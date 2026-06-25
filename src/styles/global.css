@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+@theme {
+  /* Tokeny BoHeMi sem doplní import z Claude Design exportu.
+     Zdroj pravdy = export, ne ruční odhad. Viz design-system/MASTER.md. */
+}

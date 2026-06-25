@@ -8,7 +8,9 @@
 ## Co tohle repo je
 
 Statický prezentační web studia **BoHeMi fitness** (Vinohrady, Praha).
-Stack: **Astro + Tailwind CSS**. Žádný backend, žádná databáze, žádná build-time
+Stack: **Astro + Tailwind CSS v4** (konfigurace přes `@tailwindcss/vite` v
+`astro.config.mjs`; tokeny v `@theme` v `src/styles/global.css`, žádný
+`tailwind.config.js`). Žádný backend, žádná databáze, žádná build-time
 logika navíc, než co Astro generuje.
 
 Tohle repo je **prezentační vrstva vedle WordPressu**, ne náhrada celého webu.
@@ -31,8 +33,11 @@ luxusní wellness. Tělo jako cesta k síle, zdraví a klidu.
    níž). Nová stránka jen po explicitním rozhodnutí. Změněná URL = 301 redirect,
    ne tichá změna.
 4. **Barvy a fonty jen z tokenů.** Nikdy nehardcoduj hex barvu ani název fontu
-   přímo do komponenty. Ber je z `design-system/MASTER.md` (a z Tailwind configu,
-   kam se promítnou). Když token chybí — **zeptej se, nevymýšlej.**
+   přímo do komponenty. Tokeny jsou definované v `design-system/MASTER.md` a
+   žijou v kódu jako CSS proměnné v `@theme` bloku v `src/styles/global.css`
+   (Tailwind v4 — žádný `tailwind.config.js` se nepoužívá). V komponentách ber
+   barvy/fonty přes tyto tokeny / Tailwind utility, ne natvrdo. Když token
+   chybí — **zeptej se, nevymýšlej.**
 5. **SEO basics na každé stránce.** Jeden `<h1>`, smysluplný `<title>` a
    `meta description`, sémantické nadpisy, alt texty u obrázků.
 6. **Jazyk webu je čeština.** (EN mutace případně později, ne teď.)

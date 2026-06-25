@@ -1,7 +1,8 @@
 # BoHeMi — Design System (MASTER)
 
-> Jediný zdroj pravdy pro design. Čte ho Claude Code i Copilot. Tokeny níž se
-> promítají do `tailwind.config` — komponenty berou hodnoty odsud, ne natvrdo.
+> Jediný zdroj pravdy pro design. Čte ho Claude Code i Copilot. Tokeny níž
+> žijou v kódu jako CSS proměnné v `@theme` v `src/styles/global.css` (Tailwind v4,
+> bez `tailwind.config.js`) — komponenty berou hodnoty odsud, ne natvrdo.
 >
 > ⚠️ **Barvy jsou vědomý startovní směr, ne finál.** Pokud má BoHeMi reálné
 > značkové barvy (logo, stávající identitu), nahraď jimi tokeny `--brand-*`.
