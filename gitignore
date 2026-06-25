@@ -1,0 +1,15 @@
+# Závislosti a build
+node_modules/
+dist/
+.astro/
+
+# Třetí strana — UI/UX skill je nástroj, ne náš kód (re-init kdykoliv přes uipro)
+.claude/skills/
+
+# Lokální / OS
+.DS_Store
+.env
+.env.local
+
+# Dočasné exporty z Claude Design (zdroj pro refaktor, ne součást webu)
+imports/

@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,16..72,400;0,16..72,500;0,16..72,600;1,16..72,400;1,16..72,500;1,16..72,600&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:#efe6d6; }
+  ::selection { background:#2f5a40; color:#f3ecdd; }
+  button { font-family:inherit; cursor:pointer; border:none; background:none; }
+  a { color:inherit; }
+  @keyframes bhm-marquee { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+  @keyframes bhm-floaty { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-13px); } }
+  @keyframes bhm-floaty2 { 0%,100% { transform:translateY(0); } 50% { transform:translateY(11px); } }
+  @keyframes bhm-drift { 0%,100% { transform:translate(0,0) scale(1); } 50% { transform:translate(18px,-14px) scale(1.06); } }
+</style>
+</helmet>
+<div style="position:relative; background:#efe6d6; color:#211f1a; font-family:'Hanken Grotesk',system-ui,sans-serif; font-size:18px; line-height:1.55; min-height:100vh; -webkit-font-smoothing:antialiased; overflow-x:hidden;">
+
+  <!-- grain overlay -->
+  <div style="position:fixed; inset:0; z-index:9999; pointer-events:none; opacity:0.05; mix-blend-mode:multiply; background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNDAnIGhlaWdodD0nMTQwJz48ZmlsdGVyIGlkPSduJz48ZmVUdXJidWxlbmNlIHR5cGU9J2ZyYWN0YWxOb2lzZScgYmFzZUZyZXF1ZW5jeT0nMC44NScgbnVtT2N0YXZlcz0nMicvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPScxMDAlJyBoZWlnaHQ9JzEwMCUnIGZpbHRlcj0ndXJsKCNuKScvPjwvc3ZnPg==');"></div>
+
+  <!-- ===== NAV ===== -->
+  <header style="position:sticky; top:0; z-index:50; background:rgba(239,230,214,0.82); backdrop-filter:blur(14px); border-bottom:1px solid #e0d4bd;">
+    <div style="max-width:1220px; margin:0 auto; padding:15px 32px; display:flex; align-items:center; justify-content:space-between; gap:24px;">
+      <button onClick="{{ goHome }}" style="display:flex; align-items:baseline; gap:11px; text-align:left;">
+        <span style="font-size:27px; font-weight:800; letter-spacing:-0.03em; color:#211f1a;">BoHeMi</span>
+        <span style="font-family:'Newsreader',serif; font-style:italic; font-size:15px; color:#2f5a40;">Body · Health · Mind</span>
+      </button>
+      <nav style="display:flex; align-items:center; gap:2px;">
+        <button onClick="{{ goHome }}" style="position:relative; padding:8px 14px; font-size:15.5px; font-weight:600; color:#3a352c; letter-spacing:-0.01em;" style-hover="color:#2f5a40;">
+          Domů
+          <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}"><span style="position:absolute; left:14px; right:14px; bottom:2px; height:2px; background:#c2693f; border-radius:2px;"></span></sc-if>
+        </button>
+        <button onClick="{{ goProc }}" style="position:relative; padding:8px 14px; font-size:15.5px; font-weight:600; color:#3a352c; letter-spacing:-0.01em;" style-hover="color:#2f5a40;">
+          Proč BoHeMi
+          <sc-if value="{{ isProc }}" hint-placeholder-val="{{ false }}"><span style="position:absolute; left:14px; right:14px; bottom:2px; height:2px; background:#c2693f; border-radius:2px;"></span></sc-if>
+        </button>
+        <button onClick="{{ goProgram }}" style="position:relative; padding:8px 14px; font-size:15.5px; font-weight:600; color:#3a352c; letter-spacing:-0.01em;" style-hover="color:#2f5a40;">
+          Cesta
+          <sc-if value="{{ isProgram }}" hint-placeholder-val="{{ false }}"><span style="position:absolute; left:14px; right:14px; bottom:2px; height:2px; background:#c2693f; border-radius:2px;"></span></sc-if>
+        </button>
+
+        <div style="position:relative;" onMouseEnter="{{ openMenu }}" onMouseLeave="{{ closeMenu }}">
+          <button onClick="{{ goLekce }}" style="position:relative; display:flex; align-items:center; gap:6px; padding:8px 14px; font-size:15.5px; font-weight:600; color:#3a352c; letter-spacing:-0.01em;" style-hover="color:#2f5a40;">
+            Nabídka
+            <span style="font-size:10px; opacity:0.55;">▾</span>
+            <sc-if value="{{ menuActive }}" hint-placeholder-val="{{ false }}"><span style="position:absolute; left:14px; right:24px; bottom:2px; height:2px; background:#c2693f; border-radius:2px;"></span></sc-if>
+          </button>
+          <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute; top:calc(100% + 6px); left:50%; transform:translateX(-50%); width:312px; background:#fffdf7; border:1px solid #e7dcc6; border-radius:16px; box-shadow:0 22px 48px -16px rgba(33,31,26,0.3); padding:8px; z-index:60;">
+              <sc-for list="{{ menuItems }}" as="m" hint-placeholder-count="3">
+                <button onClick="{{ m.go }}" style="display:flex; align-items:flex-start; gap:13px; width:100%; text-align:left; padding:13px 14px; border-radius:12px; background:transparent; transition:background .18s ease;" style-hover="background:#f1ece0;">
+                  <span style="flex:none; font-family:'Newsreader',serif; font-style:italic; font-size:18px; color:#c2693f; line-height:1.25;">{{ m.num }}</span>
+                  <span>
+                    <span style="display:block; font-size:16px; font-weight:700; color:#211f1a; letter-spacing:-0.01em;">{{ m.label }}</span>
+                    <span style="display:block; font-size:13.5px; color:#7a7361; margin-top:1px;">{{ m.desc }}</span>
+                  </span>
+                </button>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+
+        <button onClick="{{ goCenik }}" style="position:relative; padding:8px 14px; font-size:15.5px; font-weight:600; color:#3a352c; letter-spacing:-0.01em;" style-hover="color:#2f5a40;">
+          Ceník
+          <sc-if value="{{ isCenik }}" hint-placeholder-val="{{ false }}"><span style="position:absolute; left:14px; right:14px; bottom:2px; height:2px; background:#c2693f; border-radius:2px;"></span></sc-if>
+        </button>
+        <button onClick="{{ goKontakt }}" style="position:relative; padding:8px 14px; font-size:15.5px; font-weight:600; color:#3a352c; letter-spacing:-0.01em;" style-hover="color:#2f5a40;">
+          Kontakt
+          <sc-if value="{{ isKontakt }}" hint-placeholder-val="{{ false }}"><span style="position:absolute; left:14px; right:14px; bottom:2px; height:2px; background:#c2693f; border-radius:2px;"></span></sc-if>
+        </button>
+        <button onClick="{{ goKontakt }}" style="margin-left:14px; padding:11px 22px; background:#2f5a40; color:#f3ecdd; font-weight:700; font-size:15px; border-radius:999px; transition:background .2s ease, transform .2s ease;" style-hover="background:#244833; transform:translateY(-1px);">Rezervovat</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+  <!-- ============================================================ HOME ============================================================ -->
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+  <div>
+
+    <!-- HERO -->
+    <section style="position:relative; max-width:1220px; margin:0 auto; padding:72px 32px 56px;">
+      <div style="position:absolute; top:-40px; right:-60px; width:520px; height:520px; border-radius:50%; background:radial-gradient(circle at 35% 35%, rgba(194,105,63,0.20), rgba(194,105,63,0) 68%); filter:blur(8px); pointer-events:none; animation:bhm-drift 16s ease-in-out infinite;"></div>
+      <div style="position:relative; display:grid; grid-template-columns:1.08fr 0.92fr; gap:52px; align-items:center;">
+        <div>
+          <div style="display:inline-flex; align-items:center; gap:9px; padding:7px 15px; background:rgba(47,90,64,0.08); border:1px solid rgba(47,90,64,0.18); border-radius:999px; margin-bottom:26px;">
+            <span style="width:7px; height:7px; border-radius:50%; background:#c2693f;"></span>
+            <span style="font-size:13px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; color:#5c6b54;">Vinohrady · Praha · holistické zdraví v praxi</span>
+          </div>
+          <h1 style="font-size:clamp(44px,6.6vw,84px); line-height:0.98; font-weight:800; letter-spacing:-0.035em; color:#211f1a;">
+            Tělo jako<br><span style="font-family:'Newsreader',serif; font-weight:500; font-style:italic; color:#2f5a40;">škola</span> života.
+          </h1>
+          <p style="margin-top:26px; max-width:50ch; font-size:clamp(18px,1.9vw,22px); line-height:1.5; color:#4a4435;">
+            Přes pohyb se tu učíš rozumět svému tělu, energii, návykům i hlavě — a vést se sám, ne podle příkazů. Začínáme pohybem a jdeme dál ke spánku, dechu, jídlu a klidu.
+          </p>
+          <div style="margin-top:34px; display:flex; flex-wrap:wrap; gap:14px;">
+            <button onClick="{{ goProgram }}" style="padding:15px 28px; background:#211f1a; color:#f3ecdd; font-weight:700; font-size:17px; border-radius:999px; transition:background .2s ease, transform .2s ease;" style-hover="background:#2f5a40; transform:translateY(-2px);">Začni Cestou →</button>
+            <button onClick="{{ goLekce }}" style="padding:15px 28px; background:transparent; color:#211f1a; font-weight:700; font-size:17px; border-radius:999px; border:1.5px solid #cbbfa4; transition:border-color .2s ease, color .2s ease;" style-hover="border-color:#2f5a40; color:#2f5a40;">Rozvrh lekcí</button>
+          </div>
+          <div style="margin-top:34px; display:flex; align-items:center; gap:20px;">
+            <div style="display:flex;">
+              <span style="width:40px; height:40px; border-radius:50%; background:linear-gradient(140deg,#2f5a40,#5c8466); border:2px solid #efe6d6;"></span>
+              <span style="width:40px; height:40px; border-radius:50%; background:linear-gradient(140deg,#c2693f,#dc9a72); border:2px solid #efe6d6; margin-left:-12px;"></span>
+              <span style="width:40px; height:40px; border-radius:50%; background:linear-gradient(140deg,#c2a35a,#e2cd8f); border:2px solid #efe6d6; margin-left:-12px;"></span>
+            </div>
+            <span style="font-size:14.5px; color:#6b6354; line-height:1.4;">Malá komunita na Jiřáku,<br>kde tě trenér zná jménem.</span>
+          </div>
+        </div>
+
+        <div style="position:relative; height:clamp(380px,46vw,540px);">
+          <div style="position:absolute; inset:0; border-radius:200px 200px 22px 22px; overflow:hidden; background:linear-gradient(160deg,#34624a,#6f9379); box-shadow:0 30px 60px -22px rgba(33,31,26,0.4);">
+            <div style="position:absolute; inset:0; background:radial-gradient(circle at 30% 22%, rgba(255,255,255,0.22), rgba(255,255,255,0) 55%);"></div>
+            <span style="position:absolute; left:18px; bottom:16px; font-family:ui-monospace,'SF Mono',Menlo,monospace; font-size:12px; color:rgba(243,236,221,0.85);">[ foto — trénink ve funkčním sále ]</span>
+          </div>
+          <div style="position:absolute; top:30px; left:-26px; padding:11px 17px; background:#fffdf7; border:1px solid #e7dcc6; border-radius:14px; box-shadow:0 14px 30px -14px rgba(33,31,26,0.3); animation:bhm-floaty 5.5s ease-in-out infinite;">
+            <span style="font-size:13px; font-weight:700; color:#2f5a40;">● Tělo</span>
+          </div>
+          <div style="position:absolute; top:46%; right:-22px; padding:11px 17px; background:#fffdf7; border:1px solid #e7dcc6; border-radius:14px; box-shadow:0 14px 30px -14px rgba(33,31,26,0.3); animation:bhm-floaty2 6.2s ease-in-out infinite;">
+            <span style="font-size:13px; font-weight:700; color:#c2693f;">● Dech &amp; spánek</span>
+          </div>
+          <div style="position:absolute; bottom:18px; left:-30px; padding:11px 17px; background:#fffdf7; border:1px solid #e7dcc6; border-radius:14px; box-shadow:0 14px 30px -14px rgba(33,31,26,0.3); animation:bhm-floaty 6.8s ease-in-out infinite;">
+            <span style="font-size:13px; font-weight:700; color:#b08a2e;">● Mysl &amp; vztahy</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <section style="border-top:1px solid #e0d4bd; border-bottom:1px solid #e0d4bd; background:#e8dcc6; overflow:hidden;">
+      <div style="display:flex; width:max-content; animation:bhm-marquee 34s linear infinite; padding:15px 0;">
+        <sc-for list="{{ marqueeLoop }}" as="w" hint-placeholder-count="20">
+          <span style="display:inline-flex; align-items:center; gap:22px; padding:0 22px; font-family:'Newsreader',serif; font-style:italic; font-size:22px; color:#6b6354; white-space:nowrap;">{{ w }}<span style="color:#c2693f; font-style:normal;">✦</span></span>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- TRIAD / VENN -->
+    <section style="max-width:1220px; margin:0 auto; padding:92px 32px;">
+      <div style="display:grid; grid-template-columns:0.92fr 1.08fr; gap:56px; align-items:center;">
+        <div style="position:relative; height:440px; display:flex; align-items:center; justify-content:center;">
+          <div style="position:relative; width:430px; height:400px;">
+            <div style="position:absolute; top:0; left:50%; transform:translateX(-50%); width:262px; height:262px; border-radius:50%; background:rgba(47,90,64,0.74); mix-blend-mode:multiply;"></div>
+            <div style="position:absolute; bottom:0; left:8px; width:262px; height:262px; border-radius:50%; background:rgba(194,105,63,0.72); mix-blend-mode:multiply;"></div>
+            <div style="position:absolute; bottom:0; right:8px; width:262px; height:262px; border-radius:50%; background:rgba(194,163,90,0.78); mix-blend-mode:multiply;"></div>
+            <span style="position:absolute; top:34px; left:50%; transform:translateX(-50%); font-size:18px; font-weight:800; color:#fffdf7; letter-spacing:-0.01em;">Tělo</span>
+            <span style="position:absolute; bottom:54px; left:36px; font-size:18px; font-weight:800; color:#fffdf7; letter-spacing:-0.01em;">Zdraví</span>
+            <span style="position:absolute; bottom:54px; right:42px; font-size:18px; font-weight:800; color:#3a2f12; letter-spacing:-0.01em;">Mysl</span>
+            <span style="position:absolute; top:51%; left:50%; transform:translate(-50%,-50%); font-size:22px; font-weight:800; color:#fffdf7; letter-spacing:-0.02em; text-shadow:0 1px 6px rgba(0,0,0,0.25);">BoHeMi</span>
+          </div>
+        </div>
+        <div>
+          <p style="font-family:'Newsreader',serif; font-style:italic; font-size:23px; color:#c2693f; margin-bottom:10px;">Co znamená BoHeMi</p>
+          <h2 style="font-size:clamp(30px,4vw,48px); font-weight:800; letter-spacing:-0.03em; line-height:1.03; max-width:18ch; margin-bottom:30px;">Tři věci, o které se staráme zároveň.</h2>
+          <div style="display:flex; flex-direction:column;">
+            <sc-for list="{{ triad }}" as="item" hint-placeholder-count="3">
+              <div style="display:flex; gap:18px; padding:20px 0; border-top:1px solid #e0d4bd;">
+                <span style="flex:none; margin-top:7px; width:13px; height:13px; border-radius:50%; background:{{ item.dot }};"></span>
+                <div>
+                  <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:3px;">
+                    <h3 style="font-size:23px; font-weight:800; letter-spacing:-0.02em;">{{ item.cs }}</h3>
+                    <span style="font-size:13px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:#9a8f78;">{{ item.k }}</span>
+                  </div>
+                  <p style="font-size:16px; color:#5f594c; line-height:1.5; max-width:46ch;">{{ item.d }}</p>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROC STORY TEASER -->
+    <section style="max-width:1220px; margin:0 auto; padding:0 32px 92px;">
+      <div style="position:relative; background:#e7efe8; border:1px solid #d3e0d4; border-radius:24px; padding:clamp(36px,5vw,60px); overflow:hidden; display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:44px; align-items:center;">
+        <div>
+          <p style="font-family:'Newsreader',serif; font-style:italic; font-size:23px; color:#c2693f; margin-bottom:10px;">Proč BoHeMi</p>
+          <h2 style="font-size:clamp(28px,3.6vw,44px); font-weight:800; letter-spacing:-0.03em; line-height:1.04; margin-bottom:18px;">Tělo jako škola života.</h2>
+          <p style="font-size:18px; color:#3a4a3e; line-height:1.55; max-width:48ch; margin-bottom:16px;">BoHeMi vzniklo z osobní zkušenosti, že pohyb nemění jen tělo. Kruhové tréninky mě naučily dotahovat věci do konce, žonglování soustředění a trpělivosti — a to se přeneslo do práce i života.</p>
+          <p style="font-family:'Newsreader',serif; font-style:italic; font-size:21px; color:#244833; line-height:1.35; margin-bottom:26px;">„Nejsme jen tělo. Ale tělo je nejpoctivější místo, kde začít.“</p>
+          <button onClick="{{ goProc }}" style="padding:13px 24px; background:#2f5a40; color:#f3ecdd; font-weight:700; font-size:16px; border-radius:999px; transition:background .2s ease, transform .2s ease;" style-hover="background:#244833; transform:translateY(-2px);">Náš příběh →</button>
+        </div>
+        <div style="position:relative; height:clamp(240px,28vw,330px);">
+          <div style="position:absolute; inset:0; border-radius:18px 130px 18px 18px; overflow:hidden; background:linear-gradient(160deg,#34624a,#6f9379);">
+            <div style="position:absolute; inset:0; background:radial-gradient(circle at 30% 25%, rgba(255,255,255,0.20), rgba(255,255,255,0) 55%);"></div>
+            <span style="position:absolute; left:16px; bottom:13px; font-family:ui-monospace,'SF Mono',Menlo,monospace; font-size:12px; color:rgba(243,236,221,0.9);">[ foto — žonglování / komunita ]</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MANIFESTO -->
+    <section style="position:relative; background:#20201c; color:#f3ecdd; overflow:hidden;">
+      <div style="position:absolute; top:-80px; left:-60px; width:420px; height:420px; border-radius:50%; background:radial-gradient(circle, rgba(47,90,64,0.5), rgba(47,90,64,0) 70%); pointer-events:none;"></div>
+      <div style="position:relative; max-width:1040px; margin:0 auto; padding:96px 32px;">
+        <p style="font-size:14px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#8fb89c; margin-bottom:30px;">Náš přístup</p>
+        <p style="font-family:'Newsreader',serif; font-size:clamp(27px,3.7vw,44px); font-weight:400; letter-spacing:-0.015em; line-height:1.28;">
+          BoHeMi začíná u těla — a vede dál ke spánku, dechu, jídlu, hlavě i vztahům. <span style="font-style:italic; color:#9cc4a8;">Jen kroky, které si sám ověříš na vlastní energii.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- APPROACH -->
+    <section style="max-width:1220px; margin:0 auto; padding:92px 32px;">
+      <p style="font-family:'Newsreader',serif; font-style:italic; font-size:23px; color:#c2693f; margin-bottom:10px;">Jak přemýšlíme o zdraví</p>
+      <h2 style="font-size:clamp(30px,4vw,48px); font-weight:800; letter-spacing:-0.03em; line-height:1.03; max-width:22ch; margin-bottom:44px;">Tělo je nástroj, ne cíl. Učíme tě s ním zacházet.</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px;">
+        <sc-for list="{{ approach }}" as="a" hint-placeholder-count="4">
+          <div style="position:relative; padding:32px 28px; background:#fffdf7; border:1px solid #e7dcc6; border-radius:18px; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;" style-hover="transform:translateY(-5px); box-shadow:0 22px 44px -20px rgba(33,31,26,0.26); border-color:#2f5a40;">
+            <div style="font-family:'Newsreader',serif; font-style:italic; font-size:30px; color:#d8cbb0; margin-bottom:14px;">{{ a.n }}</div>
+            <h3 style="font-size:20px; font-weight:800; letter-spacing:-0.02em; margin-bottom:10px;">{{ a.t }}</h3>
+            <p style="font-size:15.5px; color:#5f594c; line-height:1.5;">{{ a.d }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- AUDIENCES -->
+    <section style="max-width:1220px; margin:0 auto; padding:92px 32px 24px;">
+      <p style="font-family:'Newsreader',serif; font-style:italic; font-size:23px; color:#c2693f; margin-bottom:10px;">Najdi se v tom</p>
+      <h2 style="font-size:clamp(30px,4vw,48px); font-weight:800; letter-spacing:-0.03em; line-height:1.03; max-width:20ch; margin-bottom:14px;">Tři jasné cesty. Vyber tu svoji.</h2>
+      <p style="font-size:18px; color:#5f594c; max-width:54ch; margin-bottom:44px;">Pod jednou střechou toho děláme hodně — ale pro každého trochu jinak. Tady je, co je přesně pro tebe.</p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px;">
+        <sc-for list="{{ audiences }}" as="a" hint-placeholder-count="3">
+          <div style="position:relative; display:flex; flex-direction:column; padding:32px; background:#fffdf7; border:1px solid #e7dcc6; border-radius:18px; overflow:hidden; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;" style-hover="transform:translateY(-5px); box-shadow:0 24px 46px -20px rgba(33,31,26,0.26); border-color:#2f5a40;">
+            <span style="position:absolute; top:-10px; right:-6px; font-family:'Newsreader',serif; font-style:italic; font-size:84px; color:#f1ece0;">{{ a.fig }}</span>
+            <span style="position:relative; font-size:12.5px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#9a8f78; margin-bottom:12px;">{{ a.tagline }}</span>
+            <h3 style="position:relative; font-size:28px; font-weight:800; letter-spacing:-0.025em; margin-bottom:8px;">{{ a.label }}</h3>
+            <p style="position:relative; font-size:16px; color:#5f594c; line-height:1.5; margin-bottom:20px;">{{ a.d }}</p>
+            <ul style="position:relative; display:flex; flex-direction:column; gap:9px; list-style:none; margin-bottom:24px;">
+              <sc-for list="{{ a.items }}" as="i" hint-placeholder-count="4">
+                <li style="display:flex; align-items:flex-start; gap:10px; font-size:15.5px; color:#3a352c;">
+                  <span style="flex:none; margin-top:7px; width:6px; height:6px; border-radius:50%; background:#c2693f;"></span>
+                  <span>{{ i }}</span>
+                </li>
+              </sc-for>
+            </ul>
+            <button onClick="{{ a.go }}" style="position:relative; margin-top:auto; align-self:flex-start; padding:11px 20px; background:#211f1a; color:#f3ecdd; font-weight:700; font-size:15px; border-radius:999px; transition:background .2s ease;" style-hover="background:#2f5a40;">Co nabízíme →</button>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- REGION: PRO TEBE -->
+    <section id="pro-tebe" style="max-width:1220px; margin:0 auto; padding:64px 32px 0;">
+      <div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 16px; padding-bottom:18px; border-bottom:2px solid #211f1a;">
+        <span style="font-family:'Newsreader',serif; font-style:italic; font-size:20px; color:#c2693f;">01</span>
+        <span style="font-size:13px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#2f5a40;">Pro tebe</span>
+        <span style="font-size:16px; color:#7a7361;">Jednotlivci, kteří chtějí energii, sílu a klid</span>
+      </div>
+    </section>
+
+    <section style="max-width:1220px; margin:0 auto; padding:36px 32px 0;">
+      <h3 style="font-size:24px; font-weight:800; letter-spacing:-0.02em; margin-bottom:22px;">Programy a cesty</h3>
+      <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:20px;">
+        <sc-for list="{{ paths }}" as="p" hint-placeholder-count="6">
+          <div style="padding:28px; background:#fffdf7; border:1px solid #e7dcc6; border-radius:16px; display:flex; flex-direction:column; min-height:172px; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;" style-hover="transform:translateY(-4px); box-shadow:0 20px 40px -20px rgba(33,31,26,0.24); border-color:#2f5a40;">
+            <span style="font-size:12.5px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#c2693f; margin-bottom:14px;">{{ p.tag }}</span>
+            <h4 style="font-size:21px; font-weight:800; letter-spacing:-0.02em; margin-bottom:8px;">{{ p.t }}</h4>
+            <p style="font-size:15.5px; color:#5f594c; line-height:1.5;">{{ p.d }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="max-width:1220px; margin:0 auto; padding:48px 32px 0;">
+      <div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:16px; margin-bottom:22px;">
+        <h3 style="font-size:24px; font-weight:800; letter-spacing:-0.02em;">Skupinové lekce</h3>
+        <button onClick="{{ goLekce }}" style="font-size:16px; font-weight:700; color:#2f5a40;" style-hover="color:#211f1a;">Celý rozvrh →</button>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:20px;">
+        <sc-for list="{{ classes }}" as="c" hint-placeholder-count="5">
+          <div style="border:1px solid #e7dcc6; border-radius:16px; overflow:hidden; background:#fffdf7; transition:transform .25s ease, box-shadow .25s ease;" style-hover="transform:translateY(-4px); box-shadow:0 20px 40px -20px rgba(33,31,26,0.24);">
+            <div style="position:relative; height:160px; overflow:hidden; background:{{ c.grad }};">
+              <div style="position:absolute; inset:0; background:radial-gradient(circle at 28% 25%, rgba(255,255,255,0.20), rgba(255,255,255,0) 55%);"></div>
+              <span style="position:absolute; left:13px; bottom:11px; font-family:ui-monospace,'SF Mono',Menlo,monospace; font-size:11.5px; color:rgba(255,250,243,0.88);">[ foto — {{ c.img }} ]</span>
+            </div>
+            <div style="padding:22px;">
+              <h4 style="font-size:21px; font-weight:800; letter-spacing:-0.02em; margin-bottom:8px;">{{ c.t }}</h4>
+              <p style="font-size:15.5px; color:#5f594c; line-height:1.5;">{{ c.d }}</p>
+              <div style="margin-top:11px; font-size:12.5px; font-weight:700; letter-spacing:0.02em; color:#2f5a40;">{{ c.bhm }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="max-width:1220px; margin:0 auto; padding:48px 32px 0;">
+      <h3 style="font-size:24px; font-weight:800; letter-spacing:-0.02em; margin-bottom:22px;">Individuální služby</h3>
+      <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1px; background:#e7dcc6; border:1px solid #e7dcc6; border-radius:16px; overflow:hidden;">
+        <sc-for list="{{ individualServices }}" as="s" hint-placeholder-count="3">
+          <div style="padding:30px; background:#fffdf7; transition:background .2s ease;" style-hover="background:#f7f1e6;">
+            <h4 style="font-size:20px; font-weight:800; letter-spacing:-0.02em; margin-bottom:8px;">{{ s.t }}</h4>
+            <p style="font-size:15.5px; color:#5f594c; line-height:1.5;">{{ s.d }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- REGION: PRO DETI -->
+    <section id="pro-deti" style="max-width:1220px; margin:0 auto; padding:72px 32px 0;">
+      <div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 16px; padding-bottom:18px; border-bottom:2px solid #211f1a;">
+        <span style="font-family:'Newsreader',serif; font-style:italic; font-size:20px; color:#c2693f;">02</span>
+        <span style="font-size:13px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#2f5a40;">Pro děti a rodiny</span>
+        <span style="font-size:16px; color:#7a7361;">Pohyb pro nejmenší i pro maminky</span>
+      </div>
+    </section>
+
+    <section style="max-width:1220px; margin:0 auto; padding:36px 32px 0;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:20px;">
+        <sc-for list="{{ kidsActivities }}" as="k" hint-placeholder-count="3">
+          <div style="border:1px solid #e7dcc6; border-radius:16px; overflow:hidden; background:#fffdf7; transition:transform .25s ease, box-shadow .25s ease;" style-hover="transform:translateY(-4px); box-shadow:0 20px 40px -20px rgba(33,31,26,0.24);">
+            <div style="position:relative; height:160px; overflow:hidden; background:{{ k.grad }};">
+              <div style="position:absolute; inset:0; background:radial-gradient(circle at 28% 25%, rgba(255,255,255,0.20), rgba(255,255,255,0) 55%);"></div>
+              <span style="position:absolute; left:13px; bottom:11px; font-family:ui-monospace,'SF Mono',Menlo,monospace; font-size:11.5px; color:rgba(255,250,243,0.88);">[ foto — {{ k.img }} ]</span>
+            </div>
+            <div style="padding:22px;">
+              <h4 style="font-size:21px; font-weight:800; letter-spacing:-0.02em; margin-bottom:8px;">{{ k.t }}</h4>
+              <p style="font-size:15.5px; color:#5f594c; line-height:1.5;">{{ k.d }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <p style="margin-top:20px; font-size:16px; color:#5f594c; max-width:60ch;">A pro maminky tu máme <strong style="font-weight:700;">Supermamky</strong> — trénink, kam můžeš vzít i dítě.</p>
+    </section>
+
+    <!-- REGION: PRO FIRMY -->
+    <section id="pro-firmy" style="max-width:1220px; margin:0 auto; padding:72px 32px 0;">
+      <div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 16px; padding-bottom:18px; border-bottom:2px solid #211f1a;">
+        <span style="font-family:'Newsreader',serif; font-style:italic; font-size:20px; color:#c2693f;">03</span>
+        <span style="font-size:13px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#2f5a40;">Pro firmy</span>
+        <span style="font-size:16px; color:#7a7361;">Zdravější a sehranější tým bez vlastní tělocvičny</span>
+      </div>
+    </section>
+
+    <section style="max-width:1220px; margin:0 auto; padding:36px 32px 0;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1px; background:#e7dcc6; border:1px solid #e7dcc6; border-radius:16px; overflow:hidden;">
+        <sc-for list="{{ firmyServices }}" as="f" hint-placeholder-count="3">
+          <div style="padding:30px; background:#fffdf7; transition:background .2s ease;" style-hover="background:#f7f1e6;">
+            <h4 style="font-size:20px; font-weight:800; letter-spacing:-0.02em; margin-bottom:8px;">{{ f.t }}</h4>
+            <p style="font-size:15.5px; color:#5f594c; line-height:1.5;">{{ f.d }}</p>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top:24px;">
+        <button onClick="{{ goKontakt }}" style="padding:13px 24px; background:#211f1a; color:#f3ecdd; font-weight:700; font-size:15.5px; border-radius:999px; transition:background .2s ease;" style-hover="background:#2f5a40;">Poptat firemní program →</button>
+      </div>
+    </section>
+
+    <!-- LIFE PRACTICE FEATURE -->
+    <section style="max-width:1220px; margin:0 auto; padding:92px 32px;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:52px; align-items:center;">
+        <div>
+          <span style="display:inline-block; padding:6px 14px; background:#e7efe8; color:#2f5a40; font-weight:700; font-size:13px; letter-spacing:0.04em; text-transform:uppercase; border-radius:999px; margin-bottom:20px;">Vlajkový program · 8 týdnů</span>
+          <h2 style="font-size:clamp(32px,4.4vw,54px); font-weight:800; letter-spacing:-0.035em; line-height:1.0; margin-bottom:18px;">BoHeMi <span style="font-family:'Newsreader',serif; font-weight:500; font-style:italic; color:#2f5a40;">Cesta</span></h2>
+          <p style="font-size:19px; color:#4a4435; max-width:44ch; margin-bottom:24px;">Neprodáváme jednotlivé vstupy. Prodáváme cestu. Osm týdnů pohybu, vzdělávání a komunity — s měřením na začátku i na konci.</p>
+          <ul style="display:flex; flex-direction:column; gap:13px; margin-bottom:30px; list-style:none;">
+            <sc-for list="{{ lpHighlights }}" as="h" hint-placeholder-count="4">
+              <li style="display:flex; align-items:flex-start; gap:13px; font-size:17px; color:#3a352c;">
+                <span style="flex:none; margin-top:3px; width:22px; height:22px; border-radius:50%; background:#e7efe8; color:#2f5a40; font-size:13px; font-weight:800; display:flex; align-items:center; justify-content:center;">✓</span>
+                <span>{{ h }}</span>
+              </li>
+            </sc-for>
+          </ul>
+          <button onClick="{{ goProgram }}" style="padding:14px 26px; background:#2f5a40; color:#f3ecdd; font-weight:700; font-size:16px; border-radius:999px; transition:background .2s ease, transform .2s ease;" style-hover="background:#244833; transform:translateY(-2px);">Jak program funguje →</button>
+        </div>
+        <div style="position:relative; height:clamp(340px,40vw,480px);">
+          <div style="position:absolute; inset:0; border-radius:22px 22px 160px 22px; overflow:hidden; background:linear-gradient(160deg,#b5663f,#dc9a72); box-shadow:0 28px 56px -22px rgba(33,31,26,0.38);">
+            <div style="position:absolute; inset:0; background:radial-gradient(circle at 70% 25%, rgba(255,255,255,0.22), rgba(255,255,255,0) 55%);"></div>
+            <span style="position:absolute; left:18px; bottom:16px; font-family:ui-monospace,'SF Mono',Menlo,monospace; font-size:12px; color:rgba(255,250,243,0.9);">[ foto — skupina při společné lekci ]</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HEALTH TRACKER -->
+    <section style="position:relative; background:#2f5a40; color:#f3ecdd; overflow:hidden;">
+      <div style="position:absolute; top:-90px; right:-70px; width:440px; height:440px; border-radius:50%; background:radial-gradient(circle, rgba(255,255,255,0.10), rgba(255,255,255,0) 70%); pointer-events:none;"></div>
+      <div style="position:relative; max-width:1220px; margin:0 auto; padding:92px 32px;">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:52px; align-items:start;">
+          <div>
+            <span style="display:inline-block; padding:6px 14px; background:rgba(255,255,255,0.14); color:#f3ecdd; font-weight:700; font-size:13px; letter-spacing:0.04em; text-transform:uppercase; border-radius:999px; margin-bottom:20px;">BoHeMi Health Tracker</span>
+            <h2 style="font-size:clamp(30px,4vw,50px); font-weight:800; letter-spacing:-0.03em; line-height:1.02; margin-bottom:18px;">Sedm otázek. Jeden den. <span style="font-family:'Newsreader',serif; font-weight:500; font-style:italic; color:#9cc4a8;">Zdraví v kostce.</span></h2>
+            <p style="font-size:18px; color:#d7e3d8; max-width:42ch; margin-bottom:24px;">Žádné složité tabulky ani diety. Každý den si odpovíš na sedm jednoduchých otázek — a postupně vidíš, co ti dává energii a co ji bere.</p>
+            <div style="padding:22px 24px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.16); border-radius:14px;">
+              <div style="font-size:13px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#9cc4a8; margin-bottom:8px;">Co připravujeme</div>
+              <p style="font-size:16px; color:#e6efe6; line-height:1.5;">Brzy: tvůj deník povede <strong style="font-weight:700; color:#fffdf7;">AI průvodce</strong> — připomene, sleduje návyky a navrhuje malé další kroky.</p>
+            </div>
+          </div>
+          <div style="background:#fffdf7; border-radius:18px; overflow:hidden; box-shadow:0 24px 50px -22px rgba(0,0,0,0.5);">
+            <sc-for list="{{ healthTracker }}" as="r" hint-placeholder-count="7">
+              <div style="display:flex; align-items:center; gap:18px; padding:17px 24px; border-bottom:1px solid #ece2cf;">
+                <span style="flex:none; width:84px; font-size:16px; font-weight:800; letter-spacing:-0.01em; color:#2f5a40;">{{ r.area }}</span>
+                <span style="font-size:15px; color:#3a352c; line-height:1.4;">{{ r.q }}</span>
+                <span style="flex:none; margin-left:auto; width:22px; height:22px; border-radius:7px; border:2px solid #d3c8b2;"></span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRENERI -->
+    <section style="background:#e8dcc6; border-top:1px solid #e0d4bd;">
+      <div style="max-width:1220px; margin:0 auto; padding:92px 32px;">
+        <p style="font-family:'Newsreader',serif; font-style:italic; font-size:23px; color:#c2693f; margin-bottom:10px;">Lidé, které znáš jménem</p>
+        <h2 style="font-size:clamp(30px,4vw,48px); font-weight:800; letter-spacing:-0.03em; margin-bottom:44px;">Naši trenéři</h2>
+        <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:24px;">
+          <sc-for list="{{ trainers }}" as="t" hint-placeholder-count="2">
+            <div>
+              <div style="position:relative; height:280px; border-radius:18px; overflow:hidden; background:{{ t.grad }}; margin-bottom:16px;">
+                <div style="position:absolute; inset:0; background:radial-gradient(circle at 30% 22%, rgba(255,255,255,0.20), rgba(255,255,255,0) 55%);"></div>
+                <span style="position:absolute; left:14px; bottom:12px; font-family:ui-monospace,'SF Mono',Menlo,monospace; font-size:11.5px; color:rgba(255,250,243,0.88);">[ portrét ]</span>
+              </div>
+              <h3 style="font-size:21px; font-weight:800; letter-spacing:-0.02em;">{{ t.name }}</h3>
+              <p style="font-size:15px; color:#7a7361;">{{ t.role }}</p>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <!-- ODKUD TO ČERPÁME (tichý blok) -->
+    <section style="max-width:1220px; margin:0 auto; padding:88px 32px 0;">
+      <div style="max-width:720px;">
+        <p style="font-family:'Newsreader',serif; font-style:italic; font-size:20px; color:#9a8f78; margin-bottom:12px;">Odkud to čerpáme</p>
+        <p style="font-size:18px; color:#5f594c; line-height:1.6;">Holistické zdraví jsme si nevymysleli. Nejblíž je nám kniha <em style="font-family:'Newsreader',serif; font-style:italic; color:#3a352c;">A Foundation Course in Holistic Human Health</em> — není to dieta ani příkazy, jen návrhy k vlastnímu zkoumání. Kniha nám dala mapu. BoHeMi z ní dělá cestu. Tahle kniha nikomu nic nepřikazuje. Sama říká: neber to jako pravdu, ověř si to životem. Přesně tak ji bereme i my.</p>
+        <a href="https://uhv.org.in/frontend/download/Holistic%20Human%20Health%20(eBook).pdf" target="_blank" rel="noopener" style="display:inline-block; margin-top:14px; font-size:15px; font-weight:600; color:#2f5a40; text-decoration:none; border-bottom:1px solid #b9cdbd;" style-hover="border-color:#2f5a40;">Přečíst knihu (PDF) ↗</a>
+      </div>
+    </section>
+
+    <!-- CENIK TEASER -->
+    <section style="max-width:1220px; margin:0 auto; padding:92px 32px;">
+      <div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:16px; margin-bottom:40px;">
+        <div>
+          <p style="font-family:'Newsreader',serif; font-style:italic; font-size:23px; color:#c2693f; margin-bottom:8px;">Za kolik to máme</p>
+          <h2 style="font-size:clamp(30px,4vw,48px); font-weight:800; letter-spacing:-0.03em;">Vyber podle toho, jak hluboko jdeš.</h2>
+        </div>
+        <button onClick="{{ goCenik }}" style="font-size:16px; font-weight:700; color:#2f5a40;" style-hover="color:#211f1a;">Celý ceník →</button>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px;">
+        <sc-for list="{{ pricing }}" as="pl" hint-placeholder-count="3">
+          <div style="position:relative; padding:32px; border-radius:18px; border:1px solid #e7dcc6; background:#fffdf7; display:flex; flex-direction:column;">
+            <sc-if value="{{ pl.featured }}" hint-placeholder-val="{{ false }}"><span style="position:absolute; inset:0; border:2px solid #2f5a40; border-radius:18px; pointer-events:none;"></span></sc-if>
+            <sc-if value="{{ pl.badge }}" hint-placeholder-val="{{ false }}"><span style="position:absolute; top:-11px; left:32px; padding:5px 14px; background:#2f5a40; color:#f3ecdd; font-size:12px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; border-radius:999px;">{{ pl.badge }}</span></sc-if>
+            <h3 style="font-size:23px; font-weight:800; letter-spacing:-0.02em; margin-bottom:4px;">{{ pl.t }}</h3>
+            <p style="font-size:15px; color:#7a7361; margin-bottom:16px;">{{ pl.d }}</p>
+            <div style="display:flex; align-items:baseline; gap:6px; margin-bottom:6px;">
+              <span style="font-size:34px; font-weight:800; letter-spacing:-0.02em;">{{ pl.price }}</span>
+              <span style="font-size:15px; color:#7a7361;">{{ pl.per }}</span>
+            </div>
+            <p style="font-size:13.5px; font-weight:600; color:#2f5a40; min-height:18px; margin-bottom:16px;">{{ pl.note }}</p>
+            <ul style="display:flex; flex-direction:column; gap:10px; list-style:none; margin-top:auto;">
+              <sc-for list="{{ pl.feat }}" as="f" hint-placeholder-count="3">
+                <li style="display:flex; align-items:flex-start; gap:10px; font-size:15.5px; color:#3a352c;">
+                  <span style="flex:none; margin-top:7px; width:6px; height:6px; border-radius:50%; background:#2f5a40;"></span>
+                  <span>{{ f }}</span>
+                </li>
+              </sc-for>
+            </ul>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+  </div>
+  </sc-if>
+
+  <!-- ============================================================ PROC ============================================================ -->
+  <sc-if value="{{ isProc }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <section style="position:relative; max-width:1100px; margin:0 auto; padding:84px 32px 48px; overflow:visible;">
+      <div style="position:absolute; top:0; right:0; width:420px; height:420px; border-radius:50%; background:radial-gradient(circle, rgba(194,105,63,0.14), rgba(194,105,63,0) 70%); pointer-events:none;"></div>
+      <p style="position:relative; font-family:'Newsreader',serif; font-style:italic; font-size:23px; color:#c2693f; margin-bottom:12px;">Proč BoHeMi</p>
+      <h1 style="position:relative; font-size:clamp(40px,6.2vw,76px); font-weight:800; letter-spacing:-0.035em; line-height:0.98; max-width:15ch;">Tělo jako <span style="font-family:'Newsreader',serif; font-weight:500; font-style:italic; color:#2f5a40;">škola života.</span></h1>
+      <p style="position:relative; margin-top:22px; font-size:clamp(19px,2.2vw,24px); color:#2f5a40; font-weight:600;">Pohyb, který nekončí u svalů.</p>
+    </section>
+
+    <section style="max-width:860px; margin:0 auto; padding:8px 32px 24px;">
+      <div style="display:flex; flex-direction:column; gap:22px; font-size:19px; line-height:1.6; color:#3a352c;">
+        <p>BoHeMi vzniklo z osobní zkušenosti, že pohyb není jen fyzická aktivita. Když jsem se začal pravidelně hýbat, postupně se neměnilo jen tělo — měnila se i schopnost soustředit se, dokončovat věci a zvládat stres.</p>
+        <p>Kruhové tréninky mě naučily dotahovat věci do konce. Žonglování trpělivosti, rytmu, pozornosti a schopnosti lépe číst vzorce. Postupně mi došlo, že přes tělo se dá otevřít cesta i k hlavě, návykům a rovnováze.</p>
+        <p>Později jsem v principech <em style="font-family:'Newsreader',serif; font-style:italic;">Holistic Human Health</em> našel rámec pro něco, co jsem už v praxi cítil: člověk není jen tělo, ale tělem začíná naše každodenní zkušenost se světem.</p>
+      </div>
+      <figure style="margin-top:36px; padding:32px 0; border-top:1px solid #e0d4bd; border-bottom:1px solid #e0d4bd;">
+        <blockquote style="font-family:'Newsreader',serif; font-style:italic; font-size:clamp(24px,3vw,34px); line-height:1.3; color:#244833; letter-spacing:-0.015em;">„Přes tělo jsem se začal učit věci, které mi pak pomohly i v práci a životě.“</blockquote>
+        <figcaption style="margin-top:16px; font-size:15px; color:#7a7361;">— Jan Hezina, zakladatel BoHeMi</figcaption>
+      </figure>
+    </section>
+
+    <section style="max-width:1100px; margin:0 auto; padding:60px 32px;">
+      <h2 style="font-size:clamp(28px,3.6vw,44px); font-weight:800; letter-spacing:-0.03em; margin-bottom:38px;">Tělo jako <span style="font-family:'Newsreader',serif; font-weight:500; font-style:italic; color:#2f5a40;">učitel.</span></h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:20px;">
+        <sc-for list="{{ teacher }}" as="t" hint-placeholder-count="4">
+          <div style="padding:30px 26px; background:#fffdf7; border:1px solid #e7dcc6; border-radius:18px; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;" style-hover="transform:translateY(-5px); box-shadow:0 22px 44px -20px rgba(33,31,26,0.26); border-color:#2f5a40;">
+            <div style="font-size:22px; font-weight:800; letter-spacing:-0.02em; color:#2f5a40; margin-bottom:8px;">{{ t.k }}</div>
+            <p style="font-size:16px; color:#5f594c; line-height:1.5;">{{ t.d }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="position:relative; background:#20201c; color:#f3ecdd; overflow:hidden;">
+      <div style="position:absolute; bottom:-90px; left:-60px; width:440px; height:440px; border-radius:50%; background:radial-gradient(circle, rgba(47,90,64,0.5), rgba(47,90,64,0) 70%); pointer-events:none;"></div>
+      <div style="position:relative; max-width:1100px; margin:0 auto; padding:84px 32px;">
+        <p style="font-family:'Newsreader',serif; font-style:italic; font-size:23px; color:#9cc4a8; margin-bottom:12px;">Rámec a praxe</p>
+        <h2 style="font-size:clamp(28px,3.8vw,46px); font-weight:800; letter-spacing:-0.03em; line-height:1.04; max-width:20ch; margin-bottom:14px;">Kniha nám dává mapu. BoHeMi z ní dělá cestu.</h2>
+        <p style="font-size:18px; color:#cfcabb; max-width:54ch; margin-bottom:40px;">Holistic Human Health popisuje zdraví jako harmonii těla, mysli, vztahů a prostředí. My to převádíme do živé, české a civilní praxe.</p>
+        <div style="border:1px solid #3a352c; border-radius:16px; overflow:hidden;">
+          <div style="display:grid; grid-template-columns:1fr 1fr; background:#2a2924;">
+            <div style="padding:14px 24px; font-size:13px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#9cc4a8;">Kniha</div>
+            <div style="padding:14px 24px; font-size:13px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#dca983; border-left:1px solid #3a352c;">BoHeMi v praxi</div>
+          </div>
+          <sc-for list="{{ bookMap }}" as="m" hint-placeholder-count="6">
+            <div style="display:grid; grid-template-columns:1fr 1fr; border-top:1px solid #3a352c;">
+              <div style="padding:16px 24px; font-size:16px; color:#cfcabb;">{{ m.book }}</div>
+              <div style="padding:16px 24px; font-size:16px; color:#f3ecdd; font-weight:600; border-left:1px solid #3a352c;">{{ m.bohemi }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="margin-top:32px;">
+          <a href="https://uhv.org.in/frontend/download/Holistic%20Human%20Health%20(eBook).pdf" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:9px; padding:13px 22px; background:#2f5a40; color:#f3ecdd; font-weight:700; font-size:15.5px; border-radius:999px; text-decoration:none; transition:background .2s ease, transform .2s ease;" style-hover="background:#9cc4a8; color:#20201c; transform:translateY(-2px);">Přečíst knihu (PDF) ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section style="max-width:860px; margin:0 auto; padding:8px 32px 24px;">
+      <p style="font-size:18px; color:#5f594c; line-height:1.6;">Jen pravidelný pohyb, dech, regenerace a komunita — praxe, kterou si sám ověříš na vlastní energii, a lidi, co to spolu žijí.</p>
+    </section>
+
+    <section style="max-width:1100px; margin:0 auto; padding:0 32px 92px; text-align:center;">
+      <h2 style="font-size:clamp(28px,4vw,46px); font-weight:800; letter-spacing:-0.035em; max-width:20ch; margin:0 auto 22px;">Začni tělem. Pokračuj praxí.</h2>
+      <p style="font-size:18px; color:#5f594c; max-width:44ch; margin:0 auto 30px;">Nejjednodušší první krok je přijít na lekci nebo se přidat do příští skupiny programu Cesta.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:14px; justify-content:center;">
+        <button onClick="{{ goProgram }}" style="padding:15px 28px; background:#2f5a40; color:#f3ecdd; font-weight:700; font-size:17px; border-radius:999px; transition:background .2s ease, transform .2s ease;" style-hover="background:#244833; transform:translateY(-2px);">Cesta →</button>
+        <button onClick="{{ goLekce }}" style="padding:15px 28px; background:transparent; color:#211f1a; font-weight:700; font-size:17px; border-radius:999px; border:1.5px solid #cbbfa4; transition:border-color .2s ease, color .2s ease;" style-hover="border-color:#2f5a40; color:#2f5a40;">Rozvrh lekcí</button>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
+  <!-- ============================================================ PROGRAM ============================================================ -->
+  <sc-if value="{{ isProgram }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <section style="position:relative; max-width:1100px; margin:0 auto; padding:84px 32px 56px; overflow:visible;">
+      <div style="position:absolute; top:0; right:0; width:420px; height:420px; border-radius:50%; background:radial-gradient(circle, rgba(47,90,64,0.14), rgba(47,90,64,0) 70%); pointer-events:none;"></div>
+      <span style="position:relative; display:inline-block; padding:6px 14px; background:#e7efe8; color:#2f5a40; font-weight:700; font-size:13px; letter-spacing:0.04em; text-transform:uppercase; border-radius:999px; margin-bottom:24px;">8týdenní program</span>
+      <h1 style="position:relative; font-size:clamp(40px,6.2vw,76px); font-weight:800; letter-spacing:-0.035em; line-height:0.98; max-width:14ch;">BoHeMi <span style="font-family:'Newsreader',serif; font-weight:500; font-style:italic; color:#2f5a40;">Cesta</span></h1>
+      <p style="position:relative; margin-top:26px; max-width:56ch; font-size:clamp(19px,2.2vw,23px); color:#4a4435; line-height:1.45;">Osm týdnů, během kterých si přestaneš kupovat jednotlivé vstupy a začneš stavět něco, co vydrží. Pohyb, vzdělávání a komunita — s měřením na začátku i na konci. <span style="font-family:'Newsreader',serif; font-style:italic; color:#2f5a40;">Praxe, kterou si sám ověříš na vlastní energii.</span></p>
+      <div style="position:relative; margin-top:32px; display:flex; flex-wrap:wrap; gap:14px;">
+        <button onClick="{{ goKontakt }}" style="padding:15px 28px; background:#211f1a; color:#f3ecdd; font-weight:700; font-size:17px; border-radius:999px; transition:background .2s ease, transform .2s ease;" style-hover="background:#2f5a40; transform:translateY(-2px);">Přihlásit se do skupiny →</button>
+        <button onClick="{{ goCenik }}" style="padding:15px 28px; background:transparent; color:#211f1a; font-weight:700; font-size:17px; border-radius:999px; border:1.5px solid #cbbfa4; transition:border-color .2s ease, color .2s ease;" style-hover="border-color:#2f5a40; color:#2f5a40;">Cena programu</button>
+      </div>
+    </section>
+
+    <section style="background:#20201c; color:#f3ecdd;">
+      <div style="max-width:1100px; margin:0 auto; padding:64px 32px; display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:36px;">
+        <sc-for list="{{ lpStats }}" as="s" hint-placeholder-count="4">
+          <div>
+            <div style="font-family:'Newsreader',serif; font-style:italic; font-size:clamp(44px,5vw,64px); font-weight:500; letter-spacing:-0.02em; color:#9cc4a8; line-height:1;">{{ s.n }}</div>
+            <h3 style="margin-top:12px; font-size:19px; font-weight:700;">{{ s.t }}</h3>
+            <p style="margin-top:6px; font-size:15px; color:#b7b2a4; line-height:1.5;">{{ s.d }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="max-width:1100px; margin:0 auto; padding:84px 32px;">
+      <p style="font-family:'Newsreader',serif; font-style:italic; font-size:23px; color:#c2693f; margin-bottom:10px;">Co projdeme za 8 týdnů</p>
+      <h2 style="font-size:clamp(28px,3.6vw,44px); font-weight:800; letter-spacing:-0.03em; margin-bottom:40px;">Osm témat. Jeden cíl — rozumět svému zdraví.</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px;">
+        <sc-for list="{{ curriculum }}" as="c" hint-placeholder-count="8">
+          <div style="padding:26px 24px; background:#fffdf7; border:1px solid #e7dcc6; border-radius:16px; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;" style-hover="transform:translateY(-4px); box-shadow:0 18px 36px -18px rgba(33,31,26,0.22); border-color:#2f5a40;">
+            <div style="font-family:'Newsreader',serif; font-style:italic; font-size:26px; color:#c2693f; margin-bottom:10px;">{{ c.n }}</div>
+            <h3 style="font-size:19px; font-weight:800; letter-spacing:-0.02em; margin-bottom:6px;">{{ c.t }}</h3>
+            <p style="font-size:14.5px; color:#5f594c; line-height:1.45;">{{ c.d }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="position:relative; background:#2f5a40; color:#f3ecdd; overflow:hidden;">
+      <div style="position:absolute; top:-80px; left:-60px; width:400px; height:400px; border-radius:50%; background:radial-gradient(circle, rgba(255,255,255,0.10), rgba(255,255,255,0) 70%); pointer-events:none;"></div>
+      <div style="position:relative; max-width:1100px; margin:0 auto; padding:84px 32px;">
+        <p style="font-family:'Newsreader',serif; font-style:italic; font-size:23px; color:#9cc4a8; margin-bottom:10px;">Tvůj nástroj na každý den</p>
+        <h2 style="font-size:clamp(26px,3.4vw,42px); font-weight:800; letter-spacing:-0.03em; margin-bottom:32px;">BoHeMi Health Tracker</h2>
+        <div style="background:#fffdf7; border-radius:18px; overflow:hidden; max-width:760px; box-shadow:0 24px 50px -22px rgba(0,0,0,0.5);">
+          <sc-for list="{{ healthTracker }}" as="r" hint-placeholder-count="7">
+            <div style="display:flex; align-items:center; gap:18px; padding:17px 24px; border-bottom:1px solid #ece2cf;">
+              <span style="flex:none; width:84px; font-size:16px; font-weight:800; letter-spacing:-0.01em; color:#2f5a40;">{{ r.area }}</span>
+              <span style="font-size:15px; color:#3a352c; line-height:1.4;">{{ r.q }}</span>
+              <span style="flex:none; margin-left:auto; width:22px; height:22px; border-radius:7px; border:2px solid #d3c8b2;"></span>
+            </div>
+          </sc-for>
+        </div>
+        <p style="margin-top:22px; font-size:16px; color:#d7e3d8; max-width:56ch;">Brzy ti deník povede <strong style="font-weight:700; color:#fffdf7;">AI průvodce</strong> — sleduje návyky, připomíná a navrhuje malé další kroky.</p>
+      </div>
+    </section>
+
+    <section style="background:#e7efe8; border-top:1px solid #d3e0d4; border-bottom:1px solid #d3e0d4;">
+      <div style="max-width:1100px; margin:0 auto; padding:72px 32px; display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:48px;">
+        <div>
+          <h2 style="font-size:28px; font-weight:800; letter-spacing:-0.02em; margin-bottom:24px;">Co je v ceně</h2>
+          <ul style="display:flex; flex-direction:column; gap:14px; list-style:none;">
+            <sc-for list="{{ lpIncluded }}" as="i" hint-placeholder-count="6">
+              <li style="display:flex; align-items:flex-start; gap:12px; font-size:17px; color:#3a352c;">
+                <span style="flex:none; margin-top:3px; width:22px; height:22px; border-radius:50%; background:#2f5a40; color:#f3ecdd; font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center;">✓</span>
+                <span>{{ i }}</span>
+              </li>
+            </sc-for>
+          </ul>
+        </div>
+        <div>
+          <h2 style="font-size:28px; font-weight:800; letter-spacing:-0.02em; margin-bottom:24px;">Pro koho to je</h2>
+          <ul style="display:flex; flex-direction:column; gap:14px; list-style:none;">
+            <sc-for list="{{ lpFor }}" as="i" hint-placeholder-count="4">
+              <li style="display:flex; align-items:flex-start; gap:12px; font-size:17px; color:#3a352c;">
+                <span style="flex:none; margin-top:7px; width:8px; height:8px; border-radius:50%; background:#c2693f;"></span>
+                <span>{{ i }}</span>
+              </li>
+            </sc-for>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section style="max-width:1100px; margin:0 auto; padding:92px 32px; text-align:center;">
+      <h2 style="font-size:clamp(28px,4vw,48px); font-weight:800; letter-spacing:-0.035em; max-width:18ch; margin:0 auto 22px;">Příští skupina začíná každých 8 týdnů.</h2>
+      <p style="font-size:18px; color:#5f594c; max-width:46ch; margin:0 auto 30px;">Skupina 10–20 lidí. Ozvi se nám a domluvíme vstupní měření.</p>
+      <button onClick="{{ goKontakt }}" style="padding:15px 30px; background:#2f5a40; color:#f3ecdd; font-weight:700; font-size:17px; border-radius:999px; transition:background .2s ease, transform .2s ease;" style-hover="background:#244833; transform:translateY(-2px);">Mám zájem →</button>
+    </section>
+  </div>
+  </sc-if>
+
+  <!-- ============================================================ LEKCE ============================================================ -->
+  <sc-if value="{{ isLekce }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <section style="position:relative; max-width:1220px; margin:0 auto; padding:84px 32px 40px; overflow:visible;">
+      <div style="position:absolute; top:10px; right:0; width:400px; height:400px; border-radius:50%; background:radial-gradient(circle, rgba(194,105,63,0.14), rgba(194,105,63,0) 70%); pointer-events:none;"></div>
+      <h1 style="position:relative; font-size:clamp(40px,6.2vw,76px); font-weight:800; letter-spacing:-0.035em; line-height:0.98;">Lekce a <span style="font-family:'Newsreader',serif; font-weight:500; font-style:italic; color:#2f5a40;">služby</span></h1>
+      <p style="position:relative; margin-top:24px; max-width:56ch; font-size:clamp(18px,2.1vw,22px); color:#4a4435; line-height:1.45;">Všechno, co nabízíme — přehledně ve třech cestách. Vyber tu svoji: pro tebe, pro děti a rodiny, nebo pro firmy.</p>
+      <div style="position:relative; margin-top:28px; display:flex; flex-wrap:wrap; gap:10px;">
+        <button onClick="{{ jumpProTebe }}" style="padding:10px 18px; border:1.5px solid #cbbfa4; border-radius:999px; font-size:15px; font-weight:700; color:#3a352c; transition:border-color .2s ease, color .2s ease;" style-hover="border-color:#2f5a40; color:#2f5a40;">01 · Pro tebe</button>
+        <button onClick="{{ jumpProDeti }}" style="padding:10px 18px; border:1.5px solid #cbbfa4; border-radius:999px; font-size:15px; font-weight:700; color:#3a352c; transition:border-color .2s ease, color .2s ease;" style-hover="border-color:#2f5a40; color:#2f5a40;">02 · Pro děti a rodiny</button>
+        <button onClick="{{ jumpProFirmy }}" style="padding:10px 18px; border:1.5px solid #cbbfa4; border-radius:999px; font-size:15px; font-weight:700; color:#3a352c; transition:border-color .2s ease, color .2s ease;" style-hover="border-color:#2f5a40; color:#2f5a40;">03 · Pro firmy</button>
+      </div>
+    </section>
+
+    <section id="lekce-pro-tebe" style="max-width:1220px; margin:0 auto; padding:24px 32px 0;">
+      <div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 16px; padding-bottom:18px; border-bottom:2px solid #211f1a;">
+        <span style="font-family:'Newsreader',serif; font-style:italic; font-size:20px; color:#c2693f;">01</span>
+        <span style="font-size:13px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#2f5a40;">Pro tebe</span>
+        <span style="font-size:16px; color:#7a7361;">Jednotlivci, kteří chtějí energii, sílu a klid</span>
+      </div>
+    </section>
+
+    <section style="max-width:1220px; margin:0 auto; padding:32px 32px 0;">
+      <h3 style="font-size:24px; font-weight:800; letter-spacing:-0.02em; margin-bottom:22px;">Skupinové lekce</h3>
+      <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:20px;">
+        <sc-for list="{{ classes }}" as="c" hint-placeholder-count="5">
+          <div style="border:1px solid #e7dcc6; border-radius:16px; overflow:hidden; background:#fffdf7; transition:transform .25s ease, box-shadow .25s ease;" style-hover="transform:translateY(-4px); box-shadow:0 20px 40px -20px rgba(33,31,26,0.24);">
+            <div style="position:relative; height:150px; overflow:hidden; background:{{ c.grad }};">
+              <div style="position:absolute; inset:0; background:radial-gradient(circle at 28% 25%, rgba(255,255,255,0.20), rgba(255,255,255,0) 55%);"></div>
+              <span style="position:absolute; left:13px; bottom:11px; font-family:ui-monospace,'SF Mono',Menlo,monospace; font-size:11.5px; color:rgba(255,250,243,0.88);">[ foto — {{ c.img }} ]</span>
+            </div>
+            <div style="padding:22px;">
+              <h4 style="font-size:21px; font-weight:800; letter-spacing:-0.02em; margin-bottom:8px;">{{ c.t }}</h4>
+              <p style="font-size:15.5px; color:#5f594c; line-height:1.5;">{{ c.d }}</p>
+              <div style="margin-top:11px; font-size:12.5px; font-weight:700; letter-spacing:0.02em; color:#2f5a40;">{{ c.bhm }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="max-width:1220px; margin:0 auto; padding:44px 32px 0;">
+      <h3 style="font-size:24px; font-weight:800; letter-spacing:-0.02em; margin-bottom:22px;">Individuální služby</h3>
+      <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1px; background:#e7dcc6; border:1px solid #e7dcc6; border-radius:16px; overflow:hidden;">
+        <sc-for list="{{ individualServices }}" as="s" hint-placeholder-count="3">
+          <div style="padding:30px; background:#fffdf7; transition:background .2s ease;" style-hover="background:#f7f1e6;">
+            <h4 style="font-size:20px; font-weight:800; letter-spacing:-0.02em; margin-bottom:8px;">{{ s.t }}</h4>
+            <p style="font-size:15.5px; color:#5f594c; line-height:1.5;">{{ s.d }}</p>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top:22px; padding:24px 28px; background:#e7efe8; border:1px solid #d3e0d4; border-radius:16px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;">
+        <p style="font-size:16.5px; color:#244833; max-width:48ch;"><strong style="font-weight:700;">Chceš jít hloub než jen na lekce?</strong> Cesta tě provede 8 týdny — pohyb, návyky a komunita pohromadě.</p>
+        <button onClick="{{ goProgram }}" style="flex:none; padding:12px 22px; background:#2f5a40; color:#f3ecdd; font-weight:700; font-size:15.5px; border-radius:999px; transition:background .2s ease;" style-hover="background:#244833;">Cesta →</button>
+      </div>
+    </section>
+
+    <section id="lekce-pro-deti" style="max-width:1220px; margin:0 auto; padding:64px 32px 0;">
+      <div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 16px; padding-bottom:18px; border-bottom:2px solid #211f1a;">
+        <span style="font-family:'Newsreader',serif; font-style:italic; font-size:20px; color:#c2693f;">02</span>
+        <span style="font-size:13px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#2f5a40;">Pro děti a rodiny</span>
+        <span style="font-size:16px; color:#7a7361;">Pohyb pro nejmenší i pro maminky</span>
+      </div>
+    </section>
+
+    <section style="max-width:1220px; margin:0 auto; padding:32px 32px 0;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:20px;">
+        <sc-for list="{{ kidsActivities }}" as="k" hint-placeholder-count="3">
+          <div style="border:1px solid #e7dcc6; border-radius:16px; overflow:hidden; background:#fffdf7; transition:transform .25s ease, box-shadow .25s ease;" style-hover="transform:translateY(-4px); box-shadow:0 20px 40px -20px rgba(33,31,26,0.24);">
+            <div style="position:relative; height:150px; overflow:hidden; background:{{ k.grad }};">
+              <div style="position:absolute; inset:0; background:radial-gradient(circle at 28% 25%, rgba(255,255,255,0.20), rgba(255,255,255,0) 55%);"></div>
+              <span style="position:absolute; left:13px; bottom:11px; font-family:ui-monospace,'SF Mono',Menlo,monospace; font-size:11.5px; color:rgba(255,250,243,0.88);">[ foto — {{ k.img }} ]</span>
+            </div>
+            <div style="padding:22px;">
+              <h4 style="font-size:21px; font-weight:800; letter-spacing:-0.02em; margin-bottom:8px;">{{ k.t }}</h4>
+              <p style="font-size:15.5px; color:#5f594c; line-height:1.5;">{{ k.d }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <p style="margin-top:20px; font-size:16px; color:#5f594c; max-width:60ch;">A pro maminky tu máme <strong style="font-weight:700;">Supermamky</strong> — trénink, kam můžeš vzít i dítě.</p>
+    </section>
+
+    <section id="lekce-pro-firmy" style="max-width:1220px; margin:0 auto; padding:64px 32px 0;">
+      <div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 16px; padding-bottom:18px; border-bottom:2px solid #211f1a;">
+        <span style="font-family:'Newsreader',serif; font-style:italic; font-size:20px; color:#c2693f;">03</span>
+        <span style="font-size:13px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#2f5a40;">Pro firmy</span>
+        <span style="font-size:16px; color:#7a7361;">Zdravější a sehranější tým bez vlastní tělocvičny</span>
+      </div>
+    </section>
+
+    <section style="max-width:1220px; margin:0 auto; padding:32px 32px 0;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1px; background:#e7dcc6; border:1px solid #e7dcc6; border-radius:16px; overflow:hidden;">
+        <sc-for list="{{ firmyServices }}" as="f" hint-placeholder-count="3">
+          <div style="padding:30px; background:#fffdf7; transition:background .2s ease;" style-hover="background:#f7f1e6;">
+            <h4 style="font-size:20px; font-weight:800; letter-spacing:-0.02em; margin-bottom:8px;">{{ f.t }}</h4>
+            <p style="font-size:15.5px; color:#5f594c; line-height:1.5;">{{ f.d }}</p>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top:22px;">
+        <button onClick="{{ goKontakt }}" style="padding:13px 24px; background:#211f1a; color:#f3ecdd; font-weight:700; font-size:15.5px; border-radius:999px; transition:background .2s ease;" style-hover="background:#2f5a40;">Poptat firemní program →</button>
+      </div>
+    </section>
+
+    <section style="max-width:1220px; margin:0 auto; padding:56px 32px 92px;">
+      <div style="position:relative; background:#20201c; color:#f3ecdd; border-radius:22px; padding:clamp(32px,5vw,56px); display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:24px; overflow:hidden;">
+        <div style="position:absolute; bottom:-90px; right:-50px; width:340px; height:340px; border-radius:50%; background:radial-gradient(circle, rgba(47,90,64,0.5), rgba(47,90,64,0) 70%); pointer-events:none;"></div>
+        <div style="position:relative;">
+          <h2 style="font-size:clamp(26px,3.4vw,40px); font-weight:800; letter-spacing:-0.03em; max-width:20ch;">Nevíš, kam se zařadit?</h2>
+          <p style="margin-top:12px; font-size:17px; color:#b7b2a4; max-width:42ch;">Napiš nám a doporučíme ti lekci nebo program, který sedne přesně tobě.</p>
+        </div>
+        <button onClick="{{ goKontakt }}" style="position:relative; flex:none; padding:15px 28px; background:#2f5a40; color:#f3ecdd; font-weight:700; font-size:17px; border-radius:999px; transition:background .2s ease, color .2s ease;" style-hover="background:#9cc4a8; color:#20201c;">Napsat nám →</button>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
+  <!-- ============================================================ CENIK ============================================================ -->
+  <sc-if value="{{ isCenik }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <section style="max-width:1220px; margin:0 auto; padding:84px 32px 48px;">
+      <h1 style="font-size:clamp(40px,6.2vw,76px); font-weight:800; letter-spacing:-0.035em; line-height:0.98;">Za kolik to <span style="font-family:'Newsreader',serif; font-weight:500; font-style:italic; color:#2f5a40;">máme</span></h1>
+      <p style="margin-top:24px; max-width:54ch; font-size:clamp(18px,2.1vw,22px); color:#4a4435; line-height:1.45;">Členství, jednotlivé vstupy i celá cesta. Vyber si podle toho, jak hluboko do toho chceš jít.</p>
+    </section>
+
+    <section style="max-width:1220px; margin:0 auto; padding:0 32px 24px;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:22px;">
+        <sc-for list="{{ pricing }}" as="pl" hint-placeholder-count="3">
+          <div style="position:relative; padding:36px 32px; border-radius:20px; border:1px solid #e7dcc6; background:#fffdf7; display:flex; flex-direction:column; transition:transform .25s ease, box-shadow .25s ease;" style-hover="transform:translateY(-4px); box-shadow:0 22px 44px -20px rgba(33,31,26,0.24);">
+            <sc-if value="{{ pl.featured }}" hint-placeholder-val="{{ false }}"><span style="position:absolute; inset:0; border:2px solid #2f5a40; border-radius:20px; pointer-events:none;"></span></sc-if>
+            <sc-if value="{{ pl.badge }}" hint-placeholder-val="{{ false }}"><span style="position:absolute; top:-11px; left:32px; padding:5px 14px; background:#2f5a40; color:#f3ecdd; font-size:12px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; border-radius:999px;">{{ pl.badge }}</span></sc-if>
+            <h3 style="font-size:24px; font-weight:800; letter-spacing:-0.02em; margin-bottom:4px;">{{ pl.t }}</h3>
+            <p style="font-size:15px; color:#7a7361; margin-bottom:18px;">{{ pl.d }}</p>
+            <div style="display:flex; align-items:baseline; gap:6px; margin-bottom:6px;">
+              <span style="font-size:38px; font-weight:800; letter-spacing:-0.02em;">{{ pl.price }}</span>
+              <span style="font-size:15px; color:#7a7361;">{{ pl.per }}</span>
+            </div>
+            <p style="font-size:13.5px; font-weight:600; color:#2f5a40; min-height:18px; margin-bottom:18px;">{{ pl.note }}</p>
+            <ul style="display:flex; flex-direction:column; gap:12px; list-style:none; margin-bottom:28px;">
+              <sc-for list="{{ pl.feat }}" as="f" hint-placeholder-count="3">
+                <li style="display:flex; align-items:flex-start; gap:10px; font-size:15.5px; color:#3a352c;">
+                  <span style="flex:none; margin-top:7px; width:6px; height:6px; border-radius:50%; background:#2f5a40;"></span>
+                  <span>{{ f }}</span>
+                </li>
+              </sc-for>
+            </ul>
+            <button onClick="{{ goKontakt }}" style="margin-top:auto; padding:13px 22px; background:#211f1a; color:#f3ecdd; font-weight:700; font-size:15.5px; border-radius:999px; transition:background .2s ease;" style-hover="background:#2f5a40;">Vybrat</button>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="max-width:1220px; margin:0 auto; padding:40px 32px 8px;">
+      <div style="position:relative; background:#20201c; color:#f3ecdd; border-radius:20px; padding:clamp(32px,5vw,52px); overflow:hidden;">
+        <div style="position:absolute; top:-80px; right:-60px; width:360px; height:360px; border-radius:50%; background:radial-gradient(circle, rgba(194,105,63,0.4), rgba(194,105,63,0) 70%); pointer-events:none;"></div>
+        <p style="position:relative; font-family:'Newsreader',serif; font-style:italic; font-size:23px; color:#9cc4a8; margin-bottom:8px;">Počítáš to?</p>
+        <h2 style="position:relative; font-size:clamp(26px,3.4vw,40px); font-weight:800; letter-spacing:-0.03em; max-width:22ch; margin-bottom:36px;">Předplatné se vyplatí už při třetí lekci v týdnu.</h2>
+        <div style="position:relative; display:flex; flex-direction:column; gap:26px; max-width:760px;">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px;">
+              <span style="font-size:16px; font-weight:600; color:#cfcabb;">Jednorázový vstup</span>
+              <span style="font-size:20px; font-weight:800;">290 Kč <span style="font-size:14px; font-weight:500; color:#b7b2a4;">/ lekce</span></span>
+            </div>
+            <div style="height:14px; border-radius:999px; background:#3a352c; overflow:hidden;"><div style="width:100%; height:100%; background:#c2693f; border-radius:999px;"></div></div>
+          </div>
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px;">
+              <span style="font-size:16px; font-weight:600; color:#f3ecdd;">Členství při 3 lekcích týdně</span>
+              <span style="font-size:20px; font-weight:800; color:#9cc4a8;">~99 Kč <span style="font-size:14px; font-weight:500; color:#b7b2a4;">/ lekce</span></span>
+            </div>
+            <div style="height:14px; border-radius:999px; background:#3a352c; overflow:hidden;"><div style="width:34%; height:100%; background:#9cc4a8; border-radius:999px;"></div></div>
+          </div>
+        </div>
+        <p style="position:relative; margin-top:28px; font-size:15.5px; color:#b7b2a4; max-width:52ch;">Čím častěji chodíš, tím levnější je každá lekce. Jednorázový vstup dává smysl jen na vyzkoušení — pak se vyplatí přejít na členství nebo rovnou na Life Practice.</p>
+      </div>
+    </section>
+
+    <section style="max-width:1220px; margin:0 auto; padding:40px 32px 92px;">
+      <div style="background:#fffdf7; border:1px solid #e7dcc6; border-radius:20px; padding:clamp(28px,4vw,44px);">
+        <h2 style="font-size:22px; font-weight:800; letter-spacing:-0.02em; margin-bottom:18px;">Dobré vědět</h2>
+        <ul style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px 32px; list-style:none;">
+          <sc-for list="{{ priceNotes }}" as="n" hint-placeholder-count="4">
+            <li style="display:flex; align-items:flex-start; gap:10px; font-size:15.5px; color:#3a352c;">
+              <span style="flex:none; margin-top:7px; width:6px; height:6px; border-radius:50%; background:#c2693f;"></span>
+              <span>{{ n }}</span>
+            </li>
+          </sc-for>
+        </ul>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
+  <!-- ============================================================ KONTAKT ============================================================ -->
+  <sc-if value="{{ isKontakt }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <section style="position:relative; max-width:1220px; margin:0 auto; padding:84px 32px 40px; overflow:visible;">
+      <div style="position:absolute; top:0; right:0; width:400px; height:400px; border-radius:50%; background:radial-gradient(circle, rgba(47,90,64,0.13), rgba(47,90,64,0) 70%); pointer-events:none;"></div>
+      <h1 style="position:relative; font-size:clamp(40px,6.2vw,76px); font-weight:800; letter-spacing:-0.035em; line-height:0.98;">Najdeš nás na <span style="font-family:'Newsreader',serif; font-weight:500; font-style:italic; color:#2f5a40;">Jiřáku</span></h1>
+      <p style="position:relative; margin-top:24px; max-width:52ch; font-size:clamp(18px,2.1vw,22px); color:#4a4435; line-height:1.45;">Vinohradská 1438/70, Praha 3. Dvě minuty pěšky od metra a tramvaje Jiřího z Poděbrad.</p>
+    </section>
+
+    <section style="max-width:1220px; margin:0 auto; padding:0 32px 92px; display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:40px;">
+      <div>
+        <div style="display:flex; flex-direction:column; gap:28px; margin-bottom:32px;">
+          <sc-for list="{{ contactBlocks }}" as="b" hint-placeholder-count="4">
+            <div>
+              <div style="font-size:13px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#9a8f78; margin-bottom:8px;">{{ b.label }}</div>
+              <div style="font-size:19px; color:#211f1a; line-height:1.5; white-space:pre-line;">{{ b.value }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex; gap:12px;">
+          <span style="padding:10px 18px; border:1.5px solid #cbbfa4; border-radius:999px; font-size:15px; font-weight:600; color:#3a352c;">Facebook</span>
+          <span style="padding:10px 18px; border:1.5px solid #cbbfa4; border-radius:999px; font-size:15px; font-weight:600; color:#3a352c;">Instagram</span>
+        </div>
+      </div>
+
+      <div>
+        <div style="position:relative; height:240px; border-radius:18px; overflow:hidden; background:linear-gradient(160deg,#34624a,#6f9379); margin-bottom:24px;">
+          <div style="position:absolute; inset:0; background-image:repeating-linear-gradient(0deg, rgba(255,255,255,0.10) 0 1px, transparent 1px 30px),repeating-linear-gradient(90deg, rgba(255,255,255,0.10) 0 1px, transparent 1px 30px);"></div>
+          <span style="position:absolute; left:16px; bottom:14px; font-family:ui-monospace,'SF Mono',Menlo,monospace; font-size:12px; color:rgba(243,236,221,0.9);">[ mapa — náměstí Jiřího z Poděbrad ]</span>
+        </div>
+        <div style="background:#fffdf7; border:1px solid #e7dcc6; border-radius:18px; padding:28px;">
+          <h2 style="font-size:21px; font-weight:800; letter-spacing:-0.02em; margin-bottom:18px;">Napiš nám</h2>
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <input placeholder="Tvoje jméno" style="padding:13px 16px; border:1px solid #ddd1bb; border-radius:11px; font-family:inherit; font-size:15.5px; background:#faf6ec;">
+            <input placeholder="E-mail" style="padding:13px 16px; border:1px solid #ddd1bb; border-radius:11px; font-family:inherit; font-size:15.5px; background:#faf6ec;">
+            <textarea placeholder="Zpráva — třeba že chceš do příští skupiny programu Cesta" rows="4" style="padding:13px 16px; border:1px solid #ddd1bb; border-radius:11px; font-family:inherit; font-size:15.5px; background:#faf6ec; resize:vertical;"></textarea>
+            <button style="padding:14px 22px; background:#2f5a40; color:#f3ecdd; font-weight:700; font-size:16px; border-radius:999px; transition:background .2s ease;" style-hover="background:#244833;">Odeslat</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer style="background:#20201c; color:#cfcabb;">
+    <div style="max-width:1220px; margin:0 auto; padding:64px 32px 40px;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:36px; padding-bottom:40px; border-bottom:1px solid #3a352c;">
+        <div>
+          <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:12px;">
+            <span style="font-size:24px; font-weight:800; color:#f3ecdd;">BoHeMi</span>
+            <span style="font-family:'Newsreader',serif; font-style:italic; font-size:14px; color:#9cc4a8;">Body · Health · Mind</span>
+          </div>
+          <p style="font-size:15px; max-width:30ch; line-height:1.5;">Praktická škola zdravého života na Vinohradech.</p>
+        </div>
+        <div>
+          <div style="font-size:13px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#8b8678; margin-bottom:14px;">Web</div>
+          <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+            <button onClick="{{ goProc }}" style="font-size:15.5px; color:#cfcabb;" style-hover="color:#f3ecdd;">Proč BoHeMi</button>
+            <button onClick="{{ goProgram }}" style="font-size:15.5px; color:#cfcabb;" style-hover="color:#f3ecdd;">Cesta</button>
+            <button onClick="{{ goLekce }}" style="font-size:15.5px; color:#cfcabb;" style-hover="color:#f3ecdd;">Lekce a služby</button>
+            <button onClick="{{ goCenik }}" style="font-size:15.5px; color:#cfcabb;" style-hover="color:#f3ecdd;">Ceník</button>
+            <button onClick="{{ goKontakt }}" style="font-size:15.5px; color:#cfcabb;" style-hover="color:#f3ecdd;">Kontakt</button>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:13px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#8b8678; margin-bottom:14px;">Myšlenkový základ</div>
+          <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+            <a href="https://uhv.org.in/frontend/download/Holistic%20Human%20Health%20(eBook).pdf" target="_blank" rel="noopener" style="font-size:15.5px; color:#cfcabb; text-decoration:none;" style-hover="color:#f3ecdd;">Holistic Human Health (PDF) ↗</a>
+            <a href="https://uhv.org.in" target="_blank" rel="noopener" style="font-size:15.5px; color:#cfcabb; text-decoration:none;" style-hover="color:#f3ecdd;">Universal Human Values ↗</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:13px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#8b8678; margin-bottom:14px;">Kontakt</div>
+          <div style="font-size:15.5px; line-height:1.7;">+420 603 989 762<br>info@bohemi.fit<br>Vinohradská 1438/70, Praha 3</div>
+        </div>
+      </div>
+      <div style="padding-top:24px; font-size:13.5px; color:#8b8678;">© BoHeMi fitness s.r.o. · IČ 19115296 · Všechna práva vyhrazena</div>
+    </div>
+  </footer>
+
+</div>
+
+<template id="__bundler_thumbnail" data-bg-color="#efe6d6">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#efe6d6"/>
+    <circle cx="520" cy="400" r="150" fill="#2f5a40" opacity="0.78"/>
+    <circle cx="640" cy="470" r="150" fill="#c2693f" opacity="0.72"/>
+    <circle cx="600" cy="320" r="150" fill="#be9c4f" opacity="0.8"/>
+    <text x="600" y="640" font-family="Georgia, serif" font-style="italic" font-size="46" fill="#2f5a40" text-anchor="middle">Body · Health · Mind</text>
+    <text x="600" y="720" font-family="Helvetica, Arial, sans-serif" font-weight="bold" font-size="60" fill="#211f1a" text-anchor="middle" letter-spacing="-2">BoHeMi</text>
+  </svg>
+</template></x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  state = { page: 'home', menuOpen: false };
+
+  go(page) {
+    this.setState({ page, menuOpen: false });
+    if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'auto' });
+  }
+
+  scrollToId(id) {
+    if (typeof document === 'undefined') return;
+    const el = document.getElementById(id);
+    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 76, behavior: 'smooth' });
+  }
+
+  goAndScroll(page, id) {
+    this.setState({ page, menuOpen: false }, () => {
+      const tick = (n) => {
+        if (n <= 0) return this.scrollToId(id);
+        requestAnimationFrame(() => tick(n - 1));
+      };
+      tick(3);
+      setTimeout(() => this.scrollToId(id), 90);
+    });
+  }
+
+  renderVals() {
+    const page = this.state.page;
+    const gGreen = 'linear-gradient(155deg,#34624a,#6f9379)';
+    const gClay = 'linear-gradient(155deg,#b5663f,#dc9a72)';
+    const gSand = 'linear-gradient(155deg,#be9c4f,#e0c98a)';
+    const gForest = 'linear-gradient(155deg,#244833,#4f7a5e)';
+    const gRose = 'linear-gradient(155deg,#a85a4e,#d39283)';
+
+    const marquee = ['Tělo', 'Dech', 'Spánek', 'Voda', 'Jídlo', 'Mysl', 'Vztahy', 'Pohyb', 'Energie', 'Klid'];
+
+    return {
+      isHome: page === 'home',
+      isProgram: page === 'program',
+      isLekce: page === 'lekce',
+      isCenik: page === 'cenik',
+      isKontakt: page === 'kontakt',
+      isProc: page === 'proc',
+
+      goHome: () => this.go('home'),
+      goProgram: () => this.go('program'),
+      goLekce: () => this.go('lekce'),
+      goCenik: () => this.go('cenik'),
+      goKontakt: () => this.go('kontakt'),
+      goProc: () => this.go('proc'),
+
+      jumpProTebe: () => this.scrollToId('lekce-pro-tebe'),
+      jumpProDeti: () => this.scrollToId('lekce-pro-deti'),
+      jumpProFirmy: () => this.scrollToId('lekce-pro-firmy'),
+
+      menuOpen: this.state.menuOpen,
+      menuActive: page === 'lekce',
+      openMenu: () => this.setState({ menuOpen: true }),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      menuItems: [
+        { num: '01', label: 'Pro tebe', desc: 'Programy, lekce, osobní tréninky', go: () => this.goAndScroll('lekce', 'lekce-pro-tebe') },
+        { num: '02', label: 'Pro děti a rodiny', desc: 'Cirkus, kroužky, Supermamky', go: () => this.goAndScroll('lekce', 'lekce-pro-deti') },
+        { num: '03', label: 'Pro firmy', desc: 'FitTeams, wellbeing, pronájem sálů', go: () => this.goAndScroll('lekce', 'lekce-pro-firmy') },
+      ],
+
+      marqueeLoop: marquee.concat(marquee),
+
+      triad: [
+        { k: 'Body', cs: 'Tělo', dot: '#2f5a40', d: 'Pohyb, síla a funkční tělo, které ti slouží v běžném životě — ne jen v zrcadle.' },
+        { k: 'Health', cs: 'Zdraví', dot: '#c2693f', d: 'Prevence, vitalita a rovnováha. Spánek, dech, voda, jídlo a návyky, co vydrží.' },
+        { k: 'Mind', cs: 'Mysl', dot: '#be9c4f', d: 'Klid, motivace a sebevědomí. Hlava napojená na tělo, ne odtržená od něj.' },
+      ],
+
+      approach: [
+        { n: '01', t: 'Začínáme pochopením', d: 'Nic ti netvrdíme jako pravdu. Dáváme návrhy, které si ověříš na vlastní energii — co ti sedne, zůstane.' },
+        { n: '02', t: 'Tělo je nástroj, ne cíl', d: 'Tělo umí spravovat samo sebe líp, než čekáš. Neučíme tě ho přemoct, ale rozumět mu a nepřekážet mu.' },
+        { n: '03', t: 'Pozorování místo diagnózy', d: 'Únava, napětí i horečka jsou signály, ne poruchy. Učíme tě je číst dřív, než sáhneš po tabletce, co jen ztiší zprávu od těla.' },
+        { n: '04', t: 'Návyky místo diet a slibů', d: 'Zdraví se nedělá nárazem, ale rytmem. Malé kroky, co se opakují každý den — návyk na celý život, ne zázrak na měsíc.' },
+      ],
+
+      lpHighlights: [
+        '2× pohyb týdně + 1× krátký edukační blok',
+        'Health tracker a vstupní i výstupní měření',
+        'Malá uzavřená skupina 10–20 lidí',
+        'Jednoduché návyky: spánek, dech, voda, pohyb, jídlo',
+      ],
+
+      healthTracker: [
+        { area: 'Tělo', q: 'Hýbal/a jsem se dnes alespoň 20–30 minut?' },
+        { area: 'Dech', q: 'Věnoval/a jsem 3 minuty klidnému dýchání?' },
+        { area: 'Jídlo', q: 'Jedl/a jsem tak, že mám po jídle energii?' },
+        { area: 'Voda', q: 'Pil/a jsem přiměřeně během dne?' },
+        { area: 'Spánek', q: 'Připravil/a jsem večer tělo na spánek?' },
+        { area: 'Mind', q: 'Zastavil/a jsem se aspoň na chvíli a vnímal/a sebe?' },
+        { area: 'Vztahy', q: 'Měl/a jsem dnes jeden vědomý pozitivní kontakt s druhým?' },
+      ],
+
+      curriculum: [
+        { n: '01', t: 'Tělo jako signál', d: 'Jak poznám únavu, přetížení, energii, dech a napětí.' },
+        { n: '02', t: 'Pohyb bez extrému', d: 'Silový základ, vlastní váha, mobilita, kondice, regenerace.' },
+        { n: '03', t: 'Jídlo a energie', d: 'Co mi dává energii, co mě zatěžuje, jednoduchý jídelní rytmus.' },
+        { n: '04', t: 'Dech a nervový systém', d: 'Krátké dechové techniky před a po tréninku.' },
+        { n: '05', t: 'Denní rytmus a spánek', d: 'Ráno, večer, světlo, obrazovky, regenerace.' },
+        { n: '06', t: 'Mind — co se děje v hlavě', d: 'Pozorování myšlenek, motivace, stres, vnitřní dialog.' },
+        { n: '07', t: 'Vztahy a komunita', d: 'Proč skupina pomáhá vydržet. Sdílení pokroku a podpora.' },
+        { n: '08', t: 'Vlastní plán zdraví', d: 'Každý si vytvoří svůj health tracker a plán na další měsíc.' },
+      ],
+
+      audiences: [
+        { fig: '01', tagline: 'Jednotlivci', label: 'Pro tebe', d: 'Chceš se hýbat, mít energii a líp rozumět svému tělu.', items: ['Cesta — 8týdenní program', 'Skupinové lekce', 'Osobní tréninky a Open gym', 'Regenerace a fotobiomodulace'], go: () => this.scrollToId('pro-tebe') },
+        { fig: '02', tagline: 'Děti a maminky', label: 'Pro děti a rodiny', d: 'Pohyb pro nejmenší i pro rodiče, co nechtějí přestat.', items: ['Cirkusová školička', 'Pohybové kroužky a akrobacie', 'Supermamky — i s dětmi vedle', 'Příměstské tábory'], go: () => this.scrollToId('pro-deti') },
+        { fig: '03', tagline: 'Týmy a organizace', label: 'Pro firmy', d: 'Zdravější a sehranější tým bez vlastní tělocvičny.', items: ['FitTeams — tréninky pro týmy', 'Firemní wellbeing programy', 'Pronájem sálů na akce'], go: () => this.scrollToId('pro-firmy') },
+      ],
+
+      paths: [
+        { tag: '8 týdnů', t: 'Cesta', d: 'Vlajkový program. Osm týdnů, ne permanentka.' },
+        { tag: 'měsíčně', t: 'Měsíční program', d: 'Pravidelný pohyb se strukturou a komunitou.' },
+        { tag: '1:1', t: 'Osobní restart', d: 'Individuální vedení, když potřebuješ začít znovu.' },
+        { tag: 'skupina', t: 'Maminky', d: 'Pohyb pro maminky — klidně i s dětmi vedle.' },
+        { tag: 'skupina', t: 'Chlapi 40+', d: 'Síla, záda a energie. Bez soutěžení, bez ega.' },
+        { tag: 'cyklus', t: 'Zdravá záda · síla · energie', d: 'Tematické cykly zaměřené na konkrétní cíl.' },
+      ],
+
+      classes: [
+        { t: 'Kruhové tréninky', d: 'Naše srdcovka. Funkční trénink v kruhu, pro každou úroveň.', img: 'kruhový trénink', grad: gGreen, bhm: 'Tělo · dokončování · komunita' },
+        { t: 'Silové tréninky', d: 'Práce s vlastní vahou i činkami pod vedením trenéra.', img: 'silový trénink', grad: gForest, bhm: 'Tělo · síla · trpělivost' },
+        { t: 'HIIT', d: 'Krátké intenzivní intervaly, když máš málo času.', img: 'HIIT lekce', grad: gClay, bhm: 'Tělo · energie · odolnost' },
+        { t: 'Supermamky', d: 'Trénink pro maminky — klidně i s dětmi vedle.', img: 'supermamky', grad: gSand, bhm: 'Tělo · rodina · komunita' },
+        { t: 'Vlastní váha', d: 'Ovládni svoje tělo bez nářadí, kdekoliv.', img: 'vlastní váha', grad: gRose, bhm: 'Tělo · kontrola · pozornost' },
+      ],
+
+      individualServices: [
+        { t: 'Osobní tréninky', d: 'Individuální vedení šité na tvoje cíle a tempo.' },
+        { t: 'Open gym', d: 'Privátní sál 100 m² jen pro tebe nebo malou skupinu.' },
+        { t: 'Fotobiomodulace', d: 'Regenerace a podpora hojení světelnou terapií.' },
+      ],
+
+      kidsActivities: [
+        { t: 'Cirkusová školička', d: 'Pro nejmenší — základní pohybové dovednosti hravou formou.', img: 'cirkusová školička', grad: gSand },
+        { t: 'Základy cirkusu', d: 'Gymnastika a akrobacie pod vedením akrobatů La Putyka.', img: 'akrobacie', grad: gClay },
+        { t: 'Pohybové kroužky', d: 'Pozemní i závěsná akrobacie a žonglování.', img: 'kroužky pro děti', grad: gGreen },
+      ],
+
+      firmyServices: [
+        { t: 'FitTeams', d: 'Kruhové a silové tréninky navržené pro firemní týmy.' },
+        { t: 'Firemní wellbeing', d: 'Pravidelné programy pro zdraví a energii zaměstnanců.' },
+        { t: 'Pronájem sálů', d: 'Sály pro vlastní akce, teambuilding nebo workshopy.' },
+      ],
+
+      pricing: [
+        { t: 'Jednorázový vstup', d: 'Když přijdeš jen občas', price: '290 Kč', per: '/ lekce', note: '', feat: ['Platíš za každou lekci zvlášť', 'Žádná sleva na služby', 'Nejdražší varianta za lekci'] },
+        { t: 'Členství', d: 'Když je pohyb součást života', price: '1 290 Kč', per: '/ měsíc', featured: true, badge: 'Nejvýhodnější', note: 'Při 3 lekcích týdně vyjde lekce na ~99 Kč.', feat: ['Neomezené skupinové lekce', 'Lekce už od ~99 Kč', 'Sleva 30 % na osobní tréninky', 'Komunita a akce v ceně'] },
+        { t: 'Cesta', d: 'Když chceš cestu, ne jen lekce', price: '3 900 Kč', per: '/ 8 týdnů', badge: 'Vlajkový program', note: '', feat: ['2× pohyb + 1× edukace týdně', 'Health tracker a měření', 'Uzavřená skupina 10–20 lidí', 'Vedení trenérem celých 8 týdnů'] },
+      ],
+
+      priceNotes: [
+        'Multisport, Benefit plus, Edenred i Sodexo (mimo vybrané lekce).',
+        'Rádi vystavíme fakturu pro zaměstnavatele i čerpání z FKSP.',
+        'Členství platí na kruhové, silové, Supermamky, HIIT a vlastní váhu.',
+        'Pronájem sálů je hodinový při smlouvě min. na 6 měsíců.',
+      ],
+
+      lpStats: [
+        { n: '8', t: 'Týdnů', d: 'Dost dlouho na změnu, dost krátko, aby to šlo udržet.' },
+        { n: '2×', t: 'Pohyb týdně', d: 'Skupinové lekce vedené trenérem.' },
+        { n: '1×', t: 'Edukace týdně', d: 'Krátký praktický blok o návycích.' },
+        { n: '10–20', t: 'Lidí ve skupině', d: 'Malá uzavřená skupina, kde se navzájem znáte.' },
+      ],
+
+      lpIncluded: [
+        '16 skupinových lekcí (2× týdně)',
+        '8 edukačních bloků o návycích',
+        'Health tracker a přístup do skupiny',
+        'Vstupní a výstupní měření',
+        'Vedení trenérem po celou dobu',
+        'Komunita lidí, kteří jdou stejnou cestou',
+      ],
+
+      lpFor: [
+        'Začínáš znovu a chceš strukturu, ne náhodné lekce.',
+        'Chceš patřit do malé skupiny lidí, co jdou stejnou cestou.',
+        'Chceš se hýbat i rozumět tomu, proč a jak.',
+        'Nehledáš zázraky — hledáš návyky, co vydrží.',
+      ],
+
+      trainers: [
+        { name: 'Klára Měchurová', role: 'Trenérka · funkční trénink', grad: gGreen },
+        { name: 'Jan Hezina', role: 'AI a Mind · drží to celé pohromadě', grad: gClay },
+      ],
+
+      teacher: [
+        { k: 'Kruháč', d: 'Učí dotahovat věci do konce. Stanoviště za stanovištěm, bez výmluv.' },
+        { k: 'Žonglování', d: 'Učí soustředění, rytmus a trpělivost — a schopnost lépe číst vzorce.' },
+        { k: 'Dech', d: 'Učí zklidnit se a vrátit pozornost zpátky k tělu.' },
+        { k: 'Síla', d: 'Učí trpělivosti a tomu, že pokrok je pomalý, ale poctivý.' },
+      ],
+
+      bookMap: [
+        { book: 'Filozofie zdraví', bohemi: 'Živé lekce a vedená praxe' },
+        { book: 'Health Tracker', bohemi: 'Skupina, trenér, pravidelnost' },
+        { book: 'Denní rutina', bohemi: 'Konkrétní pohybové programy' },
+        { book: 'Tělo i vnitřní nastavení', bohemi: 'Práce s tělem v reálném prostoru' },
+        { book: 'Rodina, společnost, příroda', bohemi: 'Supermamky, děti, komunita, firmy' },
+        { book: 'Vzdělávací kurz', bohemi: 'Česká civilní aplikace v životě' },
+      ],
+
+      contactBlocks: [
+        { label: 'Adresa', value: 'Vinohradská 1438/70\n130 00 Praha 3' },
+        { label: 'Doprava', value: 'Metro A, tram 11 a 13 — Jiřího z Poděbrad, 2 min pěšky' },
+        { label: 'Telefon', value: '+420 603 989 762' },
+        { label: 'E-mail', value: 'info@bohemi.fit' },
+        { label: 'Otevírací doba', value: 'Pondělí — pátek dle rozvrhu lekcí' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>
