@@ -4,15 +4,13 @@ Znovupoužitelný prompt pro Claude Code. Postup:
 
 1. Z Claude Design vyexportuj **Project archive .zip** (víc obrazovek jako
    oddělené soubory) a/nebo **Standalone HTML** (vše v jednom).
-2. Ulož do `imports/` v repu (je gitignorovaný, viz níž):
+2. Ulož do `imports/` v repu (složka je gitignorovaná, do repa se nedostane):
    - zip rozbal do `imports/bohemi-design/`
-   - standalone HTML jako `imports/homepage.html`
+   - standalone HTML klidně ponech s původním názvem
 3. V Claude Code vlož prompt níž a doplň **SLUG**.
 
 > Máš-li obojí, prompt to řeší: **zip = primární zdroj, HTML = vizuální reference
 > a fallback**. Není to dvojí práce, je to jeden zdroj a jedno ověření.
-
-> Přidej `imports/` do `.gitignore` — je to dočasný zdroj, ne součást webu.
 
 ---
 
@@ -21,9 +19,16 @@ Znovupoužitelný prompt pro Claude Code. Postup:
 ```
 Než cokoliv uděláš, přečti si `CLAUDE.md` a `design-system/MASTER.md`.
 
-Mám DVA exporty TÉHOŽ designu z Claude Design:
-- imports/bohemi-design/   (rozbalený Project archive .zip — víc souborů)
-- imports/homepage.html    (Standalone HTML — vše v jednom, obrázky base64)
+Mám exporty z Claude Design ve složce imports/:
+- imports/bohemi-design/              (rozbalený archiv — PRIMÁRNÍ zdroj)
+    - "Bohemi Web.html"               (vyrenderovaná stránka)
+    - "Bohemi Web.dc.html"            (canvas/design varianta — fallback)
+    - screenshots/                    (PNG obrazovek: home-hero, cenik, proc…)
+    - support.js
+- "imports/Bohemi Web.html"           (standalone HTML — totéž v jednom souboru)
+
+Pozn.: názvy souborů mají mezery. Projdi si složku sám a najdi v ní obrazovky;
+když potřebuješ napsat cestu ručně, dej ji do uvozovek.
 
 Cílová stránka: slug `/`  (Astro: src/pages/index.astro)
 
@@ -36,11 +41,13 @@ Astro + Tailwind implementaci.
 
 Pravidla:
 
-0. ZDROJE — primární je rozbalený zip (imports/bohemi-design/), pokud obsahuje
+0. ZDROJE — primární je rozbalený archiv (imports/bohemi-design/), pokud obsahuje
    čitelné HTML/CSS jednotlivých obrazovek. Standalone HTML ber jako autoritativní
-   VIZUÁLNÍ referenci a fallback pro cokoliv, co v zipu chybí nebo je nečitelné.
-   NEslučuj je a nediffuj mezi nimi — vyber čistší zdroj, druhý použij jen na
-   ověření vzhledu. (Obrázky: ze zipu většinou jako soubory, ze standalone HTML
+   VIZUÁLNÍ referenci a fallback pro cokoliv, co v archivu chybí nebo je nečitelné.
+   Složku screenshots/ ber jako vizuální GROUND-TRUTH — podle těch PNG ověřuj, že
+   výsledek opravdu sedí s originálem.
+   NEslučuj zdroje a nediffuj mezi nimi — vyber čistší zdroj, druhý použij jen na
+   ověření vzhledu. (Obrázky: z archivu většinou jako soubory, ze standalone HTML
    jako base64 → viz pravidlo 3.)
 
 1. TOKENY — export je zdroj pravdy pro reálné značkové barvy a fonty BoHeMi.
