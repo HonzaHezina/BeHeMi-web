@@ -83,3 +83,26 @@ zůstává v hlavní navigaci, dělá Honza, ne nástroj.
   `design-system/pages/<slug>.md` (override má přednost před MASTER).
 - Když narazíš na rozhodnutí o značce, obsahu nebo struktuře menu — **navrhni a
   zeptej se**, nerozhoduj za Honzu.
+
+## Vývoj (Astro)
+
+Dev server spouštěj v background módu, ať neblokuje session:
+
+```
+astro dev --background
+```
+
+Správa běžícího serveru: `astro dev stop`, `astro dev status`, `astro dev logs`.
+
+## Dokumentace
+
+Plná dokumentace: https://docs.astro.build
+
+Než sáhneš na související oblast, projdi příslušný guide:
+
+- Stránky, dynamické routy, middleware: https://docs.astro.build/en/guides/routing/
+- Astro komponenty: https://docs.astro.build/en/basics/astro-components/
+- React/Vue/Svelte komponenty uvnitř Astra (islands): https://docs.astro.build/en/guides/framework-components/
+- Content collections (správa obsahu): https://docs.astro.build/en/guides/content-collections/
+- Styly a Tailwind: https://docs.astro.build/en/guides/styling/
+- Vícejazyčnost (případná EN mutace později): https://docs.astro.build/en/guides/internationalization/
