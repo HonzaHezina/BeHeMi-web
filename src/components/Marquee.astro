@@ -1,0 +1,13 @@
+---
+import { marquee } from '../data/home';
+const loop = [...marquee, ...marquee];
+---
+<section class="overflow-hidden border-y border-border-strong bg-sand" aria-hidden="true">
+  <div class="anim-marquee flex w-max py-4">
+    {loop.map((w) => (
+      <span class="flex items-center gap-5 whitespace-nowrap px-5 text-[22px] italic text-ink-muted">
+        {w}<span class="not-italic text-accent">✦</span>
+      </span>
+    ))}
+  </div>
+</section>

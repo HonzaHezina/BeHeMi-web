@@ -1,0 +1,61 @@
+---
+import Button from './Button.astro';
+import MediaFrame from './MediaFrame.astro';
+---
+<section class="relative mx-auto max-w-[1220px] px-5 pb-14 pt-12 md:px-8 md:pt-18">
+  <div
+    class="anim-drift pointer-events-none absolute -right-16 -top-10 h-[520px] w-[520px] rounded-full blur-lg"
+    style="background:radial-gradient(circle at 35% 35%, rgba(194,105,63,0.20), rgba(194,105,63,0) 68%);"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="relative grid items-center gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:gap-13">
+    <div>
+      <div class="mb-6 inline-flex items-center gap-2.5 rounded-full border border-brand/20 bg-brand/8 px-4 py-1.5">
+        <span class="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true"></span>
+        <span class="text-[13px] font-semibold uppercase tracking-[0.04em] text-brand-tint">Vinohrady · Praha · holistické zdraví v praxi</span>
+      </div>
+
+      <h1 class="text-[clamp(44px,6.6vw,84px)] font-extrabold leading-[0.98] tracking-[-0.035em] text-ink">
+        Tělo jako<br /><span class="font-medium italic text-brand">škola</span> života.
+      </h1>
+
+      <p class="mt-6 max-w-[50ch] text-[clamp(18px,1.9vw,22px)] leading-[1.5] text-ink-warm">
+        Přes pohyb se tu učíš rozumět svému tělu, energii, návykům i hlavě — a vést se sám, ne podle příkazů. Začínáme pohybem a jdeme dál ke spánku, dechu, jídlu a klidu.
+      </p>
+
+      <div class="mt-8 flex flex-wrap gap-3.5">
+        <Button href="#cesta" variant="dark">Začni Cestou →</Button>
+        <Button href="#nabidka" variant="outline">Rozvrh lekcí</Button>
+      </div>
+
+      <div class="mt-8 flex items-center gap-5">
+        <div class="flex" aria-hidden="true">
+          <span class="media-green h-10 w-10 rounded-full border-2 border-bg"></span>
+          <span class="media-clay -ml-3 h-10 w-10 rounded-full border-2 border-bg"></span>
+          <span class="media-sand -ml-3 h-10 w-10 rounded-full border-2 border-bg"></span>
+        </div>
+        <span class="text-[14.5px] leading-snug text-ink-muted">Malá komunita na Jiřáku,<br />kde tě trenér zná jménem.</span>
+      </div>
+    </div>
+
+    <div class="relative h-[clamp(380px,46vw,540px)]">
+      <MediaFrame
+        media="media-green"
+        rounded="rounded-t-[200px] rounded-b-[22px]"
+        class="absolute inset-0 shadow-[0_30px_60px_-22px_rgba(33,31,26,0.4)]"
+        alt="Trénink ve funkčním sále BoHeMi"
+      />
+      <div class="anim-floaty absolute -left-6 top-8 rounded-2xl border border-border bg-surface px-4 py-2.5 shadow-[0_14px_30px_-14px_rgba(33,31,26,0.3)]">
+        <span class="text-[13px] font-bold text-brand">● Tělo</span>
+      </div>
+      <div class="anim-floaty2 absolute -right-5 top-[46%] rounded-2xl border border-border bg-surface px-4 py-2.5 shadow-[0_14px_30px_-14px_rgba(33,31,26,0.3)]">
+        <span class="text-[13px] font-bold text-accent">● Dech &amp; spánek</span>
+      </div>
+      <div class="anim-floaty3 absolute -left-7 bottom-5 rounded-2xl border border-border bg-surface px-4 py-2.5 shadow-[0_14px_30px_-14px_rgba(33,31,26,0.3)]">
+        <span class="text-[13px] font-bold text-gold-dark">● Mysl &amp; vztahy</span>
+      </div>
+    </div>
+  </div>
+</section>

@@ -38,18 +38,25 @@ CTA „Rezervovat" je **vždy odkaz na `rezervace.bohemi.fit`**.
 ## Barvy (tokeny)
 
 Teplá, grounded paleta s jedním energickým akcentem. Záměrně **mimo** spa-pastel.
+Hodnoty převzaty z Claude Design exportu (export = zdroj pravdy). Plná sada tokenů
+žije v `src/styles/global.css`; tady jsou klíčové z nich.
 
 | Token | Hex | Použití |
 |---|---|---|
-| `--bg` | `#FBF8F3` | teplá bone — hlavní pozadí |
-| `--surface` | `#FFFFFF` | karty, panely |
-| `--ink` | `#1C1C1A` | hlavní text |
-| `--ink-soft` | `#4A4A45` | sekundární text |
-| `--brand` | `#15524A` | hluboká pinie/teal — struktura, nadpisy, linky („health", grounded) |
-| `--brand-soft`| `#E3ECE8` | jemné pozadí sekcí, hover |
-| `--accent` | `#EE6A45` | teplý korál — **CTA, akcenty, energie** |
-| `--accent-ink`| `#FFFFFF` | text na akcentu |
-| `--border` | `#E7E1D7` | linky, oddělovače |
+| `--color-bg` | `#efe6d6` | písková — hlavní pozadí |
+| `--color-surface` | `#fffdf7` | karty, panely |
+| `--color-sand` | `#e8dcc6` | pruhy (marquee), sekce trenéři |
+| `--color-mint` | `#e7efe8` | jemné zelené pozadí sekcí, hover |
+| `--color-ink-dark` | `#20201c` | tmavé sekce (manifesto, footer) |
+| `--color-ink` | `#211f1a` | hlavní text / nadpisy |
+| `--color-ink-soft` | `#5f594c` | sekundární text |
+| `--color-ink-muted` | `#7a7361` | terciární text, popisky |
+| `--color-brand` | `#2f5a40` | lesní zelená — struktura, nadpisy, linky |
+| `--color-brand-dark`| `#244833` | hover / ztmavení |
+| `--color-accent` | `#c2693f` | terakota — **CTA, akcenty, energie** |
+| `--color-gold` | `#be9c4f` | třetí akcent (Mind ve Venn) |
+| `--color-cream` | `#f3ecdd` | text na tmavém / zeleném pozadí |
+| `--color-border` | `#e7dcc6` | linky, oddělovače, karty |
 
 Kontrast hlídej: text na pozadí min. **4.5:1** (WCAG AA).
 
@@ -58,16 +65,17 @@ Kontrast hlídej: text na pozadí min. **4.5:1** (WCAG AA).
 
 ## Typografie
 
-Google Fonts, dvě rodiny. Charakterní grotesk na nadpisy, humanistický sans na text.
+Google Fonts, **jedna rodina** (dle exportu). Akcenty se řeší vahou a kurzívou,
+ne druhým fontem — žádný serif.
 
-- **Nadpisy:** `Archivo` (700/800) — pevné, sportovní, ne nablýskané.
-  *Alternativa:* `Space Grotesk`.
-- **Text:** `Inter` (400/500/600) — čistý, výborně čitelný.
-- Scale (desktop): h1 ~clamp(2.5rem,5vw,4rem) / h2 ~2rem / h3 ~1.375rem /
-  body 1.0625rem / small 0.9rem. Line-height body ~1.6.
+- **Vše:** `Hanken Grotesk` (400–800) — charakterní humanistický grotesk,
+  sportovní a čistý. Nadpisy 700/800, text 400/500, akcentová slova 500 *italic*.
+- Scale (desktop): h1 ~clamp(44px,6.6vw,84px) / h2 ~clamp(30px,4vw,48px) /
+  h3 ~1.45rem / body 1.0625–1.125rem / small 0.9rem. Line-height body ~1.55.
 
-**Zakázáno:** elegantní serify (Cormorant, Playfair, EB Garamond) — čtou se jako
-spa/svatba/ezoterika. Žádné script/handwriting fonty.
+**Zakázáno:** elegantní serify (Cormorant, Playfair, EB Garamond, Newsreader) —
+čtou se jako spa/svatba/ezoterika. Žádné script/handwriting fonty. Akcent =
+kurzíva/váha téhož grotesku.
 
 ## Spacing & layout
 

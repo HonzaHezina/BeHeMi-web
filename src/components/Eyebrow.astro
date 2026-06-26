@@ -1,0 +1,17 @@
+---
+// Akcentový "eyebrow" nadpisek nad sekcí.
+// Bez serifu — odlišení vahou + kurzívou (rozhodnutí: žádné serify).
+interface Props {
+  color?: 'accent' | 'faint' | 'brand-tint';
+  class?: string;
+}
+const { color = 'accent', class: extra = '' } = Astro.props;
+const colors: Record<string, string> = {
+  accent: 'text-accent',
+  faint: 'text-ink-faint',
+  'brand-tint': 'text-brand-tint',
+};
+---
+<p class={`font-medium italic text-[23px] mb-2.5 ${colors[color]} ${extra}`}>
+  <slot />
+</p>

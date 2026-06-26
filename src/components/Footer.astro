@@ -1,0 +1,54 @@
+---
+import { RESERVE_URL } from '../data/home';
+
+const webLinks = [
+  { label: 'Proč BoHeMi', href: '#proc' },
+  { label: 'Lekce a služby', href: '#nabidka' },
+  { label: 'Cesta — vlajkový program', href: '#cesta' },
+  { label: 'Ceník', href: '#cenik' },
+  { label: 'Kontakt', href: '#kontakt' },
+];
+---
+<footer class="bg-ink-dark text-cream-soft">
+  <div class="mx-auto max-w-[1220px] px-5 py-16 md:px-8">
+    <div class="grid grid-cols-1 gap-9 border-b border-border-dark pb-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr]">
+      <div>
+        <div class="mb-3 flex items-baseline gap-2.5">
+          <span class="text-2xl font-extrabold text-cream">BoHeMi</span>
+          <span class="italic text-sm text-sage">Body · Health · Mind</span>
+        </div>
+        <p class="max-w-[30ch] text-[15px] leading-relaxed">Praktická škola zdravého života na Vinohradech.</p>
+        <a
+          href={RESERVE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-5 inline-flex cursor-pointer items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-[15px] font-bold text-cream transition-colors hover:bg-brand-dark"
+        >
+          Rezervovat lekci →
+        </a>
+      </div>
+
+      <div>
+        <div class="mb-3.5 text-[13px] font-bold uppercase tracking-[0.06em] text-cream-muted">Web</div>
+        <div class="flex flex-col items-start gap-2.5">
+          {webLinks.map((l) => (
+            <a href={l.href} class="text-[15.5px] text-cream-soft hover:text-cream">{l.label}</a>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <div class="mb-3.5 text-[13px] font-bold uppercase tracking-[0.06em] text-cream-muted">Kontakt</div>
+        <address class="text-[15.5px] not-italic leading-[1.7]">
+          <a href="tel:+420603989762" class="hover:text-cream">+420 603 989 762</a><br />
+          <a href="mailto:info@bohemi.fit" class="hover:text-cream">info@bohemi.fit</a><br />
+          Vinohradská 1438/70, Praha 3
+        </address>
+      </div>
+    </div>
+
+    <div class="pt-6 text-[13.5px] text-cream-muted">
+      © BoHeMi fitness s.r.o. · IČ 19115296 · Všechna práva vyhrazena
+    </div>
+  </div>
+</footer>

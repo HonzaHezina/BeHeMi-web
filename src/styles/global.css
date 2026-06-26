@@ -1,6 +1,106 @@
 @import "tailwindcss";
 
+/* ───────────────────────────────────────────────────────────────
+   BoHeMi design tokeny — zdroj pravdy = Claude Design export.
+   Charakter a mantinely viz design-system/MASTER.md.
+   Tailwind v4: tokeny v @theme generují utility (bg-*, text-*, …).
+   ─────────────────────────────────────────────────────────────── */
+
 @theme {
-  /* Tokeny BoHeMi sem doplní import z Claude Design exportu.
-     Zdroj pravdy = export, ne ruční odhad. Viz design-system/MASTER.md. */
+  /* Fonty — jediná rodina, akcenty řešíme vahou + kurzívou (bez serifu) */
+  --font-sans: "Hanken Grotesk", system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Plochy / pozadí */
+  --color-bg: #efe6d6;            /* písková — hlavní pozadí */
+  --color-surface: #fffdf7;       /* karty, panely */
+  --color-surface-hover: #f7f1e6; /* hover plochy */
+  --color-sand: #e8dcc6;          /* pruhy, marquee, trenéři */
+  --color-mint: #e7efe8;          /* jemné zelené pozadí sekcí */
+  --color-mint-border: #d3e0d4;   /* okraj mint bloků */
+  --color-ink-dark: #20201c;      /* tmavé sekce (manifesto, footer) */
+
+  /* Text */
+  --color-ink: #211f1a;           /* hlavní text / nadpisy */
+  --color-ink-soft: #5f594c;      /* sekundární text */
+  --color-ink-muted: #7a7361;     /* terciární / popisky */
+  --color-ink-warm: #4a4435;      /* teplý odstavec (hero) */
+  --color-ink-faint: #9a8f78;     /* labely, ghost */
+  --color-ink-ghost: #d8cbb0;     /* velká dekorativní čísla */
+  --color-ink-line: #3a352c;      /* tmavé linky / text v listech */
+  --color-brand-tint: #5c6b54;    /* tlumená zelená pro labely */
+
+  /* Značka */
+  --color-brand: #2f5a40;         /* lesní zelená — struktura, linky */
+  --color-brand-dark: #244833;    /* hover / ztmavení */
+  --color-accent: #c2693f;        /* terakota — akcenty, tečky */
+  --color-gold: #be9c4f;          /* třetí akcent (Mind) */
+  --color-gold-dark: #b08a2e;
+
+  /* Text na tmavém / zeleném pozadí */
+  --color-cream: #f3ecdd;
+  --color-cream-soft: #cfcabb;
+  --color-cream-muted: #8b8678;
+  --color-sage: #9cc4a8;
+  --color-sage-soft: #8fb89c;
+  --color-mint-text: #d7e3d8;
+
+  /* Okraje */
+  --color-border: #e7dcc6;        /* karty */
+  --color-border-strong: #e0d4bd; /* nav, pruhy */
+  --color-border-button: #cbbfa4; /* sekundární tlačítko */
+  --color-border-dark: #3a352c;   /* oddělovače na tmavém */
+  --color-tracker-line: #ece2cf;
+}
+
+/* Reset / základ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+::selection { background: var(--color-brand); color: var(--color-cream); }
+
+/* Gradientové foto-placeholdery (slot pro reálné fotky).
+   Hex žijou jen tady v token vrstvě, ne v komponentách. */
+.media-green  { background: linear-gradient(155deg, #34624a, #6f9379); }
+.media-clay   { background: linear-gradient(155deg, #b5663f, #dc9a72); }
+.media-sand   { background: linear-gradient(155deg, #be9c4f, #e0c98a); }
+.media-forest { background: linear-gradient(155deg, #244833, #4f7a5e); }
+.media-rose   { background: linear-gradient(155deg, #a85a4e, #d39283); }
+
+/* Zrnitý overlay */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("/grain.svg");
+}
+
+/* Pohyb */
+@keyframes bhm-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes bhm-floaty  { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-13px); } }
+@keyframes bhm-floaty2 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(11px); } }
+@keyframes bhm-drift   { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(18px, -14px) scale(1.06); } }
+
+.anim-marquee { animation: bhm-marquee 34s linear infinite; }
+.anim-floaty  { animation: bhm-floaty 5.5s ease-in-out infinite; }
+.anim-floaty2 { animation: bhm-floaty2 6.2s ease-in-out infinite; }
+.anim-floaty3 { animation: bhm-floaty 6.8s ease-in-out infinite; }
+.anim-drift   { animation: bhm-drift 16s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .anim-marquee, .anim-floaty, .anim-floaty2, .anim-floaty3, .anim-drift {
+    animation: none !important;
+  }
 }

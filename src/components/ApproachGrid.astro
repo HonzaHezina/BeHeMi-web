@@ -1,0 +1,17 @@
+---
+import Eyebrow from './Eyebrow.astro';
+import { approach } from '../data/home';
+---
+<section class="mx-auto max-w-[1220px] px-5 py-16 md:px-8 md:py-23">
+  <Eyebrow>Jak přemýšlíme o zdraví</Eyebrow>
+  <h2 class="mb-11 max-w-[22ch] text-[clamp(30px,4vw,48px)] font-extrabold leading-[1.03] tracking-[-0.03em]">Tělo je nástroj, ne cíl. Učíme tě s ním zacházet.</h2>
+  <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+    {approach.map((a) => (
+      <div class="rounded-[18px] border border-border bg-surface px-7 py-8 transition-all duration-300 hover:-translate-y-1.5 hover:border-brand hover:shadow-[0_22px_44px_-20px_rgba(33,31,26,0.26)]">
+        <div class="mb-3.5 text-[30px] italic text-ink-ghost">{a.n}</div>
+        <h3 class="mb-2.5 text-xl font-extrabold tracking-[-0.02em]">{a.t}</h3>
+        <p class="text-[15.5px] leading-[1.5] text-ink-soft">{a.d}</p>
+      </div>
+    ))}
+  </div>
+</section>

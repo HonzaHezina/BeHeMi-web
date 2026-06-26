@@ -1,0 +1,29 @@
+---
+import Eyebrow from './Eyebrow.astro';
+import { audiences } from '../data/home';
+---
+<section class="mx-auto max-w-[1220px] px-5 pb-6 pt-16 md:px-8 md:pb-6 md:pt-23">
+  <Eyebrow>Najdi se v tom</Eyebrow>
+  <h2 class="mb-3.5 max-w-[20ch] text-[clamp(30px,4vw,48px)] font-extrabold leading-[1.03] tracking-[-0.03em]">Tři jasné cesty. Vyber tu svoji.</h2>
+  <p class="mb-11 max-w-[54ch] text-lg text-ink-soft">Pod jednou střechou toho děláme hodně — ale pro každého trochu jinak. Tady je, co je přesně pro tebe.</p>
+
+  <div class="grid gap-5 md:grid-cols-3">
+    {audiences.map((a) => (
+      <div class="relative flex flex-col overflow-hidden rounded-[18px] border border-border bg-surface p-8 transition-all duration-300 hover:-translate-y-1.5 hover:border-brand hover:shadow-[0_24px_46px_-20px_rgba(33,31,26,0.26)]">
+        <span class="pointer-events-none absolute -right-1.5 -top-2.5 text-[84px] italic text-ink-ghost/40" aria-hidden="true">{a.fig}</span>
+        <span class="relative mb-3 text-[12.5px] font-bold uppercase tracking-[0.06em] text-ink-faint">{a.tagline}</span>
+        <h3 class="relative mb-2 text-[28px] font-extrabold tracking-[-0.025em]">{a.label}</h3>
+        <p class="relative mb-5 text-base leading-[1.5] text-ink-soft">{a.d}</p>
+        <ul class="relative mb-6 flex flex-col gap-2.5">
+          {a.items.map((i) => (
+            <li class="flex items-start gap-2.5 text-[15.5px] text-ink-line">
+              <span class="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden="true"></span>
+              <span>{i}</span>
+            </li>
+          ))}
+        </ul>
+        <a href={a.anchor} class="relative mt-auto inline-flex cursor-pointer items-center gap-2 self-start rounded-full bg-ink px-5 py-2.5 text-[15px] font-bold text-cream transition-colors hover:bg-brand">Co nabízíme →</a>
+      </div>
+    ))}
+  </div>
+</section>

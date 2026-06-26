@@ -1,0 +1,28 @@
+---
+// Tlačítko / odkaz. Vždy renderuje <a> (statika — žádné odesílání).
+// Varianty drží tokeny z global.css, žádný hardcoded hex.
+interface Props {
+  href: string;
+  variant?: 'dark' | 'brand' | 'outline' | 'link';
+  external?: boolean;
+  class?: string;
+}
+const { href, variant = 'dark', external = false, class: extra = '' } = Astro.props;
+
+const base =
+  'inline-flex items-center justify-center gap-2 font-bold cursor-pointer transition-all duration-200 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-bg';
+
+const variants: Record<string, string> = {
+  dark: 'px-7 py-3.5 text-[17px] bg-ink text-cream hover:bg-brand hover:-translate-y-0.5',
+  brand: 'px-6 py-3.5 text-base bg-brand text-cream hover:bg-brand-dark hover:-translate-y-0.5',
+  outline:
+    'px-7 py-3.5 text-[17px] bg-transparent text-ink border-[1.5px] border-border-button hover:border-brand hover:text-brand',
+  link: 'text-base text-brand hover:text-ink rounded-none',
+};
+
+const rel = external ? 'noopener noreferrer' : undefined;
+const target = external ? '_blank' : undefined;
+---
+<a href={href} rel={rel} target={target} class={`${base} ${variants[variant]} ${extra}`}>
+  <slot />
+</a>

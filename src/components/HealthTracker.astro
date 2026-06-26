@@ -1,0 +1,33 @@
+---
+import { healthTracker } from '../data/home';
+---
+<section class="relative overflow-hidden bg-brand text-cream">
+  <div
+    class="pointer-events-none absolute -right-18 -top-22 h-[440px] w-[440px] rounded-full"
+    style="background:radial-gradient(circle, rgba(255,255,255,0.10), rgba(255,255,255,0) 70%);"
+    aria-hidden="true"
+  >
+  </div>
+  <div class="relative mx-auto max-w-[1220px] px-5 py-16 md:px-8 md:py-23">
+    <div class="grid items-start gap-11 md:grid-cols-2 lg:gap-13">
+      <div>
+        <span class="mb-5 inline-block rounded-full bg-white/15 px-3.5 py-1.5 text-[13px] font-bold uppercase tracking-[0.04em] text-cream">BoHeMi Health Tracker</span>
+        <h2 class="mb-[18px] text-[clamp(30px,4vw,50px)] font-extrabold leading-[1.02] tracking-[-0.03em]">Sedm otázek. Jeden den. <span class="font-medium italic text-sage">Zdraví v kostce.</span></h2>
+        <p class="mb-6 max-w-[42ch] text-lg text-mint-text">Žádné složité tabulky ani diety. Každý den si odpovíš na sedm jednoduchých otázek — a postupně vidíš, co ti dává energii a co ji bere.</p>
+        <div class="rounded-2xl border border-white/15 bg-white/10 px-6 py-[22px]">
+          <div class="mb-2 text-[13px] font-bold uppercase tracking-[0.06em] text-sage">Co připravujeme</div>
+          <p class="text-base leading-[1.5] text-mint-text">Brzy: tvůj deník povede <strong class="font-bold text-cream">AI průvodce</strong> — připomene, sleduje návyky a navrhuje malé další kroky.</p>
+        </div>
+      </div>
+      <div class="overflow-hidden rounded-[18px] bg-surface shadow-[0_24px_50px_-22px_rgba(0,0,0,0.5)]">
+        {healthTracker.map((r) => (
+          <div class="flex items-center gap-[18px] border-b border-tracker-line px-6 py-[18px] last:border-b-0">
+            <span class="w-21 shrink-0 text-base font-extrabold tracking-[-0.01em] text-brand">{r.area}</span>
+            <span class="text-[15px] leading-snug text-ink-line">{r.q}</span>
+            <span class="ml-auto h-[22px] w-[22px] shrink-0 rounded-[7px] border-2 border-border-strong" aria-hidden="true"></span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

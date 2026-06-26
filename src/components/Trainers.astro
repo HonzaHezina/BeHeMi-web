@@ -1,0 +1,20 @@
+---
+import Eyebrow from './Eyebrow.astro';
+import MediaFrame from './MediaFrame.astro';
+import { trainers } from '../data/home';
+---
+<section class="border-t border-border-strong bg-sand">
+  <div class="mx-auto max-w-[1220px] px-5 py-16 md:px-8 md:py-23">
+    <Eyebrow>Lidé, které znáš jménem</Eyebrow>
+    <h2 class="mb-11 text-[clamp(30px,4vw,48px)] font-extrabold tracking-[-0.03em]">Naši trenéři</h2>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {trainers.map((t) => (
+        <div>
+          <MediaFrame media={t.media} rounded="rounded-[18px]" class="mb-4 h-70" alt={`Portrét — ${t.name}`} />
+          <h3 class="text-[21px] font-extrabold tracking-[-0.02em]">{t.name}</h3>
+          <p class="text-[15px] text-ink-muted">{t.role}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

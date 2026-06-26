@@ -1,0 +1,29 @@
+---
+// Placeholder pro fotku — gradientový rámeček (slot pro reálný <img>).
+// Až budou fotky, stačí dovnitř vložit <img class="absolute inset-0 ..." alt="…" />.
+interface Props {
+  media: string;       // utilita .media-* z global.css
+  rounded?: string;    // tailwind radius utility
+  class?: string;
+  alt?: string;        // popis budoucí fotky (pro a11y poznámku)
+}
+const {
+  media,
+  rounded = 'rounded-2xl',
+  class: extra = '',
+  alt = '',
+} = Astro.props;
+---
+<div
+  class={`relative overflow-hidden ${media} ${rounded} ${extra}`}
+  role="img"
+  aria-label={alt}
+>
+  <div
+    class="absolute inset-0"
+    style="background:radial-gradient(circle at 30% 24%, rgba(255,255,255,0.20), rgba(255,255,255,0) 55%);"
+    aria-hidden="true"
+  >
+  </div>
+  <slot />
+</div>
