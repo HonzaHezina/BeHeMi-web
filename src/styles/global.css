@@ -26,7 +26,7 @@
   --color-ink-muted: #60594b;     /* terciární / popisky (WCAG AA na bg/sand) */
   --color-ink-warm: #4a4435;      /* teplý odstavec (hero) */
   --color-ink-faint: #6a6150;     /* labely (WCAG AA) */
-  --color-ink-ghost: #908063;     /* velká dekorativní čísla (AA-large ≥3:1) */
+  --color-ink-ghost: #9f9070;     /* dekorativní watermark čísla (AA-large ≥3:1) */
   --color-ink-line: #3a352c;      /* tmavé linky / text v listech */
   --color-brand-tint: #525f49;    /* tlumená zelená pro labely (WCAG AA) */
 

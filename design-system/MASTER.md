@@ -50,10 +50,11 @@ Hodnoty převzaty z Claude Design exportu (export = zdroj pravdy). Plná sada to
 | `--color-ink-dark` | `#20201c` | tmavé sekce (manifesto, footer) |
 | `--color-ink` | `#211f1a` | hlavní text / nadpisy |
 | `--color-ink-soft` | `#5f594c` | sekundární text |
-| `--color-ink-muted` | `#7a7361` | terciární text, popisky |
+| `--color-ink-muted` | `#60594b` | terciární text, popisky |
 | `--color-brand` | `#2f5a40` | lesní zelená — struktura, nadpisy, linky |
 | `--color-brand-dark`| `#244833` | hover / ztmavení |
-| `--color-accent` | `#c2693f` | terakota — **CTA, akcenty, energie** |
+| `--color-accent` | `#c2693f` | terakota — výplně, tečky, akcentové plochy |
+| `--color-accent-text` | `#944b2c` | terakota pro **text** (eyebrow, čísla) — WCAG AA |
 | `--color-gold` | `#be9c4f` | třetí akcent (Mind ve Venn) |
 | `--color-cream` | `#f3ecdd` | text na tmavém / zeleném pozadí |
 | `--color-border` | `#e7dcc6` | linky, oddělovače, karty |
