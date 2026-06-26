@@ -87,20 +87,20 @@ export const pricing = [
   { t: 'Cesta', d: 'Když chceš cestu, ne jen lekce', price: '3 900 Kč', per: '/ 8 týdnů', featured: false, badge: 'Vlajkový program', note: '', feat: ['2× pohyb + 1× edukace týdně', 'Health tracker a měření', 'Uzavřená skupina 10–20 lidí', 'Vedení trenérem celých 8 týdnů'] },
 ];
 
-// Hlavní navigace. Slugy mimo "/" zatím nevedou na hotové stránky —
-// míří na budoucí slugy / kotvy (IA a redukce menu = rozhodnutí Honzy).
+// Hlavní navigace. Kotvy míří na sekce homepage formou "/#…", ať fungují
+// i z podstránek. Slugy podstránek ověřit proti reálné sitemap (CLAUDE.md).
 export const nav = [
-  { label: 'Domů', href: '/', active: true },
-  { label: 'Proč BoHeMi', href: '#proc', active: false },
-  { label: 'Lekce a služby', href: '#nabidka', active: false },
-  { label: 'Ceník', href: '#cenik', active: false },
-  { label: 'Kontakt', href: '#kontakt', active: false },
+  { label: 'Domů', href: '/' },
+  { label: 'Proč BoHeMi', href: '/proc-bohemi/' },
+  { label: 'Lekce a služby', href: '/#nabidka' },
+  { label: 'Ceník', href: '/#cenik' },
+  { label: 'Kontakt', href: '/#kontakt' },
 ];
 
 export const navMenu = [
-  { num: '01', label: 'Pro tebe', desc: 'Programy, lekce, osobní tréninky', href: '#pro-tebe' },
-  { num: '02', label: 'Pro děti a rodiny', desc: 'Cirkus, kroužky, Supermamky', href: '#pro-deti' },
-  { num: '03', label: 'Pro firmy', desc: 'FitTeams, wellbeing, pronájem sálů', href: '#pro-firmy' },
+  { num: '01', label: 'Pro tebe', desc: 'Programy, lekce, osobní tréninky', href: '/#pro-tebe' },
+  { num: '02', label: 'Pro děti a rodiny', desc: 'Cirkus, kroužky, Supermamky', href: '/#pro-deti' },
+  { num: '03', label: 'Pro firmy', desc: 'FitTeams, wellbeing, pronájem sálů', href: '/#pro-firmy' },
 ];
 
 export const RESERVE_URL = 'https://rezervace.bohemi.fit/';

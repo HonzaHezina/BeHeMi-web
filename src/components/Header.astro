@@ -1,6 +1,11 @@
 ---
 import { nav, navMenu, RESERVE_URL } from '../data/home';
 import Button from './Button.astro';
+
+interface Props {
+  current?: string;
+}
+const { current = '/' } = Astro.props;
 ---
 <header class="sticky top-0 z-50 border-b border-border-strong bg-bg/80 backdrop-blur-md">
   <div class="mx-auto flex max-w-[1220px] items-center justify-between gap-6 px-5 py-3.5 md:px-8">
@@ -41,11 +46,11 @@ import Button from './Button.astro';
         ) : (
           <a
             href={item.href}
-            aria-current={item.active ? 'page' : undefined}
+            aria-current={item.href === current ? 'page' : undefined}
             class="relative px-3.5 py-2 text-[15.5px] font-semibold tracking-tight text-ink-line hover:text-brand"
           >
             {item.label}
-            {item.active && <span class="absolute inset-x-3.5 bottom-0.5 h-0.5 rounded-full bg-accent"></span>}
+            {item.href === current && <span class="absolute inset-x-3.5 bottom-0.5 h-0.5 rounded-full bg-accent"></span>}
           </a>
         )
       ))}
