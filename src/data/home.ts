@@ -93,8 +93,8 @@ export const nav = [
   { label: 'Domů', href: '/' },
   { label: 'Proč BoHeMi', href: '/proc-bohemi/' },
   { label: 'Lekce a služby', href: '/#nabidka' },
-  { label: 'Ceník', href: '/#cenik' },
-  { label: 'Kontakt', href: '/#kontakt' },
+  { label: 'Ceník', href: '/cenik/' },
+  { label: 'Kontakt', href: '/kontakt/' },
 ];
 
 export const navMenu = [
