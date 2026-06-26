@@ -23,24 +23,25 @@
   /* Text */
   --color-ink: #211f1a;           /* hlavní text / nadpisy */
   --color-ink-soft: #5f594c;      /* sekundární text */
-  --color-ink-muted: #7a7361;     /* terciární / popisky */
+  --color-ink-muted: #60594b;     /* terciární / popisky (WCAG AA na bg/sand) */
   --color-ink-warm: #4a4435;      /* teplý odstavec (hero) */
-  --color-ink-faint: #9a8f78;     /* labely, ghost */
-  --color-ink-ghost: #d8cbb0;     /* velká dekorativní čísla */
+  --color-ink-faint: #6a6150;     /* labely (WCAG AA) */
+  --color-ink-ghost: #908063;     /* velká dekorativní čísla (AA-large ≥3:1) */
   --color-ink-line: #3a352c;      /* tmavé linky / text v listech */
-  --color-brand-tint: #5c6b54;    /* tlumená zelená pro labely */
+  --color-brand-tint: #525f49;    /* tlumená zelená pro labely (WCAG AA) */
 
   /* Značka */
   --color-brand: #2f5a40;         /* lesní zelená — struktura, linky */
   --color-brand-dark: #244833;    /* hover / ztmavení */
-  --color-accent: #c2693f;        /* terakota — akcenty, tečky */
-  --color-gold: #be9c4f;          /* třetí akcent (Mind) */
-  --color-gold-dark: #b08a2e;
+  --color-accent: #c2693f;        /* terakota — výplně, tečky, akcenty */
+  --color-accent-text: #944b2c;   /* terakota pro TEXT (WCAG AA na bg/surface/sand) */
+  --color-gold: #be9c4f;          /* třetí akcent (Mind) — výplně */
+  --color-gold-dark: #806218;     /* zlatá pro TEXT (WCAG AA) */
 
   /* Text na tmavém / zeleném pozadí */
   --color-cream: #f3ecdd;
   --color-cream-soft: #cfcabb;
-  --color-cream-muted: #8b8678;
+  --color-cream-muted: #989488;   /* WCAG AA na tmavém pozadí */
   --color-sage: #9cc4a8;
   --color-sage-soft: #8fb89c;
   --color-mint-text: #d7e3d8;
@@ -68,6 +69,14 @@
     overflow-x: hidden;
   }
   ::selection { background: var(--color-brand); color: var(--color-cream); }
+
+  /* Viditelný focus pro klávesnici na všem klikatelném (nízká specificita,
+     komponentní ring ho může přebít). */
+  :where(a, button, input, textarea, select, summary):focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
 }
 
 /* Gradientové foto-placeholdery (slot pro reálné fotky).

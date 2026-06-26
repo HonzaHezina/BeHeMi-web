@@ -18,7 +18,7 @@ const { current = '/' } = Astro.props;
     <!-- Desktop nav -->
     <nav class="hidden items-center gap-0.5 lg:flex" aria-label="Hlavní navigace">
       {nav.map((item) => (
-        item.href === '#nabidka' ? (
+        item.href === '/lekce-a-sluzby/' ? (
           <div class="group relative">
             <a
               href={item.href}
@@ -34,7 +34,7 @@ const { current = '/' } = Astro.props;
             >
               {navMenu.map((m) => (
                 <a href={m.href} class="flex items-start gap-3.5 rounded-xl p-3.5 transition-colors hover:bg-surface-hover">
-                  <span class="shrink-0 italic text-lg leading-tight text-accent">{m.num}</span>
+                  <span class="shrink-0 italic text-lg leading-tight text-accent-text">{m.num}</span>
                   <span>
                     <span class="block text-base font-bold tracking-tight text-ink">{m.label}</span>
                     <span class="mt-0.5 block text-[13.5px] text-ink-muted">{m.desc}</span>

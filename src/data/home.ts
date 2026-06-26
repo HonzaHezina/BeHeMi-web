@@ -92,15 +92,15 @@ export const pricing = [
 export const nav = [
   { label: 'Domů', href: '/' },
   { label: 'Proč BoHeMi', href: '/proc-bohemi/' },
-  { label: 'Lekce a služby', href: '/#nabidka' },
+  { label: 'Lekce a služby', href: '/lekce-a-sluzby/' },
   { label: 'Ceník', href: '/cenik/' },
   { label: 'Kontakt', href: '/kontakt/' },
 ];
 
 export const navMenu = [
-  { num: '01', label: 'Pro tebe', desc: 'Programy, lekce, osobní tréninky', href: '/#pro-tebe' },
-  { num: '02', label: 'Pro děti a rodiny', desc: 'Cirkus, kroužky, Supermamky', href: '/#pro-deti' },
-  { num: '03', label: 'Pro firmy', desc: 'FitTeams, wellbeing, pronájem sálů', href: '/#pro-firmy' },
+  { num: '01', label: 'Pro tebe', desc: 'Programy, lekce, osobní tréninky', href: '/lekce-a-sluzby/#pro-tebe' },
+  { num: '02', label: 'Pro děti a rodiny', desc: 'Cirkus, kroužky, Supermamky', href: '/lekce-a-sluzby/#pro-deti' },
+  { num: '03', label: 'Pro firmy', desc: 'FitTeams, wellbeing, pronájem sálů', href: '/lekce-a-sluzby/#pro-firmy' },
 ];
 
 export const RESERVE_URL = 'https://rezervace.bohemi.fit/';
