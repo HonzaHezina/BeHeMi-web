@@ -12,13 +12,11 @@ import MediaFrame from './MediaFrame.astro';
       <p class="mb-[26px] max-w-[44ch] text-xl italic leading-[1.35] text-brand-dark">„Nejsme jen tělo. Ale tělo je nejpoctivější místo, kde začít.“</p>
       <Button href="#cesta" variant="brand">Náš příběh →</Button>
     </div>
-    <div class="relative h-[clamp(240px,28vw,330px)]">
-      <MediaFrame
-        media="media-green"
-        rounded="rounded-[18px] rounded-tr-[130px]"
-        class="absolute inset-0"
-        alt="Žonglování a komunita v BoHeMi"
-      />
-    </div>
+    <MediaFrame
+      media="media-green"
+      rounded="rounded-[18px] rounded-tr-[130px]"
+      class="h-[clamp(240px,28vw,330px)] w-full"
+      alt="Žonglování a komunita v BoHeMi"
+    />
   </div>
 </section>

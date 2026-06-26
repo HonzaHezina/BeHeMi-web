@@ -1,11 +1,12 @@
 ---
 // Placeholder pro fotku — gradientový rámeček (slot pro reálný <img>).
-// Až budou fotky, stačí dovnitř vložit <img class="absolute inset-0 ..." alt="…" />.
+// Až budou fotky, stačí dovnitř vložit <img class="h-full w-full object-cover" alt="…" />;
+// jakmile je ve slotu obsah, decentní „foto" značka se sama skryje.
 interface Props {
   media: string;       // utilita .media-* z global.css
   rounded?: string;    // tailwind radius utility
   class?: string;
-  alt?: string;        // popis budoucí fotky (pro a11y poznámku)
+  alt?: string;        // popis budoucí fotky (a11y)
 }
 const {
   media,
@@ -13,6 +14,8 @@ const {
   class: extra = '',
   alt = '',
 } = Astro.props;
+
+const hasPhoto = Astro.slots.has('default');
 ---
 <div
   class={`relative overflow-hidden ${media} ${rounded} ${extra}`}
@@ -25,5 +28,17 @@ const {
     aria-hidden="true"
   >
   </div>
+
+  {!hasPhoto && (
+    <div class="absolute inset-0 flex flex-col items-center justify-center gap-2 text-cream/70" aria-hidden="true">
+      <svg class="h-7 w-7 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="5" width="18" height="14" rx="2.5" />
+        <circle cx="8.5" cy="10" r="1.6" />
+        <path d="M21 16l-5-5L5 19" />
+      </svg>
+      {alt && <span class="max-w-[80%] text-center text-[12.5px] font-medium leading-snug">{alt}</span>}
+    </div>
+  )}
+
   <slot />
 </div>

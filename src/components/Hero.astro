@@ -2,7 +2,7 @@
 import Button from './Button.astro';
 import MediaFrame from './MediaFrame.astro';
 ---
-<section class="relative mx-auto max-w-[1220px] px-5 pb-14 pt-12 md:px-8 md:pt-18">
+<section class="relative mx-auto max-w-[1220px] overflow-hidden px-5 pb-14 pt-12 md:px-8 md:pt-18">
   <div
     class="anim-drift pointer-events-none absolute -right-16 -top-10 h-[520px] w-[520px] rounded-full blur-lg"
     style="background:radial-gradient(circle at 35% 35%, rgba(194,105,63,0.20), rgba(194,105,63,0) 68%);"
@@ -44,16 +44,16 @@ import MediaFrame from './MediaFrame.astro';
       <MediaFrame
         media="media-green"
         rounded="rounded-t-[200px] rounded-b-[22px]"
-        class="absolute inset-0 shadow-[0_30px_60px_-22px_rgba(33,31,26,0.4)]"
+        class="h-full w-full shadow-[0_30px_60px_-22px_rgba(33,31,26,0.4)]"
         alt="Trénink ve funkčním sále BoHeMi"
       />
-      <div class="anim-floaty absolute -left-6 top-8 rounded-2xl border border-border bg-surface px-4 py-2.5 shadow-[0_14px_30px_-14px_rgba(33,31,26,0.3)]">
+      <div class="anim-floaty absolute left-1 top-6 rounded-2xl border border-border bg-surface px-4 py-2.5 shadow-[0_14px_30px_-14px_rgba(33,31,26,0.3)] lg:-left-6 lg:top-8">
         <span class="text-[13px] font-bold text-brand">● Tělo</span>
       </div>
-      <div class="anim-floaty2 absolute -right-5 top-[46%] rounded-2xl border border-border bg-surface px-4 py-2.5 shadow-[0_14px_30px_-14px_rgba(33,31,26,0.3)]">
+      <div class="anim-floaty2 absolute right-1 top-[46%] rounded-2xl border border-border bg-surface px-4 py-2.5 shadow-[0_14px_30px_-14px_rgba(33,31,26,0.3)] lg:-right-5">
         <span class="text-[13px] font-bold text-accent">● Dech &amp; spánek</span>
       </div>
-      <div class="anim-floaty3 absolute -left-7 bottom-5 rounded-2xl border border-border bg-surface px-4 py-2.5 shadow-[0_14px_30px_-14px_rgba(33,31,26,0.3)]">
+      <div class="anim-floaty3 absolute bottom-5 left-1 rounded-2xl border border-border bg-surface px-4 py-2.5 shadow-[0_14px_30px_-14px_rgba(33,31,26,0.3)] lg:-left-7">
         <span class="text-[13px] font-bold text-gold-dark">● Mysl &amp; vztahy</span>
       </div>
     </div>

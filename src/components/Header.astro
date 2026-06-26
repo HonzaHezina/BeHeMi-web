@@ -12,47 +12,42 @@ import Button from './Button.astro';
 
     <!-- Desktop nav -->
     <nav class="hidden items-center gap-0.5 lg:flex" aria-label="Hlavní navigace">
-      {nav.filter((i) => i.href !== '#nabidka').slice(0, 2).map((item) => (
-        <a
-          href={item.href}
-          aria-current={item.active ? 'page' : undefined}
-          class="relative px-3.5 py-2 text-[15.5px] font-semibold tracking-tight text-ink-line hover:text-brand"
-        >
-          {item.label}
-          {item.active && <span class="absolute inset-x-3.5 bottom-0.5 h-0.5 rounded-full bg-accent"></span>}
-        </a>
-      ))}
-
-      <!-- Nabídka dropdown -->
-      <div class="group relative">
-        <a
-          href="#nabidka"
-          class="relative flex items-center gap-1.5 px-3.5 py-2 text-[15.5px] font-semibold tracking-tight text-ink-line hover:text-brand"
-        >
-          Lekce a služby
-          <svg class="h-2.5 w-2.5 opacity-55" viewBox="0 0 10 6" fill="none" aria-hidden="true">
-            <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </a>
-        <div
-          class="invisible absolute left-1/2 top-[calc(100%+6px)] z-60 w-[312px] -translate-x-1/2 rounded-2xl border border-border bg-surface p-2 opacity-0 shadow-[0_22px_48px_-16px_rgba(33,31,26,0.3)] transition-opacity duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100"
-        >
-          {navMenu.map((m) => (
-            <a href={m.href} class="flex items-start gap-3.5 rounded-xl p-3.5 transition-colors hover:bg-surface-hover">
-              <span class="shrink-0 italic text-lg leading-tight text-accent">{m.num}</span>
-              <span>
-                <span class="block text-base font-bold tracking-tight text-ink">{m.label}</span>
-                <span class="mt-0.5 block text-[13.5px] text-ink-muted">{m.desc}</span>
-              </span>
+      {nav.map((item) => (
+        item.href === '#nabidka' ? (
+          <div class="group relative">
+            <a
+              href={item.href}
+              class="relative flex items-center gap-1.5 px-3.5 py-2 text-[15.5px] font-semibold tracking-tight text-ink-line hover:text-brand"
+            >
+              {item.label}
+              <svg class="h-2.5 w-2.5 opacity-55" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+                <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
             </a>
-          ))}
-        </div>
-      </div>
-
-      {nav.filter((i) => i.href === '#cenik' || i.href === '#kontakt').map((item) => (
-        <a href={item.href} class="relative px-3.5 py-2 text-[15.5px] font-semibold tracking-tight text-ink-line hover:text-brand">
-          {item.label}
-        </a>
+            <div
+              class="invisible absolute left-1/2 top-[calc(100%+6px)] z-60 w-[312px] -translate-x-1/2 rounded-2xl border border-border bg-surface p-2 opacity-0 shadow-[0_22px_48px_-16px_rgba(33,31,26,0.3)] transition-opacity duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100"
+            >
+              {navMenu.map((m) => (
+                <a href={m.href} class="flex items-start gap-3.5 rounded-xl p-3.5 transition-colors hover:bg-surface-hover">
+                  <span class="shrink-0 italic text-lg leading-tight text-accent">{m.num}</span>
+                  <span>
+                    <span class="block text-base font-bold tracking-tight text-ink">{m.label}</span>
+                    <span class="mt-0.5 block text-[13.5px] text-ink-muted">{m.desc}</span>
+                  </span>
+                </a>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <a
+            href={item.href}
+            aria-current={item.active ? 'page' : undefined}
+            class="relative px-3.5 py-2 text-[15.5px] font-semibold tracking-tight text-ink-line hover:text-brand"
+          >
+            {item.label}
+            {item.active && <span class="absolute inset-x-3.5 bottom-0.5 h-0.5 rounded-full bg-accent"></span>}
+          </a>
+        )
       ))}
 
       <Button href={RESERVE_URL} variant="brand" external class="ml-3.5 px-[22px] py-2.5 text-[15px]">Rezervovat</Button>

@@ -53,19 +53,21 @@
   --color-tracker-line: #ece2cf;
 }
 
-/* Reset / základ */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--color-bg);
-  color: var(--color-ink);
-  font-family: var(--font-sans);
-  font-size: 18px;
-  line-height: 1.55;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+/* Základ — v @layer base, ať NEpřebíjí Tailwind utility (margin/padding).
+   Box-sizing a reset marginů řeší Tailwind preflight, nepotřebujeme `* {}`. */
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 18px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--color-brand); color: var(--color-cream); }
 }
-::selection { background: var(--color-brand); color: var(--color-cream); }
 
 /* Gradientové foto-placeholdery (slot pro reálné fotky).
    Hex žijou jen tady v token vrstvě, ne v komponentách. */
