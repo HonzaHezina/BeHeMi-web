@@ -26,3 +26,15 @@ Ne spa, ne ezoterika, ne luxusní wellness, ne „sekta".
 Žádná spa-pastel paleta (růžová/šalvějová/zlatá), žádné elegantní serify, žádné
 AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná sekce
 „nejsme sekta". Hero = Body–Health–Mind + komunita.
+
+## Stav & konvence (drž konzistenci)
+- **Postaveno:** `/`, `/proc-bohemi/`, `/cenik/`, `/kontakt/`, `/lekce-a-sluzby/`.
+  Menu: Domů · Proč BoHeMi · Lekce a služby · Ceník · Kontakt · Rezervovat.
+- **Font:** jen **Hanken Grotesk** (bez serifu) — akcenty kurzívou + vahou.
+- **Barvy textu:** terakotový/zlatý **text** ber přes `accent-text` / `gold-dark`
+  (tmavší, WCAG AA); `accent`/`gold` jen na výplně/tečky. Drž kontrast ≥ 4.5:1.
+- **Kontakt:** přímé akce `mailto:`/`tel:`, žádný `<form>`.
+- **Data** sdílená v `src/data/home.ts`, stránky skládají `src/components/`.
+- **Tailwind v4:** reset patří do `@layer base`; zlomky spacing (4.5/5.5/6.5/7.5)
+  nejdou — piš `[18px]/[22px]/[26px]/[30px]`; po nové stránce restartuj dev server.
+- **Deploy:** Coolify statika — `dist/`, „Is it a static site?" ON, SPA OFF.

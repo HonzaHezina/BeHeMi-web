@@ -51,35 +51,37 @@ luxusní wellness. Tělo jako cesta k síle, zdraví a klidu.
 - Žádná spa/wellness pastelová estetika (růžová + šalvějová + zlatá),
   žádné elegantní serify, žádné AI fialové gradienty. Detaily v MASTER.md.
 
-## Inventář stránek (slugy = ponechat)
+## Inventář stránek
 
-> ⚠️ Slugy potvrď proti reálné `sitemap.xml` / Google Search Console **dříve**,
-> než začneš stavět. Tento seznam je provizorní z indexu.
+### Postavené (Astro `src/pages/`)
 
-| Stránka | Slug |
-|---|---|
-| Homepage | `/` |
-| Skupinové lekce | `/skupinove-lekce/` |
-| Kroužky pro děti | `/krouzky-pro-deti/` |
-| Objevovárna | `/objevovarna/` |
-| Fotobiomodulační terapie | `/fotobiomodulacni-terapie/` |
-| Osobní trenér | `/osobni-trener/` |
-| OpenGym | `/open-gym/` |
-| Pronájem sálu | `/pronajem-salu/` |
-| FitTym pro firmy | `/firmy/` |
-| Ceník („Za kolik to máme") | `/cenik/` *(slug ověřit — možná `/za-kolik-to-mame/`)* |
-| Trenéři | `/treneri/` |
-| Fotky | `/fotky/` |
-| Spolupráce | `/spoluprace/` |
-| Kontakt | `/kontakt/` |
-| Novinky | `/blog/` |
-| Seznamte se s námi | *(slug ověřit)* |
+| Stránka | Slug | Soubor |
+|---|---|---|
+| Homepage | `/` | `index.astro` |
+| Proč BoHeMi | `/proc-bohemi/` | `proc-bohemi.astro` |
+| Lekce a služby (hub) | `/lekce-a-sluzby/` | `lekce-a-sluzby.astro` |
+| Ceník | `/cenik/` | `cenik.astro` |
+| Kontakt | `/kontakt/` | `kontakt.astro` |
+
+Hlavní menu (rozhodnuto Honzou): **Domů · Proč BoHeMi · Lekce a služby · Ceník ·
+Kontakt · Rezervovat**. Položka „Lekce a služby" má dropdown na kotvy
+`#pro-tebe / #pro-deti / #pro-firmy`.
+
+> ⚠️ **Slugy ověřit proti reálné `sitemap.xml` / GSC.** Přejmenování = jen
+> přejmenování souboru v `src/pages/`. `/lekce-a-sluzby/` je **hub**, který
+> sjednocuje to, co současný web má jako samostatné stránky (níž) — buď zůstane
+> hub a staré slugy → **301 sem**, nebo se rozpadne na jednotlivé stránky.
+> Rozhodnutí dělá Honza.
+
+### Z původního indexu (zatím nepostavené / k rozhodnutí)
+
+`/skupinove-lekce/`, `/krouzky-pro-deti/`, `/objevovarna/`,
+`/fotobiomodulacni-terapie/`, `/osobni-trener/`, `/open-gym/`, `/pronajem-salu/`,
+`/firmy/`, `/treneri/`, `/fotky/`, `/spoluprace/`, `/blog/` (Novinky),
+„Seznamte se s námi" *(slug ověřit)*. Ceník alt slug možná `/za-kolik-to-mame/`.
 
 Mimo repo (WordPress, neřešíš tady): `/rezervace/` → 301 na
 `rezervace.bohemi.fit`, „Můj účet" / login / členství.
-
-Při redesignu zvaž **redukci menu** — dnes má 20+ položek. Rozhodnutí, co
-zůstává v hlavní navigaci, dělá Honza, ne nástroj.
 
 ## Jak pracovat
 
@@ -89,15 +91,60 @@ zůstává v hlavní navigaci, dělá Honza, ne nástroj.
 - Když narazíš na rozhodnutí o značce, obsahu nebo struktuře menu — **navrhni a
   zeptej se**, nerozhoduj za Honzu.
 
+## Stav implementace & rozhodnutí (drž konzistenci)
+
+Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web nerozejde:
+
+- **Font:** jediná rodina **Hanken Grotesk** (400–800). **Žádný serif** — akcentová
+  slova/eyebrow řešíme kurzívou + vahou téhož grotesku. (Export měl Newsreader;
+  Honza ho zamítl. MASTER.md serify zakazuje.)
+- **Barva textu vs. výplň:** `accent #c2693f` = výplně/tečky; `accent-text #944b2c`
+  = terakota pro **text** (eyebrow, čísla). Stejně `gold` (výplň) vs `gold-dark`
+  (text). Důvod: kontrast WCAG AA (viz níž). Tokeny byly AA-laděné — neber zpět
+  původní světlé hodnoty.
+- **Žádná externí kniha/autorita** (anti-cíl): v exportu byla sekce o knize
+  „Holistic Human Health" + odkaz na PDF (uhv.org.in). Zmírněno — myšlenka
+  („nic neber jako dogma, ověř si to") zůstává, **název knihy a odkazy pryč**.
+- **Kontakt = statika:** export měl odesílací formulář → nahrazen přímými akcemi
+  (`mailto:` / `tel:`) + odkaz ven na rezervaci. Žádný `<form>`/`<input>`.
+- **Přístupnost:** všech 5 stránek projde **axe-core (WCAG 2.1 A+AA) = 0 chyb**.
+  Drž text ≥ 4.5:1 (velký ≥ 3:1), globální `:focus-visible` ring je v `@layer base`,
+  animace respektují `prefers-reduced-motion`. Po změně barev spusť axe znovu.
+- **Architektura:** sdílená data v `src/data/home.ts` (lekce, ceník, navigace…),
+  stránky jen skládají komponenty z `src/components/`. Obrázky jsou zatím
+  gradientové placeholdery (`MediaFrame.astro`) — reálný `<img>` do slotu sám
+  skryje placeholder. Navigace: kotvy formou `/#…` (fungují i z podstránek),
+  aktivní stav přes `<Header current="/slug/" />`.
+
+## Tailwind v4 — vývojové gotchy (ušetří hodiny)
+
+- **Reset patří do `@layer base`.** Nezařazené `* { margin:0; padding:0 }` v
+  Tailwindu v4 **přebije všechny utility** margin/padding (rozbije `mx-auto` i
+  paddingy). Box-sizing/reset řeší preflight — vlastní base styly dávej do
+  `@layer base { … }`.
+- **Zlomkové spacing 4.5/5.5/6.5/7.5 se NEgenerují** (jen vestavěné
+  .5/1.5/2.5/3.5). Místo `gap-4.5` piš `gap-[18px]` atd. (4.5→18px, 5.5→22px,
+  6.5→26px, 7.5→30px).
+- **Po přidání NOVÉ stránky/souboru restartuj dev server** — content-scan
+  Tailwindu bývá stale a nové utility (např. `grid-cols-2` na nové stránce) se
+  nevygenerují. `astro build` je vždy správně; dev může lhát.
+
+## Nasazení (Coolify na Hetzneru)
+
+Web běží jako **statika** (Astro `output: static` → složka `dist/`). V Coolify:
+
+- **Build Pack:** Nixpacks · **Is it a static site? = ON** · **Is it a SPA? = OFF**
+  (multipage web — SPA by přesměroval vše na `index.html` a rozbil podstránky).
+- **Publish Directory:** `/dist` (s lomítkem) · **Build Command:** `npm run build`
+- **Static Image:** `nginx:alpine` + default Coolify nginx config (`try_files
+  $uri $uri.html $uri/index.html …` — sedí na složkový výstup Astra).
+- Pre-deployment commands nech prázdné. Port 3000 je po zapnutí statiky
+  irelevantní. Bez static toggle se to chová jako Node server → restart smyčka.
+
 ## Vývoj (Astro)
 
-Dev server spouštěj v background módu, ať neblokuje session:
-
-```
-astro dev --background
-```
-
-Správa běžícího serveru: `astro dev stop`, `astro dev status`, `astro dev logs`.
+Dev server: `npm run dev` (běží na pozadí; správa `astro dev stop/status/logs`).
+**Po přidání nové stránky restartuj** (viz Tailwind gotchy výš).
 
 ## Dokumentace
 

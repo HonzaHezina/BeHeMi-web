@@ -1,0 +1,59 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Button from '../components/Button.astro';
+
+const quickLinks = [
+  { label: 'Proč BoHeMi', href: '/proc-bohemi/' },
+  { label: 'Lekce a služby', href: '/lekce-a-sluzby/' },
+  { label: 'Ceník', href: '/cenik/' },
+  { label: 'Kontakt', href: '/kontakt/' },
+];
+---
+<Layout
+  title="Stránka nenalezena (404) — BoHeMi"
+  description="Tuhle stránku se nám nepodařilo najít. Vrať se domů nebo mrkni na lekce, ceník a kontakt."
+>
+  <meta slot="head" name="robots" content="noindex, follow" />
+
+  <Header current="/404" />
+  <main>
+    <section class="relative mx-auto flex min-h-[62vh] max-w-[860px] flex-col items-center justify-center overflow-hidden px-5 py-20 text-center md:px-8">
+      <div
+        class="pointer-events-none absolute left-1/2 top-1/2 h-[460px] w-[460px] -translate-x-1/2 -translate-y-1/2 rounded-full"
+        style="background:radial-gradient(circle, rgba(194,105,63,0.16), rgba(194,105,63,0) 68%);"
+        aria-hidden="true"
+      >
+      </div>
+
+      <div class="relative">
+        <Eyebrow class="!text-center">Chyba 404</Eyebrow>
+        <p class="text-[clamp(80px,18vw,170px)] font-extrabold leading-none tracking-[-0.04em] text-brand" aria-hidden="true">
+          4<span class="italic text-accent-text">0</span>4
+        </p>
+        <h1 class="mt-4 text-[clamp(28px,4.4vw,44px)] font-extrabold tracking-[-0.03em]">
+          Tahle stránka tu <span class="font-medium italic text-brand">není.</span>
+        </h1>
+        <p class="mx-auto mt-5 max-w-[44ch] text-lg leading-[1.55] text-ink-soft">
+          Možná se přesunula, nebo se do adresy vloudil překlep. Vrať se domů a najdeš, co potřebuješ.
+        </p>
+
+        <div class="mt-8 flex flex-wrap justify-center gap-3.5">
+          <Button href="/" variant="brand">Zpět domů</Button>
+          <Button href="/lekce-a-sluzby/" variant="outline">Rozvrh lekcí</Button>
+        </div>
+
+        <nav class="mt-9 flex flex-wrap justify-center gap-x-6 gap-y-2" aria-label="Rychlé odkazy">
+          {quickLinks.map((l) => (
+            <a href={l.href} class="text-[15px] font-semibold text-ink-muted underline decoration-border-strong underline-offset-4 hover:text-brand hover:decoration-brand">
+              {l.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
