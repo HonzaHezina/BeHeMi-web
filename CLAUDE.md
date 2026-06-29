@@ -14,8 +14,8 @@ Stack: **Astro + Tailwind CSS v4** (konfigurace přes `@tailwindcss/vite` v
 logika navíc, než co Astro generuje.
 
 Tohle repo je **prezentační vrstva vedle WordPressu**, ne náhrada celého webu.
-Rezervace, login, členství, platby a admin zůstávají ve WordPressu na subdoméně
-`rezervace.bohemi.fit`. Sem nikdy nepatří.
+Rezervace, login, členství, platby a admin zůstávají ve WordPressu pod
+`bohemi.fit/rezervace/`. Sem nikdy nepatří.
 
 Značka: **BoHeMi = Body – Health – Mind.** Komunitní studio, lidskost, žádná
 anonymita ani tlak. Není to spa, není to ezoterika, není to „sekta", není to
@@ -27,7 +27,7 @@ luxusní wellness. Tělo jako cesta k síle, zdraví a klidu.
    který něco odesílá do systému. Pokud něco potřebuje stav uživatele, kapacitu
    lekce, platbu nebo storno → **to není stránka, to je WordPress.**
 2. **Booking = odkaz ven.** Každé tlačítko „Rezervovat" je `<a>` na
-   `https://rezervace.bohemi.fit/` (případně konkrétní lekci). Nikdy iframe,
+   `https://bohemi.fit/rezervace/` (případně konkrétní lekci). Nikdy iframe,
    nikdy vlastní formulář.
 3. **URL se nemění.** Slugy musí přesně odpovídat současnému webu (viz seznam
    níž). Nová stránka jen po explicitním rozhodnutí. Změněná URL = 301 redirect,
@@ -80,8 +80,8 @@ Kontakt · Rezervovat**. Položka „Lekce a služby" má dropdown na kotvy
 `/firmy/`, `/treneri/`, `/fotky/`, `/spoluprace/`, `/blog/` (Novinky),
 „Seznamte se s námi" *(slug ověřit)*. Ceník alt slug možná `/za-kolik-to-mame/`.
 
-Mimo repo (WordPress, neřešíš tady): `/rezervace/` → 301 na
-`rezervace.bohemi.fit`, „Můj účet" / login / členství.
+Mimo repo (WordPress, neřešíš tady): `bohemi.fit/rezervace/` — rezervace,
+„Můj účet" / login / členství.
 
 ## Jak pracovat
 
@@ -98,10 +98,22 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
 - **Font:** jediná rodina **Hanken Grotesk** (400–800). **Žádný serif** — akcentová
   slova/eyebrow řešíme kurzívou + vahou téhož grotesku. (Export měl Newsreader;
   Honza ho zamítl. MASTER.md serify zakazuje.)
-- **Barva textu vs. výplň:** `accent #c2693f` = výplně/tečky; `accent-text #944b2c`
-  = terakota pro **text** (eyebrow, čísla). Stejně `gold` (výplň) vs `gold-dark`
-  (text). Důvod: kontrast WCAG AA (viz níž). Tokeny byly AA-laděné — neber zpět
-  původní světlé hodnoty.
+- **Paleta = WARM-DARK (varianta B), black/white/red.** Zdroj pravdy je logo +
+  plakáty, ne starý teplý export. Černá je **kotva, ne dominanta** — většina
+  obsahu na teplém světlém pozadí (`bg #f5efe6`), tmavé kotvy (hero, manifest,
+  footer, vybrané feature pásy) na teplé near-black (`ink-dark #14110e`, ne `#000`).
+  Plná tabulka tokenů v `design-system/MASTER.md`. Klíčové role:
+  - `brand #1c1812` = **struktura** (near-black: nadpisy, linky, sekundární
+    tlačítka, badge). **Žádné velké červené plochy** — to je hardcore-gym, zakázané.
+  - `accent #e2231a` (PLACEHOLDER, čeká přesný hex) = **červená výplň** (tečky,
+    dělící linky, aktivní stavy, glow). `accent-text #b71c13` = červená pro **text**
+    + bg červeného CTA s cream textem (WCAG AA). `accent-deep #8f150d` = hover CTA.
+  - **Červená = CTA/akcent/výplň, NIKDY barva běžného (body) textu.** Výjimka:
+    **akcentové slovo v display nadpisu smí být červené** (echo loga) — i na tmavém,
+    kde projde jen jako *velký* text (AA-large ≥ 3:1). Rozhodnuto Honzou (hero „škola").
+  - `gold #e0a43a` / `gold-dark #8a5e0e` = amber, třetí akcent (Mind). **TENTATIVE.**
+  - Triáda Body/Health/Mind = **červená / neutrál (cream·ink) / amber**.
+  Tokeny jsou AA-laděné — neber zpět původní teplé (pískové/zelené/terakotové) hodnoty.
 - **Žádná externí kniha/autorita** (anti-cíl): v exportu byla sekce o knize
   „Holistic Human Health" + odkaz na PDF (uhv.org.in). Zmírněno — myšlenka
   („nic neber jako dogma, ověř si to") zůstává, **název knihy a odkazy pryč**.

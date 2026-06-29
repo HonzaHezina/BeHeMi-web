@@ -111,4 +111,4 @@ export const navMenu = [
   { num: '03', label: 'Pro firmy', desc: 'FitTeams, wellbeing, pronájem sálů', href: '/lekce-a-sluzby/#pro-firmy' },
 ];
 
-export const RESERVE_URL = 'https://rezervace.bohemi.fit/';
+export const RESERVE_URL = 'https://bohemi.fit/rezervace/';

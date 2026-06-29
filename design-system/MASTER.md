@@ -33,7 +33,7 @@ Hero-centric + social proof, konverze emocí přes komunitu.
 6. **Social proof** — reference / Multisport & benefity / lokalita.
 7. **CTA + kontakt** — opakované „Rezervovat", mapa, doprava.
 
-CTA „Rezervovat" je **vždy odkaz na `rezervace.bohemi.fit`**.
+CTA „Rezervovat" je **vždy odkaz na `bohemi.fit/rezervace/`**.
 
 ## Barvy (tokeny)
 
@@ -67,8 +67,13 @@ v `src/styles/global.css`; tady jsou klíčové z nich.
 | `--color-border` | `#e7dcc8` | linky, oddělovače, karty |
 
 Kontrast hlídej: text na pozadí min. **4.5:1** (WCAG AA). Červená **nikdy** jako
-barva běžného textu — jen akcent/CTA/výplň/linky. Bílý (cream) text na červeném
-tlačítku ber z `--color-accent-text` (AA projde), ne z živé `--color-accent`.
+barva běžného (body) textu — jen akcent/CTA/výplň/linky. Bílý (cream) text na
+červeném tlačítku ber z `--color-accent-text` (AA projde), ne z živé `--color-accent`.
+
+**Výjimka (rozhodnuto):** akcentové slovo v **display nadpisu** (h1/h2) smí být
+červené jako echo loga — i na tmavém pozadí, kde projde jen jako *velký* text
+(AA-large ≥ 3:1). Na světlém ber `--color-accent-text`, na tmavém `--color-accent`.
+Netýká se to odstavců, popisků ani odkazů v textu — tam červená jako text ne.
 
 **Zakázáno:** růžová/šalvějová/zlatá spa kombinace, fialovo-růžové AI gradienty,
 **čistá černá `#000` jako plošné pozadí** (používej teplou near-black `#14110e`),
@@ -111,7 +116,7 @@ Decentní. Přechody 150–300 ms, jemné hover stavy. Respektuj
 ## Pre-delivery checklist
 
 - [ ] Barvy a fonty výhradně z tokenů (nic natvrdo)
-- [ ] CTA „Rezervovat" míří na `rezervace.bohemi.fit`
+- [ ] CTA „Rezervovat" míří na `bohemi.fit/rezervace/`
 - [ ] Slug stránky sedí se současným webem
 - [ ] Jeden `<h1>`, `<title>` + `meta description`
 - [ ] Kontrast textu ≥ 4.5:1, viditelný focus pro klávesnici

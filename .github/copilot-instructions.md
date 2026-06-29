@@ -7,14 +7,14 @@ ber barvy, fonty a spacing z `design-system/MASTER.md`** — nikdy je nehardcodu
 ## Co tohle repo je
 Statický prezentační web studia BoHeMi fitness. Stack: **Astro + Tailwind**.
 Prezentační vrstva **vedle WordPressu**, ne náhrada. Rezervace, login, členství,
-platby = WordPress na `rezervace.bohemi.fit`, sem nepatří.
+platby = WordPress na `bohemi.fit/rezervace/`, sem nepatří.
 
 Značka: **BoHeMi = Body – Health – Mind.** Komunitní, lidské, grounded.
 Ne spa, ne ezoterika, ne luxusní wellness, ne „sekta".
 
 ## Tvrdá pravidla
 1. **Statika only.** Žádný formulář, který odesílá rezervaci, platbu nebo login.
-2. **Booking = odkaz ven** na `https://rezervace.bohemi.fit/`. Nikdy iframe, nikdy
+2. **Booking = odkaz ven** na `https://bohemi.fit/rezervace/`. Nikdy iframe, nikdy
    vlastní rezervační formulář.
 3. **URL/slugy se nemění** — musí sedět se současným webem (viz `/CLAUDE.md`).
 4. **Barvy a fonty jen z `design-system/MASTER.md`.** Chybí token → zeptej se.
@@ -31,8 +31,14 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
 - **Postaveno:** `/`, `/proc-bohemi/`, `/cenik/`, `/kontakt/`, `/lekce-a-sluzby/`.
   Menu: Domů · Proč BoHeMi · Lekce a služby · Ceník · Kontakt · Rezervovat.
 - **Font:** jen **Hanken Grotesk** (bez serifu) — akcenty kurzívou + vahou.
-- **Barvy textu:** terakotový/zlatý **text** ber přes `accent-text` / `gold-dark`
-  (tmavší, WCAG AA); `accent`/`gold` jen na výplně/tečky. Drž kontrast ≥ 4.5:1.
+- **Paleta = WARM-DARK (black/white/red).** Černá je kotva, ne dominanta: obsah na
+  teplém světlém `bg #f5efe6`, tmavé kotvy na `ink-dark #14110e` (ne `#000`).
+  `brand #1c1812` = struktura/near-black (nadpisy, tlačítka, badge — žádné velké
+  červené plochy). Červená `accent #e2231a` (PLACEHOLDER) = výplň/tečky/linky;
+  `accent-text #b71c13` = červený **text** + bg CTA; `accent-deep` = hover CTA.
+  `gold` = amber (Mind, TENTATIVE). Triáda = červená / neutrál / amber.
+- **Červená nikdy jako body text** — jen akcent/CTA/výplň. Výjimka: akcentové slovo
+  v display nadpisu smí být červené (echo loga; na tmavém AA-large). Kontrast ≥ 4.5:1.
 - **Kontakt:** přímé akce `mailto:`/`tel:`, žádný `<form>`.
 - **Data** sdílená v `src/data/home.ts`, stránky skládají `src/components/`.
 - **Tailwind v4:** reset patří do `@layer base`; zlomky spacing (4.5/5.5/6.5/7.5)

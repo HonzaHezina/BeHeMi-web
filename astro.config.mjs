@@ -19,7 +19,7 @@ export default defineConfig({
   //   /fotobiomodulacni-terapie/, /osobni-trener/, /open-gym/, /pronajem-salu/,
   //   /firmy/, /treneri/, /fotky/, /spoluprace/, /blog/, /za-kolik-to-mame/
   //
-  // Pozn.: /rezervace/ → rezervace.bohemi.fit řeší WordPress/host, NE tady.
+  // Pozn.: /rezervace/ obsluhuje WordPress (bohemi.fit/rezervace/), NE tady.
   // Pokud poběží redirecty na host-level (nginx v Coolify), tahle mapa zůstane
   // prázdná a místo se přesune do nginx configu — rozhodne se při dodání dat.
   redirects: {
