@@ -3,21 +3,26 @@
 // Varianty drží tokeny z global.css, žádný hardcoded hex.
 interface Props {
   href: string;
-  variant?: 'dark' | 'brand' | 'outline' | 'link';
+  variant?: 'primary' | 'dark' | 'brand' | 'outline' | 'outline-light' | 'link';
   external?: boolean;
   class?: string;
 }
 const { href, variant = 'dark', external = false, class: extra = '' } = Astro.props;
 
 const base =
-  'inline-flex items-center justify-center gap-2 font-bold cursor-pointer transition-all duration-200 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-bg';
+  'inline-flex items-center justify-center gap-2 font-bold cursor-pointer transition-all duration-200 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg';
 
 const variants: Record<string, string> = {
+  // primary = červené CTA (značka): bg z accent-text (AA s cream textem), hover ztmavení
+  primary: 'px-7 py-3.5 text-[17px] bg-accent-text text-cream hover:bg-accent-deep hover:-translate-y-0.5',
   dark: 'px-7 py-3.5 text-[17px] bg-ink text-cream hover:bg-brand hover:-translate-y-0.5',
-  brand: 'px-6 py-3.5 text-base bg-brand text-cream hover:bg-brand-dark hover:-translate-y-0.5',
+  brand: 'px-6 py-3.5 text-base bg-accent-text text-cream hover:bg-accent-deep hover:-translate-y-0.5',
   outline:
     'px-7 py-3.5 text-[17px] bg-transparent text-ink border-[1.5px] border-border-button hover:border-brand hover:text-brand',
-  link: 'text-base text-brand hover:text-ink rounded-none',
+  // outline-light = sekundární na TMAVÉM pozadí (cream text + světlý okraj)
+  'outline-light':
+    'px-7 py-3.5 text-[17px] bg-transparent text-cream border-[1.5px] border-cream-soft/40 hover:border-cream hover:bg-cream/5',
+  link: 'text-base text-accent-text hover:text-ink rounded-none',
 };
 
 const rel = external ? 'noopener noreferrer' : undefined;

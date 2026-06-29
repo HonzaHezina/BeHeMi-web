@@ -1,9 +1,15 @@
 @import "tailwindcss";
 
 /* ───────────────────────────────────────────────────────────────
-   BoHeMi design tokeny — zdroj pravdy = Claude Design export.
+   BoHeMi design tokeny — zdroj pravdy = logo/plakáty (black/white/red).
+   Systém: WARM-DARK (varianta B) — černě ukotvené klíčové bloky,
+   obsahové sekce na teplém světlém pozadí, červená = energie napříč.
    Charakter a mantinely viz design-system/MASTER.md.
    Tailwind v4: tokeny v @theme generují utility (bg-*, text-*, …).
+
+   ⚠️ ČERVENÁ = PLACEHOLDER #E2231A — čeká na přesný hex z brand manuálu.
+      Najdeš ji na --color-accent / --color-accent-text (+ jejich popisky).
+   ⚠️ AMBER (Mind) = TENTATIVE — triáda Body/Health/Mind se finalizuje v kroku 3.
    ─────────────────────────────────────────────────────────────── */
 
 @theme {
@@ -11,47 +17,55 @@
   --font-sans: "Hanken Grotesk", system-ui, -apple-system, sans-serif;
   --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
 
-  /* Plochy / pozadí */
-  --color-bg: #efe6d6;            /* písková — hlavní pozadí */
-  --color-surface: #fffdf7;       /* karty, panely */
-  --color-surface-hover: #f7f1e6; /* hover plochy */
-  --color-sand: #e8dcc6;          /* pruhy, marquee, trenéři */
-  --color-mint: #e7efe8;          /* jemné zelené pozadí sekcí */
-  --color-mint-border: #d3e0d4;   /* okraj mint bloků */
-  --color-ink-dark: #20201c;      /* tmavé sekce (manifesto, footer) */
+  /* Plochy / pozadí — SVĚTLÁ zóna (obsahové sekce) */
+  --color-bg: #f5efe6;            /* teplá off-white — hlavní pozadí */
+  --color-surface: #fcf8f2;       /* karty, panely */
+  --color-surface-hover: #f4ece0; /* hover plochy */
+  --color-sand: #ede3d2;          /* pruhy, marquee, teplý band */
+  --color-mint: #f1e8db;          /* jemné teplé tint pozadí sekcí (dříve zelené) */
+  --color-mint-border: #e5d9c5;   /* okraj tint bloků */
 
-  /* Text */
-  --color-ink: #211f1a;           /* hlavní text / nadpisy */
-  --color-ink-soft: #5f594c;      /* sekundární text */
-  --color-ink-muted: #60594b;     /* terciární / popisky (WCAG AA na bg/sand) */
-  --color-ink-warm: #4a4435;      /* teplý odstavec (hero) */
-  --color-ink-faint: #6a6150;     /* labely (WCAG AA) */
-  --color-ink-ghost: #9f9070;     /* dekorativní watermark čísla (AA-large ≥3:1) */
-  --color-ink-line: #3a352c;      /* tmavé linky / text v listech */
-  --color-brand-tint: #525f49;    /* tlumená zelená pro labely (WCAG AA) */
+  /* Plochy / pozadí — TMAVÁ zóna (hero, manifest, footer, CTA pásy) */
+  --color-ink-dark: #14110e;      /* teplá near-black — tmavé sekce (NE čisté #000) */
+  --color-surface-dark: #1e1a15;  /* karty/panely na tmavém */
 
-  /* Značka */
-  --color-brand: #2f5a40;         /* lesní zelená — struktura, linky */
-  --color-brand-dark: #244833;    /* hover / ztmavení */
-  --color-accent: #c2693f;        /* terakota — výplně, tečky, akcenty */
-  --color-accent-text: #944b2c;   /* terakota pro TEXT (WCAG AA na bg/surface/sand) */
-  --color-gold: #be9c4f;          /* třetí akcent (Mind) — výplně */
-  --color-gold-dark: #806218;     /* zlatá pro TEXT (WCAG AA) */
+  /* Text na SVĚTLÉM pozadí (warm near-black škála) */
+  --color-ink: #16130f;           /* hlavní text / nadpisy */
+  --color-ink-soft: #4a4337;      /* sekundární text (WCAG AA) */
+  --color-ink-muted: #56503f;     /* terciární / popisky (WCAG AA) */
+  --color-ink-warm: #3e3729;      /* teplý odstavec (WCAG AA) */
+  --color-ink-faint: #5c5444;     /* labely (WCAG AA) */
+  --color-ink-ghost: #b6aa92;     /* dekorativní watermark čísla (AA-large ≥3:1) */
+  --color-ink-line: #2a251e;      /* tmavé linky / text v listech */
+  --color-brand-tint: #635b49;    /* tlumený teplý label (WCAG AA) */
 
-  /* Text na tmavém / zeleném pozadí */
-  --color-cream: #f3ecdd;
-  --color-cream-soft: #cfcabb;
-  --color-cream-muted: #989488;   /* WCAG AA na tmavém pozadí */
-  --color-sage: #9cc4a8;
-  --color-sage-soft: #8fb89c;
-  --color-mint-text: #d7e3d8;
-  --color-clay-soft: #dca983;     /* světlá terakota na tmavém pozadí */
+  /* Značka — STRUKTURA = teplá near-black (tlačítka, badge, nadpisy, linky) */
+  --color-brand: #1c1812;         /* near-black — struktura, linky, tlačítka */
+  --color-brand-dark: #000000;    /* hover / ztmavení struktury */
+
+  /* Značka — ČERVENÁ akcent (PLACEHOLDER, čeká na přesný hex) */
+  --color-accent: #e2231a;        /* PLACEHOLDER živá červená — výplně, tečky, dělící linky, aktivní stavy */
+  --color-accent-text: #b71c13;   /* PLACEHOLDER hlubší červená pro TEXT + bg CTA s cream textem (WCAG AA) */
+  --color-accent-deep: #8f150d;   /* PLACEHOLDER nejtmavší červená — hover červeného CTA (WCAG AA) */
+
+  /* Třetí akcent — AMBER (Mind), TENTATIVE do kroku 3 */
+  --color-gold: #e0a43a;          /* TENTATIVE amber — výplně */
+  --color-gold-dark: #8a5e0e;     /* TENTATIVE amber pro TEXT (WCAG AA na světlém) */
+
+  /* Text na TMAVÉM pozadí (warm off-white škála) */
+  --color-cream: #f5f1ea;         /* hlavní text na tmavém */
+  --color-cream-soft: #d6d0c3;    /* sekundární na tmavém (WCAG AA) */
+  --color-cream-muted: #a8a292;   /* terciární na tmavém (WCAG AA) */
+  --color-sage: #cfc8b7;          /* světlý teplý akcent na tmavém (dříve zelená) */
+  --color-sage-soft: #bbb3a0;
+  --color-mint-text: #e4ded1;     /* světlý text na tmavém */
+  --color-clay-soft: #e7c58c;     /* světlý amber akcent na tmavém (dříve terakota) */
 
   /* Okraje */
-  --color-border: #e7dcc6;        /* karty */
-  --color-border-strong: #e0d4bd; /* nav, pruhy */
-  --color-border-button: #cbbfa4; /* sekundární tlačítko */
-  --color-border-dark: #3a352c;   /* oddělovače na tmavém */
+  --color-border: #e7dcc8;        /* karty */
+  --color-border-strong: #dfd3bc; /* nav, pruhy */
+  --color-border-button: #cdc0a6; /* sekundární tlačítko */
+  --color-border-dark: #2c2720;   /* oddělovače na tmavém */
   --color-tracker-line: #ece2cf;
 }
 
@@ -68,24 +82,25 @@
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
-  ::selection { background: var(--color-brand); color: var(--color-cream); }
+  ::selection { background: var(--color-accent); color: var(--color-cream); }
 
   /* Viditelný focus pro klávesnici na všem klikatelném (nízká specificita,
-     komponentní ring ho může přebít). */
+     komponentní ring ho může přebít). Červená = vidět na světlém i tmavém. */
   :where(a, button, input, textarea, select, summary):focus-visible {
-    outline: 2px solid var(--color-brand);
+    outline: 2px solid var(--color-accent);
     outline-offset: 2px;
     border-radius: 4px;
   }
 }
 
 /* Gradientové foto-placeholdery (slot pro reálné fotky).
-   Hex žijou jen tady v token vrstvě, ne v komponentách. */
-.media-green  { background: linear-gradient(155deg, #34624a, #6f9379); }
-.media-clay   { background: linear-gradient(155deg, #b5663f, #dc9a72); }
-.media-sand   { background: linear-gradient(155deg, #be9c4f, #e0c98a); }
-.media-forest { background: linear-gradient(155deg, #244833, #4f7a5e); }
-.media-rose   { background: linear-gradient(155deg, #a85a4e, #d39283); }
+   Hex žijou jen tady v token vrstvě, ne v komponentách.
+   Warm-dark paleta: teplé charcoaly s náznakem červené/amber, žádná zeleň. */
+.media-green  { background: linear-gradient(155deg, #2c2a26, #4a4640); }
+.media-clay   { background: linear-gradient(155deg, #3a241e, #6e3a2c); }
+.media-sand   { background: linear-gradient(155deg, #3a3020, #6e5630); }
+.media-forest { background: linear-gradient(155deg, #1c1a16, #36322a); }
+.media-rose   { background: linear-gradient(155deg, #34201d, #5e352e); }
 
 /* Zrnitý overlay */
 .grain-overlay {

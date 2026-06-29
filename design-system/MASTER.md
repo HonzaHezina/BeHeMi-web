@@ -37,32 +37,42 @@ CTA „Rezervovat" je **vždy odkaz na `rezervace.bohemi.fit`**.
 
 ## Barvy (tokeny)
 
-Teplá, grounded paleta s jedním energickým akcentem. Záměrně **mimo** spa-pastel.
-Hodnoty převzaty z Claude Design exportu (export = zdroj pravdy). Plná sada tokenů
-žije v `src/styles/global.css`; tady jsou klíčové z nich.
+**Systém WARM-DARK (varianta B):** zdroj pravdy = logo + plakáty (black / white /
+red). Černě ukotvené klíčové bloky (hero, manifest, footer, CTA pásy), obsahové
+sekce na **teplém světlém** pozadí, **červená = energie** napříč. Pozadí je teplá
+near-black (`#14110e`), NE čisté `#000` — drží lidskost. Plná sada tokenů žije
+v `src/styles/global.css`; tady jsou klíčové z nich.
+
+> ⚠️ **Červená = PLACEHOLDER `#e2231a`** — čeká na přesný hex z brand manuálu.
+> Žije na `--color-accent` (živá, výplně) a `--color-accent-text` (hlubší, text + CTA).
+> **Amber pro Mind = TENTATIVE** — triáda Body/Health/Mind se finalizuje (krok 3).
 
 | Token | Hex | Použití |
 |---|---|---|
-| `--color-bg` | `#efe6d6` | písková — hlavní pozadí |
-| `--color-surface` | `#fffdf7` | karty, panely |
-| `--color-sand` | `#e8dcc6` | pruhy (marquee), sekce trenéři |
-| `--color-mint` | `#e7efe8` | jemné zelené pozadí sekcí, hover |
-| `--color-ink-dark` | `#20201c` | tmavé sekce (manifesto, footer) |
-| `--color-ink` | `#211f1a` | hlavní text / nadpisy |
-| `--color-ink-soft` | `#5f594c` | sekundární text |
-| `--color-ink-muted` | `#60594b` | terciární text, popisky |
-| `--color-brand` | `#2f5a40` | lesní zelená — struktura, nadpisy, linky |
-| `--color-brand-dark`| `#244833` | hover / ztmavení |
-| `--color-accent` | `#c2693f` | terakota — výplně, tečky, akcentové plochy |
-| `--color-accent-text` | `#944b2c` | terakota pro **text** (eyebrow, čísla) — WCAG AA |
-| `--color-gold` | `#be9c4f` | třetí akcent (Mind ve Venn) |
-| `--color-cream` | `#f3ecdd` | text na tmavém / zeleném pozadí |
-| `--color-border` | `#e7dcc6` | linky, oddělovače, karty |
+| `--color-bg` | `#f5efe6` | teplá off-white — hlavní pozadí (světlá zóna) |
+| `--color-surface` | `#fcf8f2` | karty, panely |
+| `--color-sand` | `#ede3d2` | pruhy (marquee), teplý band |
+| `--color-mint` | `#f1e8db` | jemné teplé tint pozadí sekcí, hover |
+| `--color-ink-dark` | `#14110e` | teplá near-black — tmavé sekce (hero, manifest, footer) |
+| `--color-surface-dark` | `#1e1a15` | karty/panely na tmavém |
+| `--color-ink` | `#16130f` | hlavní text / nadpisy (na světlém) |
+| `--color-ink-soft` | `#4a4337` | sekundární text |
+| `--color-ink-muted` | `#56503f` | terciární text, popisky |
+| `--color-brand` | `#1c1812` | near-black — struktura, nadpisy, linky, tlačítka |
+| `--color-brand-dark`| `#000000` | hover / ztmavení struktury |
+| `--color-accent` | `#e2231a` | **červená** (PLACEHOLDER) — výplně, tečky, dělící linky, aktivní stavy |
+| `--color-accent-text` | `#b71c13` | hlubší červená pro **text** + bg CTA s cream textem — WCAG AA |
+| `--color-gold` | `#e0a43a` | třetí akcent — amber (Mind), TENTATIVE |
+| `--color-cream` | `#f5f1ea` | text na tmavém pozadí |
+| `--color-border` | `#e7dcc8` | linky, oddělovače, karty |
 
-Kontrast hlídej: text na pozadí min. **4.5:1** (WCAG AA).
+Kontrast hlídej: text na pozadí min. **4.5:1** (WCAG AA). Červená **nikdy** jako
+barva běžného textu — jen akcent/CTA/výplň/linky. Bílý (cream) text na červeném
+tlačítku ber z `--color-accent-text` (AA projde), ne z živé `--color-accent`.
 
 **Zakázáno:** růžová/šalvějová/zlatá spa kombinace, fialovo-růžové AI gradienty,
-čistá černá `#000` jako pozadí, neonové zářivé barvy.
+**čistá černá `#000` jako plošné pozadí** (používej teplou near-black `#14110e`),
+neonové zářivé barvy, grunge/distressed textury (to je hardcore-gym plakát, ne web).
 
 ## Typografie
 
