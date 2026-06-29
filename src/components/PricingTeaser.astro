@@ -8,14 +8,14 @@ import { pricing } from '../data/home';
       <Eyebrow>Za kolik to máme</Eyebrow>
       <h2 class="text-[clamp(30px,4vw,48px)] font-extrabold tracking-[-0.03em]">Vyber podle toho, jak hluboko jdeš.</h2>
     </div>
-    <a href="/cenik/" class="cursor-pointer text-base font-bold text-brand hover:text-ink">Celý ceník →</a>
+    <a href="/cenik/" class="cursor-pointer text-base font-bold text-accent-text hover:text-ink">Celý ceník →</a>
   </div>
 
   <div class="grid gap-5 md:grid-cols-3">
     {pricing.map((pl) => (
-      <div class={`relative flex flex-col rounded-[18px] border bg-surface p-8 ${pl.featured ? 'border-2 border-brand' : 'border-border'}`}>
+      <div class={`relative flex flex-col rounded-[18px] border bg-surface p-8 ${pl.featured ? 'border-2 border-accent' : 'border-border'}`}>
         {pl.badge && (
-          <span class="absolute -top-2.5 left-8 rounded-full bg-brand px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.04em] text-cream">{pl.badge}</span>
+          <span class="absolute -top-2.5 left-8 rounded-full bg-accent-text px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.04em] text-cream">{pl.badge}</span>
         )}
         <h3 class="mb-1 text-[23px] font-extrabold tracking-[-0.02em]">{pl.t}</h3>
         <p class="mb-4 text-[15px] text-ink-muted">{pl.d}</p>
@@ -23,11 +23,11 @@ import { pricing } from '../data/home';
           <span class="text-[34px] font-extrabold tracking-[-0.02em]">{pl.price}</span>
           <span class="text-[15px] text-ink-muted">{pl.per}</span>
         </div>
-        <p class="mb-4 min-h-[18px] text-[13.5px] font-semibold text-brand">{pl.note}</p>
+        <p class="mb-4 min-h-[18px] text-[13.5px] font-semibold text-accent-text">{pl.note}</p>
         <ul class="mt-auto flex flex-col gap-2.5">
           {pl.feat.map((f) => (
             <li class="flex items-start gap-2.5 text-[15.5px] text-ink-line">
-              <span class="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-brand" aria-hidden="true"></span>
+              <span class="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden="true"></span>
               <span>{f}</span>
             </li>
           ))}

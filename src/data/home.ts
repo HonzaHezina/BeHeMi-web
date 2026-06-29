@@ -6,8 +6,9 @@ export const marquee = [
 ];
 
 export const triad = [
-  { k: 'Body', cs: 'Tělo', dot: 'bg-brand', d: 'Pohyb, síla a funkční tělo, které ti slouží v běžném životě — ne jen v zrcadle.' },
-  { k: 'Health', cs: 'Zdraví', dot: 'bg-accent', d: 'Prevence, vitalita a rovnováha. Spánek, dech, voda, jídlo a návyky, co vydrží.' },
+  // Triáda (krok 3): Body=červená, Health=neutrál (near-black), Mind=amber
+  { k: 'Body', cs: 'Tělo', dot: 'bg-accent', d: 'Pohyb, síla a funkční tělo, které ti slouží v běžném životě — ne jen v zrcadle.' },
+  { k: 'Health', cs: 'Zdraví', dot: 'bg-ink', d: 'Prevence, vitalita a rovnováha. Spánek, dech, voda, jídlo a návyky, co vydrží.' },
   { k: 'Mind', cs: 'Mysl', dot: 'bg-gold', d: 'Klid, motivace a sebevědomí. Hlava napojená na tělo, ne odtržená od něj.' },
 ];
 
