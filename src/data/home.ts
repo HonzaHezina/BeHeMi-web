@@ -110,7 +110,7 @@ export const trainers = [
 
 export const pricing = [
   { t: 'Jednorázový vstup', d: 'Když přijdeš jen občas', price: '290 Kč', per: '/ lekce', featured: false, badge: '', note: '', feat: ['Platíš za každou lekci zvlášť', 'Žádná sleva na služby', 'Nejdražší varianta za lekci'] },
-  { t: 'Členství', d: 'Když je pohyb součást života', price: '1 290 Kč', per: '/ měsíc', featured: true, badge: 'Nejvýhodnější', note: 'Při 3 lekcích týdně vyjde lekce na ~99 Kč.', feat: ['Neomezené skupinové lekce', 'Lekce už od ~99 Kč', 'Sleva 30 % na osobní tréninky', 'Komunita a akce v ceně'] },
+  { t: 'Členství', d: 'Když je pohyb součást života', price: '1 499 Kč', per: '/ 8 lekcí', featured: true, badge: 'Nejvýhodnější', note: '8 lekcí vychází na ~187 Kč za lekci.', feat: ['8 skupinových lekcí', 'Lekce ~187 Kč / lekce', 'Sleva 30 % na osobní tréninky', 'Komunita a akce v ceně'] },
   { t: 'Program 8 týdnů', d: 'Když to chceš vzít vážně', price: '3 900 Kč', per: '/ 8 týdnů', featured: false, badge: 'Vlajkový program', note: '', feat: ['2× pohyb + 1× praktický blok týdně', 'Měření na začátku a na konci', 'Uzavřená skupina 10–20 lidí', 'Vedení trenérem celých 8 týdnů'] },
 ];
 
