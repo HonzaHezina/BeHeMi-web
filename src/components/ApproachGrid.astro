@@ -1,17 +1,36 @@
 ---
 import Eyebrow from './Eyebrow.astro';
 import { approach } from '../data/home';
+// Sloučený blok „Jak přemýšlíme o zdraví" — spojuje dřívější tři filozofické
+// sekce (Náš přístup / Jak přemýšlíme o zdraví / Jak to bereme) do jedné.
+// Tmavé pozadí záměrně — web se bude celý překlápět do tmavé palety.
 ---
-<section class="mx-auto max-w-[1220px] px-5 py-16 md:px-8 md:py-23">
-  <Eyebrow>Jak přemýšlíme o zdraví</Eyebrow>
-  <h2 class="mb-11 max-w-[22ch] text-[clamp(30px,4vw,48px)] font-extrabold leading-[1.03] tracking-[-0.03em]">Tělo je nástroj, ne cíl. Učíme tě s ním zacházet.</h2>
-  <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-    {approach.map((a) => (
-      <div class="rounded-[18px] border border-border bg-surface px-7 py-8 transition-all duration-300 hover:-translate-y-1.5 hover:border-brand hover:shadow-[0_22px_44px_-20px_rgba(33,31,26,0.26)]">
-        <div class="mb-3.5 text-[30px] italic text-ink-faint" aria-hidden="true">{a.n}</div>
-        <h3 class="mb-2.5 text-xl font-extrabold tracking-[-0.02em]">{a.t}</h3>
-        <p class="text-[15.5px] leading-[1.5] text-ink-soft">{a.d}</p>
-      </div>
-    ))}
+<section class="relative overflow-hidden bg-ink-dark text-cream">
+  <div
+    class="pointer-events-none absolute -right-20 -top-24 h-[440px] w-[440px] rounded-full"
+    style="background:radial-gradient(circle, rgba(47,90,64,0.5), rgba(47,90,64,0) 70%);"
+    aria-hidden="true"
+  >
+  </div>
+  <div class="relative mx-auto max-w-[1220px] px-5 py-20 md:px-8 md:py-24">
+    <Eyebrow color="sage">Jak přemýšlíme o zdraví</Eyebrow>
+    <h2 class="mb-6 max-w-[22ch] text-[clamp(30px,4vw,48px)] font-extrabold leading-[1.03] tracking-[-0.03em]">Tělo je nástroj, ne cíl. Učíme tě s ním zacházet.</h2>
+    <p class="mb-12 max-w-[60ch] text-[clamp(20px,2.5vw,28px)] font-normal leading-[1.32] tracking-[-0.015em] text-cream-soft">
+      BoHeMi začíná u těla — a vede dál ke spánku, dechu, jídlu, hlavě i vztahům. <span class="italic text-sage">Jen kroky, které si sám ověříš na vlastní energii.</span>
+    </p>
+
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      {approach.map((a) => (
+        <div class="rounded-[18px] border border-border-dark bg-cream/[0.04] px-7 py-8 transition-all duration-300 hover:-translate-y-1.5 hover:border-sage-soft hover:bg-cream/[0.07]">
+          <div class="mb-3.5 text-[30px] italic text-cream-muted" aria-hidden="true">{a.n}</div>
+          <h3 class="mb-2.5 text-xl font-extrabold tracking-[-0.02em] text-cream">{a.t}</h3>
+          <p class="text-[15.5px] leading-[1.5] text-cream-soft">{a.d}</p>
+        </div>
+      ))}
+    </div>
+
+    <p class="mt-12 max-w-[68ch] text-base leading-[1.6] text-cream-muted">
+      Holistické zdraví jsme si nevymysleli — ale nebereme ho jako dogma. Co ti sedne, zůstane; co ne, klidně pusť.
+    </p>
   </div>
 </section>
