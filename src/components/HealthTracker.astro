@@ -1,5 +1,5 @@
 ---
-import { bodyPurpose } from '../data/home';
+import { bodyPurpose } from "../data/home";
 ---
 <section class="relative overflow-hidden bg-ink-dark text-cream">
   <div
@@ -11,18 +11,18 @@ import { bodyPurpose } from '../data/home';
   <div class="relative mx-auto max-w-[1220px] px-5 py-16 md:px-8 md:py-23">
     <div class="grid items-center gap-11 md:grid-cols-2 lg:gap-13">
       <div>
-        <span class="mb-5 inline-block rounded-full bg-white/15 px-3.5 py-1.5 text-[13px] font-bold uppercase tracking-[0.04em] text-cream">Pro&ccaron; to d&ecaron;l&aacute;me</span>
-        <h2 class="mb-[18px] text-[clamp(30px,4vw,50px)] font-extrabold leading-[1.02] tracking-[-0.03em]">T&ecaron;lo nen&iacute; c&iacute;l. <span class="font-medium italic text-accent">Je to z&aacute;klad pro &zaron;ivot.</span></h2>
-        <p class="mb-5 max-w-[46ch] text-lg leading-[1.55] text-mint-text">V&ccaron;t&scaron;ina v&ecaron;c&iacute;, kter&eacute; d&ecaron;l&aacute;me, se stane jednodu&scaron;&scaron;&iacute;, kdy&zaron; jsme fyzicky v po&rcaron;&aacute;dku. Ne perfektn&iacute; &mdash; v po&rcaron;&aacute;dku. L&eacute;pe sp&iacute;me, m&aacute;me energii na to, co chceme d&ecaron;lat, a zv&iacute;r&aacute;me t&ecaron;&zaron;&scaron;&iacute; chv&iacute;le bez zbyte&ccaron;n&eacute;ho vy&ccaron;erp&aacute;n&iacute;.</p>
-        <p class="max-w-[46ch] text-lg leading-[1.55] text-mint-text">BoHeMi nen&iacute; o v&yacute;sledc&iacute;ch na pap&iacute;&rcaron;e. Je o tom, aby ti t&ecaron;lo slou&zaron;ilo &mdash; v pr&aacute;ci, v rodin&ecaron;, ve sportu i ve st&aacute;&rcaron;&iacute;. Tenhle z&aacute;klad se buduje pohybem, kter&yacute; se d&aacute; dlouhodob&ecaron; vydr&zaron;et.</p>
+        <span class="mb-5 inline-block rounded-full bg-white/15 px-3.5 py-1.5 text-[13px] font-bold uppercase tracking-[0.04em] text-cream">Proč to děláme</span>
+        <h2 class="mb-[18px] text-[clamp(30px,4vw,50px)] font-extrabold leading-[1.02] tracking-[-0.03em]">Tělo není cíl. <span class="font-medium italic text-accent">Je to základ pro život.</span></h2>
+        <p class="mb-5 max-w-[46ch] text-lg leading-[1.55] text-mint-text">Většina věcí, které děláme, se stane jednodušší, když jsme fyzicky v pořádku. Ne perfektní — v pořádku. Lépe spíme, máme energii na to, co chceme dělat, a zvládáme těžší chvíle bez zbytečného vyčerpání.</p>
+        <p class="max-w-[46ch] text-lg leading-[1.55] text-mint-text">BoHeMi není o výsledcích na papíře. Je o tom, aby ti tělo sloužilo — v práci, v rodině, ve sportu i ve stáří. Tenhle základ se buduje pohybem, který se dá dlouhodobě vydržet.</p>
       </div>
       <div class="overflow-hidden rounded-[18px] bg-surface shadow-[0_24px_50px_-22px_rgba(0,0,0,0.5)]">
         <div class="border-b border-tracker-line px-6 py-4">
-          <span class="text-[12px] font-bold uppercase tracking-[0.06em] text-ink-faint">Co se zm&ecaron;n&iacute;, kdy&zaron; za&ccaron;ne&scaron; pravideln&ecaron; cvi&ccaron;it</span>
+          <span class="text-[12px] font-bold uppercase tracking-[0.06em] text-ink-faint">Co se změní, když začneš pravidelně cvičit</span>
         </div>
         {bodyPurpose.map((item) => (
           <div class="flex items-center gap-[18px] border-b border-tracker-line px-6 py-[18px] last:border-b-0">
-            <span class="flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full bg-accent/12 text-[13px] font-extrabold text-accent-text" aria-hidden="true">&#10003;</span>
+            <span class="flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full bg-accent/12 text-[13px] font-extrabold text-accent-text" aria-hidden="true">✓</span>
             <span class="text-[15px] leading-snug text-ink-line">{item}</span>
           </div>
         ))}
