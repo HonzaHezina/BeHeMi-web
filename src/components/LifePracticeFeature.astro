@@ -3,12 +3,12 @@ import Button from './Button.astro';
 import MediaFrame from './MediaFrame.astro';
 import { lpHighlights } from '../data/home';
 ---
-<section id="cesta" class="mx-auto max-w-[1220px] scroll-mt-24 px-5 py-16 md:px-8 md:py-23">
+<section id="program" class="mx-auto max-w-[1220px] scroll-mt-24 px-5 py-16 md:px-8 md:py-23">
   <div class="grid items-center gap-11 md:grid-cols-2 lg:gap-13">
     <div>
-      <span class="mb-5 inline-block rounded-full bg-mint px-3.5 py-1.5 text-[13px] font-bold uppercase tracking-[0.04em] text-accent-text">Vlajkový program · 8 týdnů</span>
-      <h2 class="mb-[18px] text-[clamp(32px,4.4vw,54px)] font-extrabold leading-none tracking-[-0.035em]">BoHeMi <span class="font-medium italic text-accent-text">Cesta</span></h2>
-      <p class="mb-6 max-w-[44ch] text-[19px] text-ink-warm">Neprodáváme jednotlivé vstupy. Prodáváme cestu. Osm týdnů pohybu, vzdělávání a komunity — s měřením na začátku i na konci.</p>
+      <span class="mb-5 inline-block rounded-full bg-mint px-3.5 py-1.5 text-[13px] font-bold uppercase tracking-[0.04em] text-accent-text">Vlajkový program</span>
+      <h2 class="mb-[18px] text-[clamp(32px,4.4vw,54px)] font-extrabold leading-none tracking-[-0.035em]">8 týdnů, <span class="font-medium italic text-accent-text">ne permanentka.</span></h2>
+      <p class="mb-6 max-w-[46ch] text-[19px] text-ink-warm">Osm týdnů s malou skupinou a trenérem, který tě zná jménem — ne permanentka, na kterou za měsíc zapomeneš. Někdo na tebe dává pozor a opraví tě; nikdo na tebe nečumí. Změříme tě na začátku i na konci, ať máš černé na bílém, že to k něčemu bylo.</p>
       <ul class="mb-[30px] flex flex-col gap-3.5">
         {lpHighlights.map((h) => (
           <li class="flex items-start gap-3.5 text-[17px] text-ink-line">
@@ -23,7 +23,7 @@ import { lpHighlights } from '../data/home';
       media="media-clay"
       rounded="rounded-[22px] rounded-bl-[160px]"
       class="h-[clamp(340px,40vw,480px)] w-full shadow-[0_28px_56px_-22px_rgba(33,31,26,0.38)]"
-      alt="Skupina při společné lekci BoHeMi Cesta"
+      alt="Skupina při společné lekci programu 8 týdnů"
     />
   </div>
 </section>
