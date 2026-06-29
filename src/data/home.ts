@@ -2,21 +2,21 @@
 // (renderVals() v "Bohemi Web.dc.html"). Zdroj pravdy pro texty.
 
 export const marquee = [
-  'Tělo', 'Dech', 'Spánek', 'Voda', 'Jídlo', 'Mysl', 'Vztahy', 'Pohyb', 'Energie', 'Klid',
+  'Tělo', 'Dech', 'Spánek', 'Voda', 'Jídlo', 'Mysl', 'Vztahy', 'Pohyb', 'Síla', 'Záda',
 ];
 
 export const triad = [
   // Triáda (krok 3): Body=červená, Health=neutrál (near-black), Mind=amber
   { k: 'Body', cs: 'Tělo', dot: 'bg-accent', d: 'Pohyb, síla a funkční tělo, které ti slouží v běžném životě — ne jen v zrcadle.' },
   { k: 'Health', cs: 'Zdraví', dot: 'bg-ink', d: 'Prevence, vitalita a rovnováha. Spánek, dech, voda, jídlo a návyky, co vydrží.' },
-  { k: 'Mind', cs: 'Mysl', dot: 'bg-gold', d: 'Klid, motivace a sebevědomí. Hlava napojená na tělo, ne odtržená od něj.' },
+  { k: 'Mind', cs: 'Mysl', dot: 'bg-gold', d: 'Hlava, co táhne za jeden provaz s tělem. Méně chaosu, víc soustředění a sebevědomí z toho, že něco fakt děláš.' },
 ];
 
 export const approach = [
-  { n: '01', t: 'Řekneme ti proč, ne jen co', d: 'Nebudeš cvičit naslepo. Vysvětlíme, proč to děláš — a necháš si jen to, co ti reálně sedne. Nic jako dogma.' },
-  { n: '02', t: 'Tělo zvládne víc, než čekáš', d: 'Nejde o to ho přemoct. Ukážeme ti, jak mu nepřekážet — aby fungovala záda, klouby i energie přes den.' },
-  { n: '03', t: 'Únava a bolavá záda něco znamenají', d: 'Ztuhlý krk nebo mělký spánek nejsou náhoda. Poradíme, co s tím — pohybem, regenerací a režimem dne. (Zdravotní potíže patří k lékaři, my stavíme návyky kolem.)' },
-  { n: '04', t: 'Návyky místo diet a slibů', d: 'Zdraví se nedělá nárazem. Pár věcí, co děláš pravidelně, zafunguje líp než měsíční dieta nebo předsevzetí.' },
+  { n: '01', t: 'Nic neber jako pravdu', d: 'Neber nic, co tady řekneme, jako svaté. Vyzkoušej si to sám a posuď podle výsledku, ne podle toho, kdo to říká.' },
+  { n: '02', t: 'Tělo zvládne víc, než čekáš', d: 'Když mu dáš základ — pohyb, spánek, jídlo — udělá většinu práce samo. Ten základ ale někdo držet musí. Od toho jsme tu my.' },
+  { n: '03', t: 'Únava a bolest něco znamenají', d: 'Špatný spánek, bolavá záda, únava — něco za tím je. Naučíme tě odpovědět pohybem, spánkem a rytmem dne. Zdravotní potíže patří k doktorovi; my stavíme návyky kolem.' },
+  { n: '04', t: 'Rytmus, ne náraz', d: 'Zdraví se nedělá jednou velkou akcí, ale malými kroky, co se opakují každý den. Žádný zázrak na měsíc.' },
 ];
 
 export const audiences = [
@@ -84,7 +84,7 @@ export const healthTracker = [
 // Media token vyber z .media-* v global.css (green/clay/sand/forest/rose).
 export const trainers = [
   { name: 'Klára Měchurová', role: 'Trenérka · funkční trénink', media: 'media-green' },
-  { name: 'Jan Hezina', role: 'AI a Mind · drží to celé pohromadě', media: 'media-clay' },
+  { name: 'Jan Hezina', role: 'zakladatel · provoz a technika', media: 'media-clay' },
   // { name: 'TODO — jméno', role: 'TODO — role', media: 'media-sand' },
   // { name: 'TODO — jméno', role: 'TODO — role', media: 'media-forest' },
 ];
@@ -92,7 +92,7 @@ export const trainers = [
 export const pricing = [
   { t: 'Jednorázový vstup', d: 'Když přijdeš jen občas', price: '290 Kč', per: '/ lekce', featured: false, badge: '', note: '', feat: ['Platíš za každou lekci zvlášť', 'Žádná sleva na služby', 'Nejdražší varianta za lekci'] },
   { t: 'Členství', d: 'Když je pohyb součást života', price: '1 290 Kč', per: '/ měsíc', featured: true, badge: 'Nejvýhodnější', note: 'Při 3 lekcích týdně vyjde lekce na ~99 Kč.', feat: ['Neomezené skupinové lekce', 'Lekce už od ~99 Kč', 'Sleva 30 % na osobní tréninky', 'Komunita a akce v ceně'] },
-  { t: 'Program 8 týdnů', d: 'Když chceš víc než jednotlivé lekce', price: '3 900 Kč', per: '/ 8 týdnů', featured: false, badge: 'Vlajkový program', note: '', feat: ['2× pohyb + 1× praktický blok týdně', 'Měření na začátku a na konci', 'Uzavřená skupina 10–20 lidí', 'Vedení trenérem celých 8 týdnů'] },
+  { t: 'Program 8 týdnů', d: 'Když to chceš vzít vážně', price: '3 900 Kč', per: '/ 8 týdnů', featured: false, badge: 'Vlajkový program', note: '', feat: ['2× pohyb + 1× praktický blok týdně', 'Měření na začátku a na konci', 'Uzavřená skupina 10–20 lidí', 'Vedení trenérem celých 8 týdnů'] },
 ];
 
 // Hlavní navigace. Kotvy míří na sekce homepage formou "/#…", ať fungují
