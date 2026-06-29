@@ -76,9 +76,16 @@ export const healthTracker = [
   { area: 'Vztahy', q: 'Měl/a jsem dnes jeden vědomý pozitivní kontakt s druhým?' },
 ];
 
+// TODO(Honza): doplnit zbylé trenéry/tým. Rozhodnuto: tým je VÍC než dva lidi,
+// ale reálná jména/role/bio zatím nemám. Placeholder sloty níž jsou ZÁMĚRNĚ
+// zakomentované, ať se na web nepublikují vymyšlené karty — odkomentuj a vyplň,
+// až dodáš skutečná data (jméno, role, příp. krátké bio + foto do media slotu).
+// Media token vyber z .media-* v global.css (green/clay/sand/forest/rose).
 export const trainers = [
   { name: 'Klára Měchurová', role: 'Trenérka · funkční trénink', media: 'media-green' },
   { name: 'Jan Hezina', role: 'AI a Mind · drží to celé pohromadě', media: 'media-clay' },
+  // { name: 'TODO — jméno', role: 'TODO — role', media: 'media-sand' },
+  // { name: 'TODO — jméno', role: 'TODO — role', media: 'media-forest' },
 ];
 
 export const pricing = [
