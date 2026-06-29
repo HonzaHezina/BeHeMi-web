@@ -24,7 +24,7 @@ const isProduction = import.meta.env.PUBLIC_SITE_ENV === 'production';
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
-    <meta name="generator" content={Astro.generator} />
+    {/* Žádný <meta name="generator"> — zbytečně prozrazuje verzi Astra. */}
     {!isProduction && <meta name="robots" content="noindex,nofollow" />}
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
