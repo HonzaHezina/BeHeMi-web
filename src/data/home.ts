@@ -65,9 +65,9 @@ export const kidsActivities = [
 ];
 
 export const firmyServices = [
-  { t: 'FitTeams', d: 'Kruhové a silové tréninky navržené pro firemní týmy.' },
-  { t: 'Firemní wellbeing', d: 'Pravidelné programy pro zdraví a energii zaměstnanců.' },
-  { t: 'Pronájem sálů', d: 'Sály pro vlastní akce, teambuilding nebo workshopy.' },
+  { t: 'FitTeams', d: 'Kruhové a silové tréninky navržené pro firemní týmy. Max 12 lidí, v našem studiu nebo u vás.' },
+  { t: 'Firemní wellbeing', d: 'Pravidelné programy pro zdraví a energii zaměstnanců — ergonomie, výživa, regenerace.' },
+  { t: 'Pronájem sálů', d: 'Sály pro vlastní akce, teambuilding nebo workshopy. Od 350 Kč/hod při smlouvě na 6 měsíců.' },
 ];
 
 export const lpHighlights = [
@@ -102,8 +102,8 @@ export const healthTracker = [
 // až dodáš skutečná data (jméno, role, příp. krátké bio + foto do media slotu).
 // Media token vyber z .media-* v global.css (green/clay/sand/forest/rose).
 export const trainers = [
-  { name: 'Klára Měchurová', role: 'Trenérka · funkční trénink', media: 'media-green' },
-  { name: 'Jan Hezina', role: 'zakladatel · provoz a technika', media: 'media-clay' },
+  { name: 'Klára Měchurová', role: 'Trenérka · funkční trénink', media: 'media-green', bio: 'Klára se pohybu věnuje od dětství — balet, tenis, basketbal, tanec. Certifikovaná fitness lektorka od roku 2015, aktivní od 2013. Vede kruháče, silové lekce i HIIT a nabízí osobní tréninky.' },
+  { name: 'Jan Hezina', role: 'zakladatel · provoz a technika', media: 'media-clay', bio: '' },
   // { name: 'TODO — jméno', role: 'TODO — role', media: 'media-sand' },
   // { name: 'TODO — jméno', role: 'TODO — role', media: 'media-forest' },
 ];

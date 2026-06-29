@@ -13,6 +13,7 @@ import { trainers } from '../data/home';
           <MediaFrame media={t.media} rounded="rounded-[18px]" class="mb-4 h-70" alt={`Portrét — ${t.name}`} />
           <h3 class="text-[21px] font-extrabold tracking-[-0.02em]">{t.name}</h3>
           <p class="text-[15px] text-ink-muted">{t.role}</p>
+          {t.bio && <p class="mt-1.5 text-[14.5px] leading-[1.5] text-ink-soft">{t.bio}</p>}
         </div>
       ))}
     </div>
