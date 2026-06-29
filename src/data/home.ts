@@ -14,7 +14,7 @@ export const triad = [
 export const approach = [
   { n: '01', t: 'Začínáme pochopením', d: 'Nic ti netvrdíme jako pravdu. Dáváme návrhy, které si ověříš na vlastní energii — co ti sedne, zůstane.' },
   { n: '02', t: 'Tělo je nástroj, ne cíl', d: 'Tělo umí spravovat samo sebe líp, než čekáš. Neučíme tě ho přemoct, ale rozumět mu a nepřekážet mu.' },
-  { n: '03', t: 'Pozorování místo diagnózy', d: 'Únava, napětí i horečka jsou signály, ne poruchy. Učíme tě je číst dřív, než sáhneš po tabletce, co jen ztiší zprávu od těla.' },
+  { n: '03', t: 'Pozoruj signály těla', d: 'Únava, napětí nebo mělký spánek jsou zprávy, které se vyplatí číst. Učíme tě jim rozumět a odpovídat pohybem, regenerací a rytmem dne. Zdravotní potíže patří k lékaři — my stavíme návyky kolem.' },
   { n: '04', t: 'Návyky místo diet a slibů', d: 'Zdraví se nedělá nárazem, ale rytmem. Malé kroky, co se opakují každý den — návyk na celý život, ne zázrak na měsíc.' },
 ];
 
