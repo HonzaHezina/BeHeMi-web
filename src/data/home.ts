@@ -44,6 +44,11 @@ export const classes = [
   { t: 'HIIT', d: 'Krátké intenzivní intervaly střídané odpočinkem. Efektivní trénink kondice a výdrže i pro ty, kteří mají málo času.', img: 'HIIT lekce', media: 'media-clay', bhm: 'Tělo · energie · odolnost' },
   { t: 'Supermamky', d: 'Tréninky přizpůsobené realitě rodičovství. Přijď klidně i s miminkem nebo malým dítětem vedle — cvičení se ti přizpůsobí.', img: 'supermamky', media: 'media-sand', bhm: 'Tělo · rodina · komunita' },
   { t: 'Vlastní váha', d: 'Cvičení bez nářadí: ovládneš základní pohybové vzory, zlepšíš koordinaci a sílu. Vhodné i jako první krok pro úplné začátečníky.', img: 'vlastní váha', media: 'media-rose', bhm: 'Tělo · kontrola · pozornost' },
+  { t: 'Power Zone', d: 'Funkční trénink kombinující kruháče a prvky crossfitu. Intenzivní, efektivní, vedený trenérem — pro výsledky bez zbytečných řečí.', img: 'power zone', media: 'media-clay', bhm: 'Tělo · síla · výkon' },
+  { t: 'Move Smart', d: 'Přirozené pohybové vzory, core, mobilita a technika pohybu. Vhodné pro začátečníky, maminky po porodu a každého, kdo se chce pohybovat bez bolestí.', img: 'move smart', media: 'media-forest', bhm: 'Tělo · mobilita · technika' },
+  { t: 'Břišní pekáč', d: 'Trénink hlubokého stabilizačního systému a core. Žádné zkracovačky — učíš se ovládat tělo zevnitř. Vhodné pro všechny úrovně.', img: 'břišní pekáč', media: 'media-rose', bhm: 'Tělo · stabilita · kontrola' },
+  { t: 'Solid Booty', d: 'Zaměřeno na hýžďové svaly — správná technika, vědomý pohyb, výsledky. Oblíbená lekce s jasným cílem.', img: 'solid booty', media: 'media-sand', bhm: 'Tělo · síla · pohyb' },
+  { t: 'Enduro', d: 'Síla, kondice a přirozené pohyby v jedné lekci. Pro ty, kdo chtějí výkonnější a odolnější tělo na dlouho.', img: 'enduro', media: 'media-green', bhm: 'Tělo · výdrž · odolnost' },
 ];
 
 export const individualServices = [
@@ -56,6 +61,7 @@ export const kidsActivities = [
   { t: 'Cirkusová školička', d: 'Pro nejmenší — základní pohybové dovednosti hravou formou.', img: 'cirkusová školička', media: 'media-sand' },
   { t: 'Základy cirkusu', d: 'Gymnastika a akrobacie pod vedením akrobatů La Putyka.', img: 'akrobacie', media: 'media-clay' },
   { t: 'Pohybové kroužky', d: 'Pozemní i závěsná akrobacie a žonglování.', img: 'kroužky pro děti', media: 'media-green' },
+  { t: 'Objevovárna', d: 'Pro nejmenší děti do 5 let — 6 pohybových stanovišť, kde děti prozkoumávají svět pohybem hravou formou. Středy 13:30 a 14:30, max 6 dětí.', img: 'objevovárna', media: 'media-rose' },
 ];
 
 export const firmyServices = [

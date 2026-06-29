@@ -1,0 +1,113 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+
+const benefits = [
+  { t: 'Rychlejší regenerace', d: 'LED světlo stimuluje mitochondrie — buněčné továrny na energii. Svaly se zotavují rychleji po tréninku i náročném dni.' },
+  { t: 'Lepší spánek', d: 'Pravidelná fotobiomodulace reguluje cirkadiánní rytmus. Snadnější usínání, hlubší spánek, více energie ráno.' },
+  { t: 'Protizánětlivý efekt', d: 'NIR světlo (near-infrared) proniká hluboko do tkáně a snižuje chronický zánět — přirozené příčině bolestí a únavy.' },
+  { t: 'Podpora kolagenu', d: 'Červené světlo stimuluje tvorbu kolagenu a pomáhá regeneraci kloubů, šlach i pokožky.' },
+  { t: 'Sportovní výkon', d: 'Lepší prokrvení, více kyslíku ve svalech, rychlejší odstraňování odpadních látek. Cvičíš lépe, unavíš se méně.' },
+  { t: 'Jednoduchý protokol', d: '15 minut denně nebo 3–5× týdně. Lehnout, relaxovat, hotovo.' },
+];
+---
+<Layout
+  title="Fotobiomodulace — BoHeMi fitness Vinohrady"
+  description="LED RED a NIR světelná terapie pro regeneraci, lepší spánek a sportovní výkon. Fotobiomodulace v BoHeMi na pražských Vinohradech — 15 minut, velký efekt."
+>
+  <Header current="/fotobiomodulacni-terapie/" />
+  <main>
+    <section class="relative mx-auto max-w-[1220px] overflow-hidden px-5 pb-10 pt-16 md:px-8 md:pt-20">
+      <div
+        class="pointer-events-none absolute right-0 top-2.5 h-[400px] w-[400px] rounded-full"
+        style="background:radial-gradient(circle, rgba(226,35,26,0.12), rgba(226,35,26,0) 70%);"
+        aria-hidden="true"
+      ></div>
+      <div class="relative max-w-[720px]">
+        <p class="mb-4 text-[13px] font-extrabold uppercase tracking-[0.08em] text-accent-text">
+          <a href="/lekce-a-sluzby/" class="hover:text-ink">Lekce a služby</a> · Individuální služby
+        </p>
+        <h1 class="text-[clamp(40px,6.2vw,76px)] font-extrabold leading-[0.98] tracking-[-0.035em]">
+          Foto&shy;bio&shy;modulace
+        </h1>
+        <p class="mt-6 max-w-[56ch] text-[clamp(18px,2.1vw,22px)] leading-[1.45] text-ink-warm">
+          Světelná terapie červeným (RED) a blízkým infračerveným (NIR) světlem pro rychlejší regeneraci, lepší spánek a sportovní výkon.
+        </p>
+        <div class="mt-8">
+          <Button href="https://bohemi.fit/rezervace/" variant="primary">Rezervovat →</Button>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-[1220px] px-5 py-10 md:px-8">
+      <div class="rounded-[22px] border border-border p-8 md:p-12">
+        <h2 class="mb-4 text-2xl font-extrabold tracking-[-0.02em]">Jak to funguje?</h2>
+        <p class="max-w-[64ch] text-[17px] leading-[1.6] text-ink-soft">
+          Fotobiomodulace využívá specifické vlnové délky světla (620–1000 nm), které pronikají do buněk a stimulují mitochondrie — továrny na energii v každé buňce tvého těla. Výsledkem je rychlejší regenerace, snížení zánětu a podpora přirozených opravných procesů.
+        </p>
+        <p class="mt-4 max-w-[64ch] text-[17px] leading-[1.6] text-ink-soft">
+          Není to magie ani alternativní medicína — je to fyzika a biologie. Světlo jako nástroj pro tělo, které se chce zotavit a fungovat lépe.
+        </p>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-[1220px] px-5 pb-10 md:px-8">
+      <h2 class="mb-7 text-2xl font-extrabold tracking-[-0.02em]">Na co to pomáhá</h2>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {benefits.map((b) => (
+          <div class="rounded-2xl border border-border bg-surface p-7">
+            <h3 class="mb-2 text-[19px] font-extrabold tracking-[-0.02em]">{b.t}</h3>
+            <p class="text-[15.5px] leading-[1.5] text-ink-soft">{b.d}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-[1220px] px-5 pb-10 md:px-8">
+      <div class="max-w-[640px]">
+        <h2 class="mb-4 text-2xl font-extrabold tracking-[-0.02em]">Jak to probíhá</h2>
+        <ul class="flex flex-col gap-3">
+          <li class="flex items-start gap-3 text-[16px] text-ink-soft">
+            <span class="mt-1 h-2 w-2 shrink-0 rounded-full bg-accent" aria-hidden="true"></span>
+            Přijdeš, lehneš si pod panel, relaxuješ — 15 minut
+          </li>
+          <li class="flex items-start gap-3 text-[16px] text-ink-soft">
+            <span class="mt-1 h-2 w-2 shrink-0 rounded-full bg-accent" aria-hidden="true"></span>
+            Doporučená frekvence: 3–5× týdně pro optimální výsledky
+          </li>
+          <li class="flex items-start gap-3 text-[16px] text-ink-soft">
+            <span class="mt-1 h-2 w-2 shrink-0 rounded-full bg-accent" aria-hidden="true"></span>
+            Lze kombinovat s tréninkem — ideálně jako regenerace po lekci
+          </li>
+          <li class="flex items-start gap-3 text-[16px] text-ink-soft">
+            <span class="mt-1 h-2 w-2 shrink-0 rounded-full bg-accent" aria-hidden="true"></span>
+            Dostupné pro členy i jako samostatný vstup
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-[1220px] px-5 pb-16 md:px-8 md:pb-23">
+      <div class="relative flex flex-wrap items-center justify-between gap-6 overflow-hidden rounded-[22px] bg-ink-dark p-8 text-cream md:p-[clamp(32px,5vw,56px)]">
+        <div
+          class="pointer-events-none absolute -bottom-22 -right-12 h-[340px] w-[340px] rounded-full"
+          style="background:radial-gradient(circle, rgba(226,35,26,0.18), rgba(226,35,26,0) 70%);"
+          aria-hidden="true"
+        ></div>
+        <div class="relative">
+          <h2 class="max-w-[20ch] text-[clamp(26px,3.4vw,40px)] font-extrabold tracking-[-0.03em]">Chceš zkusit?</h2>
+          <p class="mt-3 max-w-[42ch] text-[17px] text-cream-muted">Rezervuj si lekci nebo nám napiš — rádi poradíme, jak fotobiomodulaci zařadit do tvého programu.</p>
+        </div>
+        <a
+          href="https://bohemi.fit/rezervace/"
+          class="relative inline-flex shrink-0 cursor-pointer items-center gap-2 rounded-full bg-accent-text px-7 py-3.5 text-[17px] font-bold text-cream transition-colors hover:bg-accent-deep"
+        >
+          Rezervovat →
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

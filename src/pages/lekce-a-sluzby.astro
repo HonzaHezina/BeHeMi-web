@@ -53,7 +53,10 @@ const jumps = [
     </section>
 
     <section class="mx-auto max-w-[1220px] px-5 pt-8 md:px-8">
-      <h2 class="mb-[22px] text-2xl font-extrabold tracking-[-0.02em]">Skupinové lekce</h2>
+      <div class="mb-[22px] flex flex-wrap items-end justify-between gap-4">
+        <h2 class="text-2xl font-extrabold tracking-[-0.02em]">Skupinové lekce</h2>
+        <a href="/skupinove-lekce/" class="cursor-pointer text-base font-bold text-accent-text hover:text-ink">Všechny lekce →</a>
+      </div>
       <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {classes.map((c) => (
           <div class="overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-20px_rgba(33,31,26,0.24)]">
@@ -77,6 +80,10 @@ const jumps = [
             <p class="text-[15.5px] leading-[1.5] text-ink-soft">{s.d}</p>
           </div>
         ))}
+      </div>
+      <div class="mt-4 flex flex-wrap gap-5">
+        <a href="/open-gym/" class="text-[15px] font-bold text-accent-text hover:text-ink">Open Gym — detail →</a>
+        <a href="/fotobiomodulacni-terapie/" class="text-[15px] font-bold text-accent-text hover:text-ink">Fotobiomodulace — detail →</a>
       </div>
       <div class="mt-[22px] flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-mint-border bg-mint px-7 py-6">
         <p class="max-w-[48ch] text-[16.5px] text-ink"><strong class="font-bold">Chceš jít hloub než jen na lekce?</strong> Program 8 týdnů tě provede pohybem, návyky a komunitou pohromadě.</p>
