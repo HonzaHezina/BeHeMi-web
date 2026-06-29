@@ -9,6 +9,13 @@ const {
   title = 'BoHeMi — Body, Health, Mind',
   description = '',
 } = Astro.props;
+
+// Indexace je vázaná na prostředí. Web je indexovatelný JEN když je
+// PUBLIC_SITE_ENV === 'production'. Cokoliv jiného (staging, preview, lokál)
+// i nenastavená proměnná = noindex,nofollow — staging nikdy neproklouzne do
+// Googlu. ⚠️ PRODUKČNÍ DEPLOY MUSÍ MÍT PUBLIC_SITE_ENV=production, jinak bude
+// celý web noindex. Nastavení v Coolify viz README.
+const isProduction = import.meta.env.PUBLIC_SITE_ENV === 'production';
 ---
 <!doctype html>
 <html lang="cs">
@@ -18,6 +25,7 @@ const {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
+    {!isProduction && <meta name="robots" content="noindex,nofollow" />}
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
 
