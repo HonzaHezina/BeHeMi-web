@@ -1,9 +1,6 @@
 ---
 import Eyebrow from './Eyebrow.astro';
 import { approach } from '../data/home';
-// Sloučený blok „Jak přemýšlíme o zdraví" — spojuje dřívější tři filozofické
-// sekce (Náš přístup / Jak přemýšlíme o zdraví / Jak to bereme) do jedné.
-// Tmavé pozadí záměrně — web se bude celý překlápět do tmavé palety.
 ---
 <section class="relative overflow-hidden bg-ink-dark text-cream">
   <div
@@ -13,13 +10,13 @@ import { approach } from '../data/home';
   >
   </div>
   <div class="relative mx-auto max-w-[1220px] px-5 py-20 md:px-8 md:py-24">
-    <Eyebrow color="sage">Jak to u nás funguje</Eyebrow>
-    <h2 class="mb-6 max-w-[22ch] text-[clamp(30px,4vw,48px)] font-extrabold leading-[1.03] tracking-[-0.03em]">Jak nad tím přemýšlíme</h2>
-    <p class="mb-12 max-w-[60ch] text-[clamp(20px,2.5vw,28px)] font-normal leading-[1.32] tracking-[-0.015em] text-cream-soft">
-      Nic ti tu nevnucujeme. <span class="italic text-sage">Dáme ti návrhy, ty si je vyzkoušíš — a necháš si jen to, co ti reálně funguje.</span>
+    <Eyebrow color="sage">Co u nás lidé nejčastěji řeší</Eyebrow>
+    <h2 class="mb-6 max-w-[26ch] text-[clamp(30px,4vw,48px)] font-extrabold leading-[1.03] tracking-[-0.03em]">Přijdeš s jedním z těchhle důvodů?</h2>
+    <p class="mb-12 max-w-[60ch] text-[clamp(18px,2.2vw,24px)] font-normal leading-[1.4] text-cream-soft">
+      Většina lidí, co k nám chodí, začala jedním z těchto důvodů. Žádný zvláštní.
     </p>
 
-    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {approach.map((a) => (
         <div class="rounded-[18px] border border-border-dark bg-cream/[0.04] px-7 py-8 transition-all duration-300 hover:-translate-y-1.5 hover:border-sage-soft hover:bg-cream/[0.07]">
           <div class="mb-3.5 text-[30px] italic text-cream-muted" aria-hidden="true">{a.n}</div>
@@ -30,7 +27,7 @@ import { approach } from '../data/home';
     </div>
 
     <p class="mt-12 max-w-[68ch] text-base leading-[1.6] text-cream-muted">
-      Nic z toho jsme nevymysleli — je to zdravý rozum. Rozdíl je, že u toho někdo stojí s tebou.
+      Zní ti tohle povědomě? Pak je BoHeMi pravděpodobně pro tebe.
     </p>
   </div>
 </section>

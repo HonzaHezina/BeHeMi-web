@@ -4,32 +4,32 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Hero from '../components/Hero.astro';
 import Marquee from '../components/Marquee.astro';
-import TriadVenn from '../components/TriadVenn.astro';
-import ProcTeaser from '../components/ProcTeaser.astro';
 import ApproachGrid from '../components/ApproachGrid.astro';
-import Audiences from '../components/Audiences.astro';
 import Offer from '../components/Offer.astro';
 import LifePracticeFeature from '../components/LifePracticeFeature.astro';
-import HealthTracker from '../components/HealthTracker.astro';
+import ProcTeaser from '../components/ProcTeaser.astro';
+import TriadVenn from '../components/TriadVenn.astro';
+import Audiences from '../components/Audiences.astro';
 import Trainers from '../components/Trainers.astro';
+import HealthTracker from '../components/HealthTracker.astro';
 import PricingTeaser from '../components/PricingTeaser.astro';
 ---
 <Layout
-  title="BoHeMi — fitko na Vinohradech, kde tě znají jménem"
-  description="BoHeMi = Body · Health · Mind. Komunitní fitness studio na pražských Vinohradech. Skupinové lekce, osobní tréninky, program 8 týdnů i pohyb pro děti a firmy."
+  title="BoHeMi — malé skupinové tréninky na Vinohradech"
+  description="BoHeMi je malé fitko na pražských Vinohradech. Skupinové tréninky, kde tě trenér opravdu vidí — zpevnění těla, kondice, správný režim. Začni jednou lekcí."
 >
   <Header current="/" />
   <main>
     <Hero />
     <Marquee />
-    <Audiences />
+    <ApproachGrid />
     <Offer />
     <LifePracticeFeature />
-    <TriadVenn />
     <ProcTeaser />
-    <ApproachGrid />
-    <HealthTracker />
+    <TriadVenn />
+    <Audiences />
     <Trainers />
+    <HealthTracker />
     <PricingTeaser />
   </main>
   <Footer />

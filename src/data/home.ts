@@ -2,21 +2,22 @@
 // (renderVals() v "Bohemi Web.dc.html"). Zdroj pravdy pro texty.
 
 export const marquee = [
-  'Tělo', 'Dech', 'Spánek', 'Voda', 'Jídlo', 'Mysl', 'Vztahy', 'Pohyb', 'Síla', 'Záda',
+  'Tělo', 'Kondice', 'Spánek', 'Voda', 'Jídlo', 'Energie', 'Záda', 'Pohyb', 'Síla', 'Režim',
 ];
 
 export const triad = [
   // Triáda (krok 3): Body=červená, Health=neutrál (near-black), Mind=amber
-  { k: 'Body', cs: 'Tělo', dot: 'bg-accent', d: 'Pohyb, síla a funkční tělo, které ti slouží v běžném životě — ne jen v zrcadle.' },
-  { k: 'Health', cs: 'Zdraví', dot: 'bg-ink', d: 'Prevence, vitalita a rovnováha. Spánek, dech, voda, jídlo a návyky, co vydrží.' },
-  { k: 'Mind', cs: 'Mysl', dot: 'bg-gold', d: 'Hlava, co táhne za jeden provaz s tělem. Méně chaosu, víc soustředění a sebevědomí z toho, že něco fakt děláš.' },
+  { k: 'Body', cs: 'Tělo', dot: 'bg-accent', d: 'Pohyb, síla, technika a regenerace. Tělo, které ti slouží v práci, sportu i běžném životě — ne jen v zrcadle.' },
+  { k: 'Health', cs: 'Zdraví', dot: 'bg-ink', d: 'Režim, který se dá udržet: spánek, jídlo, voda, pohyb a pravidelnost. Bez extrémů, bez složitých teorií.' },
+  { k: 'Mind', cs: 'Mysl', dot: 'bg-gold', d: 'Hlava se srovná, když tělo pravidelně něco dělá a dotahuje. Méně chaosu, víc energie a jistoty.' },
 ];
 
 export const approach = [
-  { n: '01', t: 'Nic neber jako pravdu', d: 'Neber nic, co tady řekneme, jako svaté. Vyzkoušej si to sám a posuď podle výsledku, ne podle toho, kdo to říká.' },
-  { n: '02', t: 'Tělo zvládne víc, než čekáš', d: 'Když mu dáš základ — pohyb, spánek, jídlo — udělá většinu práce samo. Ten základ ale někdo držet musí. Od toho jsme tu my.' },
-  { n: '03', t: 'Únava a bolest něco znamenají', d: 'Špatný spánek, bolavá záda, únava — něco za tím je. Naučíme tě odpovědět pohybem, spánkem a rytmem dne. Zdravotní potíže patří k doktorovi; my stavíme návyky kolem.' },
-  { n: '04', t: 'Rytmus, ne náraz', d: 'Zdraví se nedělá jednou velkou akcí, ale malými kroky, co se opakují každý den. Žádný zázrak na měsíc.' },
+  { n: '01', t: 'Chci začít znovu cvičit', d: 'Bez přepáleného startu. Postupně, pravidelně a s trenérem, který tě opraví a nezapomene na tebe.' },
+  { n: '02', t: 'Chci zpevnit tělo a zlepšit kondici', d: 'Kruhové a silové tréninky v malé skupině. Každý cvičí podle svých možností, ale poctivě.' },
+  { n: '03', t: 'Chci mít víc energie a lepší režim', d: 'Pohyb, spánek, jídlo, voda a jednoduché návyky. Žádné složité teorie — jen věci, které se dají opravdu dělat.' },
+  { n: '04', t: 'Bolí mě záda nebo jsem ztuhlý/á', d: 'Pomůžeme ti rozhýbat tělo, zlepšit techniku a postupně vybudovat sílu pro běžný život.' },
+  { n: '05', t: 'Chci cvičit i jako máma', d: 'Supermamky jsou tréninky, kam můžeš přijít i s dítětem. Cvičení se přizpůsobí realitě rodičovství.' },
 ];
 
 export const audiences = [
@@ -61,10 +62,10 @@ export const firmyServices = [
 ];
 
 export const lpHighlights = [
-  '2× pohyb týdně + 1× krátký praktický blok',
-  'Vstupní a výstupní měření — čísla, ne pocity',
-  'Malá uzavřená skupina 10–20 lidí',
-  'Konkrétní návyky: spánek, pohyb, jídlo, voda',
+  '2× týdně vedený trénink v malé skupině',
+  'Vstupní a závěrečné měření — viditelný posun, ne jen pocit',
+  'Uzavřená skupina, jednoduchý deník návyků',
+  'Postupné zlepšení síly, kondice a režimu — žádné zázraky',
 ];
 
 export const healthTracker = [
