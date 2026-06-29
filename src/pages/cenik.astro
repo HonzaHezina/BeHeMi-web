@@ -22,7 +22,7 @@ const priceNotes = [
     <!-- HERO -->
     <section class="mx-auto max-w-[1220px] px-5 pb-12 pt-16 md:px-8 md:pt-20">
       <h1 class="text-[clamp(40px,6.2vw,76px)] font-extrabold leading-[0.98] tracking-[-0.035em]">
-        Za kolik to <span class="font-medium italic text-brand">máme</span>
+        Za kolik to <span class="font-medium italic text-accent-text">máme</span>
       </h1>
       <p class="mt-6 max-w-[54ch] text-[clamp(18px,2.1vw,22px)] leading-[1.45] text-ink-warm">
         Členství, jednotlivé vstupy i celá cesta. Vyber si podle toho, jak hluboko do toho chceš jít.
@@ -33,9 +33,9 @@ const priceNotes = [
     <section class="mx-auto max-w-[1220px] px-5 pb-6 md:px-8">
       <div class="grid gap-[22px] md:grid-cols-3">
         {pricing.map((pl) => (
-          <div class={`relative flex flex-col rounded-[20px] border bg-surface px-8 py-9 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_44px_-20px_rgba(33,31,26,0.24)] ${pl.featured ? 'border-2 border-brand' : 'border-border'}`}>
+          <div class={`relative flex flex-col rounded-[20px] border bg-surface px-8 py-9 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_44px_-20px_rgba(33,31,26,0.24)] ${pl.featured ? 'border-2 border-accent' : 'border-border'}`}>
             {pl.badge && (
-              <span class="absolute -top-2.5 left-8 rounded-full bg-brand px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.04em] text-cream">{pl.badge}</span>
+              <span class="absolute -top-2.5 left-8 rounded-full bg-accent-text px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.04em] text-cream">{pl.badge}</span>
             )}
             <h2 class="mb-1 text-2xl font-extrabold tracking-[-0.02em]">{pl.t}</h2>
             <p class="mb-[18px] text-[15px] text-ink-muted">{pl.d}</p>
@@ -43,11 +43,11 @@ const priceNotes = [
               <span class="text-[38px] font-extrabold tracking-[-0.02em]">{pl.price}</span>
               <span class="text-[15px] text-ink-muted">{pl.per}</span>
             </div>
-            <p class="mb-[18px] min-h-[18px] text-[13.5px] font-semibold text-brand">{pl.note}</p>
+            <p class="mb-[18px] min-h-[18px] text-[13.5px] font-semibold text-accent-text">{pl.note}</p>
             <ul class="mb-7 flex flex-col gap-3">
               {pl.feat.map((f) => (
                 <li class="flex items-start gap-2.5 text-[15.5px] text-ink-line">
-                  <span class="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-brand" aria-hidden="true"></span>
+                  <span class="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden="true"></span>
                   <span>{f}</span>
                 </li>
               ))}
@@ -63,7 +63,7 @@ const priceNotes = [
       <div class="relative overflow-hidden rounded-[20px] bg-ink-dark p-8 text-cream md:p-[clamp(32px,5vw,52px)]">
         <div
           class="pointer-events-none absolute -right-16 -top-20 h-[360px] w-[360px] rounded-full"
-          style="background:radial-gradient(circle, rgba(194,105,63,0.4), rgba(194,105,63,0) 70%);"
+          style="background:radial-gradient(circle, rgba(226,35,26,0.16), rgba(226,35,26,0) 70%);"
           aria-hidden="true"
         >
         </div>
