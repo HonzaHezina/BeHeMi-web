@@ -2,14 +2,14 @@
 // (renderVals() v "Bohemi Web.dc.html"). Zdroj pravdy pro texty.
 
 export const marquee = [
-  'Tělo', 'Kondice', 'Spánek', 'Voda', 'Jídlo', 'Energie', 'Záda', 'Pohyb', 'Síla', 'Režim',
+  'Kruháče', 'Vlastní váha', 'Funkční pohyb', 'Síla', 'Kondice', 'Záda', 'Mobilita', 'Spánek', 'Režim', 'Energie', 'Technika', 'Pravidelnost',
 ];
 
 export const triad = [
   // Triáda (krok 3): Body=červená, Health=neutrál (near-black), Mind=amber
   { k: 'Body', cs: 'Tělo', dot: 'bg-accent', d: 'Pohyb, síla, technika a regenerace. Tělo, které ti slouží v práci, sportu i běžném životě — ne jen v zrcadle.' },
   { k: 'Health', cs: 'Zdraví', dot: 'bg-ink', d: 'Režim, který se dá udržet: spánek, jídlo, voda, pohyb a pravidelnost. Bez extrémů, bez složitých teorií.' },
-  { k: 'Mind', cs: 'Mysl', dot: 'bg-gold', d: 'Hlava se srovná, když tělo pravidelně něco dělá a dotahuje. Méně chaosu, víc energie a jistoty.' },
+  { k: 'Mind', cs: 'Mysl', dot: 'bg-gold', d: 'Hlava se často srovná až ve chvíli, kdy začneš pravidelně něco dělat, dokončovat a vracet se k tomu i po pauze. Méně chaosu, víc energie.' },
 ];
 
 export const approach = [
@@ -18,6 +18,9 @@ export const approach = [
   { n: '03', t: 'Nechci chodit do anonymní posilovny', d: 'Nemusíš řešit stroje ani plán sám/sama. Přijdeš na lekci a trenér tě provede tréninkem.' },
   { n: '04', t: 'Bolí mě záda nebo jsem ztuhlý/á', d: 'Pomůžeme ti rozhýbat tělo, zlepšit techniku a postupně vybudovat sílu pro běžný život.' },
   { n: '05', t: 'Chci mít víc energie a lepší režim', d: 'Pravidelný pohyb, jednoduché návyky a tréninky, které se dají dlouhodobě vydržet.' },
+  { n: '06', t: 'Chci cvičit i jako máma', d: 'Supermamky jsou tréninky, kam můžeš přijít i s dítětem. Cvičení se přizpůsobí realitě rodičovství.' },
+  { n: '07', t: 'Hledám pohyb pro děti', d: 'Cirkusová školička, akrobacie a pohybové kroužky pod vedením zkušených lektorů. Pohyb hravou formou.' },
+  { n: '08', t: 'Chci pohybový program pro tým', d: 'FitTeams — vedené kruhové tréninky navržené přímo pro firemní skupiny. Bez vlastní tělocvičny.' },
 ];
 
 export const audiences = [
