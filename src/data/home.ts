@@ -15,9 +15,9 @@ export const triad = [
 export const approach = [
   { n: '01', t: 'Chci začít znovu cvičit', d: 'Bez přepáleného startu. Postupně, pravidelně a s trenérem, který tě opraví a nezapomene na tebe.' },
   { n: '02', t: 'Chci zpevnit tělo a zlepšit kondici', d: 'Kruhové a silové tréninky v malé skupině. Každý cvičí podle svých možností, ale poctivě.' },
-  { n: '03', t: 'Chci mít víc energie a lepší režim', d: 'Pohyb, spánek, jídlo, voda a jednoduché návyky. Žádné složité teorie — jen věci, které se dají opravdu dělat.' },
+  { n: '03', t: 'Nechci chodit do anonymní posilovny', d: 'Nemusíš řešit stroje ani plán sám/sama. Přijdeš na lekci a trenér tě provede tréninkem.' },
   { n: '04', t: 'Bolí mě záda nebo jsem ztuhlý/á', d: 'Pomůžeme ti rozhýbat tělo, zlepšit techniku a postupně vybudovat sílu pro běžný život.' },
-  { n: '05', t: 'Chci cvičit i jako máma', d: 'Supermamky jsou tréninky, kam můžeš přijít i s dítětem. Cvičení se přizpůsobí realitě rodičovství.' },
+  { n: '05', t: 'Chci mít víc energie a lepší režim', d: 'Pravidelný pohyb, jednoduché návyky a tréninky, které se dají dlouhodobě vydržet.' },
 ];
 
 export const audiences = [
@@ -36,11 +36,11 @@ export const paths = [
 ];
 
 export const classes = [
-  { t: 'Kruhové tréninky', d: 'Naše srdcovka. Funkční trénink v kruhu, pro každou úroveň.', img: 'kruhový trénink', media: 'media-green', bhm: 'Tělo · dokončování · komunita' },
-  { t: 'Silové tréninky', d: 'Práce s vlastní vahou i činkami pod vedením trenéra.', img: 'silový trénink', media: 'media-forest', bhm: 'Tělo · síla · trpělivost' },
-  { t: 'HIIT', d: 'Krátké intenzivní intervaly, když máš málo času.', img: 'HIIT lekce', media: 'media-clay', bhm: 'Tělo · energie · odolnost' },
-  { t: 'Supermamky', d: 'Trénink pro maminky — klidně i s dětmi vedle.', img: 'supermamky', media: 'media-sand', bhm: 'Tělo · rodina · komunita' },
-  { t: 'Vlastní váha', d: 'Ovládni svoje tělo bez nářadí, kdekoliv.', img: 'vlastní váha', media: 'media-rose', bhm: 'Tělo · kontrola · pozornost' },
+  { t: 'Kruhové tréninky', d: 'Funkční trénink v kruhu: střídáš stanoviště, cvičíš s vlastní vahou nebo pomůckami, trénink vede trenér. Vhodné pro všechny úrovně.', img: 'kruhový trénink', media: 'media-green', bhm: 'Tělo · dokončování · komunita' },
+  { t: 'Silové tréninky', d: 'Práce s vlastní vahou a jednoduchým nářadím pod vedením trenéra. Zaměřujeme se na techniku a postupné budování síly.', img: 'silový trénink', media: 'media-forest', bhm: 'Tělo · síla · trpělivost' },
+  { t: 'HIIT', d: 'Krátké intenzivní intervaly střídané odpočinkem. Efektivní trénink kondice a výdrže i pro ty, kteří mají málo času.', img: 'HIIT lekce', media: 'media-clay', bhm: 'Tělo · energie · odolnost' },
+  { t: 'Supermamky', d: 'Tréninky přizpůsobené realitě rodičovství. Přijď klidně i s miminkem nebo malým dítětem vedle — cvičení se ti přizpůsobí.', img: 'supermamky', media: 'media-sand', bhm: 'Tělo · rodina · komunita' },
+  { t: 'Vlastní váha', d: 'Cvičení bez nářadí: ovládneš základní pohybové vzory, zlepšíš koordinaci a sílu. Vhodné i jako první krok pro úplné začátečníky.', img: 'vlastní váha', media: 'media-rose', bhm: 'Tělo · kontrola · pozornost' },
 ];
 
 export const individualServices = [
@@ -66,6 +66,15 @@ export const lpHighlights = [
   'Vstupní a závěrečné měření — viditelný posun, ne jen pocit',
   'Uzavřená skupina, jednoduchý deník návyků',
   'Postupné zlepšení síly, kondice a režimu — žádné zázraky',
+];
+
+export const bodyPurpose = [
+  'Lépe spíš a vstáváš s víc energií',
+  'Míň tě bolí záda a pohybuj se bez omezení',
+  'Zvládáš náročné dny bez vyčerpání',
+  'Cítíš se jistěji ve vlastní kůži',
+  'Máš stabilnější náladu a méně stresu',
+  'Jsi příkladem pohybu pro lidi kolem tebe',
 ];
 
 export const healthTracker = [
