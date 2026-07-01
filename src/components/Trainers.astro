@@ -1,19 +1,28 @@
 ---
 import Eyebrow from './Eyebrow.astro';
 import MediaFrame from './MediaFrame.astro';
-import { trainers } from '../data/home';
+import { trainers as trainersCS } from '../data/home';
+import { trainers as trainersEN } from '../data/home.en';
+import type { Lang } from '../i18n/ui';
+import { t } from '../i18n/ui';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'cs' } = Astro.props;
+const trainers = lang === 'en' ? trainersEN : trainersCS;
 ---
 <section class="border-t border-border-strong bg-sand">
   <div class="mx-auto max-w-[1220px] px-5 py-16 md:px-8 md:py-23">
-    <Eyebrow>Lidé, které znáš jménem</Eyebrow>
-    <h2 class="mb-11 text-[clamp(30px,4vw,48px)] font-extrabold tracking-[-0.03em]">Naši trenéři</h2>
+    <Eyebrow>{t(lang, 'trainers_eyebrow')}</Eyebrow>
+    <h2 class="mb-11 text-[clamp(30px,4vw,48px)] font-extrabold tracking-[-0.03em]">{t(lang, 'trainers_h2')}</h2>
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-      {trainers.map((t) => (
+      {trainers.map((tr) => (
         <div>
-          <MediaFrame media={t.media} rounded="rounded-[18px]" class="mb-4 h-70" alt={`Portrét — ${t.name}`} />
-          <h3 class="text-[21px] font-extrabold tracking-[-0.02em]">{t.name}</h3>
-          <p class="text-[15px] text-ink-muted">{t.role}</p>
-          {t.bio && <p class="mt-1.5 text-[14.5px] leading-[1.5] text-ink-soft">{t.bio}</p>}
+          <MediaFrame media={tr.media} rounded="rounded-[18px]" class="mb-4 h-70" alt={`${lang === 'en' ? 'Portrait' : 'Portrét'} — ${tr.name}`} />
+          <h3 class="text-[21px] font-extrabold tracking-[-0.02em]">{tr.name}</h3>
+          <p class="text-[15px] text-ink-muted">{tr.role}</p>
+          {tr.bio && <p class="mt-1.5 text-[14.5px] leading-[1.5] text-ink-soft">{tr.bio}</p>}
         </div>
       ))}
     </div>

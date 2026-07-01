@@ -1,6 +1,13 @@
 ---
 import Button from './Button.astro';
 import MediaFrame from './MediaFrame.astro';
+import type { Lang } from '../i18n/ui';
+import { t } from '../i18n/ui';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'cs' } = Astro.props;
 ---
 <section class="relative overflow-hidden bg-ink-dark text-cream">
   <div
@@ -14,20 +21,24 @@ import MediaFrame from './MediaFrame.astro';
     <div>
       <div class="mb-6 inline-flex items-center gap-2.5 rounded-full border border-accent/30 bg-accent/10 px-4 py-1.5">
         <span class="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true"></span>
-        <span class="text-[13px] font-semibold uppercase tracking-[0.04em] text-cream-soft">Fitness studio na Vinohradech</span>
+        <span class="text-[13px] font-semibold uppercase tracking-[0.04em] text-cream-soft">{t(lang, 'hero_badge')}</span>
       </div>
 
       <h1 class="text-[clamp(44px,6.6vw,84px)] font-extrabold leading-[0.98] tracking-[-0.035em] text-cream">
-        Vedené tréninky, kruháče<br />a vlastní váha <span class="font-medium italic text-accent">na Vinohradech.</span>
+        {lang === 'en' ? (
+          <>Coached workouts, circuits<br />and bodyweight training <span class="font-medium italic text-accent">in Vinohrady.</span></>
+        ) : (
+          <>Vedené tréninky, kruháče<br />a vlastní váha <span class="font-medium italic text-accent">na Vinohradech.</span></>
+        )}
       </h1>
 
       <p class="mt-6 max-w-[50ch] text-[clamp(18px,1.9vw,22px)] leading-[1.5] text-cream-soft">
-        BoHeMi je fitness studio zaměřené na vedené lekce, kruhové tréninky a funkční pohyb. Nejsme anonymní řetězec ani strojová posilovna — přijdeš na lekci, trenér tě vede, opraví techniku a pomůže ti postupně zlepšit sílu, kondici i pohyb.
+        {t(lang, 'hero_body')}
       </p>
 
       <div class="mt-8 flex flex-wrap gap-3.5">
-        <Button href="/lekce-a-sluzby/" variant="primary">Zkus první lekci →</Button>
-        <Button href="#nabidka" variant="outline-light">Podívat se na lekce</Button>
+        <Button href={lang === 'en' ? '/en/classes-and-services/' : '/lekce-a-sluzby/'} variant="primary">{t(lang, 'hero_cta_primary')}</Button>
+        <Button href="#nabidka" variant="outline-light">{t(lang, 'hero_cta_secondary')}</Button>
       </div>
 
       <div class="mt-8 flex items-center gap-5">
@@ -36,7 +47,9 @@ import MediaFrame from './MediaFrame.astro';
           <span class="media-sand -ml-3 h-10 w-10 rounded-full border-2 border-ink-dark"></span>
           <span class="media-rose -ml-3 h-10 w-10 rounded-full border-2 border-ink-dark"></span>
         </div>
-        <span class="text-[14.5px] leading-snug text-cream-muted">Malé skupiny —<br />trenér ví, jak na tebe.</span>
+        <span class="text-[14.5px] leading-snug text-cream-muted">
+          {lang === 'en' ? <>Small groups —<br />your coach knows your name.</> : <>Malé skupiny —<br />trenér ví, jak na tebe.</>}
+        </span>
       </div>
     </div>
 
@@ -45,16 +58,16 @@ import MediaFrame from './MediaFrame.astro';
         media="media-clay"
         rounded="rounded-t-[200px] rounded-b-[22px]"
         class="h-full w-full shadow-[0_30px_60px_-22px_rgba(0,0,0,0.55)]"
-        alt="Trénink ve funkčním sále BoHeMi"
+        alt={t(lang, 'hero_img_alt')}
       />
       <div class="anim-floaty absolute left-1 top-6 rounded-2xl border border-border bg-surface px-4 py-2.5 shadow-[0_14px_30px_-14px_rgba(0,0,0,0.45)] lg:-left-6 lg:top-8">
-        <span class="text-[13px] font-bold text-accent-text">● Funkční trénink bez strojů</span>
+        <span class="text-[13px] font-bold text-accent-text">{t(lang, 'hero_float_1')}</span>
       </div>
       <div class="anim-floaty2 absolute right-1 top-[46%] rounded-2xl border border-border bg-surface px-4 py-2.5 shadow-[0_14px_30px_-14px_rgba(0,0,0,0.45)] lg:-right-5">
-        <span class="text-[13px] font-bold text-ink">● Trenér tě opraví</span>
+        <span class="text-[13px] font-bold text-ink">{t(lang, 'hero_float_2')}</span>
       </div>
       <div class="anim-floaty3 absolute bottom-5 left-1 rounded-2xl border border-border bg-surface px-4 py-2.5 shadow-[0_14px_30px_-14px_rgba(0,0,0,0.45)] lg:-left-7">
-        <span class="text-[13px] font-bold text-gold-dark">● Vlastní váha a pomůcky</span>
+        <span class="text-[13px] font-bold text-gold-dark">{t(lang, 'hero_float_3')}</span>
       </div>
     </div>
   </div>

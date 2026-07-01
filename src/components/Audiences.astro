@@ -1,11 +1,26 @@
 ---
 import Eyebrow from './Eyebrow.astro';
-import { audiences } from '../data/home';
+import { audiences as audiencesCS } from '../data/home';
+import { audiences as audiencesEN } from '../data/home.en';
+import type { Lang } from '../i18n/ui';
+import { t } from '../i18n/ui';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'cs' } = Astro.props;
+const audiences = lang === 'en' ? audiencesEN : audiencesCS;
 ---
 <section class="mx-auto max-w-[1220px] px-5 pb-6 pt-16 md:px-8 md:pb-6 md:pt-23">
-  <Eyebrow>Najdi se v tom</Eyebrow>
-  <h2 class="mb-3.5 max-w-[20ch] text-[clamp(30px,4vw,48px)] font-extrabold leading-[1.03] tracking-[-0.03em]">Tři jasné cesty. Vyber tu svoji.</h2>
-  <p class="mb-11 max-w-[54ch] text-lg text-ink-soft">Pod jednou střechou toho děláme hodně — ale pro každého trochu jinak. Tady je, co je přesně pro tebe.</p>
+  <Eyebrow>{t(lang, 'audiences_eyebrow')}</Eyebrow>
+  <h2 class="mb-3.5 max-w-[20ch] text-[clamp(30px,4vw,48px)] font-extrabold leading-[1.03] tracking-[-0.03em]">
+    {lang === 'en' ? 'Three clear paths. Pick yours.' : 'Tři jasné cesty. Vyber tu svoji.'}
+  </h2>
+  <p class="mb-11 max-w-[54ch] text-lg text-ink-soft">
+    {lang === 'en'
+      ? 'We do a lot under one roof — but a little differently for each person. Here is what is right for you.'
+      : 'Pod jednou střechou toho děláme hodně — ale pro každého trochu jinak. Tady je, co je přesně pro tebe.'}
+  </p>
 
   <div class="grid gap-5 md:grid-cols-3">
     {audiences.map((a) => (
@@ -22,7 +37,9 @@ import { audiences } from '../data/home';
             </li>
           ))}
         </ul>
-        <a href={a.anchor} class="relative mt-auto inline-flex cursor-pointer items-center gap-2 self-start rounded-full bg-ink px-5 py-2.5 text-[15px] font-bold text-cream transition-colors hover:bg-brand">Co nabízíme →</a>
+        <a href={a.anchor} class="relative mt-auto inline-flex cursor-pointer items-center gap-2 self-start rounded-full bg-ink px-5 py-2.5 text-[15px] font-bold text-cream transition-colors hover:bg-brand">
+          {t(lang, 'audiences_cta')}
+        </a>
       </div>
     ))}
   </div>

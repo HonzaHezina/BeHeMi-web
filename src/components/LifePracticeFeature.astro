@@ -1,14 +1,32 @@
 ---
 import Button from './Button.astro';
 import MediaFrame from './MediaFrame.astro';
-import { lpHighlights } from '../data/home';
+import { lpHighlights as lpCS } from '../data/home';
+import { lpHighlights as lpEN } from '../data/home.en';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'cs' } = Astro.props;
+const lpHighlights = lang === 'en' ? lpEN : lpCS;
 ---
 <section id="program" class="mx-auto max-w-[1220px] scroll-mt-24 px-5 py-16 md:px-8 md:py-23">
   <div class="grid items-center gap-11 md:grid-cols-2 lg:gap-13">
     <div>
-      <span class="mb-5 inline-block rounded-full bg-mint px-3.5 py-1.5 text-[13px] font-bold uppercase tracking-[0.04em] text-accent-text">Vlajkový program</span>
-      <h2 class="mb-[18px] text-[clamp(32px,4.4vw,54px)] font-extrabold leading-none tracking-[-0.035em]">8 týdnů, kdy se opravdu začneš hýbat <span class="font-medium italic text-accent-text">pravidelně.</span></h2>
-      <p class="mb-6 max-w-[46ch] text-[19px] text-ink-warm">Uzavřený program pro lidi, kteří chtějí začít systematicky. 2× týdně pohyb, malá skupina, jednoduché návyky, měření na začátku a na konci. Cílem není dokonalost, ale pravidelnost a viditelný posun.</p>
+      <span class="mb-5 inline-block rounded-full bg-mint px-3.5 py-1.5 text-[13px] font-bold uppercase tracking-[0.04em] text-accent-text">
+        {lang === 'en' ? 'Flagship program' : 'Vlajkový program'}
+      </span>
+      <h2 class="mb-[18px] text-[clamp(32px,4.4vw,54px)] font-extrabold leading-none tracking-[-0.035em]">
+        {lang === 'en'
+          ? <>8 weeks when you actually start moving <span class="font-medium italic text-accent-text">regularly.</span></>
+          : <>8 týdnů, kdy se opravdu začneš hýbat <span class="font-medium italic text-accent-text">pravidelně.</span></>}
+      </h2>
+      <p class="mb-6 max-w-[46ch] text-[19px] text-ink-warm">
+        {lang === 'en'
+          ? 'A closed program for people who want to start systematically. Movement 2× per week, small group, simple habits, measurements at the start and end. The goal is not perfection, but consistency and visible progress.'
+          : 'Uzavřený program pro lidi, kteří chtějí začít systematicky. 2× týdně pohyb, malá skupina, jednoduché návyky, měření na začátku a na konci. Cílem není dokonalost, ale pravidelnost a viditelný posun.'}
+      </p>
       <ul class="mb-[30px] flex flex-col gap-3.5">
         {lpHighlights.map((h) => (
           <li class="flex items-start gap-3.5 text-[17px] text-ink-line">
@@ -17,13 +35,15 @@ import { lpHighlights } from '../data/home';
           </li>
         ))}
       </ul>
-      <Button href="#cenik" variant="brand">Jak program funguje →</Button>
+      <Button href="#cenik" variant="brand">
+        {lang === 'en' ? 'How the program works →' : 'Jak program funguje →'}
+      </Button>
     </div>
     <MediaFrame
       media="media-clay"
       rounded="rounded-[22px] rounded-bl-[160px]"
       class="h-[clamp(340px,40vw,480px)] w-full shadow-[0_28px_56px_-22px_rgba(33,31,26,0.38)]"
-      alt="Skupina při společné lekci programu 8 týdnů"
+      alt={lang === 'en' ? 'Group during a shared session of the 8-Week Program' : 'Skupina při společné lekci programu 8 týdnů'}
     />
   </div>
 </section>

@@ -1,0 +1,166 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Button from '../../components/Button.astro';
+import MediaFrame from '../../components/MediaFrame.astro';
+import { classes, individualServices, kidsActivities, firmyServices } from '../../data/home.en';
+
+const jumps = [
+  { n: '01', label: 'For you', href: '#pro-tebe' },
+  { n: '02', label: 'For kids & families', href: '#pro-deti' },
+  { n: '03', label: 'For companies', href: '#pro-firmy' },
+];
+---
+<Layout
+  title="Classes & services — BoHeMi fitness Vinohrady"
+  description="Group classes, personal training, Open gym, movement for kids and companies. Everything we offer at BoHeMi — clearly in three paths: for you, for kids and families, for companies."
+  lang="en"
+  current="/en/classes-and-services/"
+>
+  <Header current="/en/classes-and-services/" lang="en" />
+  <main>
+    <!-- HERO -->
+    <section class="relative mx-auto max-w-[1220px] overflow-hidden px-5 pb-8 pt-16 md:px-8 md:pt-20">
+      <div
+        class="pointer-events-none absolute right-0 top-2.5 h-[400px] w-[400px] rounded-full"
+        style="background:radial-gradient(circle, rgba(226,35,26,0.12), rgba(226,35,26,0) 70%);"
+        aria-hidden="true"
+      >
+      </div>
+      <div class="relative">
+        <h1 class="text-[clamp(40px,6.2vw,76px)] font-extrabold leading-[0.98] tracking-[-0.035em]">
+          Classes &amp; <span class="font-medium italic text-accent-text">services</span>
+        </h1>
+        <p class="mt-6 max-w-[56ch] text-[clamp(18px,2.1vw,22px)] leading-[1.45] text-ink-warm">
+          Everything we offer — clearly in three paths. Pick yours: for you, for kids and families, or for companies.
+        </p>
+        <div class="mt-7 flex flex-wrap gap-2.5">
+          {jumps.map((j) => (
+            <a href={j.href} class="rounded-full border-[1.5px] border-border-button px-[18px] py-2.5 text-[15px] font-bold text-ink-line transition-colors hover:border-brand hover:text-brand">
+              {j.n} · {j.label}
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- FOR YOU -->
+    <section id="pro-tebe" class="mx-auto max-w-[1220px] scroll-mt-24 px-5 pt-8 md:px-8">
+      <div class="flex flex-wrap items-baseline gap-x-4 gap-y-2 border-b-2 border-ink pb-[18px]">
+        <span class="italic text-xl text-accent-text">01</span>
+        <span class="text-[13px] font-extrabold uppercase tracking-[0.08em] text-brand">For you</span>
+        <span class="text-base text-ink-muted">Individuals who want energy, strength and calm</span>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-[1220px] px-5 pt-8 md:px-8">
+      <div class="mb-[22px] flex flex-wrap items-end justify-between gap-4">
+        <h2 class="text-2xl font-extrabold tracking-[-0.02em]">Group classes</h2>
+        <a href="/en/group-classes/" class="cursor-pointer text-base font-bold text-accent-text hover:text-ink">All classes →</a>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {classes.map((c) => (
+          <div class="overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-20px_rgba(33,31,26,0.24)]">
+            <MediaFrame media={c.media} rounded="rounded-none" class="h-[150px]" alt={`Class — ${c.img}`} />
+            <div class="p-[22px]">
+              <h3 class="mb-2 text-[21px] font-extrabold tracking-[-0.02em]">{c.t}</h3>
+              <p class="text-[15.5px] leading-[1.5] text-ink-soft">{c.d}</p>
+              <div class="mt-3 text-[12.5px] font-bold tracking-[0.02em] text-brand">{c.bhm}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-[1220px] px-5 pt-11 md:px-8">
+      <h2 class="mb-[22px] text-2xl font-extrabold tracking-[-0.02em]">Individual services</h2>
+      <div class="grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+        {individualServices.map((s) => (
+          <div class="bg-surface p-[30px] transition-colors hover:bg-surface-hover">
+            <h3 class="mb-2 text-xl font-extrabold tracking-[-0.02em]">{s.t}</h3>
+            <p class="text-[15.5px] leading-[1.5] text-ink-soft">{s.d}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-4 flex flex-wrap gap-5">
+        <a href="/en/open-gym/" class="text-[15px] font-bold text-accent-text hover:text-ink">Open Gym — details →</a>
+        <a href="/en/photobiomodulation-therapy/" class="text-[15px] font-bold text-accent-text hover:text-ink">Photobiomodulation — details →</a>
+      </div>
+      <div class="mt-[22px] flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-mint-border bg-mint px-7 py-6">
+        <p class="max-w-[48ch] text-[16.5px] text-ink"><strong class="font-bold">Want to go deeper than just classes?</strong> The 8-Week Program guides you through movement, habits and community together.</p>
+        <Button href="/en/#program" variant="brand" class="shrink-0 px-[22px] py-3 text-[15.5px]">8-Week Program →</Button>
+      </div>
+    </section>
+
+    <!-- FOR KIDS -->
+    <section id="pro-deti" class="mx-auto max-w-[1220px] scroll-mt-24 px-5 pt-16 md:px-8">
+      <div class="flex flex-wrap items-baseline gap-x-4 gap-y-2 border-b-2 border-ink pb-[18px]">
+        <span class="italic text-xl text-accent-text">02</span>
+        <span class="text-[13px] font-extrabold uppercase tracking-[0.08em] text-brand">For kids &amp; families</span>
+        <span class="text-base text-ink-muted">Movement for the youngest and for mums</span>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-[1220px] px-5 pt-8 md:px-8">
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {kidsActivities.map((k) => (
+          <div class="overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-20px_rgba(33,31,26,0.24)]">
+            <MediaFrame media={k.media} rounded="rounded-none" class="h-[150px]" alt={`For kids — ${k.img}`} />
+            <div class="p-[22px]">
+              <h3 class="mb-2 text-[21px] font-extrabold tracking-[-0.02em]">{k.t}</h3>
+              <p class="text-[15.5px] leading-[1.5] text-ink-soft">{k.d}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <p class="mt-5 max-w-[60ch] text-base text-ink-soft">And for mums we have <strong class="font-bold">Supermums</strong> — training you can bring your baby or toddler to.</p>
+    </section>
+
+    <!-- FOR COMPANIES -->
+    <section id="pro-firmy" class="mx-auto max-w-[1220px] scroll-mt-24 px-5 pt-16 md:px-8">
+      <div class="flex flex-wrap items-baseline gap-x-4 gap-y-2 border-b-2 border-ink pb-[18px]">
+        <span class="italic text-xl text-accent-text">03</span>
+        <span class="text-[13px] font-extrabold uppercase tracking-[0.08em] text-brand">For companies</span>
+        <span class="text-base text-ink-muted">A healthier and more cohesive team without your own gym</span>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-[1220px] px-5 pt-8 md:px-8">
+      <div class="grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+        {firmyServices.map((f) => (
+          <div class="bg-surface p-[30px] transition-colors hover:bg-surface-hover">
+            <h3 class="mb-2 text-xl font-extrabold tracking-[-0.02em]">{f.t}</h3>
+            <p class="text-[15.5px] leading-[1.5] text-ink-soft">{f.d}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-[22px]">
+        <Button href="/en/contact/" variant="dark" class="px-6 py-3 text-[15.5px]">Enquire about a corporate programme →</Button>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="mx-auto max-w-[1220px] px-5 pb-16 pt-14 md:px-8 md:pb-23">
+      <div class="relative flex flex-wrap items-center justify-between gap-6 overflow-hidden rounded-[22px] bg-ink-dark p-8 text-cream md:p-[clamp(32px,5vw,56px)]">
+        <div
+          class="pointer-events-none absolute -bottom-22 -right-12 h-[340px] w-[340px] rounded-full"
+          style="background:radial-gradient(circle, rgba(226,35,26,0.18), rgba(226,35,26,0) 70%);"
+          aria-hidden="true"
+        >
+        </div>
+        <div class="relative">
+          <h2 class="max-w-[20ch] text-[clamp(26px,3.4vw,40px)] font-extrabold tracking-[-0.03em]">Not sure where to start?</h2>
+          <p class="mt-3 max-w-[42ch] text-[17px] text-cream-muted">Write to us and we'll recommend the class or programme that fits you perfectly.</p>
+        </div>
+        <a
+          href="/en/contact/"
+          class="relative inline-flex shrink-0 cursor-pointer items-center gap-2 rounded-full bg-accent-text px-7 py-3.5 text-[17px] font-bold text-cream transition-colors hover:bg-accent-deep"
+        >
+          Get in touch →
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer lang="en" />
+</Layout>

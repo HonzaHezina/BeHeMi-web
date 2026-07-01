@@ -1,24 +1,27 @@
 ---
 import '../styles/global.css';
+import type { Lang } from '../i18n/ui';
+import { hreflangMap } from '../i18n/ui';
 
 interface Props {
   title?: string;
   description?: string;
+  lang?: Lang;
+  current?: string;
 }
 const {
   title = 'BoHeMi — Body, Health, Mind',
   description = '',
+  lang = 'cs',
+  current = '/',
 } = Astro.props;
 
-// Indexace je vázaná na prostředí. Web je indexovatelný JEN když je
-// PUBLIC_SITE_ENV === 'production'. Cokoliv jiného (staging, preview, lokál)
-// i nenastavená proměnná = noindex,nofollow — staging nikdy neproklouzne do
-// Googlu. ⚠️ PRODUKČNÍ DEPLOY MUSÍ MÍT PUBLIC_SITE_ENV=production, jinak bude
-// celý web noindex. Nastavení v Coolify viz README.
 const isProduction = import.meta.env.PUBLIC_SITE_ENV === 'production';
+const hreflang = hreflangMap[current] ?? null;
+const origin = 'https://bohemi.fit';
 ---
 <!doctype html>
-<html lang="cs">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -28,6 +31,9 @@ const isProduction = import.meta.env.PUBLIC_SITE_ENV === 'production';
     {!isProduction && <meta name="robots" content="noindex,nofollow" />}
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
+    {hreflang && <link rel="alternate" hreflang="cs" href={`${origin}${hreflang.cs}`} />}
+    {hreflang && <link rel="alternate" hreflang="en" href={`${origin}${hreflang.en}`} />}
+    {hreflang && <link rel="alternate" hreflang="x-default" href={`${origin}${hreflang.cs}`} />}
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

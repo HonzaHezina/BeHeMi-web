@@ -1,6 +1,15 @@
 ---
 import Eyebrow from './Eyebrow.astro';
-import { approach } from '../data/home';
+import { approach as approachCS } from '../data/home';
+import { approach as approachEN } from '../data/home.en';
+import type { Lang } from '../i18n/ui';
+import { t } from '../i18n/ui';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'cs' } = Astro.props;
+const approach = lang === 'en' ? approachEN : approachCS;
 ---
 <section class="relative overflow-hidden bg-ink-dark text-cream">
   <div
@@ -10,10 +19,14 @@ import { approach } from '../data/home';
   >
   </div>
   <div class="relative mx-auto max-w-[1220px] px-5 py-20 md:px-8 md:py-24">
-    <Eyebrow color="sage">Co u nás lidé nejčastěji řeší</Eyebrow>
-    <h2 class="mb-6 max-w-[26ch] text-[clamp(30px,4vw,48px)] font-extrabold leading-[1.03] tracking-[-0.03em]">Vyber, co teď potřebuješ.</h2>
+    <Eyebrow color="sage">{t(lang, 'approach_eyebrow')}</Eyebrow>
+    <h2 class="mb-6 max-w-[26ch] text-[clamp(30px,4vw,48px)] font-extrabold leading-[1.03] tracking-[-0.03em]">
+      {lang === 'en' ? <>What people most often <span class="font-medium italic">work on here.</span></> : <>Vyber, co teď <span class="font-medium italic">potřebuješ.</span></>}
+    </h2>
     <p class="mb-12 max-w-[60ch] text-[clamp(18px,2.2vw,24px)] font-normal leading-[1.4] text-cream-soft">
-      Cvičení pro různé situace — začátek, kondici, záda, pravidelnost, děti, maminky i firmy.
+      {lang === 'en'
+        ? 'Training for different situations — starting out, fitness, back health, consistency, kids, mums, and companies.'
+        : 'Cvičení pro různé situace — začátek, kondici, záda, pravidelnost, děti, maminky i firmy.'}
     </p>
 
     <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -27,7 +40,9 @@ import { approach } from '../data/home';
     </div>
 
     <p class="mt-12 max-w-[68ch] text-base leading-[1.6] text-cream-muted">
-      Zní ti tohle povědomě? Pak je BoHeMi pravděpodobně pro tebe.
+      {lang === 'en'
+        ? 'Does this sound familiar? Then BoHeMi is probably for you.'
+        : 'Zní ti tohle povědomě? Pak je BoHeMi pravděpodobně pro tebe.'}
     </p>
   </div>
 </section>

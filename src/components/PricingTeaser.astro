@@ -1,14 +1,27 @@
 ---
 import Eyebrow from './Eyebrow.astro';
-import { pricing } from '../data/home';
+import { pricing as pricingCS } from '../data/home';
+import { pricing as pricingEN } from '../data/home.en';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'cs' } = Astro.props;
+const pricing = lang === 'en' ? pricingEN : pricingCS;
+const pricingHref = lang === 'en' ? '/en/pricing/' : '/cenik/';
 ---
 <section id="cenik" class="mx-auto max-w-[1220px] scroll-mt-24 px-5 py-16 md:px-8 md:py-23">
   <div class="mb-10 flex flex-wrap items-end justify-between gap-4">
     <div>
-      <Eyebrow>Za kolik to máme</Eyebrow>
-      <h2 class="text-[clamp(30px,4vw,48px)] font-extrabold tracking-[-0.03em]">Vyber podle toho, jak často chceš chodit.</h2>
+      <Eyebrow>{lang === 'en' ? 'Pricing' : 'Za kolik to máme'}</Eyebrow>
+      <h2 class="text-[clamp(30px,4vw,48px)] font-extrabold tracking-[-0.03em]">
+        {lang === 'en' ? 'Choose based on how often you want to come.' : 'Vyber podle toho, jak často chceš chodit.'}
+      </h2>
     </div>
-    <a href="/cenik/" class="cursor-pointer text-base font-bold text-accent-text hover:text-ink">Celý ceník →</a>
+    <a href={pricingHref} class="cursor-pointer text-base font-bold text-accent-text hover:text-ink">
+      {lang === 'en' ? 'Full pricing →' : 'Celý ceník →'}
+    </a>
   </div>
 
   <div class="grid gap-5 md:grid-cols-3">

@@ -1,24 +1,39 @@
 ---
-import { nav, navMenu, RESERVE_URL } from '../data/home';
+import { nav as navCS, navMenu as navMenuCS, RESERVE_URL } from '../data/home';
+import { nav as navEN, navMenu as navMenuEN } from '../data/home.en';
 import Button from './Button.astro';
+import type { Lang } from '../i18n/ui';
+import { routeMap, t } from '../i18n/ui';
 
 interface Props {
   current?: string;
+  lang?: Lang;
 }
-const { current = '/' } = Astro.props;
+const { current = '/', lang = 'cs' } = Astro.props;
+
+const nav = lang === 'en' ? navEN : navCS;
+const navMenu = lang === 'en' ? navMenuEN : navMenuCS;
+
+// Classes & services hub href for dropdown detection
+const servicesHref = lang === 'en' ? '/en/classes-and-services/' : '/lekce-a-sluzby/';
+
+const alternateLang = lang === 'en' ? 'cs' : 'en';
+const alternateUrl = routeMap[current] ?? (lang === 'en' ? '/' : '/en/');
+const langSwitchLabel = lang === 'en' ? 'CS' : 'EN';
+const logoHref = lang === 'en' ? '/en/' : '/';
 ---
 <header class="sticky top-0 z-50 border-b border-border-strong bg-bg/80 backdrop-blur-md">
   <div class="mx-auto flex max-w-[1220px] items-center justify-between gap-6 px-5 py-3.5 md:px-8">
     <!-- Logo -->
-    <a href="/" class="flex items-baseline gap-2.5 cursor-pointer">
+    <a href={logoHref} class="flex items-baseline gap-2.5 cursor-pointer">
       <span class="text-[27px] font-extrabold tracking-tight text-ink">BoHeMi</span>
       <span class="hidden italic text-[15px] text-brand sm:inline">Body · Health · Mind</span>
     </a>
 
     <!-- Desktop nav -->
-    <nav class="hidden items-center gap-0.5 lg:flex" aria-label="Hlavní navigace">
+    <nav class="hidden items-center gap-0.5 lg:flex" aria-label={t(lang, 'nav_menu_label')}>
       {nav.map((item) => (
-        item.href === '/lekce-a-sluzby/' ? (
+        item.href === servicesHref ? (
           <div class="group relative">
             <a
               href={item.href}
@@ -55,18 +70,32 @@ const { current = '/' } = Astro.props;
         )
       ))}
 
-      <Button href={RESERVE_URL} variant="brand" external class="ml-3.5 px-[22px] py-2.5 text-[15px]">Rezervovat</Button>
+      <!-- Language switcher -->
+      <a
+        href={alternateUrl}
+        hreflang={alternateLang}
+        aria-label={`Switch to ${alternateLang === 'en' ? 'English' : 'Czech'}`}
+        class="ml-1 px-3 py-2 text-[13px] font-bold uppercase tracking-[0.06em] text-ink-muted hover:text-brand transition-colors"
+      >{langSwitchLabel}</a>
+
+      <Button href={RESERVE_URL} variant="brand" external class="ml-1.5 px-[22px] py-2.5 text-[15px]">{t(lang, 'nav_reserve')}</Button>
     </nav>
 
     <!-- Mobile -->
-    <div class="flex items-center gap-3 lg:hidden">
-      <Button href={RESERVE_URL} variant="brand" external class="px-4 py-2 text-sm">Rezervovat</Button>
+    <div class="flex items-center gap-2 lg:hidden">
+      <a
+        href={alternateUrl}
+        hreflang={alternateLang}
+        aria-label={`Switch to ${alternateLang === 'en' ? 'English' : 'Czech'}`}
+        class="px-2.5 py-2 text-[12px] font-bold uppercase tracking-[0.06em] text-ink-muted hover:text-brand"
+      >{langSwitchLabel}</a>
+      <Button href={RESERVE_URL} variant="brand" external class="px-4 py-2 text-sm">{t(lang, 'nav_reserve')}</Button>
       <details class="group relative">
-        <summary class="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-full border border-border-strong text-ink [&::-webkit-details-marker]:hidden" aria-label="Otevřít menu">
+        <summary class="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-full border border-border-strong text-ink [&::-webkit-details-marker]:hidden" aria-label={t(lang, 'nav_open_menu')}>
           <svg class="h-5 w-5 group-open:hidden" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
           <svg class="hidden h-5 w-5 group-open:block" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
         </summary>
-        <nav class="absolute right-0 top-[calc(100%+10px)] w-[260px] rounded-2xl border border-border bg-surface p-3 shadow-[0_22px_48px_-16px_rgba(33,31,26,0.3)]" aria-label="Mobilní navigace">
+        <nav class="absolute right-0 top-[calc(100%+10px)] w-[260px] rounded-2xl border border-border bg-surface p-3 shadow-[0_22px_48px_-16px_rgba(33,31,26,0.3)]" aria-label={t(lang, 'nav_menu_label')}>
           {nav.map((item) => (
             <a href={item.href} class="block rounded-xl px-4 py-3 text-base font-semibold text-ink-line hover:bg-surface-hover">{item.label}</a>
           ))}

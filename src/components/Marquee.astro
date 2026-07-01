@@ -1,5 +1,13 @@
 ---
-import { marquee } from '../data/home';
+import { marquee as marqueeCS } from '../data/home';
+import { marquee as marqueeEN } from '../data/home.en';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'cs' } = Astro.props;
+const marquee = lang === 'en' ? marqueeEN : marqueeCS;
 const loop = [...marquee, ...marquee];
 ---
 <section class="overflow-hidden border-y border-border-strong bg-sand" aria-hidden="true">

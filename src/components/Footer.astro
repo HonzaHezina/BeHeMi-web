@@ -1,13 +1,28 @@
 ---
 import { RESERVE_URL } from '../data/home';
+import type { Lang } from '../i18n/ui';
+import { t } from '../i18n/ui';
 
-const webLinks = [
-  { label: 'Proč BoHeMi', href: '/proc-bohemi/' },
-  { label: 'Lekce a služby', href: '/lekce-a-sluzby/' },
-  { label: 'Program 8 týdnů', href: '/#program' },
-  { label: 'Ceník', href: '/cenik/' },
-  { label: 'Kontakt', href: '/kontakt/' },
-];
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'cs' } = Astro.props;
+
+const webLinks = lang === 'en'
+  ? [
+      { label: 'Why BoHeMi', href: '/en/why-bohemi/' },
+      { label: 'Classes & services', href: '/en/classes-and-services/' },
+      { label: '8-Week Program', href: '/en/#program' },
+      { label: 'Pricing', href: '/en/pricing/' },
+      { label: 'Contact', href: '/en/contact/' },
+    ]
+  : [
+      { label: 'Proč BoHeMi', href: '/proc-bohemi/' },
+      { label: 'Lekce a služby', href: '/lekce-a-sluzby/' },
+      { label: 'Program 8 týdnů', href: '/#program' },
+      { label: 'Ceník', href: '/cenik/' },
+      { label: 'Kontakt', href: '/kontakt/' },
+    ];
 ---
 <footer id="kontakt" class="scroll-mt-24 bg-ink-dark text-cream-soft">
   <div class="mx-auto max-w-[1220px] px-5 py-16 md:px-8">
@@ -17,19 +32,19 @@ const webLinks = [
           <span class="text-2xl font-extrabold text-cream">BoHeMi</span>
           <span class="italic text-sm text-sage">Body · Health · Mind</span>
         </div>
-        <p class="max-w-[30ch] text-[15px] leading-relaxed">Skupinové lekce a komunita na Vinohradech.</p>
+        <p class="max-w-[30ch] text-[15px] leading-relaxed">{t(lang, 'footer_tagline')}</p>
         <a
           href={RESERVE_URL}
           target="_blank"
           rel="noopener noreferrer"
           class="mt-5 inline-flex cursor-pointer items-center gap-2 rounded-full bg-accent-text px-5 py-2.5 text-[15px] font-bold text-cream transition-colors hover:bg-accent-deep"
         >
-          Rezervovat lekci →
+          {t(lang, 'footer_reserve')}
         </a>
       </div>
 
       <div>
-        <div class="mb-3.5 text-[13px] font-bold uppercase tracking-[0.06em] text-cream-muted">Web</div>
+        <div class="mb-3.5 text-[13px] font-bold uppercase tracking-[0.06em] text-cream-muted">{t(lang, 'footer_web')}</div>
         <div class="flex flex-col items-start gap-2.5">
           {webLinks.map((l) => (
             <a href={l.href} class="text-[15.5px] text-cream-soft hover:text-cream">{l.label}</a>
@@ -38,7 +53,7 @@ const webLinks = [
       </div>
 
       <div>
-        <div class="mb-3.5 text-[13px] font-bold uppercase tracking-[0.06em] text-cream-muted">Kontakt</div>
+        <div class="mb-3.5 text-[13px] font-bold uppercase tracking-[0.06em] text-cream-muted">{t(lang, 'footer_contact')}</div>
         <address class="text-[15.5px] not-italic leading-[1.7]">
           <a href="tel:+420603989762" class="hover:text-cream">+420 603 989 762</a><br />
           <a href="mailto:info@bohemi.fit" class="hover:text-cream">info@bohemi.fit</a><br />
@@ -48,7 +63,7 @@ const webLinks = [
     </div>
 
     <div class="pt-6 text-[13.5px] text-cream-muted">
-      © BoHeMi fitness s.r.o. · IČ 19115296 · Všechna práva vyhrazena
+      © BoHeMi fitness s.r.o. · IČ 19115296 · {t(lang, 'footer_rights')}
     </div>
   </div>
 </footer>

@@ -26,6 +26,14 @@ export default defineConfig({
     // zatím prázdné — viz TODO výš
   },
 
+  i18n: {
+    defaultLocale: 'cs',
+    locales: ['cs', 'en'],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
+
   vite: {
     plugins: [tailwindcss()]
   }
