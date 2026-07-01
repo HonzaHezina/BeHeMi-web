@@ -2,7 +2,7 @@
 // (renderVals() v "Bohemi Web.dc.html"). Zdroj pravdy pro texty.
 
 export const marquee = [
-  'Kruháče', 'Vlastní váha', 'Funkční pohyb', 'Síla', 'Kondice', 'Záda', 'Mobilita', 'Spánek', 'Režim', 'Energie', 'Technika', 'Pravidelnost',
+  'Kruháče', 'Vlastní váha', 'Funkční pohyb', 'Síla', 'Kondice', 'Záda', 'Mobilita', 'Spánek', 'Režim', 'Výdrž', 'Technika', 'Pravidelnost',
 ];
 
 export const triad = [
@@ -80,7 +80,7 @@ export const lpHighlights = [
 
 export const bodyPurpose = [
   'Lépe spíš a vstáváš s víc energií',
-  'Míň tě bolí záda a pohybuj se bez omezení',
+  'Míň tě bolí záda a pohybuješ se bez omezení',
   'Zvládáš náročné dny bez vyčerpání',
   'Cítíš se jistěji ve vlastní kůži',
   'Máš stabilnější náladu a méně stresu',
@@ -105,7 +105,7 @@ export const healthTracker = [
 export const trainers = [
   { name: 'Klára Měchurová', role: 'Trenérka · funkční trénink', media: 'media-green', bio: 'Klára se pohybu věnuje od dětství — balet, tenis, basketbal, tanec. Certifikovaná fitness lektorka od roku 2015, aktivní od 2013. Vede kruháče, silové lekce i HIIT a nabízí osobní tréninky.' },
   { name: 'Jitka Štěpánková', role: 'Lektorka · Power Zone', media: 'media-sand', bio: '' },
-  { name: 'Eliška Velázquez', role: 'Lektorka · Zumba a Dětská Zumba', media: 'media-forest', bio: '' },
+  { name: 'Eliška Velázquez', role: 'Lektorka · Zumba a Dětská Zumba', media: 'media-forest', bio: 'Eliška přináší do BoHeMi latinskoamerický rytmus a radost z pohybu. Vede Zumbu pro dospělé i Dětskou Zumbu — lekce, kde se cvičí, ale hlavně baví.' },
   { name: 'Jan Hezina', role: 'zakladatel · provoz a technika', media: 'media-clay', bio: '' },
 ];
 

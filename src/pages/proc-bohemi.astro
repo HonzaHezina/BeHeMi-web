@@ -4,23 +4,13 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import Button from '../components/Button.astro';
+import HealthTracker from '../components/HealthTracker.astro';
 
-// Obsah z exportu (PROC). Odkaz na konkrétní knihu / PDF vynechán a sekce
-// „Rámec a praxe" zmírněna — konzistentně s rozhodnutím u homepage.
 const teacher = [
   { k: 'Kruháč', d: 'Učí dotahovat věci do konce. Stanoviště za stanovištěm, bez výmluv.' },
   { k: 'Žonglování', d: 'Učí soustředění, rytmus a trpělivost — a schopnost lépe číst vzorce.' },
   { k: 'Dech', d: 'Učí zklidnit se a vrátit pozornost zpátky k tělu.' },
   { k: 'Síla', d: 'Učí trpělivosti a tomu, že pokrok je pomalý, ale poctivý.' },
-];
-
-const principleMap = [
-  { princip: 'Filozofie zdraví', bohemi: 'Živé lekce a vedená praxe' },
-  { princip: 'Health tracker', bohemi: 'Skupina, trenér, pravidelnost' },
-  { princip: 'Denní rutina', bohemi: 'Konkrétní pohybové programy' },
-  { princip: 'Tělo i vnitřní nastavení', bohemi: 'Práce s tělem v reálném prostoru' },
-  { princip: 'Rodina, společnost, příroda', bohemi: 'Supermamky, děti, komunita, firmy' },
-  { princip: 'Vzdělávání', bohemi: 'Česká civilní aplikace v životě' },
 ];
 ---
 <Layout
@@ -51,7 +41,7 @@ const principleMap = [
       <div class="flex flex-col gap-5 text-[19px] leading-[1.6] text-ink-line">
         <p>BoHeMi vzniklo z osobní zkušenosti, že pohyb není jen fyzická aktivita. Když jsem se začal pravidelně hýbat, postupně se neměnilo jen tělo — měnila se i schopnost soustředit se, dokončovat věci a zvládat stres.</p>
         <p>Kruhové tréninky mě naučily dotahovat věci do konce. Žonglování trpělivosti, rytmu, pozornosti a schopnosti lépe číst vzorce. Postupně mi došlo, že přes tělo se dá otevřít cesta i k hlavě, návykům a rovnováze.</p>
-        <p>Postupně se z toho složil jednoduchý rámec pro něco, co jsem už v praxi cítil: člověk není jen tělo, ale tělem začíná naše každodenní zkušenost se světem.</p>
+        <p>Tělo je nejjednodušší místo, kde začít — protože ho cítíš hned a výsledek vidíš.</p>
       </div>
       <figure class="mt-9 border-y border-border-strong py-8">
         <blockquote class="text-[clamp(24px,3vw,34px)] italic leading-[1.3] tracking-[-0.015em] text-ink">„Přes tělo jsem se začal učit věci, které mi pak pomohly i v práci a životě.“</blockquote>
@@ -72,38 +62,12 @@ const principleMap = [
       </div>
     </section>
 
-    <!-- RÁMEC A PRAXE (zmírněno — bez konkrétní knihy / odkazu) -->
-    <section class="relative overflow-hidden bg-ink-dark text-cream">
-      <div
-        class="pointer-events-none absolute -bottom-22 -left-16 h-[440px] w-[440px] rounded-full"
-        style="background:radial-gradient(circle, rgba(226,35,26,0.18), rgba(226,35,26,0) 70%);"
-        aria-hidden="true"
-      >
-      </div>
-      <div class="relative mx-auto max-w-[1100px] px-5 py-20 md:px-8">
-        <p class="mb-3 italic text-[23px] text-sage">Rámec a praxe</p>
-        <h2 class="mb-3.5 max-w-[20ch] text-[clamp(28px,3.8vw,46px)] font-extrabold leading-[1.04] tracking-[-0.03em]">Z principů děláme každodenní praxi.</h2>
-        <p class="mb-10 max-w-[54ch] text-lg text-cream-soft">Tělo, hlava, vztahy i prostředí spolu souvisí — a my z toho děláme normální, konkrétní praxi, ne přednášku. Nic nebereme jako dogma; co navrhujeme, si vyzkoušíš na vlastní kůži.</p>
-
-        <div class="overflow-hidden rounded-2xl border border-border-dark">
-          <div class="grid grid-cols-2 bg-white/5">
-            <div class="px-6 py-3.5 text-[13px] font-bold uppercase tracking-[0.06em] text-sage">Princip</div>
-            <div class="border-l border-border-dark px-6 py-3.5 text-[13px] font-bold uppercase tracking-[0.06em] text-clay-soft">BoHeMi v praxi</div>
-          </div>
-          {principleMap.map((m) => (
-            <div class="grid grid-cols-2 border-t border-border-dark">
-              <div class="px-6 py-4 text-base text-cream-soft">{m.princip}</div>
-              <div class="border-l border-border-dark px-6 py-4 text-base font-semibold text-cream">{m.bohemi}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
     <!-- PŘECHOD -->
     <section class="mx-auto max-w-[860px] px-5 pb-6 pt-6 md:px-8">
-      <p class="text-lg leading-[1.6] text-ink-soft">Jen pravidelný pohyb, regenerace a parta lidí, co k tobě chodí na stejnou lekci — praxe, kterou si sám vyzkoušíš a uvidíš, jestli funguje.</p>
+      <p class="text-lg leading-[1.6] text-ink-soft">Nic nebereme jako dogma; co navrhujeme, si vyzkoušíš na vlastní kůži. Jen pravidelný pohyb, regenerace a parta lidí, co k tobě chodí na stejnou lekci — praxe, která funguje nebo ne, a ty to brzy poznáš.</p>
     </section>
+
+    <HealthTracker />
 
     <!-- CTA -->
     <section class="mx-auto max-w-[1100px] px-5 pb-20 pt-8 text-center md:px-8">
