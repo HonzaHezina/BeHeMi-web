@@ -26,9 +26,9 @@ podle toho, kdo to říká."**
 jídlo. Ten základ ale někdo držet musí. Od toho jsme tu my."**
 → Opravená verze self-healing. Prodává pohyb, ne pasivitu.
 
-[JÁDRO] **„Velká část potíží má příčinu, které se dá předejít — jak žiješ, spíš,
+[volit.] **„Velká část potíží má příčinu, které se dá předejít — jak žiješ, spíš,
 jíš a jak se hýbeš."**  (překryv: „ve tvých rukou")
-→ Ownership, ne sliby. Skeptik respektuje, že mu nelžeš.
+→ Ownership, ne sliby. Skeptik respektuje, že mu nelžeš. Záloha, ne v šestce.
 
 [volit.] **„Tvoje zdraví je ve tvých rukou."**  (překryv: „potíže mají příčinu")
 → Kratší úderná verze téhož. Vyber jednu z těch dvou.
@@ -57,6 +57,10 @@ spíš tvrdě, zvládneš zátěž. To nejsou pocity — to jsou znaky."**
 jednoduše — a skoro nikdo to nedělá."**
 → Trefa do žaludku, skeptik se zasměje a kývne.
 
+[volit.] **„Po jídle poznáš, jestli bylo dobré: jsi lehký, nebo těžký. Tvoje
+vlastní měření, žádná tabulka kalorií."**  (překryv: tracker checklist „po jídle ti není těžko")
+→ „Tvoje vlastní data" > cizí autorita. Neber zároveň s tracker checklistem.
+
 ---
 
 ## Sekce „Tělo" / Co znamená BoHeMi (vyber max 1)
@@ -84,11 +88,13 @@ ale jestli ho vůbec vnímáš."**
 1. Slogan „neber nic jako svaté" (hero / karta 01)
 2. „Zdraví není, že tě zrovna nic nebolí" (WHO)
 3. „Tělo zvládne víc, když mu dáš základ — ten základ někdo držet musí" (prodává tě)
-4. „Velká část potíží má příčinu, které se dá předejít" (ownership)
+4. „Zdravé tělo poznáš podle toho, co umí, ne jak vypadá" (anti-instagram, vaše DNA)
 5. „Zdraví se pozná, nehádá: vstaneš svěží, po jídle ti není těžko…" (tracker)
 6. pull-quote „Nejlepší trénink je někdy přestat tělu škodit" (srdcovka)
 
-To je akorát: skepse + ownership + rytmus + jeden checklist. Žádná zeď.
+To je akorát: skepse + „co tělo umí" + rytmus v pozadí + checklist. Žádná zeď.
+(Ownership věty „potíže mají příčinu" / „ve tvých rukou" zůstávají v poolu jako
+záloha — jen ne obě naráz a ne nutně v šestce.)
 
 ---
 
