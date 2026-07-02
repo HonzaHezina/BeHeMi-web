@@ -1,0 +1,110 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import MediaFrame from '../components/MediaFrame.astro';
+import { RESERVE_URL } from '../data/home';
+
+// Obsah z bohemi.fit/supermamky/ (červenec 2026), přepsaný do věcného tónu.
+// Lektorka z WP (Klára Šauerová) záměrně neuvedena — podle redirect-map už
+// v týmu není. Časy a ceny na WP nejsou → odkazujeme do rezervací a na ceník.
+const facts = [
+  'Kruhový trénink celého těla — zvládne ho začátečník i pokročilý',
+  'V sále je spousta hraček, které dítě během lekce zabaví',
+  'Cviky se přizpůsobí tobě — včetně diastázy a zdravotních omezení',
+  'Cvičíš mezi ostatními rodiči, ne v anonymní posilovně',
+];
+---
+<Layout
+  title="Supermamky — BoHeMi fitness Vinohrady"
+  description="Kruhový trénink pro mámy a táty, kam můžeš vzít i miminko nebo batole — v sále jsou hračky. Cvičení bere ohled na diastázu i zdravotní omezení. Malé skupiny na pražských Vinohradech."
+>
+  <Header current="/supermamky/" />
+  <main>
+    <!-- HERO -->
+    <section class="relative mx-auto max-w-[1220px] overflow-hidden px-5 pb-8 pt-16 md:px-8 md:pt-20">
+      <div
+        class="pointer-events-none absolute right-0 top-2.5 h-[400px] w-[400px] rounded-full"
+        style="background:radial-gradient(circle, rgba(226,35,26,0.12), rgba(226,35,26,0) 70%);"
+        aria-hidden="true"
+      ></div>
+      <div class="relative">
+        <p class="mb-4 text-[13px] font-extrabold uppercase tracking-[0.08em] text-accent-text">
+          <a href="/lekce-a-sluzby/" class="hover:text-ink">Lekce a služby</a> · Pro děti a rodiny
+        </p>
+        <h1 class="text-[clamp(40px,6.2vw,76px)] font-extrabold leading-[0.98] tracking-[-0.035em]">
+          Super<span class="font-medium italic text-accent-text">mamky</span>
+        </h1>
+        <p class="mt-6 max-w-[56ch] text-[clamp(18px,2.1vw,22px)] leading-[1.45] text-ink-warm">
+          Kruhový trénink pro mámy a táty, kam můžeš přijít i s miminkem nebo batoletem.
+          Ty cvičíš, dítě si hraje vedle — a nemusíš řešit hlídání.
+        </p>
+      </div>
+    </section>
+
+    <!-- JAK TO FUNGUJE -->
+    <section class="mx-auto max-w-[1220px] px-5 pt-6 md:px-8">
+      <div class="grid gap-6 overflow-hidden rounded-[22px] border border-border bg-surface lg:grid-cols-[1.1fr_0.9fr]">
+        <div class="p-8 md:p-10">
+          <h2 class="mb-3 text-[clamp(26px,3.2vw,38px)] font-extrabold leading-[1.06] tracking-[-0.03em]">Jak lekce probíhá</h2>
+          <p class="mb-5 max-w-[54ch] text-[17px] leading-[1.55] text-ink-soft">
+            Vedený kruhový trénink přizpůsobený realitě rodičovství. Trenér ti nastaví cviky
+            podle tvé úrovně a aktuálního stavu — po porodu, po pauze, nebo když prostě chceš
+            zpevnit tělo a nemáš komu svěřit dítě.
+          </p>
+          <ul class="mb-7 flex flex-col gap-2.5">
+            {facts.map((f) => (
+              <li class="flex items-start gap-2.5 text-[15.5px] text-ink-line">
+                <span class="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden="true"></span>
+                <span>{f}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="flex flex-wrap items-center gap-5">
+            <Button href={RESERVE_URL} variant="brand">Rezervovat lekci →</Button>
+            <a href="/cenik/" class="cursor-pointer text-[15px] font-bold text-accent-text hover:text-ink">Ceník →</a>
+          </div>
+        </div>
+        <MediaFrame media="media-sand" rounded="rounded-none" class="min-h-[240px] lg:min-h-full" alt="Supermamky — trénink rodičů s dětmi v sále" />
+      </div>
+      <p class="mt-5 text-[15.5px] text-ink-soft">
+        Termíny a volná místa najdeš v <a href={RESERVE_URL} class="font-bold text-accent-text hover:text-ink">rezervačním systému</a>.
+        Supermamky mají i vlastní <a href="https://instagram.com/supermamky/" rel="noopener noreferrer" target="_blank" class="font-bold text-accent-text hover:text-ink">Instagram ↗</a>.
+      </p>
+    </section>
+
+    <!-- CROSS-LINK NA DĚTI -->
+    <section class="mx-auto max-w-[1220px] px-5 pt-12 md:px-8">
+      <div class="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-mint-border bg-mint px-7 py-6">
+        <p class="max-w-[52ch] text-[16.5px] text-ink">
+          <strong class="font-bold">A až dítě povyroste:</strong> cirkusové kroužky, Objevovárna
+          a Dětská Zumba — všechno pod jednou střechou.
+        </p>
+        <Button href="/krouzky-pro-deti/" variant="dark" class="shrink-0 px-[22px] py-3 text-[15.5px]">Kroužky pro děti →</Button>
+      </div>
+    </section>
+
+    <!-- FINÁLNÍ CTA -->
+    <section class="mx-auto max-w-[1220px] px-5 pb-16 pt-14 md:px-8 md:pb-23">
+      <div class="relative flex flex-wrap items-center justify-between gap-6 overflow-hidden rounded-[22px] bg-ink-dark p-8 text-cream md:p-[clamp(32px,5vw,56px)]">
+        <div
+          class="pointer-events-none absolute -bottom-22 -right-12 h-[340px] w-[340px] rounded-full"
+          style="background:radial-gradient(circle, rgba(226,35,26,0.18), rgba(226,35,26,0) 70%);"
+          aria-hidden="true"
+        ></div>
+        <div class="relative">
+          <h2 class="max-w-[22ch] text-[clamp(26px,3.4vw,40px)] font-extrabold tracking-[-0.03em]">Nevíš, jestli je lekce pro tebe?</h2>
+          <p class="mt-3 max-w-[44ch] text-[17px] text-cream-muted">Napiš nám — poradíme, jak začít po porodu, po pauze i s diastázou.</p>
+        </div>
+        <a
+          href="/kontakt/"
+          class="relative inline-flex shrink-0 cursor-pointer items-center gap-2 rounded-full bg-accent-text px-7 py-3.5 text-[17px] font-bold text-cream transition-colors hover:bg-accent-deep"
+        >
+          Napsat nám →
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
