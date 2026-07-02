@@ -66,6 +66,7 @@ export const ui = {
     hero_float_2: '● Trenér tě opraví',
     hero_float_3: '● Vlastní váha a pomůcky',
     hero_img_alt: 'Trénink ve funkčním sále BoHeMi',
+    hero_kids_link: 'Hledáš něco pro děti? →',
     // Marquee (long string — just re-export from data)
     // ApproachGrid
     approach_eyebrow: 'Začínáš? Vracíš se? Hledáš komunitu?',
@@ -150,6 +151,7 @@ export const ui = {
     hero_float_2: '● Coach corrects your form',
     hero_float_3: '● Bodyweight & equipment',
     hero_img_alt: 'Training in the BoHeMi functional studio',
+    hero_kids_link: 'Looking for something for kids? →',
     // ApproachGrid
     approach_eyebrow: 'Starting out? Coming back? Looking for community?',
     approach_h2_a: "What people most often",

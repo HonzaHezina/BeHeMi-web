@@ -1,0 +1,43 @@
+---
+// Plnoformátový pruh „Pro děti a rodiny" — vysoko na homepage (hned za
+// ApproachGrid). Děti = po homepage nejsilnější publikum (docs/redirect-map.md),
+// pruh dává rodičům cestu bez scrollování celou dospěláckou linií.
+import Button from './Button.astro';
+import { kidsBand as kidsBandCS } from '../data/home';
+import { kidsBand as kidsBandEN } from '../data/home.en';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'cs' } = Astro.props;
+const kidsBand = lang === 'en' ? kidsBandEN : kidsBandCS;
+---
+<section class="bg-sand">
+  <div class="mx-auto max-w-[1220px] px-5 py-16 md:px-8 md:py-20">
+    <h2 class="mb-3.5 max-w-[20ch] text-[clamp(30px,4vw,48px)] font-extrabold leading-[1.03] tracking-[-0.03em]">
+      {lang === 'en' ? <>For kids <span class="font-medium italic text-accent-text">&amp; families</span></> : <>Pro děti <span class="font-medium italic text-accent-text">a rodiny</span></>}
+    </h2>
+    <p class="mb-10 max-w-[58ch] text-lg leading-[1.55] text-ink-soft">
+      {lang === 'en'
+        ? 'Clubs, circus and movement for kids — and Supermums for new mums. In Vinohrady, in small groups where your child gets real attention.'
+        : 'Kroužky, cirkus a pohyb pro děti — a Supermamky pro čerstvé maminky. Na Vinohradech, v malých skupinách, kde se dětem někdo věnuje.'}
+    </p>
+
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {kidsBand.map((k) => (
+        <div class="rounded-[18px] border border-border bg-surface p-7 transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_20px_40px_-20px_rgba(33,31,26,0.24)]">
+          <span class="mb-3.5 block h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true"></span>
+          <h3 class="mb-2 text-xl font-extrabold tracking-[-0.02em]">{k.t}</h3>
+          <p class="text-[15.5px] leading-[1.5] text-ink-soft">{k.d}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-8">
+      <Button href="/krouzky-pro-deti/" variant="brand">
+        {lang === 'en' ? 'Everything for kids & families →' : 'Vše pro děti a rodiny →'}
+      </Button>
+    </div>
+  </div>
+</section>
