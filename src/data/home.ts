@@ -26,7 +26,7 @@ export const approach = [
 export const audiences = [
   { fig: '01', tagline: 'Jednotlivci', label: 'Pro tebe', d: 'Chceš se hýbat, mít energii a líp rozumět svému tělu.', items: ['Program 8 týdnů', 'Skupinové lekce', 'Osobní tréninky a Open gym', 'Regenerace a fotobiomodulace'], anchor: '#pro-tebe' },
   // Dětská karta vede na vlastní stránku (nejsilnější publikum), ne na kotvu.
-  { fig: '02', tagline: 'Děti a maminky', label: 'Pro děti a rodiny', d: 'Pohyb pro nejmenší i pro rodiče, co nechtějí přestat.', items: ['Cirkusová školička', 'Pohybové kroužky a akrobacie', 'Supermamky — i s dětmi vedle', 'Příměstské tábory'], anchor: '/krouzky-pro-deti/' },
+  { fig: '02', tagline: 'Děti a maminky', label: 'Pro děti a rodiny', d: 'Pohyb pro nejmenší i pro rodiče, co nechtějí přestat.', items: ['Cirkusová školička', 'Pohybové kroužky a akrobacie', 'Objevovárna a Dětská Zumba', 'Supermamky — i s dětmi vedle'], anchor: '/krouzky-pro-deti/' },
   { fig: '03', tagline: 'Týmy a organizace', label: 'Pro firmy', d: 'Zdravější a sehranější tým bez vlastní tělocvičny.', items: ['FitTeams — tréninky pro týmy', 'Firemní wellbeing programy', 'Pronájem sálů na akce'], anchor: '#pro-firmy' },
 ];
 
@@ -70,14 +70,13 @@ export const kidsActivities = [
 // (GSC: /krouzky-pro-deti/ = priorita č. 1, viz docs/redirect-map.md).
 // Cirkusová školička a Objevovárna = dvě různé položky (potvrzeno Honzou,
 // odpovídá bohemi.fit). Popisy převzaté z kidsActivities výš, žádné nové texty.
-// TODO(Honza): Příměstský tábor — doplnit termíny, věk a náplň (placeholder).
+// Příměstský tábor se už nedělá — do nabídky nevracet (rozhodnuto 7/2026).
 export const kidsBand = [
   { t: 'Kroužky pro děti', d: 'Základy gymnastiky, pozemní i závěsná akrobacie a žonglování — pod vedením akrobatů La Putyka.' },
   { t: 'Cirkusová školička', d: 'Pro nejmenší — základní pohybové dovednosti hravou formou.' },
   { t: 'Objevovárna', d: 'Pro nejmenší děti do 5 let — 6 pohybových stanovišť, kde děti prozkoumávají svět pohybem. Středy 13:30 a 14:30, max 6 dětí.' },
   { t: 'Dětská Zumba', d: 'Taneční lekce pro děti v rytmu Zumby — zábava, koordinace a pohyb hravou formou. Vede Eliška Velázquez.' },
   { t: 'Supermamky', d: 'Tréninky pro maminky — cvičení přizpůsobené realitě rodičovství. S miminkem nebo batoletem u tebe.' },
-  { t: 'Příměstský tábor', d: 'Prázdninový tábor pro děti. [Doplníme: termíny, věk a náplň.]' },
 ];
 
 export const firmyServices = [

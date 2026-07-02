@@ -23,7 +23,7 @@ export const approach = [
 export const audiences = [
   { fig: '01', tagline: 'Individuals', label: 'For you', d: "You want to move, have energy, and better understand your body.", items: ['8-Week Program', 'Group classes', 'Personal training & Open gym', 'Recovery & photobiomodulation'], anchor: '#pro-tebe' },
   // Kids card links to the dedicated page (strongest audience), not the anchor.
-  { fig: '02', tagline: 'Kids & families', label: 'For kids & families', d: "Movement for the youngest and for parents who don't want to stop.", items: ['Circus School', 'Movement clubs & acrobatics', 'Supermums — babies welcome', 'Summer camps'], anchor: '/krouzky-pro-deti/' },
+  { fig: '02', tagline: 'Kids & families', label: 'For kids & families', d: "Movement for the youngest and for parents who don't want to stop.", items: ['Circus School', 'Movement clubs & acrobatics', 'Discovery Room & Kids Zumba', 'Supermums — babies welcome'], anchor: '/krouzky-pro-deti/' },
   { fig: '03', tagline: 'Teams & organisations', label: 'For companies', d: 'A healthier and more cohesive team without needing your own gym.', items: ['FitTeams — team training', 'Corporate wellbeing programs', 'Hall rental for events'], anchor: '#pro-firmy' },
 ];
 
@@ -70,7 +70,6 @@ export const kidsBand = [
   { t: 'Discovery Room', d: 'For the youngest children up to age 5 — 6 movement stations where children explore the world through movement. Wednesdays 1:30 and 2:30 pm, max 6 children.' },
   { t: 'Kids Zumba', d: 'Dance classes for children in Zumba style — fun, coordination, and movement through play. Led by Eliška Velázquez.' },
   { t: 'Supermums', d: 'Training for mums — adapted to the reality of parenthood. With your baby or toddler right beside you.' },
-  { t: 'Day camp', d: 'Holiday camp for kids. [To be added: dates, ages and program.]' },
 ];
 
 export const firmyServices = [
