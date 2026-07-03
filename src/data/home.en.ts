@@ -49,27 +49,30 @@ export const classes = [
   { t: 'Enduro', d: 'Strength, conditioning, and natural movement patterns in one class. For those who want a more capable and resilient body long-term.', img: 'enduro', media: 'media-green', bhm: 'Body · endurance · resilience' },
 ];
 
-export const individualServices = [
+// href = detail page; the whole box is clickable. No href = page not built yet.
+export const individualServices: { t: string; d: string; href?: string }[] = [
   { t: 'Personal training', d: 'Individual coaching tailored to your goals and pace.' },
-  { t: 'Open gym', d: 'Private 100 m² studio just for you or a small group.' },
-  { t: 'Photobiomodulation', d: 'Recovery and healing support through light therapy.' },
+  { t: 'Open gym', d: 'Private 100 m² studio just for you or a small group.', href: '/en/open-gym/' },
+  { t: 'Photobiomodulation', d: 'Recovery and healing support through light therapy.', href: '/en/photobiomodulation-therapy/' },
 ];
 
-export const kidsActivities = [
-  { t: 'Circus School', d: 'For the youngest — basic movement skills through play.', img: 'circus school', media: 'media-sand' },
-  { t: 'Gymnastics & Acrobatics basics', d: 'Gymnastics and acrobatics led by La Putyka acrobats.', img: 'acrobatics', media: 'media-clay' },
-  { t: 'Floor & aerial acrobatics, juggling', d: 'Floor and aerial acrobatics and juggling.', img: 'kids clubs', media: 'media-green' },
-  { t: 'Discovery Room', d: 'For the youngest children up to age 5 — 6 movement stations where children explore the world through movement. Wednesdays 1:30 and 2:30 pm, max 6 children.', img: 'discovery room', media: 'media-rose' },
-  { t: 'Kids Zumba', d: 'Dance classes for children in Zumba style — fun, coordination, and movement through play. Led by Eliška Velázquez.', img: 'kids zumba', media: 'media-sand' },
+// href = detail page; the whole card is clickable. Kids detail pages are CS-only for now.
+export const kidsActivities: { t: string; d: string; img: string; media: string; href?: string }[] = [
+  { t: 'Circus School', d: 'For the youngest — basic movement skills through play.', img: 'circus school', media: 'media-sand', href: '/krouzky-pro-deti/' },
+  { t: 'Gymnastics & Acrobatics basics', d: 'Gymnastics and acrobatics led by La Putyka acrobats.', img: 'acrobatics', media: 'media-clay', href: '/krouzky-pro-deti/' },
+  { t: 'Floor & aerial acrobatics, juggling', d: 'Floor and aerial acrobatics and juggling.', img: 'kids clubs', media: 'media-green', href: '/krouzky-pro-deti/' },
+  { t: 'Discovery Room', d: 'For the youngest children up to age 5 — 6 movement stations where children explore the world through movement. Wednesdays 1:30 and 2:30 pm, max 6 children.', img: 'discovery room', media: 'media-rose', href: '/krouzky-pro-deti/' },
+  { t: 'Kids Zumba', d: 'Dance classes for children in Zumba style — fun, coordination, and movement through play. Led by Eliška Velázquez.', img: 'kids zumba', media: 'media-sand', href: '/krouzky-pro-deti/' },
+  { t: 'Supermums', d: 'A group class for mums and dads with kids — circuit training adapted to the reality of parenthood. With your baby or toddler right beside you.', img: 'supermums', media: 'media-forest', href: '/supermamky/' },
 ];
 
 // Homepage "For kids & families" band — mirrors kidsBand in home.ts.
 export const kidsBand = [
-  { t: 'Kids clubs', d: 'Gymnastics basics, floor and aerial acrobatics, and juggling — led by La Putyka acrobats.' },
-  { t: 'Circus School', d: 'For the youngest — basic movement skills through play.' },
-  { t: 'Discovery Room', d: 'For the youngest children up to age 5 — 6 movement stations where children explore the world through movement. Wednesdays 1:30 and 2:30 pm, max 6 children.' },
-  { t: 'Kids Zumba', d: 'Dance classes for children in Zumba style — fun, coordination, and movement through play. Led by Eliška Velázquez.' },
-  { t: 'Supermums', d: 'Training for mums — adapted to the reality of parenthood. With your baby or toddler right beside you.' },
+  { t: 'Kids clubs', d: 'Gymnastics basics, floor and aerial acrobatics, and juggling — led by La Putyka acrobats.', href: '/krouzky-pro-deti/' },
+  { t: 'Circus School', d: 'For the youngest — basic movement skills through play.', href: '/krouzky-pro-deti/' },
+  { t: 'Discovery Room', d: 'For the youngest children up to age 5 — 6 movement stations where children explore the world through movement. Wednesdays 1:30 and 2:30 pm, max 6 children.', href: '/krouzky-pro-deti/' },
+  { t: 'Kids Zumba', d: 'Dance classes for children in Zumba style — fun, coordination, and movement through play. Led by Eliška Velázquez.', href: '/krouzky-pro-deti/' },
+  { t: 'Supermums', d: 'Training for mums — adapted to the reality of parenthood. With your baby or toddler right beside you.', href: '/supermamky/' },
 ];
 
 export const firmyServices = [

@@ -88,8 +88,14 @@ const contactHref = lang === 'en' ? '/en/contact/' : '/kontakt/';
       {lang === 'en' ? 'Individual services' : 'Individuální služby'}
     </h3>
     <div class="grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-      {individualServices.map((s) => (
-        <div class="bg-surface p-[30px] transition-colors hover:bg-surface-hover">
+      {individualServices.map((s) => s.href ? (
+        <a href={s.href} class="block cursor-pointer bg-surface p-[30px] transition-colors hover:bg-surface-hover">
+          <h4 class="mb-2 text-xl font-extrabold tracking-[-0.02em]">{s.t}</h4>
+          <p class="text-[15.5px] leading-[1.5] text-ink-soft">{s.d}</p>
+          <span class="mt-3 block text-[14px] font-bold text-accent-text">{lang === 'en' ? 'Details →' : 'Detail →'}</span>
+        </a>
+      ) : (
+        <div class="bg-surface p-[30px]">
           <h4 class="mb-2 text-xl font-extrabold tracking-[-0.02em]">{s.t}</h4>
           <p class="text-[15.5px] leading-[1.5] text-ink-soft">{s.d}</p>
         </div>
@@ -113,20 +119,16 @@ const contactHref = lang === 'en' ? '/en/contact/' : '/kontakt/';
   <div class="pt-9">
     <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {kidsActivities.map((k) => (
-        <div class="overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-20px_rgba(33,31,26,0.24)]">
+        <a href={k.href} class="block cursor-pointer overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-20px_rgba(33,31,26,0.24)]">
           <MediaFrame media={k.media} rounded="rounded-none" class="h-40" alt={`${lang === 'en' ? 'For kids' : 'Pro děti'} — ${k.img}`} />
           <div class="p-[22px]">
             <h4 class="mb-2 text-[21px] font-extrabold tracking-[-0.02em]">{k.t}</h4>
             <p class="text-[15.5px] leading-[1.5] text-ink-soft">{k.d}</p>
+            <span class="mt-3 block text-[14px] font-bold text-accent-text">{lang === 'en' ? 'Details →' : 'Detail →'}</span>
           </div>
-        </div>
+        </a>
       ))}
     </div>
-    <p class="mt-5 max-w-[60ch] text-base text-ink-soft">
-      {lang === 'en'
-        ? <>And for mums we have <a href="/supermamky/" class="font-bold text-accent-text hover:text-ink">Supermums</a> — training where you can bring your child along.</>
-        : <>A pro maminky tu máme <a href="/supermamky/" class="font-bold text-accent-text hover:text-ink">Supermamky</a> — trénink, kam můžeš vzít i dítě.</>}
-    </p>
   </div>
 
   <!-- ───── PRO FIRMY / FOR COMPANIES ───── -->
