@@ -39,17 +39,20 @@ export const paths = [
   { tag: 'cyklus', t: 'Zdravá záda · síla · energie', d: 'Tematické cykly zaměřené na konkrétní cíl.' },
 ];
 
+// id = stabilní kotva na /skupinove-lekce/#<id> (ASCII bez diakritiky).
+// NIKDY neměnit — vedou na ně odkazy z celého webu. Stejná id používá i EN
+// mutace (home.en.ts), ať odkazy fungují napříč jazyky.
 export const classes = [
-  { t: 'Kruhové tréninky', d: 'Funkční trénink v kruhu: střídáš stanoviště, cvičíš s vlastní vahou nebo pomůckami, trénink vede trenér. Vhodné pro všechny úrovně.', img: 'kruhový trénink', media: 'media-green', bhm: 'Tělo · dokončování · komunita' },
-  { t: 'Silové tréninky', d: 'Práce s vlastní vahou a jednoduchým nářadím pod vedením trenéra. Zaměřujeme se na techniku a postupné budování síly.', img: 'silový trénink', media: 'media-forest', bhm: 'Tělo · síla · trpělivost' },
-  { t: 'HIIT', d: 'Vysoce intenzivní intervalový trénink, který kombinuje kardio a posilování. Krátké intervaly, maximální efekt — pro ty, kteří chtějí výsledky bez ztráty času.', img: 'HIIT lekce', media: 'media-clay', bhm: 'Tělo · energie · odolnost' },
-  { t: 'Supermamky', d: 'Tréninky pro maminky s dětmi — cvičení přizpůsobené realitě rodičovství. S miminkem nebo batoletem u tebe.', img: 'supermamky', media: 'media-sand', bhm: 'Tělo · rodina · komunita' },
-  { t: 'Vlastní váha', d: 'Cvičení bez nářadí: ovládneš základní pohybové vzory, zlepšíš koordinaci a sílu. Vhodné i jako první krok pro úplné začátečníky.', img: 'vlastní váha', media: 'media-rose', bhm: 'Tělo · kontrola · pozornost' },
-  { t: 'Power Zone', d: 'Funkční trénink kombinující kruháče a prvky crossfitu. Intenzivní, efektivní, vedený trenérem — pro výsledky bez zbytečných řečí.', img: 'power zone', media: 'media-clay', bhm: 'Tělo · síla · výkon' },
-  { t: 'Zumba', d: 'Taneční fitness v rytmu latinskoamerické hudby — pohyb jako oslava, ne dřina. Vhodné pro všechny, kteří chtějí cvičit a přitom se bavit.', img: 'zumba', media: 'media-rose', bhm: 'Tělo · rytmus · radost' },
-  { t: 'Břišní pekáč', d: 'Trénink hlubokého stabilizačního systému a core. Žádné zkracovačky — učíš se ovládat tělo zevnitř. Vhodné pro všechny úrovně.', img: 'břišní pekáč', media: 'media-rose', bhm: 'Tělo · stabilita · kontrola' },
-  { t: 'Solid Booty', d: 'Zaměřeno na hýžďové svaly — správná technika, vědomý pohyb, výsledky. Oblíbená lekce s jasným cílem.', img: 'solid booty', media: 'media-sand', bhm: 'Tělo · síla · pohyb' },
-  { t: 'Enduro', d: 'Síla, kondice a přirozené pohyby v jedné lekci. Pro ty, kdo chtějí výkonnější a odolnější tělo na dlouho.', img: 'enduro', media: 'media-green', bhm: 'Tělo · výdrž · odolnost' },
+  { id: 'kruhac', t: 'Kruhové tréninky', d: 'Funkční trénink v kruhu: střídáš stanoviště, cvičíš s vlastní vahou nebo pomůckami, trénink vede trenér. Vhodné pro všechny úrovně.', img: 'kruhový trénink', media: 'media-green', bhm: 'Tělo · dokončování · komunita' },
+  { id: 'silovy-trenink', t: 'Silové tréninky', d: 'Práce s vlastní vahou a jednoduchým nářadím pod vedením trenéra. Zaměřujeme se na techniku a postupné budování síly.', img: 'silový trénink', media: 'media-forest', bhm: 'Tělo · síla · trpělivost' },
+  { id: 'hiit', t: 'HIIT', d: 'Vysoce intenzivní intervalový trénink, který kombinuje kardio a posilování. Krátké intervaly, maximální efekt — pro ty, kteří chtějí výsledky bez ztráty času.', img: 'HIIT lekce', media: 'media-clay', bhm: 'Tělo · energie · odolnost' },
+  { id: 'supermamky', t: 'Supermamky', d: 'Tréninky pro maminky s dětmi — cvičení přizpůsobené realitě rodičovství. S miminkem nebo batoletem u tebe.', img: 'supermamky', media: 'media-sand', bhm: 'Tělo · rodina · komunita' },
+  { id: 'vlastni-vaha', t: 'Vlastní váha', d: 'Cvičení bez nářadí: ovládneš základní pohybové vzory, zlepšíš koordinaci a sílu. Vhodné i jako první krok pro úplné začátečníky.', img: 'vlastní váha', media: 'media-rose', bhm: 'Tělo · kontrola · pozornost' },
+  { id: 'power-zone', t: 'Power Zone', d: 'Funkční trénink kombinující kruháče a prvky crossfitu. Intenzivní, efektivní, vedený trenérem — pro výsledky bez zbytečných řečí.', img: 'power zone', media: 'media-clay', bhm: 'Tělo · síla · výkon' },
+  { id: 'zumba', t: 'Zumba', d: 'Taneční fitness v rytmu latinskoamerické hudby — pohyb jako oslava, ne dřina. Vhodné pro všechny, kteří chtějí cvičit a přitom se bavit.', img: 'zumba', media: 'media-rose', bhm: 'Tělo · rytmus · radost' },
+  { id: 'brisni-pekac', t: 'Břišní pekáč', d: 'Trénink hlubokého stabilizačního systému a core. Žádné zkracovačky — učíš se ovládat tělo zevnitř. Vhodné pro všechny úrovně.', img: 'břišní pekáč', media: 'media-rose', bhm: 'Tělo · stabilita · kontrola' },
+  { id: 'solid-booty', t: 'Solid Booty', d: 'Zaměřeno na hýžďové svaly — správná technika, vědomý pohyb, výsledky. Oblíbená lekce s jasným cílem.', img: 'solid booty', media: 'media-sand', bhm: 'Tělo · síla · pohyb' },
+  { id: 'enduro', t: 'Enduro', d: 'Síla, kondice a přirozené pohyby v jedné lekci. Pro ty, kdo chtějí výkonnější a odolnější tělo na dlouho.', img: 'enduro', media: 'media-green', bhm: 'Tělo · výdrž · odolnost' },
 ];
 
 // href = detail stránky; box je klikatelný celý. Bez href zatím stránka není

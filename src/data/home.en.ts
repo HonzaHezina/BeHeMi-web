@@ -36,17 +36,19 @@ export const paths = [
   { tag: 'cycle', t: 'Healthy back · strength · energy', d: 'Themed cycles focused on a specific goal.' },
 ];
 
+// id = stable anchor on /en/group-classes/#<id> — SAME slugs as Czech
+// (home.ts), never change them; links across the site point at them.
 export const classes = [
-  { t: 'Circuit Training', d: 'Functional training in a circuit: you rotate between stations, training with bodyweight or equipment, led by a coach. Suitable for all levels.', img: 'circuit training', media: 'media-green', bhm: 'Body · follow-through · community' },
-  { t: 'Strength Training', d: 'Bodyweight and simple equipment work under a coach. We focus on technique and gradual strength building.', img: 'strength training', media: 'media-forest', bhm: 'Body · strength · patience' },
-  { t: 'HIIT', d: 'High-intensity interval training combining cardio and strength. Short intervals, maximum effect — for those who want results without wasting time.', img: 'HIIT class', media: 'media-clay', bhm: 'Body · energy · resilience' },
-  { t: 'Supermums', d: 'Classes for mums with children — training adapted to the reality of parenthood. With a baby or toddler beside you.', img: 'supermums', media: 'media-sand', bhm: 'Body · family · community' },
-  { t: 'Bodyweight', d: 'Training without equipment: master fundamental movement patterns, improve coordination and strength. Great as a first step for complete beginners.', img: 'bodyweight', media: 'media-rose', bhm: 'Body · control · focus' },
-  { t: 'Power Zone', d: 'Functional training combining circuits and CrossFit elements. Intense, effective, coach-led — for results without fuss.', img: 'power zone', media: 'media-clay', bhm: 'Body · strength · performance' },
-  { t: 'Zumba', d: 'Dance fitness to Latin rhythms — movement as celebration, not a chore. For anyone who wants to exercise and have fun at the same time.', img: 'zumba', media: 'media-rose', bhm: 'Body · rhythm · joy' },
-  { t: 'Core & Abs', d: 'Deep stabilisation and core training. No crunches — you learn to control your body from the inside. Suitable for all levels.', img: 'core abs', media: 'media-rose', bhm: 'Body · stability · control' },
-  { t: 'Solid Booty', d: 'Focused on glute muscles — correct technique, mindful movement, results. A popular class with a clear goal.', img: 'solid booty', media: 'media-sand', bhm: 'Body · strength · movement' },
-  { t: 'Enduro', d: 'Strength, conditioning, and natural movement patterns in one class. For those who want a more capable and resilient body long-term.', img: 'enduro', media: 'media-green', bhm: 'Body · endurance · resilience' },
+  { id: 'kruhac', t: 'Circuit Training', d: 'Functional training in a circuit: you rotate between stations, training with bodyweight or equipment, led by a coach. Suitable for all levels.', img: 'circuit training', media: 'media-green', bhm: 'Body · follow-through · community' },
+  { id: 'silovy-trenink', t: 'Strength Training', d: 'Bodyweight and simple equipment work under a coach. We focus on technique and gradual strength building.', img: 'strength training', media: 'media-forest', bhm: 'Body · strength · patience' },
+  { id: 'hiit', t: 'HIIT', d: 'High-intensity interval training combining cardio and strength. Short intervals, maximum effect — for those who want results without wasting time.', img: 'HIIT class', media: 'media-clay', bhm: 'Body · energy · resilience' },
+  { id: 'supermamky', t: 'Supermums', d: 'Classes for mums with children — training adapted to the reality of parenthood. With a baby or toddler beside you.', img: 'supermums', media: 'media-sand', bhm: 'Body · family · community' },
+  { id: 'vlastni-vaha', t: 'Bodyweight', d: 'Training without equipment: master fundamental movement patterns, improve coordination and strength. Great as a first step for complete beginners.', img: 'bodyweight', media: 'media-rose', bhm: 'Body · control · focus' },
+  { id: 'power-zone', t: 'Power Zone', d: 'Functional training combining circuits and CrossFit elements. Intense, effective, coach-led — for results without fuss.', img: 'power zone', media: 'media-clay', bhm: 'Body · strength · performance' },
+  { id: 'zumba', t: 'Zumba', d: 'Dance fitness to Latin rhythms — movement as celebration, not a chore. For anyone who wants to exercise and have fun at the same time.', img: 'zumba', media: 'media-rose', bhm: 'Body · rhythm · joy' },
+  { id: 'brisni-pekac', t: 'Core & Abs', d: 'Deep stabilisation and core training. No crunches — you learn to control your body from the inside. Suitable for all levels.', img: 'core abs', media: 'media-rose', bhm: 'Body · stability · control' },
+  { id: 'solid-booty', t: 'Solid Booty', d: 'Focused on glute muscles — correct technique, mindful movement, results. A popular class with a clear goal.', img: 'solid booty', media: 'media-sand', bhm: 'Body · strength · movement' },
+  { id: 'enduro', t: 'Enduro', d: 'Strength, conditioning, and natural movement patterns in one class. For those who want a more capable and resilient body long-term.', img: 'enduro', media: 'media-green', bhm: 'Body · endurance · resilience' },
 ];
 
 // href = detail page; the whole box is clickable. No href = page not built yet.
