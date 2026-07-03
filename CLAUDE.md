@@ -40,7 +40,13 @@ luxusní wellness. Tělo jako cesta k síle, zdraví a klidu.
    chybí — **zeptej se, nevymýšlej.**
 5. **SEO basics na každé stránce.** Jeden `<h1>`, smysluplný `<title>` a
    `meta description`, sémantické nadpisy, alt texty u obrázků.
-6. **Jazyk webu je čeština.** (EN mutace případně později, ne teď.)
+6. **Jazyk webu je čeština.** EN mutace existuje pod `/en/` pro část stránek
+   (texty v `src/data/home.en.ts` + `src/i18n/ui.ts`). Dětské stránky jsou zatím
+   jen česky — EN na ně odkazuje českým slugem. Novou stránku stav česky, EN
+   protějšek jen když dává smysl.
+7. **Copy tón: věcný, ne duchovní.** Zakázaná slova: „energie" (woo smysl),
+   „signály těla", „holistické", „samoregulace", „prodáváme cestu", „duše".
+   Fráze na homepage jen z `docs/fraze-pool.md` (max 5–6), nové nevymýšlet.
 
 ## Anti-cíle (čeho se vědomě vyvarovat)
 
@@ -60,25 +66,37 @@ luxusní wellness. Tělo jako cesta k síle, zdraví a klidu.
 | Homepage | `/` | `index.astro` |
 | Proč BoHeMi | `/proc-bohemi/` | `proc-bohemi.astro` |
 | Lekce a služby (hub) | `/lekce-a-sluzby/` | `lekce-a-sluzby.astro` |
+| Skupinové lekce | `/skupinove-lekce/` | `skupinove-lekce.astro` |
+| Kroužky pro děti | `/krouzky-pro-deti/` | `krouzky-pro-deti.astro` |
+| Supermamky | `/supermamky/` | `supermamky.astro` |
+| Open gym | `/open-gym/` | `open-gym.astro` |
+| Fotobiomodulace | `/fotobiomodulacni-terapie/` | `fotobiomodulacni-terapie.astro` |
 | Ceník | `/cenik/` | `cenik.astro` |
 | Kontakt | `/kontakt/` | `kontakt.astro` |
+| 404 | — | `404.astro` |
+
+EN mutace (`src/pages/en/`): home, classes-and-services, group-classes,
+open-gym, photobiomodulation-therapy, pricing, why-bohemi, contact.
 
 Hlavní menu (rozhodnuto Honzou): **Domů · Proč BoHeMi · Lekce a služby · Ceník ·
 Kontakt · Rezervovat**. Položka „Lekce a služby" má dropdown na kotvy
 `#pro-tebe / #pro-deti / #pro-firmy`.
 
-> ⚠️ **Slugy ověřit proti reálné `sitemap.xml` / GSC.** Přejmenování = jen
-> přejmenování souboru v `src/pages/`. `/lekce-a-sluzby/` je **hub**, který
-> sjednocuje to, co současný web má jako samostatné stránky (níž) — buď zůstane
-> hub a staré slugy → **301 sem**, nebo se rozpadne na jednotlivé stránky.
-> Rozhodnutí dělá Honza.
+> ✅ **Slugy jsou ověřené z reálné GSC (12 měsíců).** Zdroj pravdy =
+> **`docs/redirect-map.md`** (KEEP / 301 / WP / LEGAL + trailing-slash pravidlo).
+> Nové slugy odsud, nevymýšlet. **301 redirecty zbývá implementovat**
+> (Astro config vs. nginx/Coolify — zatím nerozhodnuto).
 
-### Z původního indexu (zatím nepostavené / k rozhodnutí)
+### Zatím nepostavené (KEEP slugy z redirect-map)
 
-`/skupinove-lekce/`, `/krouzky-pro-deti/`, `/objevovarna/`,
-`/fotobiomodulacni-terapie/`, `/osobni-trener/`, `/open-gym/`, `/pronajem-salu/`,
-`/firmy/`, `/treneri/`, `/fotky/`, `/spoluprace/`, `/blog/` (Novinky),
-„Seznamte se s námi" *(slug ověřit)*. Ceník alt slug možná `/za-kolik-to-mame/`.
+`/pronajem-salu/` (142 kliků), `/hula-hoop/`, `/firmy/`, `/fotky/`,
+osobní tréninky (nová stránka; 301 z `/nase-sluzby/osobni-treninky/`),
+trenéři (`/proc-bohemi/#treneri` nebo samostatná `/treneri/` — rozhodne Honza),
+LEGAL stránky (VOP, GDPR, provozní řád…).
+
+- `/objevovarna/` se nestaví — obsah je sekce na `/krouzky-pro-deti/`.
+- **Příměstský tábor se už nedělá (rozhodnuto 7/2026) — nevracet do nabídky.**
+  Redirect `/primestsky-tabor/` → `/krouzky-pro-deti/` zůstává v platnosti.
 
 Mimo repo (WordPress, neřešíš tady): `bohemi.fit/rezervace/` — rezervace,
 „Můj účet" / login / členství.
@@ -119,7 +137,21 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   („nic neber jako dogma, ověř si to") zůstává, **název knihy a odkazy pryč**.
 - **Kontakt = statika:** export měl odesílací formulář → nahrazen přímými akcemi
   (`mailto:` / `tel:`) + odkaz ven na rezervaci. Žádný `<form>`/`<input>`.
-- **Přístupnost:** všech 5 stránek projde **axe-core (WCAG 2.1 A+AA) = 0 chyb**.
+- **Děti a rodiny = po homepage nejsilnější publikum** (GSC: `/krouzky-pro-deti/`
+  338 kliků). Realizováno (7/2026): hero má sekundární tlačítko „Hledáš něco pro
+  děti?", vysoko na homepage je plný pruh `KidsBand.astro` (sand pozadí, dlaždice
+  z `kidsBand` v datech) a dětská karta v „Najdi se v tom" vede na
+  `/krouzky-pro-deti/`, ne na kotvu. Dospělácká linie webu tím ale zůstává —
+  není to dětský web.
+- **Klikatelné karty služeb:** detail se otvírá klikem na celý box, ne textovým
+  odkazem pod mřížkou. Vzor: volitelné `href` v datech (`individualServices`,
+  `kidsActivities`, `kidsBand`), šablona renderuje `<a>` s „Detail →", bez
+  `href` zůstává `<div>` (= stránka ještě není, např. osobní tréninky).
+- **Obsah z WordPressu ověřovat — je místy zastaralý.** Př.: lektorka Supermamek
+  na WP (Klára Šauerová) už v týmu není; termíny semestru kroužků („letní
+  16. 9. 2026 – 27. 1. 2027") vypadají jako zimní — čeká na Honzovo potvrzení.
+  Dynamické údaje (volná místa) na statický web nepatří.
+- **Přístupnost:** všechny stránky projdou **axe-core (WCAG 2.1 A+AA) = 0 chyb**.
   Drž text ≥ 4.5:1 (velký ≥ 3:1), globální `:focus-visible` ring je v `@layer base`,
   animace respektují `prefers-reduced-motion`. Po změně barev spusť axe znovu.
 - **Architektura:** sdílená data v `src/data/home.ts` (lekce, ceník, navigace…),
@@ -169,4 +201,4 @@ Než sáhneš na související oblast, projdi příslušný guide:
 - React/Vue/Svelte komponenty uvnitř Astra (islands): https://docs.astro.build/en/guides/framework-components/
 - Content collections (správa obsahu): https://docs.astro.build/en/guides/content-collections/
 - Styly a Tailwind: https://docs.astro.build/en/guides/styling/
-- Vícejazyčnost (případná EN mutace později): https://docs.astro.build/en/guides/internationalization/
+- Vícejazyčnost (EN mutace v `/en/`): https://docs.astro.build/en/guides/internationalization/
