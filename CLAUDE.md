@@ -79,8 +79,12 @@ EN mutace (`src/pages/en/`): home, classes-and-services, group-classes,
 open-gym, photobiomodulation-therapy, pricing, why-bohemi, contact.
 
 Hlavní menu (rozhodnuto Honzou): **Domů · Proč BoHeMi · Lekce a služby · Ceník ·
-Kontakt · Rezervovat**. Položka „Lekce a služby" má dropdown na kotvy
-`#pro-tebe / #pro-deti / #pro-firmy`.
+Kontakt · Rezervovat**. Položka „Lekce a služby" má dropdown: **Pro tebe →
+`/lekce-a-sluzby/#pro-tebe` · Pro děti a rodiny → `/krouzky-pro-deti/`
+(rozhodnuto 7/2026 — děti vedou na klíčovou stránku, ne na kotvu) · Pro firmy →
+`/lekce-a-sluzby/#pro-firmy`** (kotva jen dokud nevznikne `/firmy/`).
+Footer má sloupec **Služby** (Skupinové lekce, Kroužky pro děti, Supermamky,
+Open gym, Fotobiomodulace) — každá nová service stránka se přidává i sem.
 
 > ✅ **Slugy jsou ověřené z reálné GSC (12 měsíců).** Zdroj pravdy =
 > **`docs/redirect-map.md`** (KEEP / 301 / WP / LEGAL + trailing-slash pravidlo).
@@ -100,6 +104,47 @@ LEGAL stránky (VOP, GDPR, provozní řád…).
 
 Mimo repo (WordPress, neřešíš tady): `bohemi.fit/rezervace/` — rezervace,
 „Můj účet" / login / členství.
+
+## Navigační logika — tři vrstvy (sjednoceno 7/2026, drž ji)
+
+**HP (ochutnávka) → rozcestník (přehled) → detailní stránka (vše).**
+Pravidlo pro celý web: **každý klik vede na NEJKONKRÉTNĚJŠÍ existující stránku.**
+
+- služba s vlastní stránkou → její stránka (KEEP sekce v `docs/redirect-map.md`)
+- typ lekce (kruháč, HIIT…) → `/skupinove-lekce/#kotva` — **typy lekcí NEMAJÍ
+  vlastní stránky (rozhodnuto z dat), vždy kotva**
+- dětská aktivita bez vlastní stránky → `/krouzky-pro-deti/#kotva`
+- kategorie → rozcestník (`/lekce-a-sluzby/`, příp. jeho sekce)
+
+**Stabilní kotvy (NIKDY neměnit — vedou na ně odkazy z celého webu; EN používá
+stejné slugy, jen cestu `/en/group-classes/#…`):**
+
+- `/skupinove-lekce/`: `#kruhac #silovy-trenink #hiit #supermamky #vlastni-vaha
+  #power-zone #zumba #brisni-pekac #solid-booty #enduro`
+- `/krouzky-pro-deti/`: `#cirkusova-skolicka #zaklady-gymnastiky
+  #akrobacie-zonglovani #objevovarna #detska-zumba`
+
+**Jak se to drží v kódu** (data v `src/data/home.ts` + `home.en.ts`):
+
+- `classes[].id` = kotva; `classes[].page` = lekce má vlastní stránku (dnes jen
+  Supermamky) → zmínky vedou na ni, kotva ale dál existuje.
+- Volitelné `href` u `paths`, `approach`, `individualServices`, `kidsActivities`,
+  `kidsBand`: šablona vykreslí celý box jako `<a>` (+ „Detail →"), bez `href`
+  zůstává `<div>` = stránka/kotva ještě neexistuje. Nikdy textový odkaz
+  „… — detail →" uvnitř neklikací karty.
+- Cíl kotvy potřebuje `scroll-mt-24` (sticky header).
+- **Provozní údaje (rozvrh, kapacita, ceny) jen na detailu, ne v dlaždicích** —
+  jeden zdroj pravdy (viz Objevovárna).
+- Rozcestník = krátké dlaždice, detail = plný text. **Stejný odstavec nesmí být
+  na rozcestníku i detailu** (SEO + údržba).
+
+**Až vznikne nová service stránka** (osobní tréninky, `/pronajem-salu/`,
+`/firmy/`, `/hula-hoop/`): doplnit `href`/`page` do dat, přesunout její plný
+text z rozcestníku na detail (checklist v `docs/service-pages.md`), přidat do
+footer sloupce Služby, u `/firmy/` přepnout dropdown a kartu 08.
+
+Kontrola po změnách odkazů: `npm run build && node scripts/check-links.mjs`
+(mrtvé odkazy, mrtvé kotvy, duplicitní odstavce — má hlásit 0 chyb).
 
 ## Jak pracovat
 
@@ -143,10 +188,8 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   z `kidsBand` v datech) a dětská karta v „Najdi se v tom" vede na
   `/krouzky-pro-deti/`, ne na kotvu. Dospělácká linie webu tím ale zůstává —
   není to dětský web.
-- **Klikatelné karty služeb:** detail se otvírá klikem na celý box, ne textovým
-  odkazem pod mřížkou. Vzor: volitelné `href` v datech (`individualServices`,
-  `kidsActivities`, `kidsBand`), šablona renderuje `<a>` s „Detail →", bez
-  `href` zůstává `<div>` (= stránka ještě není, např. osobní tréninky).
+- **Klikatelné karty:** detail se otvírá klikem na celý box, ne textovým
+  odkazem pod mřížkou. Vzor a cíle odkazů → sekce **Navigační logika** výš.
 - **Obsah z WordPressu ověřovat — je místy zastaralý.** Př.: lektorka Supermamek
   na WP (Klára Šauerová) už v týmu není; termíny semestru kroužků („letní
   16. 9. 2026 – 27. 1. 2027") vypadají jako zimní — čeká na Honzovo potvrzení.

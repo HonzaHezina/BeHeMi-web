@@ -36,11 +36,20 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   `/krouzky-pro-deti/`, `/supermamky/`, `/open-gym/`, `/fotobiomodulacni-terapie/`,
   `/cenik/`, `/kontakt/`, 404 + EN mutace v `src/pages/en/`.
   Menu: Domů · Proč BoHeMi · Lekce a služby · Ceník · Kontakt · Rezervovat.
+- **Navigace = tři vrstvy** (HP ochutnávka → rozcestník → detail): každý klik
+  vede na **nejkonkrétnější existující stránku**. Služba → vlastní stránka; typ
+  lekce → `/skupinove-lekce/#kotva` (typy lekcí nemají vlastní stránky); dětská
+  aktivita → `/krouzky-pro-deti/#kotva`. **Kotvy (`classes[].id` v datech +
+  dětské `#cirkusova-skolicka` ap.) se NIKDY nemění**; cíl kotvy má `scroll-mt-24`.
+  Provozní údaje (rozvrh, kapacita) jen na detailu, ne v dlaždicích; stejný
+  odstavec nesmí být na rozcestníku i detailu. Detaily v `/CLAUDE.md`.
 - **Děti = po homepage nejsilnější publikum:** hero má dětské tlačítko, homepage
-  pruh `KidsBand.astro`, dětská karta vede na `/krouzky-pro-deti/`. Příměstský
-  tábor se už nedělá — nevracet.
+  pruh `KidsBand.astro`, dětská karta i menu dropdown vedou na
+  `/krouzky-pro-deti/`. Příměstský tábor se už nedělá — nevracet.
 - **Klikatelné karty:** detail služby = klik na celý box (volitelné `href`
   v datech → `<a>` s „Detail →"; bez `href` `<div>` = stránka ještě není).
+  `classes[].page` = lekce s vlastní stránkou (Supermamky). Nová service
+  stránka → doplnit `href`/`page` v datech + footer sloupec „Služby".
 - **Font:** jen **Hanken Grotesk** (bez serifu) — akcenty kurzívou + vahou.
 - **Paleta = WARM-DARK (black/white/red).** Černá je kotva, ne dominanta: obsah na
   teplém světlém `bg #f5efe6`, tmavé kotvy na `ink-dark #14110e` (ne `#000`).

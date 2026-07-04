@@ -68,6 +68,24 @@ placeholder čekající na moje doplnění.
 
 ---
 
+## Checklist po postavení stránky (napojení na navigaci — 7/2026)
+
+Web má sjednocenou třívrstvou navigaci (HP → rozcestník → detail; pravidla
+v `CLAUDE.md`, sekce „Navigační logika"). Nová service stránka se napojuje takto:
+
+1. **Data:** doplň `href` (u `individualServices` / `kidsActivities` / …)
+   nebo `page` (u `classes`) v `src/data/home.ts` + `home.en.ts` — dlaždice
+   na HP a rozcestníku se tím samy stanou klikací.
+2. **Text:** plný odstavec služby PŘESUŇ z rozcestníku na detail; na
+   rozcestníku nech jen krátkou dlaždici. Stejný odstavec nesmí zůstat dvakrát.
+3. **Footer:** přidej stránku do sloupce „Služby" (`Footer.astro`, CS + EN).
+4. **Ceník:** má-li služba sekci v ceníku, přidej k ní odkaz na detail
+   (vzor: fotobiomodulace, kroužky).
+5. **Speciálně `/firmy/`:** přepnout dropdown „Pro firmy" a kartu 08
+   v „Vyber, co teď potřebuješ" z kotvy `/lekce-a-sluzby/#pro-firmy` na `/firmy/`.
+6. Spusť build a zkontroluj odkazy a kotvy: `npm run build && node scripts/check-links.mjs`
+   (0 chyb; hlásí i duplicitní odstavce rozcestník × detail).
+
 ## Co potřebuju od Honzy, než se rozjedeme
 - Potvrdit seznam stránek + reálné staré slugy (ideálně ze Search Console).
 - Reálné bony tam, kde staging odstavec nestačí: ceny, rozvrh, kdo vede,
