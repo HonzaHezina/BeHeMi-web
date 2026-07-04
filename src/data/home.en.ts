@@ -68,7 +68,7 @@ export const individualServices: { t: string; d: string; href?: string }[] = [
 export const kidsActivities: { t: string; d: string; img: string; media: string; href?: string }[] = [
   { t: 'Circus School', d: 'For the youngest — basic movement skills through play.', img: 'circus school', media: 'media-sand', href: '/krouzky-pro-deti/#cirkusova-skolicka' },
   { t: 'Gymnastics & Acrobatics basics', d: 'Gymnastics and acrobatics led by La Putyka acrobats.', img: 'acrobatics', media: 'media-clay', href: '/krouzky-pro-deti/#zaklady-gymnastiky' },
-  { t: 'Floor & aerial acrobatics, juggling', d: 'Floor and aerial acrobatics and juggling.', img: 'kids clubs', media: 'media-green', href: '/krouzky-pro-deti/#akrobacie-zonglovani' },
+  { t: 'Hlavou ve vzduchu', d: 'Floor and aerial acrobatics and juggling.', img: 'kids clubs', media: 'media-green', href: '/krouzky-pro-deti/#akrobacie-zonglovani' },
   { t: 'Discovery Room', d: 'For the youngest children up to age 5 — 6 movement stations where children explore the world through movement.', img: 'discovery room', media: 'media-rose', href: '/krouzky-pro-deti/#objevovarna' },
   { t: 'Kids Zumba', d: 'Dance classes for children in Zumba style — fun, coordination, and movement through play. Led by Eliška Velázquez.', img: 'kids zumba', media: 'media-sand', href: '/krouzky-pro-deti/#detska-zumba' },
   { t: 'Supermums', d: 'A group class for mums and dads with kids — circuit training adapted to the reality of parenthood. With your baby or toddler right beside you.', img: 'supermums', media: 'media-forest', href: '/supermamky/' },
@@ -123,9 +123,9 @@ export const trainers = [
 ];
 
 export const pricing = [
-  { t: 'Single entry', d: 'When you come just occasionally', price: '250 CZK', per: '/ class', featured: false, badge: '', note: '', feat: ['Pay per class separately', 'No discount on services', 'Most expensive per-class option'] },
-  { t: 'Membership', d: 'When movement is part of life', price: '1,499 CZK', per: '/ 8 classes', featured: true, badge: 'Best value', note: '8 classes works out to ~187 CZK per class.', feat: ['8 group classes', 'Classes ~187 CZK / class', '30% discount on personal training', 'Community and events included'] },
-  { t: '8-Week Program', d: 'When you want to take it seriously', price: '3,900 CZK', per: '/ 8 weeks', featured: false, badge: 'Flagship program', note: '', feat: ['2× movement + 1× workshop per week', 'Measurements at start and end', 'Closed group of up to 12 people', 'Coach-led for the full 8 weeks'] },
+  { t: 'Single entry', d: 'When you come just occasionally', price: '199 CZK', per: '/ class', featured: false, badge: '', note: 'Enduro 250 CZK · Open gym 450 CZK.', feat: ['Circuit, strength, HIIT, Supermums', 'Pay per class separately', 'No discount on other classes'] },
+  { t: 'Monthly membership', d: 'Movement as part of your routine', price: '1,499 CZK', per: '/ month', featured: true, badge: 'Most popular', note: '8 classes works out to ~187 CZK per class.', feat: ['8 group classes, 30-day validity', '1× Open gym + 10 min photobiomodulation', '10% off other classes'] },
+  { t: 'Annual membership', d: 'Movement as a long-term commitment', price: '1,199 CZK', per: '/ month', featured: false, badge: 'Best value', note: '96 classes works out to ~150 CZK per class.', feat: ['96 group classes, 14-month validity', '12× Open gym + 10 min photobio / month', '10% off other classes'] },
 ];
 
 export const nav = [

@@ -74,8 +74,8 @@ export const individualServices: { t: string; d: string; href?: string }[] = [
 // skupinová lekce maminek (a tátů) s dětmi, ne jen poznámka pod čarou.
 export const kidsActivities: { t: string; d: string; img: string; media: string; href?: string }[] = [
   { t: 'Cirkusová školička', d: 'Pro nejmenší — základní pohybové dovednosti hravou formou.', img: 'cirkusová školička', media: 'media-sand', href: '/krouzky-pro-deti/#cirkusova-skolicka' },
-  { t: 'Základy gymnastiky a akrobacie', d: 'Gymnastika a akrobacie pod vedením akrobatů La Putyka.', img: 'akrobacie', media: 'media-clay', href: '/krouzky-pro-deti/#zaklady-gymnastiky' },
-  { t: 'Pozemní a závěsná akrobacie, žonglování', d: 'Pozemní i závěsná akrobacie a žonglování.', img: 'kroužky pro děti', media: 'media-green', href: '/krouzky-pro-deti/#akrobacie-zonglovani' },
+  { t: 'Základy cirkusového tréninku', d: 'Gymnastika a akrobacie pod vedením akrobatů La Putyka.', img: 'akrobacie', media: 'media-clay', href: '/krouzky-pro-deti/#zaklady-gymnastiky' },
+  { t: 'Hlavou ve vzduchu', d: 'Pozemní i závěsná akrobacie a žonglování.', img: 'kroužky pro děti', media: 'media-green', href: '/krouzky-pro-deti/#akrobacie-zonglovani' },
   { t: 'Objevovárna', d: 'Pro nejmenší děti do 5 let — 6 pohybových stanovišť, kde děti prozkoumávají svět pohybem hravou formou.', img: 'objevovárna', media: 'media-rose', href: '/krouzky-pro-deti/#objevovarna' },
   { t: 'Dětská Zumba', d: 'Taneční lekce pro děti v rytmu Zumby — zábava, koordinace a pohyb hravou formou. Vede Eliška Velázquez.', img: 'dětská zumba', media: 'media-sand', href: '/krouzky-pro-deti/#detska-zumba' },
   { t: 'Supermamky', d: 'Skupinová lekce pro maminky a tatínky s dětmi — kruhový trénink přizpůsobený realitě rodičovství. S miminkem nebo batoletem u tebe.', img: 'supermamky', media: 'media-forest', href: '/supermamky/' },
@@ -139,9 +139,9 @@ export const trainers = [
 ];
 
 export const pricing = [
-  { t: 'Jednorázový vstup', d: 'Když přijdeš jen občas', price: '250 Kč', per: '/ lekce', featured: false, badge: '', note: '', feat: ['Platíš za každou lekci zvlášť', 'Žádná sleva na služby', 'Nejdražší varianta za lekci'] },
-  { t: 'Členství', d: 'Když je pohyb součást života', price: '1 499 Kč', per: '/ 8 lekcí', featured: true, badge: 'Nejvýhodnější', note: '8 lekcí vychází na ~187 Kč za lekci.', feat: ['8 skupinových lekcí', 'Lekce ~187 Kč / lekce', 'Sleva 30 % na osobní tréninky', 'Komunita a akce v ceně'] },
-  { t: 'Program 8 týdnů', d: 'Když to chceš vzít vážně', price: '3 900 Kč', per: '/ 8 týdnů', featured: false, badge: 'Vlajkový program', note: '', feat: ['2× pohyb + 1× praktický blok týdně', 'Měření na začátku a na konci', 'Uzavřená skupina do 12 lidí', 'Vedení trenérem celých 8 týdnů'] },
+  { t: 'Jednorázový vstup', d: 'Když přijdeš jen občas', price: '199 Kč', per: '/ lekce', featured: false, badge: '', note: 'Enduro 250 Kč · Open gym 450 Kč.', feat: ['Kruhové, silové, HIIT, Supermamky', 'Platíš za každou lekci zvlášť', 'Žádná sleva na ostatní lekce'] },
+  { t: 'Měsíční členství', d: 'Pohyb jako součást rutiny', price: '1 499 Kč', per: '/ měsíc', featured: true, badge: 'Nejoblíbenější', note: '8 lekcí vychází na ~187 Kč za lekci.', feat: ['8 skupinových lekcí, 30 dní platnosti', '1× Open gym + 10 min fotobiomodulace', '10% sleva na ostatní lekce'] },
+  { t: 'Roční členství', d: 'Pohyb jako dlouhodobý závazek', price: '1 199 Kč', per: '/ měsíc', featured: false, badge: 'Nejlepší cena', note: '96 lekcí vychází na ~150 Kč za lekci.', feat: ['96 skupinových lekcí, 14 měsíců platnosti', '12× Open gym + 10 min fotobio / měsíc', '10% sleva na ostatní lekce'] },
 ];
 
 // Hlavní navigace. Kotvy míří na sekce homepage formou "/#…", ať fungují
