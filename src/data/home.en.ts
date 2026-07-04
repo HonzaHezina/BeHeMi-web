@@ -33,7 +33,7 @@ export const audiences = [
 // NOT RENDERED (7/2026): programs other than the 8-Week Program aren't ready —
 // the "Classes & programs" grid was pulled from the homepage (Offer.astro).
 export const paths: { tag: string; t: string; d: string; href?: string }[] = [
-  { tag: 'flagship', t: '8-Week Program', d: 'Eight weeks with a small group — not a punch card.', href: '/en/#program' },
+  { tag: 'flagship', t: '8-Week Program', d: 'Eight weeks with a small group — not a punch card.', href: '/program-8-tydnu/' },
   { tag: 'monthly', t: 'Monthly membership', d: 'Regular movement with structure and community.' },
   { tag: '1:1', t: 'Personal restart', d: 'Individual coaching when you need to start fresh.' },
   { tag: 'group', t: 'Mums', d: 'Movement for mums — babies welcome beside you.', href: '/supermamky/' },
@@ -125,7 +125,7 @@ export const trainers = [
 export const pricing = [
   { t: 'Single entry', d: 'When you come just occasionally', price: '250 CZK', per: '/ class', featured: false, badge: '', note: '', feat: ['Pay per class separately', 'No discount on services', 'Most expensive per-class option'] },
   { t: 'Membership', d: 'When movement is part of life', price: '1,499 CZK', per: '/ 8 classes', featured: true, badge: 'Best value', note: '8 classes works out to ~187 CZK per class.', feat: ['8 group classes', 'Classes ~187 CZK / class', '30% discount on personal training', 'Community and events included'] },
-  { t: '8-Week Program', d: 'When you want to take it seriously', price: '3,900 CZK', per: '/ 8 weeks', featured: false, badge: 'Flagship program', note: '', feat: ['2× movement + 1× workshop per week', 'Measurements at start and end', 'Closed group of 10–20 people', 'Coach-led for the full 8 weeks'] },
+  { t: '8-Week Program', d: 'When you want to take it seriously', price: '3,900 CZK', per: '/ 8 weeks', featured: false, badge: 'Flagship program', note: '', feat: ['2× movement + 1× workshop per week', 'Measurements at start and end', 'Closed group of up to 12 people', 'Coach-led for the full 8 weeks'] },
 ];
 
 export const nav = [
