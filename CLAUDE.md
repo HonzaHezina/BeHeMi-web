@@ -44,9 +44,13 @@ luxusní wellness. Tělo jako cesta k síle, zdraví a klidu.
    (texty v `src/data/home.en.ts` + `src/i18n/ui.ts`). Dětské stránky jsou zatím
    jen česky — EN na ně odkazuje českým slugem. Novou stránku stav česky, EN
    protějšek jen když dává smysl.
-7. **Copy tón: věcný, ne duchovní.** Zakázaná slova: „energie" (woo smysl),
-   „signály těla", „holistické", „samoregulace", „prodáváme cestu", „duše".
-   Fráze na homepage jen z `docs/fraze-pool.md` (max 5–6), nové nevymýšlet.
+7. **Copy tón: věcný, ne duchovní.** Zakázaná slova (platí všude, nula):
+   „energie" (woo smysl), „signály těla", „holistické", „samoregulace",
+   „prodáváme cestu", „duše" + rozšířeno 7/2026: „harmonie", „transformace",
+   „vědomí". Fráze na homepage jen z `docs/fraze-pool.md` (max 5–6), nové
+   nevymýšlet. **Fráze použité na `/program-8-tydnu/` se NESMÍ opakovat na
+   HP** — HP smí z poolu nést jen slogan „Neber nic jako svaté…" (zatím
+   nenasazen). Stav nasazení frází je vedený v `docs/fraze-pool.md`.
 
 ## Anti-cíle (čeho se vědomě vyvarovat)
 
@@ -72,6 +76,7 @@ luxusní wellness. Tělo jako cesta k síle, zdraví a klidu.
 | Open gym | `/open-gym/` | `open-gym.astro` |
 | Fotobiomodulace | `/fotobiomodulacni-terapie/` | `fotobiomodulacni-terapie.astro` |
 | Osobní tréninky | `/osobni-treninky/` | `osobni-treninky.astro` |
+| Program 8 týdnů | `/program-8-tydnu/` | `program-8-tydnu.astro` |
 | Pronájem sálů | `/pronajem-salu/` | `pronajem-salu.astro` |
 | Pro firmy | `/firmy/` | `firmy.astro` |
 | Trenéři | `/treneri/` | `treneri.astro` |
@@ -89,11 +94,14 @@ klíčové stránky: **Skupinové lekce → `/skupinove-lekce/` · Osobní trén
 `/firmy/` · Trenéři → `/treneri/`** (data v `navMenu` v `home.ts`).
 Footer má sloupec **Služby** (Skupinové lekce, Kroužky pro děti, Supermamky,
 Open gym, Fotobiomodulace, Osobní tréninky, Pronájem sálů, Pro firmy) — každá
-nová service stránka se přidává i sem.
+nová service stránka se přidává i sem. Program 8 týdnů je ve sloupci **Web**
+(`/program-8-tydnu/`), ne ve Službách — je to program, ne služba.
 
 > ✅ **Slugy jsou ověřené z reálné GSC (12 měsíců).** Zdroj pravdy =
 > **`docs/redirect-map.md`** (KEEP / 301 / WP / LEGAL + trailing-slash pravidlo).
-> Nové slugy odsud, nevymýšlet. **301 redirecty zbývá implementovat**
+> Nové slugy odsud, nevymýšlet. Jediná výjimka mimo GSC: `/program-8-tydnu/`
+> (nový produkt, explicitně schváleno 7/2026 — zapsán i v redirect-map).
+> **301 redirecty zbývá implementovat**
 > (Astro config vs. nginx/Coolify — zatím nerozhodnuto).
 
 ### Zatím nepostavené (KEEP slugy z redirect-map)
@@ -137,7 +145,12 @@ stejné slugy, jen cestu `/en/group-classes/#…`):**
 - Volitelné `href` u `paths`, `approach`, `individualServices`, `kidsActivities`,
   `kidsBand`: šablona vykreslí celý box jako `<a>` (+ „Detail →"), bez `href`
   zůstává `<div>` = stránka/kotva ještě neexistuje. Nikdy textový odkaz
-  „… — detail →" uvnitř neklikací karty.
+  „… — detail →" uvnitř neklikací karty. Mřížka `paths` („Lekce a programy")
+  je od 7/2026 **stažená z HP** — programy kromě Programu 8 týdnů nejsou
+  hotové; data v `home.ts` zůstala, vrátit až budou.
+- **Zmínky Programu 8 týdnů vedou na `/program-8-tydnu/`** (footer, rozcestník,
+  Proč BoHeMi, HP CTA „Jak program funguje →"). HP sekce s kotvou `#program`
+  zůstává jen jako ochutnávka — kotvu neměnit.
 - **`audiences[].anchor` musí být absolutní cesta**, nikdy samotný `#hash`.
   Komponenta `Audiences.astro` se renderuje na homepage — lokální hash jako
   `#pro-firmy` na homepage neexistuje a odkaz nikam nevede. Správně:
@@ -199,14 +212,41 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
 - **Žádná externí kniha/autorita** (anti-cíl): v exportu byla sekce o knize
   „Holistic Human Health" + odkaz na PDF (uhv.org.in). Zmírněno — myšlenka
   („nic neber jako dogma, ověř si to") zůstává, **název knihy a odkazy pryč**.
+  Platí i pro `/program-8-tydnu/`: obsah čerpá myšlenky přes `docs/fraze-pool.md`,
+  kniha se na webu nejmenuje ani neodkazuje.
 - **Kontakt = statika:** export měl odesílací formulář → nahrazen přímými akcemi
   (`mailto:` / `tel:`) + odkaz ven na rezervaci. Žádný `<form>`/`<input>`.
 - **Děti a rodiny = po homepage nejsilnější publikum** (GSC: `/krouzky-pro-deti/`
   338 kliků). Realizováno (7/2026): hero má sekundární tlačítko „Hledáš něco pro
   děti?", vysoko na homepage je plný pruh `KidsBand.astro` (sand pozadí, dlaždice
-  z `kidsBand` v datech) a dětská karta v „Najdi se v tom" vede na
+  z `kidsBand` v datech) a dětská karta v „Pro koho tu jsme" vede na
   `/krouzky-pro-deti/`, ne na kotvu. Dospělácká linie webu tím ale zůstává —
   není to dětský web.
+- **Lokalita ≠ značka (7/2026):** BoHeMi se má časem rozšířit o další místa —
+  „BoHeMi je myšlenka, může být kdekoliv". Značková vrstva je bez Vinohrad:
+  hero H1 akcent „pro tělo, zdraví i hlavu.", footer tagline „…Body – Health –
+  Mind." Lokalita zůstává v hero badge a v SEO titles („— BoHeMi fitness
+  Vinohrady") + meta/kontaktu, **dokud existuje jedno studio** — je to lokální
+  SEO hodnota z GSC, nevyhazovat předčasně. Až bude druhé místo konkrétní:
+  `locations` pole v `src/data/`, Footer/Kontakt renderovat z něj, titles
+  přehodnotit.
+- **HP sekce „Pro koho tu jsme" (dřív „Najdi se v tom", přerámováno 7/2026):**
+  je to rozcestník, ne osobní identifikace — eyebrow „Pro koho tu jsme", H2
+  „Ty. Tvoje děti. Tvoje firma.", karta 01 štítek „Dospělí". Osobní identifikaci
+  dělá vedlejší sekce „Co u nás lidé nejčastěji řeší" (8 situací). **Nepřidávat
+  další karty** — tři vstupy zrcadlí strukturu rozcestníku.
+- **Program 8 týdnů (7/2026):** jediný hotový program (Měsíční program, Osobní
+  restart, Chlapi 40+ a cykly NEJSOU hotové → mřížka „Lekce a programy" stažena
+  z HP). Detail `/program-8-tydnu/`: název **VŽDY „Program 8 týdnů"** (nikdy
+  „Life Practice" ani „Cesta"; velké P i uprostřed věty — HP blok, ceník i detail
+  musí říkat stejně; název ve WP bookingu = samostatná migrace). Kapacita do
+  12 lidí, cena jen v ceníku (na detailu jen odkaz), zdravotní věta „Program
+  nenahrazuje lékařskou ani rehabilitační péči." u CTA, sekundární CTA vede na
+  `/skupinove-lekce/`. Interní podklady (osnovy 20min bloků, měřicí protokol,
+  plná storno tabulka) = `docs/program-8-tydnu-podklady.md` — **NEPUBLIKOVAT**;
+  předstartovní storno pásma patří do budoucích VOP. Termín na webu je záměrně
+  „září 2026" (kandidát 14. 9.–8. 11. 2026 čeká na Honzovo potvrzení). EN
+  stránka není — EN odkazuje českým slugem.
 - **Klikatelné karty:** detail se otvírá klikem na celý box, ne textovým
   odkazem pod mřížkou. Vzor a cíle odkazů → sekce **Navigační logika** výš.
 - **Lekce a služby (rozcestník `/lekce-a-sluzby/`) — rozhodnutá struktura (7/2026):**
