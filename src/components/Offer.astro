@@ -158,8 +158,14 @@ const detailLabel = lang === 'en' ? 'Details →' : 'Detail →';
 
   <div class="pt-9">
     <div class="grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-      {firmyServices.map((f) => (
-        <div class="bg-surface p-[30px] transition-colors hover:bg-surface-hover">
+      {firmyServices.map((f) => f.href ? (
+        <a href={f.href} class="block cursor-pointer bg-surface p-[30px] transition-colors hover:bg-surface-hover">
+          <h4 class="mb-2 text-xl font-extrabold tracking-[-0.02em]">{f.t}</h4>
+          <p class="text-[15.5px] leading-[1.5] text-ink-soft">{f.d}</p>
+          <span class="mt-3 block text-[14px] font-bold text-accent-text">{lang === 'en' ? 'Details →' : 'Detail →'}</span>
+        </a>
+      ) : (
+        <div class="bg-surface p-[30px]">
           <h4 class="mb-2 text-xl font-extrabold tracking-[-0.02em]">{f.t}</h4>
           <p class="text-[15.5px] leading-[1.5] text-ink-soft">{f.d}</p>
         </div>
