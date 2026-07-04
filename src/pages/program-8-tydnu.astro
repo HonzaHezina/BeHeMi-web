@@ -20,22 +20,23 @@ const weekRhythm = [
 // držení těla → režim), věcně a měřitelně. Témata 4 a 5 držet striktně
 // fyziologicky (rozhodnutí Honzy) — nerozvíjet do konceptů.
 const weeks = [
-  { n: '01', t: 'Kde jsi teď', d: 'Vstupní měření síly, kondice a režimu. Ne kvůli známce — kvůli srovnání, až přijde týden 8.' },
-  { n: '02', t: 'Pohyb jako standard', d: 'Jak si postavit týden, aby pohyb nevypadl, ani když přijde nabitý diář. Pravidelnost má přednost před intenzitou.' },
-  { n: '03', t: 'Spánek', d: 'Velká část oprav v těle běží v noci — ne když makáš, ale když ležíš. Spánek je trénink, ne lenost. Co pro něj jde udělat prakticky.' },
-  { n: '04', t: 'Jídlo a voda', d: 'Jez, když máš hlad. Přestaň, když jsi najedený. A po jídle si všimni, jestli jsi lehký, nebo těžký — tvoje vlastní měření, žádné tabulky kalorií.' },
-  { n: '05', t: 'Dech', d: 'Tři minuty klidného dýchání denně. Tempo dechu měřitelně ovlivňuje tep a reakci na stres — naučíš se konkrétní cvičení a rozdíl si ověříš sám/sama. Žádná meditace.' },
-  { n: '06', t: 'Držení těla a technika', d: 'Sed, stoj, zvedání břemen. Technika ze sálu má smysl hlavně mimo něj — v práci, doma, při nošení nákupu.' },
-  { n: '07', t: 'Rytmus', d: 'Zdraví se nedělá nárazem, dělá se rytmem. Jedna změna za pár týdnů — co vydrží, si necháš. Žádných deset předsevzetí naráz.' },
-  { n: '08', t: 'Kde jsi teď — podruhé', d: 'Závěrečné měření stejných položek jako v týdnu 1 a plán, jak pokračovat bez programu. Posun uvidíš v číslech, ne v dojmech.' },
+  { n: '01', t: 'Kde jsi teď', d: 'Vstupní měření síly, kondice, mobility a režimu. Ne kvůli známce — kvůli srovnání, až přijde týden 8.' },
+  { n: '02', t: 'Pohyb jako standard', d: 'Jak si postavit týden, aby pohyb nevypadl, když přijde práce, děti, stres nebo plný diář. Pravidelnost má přednost před intenzitou.' },
+  { n: '03', t: 'Spánek', d: 'Spánek není lenost — je to část tréninku, ve které tělo opravuje, třídí a obnovuje síly. Co pro něj jde udělat prakticky.' },
+  { n: '04', t: 'Jídlo a voda', d: 'Jez, když máš hlad. Přestaň, když jsi najedený. Bez dietní hysterie — sleduješ, po kterém jídle jsi lehký a po kterém padáš. Žádné tabulky kalorií.' },
+  { n: '05', t: 'Dech', d: 'Tři minuty klidného dýchání denně. Tempo dechu měřitelně ovlivňuje tep a reakci na stres — žádná meditace, jen nástroj, který máš pořád u sebe.' },
+  { n: '06', t: 'Držení těla a technika', d: 'Sed, stoj, zvedání, dřep, tah. Co se naučíš v sále, přeneseš do běžného dne — v práci, doma, při nošení nákupu.' },
+  { n: '07', t: 'Rytmus', d: 'Zdraví se nedělá nárazem, dělá se rytmem — opakováním malých věcí, které zvládneš i v horším týdnu. Co vydrží, si necháš.' },
+  { n: '08', t: 'Kde jsi teď — podruhé', d: 'Závěrečné měření stejných položek jako v týdnu 1, porovnání a plán, jak pokračovat bez programu. Posun uvidíš v číslech, ne v dojmech.' },
 ];
 
-// PLACEHOLDER: přesné položky měření dodá Honza (kategorie síla / kondice /
-// režim potvrzeny). Položky NEVYMÝŠLET — doplnit až z jeho podkladů.
+// Položky měření dle Honzových podkladů (7/2026) — plný protokol testů je
+// interně v docs/program-8-tydnu-podklady.md, web nese jen srozumitelný souhrn.
 const measures = [
-  { t: 'Síla' },
-  { t: 'Kondice' },
-  { t: 'Režim' },
+  { t: 'Síla', d: 'Dřep, klik, výdrž ve vzporu a nošení zátěže. Počítají se kvalitní opakování, ne rekordy — každý cvik má variantu pro tvou úroveň.' },
+  { t: 'Kondice', d: 'Tři minuty mírné zátěže a sledování, jak rychle se zklidní dech. Námahu hodnotíš na škále 1–10 — žádné medicínské testy.' },
+  { t: 'Mobilita a držení těla', d: 'Dřep, předklon, ramena, zvednutí ze země. Zapisujeme slovně — bez potíží, lehké omezení, výrazné omezení. Ne známkou.' },
+  { t: 'Režim a návyky', d: 'Krátký dotazník: spánek, energie během dne, pohyb mimo lekce, jídlo, voda, dech a dotahování věcí, které začneš.' },
 ];
 
 const signs = ['Vstaneš svěží', 'Po jídle ti není těžko', 'Spíš tvrdě', 'Zvládneš zátěž'];
@@ -51,10 +52,11 @@ const notForYou = [
   'Chceš cvičit jen občas a bez závazku — na to jsou skupinové lekce.',
 ];
 
-// FAQ: odpovědi na náhrady a ukončení = PLACEHOLDER na Honzovy podmínky.
-const faq: { q: string; a: string; placeholder?: boolean }[] = [
-  { q: 'Co když jednu lekci nestihnu?', a: 'Podmínky náhrad upřesníme — brzy je tu doplníme.', placeholder: true },
-  { q: 'Co když vypadnu v půlce programu?', a: 'Podmínky ukončení a storna upřesníme — brzy je tu doplníme.', placeholder: true },
+// FAQ: podmínky náhrad a ukončení dle Honzova rozhodnutí 7/2026 — finální
+// právní znění patří do VOP (LEGAL stránky), tady je srozumitelný souhrn.
+const faq: { q: string; a: string }[] = [
+  { q: 'Co když jednu lekci nestihnu?', a: 'Jednotlivé absence můžeš nahradit na běžných skupinových lekcích BoHeMi — maximálně 2 lekce během jednoho běhu programu. Nevyužité lekce se po skončení programu neproplácí.' },
+  { q: 'Co když vypadnu v půlce programu?', a: 'Účast se hradí předem a místo je rezervované na celý běh. Pokud po prvním týdnu zjistíš, že program pro tebe není, můžeš skončit a vrátíme ti 70 % ceny. Při pozdějším ukončení se kurzovné nevrací. Výjimka je nemoc nebo úraz doložený lékařem — nevyčerpanou část převedeme do dalšího běhu, případně vyřešíme kreditem po domluvě.' },
   { q: 'Musím být fit předem?', a: 'Ne. Každý cvik má lehčí i těžší variantu a trenér ti nastaví zátěž podle tvé úrovně. Program je stavěný pro začátek a návrat k pohybu, ne pro závodníky.' },
   { q: 'Co obnáší deník návyků?', a: 'Jedna otázka denně, dvě minuty času. Večer si odpovíš, jestli ses dnes hýbal/a, jak se spalo a jak ti bylo po jídle. Žádné tabulky, žádná aplikace navíc.' },
 ];
@@ -82,6 +84,10 @@ const faq: { q: string; a: string; placeholder?: boolean }[] = [
         <p class="mt-6 max-w-[58ch] text-[clamp(18px,2.1vw,22px)] leading-[1.45] text-ink-warm">
           Osm týdnů, dva vedené tréninky týdně a jeden praktický blok. Uzavřená skupina
           do 12 lidí, měření na začátku a na konci. Ne permanentka — program se začátkem a koncem.
+        </p>
+        <p class="mt-4 max-w-[58ch] text-[16.5px] leading-[1.55] text-ink-soft">
+          Není to kurz o tom, jak se změnit přes noc — ani terapie, dieta nebo osobní rozvoj.
+          Je to osm týdnů obyčejné praxe, při které si na vlastním těle ověříš, co ti pomáhá fungovat líp.
         </p>
       </div>
     </section>
@@ -147,17 +153,22 @@ const faq: { q: string; a: string; placeholder?: boolean }[] = [
     <section class="mx-auto max-w-[1220px] px-5 pt-14 md:px-8">
       <h2 class="mb-3 text-[clamp(26px,3.2vw,38px)] font-extrabold leading-[1.06] tracking-[-0.03em]">Co se měří</h2>
       <p class="mb-8 max-w-[58ch] text-[17px] leading-[1.55] text-ink-soft">
-        Stejné položky v týdnu 1 a v týdnu 8 — tři oblasti, ve kterých chceš vidět posun.
+        Nejde o známkování, porovnávání ani soutěž. Chceme vědět, kde právě jsi, abychom se
+        v týdnu 8 mohli podívat, co se změnilo. Žádný výkonový test — výchozí bod a srovnání.
       </p>
-      <!-- PLACEHOLDER: přesné položky měření dodá Honza (nevymýšlet). -->
-      <div class="grid gap-5 sm:grid-cols-3">
+      <div class="grid gap-5 sm:grid-cols-2">
         {measures.map((m) => (
-          <div class="rounded-2xl border-2 border-dashed border-border bg-mint p-7">
+          <div class="rounded-2xl border border-border bg-surface p-7">
             <h3 class="mb-2 text-[21px] font-extrabold tracking-[-0.02em]">{m.t}</h3>
-            <p class="text-[15.5px] italic leading-[1.5] text-ink-muted">Přesné položky měření doplníme.</p>
+            <p class="text-[15.5px] leading-[1.5] text-ink-soft">{m.d}</p>
           </div>
         ))}
       </div>
+      <p class="mt-6 max-w-[58ch] text-[15.5px] leading-[1.55] text-ink-soft">
+        K tomu pár osobních otázek: co tě v těle nejvíc omezuje, co ti bere nejvíc energie
+        a jak se chceš po osmi týdnech cítit. V týdnu 8 to celé zopakujeme — cílem není dokonalý
+        výsledek, ale jasnější odpověď na otázku, co ti funguje a jak v tom pokračovat dál.
+      </p>
     </section>
 
     <!-- JAK POZNÁŠ, ŽE TO FUNGUJE -->
@@ -221,11 +232,7 @@ const faq: { q: string; a: string; placeholder?: boolean }[] = [
                 <path d="m6 9 6 6 6-6" />
               </svg>
             </summary>
-            {f.placeholder ? (
-              <p class="rounded-xl border-2 border-dashed border-border bg-mint px-4 py-3 mb-5 text-[15.5px] italic leading-[1.55] text-ink-muted">{f.a}</p>
-            ) : (
-              <p class="pb-5 text-[15.5px] leading-[1.55] text-ink-soft">{f.a}</p>
-            )}
+            <p class="pb-5 text-[15.5px] leading-[1.55] text-ink-soft">{f.a}</p>
           </details>
         ))}
       </div>
@@ -243,7 +250,8 @@ const faq: { q: string; a: string; placeholder?: boolean }[] = [
           <div>
             <h2 class="max-w-[24ch] text-[clamp(26px,3.4vw,40px)] font-extrabold tracking-[-0.03em]">Chceš do příští skupiny?</h2>
             <p class="mt-3 max-w-[46ch] text-[17px] text-cream-muted">
-              Rezervace běží přes náš rezervační systém. Cenu a aktuální podmínky najdeš
+              První běh připravujeme na září 2026 — přesný termín zveřejníme po potvrzení
+              rozvrhu. Cenu a podmínky najdeš
               <a href="/cenik/" class="cursor-pointer font-bold text-cream underline underline-offset-4 hover:text-cream-soft">v ceníku</a>.
             </p>
           </div>
