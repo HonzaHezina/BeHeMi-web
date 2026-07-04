@@ -67,7 +67,7 @@ export const kidsActivities: { t: string; d: string; img: string; media: string;
   { t: 'Circus School', d: 'For the youngest — basic movement skills through play.', img: 'circus school', media: 'media-sand', href: '/krouzky-pro-deti/#cirkusova-skolicka' },
   { t: 'Gymnastics & Acrobatics basics', d: 'Gymnastics and acrobatics led by La Putyka acrobats.', img: 'acrobatics', media: 'media-clay', href: '/krouzky-pro-deti/#zaklady-gymnastiky' },
   { t: 'Floor & aerial acrobatics, juggling', d: 'Floor and aerial acrobatics and juggling.', img: 'kids clubs', media: 'media-green', href: '/krouzky-pro-deti/#akrobacie-zonglovani' },
-  { t: 'Discovery Room', d: 'For the youngest children up to age 5 — 6 movement stations where children explore the world through movement. Wednesdays 1:30 and 2:30 pm, max 6 children.', img: 'discovery room', media: 'media-rose', href: '/krouzky-pro-deti/#objevovarna' },
+  { t: 'Discovery Room', d: 'For the youngest children up to age 5 — 6 movement stations where children explore the world through movement.', img: 'discovery room', media: 'media-rose', href: '/krouzky-pro-deti/#objevovarna' },
   { t: 'Kids Zumba', d: 'Dance classes for children in Zumba style — fun, coordination, and movement through play. Led by Eliška Velázquez.', img: 'kids zumba', media: 'media-sand', href: '/krouzky-pro-deti/#detska-zumba' },
   { t: 'Supermums', d: 'A group class for mums and dads with kids — circuit training adapted to the reality of parenthood. With your baby or toddler right beside you.', img: 'supermums', media: 'media-forest', href: '/supermamky/' },
 ];
@@ -76,7 +76,7 @@ export const kidsActivities: { t: string; d: string; img: string; media: string;
 export const kidsBand = [
   { t: 'Kids clubs', d: 'Gymnastics basics, floor and aerial acrobatics, and juggling — led by La Putyka acrobats.', href: '/krouzky-pro-deti/' },
   { t: 'Circus School', d: 'For the youngest — basic movement skills through play.', href: '/krouzky-pro-deti/#cirkusova-skolicka' },
-  { t: 'Discovery Room', d: 'For the youngest children up to age 5 — 6 movement stations where children explore the world through movement. Wednesdays 1:30 and 2:30 pm, max 6 children.', href: '/krouzky-pro-deti/#objevovarna' },
+  { t: 'Discovery Room', d: 'For the youngest children up to age 5 — 6 movement stations where children explore the world through movement.', href: '/krouzky-pro-deti/#objevovarna' },
   { t: 'Kids Zumba', d: 'Dance classes for children in Zumba style — fun, coordination, and movement through play. Led by Eliška Velázquez.', href: '/krouzky-pro-deti/#detska-zumba' },
   { t: 'Supermums', d: 'Training for mums — adapted to the reality of parenthood. With your baby or toddler right beside you.', href: '/supermamky/' },
 ];
