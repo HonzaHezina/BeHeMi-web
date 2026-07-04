@@ -5,13 +5,10 @@ import Footer from '../components/Footer.astro';
 import Button from '../components/Button.astro';
 import MediaFrame from '../components/MediaFrame.astro';
 import { trainers, RESERVE_URL } from '../data/home';
-
-// Jan Hezina (zakladatel/provoz) se na trenérské stránce nezobrazuje.
-const displayTrainers = trainers.filter((t) => t.name !== 'Jan Hezina');
 ---
 <Layout
   title="Trenéři — BoHeMi fitness Vinohrady"
-  description="Tým trenérů a lektorů BoHeMi fitness na pražských Vinohradech. Klára Měchurová, Jitka Štěpánková, Eliška Velázquez — profesionálové, kteří se vám věnují osobně."
+  description="Tým BoHeMi fitness na pražských Vinohradech. Klára Měchurová, Jitka Štěpánková, Eliška Velázquez a Jan Hezina — lidé, kteří za studiem stojí."
 >
   <Header current="/treneri/" />
   <main>
@@ -30,21 +27,20 @@ const displayTrainers = trainers.filter((t) => t.name !== 'Jan Hezina');
           Náš <span class="font-medium italic text-accent-text">tým</span>
         </h1>
         <p class="mt-6 max-w-[54ch] text-[clamp(18px,2.1vw,22px)] leading-[1.45] text-ink-warm">
-          Lektoři, kteří to berou vážně — svou práci i tebe.
-          Malé skupiny, přímý kontakt, žádná anonymita.
+          Lektoři a zakladatel studia. Malé skupiny, přímý kontakt, žádná anonymita.
         </p>
       </div>
     </section>
 
     <!-- TRENÉŘI -->
     <section class="mx-auto max-w-[1220px] px-5 pb-16 md:px-8 md:pb-23">
-      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        {displayTrainers.map((tr) => (
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {trainers.map((tr) => (
           <div class="rounded-[22px] border border-border bg-surface overflow-hidden">
             <MediaFrame
               media={tr.media}
               rounded="rounded-none"
-              class="h-72 w-full"
+              class="h-60 w-full"
               alt={`Portrét — ${tr.name}`}
             />
             <div class="p-7">
