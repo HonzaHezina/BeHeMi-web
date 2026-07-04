@@ -39,7 +39,8 @@ import { classes } from '../data/home';
               <h2 class="mb-2 text-[21px] font-extrabold tracking-[-0.02em]">{c.t}</h2>
               <p class="text-[15.5px] leading-[1.5] text-ink-soft">{c.d}</p>
               <div class="mt-3 text-[12.5px] font-bold tracking-[0.02em] text-brand">{c.bhm}</div>
-              <div class="mt-4">
+              <div class="mt-4 flex flex-wrap gap-5">
+                {c.page && <a href={c.page} class="text-[14px] font-bold text-accent-text hover:text-ink">Detail →</a>}
                 <a href="https://bohemi.fit/rezervace/" class="text-[14px] font-bold text-accent-text hover:text-ink">Rezervovat →</a>
               </div>
             </div>

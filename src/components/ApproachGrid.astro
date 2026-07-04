@@ -30,7 +30,13 @@ const approach = lang === 'en' ? approachEN : approachCS;
     </p>
 
     <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-      {approach.map((a) => (
+      {approach.map((a) => a.href ? (
+        <a href={a.href} class="block cursor-pointer rounded-[18px] border border-border-dark bg-cream/[0.04] px-7 py-8 transition-all duration-300 hover:-translate-y-1.5 hover:border-sage-soft hover:bg-cream/[0.07]">
+          <div class="mb-3.5 text-[30px] italic text-cream-muted" aria-hidden="true">{a.n}</div>
+          <h3 class="mb-2.5 text-xl font-extrabold tracking-[-0.02em] text-cream">{a.t}</h3>
+          <p class="text-[15.5px] leading-[1.5] text-cream-soft">{a.d}</p>
+        </a>
+      ) : (
         <div class="rounded-[18px] border border-border-dark bg-cream/[0.04] px-7 py-8 transition-all duration-300 hover:-translate-y-1.5 hover:border-sage-soft hover:bg-cream/[0.07]">
           <div class="mb-3.5 text-[30px] italic text-cream-muted" aria-hidden="true">{a.n}</div>
           <h3 class="mb-2.5 text-xl font-extrabold tracking-[-0.02em] text-cream">{a.t}</h3>

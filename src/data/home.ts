@@ -12,15 +12,17 @@ export const triad = [
   { k: 'Mind', cs: 'Mysl', dot: 'bg-gold', d: 'Hlava se často srovná až ve chvíli, kdy začneš pravidelně něco dělat, dokončovat a vracet se k tomu i po pauze. Méně chaosu, víc energie.' },
 ];
 
-export const approach = [
+// href = karta je klikací a vede na nejkonkrétnější existující cíl zmíněné
+// služby. Bez href zůstává neklikací (obecná situace bez vlastní stránky).
+export const approach: { n: string; t: string; d: string; href?: string }[] = [
   { n: '01', t: 'Chci začít znovu cvičit', d: 'Bez přepáleného startu. Postupně, pravidelně a s trenérem, který tě opraví a nezapomene na tebe.' },
   { n: '02', t: 'Chci zpevnit tělo a zlepšit kondici', d: 'Kruhové a silové tréninky v malé skupině. Každý cvičí podle svých možností, ale poctivě.' },
   { n: '03', t: 'Nechci chodit do anonymní posilovny', d: 'Nemusíš řešit stroje ani plán sám/sama. Přijdeš na lekci a trenér tě provede tréninkem.' },
   { n: '04', t: 'Bolí mě záda nebo jsem ztuhlý/á', d: 'Pomůžeme ti rozhýbat tělo, zlepšit techniku a postupně vybudovat sílu pro běžný život.' },
   { n: '05', t: 'Chci mít víc energie a lepší režim', d: 'Pravidelný pohyb, jednoduché návyky a tréninky, které se dají dlouhodobě vydržet.' },
-  { n: '06', t: 'Chci cvičit i jako máma', d: 'Supermamky jsou tréninky, kam můžeš přijít i s dítětem. Cvičení se přizpůsobí realitě rodičovství.' },
-  { n: '07', t: 'Hledám pohyb pro děti', d: 'Cirkusová školička, akrobacie a pohybové kroužky pod vedením zkušených lektorů. Pohyb hravou formou.' },
-  { n: '08', t: 'Chci pohybový program pro tým', d: 'FitTeams — vedené kruhové tréninky navržené přímo pro firemní skupiny. Bez vlastní tělocvičny.' },
+  { n: '06', t: 'Chci cvičit i jako máma', d: 'Supermamky jsou tréninky, kam můžeš přijít i s dítětem. Cvičení se přizpůsobí realitě rodičovství.', href: '/supermamky/' },
+  { n: '07', t: 'Hledám pohyb pro děti', d: 'Cirkusová školička, akrobacie a pohybové kroužky pod vedením zkušených lektorů. Pohyb hravou formou.', href: '/krouzky-pro-deti/' },
+  { n: '08', t: 'Chci pohybový program pro tým', d: 'FitTeams — vedené kruhové tréninky navržené přímo pro firemní skupiny. Bez vlastní tělocvičny.', href: '/lekce-a-sluzby/#pro-firmy' },
 ];
 
 export const audiences = [
@@ -30,11 +32,13 @@ export const audiences = [
   { fig: '03', tagline: 'Týmy a organizace', label: 'Pro firmy', d: 'Zdravější a sehranější tým bez vlastní tělocvičny.', items: ['FitTeams — tréninky pro týmy', 'Firemní wellbeing programy', 'Pronájem sálů na akce'], anchor: '#pro-firmy' },
 ];
 
-export const paths = [
-  { tag: 'vlajkový', t: 'Program 8 týdnů', d: 'Osm týdnů s malou skupinou — ne permanentka.' },
+// href = klik vede na nejkonkrétnější existující cíl; bez href karta
+// zůstává neklikací (program/cyklus zatím bez vlastní stránky či kotvy).
+export const paths: { tag: string; t: string; d: string; href?: string }[] = [
+  { tag: 'vlajkový', t: 'Program 8 týdnů', d: 'Osm týdnů s malou skupinou — ne permanentka.', href: '/#program' },
   { tag: 'měsíčně', t: 'Měsíční program', d: 'Pravidelný pohyb se strukturou a komunitou.' },
   { tag: '1:1', t: 'Osobní restart', d: 'Individuální vedení, když potřebuješ začít znovu.' },
-  { tag: 'skupina', t: 'Maminky', d: 'Pohyb pro maminky — klidně i s dětmi vedle.' },
+  { tag: 'skupina', t: 'Maminky', d: 'Pohyb pro maminky — klidně i s dětmi vedle.', href: '/supermamky/' },
   { tag: 'skupina', t: 'Chlapi 40+', d: 'Síla, záda a energie. Bez soutěžení, bez ega.' },
   { tag: 'cyklus', t: 'Zdravá záda · síla · energie', d: 'Tematické cykly zaměřené na konkrétní cíl.' },
 ];
@@ -42,11 +46,12 @@ export const paths = [
 // id = stabilní kotva na /skupinove-lekce/#<id> (ASCII bez diakritiky).
 // NIKDY neměnit — vedou na ně odkazy z celého webu. Stejná id používá i EN
 // mutace (home.en.ts), ať odkazy fungují napříč jazyky.
-export const classes = [
+// page = lekce má vlastní stránku; zmínky pak vedou na ni, ne na kotvu.
+export const classes: { id: string; t: string; d: string; img: string; media: string; bhm: string; page?: string }[] = [
   { id: 'kruhac', t: 'Kruhové tréninky', d: 'Funkční trénink v kruhu: střídáš stanoviště, cvičíš s vlastní vahou nebo pomůckami, trénink vede trenér. Vhodné pro všechny úrovně.', img: 'kruhový trénink', media: 'media-green', bhm: 'Tělo · dokončování · komunita' },
   { id: 'silovy-trenink', t: 'Silové tréninky', d: 'Práce s vlastní vahou a jednoduchým nářadím pod vedením trenéra. Zaměřujeme se na techniku a postupné budování síly.', img: 'silový trénink', media: 'media-forest', bhm: 'Tělo · síla · trpělivost' },
   { id: 'hiit', t: 'HIIT', d: 'Vysoce intenzivní intervalový trénink, který kombinuje kardio a posilování. Krátké intervaly, maximální efekt — pro ty, kteří chtějí výsledky bez ztráty času.', img: 'HIIT lekce', media: 'media-clay', bhm: 'Tělo · energie · odolnost' },
-  { id: 'supermamky', t: 'Supermamky', d: 'Tréninky pro maminky s dětmi — cvičení přizpůsobené realitě rodičovství. S miminkem nebo batoletem u tebe.', img: 'supermamky', media: 'media-sand', bhm: 'Tělo · rodina · komunita' },
+  { id: 'supermamky', page: '/supermamky/', t: 'Supermamky', d: 'Tréninky pro maminky s dětmi — cvičení přizpůsobené realitě rodičovství. S miminkem nebo batoletem u tebe.', img: 'supermamky', media: 'media-sand', bhm: 'Tělo · rodina · komunita' },
   { id: 'vlastni-vaha', t: 'Vlastní váha', d: 'Cvičení bez nářadí: ovládneš základní pohybové vzory, zlepšíš koordinaci a sílu. Vhodné i jako první krok pro úplné začátečníky.', img: 'vlastní váha', media: 'media-rose', bhm: 'Tělo · kontrola · pozornost' },
   { id: 'power-zone', t: 'Power Zone', d: 'Funkční trénink kombinující kruháče a prvky crossfitu. Intenzivní, efektivní, vedený trenérem — pro výsledky bez zbytečných řečí.', img: 'power zone', media: 'media-clay', bhm: 'Tělo · síla · výkon' },
   { id: 'zumba', t: 'Zumba', d: 'Taneční fitness v rytmu latinskoamerické hudby — pohyb jako oslava, ne dřina. Vhodné pro všechny, kteří chtějí cvičit a přitom se bavit.', img: 'zumba', media: 'media-rose', bhm: 'Tělo · rytmus · radost' },
@@ -66,11 +71,11 @@ export const individualServices: { t: string; d: string; href?: string }[] = [
 // href = detail; karta je klikatelná celá. Supermamky patří sem — je to
 // skupinová lekce maminek (a tátů) s dětmi, ne jen poznámka pod čarou.
 export const kidsActivities: { t: string; d: string; img: string; media: string; href?: string }[] = [
-  { t: 'Cirkusová školička', d: 'Pro nejmenší — základní pohybové dovednosti hravou formou.', img: 'cirkusová školička', media: 'media-sand', href: '/krouzky-pro-deti/' },
-  { t: 'Základy gymnastiky a akrobacie', d: 'Gymnastika a akrobacie pod vedením akrobatů La Putyka.', img: 'akrobacie', media: 'media-clay', href: '/krouzky-pro-deti/' },
-  { t: 'Pozemní a závěsná akrobacie, žonglování', d: 'Pozemní i závěsná akrobacie a žonglování.', img: 'kroužky pro děti', media: 'media-green', href: '/krouzky-pro-deti/' },
-  { t: 'Objevovárna', d: 'Pro nejmenší děti do 5 let — 6 pohybových stanovišť, kde děti prozkoumávají svět pohybem hravou formou. Středy 13:30 a 14:30, max 6 dětí.', img: 'objevovárna', media: 'media-rose', href: '/krouzky-pro-deti/' },
-  { t: 'Dětská Zumba', d: 'Taneční lekce pro děti v rytmu Zumby — zábava, koordinace a pohyb hravou formou. Vede Eliška Velázquez.', img: 'dětská zumba', media: 'media-sand', href: '/krouzky-pro-deti/' },
+  { t: 'Cirkusová školička', d: 'Pro nejmenší — základní pohybové dovednosti hravou formou.', img: 'cirkusová školička', media: 'media-sand', href: '/krouzky-pro-deti/#cirkusova-skolicka' },
+  { t: 'Základy gymnastiky a akrobacie', d: 'Gymnastika a akrobacie pod vedením akrobatů La Putyka.', img: 'akrobacie', media: 'media-clay', href: '/krouzky-pro-deti/#zaklady-gymnastiky' },
+  { t: 'Pozemní a závěsná akrobacie, žonglování', d: 'Pozemní i závěsná akrobacie a žonglování.', img: 'kroužky pro děti', media: 'media-green', href: '/krouzky-pro-deti/#akrobacie-zonglovani' },
+  { t: 'Objevovárna', d: 'Pro nejmenší děti do 5 let — 6 pohybových stanovišť, kde děti prozkoumávají svět pohybem hravou formou. Středy 13:30 a 14:30, max 6 dětí.', img: 'objevovárna', media: 'media-rose', href: '/krouzky-pro-deti/#objevovarna' },
+  { t: 'Dětská Zumba', d: 'Taneční lekce pro děti v rytmu Zumby — zábava, koordinace a pohyb hravou formou. Vede Eliška Velázquez.', img: 'dětská zumba', media: 'media-sand', href: '/krouzky-pro-deti/#detska-zumba' },
   { t: 'Supermamky', d: 'Skupinová lekce pro maminky a tatínky s dětmi — kruhový trénink přizpůsobený realitě rodičovství. S miminkem nebo batoletem u tebe.', img: 'supermamky', media: 'media-forest', href: '/supermamky/' },
 ];
 
@@ -81,9 +86,9 @@ export const kidsActivities: { t: string; d: string; img: string; media: string;
 // Příměstský tábor se už nedělá — do nabídky nevracet (rozhodnuto 7/2026).
 export const kidsBand = [
   { t: 'Kroužky pro děti', d: 'Základy gymnastiky, pozemní i závěsná akrobacie a žonglování — pod vedením akrobatů La Putyka.', href: '/krouzky-pro-deti/' },
-  { t: 'Cirkusová školička', d: 'Pro nejmenší — základní pohybové dovednosti hravou formou.', href: '/krouzky-pro-deti/' },
-  { t: 'Objevovárna', d: 'Pro nejmenší děti do 5 let — 6 pohybových stanovišť, kde děti prozkoumávají svět pohybem. Středy 13:30 a 14:30, max 6 dětí.', href: '/krouzky-pro-deti/' },
-  { t: 'Dětská Zumba', d: 'Taneční lekce pro děti v rytmu Zumby — zábava, koordinace a pohyb hravou formou. Vede Eliška Velázquez.', href: '/krouzky-pro-deti/' },
+  { t: 'Cirkusová školička', d: 'Pro nejmenší — základní pohybové dovednosti hravou formou.', href: '/krouzky-pro-deti/#cirkusova-skolicka' },
+  { t: 'Objevovárna', d: 'Pro nejmenší děti do 5 let — 6 pohybových stanovišť, kde děti prozkoumávají svět pohybem. Středy 13:30 a 14:30, max 6 dětí.', href: '/krouzky-pro-deti/#objevovarna' },
+  { t: 'Dětská Zumba', d: 'Taneční lekce pro děti v rytmu Zumby — zábava, koordinace a pohyb hravou formou. Vede Eliška Velázquez.', href: '/krouzky-pro-deti/#detska-zumba' },
   { t: 'Supermamky', d: 'Tréninky pro maminky — cvičení přizpůsobené realitě rodičovství. S miminkem nebo batoletem u tebe.', href: '/supermamky/' },
 ];
 
