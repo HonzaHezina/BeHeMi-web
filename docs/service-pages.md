@@ -79,8 +79,10 @@ v `CLAUDE.md`, sekce „Navigační logika"). Nová service stránka se napojuje
 2. **Text:** plný odstavec služby PŘESUŇ z rozcestníku na detail; na
    rozcestníku nech jen krátkou dlaždici. Stejný odstavec nesmí zůstat dvakrát.
 3. **Footer:** přidej stránku do sloupce „Služby" (`Footer.astro`, CS + EN).
-4. **Ceník:** má-li služba sekci v ceníku, přidej k ní odkaz na detail
-   (vzor: fotobiomodulace, kroužky).
+4. **Ceník:** má-li služba sekci v ceníku, odkaz na detail patří do hlavičky
+   sekce vedle `<h2>` (vzor: fotobiomodulace, kroužky). Odpovídá-li dlaždice
+   v ceníku konkrétní stránce/kotvě, je klikací celá (vzor: dlaždice kroužků);
+   dlaždice cenových variant jedné služby zůstávají neklikací.
 5. **Speciálně `/firmy/`:** přepnout dropdown „Pro firmy" a kartu 08
    v „Vyber, co teď potřebuješ" z kotvy `/lekce-a-sluzby/#pro-firmy` na `/firmy/`.
 6. Spusť build a zkontroluj odkazy a kotvy: `npm run build && node scripts/check-links.mjs`

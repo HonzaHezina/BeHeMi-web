@@ -132,6 +132,14 @@ stejné slugy, jen cestu `/en/group-classes/#…`):**
   `kidsBand`: šablona vykreslí celý box jako `<a>` (+ „Detail →"), bez `href`
   zůstává `<div>` = stránka/kotva ještě neexistuje. Nikdy textový odkaz
   „… — detail →" uvnitř neklikací karty.
+- **Pravidlo boxů (platí všude, i v ceníku):** má-li obsah boxu/dlaždice
+  detailní stránku nebo kotvu, je klikací CELÝ box (`<a>`, hover zdvih,
+  „Detail →" span), ne textový odkaz vedle. Př.: dlaždice kroužků v ceníku →
+  `/krouzky-pro-deti/#kotva`. Cenové dlaždice *variant jedné služby*
+  (fotobiomodulace 13 Kč/min…) zůstávají neklikací — na detail vede sekce.
+- **Odkaz sekce na detail patří do hlavičky sekce** (flex řádek vedle `<h2>`,
+  vzor „Všechny lekce →" na rozcestníku, fotobiomodulace/kroužky v ceníku),
+  ne do odstavce pod mřížkou.
 - Cíl kotvy potřebuje `scroll-mt-24` (sticky header).
 - **Provozní údaje (rozvrh, kapacita, ceny) jen na detailu, ne v dlaždicích** —
   jeden zdroj pravdy (viz Objevovárna).

@@ -50,6 +50,9 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   v datech → `<a>` s „Detail →"; bez `href` `<div>` = stránka ještě není).
   `classes[].page` = lekce s vlastní stránkou (Supermamky). Nová service
   stránka → doplnit `href`/`page` v datech + footer sloupec „Služby".
+  Platí všude (i ceník): box s detailem/kotvou = klikací celý, nikdy textový
+  odkaz „… — detail →" vedle boxu; odkaz sekce na detail patří do hlavičky
+  sekce vedle `<h2>`. Cenové dlaždice variant jedné služby neklikací.
 - **Font:** jen **Hanken Grotesk** (bez serifu) — akcenty kurzívou + vahou.
 - **Paleta = WARM-DARK (black/white/red).** Černá je kotva, ne dominanta: obsah na
   teplém světlém `bg #f5efe6`, tmavé kotvy na `ink-dark #14110e` (ne `#000`).
