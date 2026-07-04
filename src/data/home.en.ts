@@ -134,9 +134,11 @@ export const nav = [
   { label: 'Contact', href: '/en/contact/' },
 ];
 
+// Kids go straight to the key page (CS-only, decided 7/2026); For you and
+// For companies stay on hub anchors until better targets exist.
 export const navMenu = [
   { num: '01', label: 'For you', desc: 'Programs, classes, personal training', href: '/en/classes-and-services/#pro-tebe' },
-  { num: '02', label: 'For kids & families', desc: 'Circus, clubs, Supermums', href: '/en/classes-and-services/#pro-deti' },
+  { num: '02', label: 'For kids & families', desc: 'Circus, clubs, Supermums', href: '/krouzky-pro-deti/' },
   { num: '03', label: 'For companies', desc: 'FitTeams, wellbeing, hall rental', href: '/en/classes-and-services/#pro-firmy' },
 ];
 

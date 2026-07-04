@@ -23,10 +23,28 @@ const webLinks = lang === 'en'
       { label: 'Ceník', href: '/cenik/' },
       { label: 'Kontakt', href: '/kontakt/' },
     ];
+
+// Služby s vlastní stránkou (dětské stránky jsou zatím jen česky).
+// Až vzniknou /pronajem-salu/, /firmy/ a osobní tréninky, přidat sem.
+const serviceLinks = lang === 'en'
+  ? [
+      { label: 'Group classes', href: '/en/group-classes/' },
+      { label: 'Kids clubs', href: '/krouzky-pro-deti/' },
+      { label: 'Supermums', href: '/supermamky/' },
+      { label: 'Open gym', href: '/en/open-gym/' },
+      { label: 'Photobiomodulation', href: '/en/photobiomodulation-therapy/' },
+    ]
+  : [
+      { label: 'Skupinové lekce', href: '/skupinove-lekce/' },
+      { label: 'Kroužky pro děti', href: '/krouzky-pro-deti/' },
+      { label: 'Supermamky', href: '/supermamky/' },
+      { label: 'Open gym', href: '/open-gym/' },
+      { label: 'Fotobiomodulace', href: '/fotobiomodulacni-terapie/' },
+    ];
 ---
 <footer id="kontakt" class="scroll-mt-24 bg-ink-dark text-cream-soft">
   <div class="mx-auto max-w-[1220px] px-5 py-16 md:px-8">
-    <div class="grid grid-cols-1 gap-9 border-b border-border-dark pb-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr]">
+    <div class="grid grid-cols-1 gap-9 border-b border-border-dark pb-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
       <div>
         <div class="mb-3 flex items-baseline gap-2.5">
           <span class="text-2xl font-extrabold text-cream">BoHeMi</span>
@@ -47,6 +65,15 @@ const webLinks = lang === 'en'
         <div class="mb-3.5 text-[13px] font-bold uppercase tracking-[0.06em] text-cream-muted">{t(lang, 'footer_web')}</div>
         <div class="flex flex-col items-start gap-2.5">
           {webLinks.map((l) => (
+            <a href={l.href} class="text-[15.5px] text-cream-soft hover:text-cream">{l.label}</a>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <div class="mb-3.5 text-[13px] font-bold uppercase tracking-[0.06em] text-cream-muted">{t(lang, 'footer_services')}</div>
+        <div class="flex flex-col items-start gap-2.5">
+          {serviceLinks.map((l) => (
             <a href={l.href} class="text-[15.5px] text-cream-soft hover:text-cream">{l.label}</a>
           ))}
         </div>
