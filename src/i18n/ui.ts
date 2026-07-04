@@ -47,7 +47,7 @@ export const ui = {
     nav_close_menu: 'Zavřít menu',
     nav_menu_label: 'Hlavní navigace',
     // Footer
-    footer_tagline: 'Skupinové lekce a komunita na Vinohradech.',
+    footer_tagline: 'Skupinové lekce a komunita. Body – Health – Mind.',
     footer_reserve: 'Rezervovat lekci →',
     footer_web: 'Web',
     footer_services: 'Služby',
@@ -58,7 +58,7 @@ export const ui = {
     // Hero
     hero_badge: 'Fitness studio na Vinohradech',
     hero_h1: 'Vedené tréninky, kruháče\na vlastní váha',
-    hero_h1_accent: 'na Vinohradech.',
+    hero_h1_accent: 'pro tělo, zdraví i hlavu.',
     hero_body: 'BoHeMi je fitness studio zaměřené na vedené lekce, kruhové tréninky a funkční pohyb. Nejsme anonymní řetězec ani strojová posilovna — přijdeš na lekci, trenér tě vede, opraví techniku a pomůže ti postupně zlepšit sílu, kondici i pohyb.',
     hero_cta_primary: 'Zkus první lekci →',
     hero_cta_secondary: 'Podívat se na lekce',
@@ -76,7 +76,7 @@ export const ui = {
     approach_body: 'Každý přichází s jinými cílem — ale vždycky jde o to, aby pohyb byl pravidelný, trenér znal tvoje jméno a ty viděl/a výsledky.',
     approach_footer: 'Nic ti na tomhle webu neprodáme — jen ukážeme cestu.',
     // Audiences
-    audiences_eyebrow: 'Najdi se v tom',
+    audiences_eyebrow: 'Pro koho tu jsme',
     audiences_h2_a: 'BoHeMi není',
     audiences_h2_b: 'jen posilovna.',
     audiences_body: 'Máme programy pro jednotlivce, rodiny i firmy — vždy s trenérem, v malé skupině, kde každý ví, jak se jmenuješ.',
@@ -133,7 +133,7 @@ export const ui = {
     nav_close_menu: 'Close menu',
     nav_menu_label: 'Main navigation',
     // Footer
-    footer_tagline: 'Group classes and community in Vinohrady.',
+    footer_tagline: 'Group classes and community. Body – Health – Mind.',
     footer_reserve: 'Book a class →',
     footer_web: 'Website',
     footer_services: 'Services',
@@ -144,7 +144,7 @@ export const ui = {
     // Hero
     hero_badge: 'Fitness studio in Vinohrady, Prague',
     hero_h1: 'Coached workouts, circuits\nand bodyweight training',
-    hero_h1_accent: 'in Vinohrady.',
+    hero_h1_accent: 'for body, health and mind.',
     hero_body: "BoHeMi is a fitness studio focused on coached group classes, circuit training, and functional movement. We're not an anonymous gym chain — you come to class, the coach leads you, corrects your form, and helps you gradually improve strength, fitness, and movement.",
     hero_cta_primary: 'Try your first class →',
     hero_cta_secondary: 'See the classes',
@@ -161,7 +161,7 @@ export const ui = {
     approach_body: 'Everyone arrives with different goals — but it always comes down to making movement regular, having a coach who knows your name, and seeing real results.',
     approach_footer: "We won't sell you anything on this site — we'll just show you the way.",
     // Audiences
-    audiences_eyebrow: 'Find yourself here',
+    audiences_eyebrow: "Who we're here for",
     audiences_h2_a: 'BoHeMi is more than',
     audiences_h2_b: 'just a gym.',
     audiences_body: 'We have programs for individuals, families and companies — always with a coach, in a small group where everyone knows your name.',
