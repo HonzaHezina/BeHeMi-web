@@ -138,6 +138,13 @@ stejné slugy, jen cestu `/en/group-classes/#…`):**
   `kidsBand`: šablona vykreslí celý box jako `<a>` (+ „Detail →"), bez `href`
   zůstává `<div>` = stránka/kotva ještě neexistuje. Nikdy textový odkaz
   „… — detail →" uvnitř neklikací karty.
+- **`audiences[].anchor` musí být absolutní cesta**, nikdy samotný `#hash`.
+  Komponenta `Audiences.astro` se renderuje na homepage — lokální hash jako
+  `#pro-firmy` na homepage neexistuje a odkaz nikam nevede. Správně:
+  `/firmy/` (dedikovaná stránka), `/lekce-a-sluzby/#pro-tebe` (sekce rozcestníku),
+  `/krouzky-pro-deti/` (stránka). **EN mutace:** bez EN stránek pro firmy/treneri/
+  osobni-treninky → anchor jde na `/en/classes-and-services/#sekce` (nejkonkrétnější
+  dostupný EN cíl).
 - **Pravidlo boxů (platí všude, i v ceníku):** má-li obsah boxu/dlaždice
   detailní stránku nebo kotvu, je klikací CELÝ box (`<a>`, hover zdvih,
   „Detail →" span), ne textový odkaz vedle. Př.: dlaždice kroužků v ceníku →
@@ -202,6 +209,11 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   není to dětský web.
 - **Klikatelné karty:** detail se otvírá klikem na celý box, ne textovým
   odkazem pod mřížkou. Vzor a cíle odkazů → sekce **Navigační logika** výš.
+- **Lekce a služby (rozcestník `/lekce-a-sluzby/`) — rozhodnutá struktura (7/2026):**
+  Jump links = self-identifikační jazyk („Chci cvičit / Hledám pro dítě / Jsem z firmy"),
+  každá ze tří kategorií má 1–2 věty intro pod nadpisem, skupinové lekce limitované
+  na 6 karet (→ „Všechny lekce →" na `/skupinove-lekce/`). Stejný odstavec
+  nesmí být na rozcestníku i detailu.
 - **Obsah z WordPressu ověřovat — je místy zastaralý.** Př.: lektorka Supermamek
   na WP (Klára Šauerová) už v týmu není; termíny semestru kroužků („letní
   16. 9. 2026 – 27. 1. 2027") vypadají jako zimní — čeká na Honzovo potvrzení.
