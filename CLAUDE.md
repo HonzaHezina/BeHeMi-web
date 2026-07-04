@@ -71,6 +71,10 @@ luxusní wellness. Tělo jako cesta k síle, zdraví a klidu.
 | Supermamky | `/supermamky/` | `supermamky.astro` |
 | Open gym | `/open-gym/` | `open-gym.astro` |
 | Fotobiomodulace | `/fotobiomodulacni-terapie/` | `fotobiomodulacni-terapie.astro` |
+| Osobní tréninky | `/osobni-treninky/` | `osobni-treninky.astro` |
+| Pronájem sálů | `/pronajem-salu/` | `pronajem-salu.astro` |
+| Pro firmy | `/firmy/` | `firmy.astro` |
+| Trenéři | `/treneri/` | `treneri.astro` |
 | Ceník | `/cenik/` | `cenik.astro` |
 | Kontakt | `/kontakt/` | `kontakt.astro` |
 | 404 | — | `404.astro` |
@@ -79,12 +83,13 @@ EN mutace (`src/pages/en/`): home, classes-and-services, group-classes,
 open-gym, photobiomodulation-therapy, pricing, why-bohemi, contact.
 
 Hlavní menu (rozhodnuto Honzou): **Domů · Proč BoHeMi · Lekce a služby · Ceník ·
-Kontakt · Rezervovat**. Položka „Lekce a služby" má dropdown: **Pro tebe →
-`/lekce-a-sluzby/#pro-tebe` · Pro děti a rodiny → `/krouzky-pro-deti/`
-(rozhodnuto 7/2026 — děti vedou na klíčovou stránku, ne na kotvu) · Pro firmy →
-`/lekce-a-sluzby/#pro-firmy`** (kotva jen dokud nevznikne `/firmy/`).
+Kontakt · Rezervovat**. Položka „Lekce a služby" má dropdown s přímými odkazy na
+klíčové stránky: **Skupinové lekce → `/skupinove-lekce/` · Osobní tréninky →
+`/osobni-treninky/` · Kroužky pro děti → `/krouzky-pro-deti/` · Pro firmy →
+`/firmy/` · Trenéři → `/treneri/`** (data v `navMenu` v `home.ts`).
 Footer má sloupec **Služby** (Skupinové lekce, Kroužky pro děti, Supermamky,
-Open gym, Fotobiomodulace) — každá nová service stránka se přidává i sem.
+Open gym, Fotobiomodulace, Osobní tréninky, Pronájem sálů, Pro firmy) — každá
+nová service stránka se přidává i sem.
 
 > ✅ **Slugy jsou ověřené z reálné GSC (12 měsíců).** Zdroj pravdy =
 > **`docs/redirect-map.md`** (KEEP / 301 / WP / LEGAL + trailing-slash pravidlo).
@@ -93,14 +98,15 @@ Open gym, Fotobiomodulace) — každá nová service stránka se přidává i se
 
 ### Zatím nepostavené (KEEP slugy z redirect-map)
 
-`/pronajem-salu/` (142 kliků), `/hula-hoop/`, `/firmy/`, `/fotky/`,
-osobní tréninky (nová stránka; 301 z `/nase-sluzby/osobni-treninky/`),
-trenéři (`/proc-bohemi/#treneri` nebo samostatná `/treneri/` — rozhodne Honza),
-LEGAL stránky (VOP, GDPR, provozní řád…).
+`/hula-hoop/` (rozhodnuto 7/2026 — hula hoop se nyní nenabízí, stránku zatím
+nestavět), `/fotky/`, LEGAL stránky (VOP, GDPR, provozní řád…).
 
 - `/objevovarna/` se nestaví — obsah je sekce na `/krouzky-pro-deti/`.
 - **Příměstský tábor se už nedělá (rozhodnuto 7/2026) — nevracet do nabídky.**
   Redirect `/primestsky-tabor/` → `/krouzky-pro-deti/` zůstává v platnosti.
+- **301 redirecty čekají:** `/nase-sluzby/osobni-treninky/` → `/osobni-treninky/`,
+  `/o-nas/` → `/proc-bohemi/`, `/treneri/` staré profily (Šauerová, Nováčková,
+  Bierhausová) → `/treneri/`. Implementace zatím nerozhodnutá (Astro vs. nginx).
 
 Mimo repo (WordPress, neřešíš tady): `bohemi.fit/rezervace/` — rezervace,
 „Můj účet" / login / členství.
@@ -146,10 +152,8 @@ stejné slugy, jen cestu `/en/group-classes/#…`):**
 - Rozcestník = krátké dlaždice, detail = plný text. **Stejný odstavec nesmí být
   na rozcestníku i detailu** (SEO + údržba).
 
-**Až vznikne nová service stránka** (osobní tréninky, `/pronajem-salu/`,
-`/firmy/`, `/hula-hoop/`): doplnit `href`/`page` do dat, přesunout její plný
-text z rozcestníku na detail (checklist v `docs/service-pages.md`), přidat do
-footer sloupce Služby, u `/firmy/` přepnout dropdown a kartu 08.
+**Až vznikne nová service stránka** (`/hula-hoop/` nebo LEGAL stránky): doplnit
+`href`/`page` do dat, přidat do footer sloupce Služby (kde relevantní).
 
 Kontrola po změnách odkazů: `npm run build && node scripts/check-links.mjs`
 (mrtvé odkazy, mrtvé kotvy, duplicitní odstavce — má hlásit 0 chyb).

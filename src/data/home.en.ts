@@ -134,12 +134,13 @@ export const nav = [
   { label: 'Contact', href: '/en/contact/' },
 ];
 
-// Kids go straight to the key page (CS-only, decided 7/2026); For you and
-// For companies stay on hub anchors until better targets exist.
+// Kids, trainers and company pages are CS-only for now — links go to CS pages.
 export const navMenu = [
-  { num: '01', label: 'For you', desc: 'Programs, classes, personal training', href: '/en/classes-and-services/#pro-tebe' },
-  { num: '02', label: 'For kids & families', desc: 'Circus, clubs, Supermums', href: '/krouzky-pro-deti/' },
-  { num: '03', label: 'For companies', desc: 'FitTeams, wellbeing, hall rental', href: '/en/classes-and-services/#pro-firmy' },
+  { num: '01', label: 'Group classes', desc: 'Circuits, HIIT, Zumba & more', href: '/en/group-classes/' },
+  { num: '02', label: 'Personal training', desc: 'Individual coaching 1:1', href: '/en/classes-and-services/#pro-tebe' },
+  { num: '03', label: 'Kids clubs', desc: 'Circus, acrobatics, Supermums', href: '/krouzky-pro-deti/' },
+  { num: '04', label: 'For companies', desc: 'FitTeams, wellbeing, hall rental', href: '/en/classes-and-services/#pro-firmy' },
+  { num: '05', label: 'Trainers', desc: 'Who will guide you', href: '/treneri/' },
 ];
 
 export const RESERVE_URL = 'https://bohemi.fit/rezervace/';

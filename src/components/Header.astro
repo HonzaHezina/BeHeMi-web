@@ -45,7 +45,7 @@ const logoHref = lang === 'en' ? '/en/' : '/';
               </svg>
             </a>
             <div
-              class="invisible absolute left-1/2 top-[calc(100%+6px)] z-60 w-[312px] -translate-x-1/2 rounded-2xl border border-border bg-surface p-2 opacity-0 shadow-[0_22px_48px_-16px_rgba(33,31,26,0.3)] transition-opacity duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100"
+              class="invisible absolute left-1/2 top-[calc(100%+6px)] z-60 w-[340px] -translate-x-1/2 rounded-2xl border border-border bg-surface p-2 opacity-0 shadow-[0_22px_48px_-16px_rgba(33,31,26,0.3)] transition-opacity duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100"
             >
               {navMenu.map((m) => (
                 <a href={m.href} class="flex items-start gap-3.5 rounded-xl p-3.5 transition-colors hover:bg-surface-hover">
@@ -95,13 +95,23 @@ const logoHref = lang === 'en' ? '/en/' : '/';
           <svg class="h-5 w-5 group-open:hidden" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
           <svg class="hidden h-5 w-5 group-open:block" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
         </summary>
-        <nav class="absolute right-0 top-[calc(100%+10px)] w-[260px] rounded-2xl border border-border bg-surface p-3 shadow-[0_22px_48px_-16px_rgba(33,31,26,0.3)]" aria-label={t(lang, 'nav_menu_label')}>
+        <nav class="absolute right-0 top-[calc(100%+10px)] w-[290px] rounded-2xl border border-border bg-surface p-3 shadow-[0_22px_48px_-16px_rgba(33,31,26,0.3)]" aria-label={t(lang, 'nav_menu_label')}>
           {nav.map((item) => (
-            <a href={item.href} class="block rounded-xl px-4 py-3 text-base font-semibold text-ink-line hover:bg-surface-hover">{item.label}</a>
+            <a
+              href={item.href}
+              aria-current={item.href === current ? 'page' : undefined}
+              class="block rounded-xl px-4 py-3 text-base font-semibold text-ink-line hover:bg-surface-hover"
+            >{item.label}</a>
           ))}
-          <div class="my-1 border-t border-border"></div>
+          <div class="my-1.5 border-t border-border"></div>
+          <p class="px-4 pb-1 pt-0.5 text-[11px] font-bold uppercase tracking-[0.08em] text-ink-muted">
+            {lang === 'en' ? 'Classes & services' : 'Lekce a služby'}
+          </p>
           {navMenu.map((m) => (
-            <a href={m.href} class="block rounded-xl px-4 py-2.5 text-[15px] text-ink-soft hover:bg-surface-hover">{m.label}</a>
+            <a href={m.href} class="flex items-center gap-2.5 rounded-xl px-4 py-2.5 text-[15px] text-ink-soft hover:bg-surface-hover">
+              <span class="shrink-0 italic text-[13px] text-accent-text">{m.num}</span>
+              <span>{m.label}</span>
+            </a>
           ))}
         </nav>
       </details>
