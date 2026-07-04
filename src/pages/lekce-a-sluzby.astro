@@ -7,9 +7,9 @@ import MediaFrame from '../components/MediaFrame.astro';
 import { classes, individualServices, kidsActivities, firmyServices } from '../data/home';
 
 const jumps = [
-  { n: '01', label: 'Pro tebe', href: '#pro-tebe' },
-  { n: '02', label: 'Pro děti a rodiny', href: '#pro-deti' },
-  { n: '03', label: 'Pro firmy', href: '#pro-firmy' },
+  { n: '01', label: 'Chci cvičit', href: '#pro-tebe' },
+  { n: '02', label: 'Hledám pro dítě', href: '#pro-deti' },
+  { n: '03', label: 'Jsem z firmy', href: '#pro-firmy' },
 ];
 ---
 <Layout
@@ -50,6 +50,7 @@ const jumps = [
         <span class="text-[13px] font-extrabold uppercase tracking-[0.08em] text-brand">Pro tebe</span>
         <span class="text-base text-ink-muted">Jednotlivci, kteří chtějí energii, sílu a klid</span>
       </div>
+      <p class="mt-5 max-w-[64ch] text-[17px] leading-[1.55] text-ink-warm">Skupinové lekce v malé skupině, osobní tréninky, volný Open gym nebo osmi­týdenní program — každý si najde svoji cestu pohybu.</p>
     </section>
 
     <section class="mx-auto max-w-[1220px] px-5 pt-8 md:px-8">
@@ -58,7 +59,7 @@ const jumps = [
         <a href="/skupinove-lekce/" class="cursor-pointer text-base font-bold text-accent-text hover:text-ink">Všechny lekce →</a>
       </div>
       <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {classes.map((c) => (
+        {classes.slice(0, 6).map((c) => (
           <a href={c.page ?? `/skupinove-lekce/#${c.id}`} class="block cursor-pointer overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-20px_rgba(33,31,26,0.24)]">
             <MediaFrame media={c.media} rounded="rounded-none" class="h-[150px]" alt={`Lekce — ${c.img}`} />
             <div class="p-[22px]">
@@ -101,6 +102,7 @@ const jumps = [
         <span class="text-[13px] font-extrabold uppercase tracking-[0.08em] text-brand">Pro děti a rodiny</span>
         <span class="text-base text-ink-muted">Pohyb pro nejmenší i pro maminky</span>
       </div>
+      <p class="mt-5 max-w-[64ch] text-[17px] leading-[1.55] text-ink-warm">Cirkusová školička, akrobacie pod vedením La Putyka, Objevovárna pro nejmenší, Dětská Zumba a Supermamky — pohyb, který baví celou rodinu.</p>
     </section>
 
     <section class="mx-auto max-w-[1220px] px-5 pt-8 md:px-8">
@@ -126,6 +128,7 @@ const jumps = [
         <span class="text-base text-ink-muted">Zdravější a sehranější tým bez vlastní tělocvičny</span>
         <a href="/firmy/" class="ml-auto cursor-pointer text-base font-bold text-accent-text hover:text-ink">Vše pro firmy →</a>
       </div>
+      <p class="mt-5 max-w-[64ch] text-[17px] leading-[1.55] text-ink-warm">FitTeams, firemní wellbeing programy a pronájem sálů — řešení pro firmy, které chtějí investovat do zdraví svých lidí.</p>
     </section>
 
     <section class="mx-auto max-w-[1220px] px-5 pt-8 md:px-8">
