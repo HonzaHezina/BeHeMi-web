@@ -63,7 +63,7 @@ export const classes: { id: string; t: string; d: string; img: string; media: st
 // href = detail stránky; box je klikatelný celý. Bez href zatím stránka není
 // (osobní tréninky — viz redirect-map, stránka se teprve postaví).
 export const individualServices: { t: string; d: string; href?: string }[] = [
-  { t: 'Osobní tréninky', d: 'Individuální vedení šité na tvoje cíle a tempo.' },
+  { t: 'Osobní tréninky', d: 'Individuální vedení šité na tvoje cíle a tempo.', href: '/osobni-treninky/' },
   { t: 'Open gym', d: 'Privátní sál 100 m² jen pro tebe nebo malou skupinu.', href: '/open-gym/' },
   { t: 'Fotobiomodulace', d: 'Regenerace a podpora hojení světelnou terapií.', href: '/fotobiomodulacni-terapie/' },
 ];
@@ -92,10 +92,10 @@ export const kidsBand = [
   { t: 'Supermamky', d: 'Tréninky pro maminky — cvičení přizpůsobené realitě rodičovství. S miminkem nebo batoletem u tebe.', href: '/supermamky/' },
 ];
 
-export const firmyServices = [
-  { t: 'FitTeams', d: 'Kruhové a silové tréninky navržené pro firemní týmy. Max 12 lidí, v našem studiu nebo u vás.' },
-  { t: 'Firemní wellbeing', d: 'Pravidelné programy pro zdraví a energii zaměstnanců — ergonomie, výživa, regenerace.' },
-  { t: 'Pronájem sálů', d: 'Sály pro vlastní akce, teambuilding nebo workshopy. Od 350 Kč/hod při smlouvě na 6 měsíců.' },
+export const firmyServices: { t: string; d: string; href?: string }[] = [
+  { t: 'FitTeams', d: 'Kruhové a silové tréninky navržené pro firemní týmy. Max 12 lidí, v našem studiu nebo u vás.', href: '/firmy/' },
+  { t: 'Firemní wellbeing', d: 'Pravidelné programy pro zdraví a energii zaměstnanců — ergonomie, výživa, regenerace.', href: '/firmy/' },
+  { t: 'Pronájem sálů', d: 'Sály pro vlastní akce, teambuilding nebo workshopy. Od 350 Kč/hod při smlouvě na 6 měsíců.', href: '/pronajem-salu/' },
 ];
 
 export const lpHighlights = [

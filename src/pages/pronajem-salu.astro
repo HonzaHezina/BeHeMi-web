@@ -10,21 +10,25 @@ const halls = [
     name: 'Velký taneční sál',
     desc: 'Prostorný sál se zrcadly po celé délce. Ideální pro skupinové lekce, tanec, kruhové tréninky nebo firemní akce.',
     capacity: 'do 20 osob',
+    price: '700 Kč / hod',
+  },
+  {
+    name: 'Střední sál',
+    desc: 'Sál se zrcadly pro středně velké skupiny. Vhodný pro workshopy, taneční kurzy nebo malé firemní akce.',
+    capacity: 'do 12 osob',
+    price: '600 Kč / hod',
   },
   {
     name: 'Malý taneční sál',
     desc: 'Sál se zrcadly pro menší skupiny nebo individuální lekce. Vhodný pro osobní tréninky, workshopy nebo duety.',
     capacity: 'do 8 osob',
+    price: '500 Kč / hod',
   },
   {
-    name: 'Tatami místnost',
-    desc: 'Místnost se zrcadly, tatami pokrytím a fitness vybavením. Skvělá pro bojová umění, strečink, jógu nebo osobní tréninky.',
-    capacity: 'do 6 osob',
-  },
-  {
-    name: 'Funkční sál',
+    name: 'Fitness sál',
     desc: 'Sál s vybavením pro funkční a silový trénink. Vhodný pro skupinové i individuální tréninky.',
     capacity: 'do 12 osob',
+    price: '350 Kč / hod',
   },
 ];
 
@@ -75,13 +79,15 @@ const forWhom = [
           <div class="rounded-[18px] border border-border bg-surface p-7">
             <h3 class="mb-2 text-[20px] font-extrabold tracking-[-0.02em]">{hall.name}</h3>
             <p class="mb-4 text-[15.5px] leading-[1.55] text-ink-soft">{hall.desc}</p>
-            <span class="inline-block rounded-full bg-sand px-3 py-1 text-[13px] font-bold text-ink-muted">{hall.capacity}</span>
+            <div class="flex flex-wrap gap-2">
+              <span class="inline-block rounded-full bg-sand px-3 py-1 text-[13px] font-bold text-ink-muted">{hall.capacity}</span>
+              <span class="inline-block rounded-full bg-accent-text px-3 py-1 text-[13px] font-bold text-cream">{hall.price}</span>
+            </div>
           </div>
         ))}
       </div>
+      <p class="mt-4 text-[14.5px] text-ink-soft">Ceny jsou hodinové při smlouvě min. na 6 měsíců. Kratší nebo jednorázový pronájem na dotaz.</p>
     </section>
-
-    <!-- PRO KOHO + FOTO -->
     <section class="mx-auto max-w-[1220px] px-5 pt-10 md:px-8">
       <div class="grid gap-6 overflow-hidden rounded-[22px] border border-border bg-surface lg:grid-cols-[1.1fr_0.9fr]">
         <div class="p-8 md:p-10">

@@ -15,7 +15,10 @@ const trainers = lang === 'en' ? trainersEN : trainersCS;
 <section class="border-t border-border-strong bg-sand">
   <div class="mx-auto max-w-[1220px] px-5 py-16 md:px-8 md:py-23">
     <Eyebrow>{t(lang, 'trainers_eyebrow')}</Eyebrow>
-    <h2 class="mb-11 text-[clamp(30px,4vw,48px)] font-extrabold tracking-[-0.03em]">{t(lang, 'trainers_h2')}</h2>
+    <div class="mb-11 flex flex-wrap items-baseline justify-between gap-4">
+      <h2 class="text-[clamp(30px,4vw,48px)] font-extrabold tracking-[-0.03em]">{t(lang, 'trainers_h2')}</h2>
+      {lang === 'cs' && <a href="/treneri/" class="cursor-pointer text-base font-bold text-accent-text hover:text-ink">Celý tým →</a>}
+    </div>
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
       {trainers.map((tr) => (
         <div>

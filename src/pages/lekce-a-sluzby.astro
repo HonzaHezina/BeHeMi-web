@@ -124,12 +124,19 @@ const jumps = [
         <span class="italic text-xl text-accent-text">03</span>
         <span class="text-[13px] font-extrabold uppercase tracking-[0.08em] text-brand">Pro firmy</span>
         <span class="text-base text-ink-muted">Zdravější a sehranější tým bez vlastní tělocvičny</span>
+        <a href="/firmy/" class="ml-auto cursor-pointer text-base font-bold text-accent-text hover:text-ink">Vše pro firmy →</a>
       </div>
     </section>
 
     <section class="mx-auto max-w-[1220px] px-5 pt-8 md:px-8">
       <div class="grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-        {firmyServices.map((f) => (
+        {firmyServices.map((f) => f.href ? (
+          <a href={f.href} class="block cursor-pointer bg-surface p-[30px] transition-colors hover:bg-surface-hover">
+            <h3 class="mb-2 text-xl font-extrabold tracking-[-0.02em]">{f.t}</h3>
+            <p class="text-[15.5px] leading-[1.5] text-ink-soft">{f.d}</p>
+            <span class="mt-3 block text-[14px] font-bold text-accent-text">Detail →</span>
+          </a>
+        ) : (
           <div class="bg-surface p-[30px] transition-colors hover:bg-surface-hover">
             <h3 class="mb-2 text-xl font-extrabold tracking-[-0.02em]">{f.t}</h3>
             <p class="text-[15.5px] leading-[1.5] text-ink-soft">{f.d}</p>
