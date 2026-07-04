@@ -37,7 +37,7 @@ export const audiences = [
 // NEZOBRAZUJE SE (7/2026): programy kromě Programu 8 týdnů nejsou hotové —
 // mřížka „Lekce a programy" stažena z HP (Offer.astro). Vrátit, až budou.
 export const paths: { tag: string; t: string; d: string; href?: string }[] = [
-  { tag: 'vlajkový', t: 'Program 8 týdnů', d: 'Osm týdnů s malou skupinou — ne permanentka.', href: '/program-8-tydnu/' },
+  { tag: 'vlajkový', t: 'Program 8 týdnů', d: 'Osm týdnů s malou skupinou do 12 lidí.', href: '/program-8-tydnu/' },
   { tag: 'měsíčně', t: 'Měsíční program', d: 'Pravidelný pohyb se strukturou a komunitou.' },
   { tag: '1:1', t: 'Osobní restart', d: 'Individuální vedení, když potřebuješ začít znovu.' },
   { tag: 'skupina', t: 'Maminky', d: 'Pohyb pro maminky — klidně i s dětmi vedle.', href: '/supermamky/' },
