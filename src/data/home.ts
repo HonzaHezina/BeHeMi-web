@@ -34,6 +34,8 @@ export const audiences = [
 
 // href = klik vede na nejkonkrétnější existující cíl; bez href karta
 // zůstává neklikací (program/cyklus zatím bez vlastní stránky či kotvy).
+// NEZOBRAZUJE SE (7/2026): programy kromě Programu 8 týdnů nejsou hotové —
+// mřížka „Lekce a programy" stažena z HP (Offer.astro). Vrátit, až budou.
 export const paths: { tag: string; t: string; d: string; href?: string }[] = [
   { tag: 'vlajkový', t: 'Program 8 týdnů', d: 'Osm týdnů s malou skupinou — ne permanentka.', href: '/#program' },
   { tag: 'měsíčně', t: 'Měsíční program', d: 'Pravidelný pohyb se strukturou a komunitou.' },

@@ -2,14 +2,12 @@
 import Button from './Button.astro';
 import MediaFrame from './MediaFrame.astro';
 import {
-  paths as pathsCS,
   classes as classesCS,
   individualServices as individualServicesCS,
   kidsActivities as kidsActivitiesCS,
   firmyServices as firmyServicesCS,
 } from '../data/home';
 import {
-  paths as pathsEN,
   classes as classesEN,
   individualServices as individualServicesEN,
   kidsActivities as kidsActivitiesEN,
@@ -22,7 +20,6 @@ interface Props {
 }
 const { lang = 'cs' } = Astro.props;
 
-const paths = lang === 'en' ? pathsEN : pathsCS;
 const classes = lang === 'en' ? classesEN : classesCS;
 const individualServices = lang === 'en' ? individualServicesEN : individualServicesCS;
 const kidsActivities = lang === 'en' ? kidsActivitiesEN : kidsActivitiesCS;
@@ -49,29 +46,10 @@ const detailLabel = lang === 'en' ? 'Details →' : 'Detail →';
     </div>
   </div>
 
-  <div class="pt-9">
-    <h3 class="mb-[22px] text-2xl font-extrabold tracking-[-0.02em]">
-      {lang === 'en' ? 'Classes & programs' : 'Lekce a programy'}
-    </h3>
-    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      {paths.map((p) => p.href ? (
-        <a href={p.href} class="flex min-h-[172px] cursor-pointer flex-col rounded-2xl border border-border bg-surface p-7 transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_20px_40px_-20px_rgba(33,31,26,0.24)]">
-          <span class="mb-3.5 text-[12.5px] font-bold uppercase tracking-[0.06em] text-accent-text">{p.tag}</span>
-          <h4 class="mb-2 text-[21px] font-extrabold tracking-[-0.02em]">{p.t}</h4>
-          <p class="text-[15.5px] leading-[1.5] text-ink-soft">{p.d}</p>
-          <span class="mt-auto block pt-3 text-[14px] font-bold text-accent-text">{detailLabel}</span>
-        </a>
-      ) : (
-        <div class="flex min-h-[172px] flex-col rounded-2xl border border-border bg-surface p-7 transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_20px_40px_-20px_rgba(33,31,26,0.24)]">
-          <span class="mb-3.5 text-[12.5px] font-bold uppercase tracking-[0.06em] text-accent-text">{p.tag}</span>
-          <h4 class="mb-2 text-[21px] font-extrabold tracking-[-0.02em]">{p.t}</h4>
-          <p class="text-[15.5px] leading-[1.5] text-ink-soft">{p.d}</p>
-        </div>
-      ))}
-    </div>
-  </div>
+  <!-- Blok „Lekce a programy" (data `paths`) stažen z HP 7/2026 — programy
+       kromě Programu 8 týdnů ještě nejsou hotové. Vrátit, až budou. -->
 
-  <div class="pt-12">
+  <div class="pt-9">
     <div class="mb-[22px] flex flex-wrap items-end justify-between gap-4">
       <h3 class="text-2xl font-extrabold tracking-[-0.02em]">
         {lang === 'en' ? 'Group classes' : 'Skupinové lekce'}

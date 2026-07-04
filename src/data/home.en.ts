@@ -30,6 +30,8 @@ export const audiences = [
 ];
 
 // href = clickable card; no href = no dedicated page/anchor yet.
+// NOT RENDERED (7/2026): programs other than the 8-Week Program aren't ready —
+// the "Classes & programs" grid was pulled from the homepage (Offer.astro).
 export const paths: { tag: string; t: string; d: string; href?: string }[] = [
   { tag: 'flagship', t: '8-Week Program', d: 'Eight weeks with a small group — not a punch card.', href: '/en/#program' },
   { tag: 'monthly', t: 'Monthly membership', d: 'Regular movement with structure and community.' },
