@@ -152,13 +152,10 @@ export const nav = [
   { label: 'Kontakt', href: '/kontakt/' },
 ];
 
-// Děti vedou rovnou na klíčovou stránku (rozhodnuto 7/2026); Pro tebe a
-// Pro firmy zůstávají na kotvách rozcestníku, dokud nevznikne lepší cíl
-// (/firmy/ → pak přepnout).
 export const navMenu = [
   { num: '01', label: 'Pro tebe', desc: 'Programy, lekce, osobní tréninky', href: '/lekce-a-sluzby/#pro-tebe' },
   { num: '02', label: 'Pro děti a rodiny', desc: 'Cirkus, kroužky, Supermamky', href: '/krouzky-pro-deti/' },
-  { num: '03', label: 'Pro firmy', desc: 'FitTeams, wellbeing, pronájem sálů', href: '/lekce-a-sluzby/#pro-firmy' },
+  { num: '03', label: 'Pro firmy', desc: 'FitTeams, wellbeing, pronájem sálů', href: '/firmy/' },
 ];
 
 export const RESERVE_URL = 'https://bohemi.fit/rezervace/';

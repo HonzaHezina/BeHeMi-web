@@ -1,0 +1,77 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import MediaFrame from '../components/MediaFrame.astro';
+import { trainers, RESERVE_URL } from '../data/home';
+
+// Jan Hezina (zakladatel/provoz) se na trenérské stránce nezobrazuje.
+const displayTrainers = trainers.filter((t) => t.name !== 'Jan Hezina');
+---
+<Layout
+  title="Trenéři — BoHeMi fitness Vinohrady"
+  description="Tým trenérů a lektorů BoHeMi fitness na pražských Vinohradech. Klára Měchurová, Jitka Štěpánková, Eliška Velázquez — profesionálové, kteří se vám věnují osobně."
+>
+  <Header current="/treneri/" />
+  <main>
+    <!-- HERO -->
+    <section class="relative mx-auto max-w-[1220px] overflow-hidden px-5 pb-10 pt-16 md:px-8 md:pt-20">
+      <div
+        class="pointer-events-none absolute right-0 top-2.5 h-[400px] w-[400px] rounded-full"
+        style="background:radial-gradient(circle, rgba(226,35,26,0.12), rgba(226,35,26,0) 70%);"
+        aria-hidden="true"
+      ></div>
+      <div class="relative max-w-[680px]">
+        <p class="mb-4 text-[13px] font-extrabold uppercase tracking-[0.08em] text-accent-text">
+          <a href="/proc-bohemi/" class="hover:text-ink">Proč BoHeMi</a> · Tým
+        </p>
+        <h1 class="text-[clamp(40px,6.2vw,76px)] font-extrabold leading-[0.98] tracking-[-0.035em]">
+          Náš <span class="font-medium italic text-accent-text">tým</span>
+        </h1>
+        <p class="mt-6 max-w-[54ch] text-[clamp(18px,2.1vw,22px)] leading-[1.45] text-ink-warm">
+          Lektoři, kteří to berou vážně — svou práci i tebe.
+          Malé skupiny, přímý kontakt, žádná anonymita.
+        </p>
+      </div>
+    </section>
+
+    <!-- TRENÉŘI -->
+    <section class="mx-auto max-w-[1220px] px-5 pb-16 md:px-8 md:pb-23">
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {displayTrainers.map((tr) => (
+          <div class="rounded-[22px] border border-border bg-surface overflow-hidden">
+            <MediaFrame
+              media={tr.media}
+              rounded="rounded-none"
+              class="h-72 w-full"
+              alt={`Portrét — ${tr.name}`}
+            />
+            <div class="p-7">
+              <h2 class="text-[22px] font-extrabold tracking-[-0.02em]">{tr.name}</h2>
+              <p class="mb-3 text-[13px] font-extrabold uppercase tracking-[0.06em] text-accent-text">{tr.role}</p>
+              {tr.bio
+                ? <p class="text-[15px] leading-[1.6] text-ink-soft">{tr.bio}</p>
+                : <p class="text-[15px] italic text-ink-muted">Profil brzy doplníme.</p>
+              }
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Nabídka osobních tréninků -->
+      <div class="mt-12 rounded-[22px] bg-sand p-8 md:p-10">
+        <h2 class="mb-3 text-[clamp(22px,2.8vw,30px)] font-extrabold tracking-[-0.02em]">Chceš individuální pozornost?</h2>
+        <p class="mb-6 max-w-[58ch] text-[16px] leading-[1.6] text-ink-soft">
+          Někteří lektoři nabízí kromě skupinových lekcí i osobní tréninky.
+          Domluvíte si termín a program přímo s trenérem.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <Button href="/osobni-treninky/" variant="brand">Osobní tréninky →</Button>
+          <Button href={RESERVE_URL} variant="outline">Skupinové lekce</Button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

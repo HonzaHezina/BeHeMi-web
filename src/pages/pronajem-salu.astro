@@ -1,0 +1,144 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import MediaFrame from '../components/MediaFrame.astro';
+
+const halls = [
+  {
+    name: 'Velký taneční sál',
+    desc: 'Prostorný sál se zrcadly po celé délce. Ideální pro skupinové lekce, tanec, kruhové tréninky nebo firemní akce.',
+    capacity: 'do 20 osob',
+  },
+  {
+    name: 'Malý taneční sál',
+    desc: 'Sál se zrcadly pro menší skupiny nebo individuální lekce. Vhodný pro osobní tréninky, workshopy nebo duety.',
+    capacity: 'do 8 osob',
+  },
+  {
+    name: 'Tatami místnost',
+    desc: 'Místnost se zrcadly, tatami pokrytím a fitness vybavením. Skvělá pro bojová umění, strečink, jógu nebo osobní tréninky.',
+    capacity: 'do 6 osob',
+  },
+  {
+    name: 'Funkční sál',
+    desc: 'Sál s vybavením pro funkční a silový trénink. Vhodný pro skupinové i individuální tréninky.',
+    capacity: 'do 12 osob',
+  },
+];
+
+const forWhom = [
+  'Lektoři a trenéři hledající prostor pro vlastní klienty',
+  'Taneční skupiny a soubory',
+  'Firemní teambuildingové akce',
+  'Workshopy, kurzy a semináře',
+  'Focení a natáčení v autentickém prostoru studia',
+];
+---
+<Layout
+  title="Pronájem sálů — BoHeMi fitness Vinohrady"
+  description="Pronájem tanečních a fitness sálů v BoHeMi na pražských Vinohradech. Čtyři sály se zrcadly pro lektory, taneční skupiny, firemní akce a workshopy. Vinohradská 1438/70."
+>
+  <Header current="/pronajem-salu/" />
+  <main>
+    <!-- HERO -->
+    <section class="relative mx-auto max-w-[1220px] overflow-hidden px-5 pb-8 pt-16 md:px-8 md:pt-20">
+      <div
+        class="pointer-events-none absolute right-0 top-2.5 h-[400px] w-[400px] rounded-full"
+        style="background:radial-gradient(circle, rgba(226,35,26,0.12), rgba(226,35,26,0) 70%);"
+        aria-hidden="true"
+      ></div>
+      <div class="relative max-w-[780px]">
+        <p class="mb-4 text-[13px] font-extrabold uppercase tracking-[0.08em] text-accent-text">
+          <a href="/lekce-a-sluzby/" class="hover:text-ink">Lekce a služby</a> · Prostory
+        </p>
+        <h1 class="text-[clamp(40px,6.2vw,76px)] font-extrabold leading-[0.98] tracking-[-0.035em]">
+          Pronájem <span class="font-medium italic text-accent-text">sálů</span>
+        </h1>
+        <p class="mt-6 max-w-[56ch] text-[clamp(18px,2.1vw,22px)] leading-[1.45] text-ink-warm">
+          Čtyři sály na pražských Vinohradech k pronájmu mimo provozní hodiny studia.
+          Zrcadla, čisté prostory, dobrá poloha — vše připravené k práci.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <Button href="mailto:info@bohemi.fit" variant="primary">Nezávazně poptat →</Button>
+          <Button href="/kontakt/" variant="outline">Kontakt a adresa</Button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SÁLY -->
+    <section class="mx-auto max-w-[1220px] px-5 pt-10 md:px-8">
+      <h2 class="mb-8 text-[clamp(26px,3.2vw,38px)] font-extrabold tracking-[-0.03em]">Co nabízíme k pronájmu</h2>
+      <div class="grid gap-5 sm:grid-cols-2">
+        {halls.map((hall) => (
+          <div class="rounded-[18px] border border-border bg-surface p-7">
+            <h3 class="mb-2 text-[20px] font-extrabold tracking-[-0.02em]">{hall.name}</h3>
+            <p class="mb-4 text-[15.5px] leading-[1.55] text-ink-soft">{hall.desc}</p>
+            <span class="inline-block rounded-full bg-sand px-3 py-1 text-[13px] font-bold text-ink-muted">{hall.capacity}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- PRO KOHO + FOTO -->
+    <section class="mx-auto max-w-[1220px] px-5 pt-10 md:px-8">
+      <div class="grid gap-6 overflow-hidden rounded-[22px] border border-border bg-surface lg:grid-cols-[1.1fr_0.9fr]">
+        <div class="p-8 md:p-10">
+          <h2 class="mb-5 text-[clamp(24px,3vw,34px)] font-extrabold tracking-[-0.03em]">Pro koho jsou sály určeny</h2>
+          <ul class="mb-7 flex flex-col gap-3">
+            {forWhom.map((item) => (
+              <li class="flex items-start gap-2.5 text-[15.5px] text-ink-line">
+                <span class="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden="true"></span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <p class="text-[15px] text-ink-soft">
+            Sály pronajímáme mimo provozní hodiny studia — konkrétní termíny si domluvíme individuálně.
+            Cena závisí na sálu, délce a pravidelnosti pronájmu.
+          </p>
+        </div>
+        <MediaFrame media="media-clay" rounded="rounded-none" class="min-h-[240px] lg:min-h-full" alt="Taneční sál BoHeMi — prostorný sál se zrcadly na Vinohradech" />
+      </div>
+    </section>
+
+    <!-- LOKALITA -->
+    <section class="mx-auto max-w-[1220px] px-5 pt-10 md:px-8">
+      <div class="rounded-[22px] bg-sand p-8 md:p-10">
+        <h2 class="mb-4 text-[clamp(22px,2.8vw,32px)] font-extrabold tracking-[-0.03em]">Kde nás najdete</h2>
+        <p class="mb-2 text-[16px] leading-[1.6] text-ink-soft">
+          <strong class="font-bold text-ink">Vinohradská 1438/70, 130 00 Praha 3</strong>
+        </p>
+        <p class="max-w-[60ch] text-[15.5px] leading-[1.6] text-ink-soft">
+          Centrum Vinohrad, snadná dostupnost MHD. Metro A Jiřího z Poděbrad (5 min chůze)
+          nebo tramvaj na Vinohradské třídě.
+        </p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="mx-auto max-w-[1220px] px-5 pb-16 pt-10 md:px-8 md:pb-23">
+      <div class="relative flex flex-wrap items-center justify-between gap-6 overflow-hidden rounded-[22px] bg-ink-dark p-8 text-cream md:p-[clamp(32px,5vw,56px)]">
+        <div
+          class="pointer-events-none absolute -bottom-22 -right-12 h-[340px] w-[340px] rounded-full"
+          style="background:radial-gradient(circle, rgba(226,35,26,0.18), rgba(226,35,26,0) 70%);"
+          aria-hidden="true"
+        ></div>
+        <div class="relative">
+          <h2 class="max-w-[22ch] text-[clamp(26px,3.4vw,40px)] font-extrabold tracking-[-0.03em]">Máte zájem o pronájem?</h2>
+          <p class="mt-3 max-w-[44ch] text-[17px] text-cream-muted">
+            Napište nám — domluvíme si konkrétní termín, ukážeme sály a řekneme vám cenu.
+          </p>
+        </div>
+        <a
+          href="mailto:info@bohemi.fit"
+          class="relative inline-flex shrink-0 cursor-pointer items-center gap-2 rounded-full bg-accent-text px-7 py-3.5 text-[17px] font-bold text-cream transition-colors hover:bg-accent-deep"
+        >
+          Napsat na info@bohemi.fit →
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

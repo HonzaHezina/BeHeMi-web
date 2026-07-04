@@ -1,0 +1,158 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import MediaFrame from '../components/MediaFrame.astro';
+
+const services = [
+  {
+    name: 'Trénink v BoHeMi',
+    desc: 'Skupinový kruhový nebo silový trénink přímo v našem studiu. Profesionální vybavení, zrcadla, sprchy — tým přijde a cvičí.',
+    note: 'Kapacita do 12 osob',
+  },
+  {
+    name: 'Trénink u vás',
+    desc: 'Trenér přijede k vám — do kanceláře, coworkingu nebo na zahradu. Stačí volný prostor, vybavení přivezeme.',
+    note: 'Flexibilní lokalita',
+  },
+  {
+    name: 'Fotobiomodulace jako benefit',
+    desc: 'Po tréninku nebo jako samostatný relaxační benefit. Světelná terapie pro rychlejší regeneraci a snížení stresu.',
+    note: 'Na vyžádání',
+  },
+];
+
+const benefits = [
+  'Lepší soustředění a energie v práci po pohybu',
+  'Posílení spolupráce a týmové dynamiky',
+  'Pohybová rozmanitost — nikdo se nenudí',
+  'Flexibilní rozvrh přizpůsobený vašim potřebám',
+  'Jeden kontaktní člověk, vše si domluvíte přímo',
+];
+---
+<Layout
+  title="Firemní tréninky — BoHeMi fitness Vinohrady"
+  description="Skupinové tréninky a wellness benefity pro firmy. Kruhový a silový trénink v BoHeMi studiu nebo výjezdně u vás. Praha, Vinohrady. Cena na vyžádání."
+>
+  <Header current="/firmy/" />
+  <main>
+    <!-- HERO -->
+    <section class="relative mx-auto max-w-[1220px] overflow-hidden px-5 pb-8 pt-16 md:px-8 md:pt-20">
+      <div
+        class="pointer-events-none absolute right-0 top-2.5 h-[400px] w-[400px] rounded-full"
+        style="background:radial-gradient(circle, rgba(226,35,26,0.12), rgba(226,35,26,0) 70%);"
+        aria-hidden="true"
+      ></div>
+      <div class="relative max-w-[720px]">
+        <p class="mb-4 text-[13px] font-extrabold uppercase tracking-[0.08em] text-accent-text">
+          <a href="/lekce-a-sluzby/" class="hover:text-ink">Lekce a služby</a> · Pro firmy
+        </p>
+        <h1 class="text-[clamp(40px,6.2vw,76px)] font-extrabold leading-[0.98] tracking-[-0.035em]">
+          BoHeMi <span class="font-medium italic text-accent-text">pro firmy</span>
+        </h1>
+        <p class="mt-6 max-w-[56ch] text-[clamp(18px,2.1vw,22px)] leading-[1.45] text-ink-warm">
+          Skupinové tréninky pro týmy — v našem studiu nebo výjezdně u vás.
+          Jednorázová akce nebo pravidelný program, vždy šitý na míru.
+        </p>
+        <div class="mt-8">
+          <Button href="mailto:info@bohemi.fit" variant="primary">Nezávazně poptat →</Button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CO NABÍZÍME -->
+    <section class="mx-auto max-w-[1220px] px-5 pt-10 md:px-8">
+      <h2 class="mb-8 text-[clamp(26px,3.2vw,38px)] font-extrabold tracking-[-0.03em]">Co nabízíme</h2>
+      <div class="grid gap-5 sm:grid-cols-3">
+        {services.map((s) => (
+          <div class="rounded-[18px] border border-border bg-surface p-7">
+            <h3 class="mb-2 text-[19px] font-extrabold tracking-[-0.02em]">{s.name}</h3>
+            <p class="mb-4 text-[15.5px] leading-[1.55] text-ink-soft">{s.desc}</p>
+            <span class="inline-block rounded-full bg-sand px-3 py-1 text-[13px] font-bold text-ink-muted">{s.note}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- VÝHODY + FOTO -->
+    <section class="mx-auto max-w-[1220px] px-5 pt-10 md:px-8">
+      <div class="grid gap-6 overflow-hidden rounded-[22px] border border-border bg-surface lg:grid-cols-[1.1fr_0.9fr]">
+        <div class="p-8 md:p-10">
+          <h2 class="mb-3 text-[clamp(24px,3vw,34px)] font-extrabold leading-[1.06] tracking-[-0.03em]">Proč to funguje</h2>
+          <p class="mb-5 max-w-[54ch] text-[17px] leading-[1.55] text-ink-soft">
+            Pohyb jako benefit má smysl, když je dostupný a zábavný — ne jako povinná
+            jóga v zasedačce. Naše lekce jsou vedené, variabilní a přizpůsobené
+            různým úrovním pohybových schopností v jednom týmu.
+          </p>
+          <ul class="mb-7 flex flex-col gap-2.5">
+            {benefits.map((b) => (
+              <li class="flex items-start gap-2.5 text-[15.5px] text-ink-line">
+                <span class="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden="true"></span>
+                <span>{b}</span>
+              </li>
+            ))}
+          </ul>
+          <Button href="mailto:info@bohemi.fit" variant="brand">Domluvit schůzku →</Button>
+        </div>
+        <MediaFrame media="media-forest" rounded="rounded-none" class="min-h-[240px] lg:min-h-full" alt="Firemní trénink v BoHeMi — skupinové cvičení pro týmy" />
+      </div>
+    </section>
+
+    <!-- JAK TO FUNGUJE -->
+    <section class="mx-auto max-w-[1220px] px-5 pt-10 md:px-8">
+      <div class="rounded-[22px] bg-sand p-8 md:p-10">
+        <h2 class="mb-6 text-[clamp(22px,2.8vw,32px)] font-extrabold tracking-[-0.03em]">Jak to probíhá</h2>
+        <ol class="flex flex-col gap-5">
+          {[
+            ['Napíšete nám', 'Řeknete nám, kolik vás je, co byste rádi a kdy to chcete. Stačí mail nebo telefon.'],
+            ['Domluvíme program', 'Navrhneme konkrétní typ tréninku, termín a cenu. Vše přizpůsobíme vašemu týmu.'],
+            ['Přijdete cvičit', 'Zbytek je na nás — prostor, vybavení, vedení. Vy si přinesete jen sportovní oblečení.'],
+          ].map(([title, desc], i) => (
+            <li class="flex gap-5">
+              <span class="shrink-0 flex h-9 w-9 items-center justify-center rounded-full bg-accent-text text-[14px] font-extrabold text-cream">
+                {i + 1}
+              </span>
+              <div>
+                <p class="font-bold text-ink">{title}</p>
+                <p class="mt-0.5 text-[15px] text-ink-soft">{desc}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="mx-auto max-w-[1220px] px-5 pb-16 pt-10 md:px-8 md:pb-23">
+      <div class="relative flex flex-wrap items-center justify-between gap-6 overflow-hidden rounded-[22px] bg-ink-dark p-8 text-cream md:p-[clamp(32px,5vw,56px)]">
+        <div
+          class="pointer-events-none absolute -bottom-22 -right-12 h-[340px] w-[340px] rounded-full"
+          style="background:radial-gradient(circle, rgba(226,35,26,0.18), rgba(226,35,26,0) 70%);"
+          aria-hidden="true"
+        ></div>
+        <div class="relative">
+          <h2 class="max-w-[22ch] text-[clamp(26px,3.4vw,40px)] font-extrabold tracking-[-0.03em]">Chcete pohyb jako firemní benefit?</h2>
+          <p class="mt-3 max-w-[44ch] text-[17px] text-cream-muted">
+            Napište nebo zavolejte — rádi se domluvíme na tom, co bude dávat smysl pro váš tým.
+          </p>
+        </div>
+        <div class="relative flex flex-col gap-3">
+          <a
+            href="mailto:info@bohemi.fit"
+            class="inline-flex shrink-0 cursor-pointer items-center gap-2 rounded-full bg-accent-text px-7 py-3.5 text-[17px] font-bold text-cream transition-colors hover:bg-accent-deep"
+          >
+            info@bohemi.fit →
+          </a>
+          <a
+            href="tel:+420603989762"
+            class="text-center text-[15px] font-bold text-cream-muted hover:text-cream"
+          >
+            +420 603 989 762
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
