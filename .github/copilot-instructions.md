@@ -57,7 +57,9 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   pruh `KidsBand.astro`, dětská karta i menu dropdown vedou na
   `/krouzky-pro-deti/`. Příměstský tábor se už nedělá — nevracet.
 - **Klikatelné karty:** detail služby = klik na celý box (volitelné `href`
-  v datech → `<a>` s „Detail →"; bez `href` `<div>` = stránka ještě není).
+  v datech → celý box `<a>`; bez `href` `<div>` = stránka ještě není).
+  **Žádný nápis „Detail →" v boxech (rozhodnuto 7/2026)** — klikatelnost nese
+  celý box (hover zdvih), ne popisek.
   `classes[].page` = lekce s vlastní stránkou (Supermamky). Nová service
   stránka → doplnit `href`/`page` v datech + footer sloupec „Služby".
   Platí všude (i ceník): box s detailem/kotvou = klikací celý, nikdy textový

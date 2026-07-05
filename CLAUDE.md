@@ -151,7 +151,7 @@ stejné slugy, jen cestu `/en/group-classes/#…`):**
 - `classes[].id` = kotva; `classes[].page` = lekce má vlastní stránku (dnes jen
   Supermamky) → zmínky vedou na ni, kotva ale dál existuje.
 - Volitelné `href` u `paths`, `approach`, `individualServices`, `kidsActivities`,
-  `kidsBand`: šablona vykreslí celý box jako `<a>` (+ „Detail →"), bez `href`
+  `kidsBand`: šablona vykreslí celý box jako `<a>`, bez `href`
   zůstává `<div>` = stránka/kotva ještě neexistuje. Nikdy textový odkaz
   „… — detail →" uvnitř neklikací karty. Mřížka `paths` („Lekce a programy")
   je od 7/2026 **stažená z HP** — programy kromě Programu 8 týdnů nejsou
@@ -167,9 +167,13 @@ stejné slugy, jen cestu `/en/group-classes/#…`):**
   osobni-treninky → anchor jde na `/en/classes-and-services/#sekce` (nejkonkrétnější
   dostupný EN cíl).
 - **Pravidlo boxů (platí všude, i v ceníku):** má-li obsah boxu/dlaždice
-  detailní stránku nebo kotvu, je klikací CELÝ box (`<a>`, hover zdvih,
-  „Detail →" span), ne textový odkaz vedle. Př.: dlaždice kroužků v ceníku →
-  `/krouzky-pro-deti/#kotva`. Cenové dlaždice *variant jedné služby*
+  detailní stránku nebo kotvu, je klikací CELÝ box (`<a>`, hover zdvih),
+  ne textový odkaz vedle. **Žádný nápis „Detail →" v boxech (rozhodnuto
+  7/2026)** — klikatelnost nese box sám. Př.: dlaždice kroužků v ceníku →
+  `/krouzky-pro-deti/#kotva`. Musí-li box obsahovat i druhý odkaz (např.
+  „Rezervovat →" na `/skupinove-lekce/`), řeší se overlay `<a>` (`absolute
+  inset-0` + `aria-label`, kontejner `relative`, druhý odkaz `relative` nad
+  ním) — vnořené `<a>` jsou nevalidní. Cenové dlaždice *variant jedné služby*
   (fotobiomodulace 13 Kč/min…) zůstávají neklikací — na detail vede sekce.
 - **Odkaz sekce na detail patří do hlavičky sekce** (flex řádek vedle `<h2>`,
   vzor „Všechny lekce →" na rozcestníku, fotobiomodulace/kroužky v ceníku),
