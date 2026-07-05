@@ -237,7 +237,9 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   děti?", vysoko na homepage je plný pruh `KidsBand.astro` (sand pozadí, dlaždice
   z `kidsBand` v datech) a dětská karta v „Pro koho tu jsme" vede na
   `/krouzky-pro-deti/`, ne na kotvu. Dospělácká linie webu tím ale zůstává —
-  není to dětský web.
+  není to dětský web. **Dětské dlaždice jsou na HP JEN v KidsBand** (rozhodnuto
+  5. 7. 2026) — sekce 02 v HP nabídce (`Offer.astro`) je zeštíhlená na hlavičku
+  + větu + tlačítko na `/krouzky-pro-deti/`, mřížku `kidsActivities` nevracet.
 - **Lokalita ≠ značka (7/2026):** BoHeMi se má časem rozšířit o další místa —
   „BoHeMi je myšlenka, může být kdekoliv". Značková vrstva je bez Vinohrad:
   hero H1 akcent „pro tělo, zdraví i hlavu.", footer tagline „…Body – Health –
@@ -269,7 +271,9 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   Jump links = self-identifikační jazyk („Chci cvičit / Hledám pro dítě / Jsem z firmy"),
   každá ze tří kategorií má 1–2 věty intro pod nadpisem, skupinové lekce limitované
   na 6 karet (→ „Všechny lekce →" na `/skupinove-lekce/`). Stejný odstavec
-  nesmí být na rozcestníku i detailu.
+  nesmí být na rozcestníku i detailu. **HP nabídka (`Offer.astro`) i EN rozcestník
+  ukazují stejných 6 karet lekcí** (`classes.slice(0, 6)`, rozhodnuto 5. 7. 2026) —
+  všech 10 má jen detail `/skupinove-lekce/`.
 - **Obsah z WordPressu ověřovat — je místy zastaralý.** Př.: lektorka Supermamek
   na WP (Klára Šauerová) už v týmu není; termíny semestru kroužků („letní
   16. 9. 2026 – 27. 1. 2027") vypadají jako zimní — čeká na Honzovo potvrzení.

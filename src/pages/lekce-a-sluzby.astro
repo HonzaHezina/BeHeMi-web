@@ -65,7 +65,8 @@ const jumps = [
             <div class="p-[22px]">
               <h3 class="mb-2 text-[21px] font-extrabold tracking-[-0.02em]">{c.t}</h3>
               <p class="text-[15.5px] leading-[1.5] text-ink-soft">{c.d}</p>
-              <div class="mt-3 text-[12.5px] font-bold tracking-[0.02em] text-brand">{c.bhm}</div>            </div>
+              <div class="mt-3 text-[12.5px] font-bold tracking-[0.02em] text-brand">{c.bhm}</div>
+            </div>
           </a>
         ))}
       </div>
@@ -77,7 +78,8 @@ const jumps = [
         {individualServices.map((s) => s.href ? (
           <a href={s.href} class="block cursor-pointer bg-surface p-[30px] transition-colors hover:bg-surface-hover">
             <h3 class="mb-2 text-xl font-extrabold tracking-[-0.02em]">{s.t}</h3>
-            <p class="text-[15.5px] leading-[1.5] text-ink-soft">{s.d}</p>          </a>
+            <p class="text-[15.5px] leading-[1.5] text-ink-soft">{s.d}</p>
+          </a>
         ) : (
           <div class="bg-surface p-[30px]">
             <h3 class="mb-2 text-xl font-extrabold tracking-[-0.02em]">{s.t}</h3>
@@ -108,7 +110,8 @@ const jumps = [
             <MediaFrame media={k.media} rounded="rounded-none" class="h-[150px]" alt={`Pro děti — ${k.img}`} />
             <div class="p-[22px]">
               <h3 class="mb-2 text-[21px] font-extrabold tracking-[-0.02em]">{k.t}</h3>
-              <p class="text-[15.5px] leading-[1.5] text-ink-soft">{k.d}</p>            </div>
+              <p class="text-[15.5px] leading-[1.5] text-ink-soft">{k.d}</p>
+            </div>
           </a>
         ))}
       </div>
@@ -130,7 +133,8 @@ const jumps = [
         {firmyServices.map((f) => f.href ? (
           <a href={f.href} class="block cursor-pointer bg-surface p-[30px] transition-colors hover:bg-surface-hover">
             <h3 class="mb-2 text-xl font-extrabold tracking-[-0.02em]">{f.t}</h3>
-            <p class="text-[15.5px] leading-[1.5] text-ink-soft">{f.d}</p>          </a>
+            <p class="text-[15.5px] leading-[1.5] text-ink-soft">{f.d}</p>
+          </a>
         ) : (
           <div class="bg-surface p-[30px]">
             <h3 class="mb-2 text-xl font-extrabold tracking-[-0.02em]">{f.t}</h3>

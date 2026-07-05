@@ -4,13 +4,11 @@ import MediaFrame from './MediaFrame.astro';
 import {
   classes as classesCS,
   individualServices as individualServicesCS,
-  kidsActivities as kidsActivitiesCS,
   firmyServices as firmyServicesCS,
 } from '../data/home';
 import {
   classes as classesEN,
   individualServices as individualServicesEN,
-  kidsActivities as kidsActivitiesEN,
   firmyServices as firmyServicesEN,
 } from '../data/home.en';
 import type { Lang } from '../i18n/ui';
@@ -22,7 +20,6 @@ const { lang = 'cs' } = Astro.props;
 
 const classes = lang === 'en' ? classesEN : classesCS;
 const individualServices = lang === 'en' ? individualServicesEN : individualServicesCS;
-const kidsActivities = lang === 'en' ? kidsActivitiesEN : kidsActivitiesCS;
 const firmyServices = lang === 'en' ? firmyServicesEN : firmyServicesCS;
 
 const scheduleHref = lang === 'en' ? '/en/group-classes/' : '/skupinove-lekce/';
@@ -58,13 +55,14 @@ const classHref = (c: (typeof classes)[number]) => c.page ?? `${scheduleHref}#${
       </a>
     </div>
     <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      {classes.map((c) => (
+      {classes.slice(0, 6).map((c) => (
         <a href={classHref(c)} class="block cursor-pointer overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-20px_rgba(33,31,26,0.24)]">
           <MediaFrame media={c.media} rounded="rounded-none" class="h-40" alt={`${lang === 'en' ? 'Class' : 'Lekce'} — ${c.img}`} />
           <div class="p-[22px]">
             <h4 class="mb-2 text-[21px] font-extrabold tracking-[-0.02em]">{c.t}</h4>
             <p class="text-[15.5px] leading-[1.5] text-ink-soft">{c.d}</p>
-            <div class="mt-3 text-[12.5px] font-bold tracking-[0.02em] text-brand">{c.bhm}</div>          </div>
+            <div class="mt-3 text-[12.5px] font-bold tracking-[0.02em] text-brand">{c.bhm}</div>
+          </div>
         </a>
       ))}
     </div>
@@ -78,7 +76,8 @@ const classHref = (c: (typeof classes)[number]) => c.page ?? `${scheduleHref}#${
       {individualServices.map((s) => s.href ? (
         <a href={s.href} class="block cursor-pointer bg-surface p-[30px] transition-colors hover:bg-surface-hover">
           <h4 class="mb-2 text-xl font-extrabold tracking-[-0.02em]">{s.t}</h4>
-          <p class="text-[15.5px] leading-[1.5] text-ink-soft">{s.d}</p>        </a>
+          <p class="text-[15.5px] leading-[1.5] text-ink-soft">{s.d}</p>
+        </a>
       ) : (
         <div class="bg-surface p-[30px]">
           <h4 class="mb-2 text-xl font-extrabold tracking-[-0.02em]">{s.t}</h4>
@@ -101,17 +100,17 @@ const classHref = (c: (typeof classes)[number]) => c.page ?? `${scheduleHref}#${
     </div>
   </div>
 
+  <!-- Dlaždice dětských aktivit žijí na HP jen v KidsBand výš — tady jen odkaz,
+       ať se stejný obsah neopakuje dvakrát na jedné stránce. -->
   <div class="pt-9">
-    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      {kidsActivities.map((k) => (
-        <a href={k.href} class="block cursor-pointer overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-20px_rgba(33,31,26,0.24)]">
-          <MediaFrame media={k.media} rounded="rounded-none" class="h-40" alt={`${lang === 'en' ? 'For kids' : 'Pro děti'} — ${k.img}`} />
-          <div class="p-[22px]">
-            <h4 class="mb-2 text-[21px] font-extrabold tracking-[-0.02em]">{k.t}</h4>
-            <p class="text-[15.5px] leading-[1.5] text-ink-soft">{k.d}</p>          </div>
-        </a>
-      ))}
-    </div>
+    <p class="mb-6 max-w-[64ch] text-[17px] leading-[1.55] text-ink-warm">
+      {lang === 'en'
+        ? 'Clubs, circus, the Discovery Room and Supermums — everything for kids lives on one page.'
+        : 'Kroužky, cirkus, Objevovárna i Supermamky — celá dětská nabídka je pohromadě na jedné stránce.'}
+    </p>
+    <Button href="/krouzky-pro-deti/" variant="dark" class="px-6 py-3 text-[15.5px]">
+      {lang === 'en' ? 'Kids clubs & activities →' : 'Kroužky pro děti →'}
+    </Button>
   </div>
 
   <!-- ───── PRO FIRMY / FOR COMPANIES ───── -->
@@ -132,7 +131,8 @@ const classHref = (c: (typeof classes)[number]) => c.page ?? `${scheduleHref}#${
       {firmyServices.map((f) => f.href ? (
         <a href={f.href} class="block cursor-pointer bg-surface p-[30px] transition-colors hover:bg-surface-hover">
           <h4 class="mb-2 text-xl font-extrabold tracking-[-0.02em]">{f.t}</h4>
-          <p class="text-[15.5px] leading-[1.5] text-ink-soft">{f.d}</p>        </a>
+          <p class="text-[15.5px] leading-[1.5] text-ink-soft">{f.d}</p>
+        </a>
       ) : (
         <div class="bg-surface p-[30px]">
           <h4 class="mb-2 text-xl font-extrabold tracking-[-0.02em]">{f.t}</h4>
