@@ -110,11 +110,19 @@ nová service stránka se přidává i sem. Program 8 týdnů je ve sloupci **We
 nestavět), `/fotky/`, LEGAL stránky (VOP, GDPR, provozní řád…).
 
 - `/objevovarna/` se nestaví — obsah je sekce na `/krouzky-pro-deti/`.
+- **Dětské aktivity nemají vlastní stránky (potvrzeno 7/2026):** živé WP stránky
+  `/akademie-cirk-la-putyka/`, `/detska-zumba/` a `/hernicka/` mají v GSC ~0
+  kliků → obsah žije na `/krouzky-pro-deti/` (sekce + kotvy), staré URL jsou
+  301 v redirect-map. Vlastní stránku dostane kroužek, až reálně potáhne v GSC
+  (vzor: výjimka Supermamky, 72 kliků).
 - **Příměstský tábor se už nedělá (rozhodnuto 7/2026) — nevracet do nabídky.**
   Redirect `/primestsky-tabor/` → `/krouzky-pro-deti/` zůstává v platnosti.
 - **301 redirecty čekají:** `/nase-sluzby/osobni-treninky/` → `/osobni-treninky/`,
   `/o-nas/` → `/proc-bohemi/`, `/treneri/` staré profily (Šauerová, Nováčková,
-  Bierhausová) → `/treneri/`. Implementace zatím nerozhodnutá (Astro vs. nginx).
+  Bierhausová) → `/treneri/`, `/akademie-cirk-la-putyka/` → `/krouzky-pro-deti/`,
+  `/detska-zumba/` → `/krouzky-pro-deti/#detska-zumba`, `/hernicka/` →
+  `/krouzky-pro-deti/#objevovarna`. Plný seznam v redirect-map. Implementace
+  zatím nerozhodnutá (Astro vs. nginx).
 
 Mimo repo (WordPress, neřešíš tady): `bohemi.fit/rezervace/` — rezervace,
 „Můj účet" / login / členství.
@@ -257,7 +265,15 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
 - **Obsah z WordPressu ověřovat — je místy zastaralý.** Př.: lektorka Supermamek
   na WP (Klára Šauerová) už v týmu není; termíny semestru kroužků („letní
   16. 9. 2026 – 27. 1. 2027") vypadají jako zimní — čeká na Honzovo potvrzení.
-  Dynamické údaje (volná místa) na statický web nepatří.
+  Dynamické údaje (volná místa) na statický web nepatří — WP u kurzů akademie
+  ukazuje „kapacitu" 10/9/11 míst, což jsou volná místa z bookingu, nepřenášet.
+- **Ceny kroužků sjednocené s WP 5. 7. 2026:** akademie 4 000 / 4 600 / 5 500 Kč,
+  Dětská Zumba 3 400 Kč (vše „/ semestr"), Objevovárna 250 Kč / vstup. Při změně
+  držet v synku tři místa: detail `/krouzky-pro-deti/` + ceník CZ + ceník EN.
+  Otevřené (čeká na Honzu): názvy kurzů akademie se na webu liší od WP — web má
+  „Základy cirkusového tréninku" a „Hlavou ve vzduchu", WP „Základy gymnastiky
+  a akrobacie formou hry" a „Pozemní a závěsná akrobacie, žonglování". Jestli
+  mají sedět s WP bookingem 1:1, rozhodne Honza — zatím nechat webové názvy.
 - **Přístupnost:** všechny stránky projdou **axe-core (WCAG 2.1 A+AA) = 0 chyb**.
   Drž text ≥ 4.5:1 (velký ≥ 3:1), globální `:focus-visible` ring je v `@layer base`,
   animace respektují `prefers-reduced-motion`. Po změně barev spusť axe znovu.
