@@ -35,15 +35,15 @@ import { classes } from '../../data/home.en';
     <section class="mx-auto max-w-[1220px] px-5 pb-12 pt-6 md:px-8 md:pb-16">
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {classes.map((c) => (
-          <div id={c.id} class="scroll-mt-24 overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-20px_rgba(33,31,26,0.24)]">
+          <div id={c.id} class="relative scroll-mt-24 overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-20px_rgba(33,31,26,0.24)]">
             <MediaFrame media={c.media} rounded="rounded-none" class="h-44" alt={`Class — ${c.img}`} />
             <div class="p-[22px]">
               <h2 class="mb-2 text-[21px] font-extrabold tracking-[-0.02em]">{c.t}</h2>
               <p class="text-[15.5px] leading-[1.5] text-ink-soft">{c.d}</p>
               <div class="mt-3 text-[12.5px] font-bold tracking-[0.02em] text-brand">{c.bhm}</div>
               <div class="mt-4 flex flex-wrap gap-5">
-                {c.page && <a href={c.page} class="text-[14px] font-bold text-accent-text hover:text-ink">Details →</a>}
-                <a href="https://bohemi.fit/rezervace/" class="text-[14px] font-bold text-accent-text hover:text-ink">Book →</a>
+                {c.page && <a href={c.page} class="text-[14px] font-bold text-accent-text after:absolute after:inset-0 hover:text-ink">Details →</a>}
+                <a href="https://bohemi.fit/rezervace/" class="relative text-[14px] font-bold text-accent-text hover:text-ink">Book →</a>
               </div>
             </div>
           </div>
