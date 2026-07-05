@@ -44,7 +44,7 @@ neřešit.
 | /ai-a-bohemi/ | 0 | → /proc-bohemi/ |
 | /blog/ | 0 | → / (nebo ponechat, jestli chceš blogovat) |
 | /pripravujeme/ | 1 | → / |
-| /hernicka/ | 1 | → /krouzky-pro-deti/ |
+| /hernicka/ | 1 | → /krouzky-pro-deti/#objevovarna (kotva existuje — nejkonkrétnější cíl) |
 | /spoluprace/ | 1 | → / nebo /firmy/ |
 | /informace/kurzy-pro-deti/ | 1 | → /krouzky-pro-deti/ |
 | /nase-sluzby/meditace/ | 0 | → / (služba zrušena) |
@@ -66,6 +66,8 @@ spadly do 404 — každá potřebuje 301 na aktuální cíl.
 | /klara-mechurova/ | → /proc-bohemi/#treneri (aktuální trenérka) |
 | /ucet-clenstvi/urovne-clenstvi/ | → /cenik/ |
 | /kalendar/ | → /skupinove-lekce/ (nebo rozvrh) |
+| /akademie-cirk-la-putyka/ | → /krouzky-pro-deti/ (sekce Akademie je nahoře; živá WP stránka, v GSC exportu nebyla) |
+| /detska-zumba/ | → /krouzky-pro-deti/#detska-zumba (živá WP stránka, v GSC exportu nebyla) |
 
 ## Globální pravidlo — trailing slash (JEDNO nastavení, ne po stránkách)
 Google zná URL s lomítkem i bez (`/krouzky-pro-deti` vs `/krouzky-pro-deti/`,
