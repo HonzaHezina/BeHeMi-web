@@ -24,7 +24,7 @@ const audiences = lang === 'en' ? audiencesEN : audiencesCS;
 
   <div class="grid gap-5 md:grid-cols-3">
     {audiences.map((a) => (
-      <div class="relative flex flex-col overflow-hidden rounded-[18px] border border-border bg-surface p-8 transition-all duration-300 hover:-translate-y-1.5 hover:border-brand hover:shadow-[0_24px_46px_-20px_rgba(33,31,26,0.26)]">
+      <a href={a.anchor} class="group relative flex cursor-pointer flex-col overflow-hidden rounded-[18px] border border-border bg-surface p-8 transition-all duration-300 hover:-translate-y-1.5 hover:border-brand hover:shadow-[0_24px_46px_-20px_rgba(33,31,26,0.26)]">
         <span class="pointer-events-none absolute -right-1.5 -top-2.5 text-[84px] italic text-ink-ghost" aria-hidden="true">{a.fig}</span>
         <span class="relative mb-3 text-[12.5px] font-bold uppercase tracking-[0.06em] text-ink-faint">{a.tagline}</span>
         <h3 class="relative mb-2 text-[28px] font-extrabold tracking-[-0.025em]">{a.label}</h3>
@@ -37,10 +37,10 @@ const audiences = lang === 'en' ? audiencesEN : audiencesCS;
             </li>
           ))}
         </ul>
-        <a href={a.anchor} class="relative mt-auto inline-flex cursor-pointer items-center gap-2 self-start rounded-full bg-ink px-5 py-2.5 text-[15px] font-bold text-cream transition-colors hover:bg-brand">
+        <span class="relative mt-auto inline-flex items-center gap-2 self-start rounded-full bg-ink px-5 py-2.5 text-[15px] font-bold text-cream transition-colors group-hover:bg-brand">
           {t(lang, 'audiences_cta')}
-        </a>
-      </div>
+        </span>
+      </a>
     ))}
   </div>
 </section>

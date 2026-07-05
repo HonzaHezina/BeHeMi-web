@@ -93,7 +93,7 @@ const objevovarnaFacts = [
       </p>
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {circusCourses.map((c) => (
-          <div id={c.id} class="flex scroll-mt-24 flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-20px_rgba(33,31,26,0.24)]">
+          <div id={c.id} class="flex scroll-mt-24 flex-col overflow-hidden rounded-2xl border border-border bg-surface">
             <MediaFrame media={c.media} rounded="rounded-none" class="h-44" alt={`Kroužek — ${c.img}`} />
             <div class="flex flex-1 flex-col p-[22px]">
               <h3 class="mb-2 text-[21px] font-extrabold tracking-[-0.02em]">{c.t}</h3>

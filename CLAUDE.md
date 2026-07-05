@@ -175,6 +175,10 @@ stejné slugy, jen cestu `/en/group-classes/#…`):**
   inset-0` + `aria-label`, kontejner `relative`, druhý odkaz `relative` nad
   ním) — vnořené `<a>` jsou nevalidní. Cenové dlaždice *variant jedné služby*
   (fotobiomodulace 13 Kč/min…) zůstávají neklikací — na detail vede sekce.
+  **Hover affordance (zdvih/stín/bg) jen na klikacích boxech** — neklikací
+  `<div>` nesmí mít hover efekt, aby nevypadal klikací (sladěno 7/2026:
+  ceník membership dlaždice, karty kroužků, „Tělo jako učitel", fallbacky
+  bez `href`).
 - **Odkaz sekce na detail patří do hlavičky sekce** (flex řádek vedle `<h2>`,
   vzor „Všechny lekce →" na rozcestníku, fotobiomodulace/kroužky v ceníku),
   ne do odstavce pod mřížkou.
