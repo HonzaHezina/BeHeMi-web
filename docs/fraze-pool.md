@@ -9,6 +9,29 @@ Značení: [JÁDRO] = doporučuju nasadit · [volit.] = dobré, ale jako záloha
 
 ---
 
+## STAV NASAZENÍ (aktualizováno 7/2026 — udržovat!)
+
+Pravidlo (Honza, 7/2026): **fráze použité na `/program-8-tydnu/` se NESMÍ
+opakovat na homepage.** HP smí z poolu nést jen slogan „Neber nic jako svaté…"
+— ten zatím NENÍ nasazen nikde (vyhrazen pro HP, na detail programu nepatří).
+
+Použito na `/program-8-tydnu/` (5 — pro HP zablokované):
+
+1. „Velká část oprav v těle běží v noci… spánek je trénink, ne lenost" —
+   týden 3 (parafráze „tělo opravuje, třídí a obnovuje síly")
+2. „Jez, když máš hlad. Přestaň, když jsi najedený." — týden 4
+3. „Zdraví se nedělá nárazem, dělá se rytmem." + „co vydrží, si necháš" — týden 7
+4. „Zdraví se nehádá, pozná se: vstaneš svěží, po jídle ti není těžko, spíš
+   tvrdě, zvládneš zátěž." — sekce „Jak poznáš, že to funguje"
+5. Pull-quote „Nejlepší trénink je někdy ten, že na pár dní přestaneš tělu
+   škodit." — tmavý pás
+
+Volné pro HP/jinde: slogan (jen HP) · „Zdraví není to, že tě zrovna nic
+nebolí" · „Tělo zvládne víc, než čekáš…" · „Zdravé tělo poznáš podle toho,
+co umí…" · ownership věty · „spánek = noční opravy" (dlouhá verze).
+
+---
+
 ## HERO / slogan (vyber max 1)
 
 [JÁDRO] **„Neber nic, co tady řekneme, jako svaté. Posuď to podle výsledku, ne

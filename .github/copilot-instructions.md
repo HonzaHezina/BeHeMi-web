@@ -17,14 +17,16 @@ Ne spa, ne ezoterika, ne luxusní wellness, ne „sekta".
 2. **Booking = odkaz ven** na `https://bohemi.fit/rezervace/`. Nikdy iframe, nikdy
    vlastní rezervační formulář.
 3. **URL/slugy se nemění** — zdroj pravdy je `docs/redirect-map.md` (reálná GSC
-   data). Nové slugy nevymýšlet.
+   data). Nové slugy nevymýšlet. Jediná schválená výjimka: `/program-8-tydnu/`.
 4. **Barvy a fonty jen z `design-system/MASTER.md`.** Chybí token → zeptej se.
 5. **SEO basics:** jeden `<h1>`, `<title>` + `meta description`, sémantické
    nadpisy, alt texty.
 6. Jazyk webu = čeština (EN mutace pod `/en/`, texty v `src/data/home.en.ts`
    + `src/i18n/ui.ts`).
-7. **Copy tón věcný, ne duchovní.** Zakázaná slova: „energie" (woo), „signály
-   těla", „holistické", „samoregulace", „duše". Fráze jen z `docs/fraze-pool.md`.
+7. **Copy tón věcný, ne duchovní.** Zakázaná slova (nula, všude): „energie" (woo),
+   „signály těla", „holistické", „samoregulace", „duše", „harmonie",
+   „transformace", „vědomí". Fráze jen z `docs/fraze-pool.md` — fráze použité na
+   `/program-8-tydnu/` se nesmí opakovat na homepage (stav → fraze-pool.md).
 
 ## Anti-cíle
 Žádná spa-pastel paleta (růžová/šalvějová/zlatá), žádné elegantní serify, žádné
@@ -34,8 +36,16 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
 ## Stav & konvence (drž konzistenci)
 - **Postaveno:** `/`, `/proc-bohemi/`, `/lekce-a-sluzby/`, `/skupinove-lekce/`,
   `/krouzky-pro-deti/`, `/supermamky/`, `/open-gym/`, `/fotobiomodulacni-terapie/`,
-  `/cenik/`, `/kontakt/`, 404 + EN mutace v `src/pages/en/`.
+  `/osobni-treninky/`, `/pronajem-salu/`, `/firmy/`, `/treneri/`,
+  `/program-8-tydnu/`, `/cenik/`, `/kontakt/`, 404 + EN mutace v `src/pages/en/`.
   Menu: Domů · Proč BoHeMi · Lekce a služby · Ceník · Kontakt · Rezervovat.
+- **Program 8 týdnů:** název VŽDY „Program 8 týdnů" (nikdy „Life Practice"/„Cesta";
+  velké P i uprostřed věty). Zmínky vedou na `/program-8-tydnu/`. Interní podklady
+  `docs/program-8-tydnu-podklady.md` NEPUBLIKOVAT. Mřížka `paths` („Lekce a
+  programy") je stažená z HP — ostatní programy nejsou hotové.
+- **Lokalita ≠ značka:** hero H1/tagline bez „Vinohrady" (BoHeMi = myšlenka,
+  časem víc míst); lokalita jen v hero badge, SEO titles a kontaktech, dokud
+  je jedno studio.
 - **Navigace = tři vrstvy** (HP ochutnávka → rozcestník → detail): každý klik
   vede na **nejkonkrétnější existující stránku**. Služba → vlastní stránka; typ
   lekce → `/skupinove-lekce/#kotva` (typy lekcí nemají vlastní stránky); dětská

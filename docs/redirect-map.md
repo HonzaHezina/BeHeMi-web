@@ -21,6 +21,11 @@ neřešit.
 | /firmy/ | 7 | KEEP |
 | /fotky/ | 3 | KEEP (659 zobr.) |
 
+## NOVÉ slugy — nejsou z GSC, explicitně schválené
+| URL | Schváleno | Pozn. |
+|---|---|---|
+| /program-8-tydnu/ | 7/2026 (Honza) | detail vlajkového programu; název vždy „Program 8 týdnů" (nikdy „Life Practice") |
+
 ## 301 — přesměrovat starou URL na nový cíl
 | Stará URL | Kliky | → Cíl |
 |---|---|---|
