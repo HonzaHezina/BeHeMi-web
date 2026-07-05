@@ -6,9 +6,13 @@ import Button from '../components/Button.astro';
 import MediaFrame from '../components/MediaFrame.astro';
 import { RESERVE_URL } from '../data/home';
 
-// Reálná data z bohemi.fit/akademie-cirk-la-putyka/ a /hernicka/ (červenec 2026).
-// TODO(Honza): před nasazením ověřit termíny semestru a ceny — WP uvádí
+// Reálná data z bohemi.fit/akademie-cirk-la-putyka/ a /hernicka/.
+// Ceny ověřené proti WP 5. 7. 2026 (4 000 / 4 600 / 5 500 Kč) — drž v synku
+// s cenik.astro a en/pricing.astro.
+// TODO(Honza): před nasazením ověřit termíny semestru — WP uvádí
 // „letní semestr 16. 9. 2026 – 27. 1. 2027", což vypadá jako zimní.
+// WP u kurzů ukazuje i počty míst (10/9/11) — vypadá to jako volná místa
+// z bookingu, ne kapacita → na statický web nepatří (viz CLAUDE.md).
 // id = stabilní kotva /krouzky-pro-deti/#<id> (ASCII, nikdy neměnit) —
 // vedou na ně odkazy z HP a rozcestníku, stejná logika jako u typů lekcí.
 const circusCourses = [
@@ -17,7 +21,7 @@ const circusCourses = [
     t: 'Cirkusová školička',
     age: '3–5 let',
     when: 'každou středu od 14:15',
-    price: '3 900 Kč / semestr',
+    price: '4 000 Kč / semestr',
     d: 'Zkušení trenéři a akrobaté naučí děti základní pohybové dovednosti a zdolávání jednoduchých překážek — formou hry a s pomocí cirkusových vzdělávacích technik. Rodiče jsou na hodině vítáni.',
     media: 'media-sand',
     img: 'cirkusová školička',
@@ -27,7 +31,7 @@ const circusCourses = [
     t: 'Základy cirkusového tréninku',
     age: '6–8 let',
     when: 'každou středu od 15:15',
-    price: '4 400 Kč / semestr',
+    price: '4 600 Kč / semestr',
     d: 'Děti si formou hry osvojí základy gymnastiky a akrobacie. Hodina má dvě části: cvičení pro správné držení těla, koordinaci a obratnost — a jednotlivé disciplíny jako pozemní akrobacie nebo žonglování.',
     media: 'media-clay',
     img: 'základy gymnastiky a akrobacie',
@@ -37,7 +41,7 @@ const circusCourses = [
     t: 'Hlavou ve vzduchu',
     age: '9–12 let',
     when: 'každou středu od 16:30',
-    price: '5 300 Kč / semestr',
+    price: '5 500 Kč / semestr',
     d: 'Jednotlivé cirkusové disciplíny do hloubky: pozemní i závěsná akrobacie a žonglování. Ucelený soubor základních dovedností doplněný o skupinová cvičení pro spolupráci v kolektivu.',
     media: 'media-green',
     img: 'pozemní a závěsná akrobacie',
