@@ -1,5 +1,10 @@
 # Homepage — neEzo přepis + prompt
 
+> ⚠️ **ARCHIV (5. 7. 2026)** — historický pracovní brief, přepis je dávno
+> aplikovaný. Neřiď se detaily: „Cesta" se dnes jmenuje **Program 8 týdnů**,
+> „Najdi se v tom" je přerámované na „Pro koho tu jsme", HP struktura se dál
+> vyvíjela (KidsBand, 6 karet lekcí, dedup). Aktuální stav = `/CLAUDE.md`.
+
 Nová copy sekci po sekci. Tvůj civilní hlas, ne knižní. Pravidlo: drž skepsi
 (otestuj si to sám, žádné dogma), zabij wellness mluvu (energie, signály, tělo se
 léčí samo, holistické, „prodáváme cestu"). „Cesta" zůstává jen jako NÁZEV produktu.

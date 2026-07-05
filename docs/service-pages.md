@@ -1,5 +1,11 @@
 # Service stránky — plán + prompt
 
+> ⚠️ **ARCHIV (5. 7. 2026)** — plán je z většiny zrealizovaný. Neřiď se
+> tabulkou slugů: zdroj pravdy je `docs/redirect-map.md`. Rozdíly proti plánu:
+> `/objevovarna/` se NEstaví (sekce na `/krouzky-pro-deti/`), osobní tréninky
+> žijí na `/osobni-treninky/`. Prompt níž lze dál použít pro budoucí stránky
+> (`/hula-hoop/`, LEGAL) — vždy spolu s aktuálním `/CLAUDE.md`.
+
 Cíl: z rozcestníku `/lekce-a-sluzby/` vytáhnout jednotlivé service stránky na
 STARÉ WP slugy (ožijí zaindexované URL, nepotřebují 301). Menu zůstává
 konsolidované — service stránky jsou hloubkové, linkované z rozcestníku.

@@ -106,6 +106,9 @@ kurzíva/váha téhož grotesku.
   ztmavení ~8 %, `cursor-pointer`, viditelný focus ring.
 - **Sekundární:** outline `--brand`, transparentní pozadí.
 - **Karta lekce:** `--surface`, jemný stín, foto + název + 1 věta + „Rezervovat".
+- **Klikací box:** má-li karta/dlaždice cíl (stránku/kotvu), kliká se na CELÝ
+  box — žádný nápis „Detail →" uvnitř (rozhodnuto 7/2026). Hover affordance
+  (zdvih/stín/bg) patří **jen klikacím boxům**; neklikací `<div>` je bez hoveru.
 - Ikony: **SVG (Lucide / Heroicons)**, ne emoji.
 
 ## Pohyb
@@ -121,6 +124,7 @@ Decentní. Přechody 150–300 ms, jemné hover stavy. Respektuj
 - [ ] Jeden `<h1>`, `<title>` + `meta description`
 - [ ] Kontrast textu ≥ 4.5:1, viditelný focus pro klávesnici
 - [ ] `cursor-pointer` na všem klikatelném
+- [ ] Hover zdvih/stín jen na klikacích boxech; box s cílem klikací celý, bez „Detail →"
 - [ ] Ikony jako SVG, ne emoji
 - [ ] Responzivní na 375 / 768 / 1024 / 1440
 - [ ] `prefers-reduced-motion` respektováno

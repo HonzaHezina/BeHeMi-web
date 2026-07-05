@@ -52,10 +52,14 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   aktivita → `/krouzky-pro-deti/#kotva`. **Kotvy (`classes[].id` v datech +
   dětské `#cirkusova-skolicka` ap.) se NIKDY nemění**; cíl kotvy má `scroll-mt-24`.
   Provozní údaje (rozvrh, kapacita) jen na detailu, ne v dlaždicích; stejný
-  odstavec nesmí být na rozcestníku i detailu. Detaily v `/CLAUDE.md`.
+  odstavec nesmí být na rozcestníku i detailu. **HP nabídka i rozcestníky (CZ/EN)
+  ukazují 6 karet lekcí** (`classes.slice(0, 6)`), všech 10 jen na
+  `/skupinove-lekce/`. Detaily v `/CLAUDE.md`.
 - **Děti = po homepage nejsilnější publikum:** hero má dětské tlačítko, homepage
   pruh `KidsBand.astro`, dětská karta i menu dropdown vedou na
-  `/krouzky-pro-deti/`. Příměstský tábor se už nedělá — nevracet.
+  `/krouzky-pro-deti/`. **Dětské dlaždice jsou na HP jen v KidsBand** — sekce 02
+  v `Offer.astro` je jen hlavička + věta + tlačítko, mřížku `kidsActivities`
+  na HP nevracet. Příměstský tábor se už nedělá — nevracet.
 - **Klikatelné karty:** detail služby = klik na celý box (volitelné `href`
   v datech → celý box `<a>`; bez `href` `<div>` = stránka ještě není).
   **Žádný nápis „Detail →" v boxech (rozhodnuto 7/2026)** — klikatelnost nese
@@ -65,6 +69,10 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   Platí všude (i ceník): box s detailem/kotvou = klikací celý, nikdy textový
   odkaz „… — detail →" vedle boxu; odkaz sekce na detail patří do hlavičky
   sekce vedle `<h2>`. Cenové dlaždice variant jedné služby neklikací.
+  **Hover efekt (zdvih/stín/bg) jen na klikacích boxech** — neklikací `<div>`
+  bez hoveru, ať nevypadá klikací. Druhý odkaz uvnitř klikacího boxu (např.
+  „Rezervovat →") = overlay `<a>` `absolute inset-0` + `aria-label`, druhý
+  odkaz `relative` nad ním (vnořené `<a>` jsou nevalidní).
 - **Font:** jen **Hanken Grotesk** (bez serifu) — akcenty kurzívou + vahou.
 - **Paleta = WARM-DARK (black/white/red).** Černá je kotva, ne dominanta: obsah na
   teplém světlém `bg #f5efe6`, tmavé kotvy na `ink-dark #14110e` (ne `#000`).
