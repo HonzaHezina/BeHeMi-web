@@ -50,9 +50,15 @@ const classHref = (c: (typeof classes)[number]) => c.page ?? `${scheduleHref}#${
       <h3 class="text-2xl font-extrabold tracking-[-0.02em]">
         {lang === 'en' ? 'Group classes' : 'Skupinové lekce'}
       </h3>
-      <a href={scheduleHref} class="cursor-pointer text-base font-bold text-accent-text hover:text-ink">
-        {lang === 'en' ? 'Full schedule →' : 'Celý rozvrh →'}
-      </a>
+      <!-- Kotva #prvni-lekce existuje jen na CZ stránce — EN odkaz nedávat. -->
+      <div class="flex flex-wrap items-baseline gap-x-6 gap-y-1">
+        {lang === 'cs' && (
+          <a href="/skupinove-lekce/#prvni-lekce" class="cursor-pointer text-base font-bold text-accent-text hover:text-ink">Jdeš poprvé? →</a>
+        )}
+        <a href={scheduleHref} class="cursor-pointer text-base font-bold text-accent-text hover:text-ink">
+          {lang === 'en' ? 'Full schedule →' : 'Celý rozvrh →'}
+        </a>
+      </div>
     </div>
     <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {classes.slice(0, 6).map((c) => (

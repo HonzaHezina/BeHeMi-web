@@ -146,11 +146,11 @@ Pravidlo pro celý web: **každý klik vede na NEJKONKRÉTNĚJŠÍ existující 
 stejné slugy, jen cestu `/en/group-classes/#…`):**
 
 - `/skupinove-lekce/`: `#kruhac #silovy-trenink #hiit #supermamky #vlastni-vaha
-  #power-zone #move-smart #zumba #brisni-pekac #solid-booty #enduro` + blok
-  `#prvni-lekce` („Tvoje první lekce" — konverzní jádro stránky; HP i dětská
-  stránka na něj můžou odkazovat „Jdeš poprvé? →"). Kotvy `#move-smart` a
-  `#prvni-lekce` přidány 7. 7. 2026 (Move Smart jede — potvrzeno Honzou, do té
-  doby byla jen na WP).
+  #power-zone #zumba #brisni-pekac #solid-booty #enduro` + blok `#prvni-lekce`
+  („Tvoje první lekce" — konverzní jádro stránky, přidáno 7. 7. 2026; vedou na
+  něj odkazy „Jdeš poprvé? →" z HP a z dětské stránky). **Move Smart NEJEDE**
+  (rozhodnuto Honzou 7. 7. 2026) — lekce visí už jen na starém WP, na nový web
+  nepatří a kotva `#move-smart` neexistuje.
 - `/krouzky-pro-deti/`: `#cirkusova-skolicka #zaklady-gymnastiky
   #akrobacie-zonglovani #objevovarna #detska-zumba`
 
