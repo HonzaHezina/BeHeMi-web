@@ -2,16 +2,147 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
 import MediaFrame from '../components/MediaFrame.astro';
-import { classes } from '../data/home';
+import { classes, RESERVE_URL } from '../data/home';
+
+// Bohatý obsah sekcí žije jen tady (CZ stránka) — krátké dlaždicové popisy
+// pro HP a rozcestník zůstávají v classes[] v src/data/home.ts.
+// Kotvy = classes[].id, NIKDY neměnit. Fakta: šablona docs/skupinove-lekce-sekce.md,
+// živý WP obsah a data od Honzy (60 min všechny lekce, 7. 7. 2026).
+// int = intenzita 1–3 (odhad, čeká na potvrzení Honzou — viz ph níž).
+type Lesson = {
+  id: string; t: string; hook: string; how: string; who: string;
+  len: string; int: 1 | 2 | 3; bring: string; ph?: string[];
+};
+
+const lessons: Lesson[] = [
+  {
+    id: 'kruhac',
+    t: 'Kruhový trénink',
+    hook: 'Za 60 minut projedeš celé tělo — stanoviště, intervaly, žádné čekání.',
+    how: 'Lekce jede v kruhu: 8–10 stanovišť (vlastní váha, kettlebell, TRX…), na každém pracuješ na čas — zhruba 30 vteřin práce, 10 vteřin na přesun — a jede se dál. Za hodinu vystřídáš sílu, kondici i koordinaci. Trenér tě celou dobu vidí a opravuje techniku — skupina je malá, nikdo se neschová a nikdo se neztratí.',
+    who: 'Pro každého, kdo se chce hýbat efektivně. Zátěž se škáluje — vedle sebe cvičí začátečník i mazák, každý na svém.',
+    len: '60 min', int: 2, bring: 'ručník a pití',
+  },
+  {
+    id: 'silovy-trenink',
+    t: 'Silové tréninky',
+    hook: 'Míň cviků, víc soustředění — síla roste technikou a postupným přidáváním zátěže.',
+    how: 'Žádné kroužení po stanovištích: lekce stojí na několika komplexních cvicích — dřep, tah, tlak — které jedeš v sériích s pauzami. Trenér ti nastaví zátěž podle úrovně a hlídá provedení každé série; těžší váha přijde, až když technika sedí.',
+    who: 'Pro ty, kdo chtějí být hlavně silnější. Základní pohybové vzory je lepší už znát — když začínáš úplně od nuly, vezmi si napřed vlastní váhu nebo kruháč.',
+    len: '60 min', int: 3, bring: 'ručník a pití',
+    ph: [
+      'S čím se cvičí — kettlebelly, jednoručky, osa s kotouči?',
+      'Starý web říkal „není vhodný pro začátečníky" — platí to takhle tvrdě, nebo stačí doporučení začít jinde?',
+    ],
+  },
+  {
+    id: 'hiit',
+    t: 'HIIT',
+    hook: 'Nejhustších 60 minut v rozvrhu: 30 vteřin naplno a pauza skoro žádná.',
+    how: '9–12 cviků za sebou, každý zhruba 30 vteřin práce a 0–5 vteřin odpočinku, celkem tři kola. Střídá se kardio a posilování, takže tep zůstává nahoře celou lekci — a tělo pálí ještě hodiny po ní. Trenér hlídá, aby tempo nešlo na úkor provedení.',
+    who: 'Pro ty, kdo už nějakou kondici mají a chtějí ji posunout. Úplným začátečníkům doporučíme začít kruháčem nebo vlastní vahou — HIIT ti pak dá víc.',
+    len: '60 min', int: 3, bring: 'ručník a hodně pití',
+  },
+  {
+    id: 'vlastni-vaha',
+    t: 'Vlastní váha',
+    hook: 'Žádné nářadí. Jen ty a základní pohybové vzory, které má tělo umět.',
+    how: 'Dřepy, kliky, výpady, plank a jejich varianty — učíš se ovládat vlastní tělo, správně a pod kontrolou. Součástí lekce bývá Tabata: 20 vteřin práce, 10 vteřin pauza, 8 kol. Každý cvik má lehčí i těžší variantu a trenér ti ukáže tu tvoji.',
+    who: 'Nejlepší první lekce, jakou u nás můžeš vzít — všechno se dá zjednodušit přesně na tvou úroveň. A pokročilé potrápí těžší varianty týchž cviků.',
+    len: '60 min', int: 2, bring: 'ručník a pití',
+  },
+  {
+    id: 'power-zone',
+    t: 'Power Zone',
+    hook: 'Funkční trénink, kruháč a prvky crossfitu v jedné lekci.',
+    how: 'Power Zone spojuje funkční cviky, kruhový formát a crossfitové prvky — cílem je síla a kondice zároveň. Lekci vede Jitka Štěpánková.',
+    who: 'Pro ty, kdo chtějí od lekce výkon a klasický kruháč jim už nestačí.',
+    len: '60 min', int: 3, bring: 'ručník a pití',
+    ph: [
+      'Struktura lekce — jak jdou bloky za sebou a čím se tempo liší od kruháče?',
+      'Zvládne i začátečník, nebo je lepší mít něco najeto?',
+      'Intenzita ●●● je odhad — potvrdit.',
+    ],
+  },
+  {
+    id: 'move-smart',
+    t: 'Move Smart',
+    hook: 'Nejpomalejší lekce v rozvrhu — tempo dole, nároky na přesnost nahoře.',
+    how: 'Pracuješ s přirozenými pohybovými vzory a aktivací středu těla. Každý pohyb se nejdřív učíš provést správně a teprve potom přidáváš — žádné intervaly, žádný závod s časem. Přesně ta práce, která chybí, když tě bolí záda ze sezení.',
+    who: 'Začátečníci, maminky po porodu, starší lidé a všichni, kdo chtějí pohyb nejdřív srovnat a pak teprve zrychlovat.',
+    len: '60 min', int: 1, bring: 'pohodlné oblečení a pití',
+    ph: ['Kdo Move Smart vede a používá se nějaké vybavení (podložky máte v sále)?'],
+  },
+  {
+    id: 'zumba',
+    t: 'Zumba',
+    hook: 'Hodina tance na latinskoamerickou hudbu — kondice, u které nepočítáš opakování.',
+    how: 'Jednoduché choreografie na latinské rytmy — kroky ukazuje Eliška Velázquez průběžně, takže se chytneš i napoprvé. Žádné série, žádné intervaly: tančíš, zpotíš se a hodina je pryč.',
+    who: 'Pro každého, kdo chce kondici bez činek. Taneční průprava není potřeba — stačí přijít.',
+    len: '60 min', int: 2, bring: 'pití a boty do sálu',
+  },
+  {
+    id: 'brisni-pekac',
+    t: 'Břišní pekáč',
+    hook: 'Hodina pro střed těla. Zkracovačky nečekej.',
+    how: 'Trénink core a hlubokého stabilizačního systému: zpevnění v různých polohách, plank a jeho varianty, dýchání pod zátěží. Učíš se držet střed těla v práci — základ, na kterém stojí každý jiný trénink i záda bez bolesti.',
+    who: 'Všechny úrovně — cviky se stupňují od základních po opravdu těžké. Ideální doplněk ke kruháči nebo silovému tréninku.',
+    len: '60 min', int: 2, bring: 'ručník a pití',
+  },
+  {
+    id: 'solid-booty',
+    t: 'Solid Booty',
+    hook: 'Jeden jasný cíl: silné a pevné hýždě — šetrně ke kolenům i zádům.',
+    how: 'Cílená práce na hýžďové svaly s booty bandem, vlastní vahou a lehkým závažím. Hlavní je provedení: pracovat mají hýždě, ne stehna nebo bedra — trenér to u každého cviku kontroluje.',
+    who: 'Pro každého, kdo chce tuhle partii cíleně posílit — silné hýždě navíc drží pánev a ulevují zádům. Zvládne i začátečník.',
+    len: '60 min', int: 2, bring: 'ručník a pití',
+  },
+  {
+    id: 'enduro',
+    t: 'Enduro',
+    hook: 'Síla, kondice a přirozené pohyby v jednom — trénink na odolnost, ne na jedno léto.',
+    how: 'Enduro spojuje funkční sílu, kondiční intervaly a přirozené pohyby do jedné lekce.',
+    who: 'Pro ty, kdo chtějí výkonnější a odolnější tělo na dlouho.',
+    len: '60 min', int: 3, bring: 'ručník a pití',
+    ph: [
+      'Struktura lekce — čím se konkrétně liší od Power Zone?',
+      'Jednorázový vstup je 250 Kč (ostatní 199 Kč) — proč? Delší formát, menší skupina?',
+      'Intenzita ●●● je odhad — potvrdit.',
+    ],
+  },
+];
+
+// Pořadí sekcí zatím = pořadí v datech; šablona chce „od nejnavštěvovanějších"
+// — přeskládat, až Honza dodá pořadí.
+const media = Object.fromEntries(classes.map((c) => [c.id, { media: c.media, img: c.img }]));
+
+const firstVisit = [
+  { t: 'Přijď o 10 minut dřív', d: 'Stihneš se v klidu převléknout a rozkoukat. Šatny a sprchy jsou na místě.' },
+  { t: 'Řekni trenérovi, že jsi tu poprvé', d: 'Ukáže ti lehčí varianty cviků a během lekce tě pohlídá o něco víc.' },
+  { t: 'Všechno se škáluje', d: 'Každý cvik má lehčí a těžší variantu. Cvičíš na své úrovni — vedle třeba někdo jede úplně jinou zátěž a nevadí to.' },
+  { t: 'Nikdo tě nesleduje', d: 'Každý má dost práce sám se sebou. Skupina je malá a na nové tváře zvyklá.' },
+  { t: 'Co s sebou', d: 'Ručník, pití a čisté boty do sálu. Nic víc nepotřebuješ.' },
+  { t: 'Jak lekce končí', d: 'Dojezd a protažení jsou součást hodiny. Odejdeš unavený/á, ne zničený/á.' },
+];
+
+const picker = [
+  { q: 'Chceš všechno najednou — sílu, kondici, koordinaci?', a: 'Kruhový trénink', href: '#kruhac' },
+  { q: 'Chceš se pořádně zpotit?', a: 'HIIT', href: '#hiit' },
+  { q: 'Začínáš, nebo se vracíš po pauze?', a: 'Vlastní váha nebo Move Smart', href: '#vlastni-vaha' },
+  { q: 'Chceš být hlavně silnější?', a: 'Silové tréninky', href: '#silovy-trenink' },
+  { q: 'Chceš se u pohybu hlavně bavit?', a: 'Zumba', href: '#zumba' },
+];
 ---
 <Layout
-  title="Skupinové lekce — BoHeMi fitness Vinohrady"
-  description="Přehled všech skupinových lekcí v BoHeMi fitness na pražských Vinohradech. Kruháče, HIIT, silové tréninky, vlastní váha, Move Smart a další — vedené trenérem v malé skupině."
+  title="Skupinové lekce Praha Vinohrady — kruhový trénink, HIIT a další | BoHeMi"
+  description="Kruhový trénink, HIIT, silové tréninky, Power Zone, vlastní váha, Move Smart, Zumba, břišní pekáč, Solid Booty a Enduro. 60minutové lekce v malé skupině — trenér vede a opravuje techniku. Vinohrady, Praha."
 >
   <Header current="/skupinove-lekce/" />
   <main>
-    <section class="relative mx-auto max-w-[1220px] overflow-hidden px-5 pb-8 pt-16 md:px-8 md:pt-20">
+    <!-- HERO + kotvy-menu -->
+    <section class="relative mx-auto max-w-[1220px] overflow-hidden px-5 pb-10 pt-16 md:px-8 md:pt-20">
       <div
         class="pointer-events-none absolute right-0 top-2.5 h-[400px] w-[400px] rounded-full"
         style="background:radial-gradient(circle, rgba(226,35,26,0.12), rgba(226,35,26,0) 70%);"
@@ -24,35 +155,124 @@ import { classes } from '../data/home';
         <h1 class="text-[clamp(40px,6.2vw,76px)] font-extrabold leading-[0.98] tracking-[-0.035em]">
           Skupinové <span class="font-medium italic text-accent-text">lekce</span>
         </h1>
-        <p class="mt-6 max-w-[56ch] text-[clamp(18px,2.1vw,22px)] leading-[1.45] text-ink-warm">
-          Deset lekcí, každá s jiným zaměřením — trenér vede, ty cvičíš. Najdi, co ti sedí.
+        <p class="mt-6 max-w-[58ch] text-[clamp(18px,2.1vw,22px)] leading-[1.45] text-ink-warm">
+          Malá skupina a trenér, který tě celou lekci vidí a opravuje techniku.
+          Každá lekce trvá 60 minut a má jiné zaměření — vyber si podle toho, co od tréninku chceš.
         </p>
+        <div class="mt-7 flex flex-wrap items-center gap-4">
+          <Button href={RESERVE_URL} variant="primary" external>Rezervovat lekci →</Button>
+          <p class="text-[15px] text-ink-muted">Aktuální rozvrh a volná místa najdeš v rezervačním kalendáři.</p>
+        </div>
+        <nav aria-label="Rychlá navigace na lekce" class="mt-8 flex flex-wrap gap-2.5">
+          <a href="#prvni-lekce" class="rounded-full bg-brand px-[18px] py-2.5 text-[14.5px] font-bold text-cream transition-colors hover:bg-brand-dark">Jdeš poprvé? →</a>
+          {lessons.map((l) => (
+            <a href={`#${l.id}`} class="rounded-full border-[1.5px] border-border-button px-[18px] py-2.5 text-[14.5px] font-bold text-ink-line transition-colors hover:border-brand hover:text-brand">{l.t}</a>
+          ))}
+          <a href="#supermamky" class="rounded-full border-[1.5px] border-border-button px-[18px] py-2.5 text-[14.5px] font-bold text-ink-line transition-colors hover:border-brand hover:text-brand">Supermamky</a>
+        </nav>
       </div>
     </section>
 
-    <section class="mx-auto max-w-[1220px] px-5 pt-6 pb-12 md:px-8 md:pb-16">
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {classes.map((c) => (
-          <div id={c.id} class:list={[
-            'relative scroll-mt-24 overflow-hidden rounded-2xl border border-border bg-surface',
-            c.page && 'transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-20px_rgba(33,31,26,0.24)]',
-          ]}>
-            <MediaFrame media={c.media} rounded="rounded-none" class="h-44" alt={`Lekce — ${c.img}`} />
-            <div class="p-[22px]">
-              <h2 class="mb-2 text-[21px] font-extrabold tracking-[-0.02em]">{c.t}</h2>
-              <p class="text-[15.5px] leading-[1.5] text-ink-soft">{c.d}</p>
-              <div class="mt-3 text-[12.5px] font-bold tracking-[0.02em] text-brand">{c.bhm}</div>
-              <div class="mt-4 flex flex-wrap gap-5">
-                {c.page && <a href={c.page} class="absolute inset-0" aria-label={`${c.t} — detail`}></a>}
-                <a href="https://bohemi.fit/rezervace/" class="relative text-[14px] font-bold text-accent-text hover:text-ink">Rezervovat →</a>
+    <!-- TVOJE PRVNÍ LEKCE — konverzní jádro stránky -->
+    <section id="prvni-lekce" class="mx-auto max-w-[1220px] scroll-mt-24 px-5 pb-14 md:px-8">
+      <div class="relative overflow-hidden rounded-[22px] bg-ink-dark p-8 text-cream md:p-[clamp(32px,5vw,56px)]">
+        <div
+          class="pointer-events-none absolute -bottom-22 -right-12 h-[340px] w-[340px] rounded-full"
+          style="background:radial-gradient(circle, rgba(226,35,26,0.18), rgba(226,35,26,0) 70%);"
+          aria-hidden="true"
+        ></div>
+        <div class="relative">
+          <p class="mb-3 text-[13px] font-extrabold uppercase tracking-[0.08em] text-accent">Tvoje první lekce</p>
+          <h2 class="max-w-[24ch] text-[clamp(26px,3.4vw,40px)] font-extrabold tracking-[-0.03em]">Jdeš poprvé? Tohle stačí vědět.</h2>
+          <div class="mt-8 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
+            {firstVisit.map((f) => (
+              <div>
+                <h3 class="mb-1.5 text-[17px] font-extrabold tracking-[-0.01em]">{f.t}</h3>
+                <p class="text-[15px] leading-[1.55] text-cream-muted">{f.d}</p>
               </div>
-            </div>
+            ))}
           </div>
+          <div class="mt-9 flex flex-wrap items-center gap-4">
+            <Button href={RESERVE_URL} variant="primary" external>Rezervovat první lekci →</Button>
+            <p class="text-[15px] text-cream-muted">Nemusíš nic kupovat předem — stačí jednorázový vstup.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEKCE LEKCÍ -->
+    <section class="mx-auto max-w-[1220px] px-5 md:px-8" aria-label="Přehled lekcí">
+      <div class="space-y-6">
+        {lessons.map((l) => (
+          <article id={l.id} class="scroll-mt-24 overflow-hidden rounded-2xl border border-border bg-surface md:grid md:grid-cols-[minmax(240px,320px)_1fr]">
+            <MediaFrame media={media[l.id].media} rounded="rounded-none" class="h-44 md:h-full" alt={`Lekce — ${media[l.id].img}`} />
+            <div class="p-7 md:p-9">
+              <h2 class="text-[clamp(22px,2.6vw,28px)] font-extrabold tracking-[-0.02em]">{l.t}</h2>
+              <p class="mt-2 max-w-[52ch] text-[17.5px] font-bold leading-[1.4]">{l.hook}</p>
+              <p class="mt-4 max-w-[68ch] text-[15.5px] leading-[1.55] text-ink-soft">{l.how}</p>
+              <p class="mt-3 max-w-[68ch] text-[15.5px] leading-[1.55] text-ink-soft"><strong class="font-bold text-ink">Pro koho:</strong> {l.who}</p>
+              {l.ph && (
+                <div class="mt-4 rounded-xl border border-border bg-sand px-4 py-3">
+                  <p class="text-[13px] font-extrabold uppercase tracking-[0.06em] text-ink">Doplnit — čeká na podklady</p>
+                  <ul class="mt-1.5 list-disc pl-5 text-[14px] leading-[1.5] text-ink-soft">
+                    {l.ph.map((p) => <li>{p}</li>)}
+                  </ul>
+                </div>
+              )}
+              <div class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-[13.5px] font-bold tracking-[0.02em] text-brand">
+                <span>{l.len}</span>
+                <span aria-hidden="true">·</span>
+                <span>
+                  intenzita<span class="sr-only"> {l.int} ze 3</span>
+                  <span class="ml-1 text-accent-text" aria-hidden="true">{'●'.repeat(l.int)}<span class="text-border-button">{'●'.repeat(3 - l.int)}</span></span>
+                </span>
+                <span aria-hidden="true">·</span>
+                <span>{l.bring}</span>
+              </div>
+              <a href={RESERVE_URL} rel="noopener noreferrer" class="mt-5 inline-block cursor-pointer text-[15px] font-bold text-accent-text hover:text-ink">Rezervovat →</a>
+            </div>
+          </article>
         ))}
       </div>
     </section>
 
-    <section class="mx-auto max-w-[1220px] px-5 pb-16 md:px-8 md:pb-23">
+    <!-- NEVÍŠ, KTEROU VYBRAT? -->
+    <section class="mx-auto max-w-[1220px] px-5 pt-14 md:px-8">
+      <div class="rounded-2xl border border-mint-border bg-mint p-7 md:p-10">
+        <h2 class="text-2xl font-extrabold tracking-[-0.02em]">Nevíš, kterou vybrat?</h2>
+        <ul class="mt-5 divide-y divide-mint-border">
+          {picker.map((p) => (
+            <li class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 py-3">
+              <span class="text-[16px] text-ink">{p.q}</span>
+              <a href={p.href} class="cursor-pointer text-[15.5px] font-bold text-accent-text hover:text-ink">{p.a} →</a>
+            </li>
+          ))}
+        </ul>
+        <p class="mt-5 text-[15px] text-ink-muted">Pořád nevíš? <a href="/kontakt/" class="font-bold text-accent-text hover:text-ink">Napiš nám</a> — poradíme podle tvé úrovně a cíle.</p>
+      </div>
+    </section>
+
+    <!-- SUPERMAMKY — vlastní stránka, tady jen dlaždice -->
+    <section class="mx-auto max-w-[1220px] px-5 pt-6 md:px-8">
+      <a
+        id="supermamky"
+        href="/supermamky/"
+        class="grid scroll-mt-24 cursor-pointer overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-20px_rgba(33,31,26,0.24)] md:grid-cols-[minmax(240px,320px)_1fr]"
+      >
+        <MediaFrame media="media-sand" rounded="rounded-none" class="h-40 md:h-full" alt="Lekce — supermamky" />
+        <div class="p-7 md:p-9">
+          <h2 class="text-[clamp(22px,2.6vw,28px)] font-extrabold tracking-[-0.02em]">Supermamky</h2>
+          <p class="mt-2 max-w-[62ch] text-[15.5px] leading-[1.55] text-ink-soft">
+            Kruhový trénink pro mámy a táty, kteří cvičí s miminkem nebo batoletem u sebe.
+            Má vlastní stránku se vším podstatným — jak lekce vypadá, pro koho je a jak se přihlásit.
+          </p>
+          <span class="mt-4 inline-block text-[15px] font-bold text-accent-text">supermamky →</span>
+        </div>
+      </a>
+    </section>
+
+    <!-- FINÁLNÍ CTA -->
+    <section class="mx-auto max-w-[1220px] px-5 pb-16 pt-14 md:px-8 md:pb-23">
       <div class="relative flex flex-wrap items-center justify-between gap-6 overflow-hidden rounded-[22px] bg-ink-dark p-8 text-cream md:p-[clamp(32px,5vw,56px)]">
         <div
           class="pointer-events-none absolute -bottom-22 -right-12 h-[340px] w-[340px] rounded-full"
@@ -60,14 +280,18 @@ import { classes } from '../data/home';
           aria-hidden="true"
         ></div>
         <div class="relative">
-          <h2 class="max-w-[20ch] text-[clamp(26px,3.4vw,40px)] font-extrabold tracking-[-0.03em]">Nevíš, která lekce je pro tebe?</h2>
-          <p class="mt-3 max-w-[42ch] text-[17px] text-cream-muted">Napiš nám — poradíme, co sedí tvé úrovni a cíli.</p>
+          <h2 class="max-w-[20ch] text-[clamp(26px,3.4vw,40px)] font-extrabold tracking-[-0.03em]">Vyber si lekci a přijď</h2>
+          <p class="mt-3 max-w-[46ch] text-[17px] text-cream-muted">
+            Na první lekci stačí jednorázový vstup — žádné členství předem.
+            Ceny najdeš v <a href="/cenik/" class="font-bold text-cream underline underline-offset-4 hover:text-accent">ceníku</a>.
+          </p>
         </div>
         <a
-          href="/kontakt/"
+          href={RESERVE_URL}
+          rel="noopener noreferrer"
           class="relative inline-flex shrink-0 cursor-pointer items-center gap-2 rounded-full bg-accent-text px-7 py-3.5 text-[17px] font-bold text-cream transition-colors hover:bg-accent-deep"
         >
-          Napsat nám →
+          Rezervovat →
         </a>
       </div>
     </section>

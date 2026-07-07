@@ -56,6 +56,9 @@ export const classes: { id: string; t: string; d: string; img: string; media: st
   { id: 'supermamky', page: '/supermamky/', t: 'Supermamky', d: 'Tréninky pro maminky s dětmi — cvičení přizpůsobené realitě rodičovství. S miminkem nebo batoletem u tebe.', img: 'supermamky', media: 'media-sand', bhm: 'Tělo · rodina · komunita' },
   { id: 'vlastni-vaha', t: 'Vlastní váha', d: 'Cvičení bez nářadí: ovládneš základní pohybové vzory, zlepšíš koordinaci a sílu. Vhodné i jako první krok pro úplné začátečníky.', img: 'vlastní váha', media: 'media-rose', bhm: 'Tělo · kontrola · pozornost' },
   { id: 'power-zone', t: 'Power Zone', d: 'Funkční trénink kombinující kruháče a prvky crossfitu. Intenzivní, efektivní, vedený trenérem — pro výsledky bez zbytečných řečí.', img: 'power zone', media: 'media-clay', bhm: 'Tělo · síla · výkon' },
+  // Move Smart je až na 7. pozici ZÁMĚRNĚ — HP i rozcestník ukazují
+  // classes.slice(0, 6) a schválená šestka (5. 7. 2026) se nesmí změnit.
+  { id: 'move-smart', t: 'Move Smart', d: 'Pomalejší lekce zaměřená na přirozené pohybové vzory a aktivaci středu těla. Důraz na techniku — pro začátečníky, maminky po porodu i lidi s bolestí zad.', img: 'move smart', media: 'media-forest', bhm: 'Tělo · technika · kontrola' },
   { id: 'zumba', t: 'Zumba', d: 'Taneční fitness v rytmu latinskoamerické hudby — pohyb jako oslava, ne dřina. Vhodné pro všechny, kteří chtějí cvičit a přitom se bavit.', img: 'zumba', media: 'media-rose', bhm: 'Tělo · rytmus · radost' },
   { id: 'brisni-pekac', t: 'Břišní pekáč', d: 'Trénink hlubokého stabilizačního systému a core. Žádné zkracovačky — učíš se ovládat tělo zevnitř. Vhodné pro všechny úrovně.', img: 'břišní pekáč', media: 'media-rose', bhm: 'Tělo · stabilita · kontrola' },
   { id: 'solid-booty', t: 'Solid Booty', d: 'Zaměřeno na hýžďové svaly — správná technika, vědomý pohyb, výsledky. Oblíbená lekce s jasným cílem.', img: 'solid booty', media: 'media-sand', bhm: 'Tělo · síla · pohyb' },

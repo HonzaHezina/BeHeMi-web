@@ -106,8 +106,12 @@ nová service stránka se přidává i sem. Program 8 týdnů je ve sloupci **We
 
 ### Zatím nepostavené (KEEP slugy z redirect-map)
 
-`/hula-hoop/` (rozhodnuto 7/2026 — hula hoop se nyní nenabízí, stránku zatím
-nestavět), `/fotky/`, LEGAL stránky (VOP, GDPR, provozní řád…).
+`/fotky/`, LEGAL stránky (VOP, GDPR, provozní řád…).
+
+- **Hula hoop skončil (rozhodnuto 7. 7. 2026):** stránka se nestaví a lekce se
+  na webu nikde nezmiňuje. `/hula-hoop/` i `/hooping/` jsou 301; cíl čeká na
+  potvrzení Honzou (`/skupinove-lekce/` vs. `/krouzky-pro-deti/` — viz
+  redirect-map, poptávka 824 zobr. existuje).
 
 - `/objevovarna/` se nestaví — obsah je sekce na `/krouzky-pro-deti/`.
 - **Dětské aktivity nemají vlastní stránky (potvrzeno 7/2026):** živé WP stránky
@@ -142,7 +146,11 @@ Pravidlo pro celý web: **každý klik vede na NEJKONKRÉTNĚJŠÍ existující 
 stejné slugy, jen cestu `/en/group-classes/#…`):**
 
 - `/skupinove-lekce/`: `#kruhac #silovy-trenink #hiit #supermamky #vlastni-vaha
-  #power-zone #zumba #brisni-pekac #solid-booty #enduro`
+  #power-zone #move-smart #zumba #brisni-pekac #solid-booty #enduro` + blok
+  `#prvni-lekce` („Tvoje první lekce" — konverzní jádro stránky; HP i dětská
+  stránka na něj můžou odkazovat „Jdeš poprvé? →"). Kotvy `#move-smart` a
+  `#prvni-lekce` přidány 7. 7. 2026 (Move Smart jede — potvrzeno Honzou, do té
+  doby byla jen na WP).
 - `/krouzky-pro-deti/`: `#cirkusova-skolicka #zaklady-gymnastiky
   #akrobacie-zonglovani #objevovarna #detska-zumba`
 
@@ -188,7 +196,7 @@ stejné slugy, jen cestu `/en/group-classes/#…`):**
 - Rozcestník = krátké dlaždice, detail = plný text. **Stejný odstavec nesmí být
   na rozcestníku i detailu** (SEO + údržba).
 
-**Až vznikne nová service stránka** (`/hula-hoop/` nebo LEGAL stránky): doplnit
+**Až vznikne nová service stránka** (LEGAL stránky apod.): doplnit
 `href`/`page` do dat, přidat do footer sloupce Služby (kde relevantní).
 
 Kontrola po změnách odkazů: `npm run build && node scripts/check-links.mjs`

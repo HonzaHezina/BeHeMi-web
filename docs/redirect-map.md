@@ -13,7 +13,6 @@ neřešit.
 | /pronajem-salu/ | 142 | KEEP |
 | /supermamky/ | 72 | KEEP (výjimka: typ lekce s vlastním provozem) |
 | /skupinove-lekce/ | 50 | KEEP — rozcestník; OPRAVIT title/snippet (8 252 zobr., mizerné CTR) |
-| /hula-hoop/ | 46 | KEEP (výjimka: typ lekce s vlastním provozem) |
 | /fotobiomodulacni-terapie/ | 30 | KEEP |
 | /kontakt/ | 20 | KEEP |
 | /cenik/ | 19 | KEEP |
@@ -21,15 +20,11 @@ neřešit.
 | /firmy/ | 7 | KEEP |
 | /fotky/ | 3 | KEEP (659 zobr.) |
 
-## NOVÉ slugy — nejsou z GSC, explicitně schválené
-| URL | Schváleno | Pozn. |
-|---|---|---|
-| /program-8-tydnu/ | 7/2026 (Honza) | detail vlajkového programu; název vždy „Program 8 týdnů" (nikdy „Life Practice") |
-
 ## 301 — přesměrovat starou URL na nový cíl
 | Stará URL | Kliky | → Cíl |
 |---|---|---|
 | /o-nas/ | 18 | → /proc-bohemi/  (1 333 zobr. — důležité) |
+| /hula-hoop/ | 46 | → CÍL POTVRDIT: /krouzky-pro-deti/ nebo /skupinove-lekce/ — hula hoop UŽ NEJEDE, ale poptávka existuje (824 zobr.); žádná vlastní stránka |
 | /nase-sluzby/osobni-treninky/ | 18 | → nová stránka osobních tréninků |
 | /treneri/ | 16 | → /proc-bohemi/#treneri (nebo samostatná /treneri/) |
 | /lenka-novackova/ | 15 | → trenéři (starý trenér, už u vás není) |
@@ -44,7 +39,7 @@ neřešit.
 | /ai-a-bohemi/ | 0 | → /proc-bohemi/ |
 | /blog/ | 0 | → / (nebo ponechat, jestli chceš blogovat) |
 | /pripravujeme/ | 1 | → / |
-| /hernicka/ | 1 | → /krouzky-pro-deti/#objevovarna (kotva existuje — nejkonkrétnější cíl) |
+| /hernicka/ | 1 | → /krouzky-pro-deti/ |
 | /spoluprace/ | 1 | → / nebo /firmy/ |
 | /informace/kurzy-pro-deti/ | 1 | → /krouzky-pro-deti/ |
 | /nase-sluzby/meditace/ | 0 | → / (služba zrušena) |
@@ -59,15 +54,13 @@ spadly do 404 — každá potřebuje 301 na aktuální cíl.
 |---|---|
 | /nase-sluzby/skupinove-lekce/ | → /skupinove-lekce/ |
 | /nase-sluzby/skupinove-lekce/hiit/ | → /skupinove-lekce/ |
-| /hooping/ | → /hula-hoop/ |
+| /hooping/ | → stejný cíl jako /hula-hoop/ (přímo, žádný řetěz redirectů) |
 | /fitteams-program-pro-firmy/ | → /firmy/ |
 | /primestsky-tabor-aktivitaci/ | → /krouzky-pro-deti/ (nebo sekce tábor) |
 | /treneri-2/ | → /proc-bohemi/#treneri |
 | /klara-mechurova/ | → /proc-bohemi/#treneri (aktuální trenérka) |
 | /ucet-clenstvi/urovne-clenstvi/ | → /cenik/ |
 | /kalendar/ | → /skupinove-lekce/ (nebo rozvrh) |
-| /akademie-cirk-la-putyka/ | → /krouzky-pro-deti/ (sekce Akademie je nahoře; živá WP stránka, v GSC exportu nebyla) |
-| /detska-zumba/ | → /krouzky-pro-deti/#detska-zumba (živá WP stránka, v GSC exportu nebyla) |
 
 ## Globální pravidlo — trailing slash (JEDNO nastavení, ne po stránkách)
 Google zná URL s lomítkem i bez (`/krouzky-pro-deti` vs `/krouzky-pro-deti/`,
@@ -111,8 +104,9 @@ Po nasazení produkce ověř ve zdroji stránky, že tam NENÍ `noindex`.
    stránka. Postav ji pořádně a vytáhni dopředu i na homepage.
 2. **Oprav /skupinove-lekce/ snippet** — 8 252 zobrazení, 0,6 % CTR = spící
    poptávka, kterou stránka neproměňuje.
-3. **Vlastní stránky:** krouzky-pro-deti, pronajem-salu, supermamky, hula-hoop,
+3. **Vlastní stránky:** krouzky-pro-deti, pronajem-salu, supermamky,
    skupinove-lekce (hub), fotobiomodulace, open-gym, firmy, osobni-treninky.
+   (Hula-hoop vypadl 7. 7. 2026 — služba skončila, URL je 301, cíl viz tabulka.)
 4. **Typy lekcí (kruháč, HIIT…)** v datech nejsou → zůstávají v rozvrhu.
 5. **Nastav globální trailing-slash pravidlo** (`trailingSlash: 'always'`) —
    jinak si duplicity vyrobíš nanovo.
