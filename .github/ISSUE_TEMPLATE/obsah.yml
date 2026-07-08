@@ -1,0 +1,33 @@
+name: ✏️ Úprava obsahu
+description: Změna textu, oprava chyby nebo návrh na webu
+title: "Obsah: "
+labels: ["obsah"]
+body:
+  - type: input
+    id: stranka
+    attributes:
+      label: Která stránka
+      placeholder: např. /skupinove-lekce/ nebo homepage
+    validations:
+      required: true
+  - type: textarea
+    id: ted
+    attributes:
+      label: Co tam je teď
+      description: Zkopíruj současný text, kterého se to týká (stačí kousek).
+  - type: textarea
+    id: zmena
+    attributes:
+      label: Co tam má být / co je špatně
+    validations:
+      required: true
+  - type: dropdown
+    id: typ
+    attributes:
+      label: Typ
+      options:
+        - Oprava chyby (překlep, špatná cena, neplatná informace)
+        - Změna textu
+        - Nový obsah / návrh
+    validations:
+      required: true

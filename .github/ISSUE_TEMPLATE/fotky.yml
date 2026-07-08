@@ -1,0 +1,40 @@
+name: 📷 Nové fotky
+description: Nahraj fotky pro web (kruháče, trenéři, děti, studio…)
+title: "Fotky: "
+labels: ["fotky"]
+body:
+  - type: dropdown
+    id: kam
+    attributes:
+      label: Kam fotky patří
+      options:
+        - Skupinové lekce (kruháč, HIIT…)
+        - Trenéři
+        - Děti a kroužky
+        - Studio / sál
+        - Galerie
+        - Jinam (napiš do popisu)
+    validations:
+      required: true
+  - type: textarea
+    id: fotky
+    attributes:
+      label: Fotky
+      description: Přetáhni fotky sem do pole. Klidně rovnou z mobilu, o zmenšení se postaráme.
+      placeholder: Sem přetáhni fotky…
+    validations:
+      required: true
+  - type: textarea
+    id: popis
+    attributes:
+      label: Co je na fotkách
+      description: Pár slov ke každé fotce — použije se jako popisek pro nevidomé a Google (např. „skupina na kruháči, trenérka opravuje techniku dřepu").
+    validations:
+      required: true
+  - type: checkboxes
+    id: souhlas
+    attributes:
+      label: Kontrola
+      options:
+        - label: Lidé na fotkách souhlasí se zveřejněním (u dětí rodiče)
+          required: true
