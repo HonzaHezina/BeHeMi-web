@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import logoImg from '../assets/logo_bohemi_trans.png';
 import { nav as navCS, navMenu as navMenuCS, RESERVE_URL } from '../data/home';
 import { nav as navEN, navMenu as navMenuEN } from '../data/home.en';
 import Button from './Button.astro';
@@ -25,10 +27,13 @@ const logoHref = lang === 'en' ? '/en/' : '/';
 <header class="sticky top-0 z-50 border-b border-border-strong bg-bg/80 backdrop-blur-md">
   <div class="mx-auto flex max-w-[1220px] items-center justify-between gap-6 px-5 py-3.5 md:px-8">
     <!-- Logo -->
-    <a href={logoHref} class="flex items-baseline gap-2.5 cursor-pointer">
-      <span class="text-[27px] font-extrabold tracking-tight text-ink">BoHeMi</span>
-      <span class="hidden italic text-[15px] text-brand sm:inline">Body · Health · Mind</span>
+    <a href={logoHref} class="flex flex-col items-center cursor-pointer">
+      <Image src={logoImg} alt="BoHeMi fitness" height={36} class="h-9 w-auto" loading="eager" />
+      <span class="text-[18px] font-extrabold tracking-tight text-ink leading-tight">BoHeMi</span>
     </a>
+
+    <!-- Tagline — fills the gap between logo and nav on desktop -->
+    <span class="hidden flex-1 text-center text-[13px] font-semibold tracking-[0.12em] uppercase text-ink-muted lg:block">Body · Health · Mind</span>
 
     <!-- Desktop nav -->
     <nav class="hidden items-center gap-0.5 lg:flex" aria-label={t(lang, 'nav_menu_label')}>
