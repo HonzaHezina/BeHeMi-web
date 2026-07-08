@@ -23,3 +23,6 @@ pnpm-debug.log*
 
 # Dočasné exporty z Claude Design (zdroj pro refaktor, ne součást webu)
 imports/
+
+# Syrové fotky před zpracováním — po `npm run photos` skončí v src/assets/
+_raw/
