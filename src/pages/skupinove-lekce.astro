@@ -4,7 +4,22 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Button from '../components/Button.astro';
 import MediaFrame from '../components/MediaFrame.astro';
+import { Image } from 'astro:assets';
 import { classes, RESERVE_URL } from '../data/home';
+
+import imgKruhac from '../assets/lekce/kruhac-01.jpg';
+import imgSilovy from '../assets/lekce/silovy-trenink-05.jpg';
+import imgPowerZone from '../assets/lekce/silovy-trenink-02.jpg';
+import imgVlastniVaha from '../assets/lekce/vlastni-vaha-01.jpg';
+import imgSupermamkyCard from '../assets/supermamky/supermamky-01.jpg';
+
+const lessonPhotos: Record<string, { src: ImageMetadata; alt: string; pos?: string }> = {
+  kruhac:          { src: imgKruhac,        alt: 'Kruháč v sále BoHeMi — skupina cvičí na stanovištích' },
+  'silovy-trenink':{ src: imgSilovy,        alt: 'Silový trénink v BoHeMi — dřep s osou pod vedením trenéra', pos: 'object-top' },
+  'power-zone':    { src: imgPowerZone,     alt: 'Power Zone v BoHeMi — funkční silový trénink s kettlebellem', pos: 'object-[50%_30%]' },
+  'vlastni-vaha':  { src: imgVlastniVaha,   alt: 'Trénink s vlastní vahou v sále BoHeMi' },
+  supermamky:      { src: imgSupermamkyCard, alt: 'Supermamky — máma cvičí s dítětem v sále BoHeMi' },
+};
 
 // Bohatý obsah sekcí žije jen tady (CZ stránka) — krátké dlaždicové popisy
 // pro HP a rozcestník zůstávají v classes[] v src/data/home.ts.
@@ -196,7 +211,18 @@ const picker = [
       <div class="space-y-6">
         {lessons.map((l) => (
           <article id={l.id} class="scroll-mt-24 overflow-hidden rounded-2xl border border-border bg-surface md:grid md:grid-cols-[minmax(240px,320px)_1fr]">
-            <MediaFrame media={media[l.id].media} rounded="rounded-none" class="h-44 md:h-full" alt={`Lekce — ${media[l.id].img}`} />
+            <MediaFrame media={media[l.id].media} rounded="rounded-none" class="h-44 md:h-full" alt={lessonPhotos[l.id]?.alt ?? `Lekce — ${media[l.id].img}`}>
+              {lessonPhotos[l.id] && (
+                <Image
+                  src={lessonPhotos[l.id].src}
+                  alt={lessonPhotos[l.id].alt}
+                  class={`h-full w-full object-cover ${lessonPhotos[l.id].pos ?? 'object-center'}`}
+                  widths={[480, 640]}
+                  sizes="(min-width: 768px) 320px, 100vw"
+                  loading="lazy"
+                />
+              )}
+            </MediaFrame>
             <div class="p-7 md:p-9">
               <h2 class="text-[clamp(22px,2.6vw,28px)] font-extrabold tracking-[-0.02em]">{l.t}</h2>
               <p class="mt-2 max-w-[52ch] text-[17.5px] font-bold leading-[1.4]">{l.hook}</p>
@@ -250,7 +276,16 @@ const picker = [
         href="/supermamky/"
         class="grid scroll-mt-24 cursor-pointer overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-20px_rgba(33,31,26,0.24)] md:grid-cols-[minmax(240px,320px)_1fr]"
       >
-        <MediaFrame media="media-sand" rounded="rounded-none" class="h-40 md:h-full" alt="Lekce — supermamky" />
+        <MediaFrame media="media-sand" rounded="rounded-none" class="h-40 md:h-full" alt="Supermamky — trénink s dítětem v sále BoHeMi">
+          <Image
+            src={imgSupermamkyCard}
+            alt="Supermamky — trénink s dítětem v sále BoHeMi"
+            class="h-full w-full object-cover object-center"
+            widths={[480, 640]}
+            sizes="(min-width: 768px) 320px, 100vw"
+            loading="lazy"
+          />
+        </MediaFrame>
         <div class="p-7 md:p-9">
           <h2 class="text-[clamp(22px,2.6vw,28px)] font-extrabold tracking-[-0.02em]">Supermamky</h2>
           <p class="mt-2 max-w-[62ch] text-[15.5px] leading-[1.55] text-ink-soft">

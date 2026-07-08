@@ -19,8 +19,8 @@ const hasPhoto = Astro.slots.has('default');
 ---
 <div
   class={`relative overflow-hidden ${media} ${rounded} ${extra}`}
-  role="img"
-  aria-label={alt}
+  role={hasPhoto ? undefined : 'img'}
+  aria-label={hasPhoto ? undefined : alt}
 >
   <div
     class="absolute inset-0"
