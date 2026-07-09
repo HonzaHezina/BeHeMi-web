@@ -304,12 +304,17 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   `<Header current="/slug/" />`.
 - **Fotky (stav 9. 7. 2026):** Reálné fotky zapojeny na klíčových stránkách.
   Zdrojové soubory v `src/assets/`: `lekce/` (kruhač, silový trénink, vlastní váha),
-  `supermamky/`, `deti/` (Objevovárna). Vzor: `Record<string, {src, alt, pos?}>` mapa
-  v frontmatter stránky, klíč = `class.id`; `pos` je Tailwind `object-*` třída pro
-  ořez. Nepoužité fotky (`kruhac-06–08`, `silovy-trenink-04/06/10`) jsou připravené
-  pro sekce na `/skupinove-lekce/` (placeholder boxy čekají na Honzova data).
-  Zpracování nových fotek: `npm run photos` (skript `scripts/prep-photos.mjs`,
-  staging přes `_raw/` podsložky).
+  `supermamky/`, `deti/` (Objevovárna), `treneri/` (Klára Měchurová). Vzor pro
+  lekce: `Record<string, {src, alt, pos?}>` mapa v frontmatter stránky, klíč =
+  `class.id`; `pos` je Tailwind `object-*` třída pro ořez. Vzor pro trenéry:
+  **centrální mapa `src/data/trainer-photos.ts`** (`Record<string, ImageMetadata>`,
+  klíč = přesné jméno trenéra) — importovat v `Trainers.astro`, `treneri.astro`
+  i `osobni-treninky.astro`. Nový trenér s fotkou = přidat do `trainer-photos.ts`,
+  fotku zpracovat do `src/assets/treneri/`. Nepoužité fotky (`kruhac-06–08`,
+  `silovy-trenink-04/06/10`) jsou připravené pro sekce na `/skupinove-lekce/`
+  (placeholder boxy čekají na Honzova data).
+  Zpracování nových fotek: `npm run photos -- _raw/<složka> <cíl>` (skript
+  `scripts/prep-photos.mjs`, staging přes `_raw/` podsložky v rootu repa).
 
 ## Tailwind v4 — vývojové gotchy (ušetří hodiny)
 

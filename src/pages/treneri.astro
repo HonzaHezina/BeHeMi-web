@@ -6,11 +6,7 @@ import Button from '../components/Button.astro';
 import MediaFrame from '../components/MediaFrame.astro';
 import { Image } from 'astro:assets';
 import { trainers, RESERVE_URL } from '../data/home';
-import imgKlaraMechurova from '../assets/treneri/klara-mechurova.jpg';
-
-const trainerPhotos: Record<string, ImageMetadata> = {
-  'Klára Měchurová': imgKlaraMechurova,
-};
+import { trainerPhotos } from '../data/trainer-photos';
 ---
 <Layout
   title="Trenéři — BoHeMi fitness Vinohrady"

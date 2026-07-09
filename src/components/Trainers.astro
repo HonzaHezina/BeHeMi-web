@@ -1,8 +1,10 @@
 ---
 import Eyebrow from './Eyebrow.astro';
 import MediaFrame from './MediaFrame.astro';
+import { Image } from 'astro:assets';
 import { trainers as trainersCS } from '../data/home';
 import { trainers as trainersEN } from '../data/home.en';
+import { trainerPhotos } from '../data/trainer-photos';
 import type { Lang } from '../i18n/ui';
 import { t } from '../i18n/ui';
 
@@ -22,7 +24,19 @@ const trainers = lang === 'en' ? trainersEN : trainersCS;
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
       {trainers.map((tr) => (
         <div>
-          <MediaFrame media={tr.media} rounded="rounded-[18px]" class="mb-4 h-70" alt={`${lang === 'en' ? 'Portrait' : 'Portrét'} — ${tr.name}`} />
+          {trainerPhotos[tr.name] ? (
+            <MediaFrame media={tr.media} rounded="rounded-[18px]" class="mb-4 h-70" alt={`${lang === 'en' ? 'Portrait' : 'Portrét'} — ${tr.name}`}>
+              <Image
+                src={trainerPhotos[tr.name]}
+                alt={`${lang === 'en' ? 'Portrait' : 'Portrét'} — ${tr.name}`}
+                class="h-full w-full object-cover"
+                widths={[320, 640]}
+                sizes="(min-width: 1024px) 25vw, 50vw"
+              />
+            </MediaFrame>
+          ) : (
+            <MediaFrame media={tr.media} rounded="rounded-[18px]" class="mb-4 h-70" alt={`${lang === 'en' ? 'Portrait' : 'Portrét'} — ${tr.name}`} />
+          )}
           <h3 class="text-[21px] font-extrabold tracking-[-0.02em]">{tr.name}</h3>
           <p class="text-[15px] text-ink-muted">{tr.role}</p>
           {tr.bio && <p class="mt-1.5 text-[14.5px] leading-[1.5] text-ink-soft">{tr.bio}</p>}
