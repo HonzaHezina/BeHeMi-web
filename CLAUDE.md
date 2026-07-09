@@ -298,10 +298,18 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   Drž text ≥ 4.5:1 (velký ≥ 3:1), globální `:focus-visible` ring je v `@layer base`,
   animace respektují `prefers-reduced-motion`. Po změně barev spusť axe znovu.
 - **Architektura:** sdílená data v `src/data/home.ts` (lekce, ceník, navigace…),
-  stránky jen skládají komponenty z `src/components/`. Obrázky jsou zatím
-  gradientové placeholdery (`MediaFrame.astro`) — reálný `<img>` do slotu sám
-  skryje placeholder. Navigace: kotvy formou `/#…` (fungují i z podstránek),
-  aktivní stav přes `<Header current="/slug/" />`.
+  stránky jen skládají komponenty z `src/components/`. Obrázky přes `MediaFrame.astro`
+  (slot pattern — placeholder se skryje, když je `<Image />` ve slotu). Navigace:
+  kotvy formou `/#…` (fungují i z podstránek), aktivní stav přes
+  `<Header current="/slug/" />`.
+- **Fotky (stav 9. 7. 2026):** Reálné fotky zapojeny na klíčových stránkách.
+  Zdrojové soubory v `src/assets/`: `lekce/` (kruhač, silový trénink, vlastní váha),
+  `supermamky/`, `deti/` (Objevovárna). Vzor: `Record<string, {src, alt, pos?}>` mapa
+  v frontmatter stránky, klíč = `class.id`; `pos` je Tailwind `object-*` třída pro
+  ořez. Nepoužité fotky (`kruhac-06–08`, `silovy-trenink-04/06/10`) jsou připravené
+  pro sekce na `/skupinove-lekce/` (placeholder boxy čekají na Honzova data).
+  Zpracování nových fotek: `npm run photos` (skript `scripts/prep-photos.mjs`,
+  staging přes `_raw/` podsložky).
 
 ## Tailwind v4 — vývojové gotchy (ušetří hodiny)
 
