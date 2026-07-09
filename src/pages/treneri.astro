@@ -4,7 +4,13 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Button from '../components/Button.astro';
 import MediaFrame from '../components/MediaFrame.astro';
+import { Image } from 'astro:assets';
 import { trainers, RESERVE_URL } from '../data/home';
+import imgKlaraMechurova from '../assets/treneri/klara-mechurova.jpg';
+
+const trainerPhotos: Record<string, ImageMetadata> = {
+  'Klára Měchurová': imgKlaraMechurova,
+};
 ---
 <Layout
   title="Trenéři — BoHeMi fitness Vinohrady"
@@ -37,12 +43,29 @@ import { trainers, RESERVE_URL } from '../data/home';
       <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
         {trainers.map((tr) => (
           <div class="rounded-[22px] border border-border bg-surface overflow-hidden">
-            <MediaFrame
-              media={tr.media}
-              rounded="rounded-none"
-              class="h-60 w-full"
-              alt={`Portrét — ${tr.name}`}
-            />
+            {trainerPhotos[tr.name] ? (
+              <MediaFrame
+                media={tr.media}
+                rounded="rounded-none"
+                class="h-60 w-full"
+                alt={`Portrét — ${tr.name}`}
+              >
+                <Image
+                  src={trainerPhotos[tr.name]}
+                  alt={`Portrét — ${tr.name}`}
+                  class="h-full w-full object-cover"
+                  widths={[320, 640]}
+                  sizes="(min-width: 1024px) 25vw, 50vw"
+                />
+              </MediaFrame>
+            ) : (
+              <MediaFrame
+                media={tr.media}
+                rounded="rounded-none"
+                class="h-60 w-full"
+                alt={`Portrét — ${tr.name}`}
+              />
+            )}
             <div class="p-7">
               <h2 class="text-[22px] font-extrabold tracking-[-0.02em]">{tr.name}</h2>
               <p class="mb-3 text-[13px] font-extrabold uppercase tracking-[0.06em] text-accent-text">{tr.role}</p>
