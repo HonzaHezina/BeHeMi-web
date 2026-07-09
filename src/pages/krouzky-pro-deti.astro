@@ -4,7 +4,9 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Button from '../components/Button.astro';
 import MediaFrame from '../components/MediaFrame.astro';
+import { Image } from 'astro:assets';
 import { RESERVE_URL } from '../data/home';
+import imgObjevovarna from '../assets/deti/objevovarna-01.jpg';
 
 // Reálná data z bohemi.fit/akademie-cirk-la-putyka/, /detska-zumba/ a /hernicka/.
 // Dětská Zumba dle WP (5. 7. 2026): 6–12 let, středa 17:00, 55 min,
@@ -137,7 +139,16 @@ const objevovarnaFacts = [
           </ul>
           <Button href={RESERVE_URL} variant="brand">Rezervovat místo →</Button>
         </div>
-        <MediaFrame media="media-rose" rounded="rounded-none" class="min-h-[240px] lg:min-h-full" alt="Objevovárna — hernička pro nejmenší" />
+        <MediaFrame media="media-rose" rounded="rounded-none" class="min-h-[240px] lg:min-h-full" alt="Objevovárna — hernička pro nejmenší">
+          <Image
+            src={imgObjevovarna}
+            alt="Objevovárna BoHeMi — dítě třídí barevné kuličky při hravé aktivitě"
+            class="h-full w-full object-cover object-[50%_30%]"
+            widths={[480, 640]}
+            sizes="(min-width: 1024px) 45vw, 100vw"
+            loading="lazy"
+          />
+        </MediaFrame>
       </div>
     </section>
 
