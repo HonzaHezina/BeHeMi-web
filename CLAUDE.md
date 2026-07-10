@@ -182,7 +182,10 @@ stejné slugy, jen cestu `/en/group-classes/#…`):**
 - **Pravidlo boxů (platí všude, i v ceníku):** má-li obsah boxu/dlaždice
   detailní stránku nebo kotvu, je klikací CELÝ box (`<a>`, hover zdvih),
   ne textový odkaz vedle. **Žádný nápis „Detail →" v boxech (rozhodnuto
-  7/2026)** — klikatelnost nese box sám. Př.: dlaždice kroužků v ceníku →
+  7/2026)** — klikatelnost nese box sám. Pro dlaždice lekcí/dětských aktivit
+  (box = fotka + nadpis + popis, celý klikací) použij `<ClassCard>`
+  (`src/components/ClassCard.astro`) s fotkou z `src/data/photos.ts` —
+  nepiš vlastní markup ani lokální fotku-mapu znovu (viz „Fotky" níž). Př.: dlaždice kroužků v ceníku →
   `/krouzky-pro-deti/#kotva`. Musí-li box obsahovat i druhý odkaz (např.
   „Rezervovat →" na `/skupinove-lekce/`), řeší se overlay `<a>` (`absolute
   inset-0` + `aria-label`, kontejner `relative`, druhý odkaz `relative` nad
@@ -334,17 +337,32 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   (slot pattern — placeholder se skryje, když je `<Image />` ve slotu). Navigace:
   kotvy formou `/#…` (fungují i z podstránek), aktivní stav přes
   `<Header current="/slug/" />`.
-- **Fotky (stav 9. 7. 2026):** Reálné fotky zapojeny na klíčových stránkách.
+- **Fotky (stav 10. 7. 2026):** Reálné fotky zapojeny na klíčových stránkách.
   Zdrojové soubory v `src/assets/`: `lekce/` (kruhač, silový trénink, vlastní váha),
-  `supermamky/`, `deti/` (Objevovárna), `treneri/` (Klára Měchurová). Vzor pro
-  lekce: `Record<string, {src, alt, pos?}>` mapa v frontmatter stránky, klíč =
-  `class.id`; `pos` je Tailwind `object-*` třída pro ořez. Vzor pro trenéry:
-  **centrální mapa `src/data/trainer-photos.ts`** (`Record<string, ImageMetadata>`,
-  klíč = přesné jméno trenéra) — importovat v `Trainers.astro`, `treneri.astro`
-  i `osobni-treninky.astro`. Nový trenér s fotkou = přidat do `trainer-photos.ts`,
-  fotku zpracovat do `src/assets/treneri/`. Nepoužité fotky (`kruhac-06–08`,
-  `silovy-trenink-04/06/10`) jsou připravené pro sekce na `/skupinove-lekce/`
-  (placeholder boxy čekají na Honzova data).
+  `supermamky/`, `deti/` (Objevovárna), `treneri/` (Klára Měchurová).
+  **Centrální registr fotek lekcí a dětských aktivit = `src/data/photos.ts`**
+  (`photosCS`/`photosEN`, `Record<string, {src, alt, pos?}>`, klíč = `id` z
+  `classes[]`/`kidsActivities[]`/`kidsBand[]` v `src/data/home.ts`). Fotka se
+  přidává **jen jednou sem** — objeví se všude, kde se dané `id` používá (HP,
+  rozcestník, detail, EN mutace), místo aby se kopírovala do každé stránky
+  zvlášť (tak vznikaly mezery — fotka byla zapojená na jedné stránce, na jiné
+  s týmž boxem chyběla). `pos` je Tailwind `object-*` třída pro ořez.
+  **Dlaždice lekcí/aktivit renderuj přes `<ClassCard>`** (`src/components/ClassCard.astro`)
+  — sdílená komponenta pro vzor „celý box je `<a>`, `MediaFrame` + fotka z
+  `photosCS`/`photosEN`, nadpis, popis, volitelná `meta` řádka“. Používá ji
+  `Offer.astro`, `KidsBand.astro`, `lekce-a-sluzby.astro` a
+  `en/classes-and-services.astro`. Bohatší/odlišné layouty (`skupinove-lekce.astro`
+  detail, `en/group-classes.astro` s dvěma odkazy v boxu) mají vlastní markup,
+  ale fotku čerpají taky z `photos.ts` — ne vlastní kopii mapy. **Nová fotka
+  lekce/aktivity → přidej `id` do `photosCS`/`photosEN` v `photos.ts`, nikdy
+  nevytvářej lokální `classPhotos`/`kidsPhotos` mapu v jednotlivé stránce.**
+  Vzor pro trenéry zůstává oddělený: **centrální mapa `src/data/trainer-photos.ts`**
+  (`Record<string, ImageMetadata>`, klíč = přesné jméno trenéra) — importovat v
+  `Trainers.astro`, `treneri.astro` i `osobni-treninky.astro`. Nový trenér
+  s fotkou = přidat do `trainer-photos.ts`, fotku zpracovat do
+  `src/assets/treneri/`. Nepoužité fotky (`kruhac-06–08`, `silovy-trenink-04/06/10`)
+  jsou připravené pro sekce na `/skupinove-lekce/` (placeholder boxy čekají na
+  Honzova data).
   Zpracování nových fotek: `npm run photos -- _raw/<složka> <cíl>` (skript
   `scripts/prep-photos.mjs`, staging přes `_raw/` podsložky v rootu repa).
 

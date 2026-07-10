@@ -93,6 +93,12 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   v display nadpisu smí být červené (echo loga; na tmavém AA-large). Kontrast ≥ 4.5:1.
 - **Kontakt:** přímé akce `mailto:`/`tel:`, žádný `<form>`.
 - **Data** sdílená v `src/data/home.ts`, stránky skládají `src/components/`.
+- **Fotky lekcí/dětských aktivit:** centrální registr `src/data/photos.ts`
+  (`photosCS`/`photosEN`, klíč = `id` z `classes[]`/`kidsActivities[]`/
+  `kidsBand[]`) — fotka se přidává jednou tam, ne po stránkách. Dlaždice
+  renderuj přes `<ClassCard>` (`src/components/ClassCard.astro`), nepiš
+  vlastní box + lokální fotku-mapu znovu. Trenéři mají vlastní
+  `src/data/trainer-photos.ts` (klíč = jméno).
 - **Tailwind v4:** reset patří do `@layer base`; zlomky spacing (4.5/5.5/6.5/7.5)
   nejdou — piš `[18px]/[22px]/[26px]/[30px]`; po nové stránce restartuj dev server.
 - **Deploy:** Coolify statika — `dist/`, „Is it a static site?" ON, SPA OFF.
