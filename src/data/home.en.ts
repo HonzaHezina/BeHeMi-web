@@ -51,6 +51,7 @@ export const individualServices: { t: string; d: string; href?: string }[] = [
   { t: 'Personal training', d: 'Individual coaching tailored to your goals and pace.' },
   { t: 'Open gym', d: 'Private 100 m² studio just for you or a small group.', href: '/en/open-gym/' },
   { t: 'Photobiomodulation', d: 'Recovery and healing support through light therapy.', href: '/en/photobiomodulation-therapy/' },
+  { t: 'Hall rental', d: 'Studios for your own events, workshops or your own clients. From 350 CZK/hr with a 6-month contract.' },
 ];
 
 // href = detail page; the whole card is clickable. Kids detail pages are CS-only for now.
@@ -75,7 +76,6 @@ export const kidsBand = [
 export const firmyServices = [
   { t: 'FitTeams', d: 'Circuit and strength training designed for company teams. Max 12 people, at our studio or yours.' },
   { t: 'Corporate wellbeing', d: 'Regular programs for employee health and energy — ergonomics, nutrition, recovery.' },
-  { t: 'Hall rental', d: 'Studios for your own events, team-building or workshops. From 350 CZK/hr with a 6-month contract.' },
 ];
 
 export const lpHighlights = [

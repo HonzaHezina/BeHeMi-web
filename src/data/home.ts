@@ -57,6 +57,7 @@ export const individualServices: { t: string; d: string; href?: string }[] = [
   { t: 'Osobní tréninky', d: 'Individuální vedení šité na tvoje cíle a tempo.', href: '/osobni-treninky/' },
   { t: 'Open gym', d: 'Privátní sál 100 m² jen pro tebe nebo malou skupinu.', href: '/open-gym/' },
   { t: 'Fotobiomodulace', d: 'Regenerace a podpora hojení světelnou terapií.', href: '/fotobiomodulacni-terapie/' },
+  { t: 'Pronájem sálů', d: 'Sály pro vlastní akce, workshopy nebo tvoje klienty. Od 350 Kč/hod při smlouvě na 6 měsíců.', href: '/pronajem-salu/' },
 ];
 
 // href = detail; karta je klikatelná celá. Supermamky patří sem — je to
@@ -86,7 +87,6 @@ export const kidsBand = [
 export const firmyServices: { t: string; d: string; href?: string }[] = [
   { t: 'FitTeams', d: 'Kruhové a silové tréninky navržené pro firemní týmy. Max 12 lidí, v našem studiu nebo u vás.', href: '/firmy/' },
   { t: 'Firemní wellbeing', d: 'Pravidelné programy pro zdraví a energii zaměstnanců — ergonomie, výživa, regenerace.', href: '/firmy/' },
-  { t: 'Pronájem sálů', d: 'Sály pro vlastní akce, teambuilding nebo workshopy. Od 350 Kč/hod při smlouvě na 6 měsíců.', href: '/pronajem-salu/' },
 ];
 
 export const lpHighlights = [
