@@ -38,7 +38,7 @@ import { trainerPhotos } from '../data/trainer-photos';
     <section class="mx-auto max-w-[1220px] px-5 pb-16 md:px-8 md:pb-23">
       <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
         {trainers.map((tr) => (
-          <div class="rounded-[22px] border border-border bg-surface overflow-hidden">
+          <div id={tr.id} class="scroll-mt-24 rounded-[22px] border border-border bg-surface overflow-hidden">
             {trainerPhotos[tr.name] ? (
               <MediaFrame
                 media={tr.media}

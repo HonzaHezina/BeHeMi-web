@@ -2,7 +2,6 @@
 // Plnoformátový pruh „Pro děti a rodiny" — vysoko na homepage (hned za
 // ApproachGrid). Děti = po homepage nejsilnější publikum (docs/redirect-map.md),
 // pruh dává rodičům cestu bez scrollování celou dospěláckou linií.
-import Button from './Button.astro';
 import ClassCard from './ClassCard.astro';
 import { kidsBand as kidsBandCS } from '../data/home';
 import { kidsBand as kidsBandEN } from '../data/home.en';
@@ -18,14 +17,21 @@ const photos = lang === 'en' ? photosEN : photosCS;
 ---
 <section class="bg-sand">
   <div class="mx-auto max-w-[1220px] px-5 py-16 md:px-8 md:py-20">
-    <h2 class="mb-3.5 max-w-[20ch] text-[clamp(30px,4vw,48px)] font-extrabold leading-[1.03] tracking-[-0.03em]">
-      {lang === 'en' ? <>For kids <span class="font-medium text-accent-text">&amp; families</span></> : <>Pro děti <span class="font-medium text-accent-text">a rodiny</span></>}
-    </h2>
-    <p class="mb-10 max-w-[58ch] text-lg leading-[1.55] text-ink-soft">
-      {lang === 'en'
-        ? 'Clubs, circus and movement for kids — and Supermums for new mums. In Vinohrady, in small groups where your child gets real attention.'
-        : 'Kroužky, cirkus a pohyb pro děti — a Supermamky pro čerstvé maminky. Na Vinohradech, v malých skupinách, kde se dětem někdo věnuje.'}
-    </p>
+    <div class="mb-10 flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <h2 class="mb-3.5 max-w-[20ch] text-[clamp(30px,4vw,48px)] font-extrabold leading-[1.03] tracking-[-0.03em]">
+          {lang === 'en' ? <>For kids <span class="font-medium text-accent-text">&amp; families</span></> : <>Pro děti <span class="font-medium text-accent-text">a rodiny</span></>}
+        </h2>
+        <p class="max-w-[58ch] text-lg leading-[1.55] text-ink-soft">
+          {lang === 'en'
+            ? 'Clubs, circus and movement for kids — and Supermums for new mums. In Vinohrady, in small groups where your child gets real attention.'
+            : 'Kroužky, cirkus a pohyb pro děti — a Supermamky pro čerstvé maminky. Na Vinohradech, v malých skupinách, kde se dětem někdo věnuje.'}
+        </p>
+      </div>
+      <a href="/krouzky-pro-deti/" class="cursor-pointer text-base font-bold text-accent-text hover:text-ink">
+        {lang === 'en' ? 'Everything for kids & families →' : 'Vše pro děti a rodiny →'}
+      </a>
+    </div>
 
     <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {kidsBand.map((k) => (
@@ -39,12 +45,6 @@ const photos = lang === 'en' ? photosEN : photosCS;
           bodyClass="p-7"
         />
       ))}
-    </div>
-
-    <div class="mt-8">
-      <Button href="/krouzky-pro-deti/" variant="brand">
-        {lang === 'en' ? 'Everything for kids & families →' : 'Vše pro děti a rodiny →'}
-      </Button>
     </div>
   </div>
 </section>

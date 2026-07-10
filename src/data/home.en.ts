@@ -104,11 +104,12 @@ export const healthTracker = [
   { area: 'Relations', q: 'Did I have one mindful positive contact with another person today?' },
 ];
 
+// id must match the CS file — shared anchor on the CS-only /treneri/ page.
 export const trainers = [
-  { name: 'Klára Měchurová', role: 'Coach · functional training', media: 'media-green', bio: 'Klára has been active since childhood — ballet, tennis, basketball, dance. Certified fitness instructor since 2015, active since 2013. She leads circuit, strength and HIIT classes and offers personal training.' },
-  { name: 'Jitka Štěpánková', role: 'Instructor · Power Zone', media: 'media-sand', bio: '' },
-  { name: 'Eliška Velázquez', role: 'Instructor · Zumba and Kids Zumba', media: 'media-forest', bio: 'Eliška brings Latin rhythm and the joy of movement to BoHeMi. She leads Zumba for adults and Kids Zumba — classes where you exercise but most of all have fun.' },
-  { name: 'Jan Hezina', role: 'founder · operations & tech', media: 'media-clay', bio: '' },
+  { id: 'klara-mechurova', name: 'Klára Měchurová', role: 'Coach · functional training', media: 'media-green', bio: 'Klára has been active since childhood — ballet, tennis, basketball, dance. Certified fitness instructor since 2015, active since 2013. She leads circuit, strength and HIIT classes and offers personal training.' },
+  { id: 'jitka-stepankova', name: 'Jitka Štěpánková', role: 'Instructor · Power Zone', media: 'media-sand', bio: '' },
+  { id: 'eliska-velazquez', name: 'Eliška Velázquez', role: 'Instructor · Zumba and Kids Zumba', media: 'media-forest', bio: 'Eliška brings Latin rhythm and the joy of movement to BoHeMi. She leads Zumba for adults and Kids Zumba — classes where you exercise but most of all have fun.' },
+  { id: 'jan-hezina', name: 'Jan Hezina', role: 'founder · operations & tech', media: 'media-clay', bio: '' },
 ];
 
 export const pricing = [

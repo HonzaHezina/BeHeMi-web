@@ -120,11 +120,13 @@ export const healthTracker = [
 // zakomentované, ať se na web nepublikují vymyšlené karty — odkomentuj a vyplň,
 // až dodáš skutečná data (jméno, role, příp. krátké bio + foto do media slotu).
 // Media token vyber z .media-* v global.css (green/clay/sand/forest/rose).
+// id = stabilní kotva /treneri/#<id> (ASCII, nikdy neměnit) — HP karty na ni
+// odkazují stejnou logikou jako typy lekcí na /skupinove-lekce/.
 export const trainers = [
-  { name: 'Klára Měchurová', role: 'Trenérka · funkční trénink', media: 'media-green', bio: 'Klára se pohybu věnuje od dětství — balet, tenis, basketbal, tanec. Certifikovaná fitness lektorka od roku 2015, aktivní od 2013. Vede kruháče, silové lekce i HIIT a nabízí osobní tréninky.' },
-  { name: 'Jitka Štěpánková', role: 'Lektorka · Power Zone', media: 'media-sand', bio: '' },
-  { name: 'Eliška Velázquez', role: 'Lektorka · Zumba a Dětská Zumba', media: 'media-forest', bio: 'Eliška přináší do BoHeMi latinskoamerický rytmus a radost z pohybu. Vede Zumbu pro dospělé i Dětskou Zumbu — lekce, kde se cvičí, ale hlavně baví.' },
-  { name: 'Jan Hezina', role: 'zakladatel · provoz a technika', media: 'media-clay', bio: '' },
+  { id: 'klara-mechurova', name: 'Klára Měchurová', role: 'Trenérka · funkční trénink', media: 'media-green', bio: 'Klára se pohybu věnuje od dětství — balet, tenis, basketbal, tanec. Certifikovaná fitness lektorka od roku 2015, aktivní od 2013. Vede kruháče, silové lekce i HIIT a nabízí osobní tréninky.' },
+  { id: 'jitka-stepankova', name: 'Jitka Štěpánková', role: 'Lektorka · Power Zone', media: 'media-sand', bio: '' },
+  { id: 'eliska-velazquez', name: 'Eliška Velázquez', role: 'Lektorka · Zumba a Dětská Zumba', media: 'media-forest', bio: 'Eliška přináší do BoHeMi latinskoamerický rytmus a radost z pohybu. Vede Zumbu pro dospělé i Dětskou Zumbu — lekce, kde se cvičí, ale hlavně baví.' },
+  { id: 'jan-hezina', name: 'Jan Hezina', role: 'zakladatel · provoz a technika', media: 'media-clay', bio: '' },
 ];
 
 export const pricing = [

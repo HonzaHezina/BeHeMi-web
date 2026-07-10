@@ -159,6 +159,13 @@ stejné slugy, jen cestu `/en/group-classes/#…`):**
   nepatří a kotva `#move-smart` neexistuje.
 - `/krouzky-pro-deti/`: `#cirkusova-skolicka #zaklady-gymnastiky
   #akrobacie-zonglovani #objevovarna #detska-zumba`
+- `/treneri/`: `#klara-mechurova #jitka-stepankova #eliska-velazquez #jan-hezina`
+  (`trainers[].id` v `home.ts`/`home.en.ts`, přidáno 10. 7. 2026). HP karty
+  trenérů (`Trainers.astro`) jsou celé klikací a vedou na `/treneri/#id` —
+  stejná logika jako typ lekce → `/skupinove-lekce/#kotva` (trenér nemá
+  vlastní stránku, jen kotvu na společném výpisu). `/treneri/` je zatím jen
+  česky — EN karty na HP vedou na stejné české kotvy (konvence jako u dětských
+  stránek).
 
 **Jak se to drží v kódu** (data v `src/data/home.ts` + `home.en.ts`):
 
@@ -197,7 +204,12 @@ stejné slugy, jen cestu `/en/group-classes/#…`):**
   bez `href`).
 - **Odkaz sekce na detail patří do hlavičky sekce** (flex řádek vedle `<h2>`,
   vzor „Všechny lekce →" na rozcestníku, fotobiomodulace/kroužky v ceníku),
-  ne do odstavce pod mřížkou.
+  ne do odstavce pod mřížkou. **Je to vždy textový odkaz** (`text-base
+  font-bold text-accent-text hover:text-ink`, ne `<Button>`) — sjednoceno
+  10. 7. 2026 (`KidsBand.astro` měl navíc `<Button>` pod mřížkou, HP i ostatní
+  sekce — Offer, Trainers, PricingTeaser — používaly textový odkaz v hlavičce;
+  KidsBand upraven, aby seděl). `<Button>` patří na konec sekce jen tam, kde je
+  to samostatná finální CTA (rezervace, kontakt), ne jako „zobrazit vše" odkaz.
 - Cíl kotvy potřebuje `scroll-mt-24` (sticky header).
 - **Provozní údaje (rozvrh, kapacita, ceny) jen na detailu, ne v dlaždicích** —
   jeden zdroj pravdy (viz Objevovárna).

@@ -19,11 +19,15 @@ const trainers = lang === 'en' ? trainersEN : trainersCS;
     <Eyebrow>{t(lang, 'trainers_eyebrow')}</Eyebrow>
     <div class="mb-11 flex flex-wrap items-baseline justify-between gap-4">
       <h2 class="text-[clamp(30px,4vw,48px)] font-extrabold tracking-[-0.03em]">{t(lang, 'trainers_h2')}</h2>
-      {lang === 'cs' && <a href="/treneri/" class="cursor-pointer text-base font-bold text-accent-text hover:text-ink">Celý tým →</a>}
+      <!-- /treneri/ je zatím jen česky — EN odkazuje českým slugem (stejná
+           konvence jako u dětských stránek). -->
+      <a href="/treneri/" class="cursor-pointer text-base font-bold text-accent-text hover:text-ink">
+        {lang === 'en' ? 'Full team →' : 'Celý tým →'}
+      </a>
     </div>
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
       {trainers.map((tr) => (
-        <div>
+        <a href={`/treneri/#${tr.id}`} class="block cursor-pointer rounded-[18px] transition-transform duration-300 hover:-translate-y-1">
           {trainerPhotos[tr.name] ? (
             <MediaFrame media={tr.media} rounded="rounded-[18px]" class="mb-4 h-70" alt={`${lang === 'en' ? 'Portrait' : 'Portrét'} — ${tr.name}`}>
               <Image
@@ -40,7 +44,7 @@ const trainers = lang === 'en' ? trainersEN : trainersCS;
           <h3 class="text-[21px] font-extrabold tracking-[-0.02em]">{tr.name}</h3>
           <p class="text-[15px] text-ink-muted">{tr.role}</p>
           {tr.bio && <p class="mt-1.5 text-[14.5px] leading-[1.5] text-ink-soft">{tr.bio}</p>}
-        </div>
+        </a>
       ))}
     </div>
   </div>
