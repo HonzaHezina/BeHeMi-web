@@ -61,13 +61,13 @@ export const individualServices: { t: string; d: string; href?: string }[] = [
 
 // href = detail; karta je klikatelná celá. Supermamky patří sem — je to
 // skupinová lekce maminek (a tátů) s dětmi, ne jen poznámka pod čarou.
-export const kidsActivities: { t: string; d: string; img: string; media: string; href?: string }[] = [
-  { t: 'Cirkusová školička', d: 'Pro nejmenší — první krok k pohybu: rovnováha, koordinace a odvaha zkusit něco nového.', img: 'cirkusová školička', media: 'media-sand', href: '/krouzky-pro-deti/#cirkusova-skolicka' },
-  { t: 'Základy cirkusového tréninku', d: 'Gymnastika a akrobacie pod vedením akrobatů La Putyka.', img: 'akrobacie', media: 'media-clay', href: '/krouzky-pro-deti/#zaklady-gymnastiky' },
-  { t: 'Hlavou ve vzduchu', d: 'Pozemní i závěsná akrobacie a žonglování.', img: 'kroužky pro děti', media: 'media-green', href: '/krouzky-pro-deti/#akrobacie-zonglovani' },
-  { t: 'Objevovárna', d: 'Pro děti do 5 let — 6 pohybových stanovišť, na kterých si samy zkoušejí, co jejich tělo zvládne.', img: 'objevovárna', media: 'media-rose', href: '/krouzky-pro-deti/#objevovarna' },
-  { t: 'Dětská Zumba', d: 'Taneční lekce pro děti v rytmu Zumby — koordinace a pohyb, ale hlavně zábava. Vede Eliška Velázquez.', img: 'dětská zumba', media: 'media-sand', href: '/krouzky-pro-deti/#detska-zumba' },
-  { t: 'Supermamky', d: 'Skupinová lekce pro maminky a tatínky s dětmi — kruhový trénink přizpůsobený realitě rodičovství. S miminkem nebo batoletem u tebe.', img: 'supermamky', media: 'media-forest', href: '/supermamky/' },
+export const kidsActivities: { id: string; t: string; d: string; img: string; media: string; href?: string }[] = [
+  { id: 'cirkusova-skolicka', t: 'Cirkusová školička', d: 'Pro nejmenší — první krok k pohybu: rovnováha, koordinace a odvaha zkusit něco nového.', img: 'cirkusová školička', media: 'media-sand', href: '/krouzky-pro-deti/#cirkusova-skolicka' },
+  { id: 'zaklady-gymnastiky', t: 'Základy cirkusového tréninku', d: 'Gymnastika a akrobacie pod vedením akrobatů La Putyka.', img: 'akrobacie', media: 'media-clay', href: '/krouzky-pro-deti/#zaklady-gymnastiky' },
+  { id: 'akrobacie-zonglovani', t: 'Hlavou ve vzduchu', d: 'Pozemní i závěsná akrobacie a žonglování.', img: 'kroužky pro děti', media: 'media-green', href: '/krouzky-pro-deti/#akrobacie-zonglovani' },
+  { id: 'objevovarna', t: 'Objevovárna', d: 'Pro děti do 5 let — 6 pohybových stanovišť, na kterých si samy zkoušejí, co jejich tělo zvládne.', img: 'objevovárna', media: 'media-rose', href: '/krouzky-pro-deti/#objevovarna' },
+  { id: 'detska-zumba', t: 'Dětská Zumba', d: 'Taneční lekce pro děti v rytmu Zumby — koordinace a pohyb, ale hlavně zábava. Vede Eliška Velázquez.', img: 'dětská zumba', media: 'media-sand', href: '/krouzky-pro-deti/#detska-zumba' },
+  { id: 'supermamky', t: 'Supermamky', d: 'Skupinová lekce pro maminky a tatínky s dětmi — kruhový trénink přizpůsobený realitě rodičovství. S miminkem nebo batoletem u tebe.', img: 'supermamky', media: 'media-forest', href: '/supermamky/' },
 ];
 
 // Homepage pruh „Pro děti a rodiny" — po homepage nejsilnější publikum
@@ -76,11 +76,11 @@ export const kidsActivities: { t: string; d: string; img: string; media: string;
 // odpovídá bohemi.fit). Popisy převzaté z kidsActivities výš, žádné nové texty.
 // Příměstský tábor se už nedělá — do nabídky nevracet (rozhodnuto 7/2026).
 export const kidsBand = [
-  { t: 'Kroužky pro děti', d: 'Základy gymnastiky, pozemní i závěsná akrobacie a žonglování — pod vedením akrobatů La Putyka.', href: '/krouzky-pro-deti/' },
-  { t: 'Cirkusová školička', d: 'Pro nejmenší — první krok k pohybu: rovnováha, koordinace a odvaha zkusit něco nového.', href: '/krouzky-pro-deti/#cirkusova-skolicka' },
-  { t: 'Objevovárna', d: 'Pro děti do 5 let — 6 pohybových stanovišť, na kterých si samy zkoušejí, co jejich tělo zvládne.', href: '/krouzky-pro-deti/#objevovarna' },
-  { t: 'Dětská Zumba', d: 'Taneční lekce pro děti v rytmu Zumby — koordinace a pohyb, ale hlavně zábava. Vede Eliška Velázquez.', href: '/krouzky-pro-deti/#detska-zumba' },
-  { t: 'Supermamky', d: 'Tréninky pro maminky — cvičení přizpůsobené realitě rodičovství. S miminkem nebo batoletem u tebe.', href: '/supermamky/' },
+  { id: 'krouzky', t: 'Kroužky pro děti', d: 'Základy gymnastiky, pozemní i závěsná akrobacie a žonglování — pod vedením akrobatů La Putyka.', media: 'media-sand', href: '/krouzky-pro-deti/' },
+  { id: 'cirkusova-skolicka', t: 'Cirkusová školička', d: 'Pro nejmenší — první krok k pohybu: rovnováha, koordinace a odvaha zkusit něco nového.', media: 'media-clay', href: '/krouzky-pro-deti/#cirkusova-skolicka' },
+  { id: 'objevovarna', t: 'Objevovárna', d: 'Pro děti do 5 let — 6 pohybových stanovišť, na kterých si samy zkoušejí, co jejich tělo zvládne.', media: 'media-rose', href: '/krouzky-pro-deti/#objevovarna' },
+  { id: 'detska-zumba', t: 'Dětská Zumba', d: 'Taneční lekce pro děti v rytmu Zumby — koordinace a pohyb, ale hlavně zábava. Vede Eliška Velázquez.', media: 'media-green', href: '/krouzky-pro-deti/#detska-zumba' },
+  { id: 'supermamky', t: 'Supermamky', d: 'Tréninky pro maminky — cvičení přizpůsobené realitě rodičovství. S miminkem nebo batoletem u tebe.', media: 'media-forest', href: '/supermamky/' },
 ];
 
 export const firmyServices: { t: string; d: string; href?: string }[] = [

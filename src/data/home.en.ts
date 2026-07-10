@@ -54,22 +54,22 @@ export const individualServices: { t: string; d: string; href?: string }[] = [
 ];
 
 // href = detail page; the whole card is clickable. Kids detail pages are CS-only for now.
-export const kidsActivities: { t: string; d: string; img: string; media: string; href?: string }[] = [
-  { t: 'Circus School', d: 'For the youngest — a first step into movement: balance, coordination, and the confidence to try something new.', img: 'circus school', media: 'media-sand', href: '/krouzky-pro-deti/#cirkusova-skolicka' },
-  { t: 'Gymnastics & Acrobatics basics', d: 'Gymnastics and acrobatics led by La Putyka acrobats.', img: 'acrobatics', media: 'media-clay', href: '/krouzky-pro-deti/#zaklady-gymnastiky' },
-  { t: 'Hlavou ve vzduchu', d: 'Floor and aerial acrobatics and juggling.', img: 'kids clubs', media: 'media-green', href: '/krouzky-pro-deti/#akrobacie-zonglovani' },
-  { t: 'Discovery Room', d: 'For kids up to age 5 — 6 movement stations where they figure out on their own what their body can do.', img: 'discovery room', media: 'media-rose', href: '/krouzky-pro-deti/#objevovarna' },
-  { t: 'Kids Zumba', d: 'Dance classes for children in Zumba style — coordination and movement, but mostly fun. Led by Eliška Velázquez.', img: 'kids zumba', media: 'media-sand', href: '/krouzky-pro-deti/#detska-zumba' },
-  { t: 'Supermums', d: 'A group class for mums and dads with kids — circuit training adapted to the reality of parenthood. With your baby or toddler right beside you.', img: 'supermums', media: 'media-forest', href: '/supermamky/' },
+export const kidsActivities: { id: string; t: string; d: string; img: string; media: string; href?: string }[] = [
+  { id: 'cirkusova-skolicka', t: 'Circus School', d: 'For the youngest — a first step into movement: balance, coordination, and the confidence to try something new.', img: 'circus school', media: 'media-sand', href: '/krouzky-pro-deti/#cirkusova-skolicka' },
+  { id: 'zaklady-gymnastiky', t: 'Gymnastics & Acrobatics basics', d: 'Gymnastics and acrobatics led by La Putyka acrobats.', img: 'acrobatics', media: 'media-clay', href: '/krouzky-pro-deti/#zaklady-gymnastiky' },
+  { id: 'akrobacie-zonglovani', t: 'Hlavou ve vzduchu', d: 'Floor and aerial acrobatics and juggling.', img: 'kids clubs', media: 'media-green', href: '/krouzky-pro-deti/#akrobacie-zonglovani' },
+  { id: 'objevovarna', t: 'Discovery Room', d: 'For kids up to age 5 — 6 movement stations where they figure out on their own what their body can do.', img: 'discovery room', media: 'media-rose', href: '/krouzky-pro-deti/#objevovarna' },
+  { id: 'detska-zumba', t: 'Kids Zumba', d: 'Dance classes for children in Zumba style — coordination and movement, but mostly fun. Led by Eliška Velázquez.', img: 'kids zumba', media: 'media-sand', href: '/krouzky-pro-deti/#detska-zumba' },
+  { id: 'supermamky', t: 'Supermums', d: 'A group class for mums and dads with kids — circuit training adapted to the reality of parenthood. With your baby or toddler right beside you.', img: 'supermums', media: 'media-forest', href: '/supermamky/' },
 ];
 
 // Homepage "For kids & families" band — mirrors kidsBand in home.ts.
 export const kidsBand = [
-  { t: 'Kids clubs', d: 'Gymnastics basics, floor and aerial acrobatics, and juggling — led by La Putyka acrobats.', href: '/krouzky-pro-deti/' },
-  { t: 'Circus School', d: 'For the youngest — a first step into movement: balance, coordination, and the confidence to try something new.', href: '/krouzky-pro-deti/#cirkusova-skolicka' },
-  { t: 'Discovery Room', d: 'For kids up to age 5 — 6 movement stations where they figure out on their own what their body can do.', href: '/krouzky-pro-deti/#objevovarna' },
-  { t: 'Kids Zumba', d: 'Dance classes for children in Zumba style — coordination and movement, but mostly fun. Led by Eliška Velázquez.', href: '/krouzky-pro-deti/#detska-zumba' },
-  { t: 'Supermums', d: 'Training for mums — adapted to the reality of parenthood. With your baby or toddler right beside you.', href: '/supermamky/' },
+  { id: 'krouzky', t: 'Kids clubs', d: 'Gymnastics basics, floor and aerial acrobatics, and juggling — led by La Putyka acrobats.', media: 'media-sand', href: '/krouzky-pro-deti/' },
+  { id: 'cirkusova-skolicka', t: 'Circus School', d: 'For the youngest — a first step into movement: balance, coordination, and the confidence to try something new.', media: 'media-clay', href: '/krouzky-pro-deti/#cirkusova-skolicka' },
+  { id: 'objevovarna', t: 'Discovery Room', d: 'For kids up to age 5 — 6 movement stations where they figure out on their own what their body can do.', media: 'media-rose', href: '/krouzky-pro-deti/#objevovarna' },
+  { id: 'detska-zumba', t: 'Kids Zumba', d: 'Dance classes for children in Zumba style — coordination and movement, but mostly fun. Led by Eliška Velázquez.', media: 'media-green', href: '/krouzky-pro-deti/#detska-zumba' },
+  { id: 'supermamky', t: 'Supermums', d: 'Training for mums — adapted to the reality of parenthood. With your baby or toddler right beside you.', media: 'media-forest', href: '/supermamky/' },
 ];
 
 export const firmyServices = [
