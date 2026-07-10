@@ -13,7 +13,7 @@ export const approach: { n: string; t: string; d: string; href?: string }[] = [
   { n: '04', t: 'My back hurts or I feel stiff', d: "We'll help you get moving, improve technique, and gradually build strength for everyday life." },
   { n: '05', t: 'I want more energy and a better routine', d: 'Regular movement, simple habits, and workouts you can sustain long-term.' },
   { n: '06', t: 'I want to train as a mum', d: 'Supermums are classes you can attend with your child. Training adapts to the reality of parenting.', href: '/supermamky/' },
-  { n: '07', t: 'I want movement for my kids', d: 'Circus School, acrobatics, and movement clubs led by experienced coaches. Movement through play.', href: '/krouzky-pro-deti/' },
+  { n: '07', t: 'I want movement for my kids', d: 'Circus School, acrobatics, and movement clubs led by experienced coaches.', href: '/krouzky-pro-deti/' },
   { n: '08', t: 'I want a movement program for my team', d: 'FitTeams — coached circuit training designed specifically for company groups. No gym required.', href: '/en/classes-and-services/#pro-firmy' },
 ];
 
@@ -34,16 +34,16 @@ export const paths: { tag: string; t: string; d: string; href?: string }[] = [
 // (home.ts), never change them; links across the site point at them.
 // page = class has its own page (CS-only for now); mentions link there.
 export const classes: { id: string; t: string; d: string; img: string; media: string; bhm: string; page?: string }[] = [
-  { id: 'kruhac', t: 'Circuit Training', d: 'Functional training in a circuit: you rotate between stations, training with bodyweight or equipment, led by a coach. Suitable for all levels.', img: 'circuit training', media: 'media-green', bhm: 'Body · follow-through · community' },
-  { id: 'silovy-trenink', t: 'Strength Training', d: 'Bodyweight and simple equipment work under a coach. We focus on technique and gradual strength building.', img: 'strength training', media: 'media-forest', bhm: 'Body · strength · patience' },
-  { id: 'hiit', t: 'HIIT', d: 'High-intensity interval training combining cardio and strength. Short intervals, maximum effect — for those who want results without wasting time.', img: 'HIIT class', media: 'media-clay', bhm: 'Body · energy · resilience' },
-  { id: 'supermamky', page: '/supermamky/', t: 'Supermums', d: 'Classes for mums with children — training adapted to the reality of parenthood. With a baby or toddler beside you.', img: 'supermums', media: 'media-sand', bhm: 'Body · family · community' },
-  { id: 'vlastni-vaha', t: 'Bodyweight', d: 'Training without equipment: master fundamental movement patterns, improve coordination and strength. Great as a first step for complete beginners.', img: 'bodyweight', media: 'media-rose', bhm: 'Body · control · focus' },
-  { id: 'power-zone', t: 'Power Zone', d: 'Functional training combining circuits and CrossFit elements. Intense, effective, coach-led — for results without fuss.', img: 'power zone', media: 'media-clay', bhm: 'Body · strength · performance' },
-  { id: 'zumba', t: 'Zumba', d: 'Dance fitness to Latin rhythms — movement as celebration, not a chore. For anyone who wants to exercise and have fun at the same time.', img: 'zumba', media: 'media-rose', bhm: 'Body · rhythm · joy' },
-  { id: 'brisni-pekac', t: 'Core & Abs', d: 'Deep stabilisation and core training. No crunches — you learn to control your body from the inside. Suitable for all levels.', img: 'core abs', media: 'media-rose', bhm: 'Body · stability · control' },
-  { id: 'solid-booty', t: 'Solid Booty', d: 'Focused on glute muscles — correct technique, mindful movement, results. A popular class with a clear goal.', img: 'solid booty', media: 'media-sand', bhm: 'Body · strength · movement' },
-  { id: 'enduro', t: 'Enduro', d: 'Strength, conditioning, and natural movement patterns in one class. For those who want a more capable and resilient body long-term.', img: 'enduro', media: 'media-green', bhm: 'Body · endurance · resilience' },
+  { id: 'kruhac', t: 'Circuit Training', d: 'Eight to ten stations in a circuit — bodyweight, kettlebells, TRX. Your coach watches the whole time and corrects your form.', img: 'circuit training', media: 'media-green', bhm: 'Timed stations · small group' },
+  { id: 'silovy-trenink', t: 'Strength Training', d: 'A handful of compound lifts across several sets — squat, pull, push. Heavier weight comes once the technique is solid.', img: 'strength training', media: 'media-forest', bhm: 'Technique · gradual load' },
+  { id: 'hiit', t: 'HIIT', d: '30 seconds all-out, barely any rest, three rounds through. Cardio and strength in one, heart rate stays up the whole hour.', img: 'HIIT class', media: 'media-clay', bhm: 'High tempo · short intervals' },
+  { id: 'supermamky', page: '/supermamky/', t: 'Supermums', d: 'Circuit training for parents with kids — baby or toddler right there with you.', img: 'supermums', media: 'media-sand', bhm: 'Kids welcome' },
+  { id: 'vlastni-vaha', t: 'Bodyweight', d: 'Squats, push-ups, lunges, planks — fundamental movement patterns, no equipment. Every move has an easier and a harder version.', img: 'bodyweight', media: 'media-rose', bhm: 'No equipment · any level' },
+  { id: 'power-zone', t: 'Power Zone', d: 'Functional moves, circuit format and CrossFit elements in one class. Led by Jitka Štěpánková.', img: 'power zone', media: 'media-clay', bhm: 'Circuit · CrossFit' },
+  { id: 'zumba', t: 'Zumba', d: "An hour of dance to Latin rhythms — you'll pick up the steps on your first try, no dance background needed.", img: 'zumba', media: 'media-rose', bhm: 'Dance · no counting reps' },
+  { id: 'brisni-pekac', t: 'Core & Abs', d: "Core and deep stabilisation work — don't expect crunches. The foundation a pain-free back stands on.", img: 'core abs', media: 'media-rose', bhm: 'Core · no crunches' },
+  { id: 'solid-booty', t: 'Solid Booty', d: 'Focused glute work with a booty band and bodyweight. Technique comes first.', img: 'solid booty', media: 'media-sand', bhm: 'Glutes · precise form' },
+  { id: 'enduro', t: 'Enduro', d: 'Functional strength, conditioning intervals and natural movement in one class — built for the long haul, not one summer.', img: 'enduro', media: 'media-green', bhm: 'Strength for the long run' },
 ];
 
 // href = detail page; the whole box is clickable. No href = page not built yet.
@@ -55,20 +55,20 @@ export const individualServices: { t: string; d: string; href?: string }[] = [
 
 // href = detail page; the whole card is clickable. Kids detail pages are CS-only for now.
 export const kidsActivities: { t: string; d: string; img: string; media: string; href?: string }[] = [
-  { t: 'Circus School', d: 'For the youngest — basic movement skills through play.', img: 'circus school', media: 'media-sand', href: '/krouzky-pro-deti/#cirkusova-skolicka' },
+  { t: 'Circus School', d: 'For the youngest — a first step into movement: balance, coordination, and the confidence to try something new.', img: 'circus school', media: 'media-sand', href: '/krouzky-pro-deti/#cirkusova-skolicka' },
   { t: 'Gymnastics & Acrobatics basics', d: 'Gymnastics and acrobatics led by La Putyka acrobats.', img: 'acrobatics', media: 'media-clay', href: '/krouzky-pro-deti/#zaklady-gymnastiky' },
   { t: 'Hlavou ve vzduchu', d: 'Floor and aerial acrobatics and juggling.', img: 'kids clubs', media: 'media-green', href: '/krouzky-pro-deti/#akrobacie-zonglovani' },
-  { t: 'Discovery Room', d: 'For the youngest children up to age 5 — 6 movement stations where children explore the world through movement.', img: 'discovery room', media: 'media-rose', href: '/krouzky-pro-deti/#objevovarna' },
-  { t: 'Kids Zumba', d: 'Dance classes for children in Zumba style — fun, coordination, and movement through play. Led by Eliška Velázquez.', img: 'kids zumba', media: 'media-sand', href: '/krouzky-pro-deti/#detska-zumba' },
+  { t: 'Discovery Room', d: 'For kids up to age 5 — 6 movement stations where they figure out on their own what their body can do.', img: 'discovery room', media: 'media-rose', href: '/krouzky-pro-deti/#objevovarna' },
+  { t: 'Kids Zumba', d: 'Dance classes for children in Zumba style — coordination and movement, but mostly fun. Led by Eliška Velázquez.', img: 'kids zumba', media: 'media-sand', href: '/krouzky-pro-deti/#detska-zumba' },
   { t: 'Supermums', d: 'A group class for mums and dads with kids — circuit training adapted to the reality of parenthood. With your baby or toddler right beside you.', img: 'supermums', media: 'media-forest', href: '/supermamky/' },
 ];
 
 // Homepage "For kids & families" band — mirrors kidsBand in home.ts.
 export const kidsBand = [
   { t: 'Kids clubs', d: 'Gymnastics basics, floor and aerial acrobatics, and juggling — led by La Putyka acrobats.', href: '/krouzky-pro-deti/' },
-  { t: 'Circus School', d: 'For the youngest — basic movement skills through play.', href: '/krouzky-pro-deti/#cirkusova-skolicka' },
-  { t: 'Discovery Room', d: 'For the youngest children up to age 5 — 6 movement stations where children explore the world through movement.', href: '/krouzky-pro-deti/#objevovarna' },
-  { t: 'Kids Zumba', d: 'Dance classes for children in Zumba style — fun, coordination, and movement through play. Led by Eliška Velázquez.', href: '/krouzky-pro-deti/#detska-zumba' },
+  { t: 'Circus School', d: 'For the youngest — a first step into movement: balance, coordination, and the confidence to try something new.', href: '/krouzky-pro-deti/#cirkusova-skolicka' },
+  { t: 'Discovery Room', d: 'For kids up to age 5 — 6 movement stations where they figure out on their own what their body can do.', href: '/krouzky-pro-deti/#objevovarna' },
+  { t: 'Kids Zumba', d: 'Dance classes for children in Zumba style — coordination and movement, but mostly fun. Led by Eliška Velázquez.', href: '/krouzky-pro-deti/#detska-zumba' },
   { t: 'Supermums', d: 'Training for mums — adapted to the reality of parenthood. With your baby or toddler right beside you.', href: '/supermamky/' },
 ];
 
@@ -80,9 +80,9 @@ export const firmyServices = [
 
 export const lpHighlights = [
   'Coached training 2× per week in a small group',
-  'Initial and final measurements — visible progress, not just a feeling',
+  'Measurements at the start and the end — you see it in numbers, not just how you feel',
   'Closed group with a simple habit journal',
-  'Gradual improvement in strength, fitness and routine — no miracles',
+  'Eight weeks to make movement part of your week, not the exception',
 ];
 
 export const bodyPurpose = [

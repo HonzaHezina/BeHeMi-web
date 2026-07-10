@@ -17,7 +17,7 @@ export const approach: { n: string; t: string; d: string; href?: string }[] = [
   { n: '04', t: 'Bolí mě záda nebo jsem ztuhlý/á', d: 'Pomůžeme ti rozhýbat tělo, zlepšit techniku a postupně vybudovat sílu pro běžný život.' },
   { n: '05', t: 'Chci mít víc energie a lepší režim', d: 'Pravidelný pohyb, jednoduché návyky a tréninky, které se dají dlouhodobě vydržet.' },
   { n: '06', t: 'Chci cvičit i jako máma', d: 'Supermamky jsou tréninky, kam můžeš přijít i s dítětem. Cvičení se přizpůsobí realitě rodičovství.', href: '/supermamky/' },
-  { n: '07', t: 'Hledám pohyb pro děti', d: 'Cirkusová školička, akrobacie a pohybové kroužky pod vedením zkušených lektorů. Pohyb hravou formou.', href: '/krouzky-pro-deti/' },
+  { n: '07', t: 'Hledám pohyb pro děti', d: 'Cirkusová školička, akrobacie a pohybové kroužky pod vedením zkušených lektorů.', href: '/krouzky-pro-deti/' },
   { n: '08', t: 'Chci pohybový program pro tým', d: 'FitTeams — vedené kruhové tréninky navržené přímo pro firemní skupiny. Bez vlastní tělocvičny.', href: '/firmy/' },
 ];
 
@@ -39,16 +39,16 @@ export const paths: { tag: string; t: string; d: string; href?: string }[] = [
 // mutace (home.en.ts), ať odkazy fungují napříč jazyky.
 // page = lekce má vlastní stránku; zmínky pak vedou na ni, ne na kotvu.
 export const classes: { id: string; t: string; d: string; img: string; media: string; bhm: string; page?: string }[] = [
-  { id: 'kruhac', t: 'Kruhové tréninky', d: 'Funkční trénink v kruhu: střídáš stanoviště, cvičíš s vlastní vahou nebo pomůckami, trénink vede trenér. Vhodné pro všechny úrovně.', img: 'kruhový trénink', media: 'media-green', bhm: 'Tělo · dokončování · komunita' },
-  { id: 'silovy-trenink', t: 'Silové tréninky', d: 'Práce s vlastní vahou a jednoduchým nářadím pod vedením trenéra. Zaměřujeme se na techniku a postupné budování síly.', img: 'silový trénink', media: 'media-forest', bhm: 'Tělo · síla · trpělivost' },
-  { id: 'hiit', t: 'HIIT', d: 'Vysoce intenzivní intervalový trénink, který kombinuje kardio a posilování. Krátké intervaly, maximální efekt — pro ty, kteří chtějí výsledky bez ztráty času.', img: 'HIIT lekce', media: 'media-clay', bhm: 'Tělo · energie · odolnost' },
-  { id: 'supermamky', page: '/supermamky/', t: 'Supermamky', d: 'Tréninky pro maminky s dětmi — cvičení přizpůsobené realitě rodičovství. S miminkem nebo batoletem u tebe.', img: 'supermamky', media: 'media-sand', bhm: 'Tělo · rodina · komunita' },
-  { id: 'vlastni-vaha', t: 'Vlastní váha', d: 'Cvičení bez nářadí: ovládneš základní pohybové vzory, zlepšíš koordinaci a sílu. Vhodné i jako první krok pro úplné začátečníky.', img: 'vlastní váha', media: 'media-rose', bhm: 'Tělo · kontrola · pozornost' },
-  { id: 'power-zone', t: 'Power Zone', d: 'Funkční trénink kombinující kruháče a prvky crossfitu. Intenzivní, efektivní, vedený trenérem — pro výsledky bez zbytečných řečí.', img: 'power zone', media: 'media-clay', bhm: 'Tělo · síla · výkon' },
-  { id: 'zumba', t: 'Zumba', d: 'Taneční fitness v rytmu latinskoamerické hudby — pohyb jako oslava, ne dřina. Vhodné pro všechny, kteří chtějí cvičit a přitom se bavit.', img: 'zumba', media: 'media-rose', bhm: 'Tělo · rytmus · radost' },
-  { id: 'brisni-pekac', t: 'Břišní pekáč', d: 'Trénink hlubokého stabilizačního systému a core. Žádné zkracovačky — učíš se ovládat tělo zevnitř. Vhodné pro všechny úrovně.', img: 'břišní pekáč', media: 'media-rose', bhm: 'Tělo · stabilita · kontrola' },
-  { id: 'solid-booty', t: 'Solid Booty', d: 'Zaměřeno na hýžďové svaly — správná technika, vědomý pohyb, výsledky. Oblíbená lekce s jasným cílem.', img: 'solid booty', media: 'media-sand', bhm: 'Tělo · síla · pohyb' },
-  { id: 'enduro', t: 'Enduro', d: 'Síla, kondice a přirozené pohyby v jedné lekci. Pro ty, kdo chtějí výkonnější a odolnější tělo na dlouho.', img: 'enduro', media: 'media-green', bhm: 'Tělo · výdrž · odolnost' },
+  { id: 'kruhac', t: 'Kruhové tréninky', d: 'Osm až deset stanovišť v kruhu — vlastní váha, kettlebell, TRX. Trenér tě vidí celou dobu a opraví techniku.', img: 'kruhový trénink', media: 'media-green', bhm: 'Stanoviště na čas · malá skupina' },
+  { id: 'silovy-trenink', t: 'Silové tréninky', d: 'Pár komplexních cviků ve více sériích — dřep, tah, tlak. Těžší váha přijde, až sedí technika.', img: 'silový trénink', media: 'media-forest', bhm: 'Technika · postupná zátěž' },
+  { id: 'hiit', t: 'HIIT', d: '30 vteřin naplno, minimum pauzy, tři kola dokola. Kardio a posilování v jednom, tep nahoře celou hodinu.', img: 'HIIT lekce', media: 'media-clay', bhm: 'Vysoké tempo · krátké intervaly' },
+  { id: 'supermamky', page: '/supermamky/', t: 'Supermamky', d: 'Kruhový trénink pro rodiče s dětmi — s miminkem nebo batoletem přímo u tebe.', img: 'supermamky', media: 'media-sand', bhm: 'S dítětem vedle' },
+  { id: 'vlastni-vaha', t: 'Vlastní váha', d: 'Dřepy, kliky, výpady, plank — základní pohybové vzory bez nářadí. Každý cvik má lehčí i těžší variantu.', img: 'vlastní váha', media: 'media-rose', bhm: 'Bez nářadí · pro každou úroveň' },
+  { id: 'power-zone', t: 'Power Zone', d: 'Funkční cviky, kruhový formát a prvky crossfitu v jedné lekci. Vede Jitka Štěpánková.', img: 'power zone', media: 'media-clay', bhm: 'Kruháč · crossfit' },
+  { id: 'zumba', t: 'Zumba', d: 'Hodina tance na latinskoamerickou hudbu — kroky se chytneš i napoprvé, taneční průprava netřeba.', img: 'zumba', media: 'media-rose', bhm: 'Tanec · bez počítání opakování' },
+  { id: 'brisni-pekac', t: 'Břišní pekáč', d: 'Core a hluboký stabilizační systém — zkracovačky nečekej. Základ, na kterém stojí záda bez bolesti.', img: 'břišní pekáč', media: 'media-rose', bhm: 'Core · žádné zkracovačky' },
+  { id: 'solid-booty', t: 'Solid Booty', d: 'Cílená práce na hýžďové svaly s booty bandem a vlastní vahou. Technika na prvním místě.', img: 'solid booty', media: 'media-sand', bhm: 'Hýždě · přesná technika' },
+  { id: 'enduro', t: 'Enduro', d: 'Funkční síla, kondiční intervaly a přirozené pohyby v jedné lekci — na odolnost, ne na jedno léto.', img: 'enduro', media: 'media-green', bhm: 'Síla na dlouhou trať' },
 ];
 
 // href = detail stránky; box je klikatelný celý. Bez href zatím stránka není
@@ -62,11 +62,11 @@ export const individualServices: { t: string; d: string; href?: string }[] = [
 // href = detail; karta je klikatelná celá. Supermamky patří sem — je to
 // skupinová lekce maminek (a tátů) s dětmi, ne jen poznámka pod čarou.
 export const kidsActivities: { t: string; d: string; img: string; media: string; href?: string }[] = [
-  { t: 'Cirkusová školička', d: 'Pro nejmenší — základní pohybové dovednosti hravou formou.', img: 'cirkusová školička', media: 'media-sand', href: '/krouzky-pro-deti/#cirkusova-skolicka' },
+  { t: 'Cirkusová školička', d: 'Pro nejmenší — první krok k pohybu: rovnováha, koordinace a odvaha zkusit něco nového.', img: 'cirkusová školička', media: 'media-sand', href: '/krouzky-pro-deti/#cirkusova-skolicka' },
   { t: 'Základy cirkusového tréninku', d: 'Gymnastika a akrobacie pod vedením akrobatů La Putyka.', img: 'akrobacie', media: 'media-clay', href: '/krouzky-pro-deti/#zaklady-gymnastiky' },
   { t: 'Hlavou ve vzduchu', d: 'Pozemní i závěsná akrobacie a žonglování.', img: 'kroužky pro děti', media: 'media-green', href: '/krouzky-pro-deti/#akrobacie-zonglovani' },
-  { t: 'Objevovárna', d: 'Pro nejmenší děti do 5 let — 6 pohybových stanovišť, kde děti prozkoumávají svět pohybem hravou formou.', img: 'objevovárna', media: 'media-rose', href: '/krouzky-pro-deti/#objevovarna' },
-  { t: 'Dětská Zumba', d: 'Taneční lekce pro děti v rytmu Zumby — zábava, koordinace a pohyb hravou formou. Vede Eliška Velázquez.', img: 'dětská zumba', media: 'media-sand', href: '/krouzky-pro-deti/#detska-zumba' },
+  { t: 'Objevovárna', d: 'Pro děti do 5 let — 6 pohybových stanovišť, na kterých si samy zkoušejí, co jejich tělo zvládne.', img: 'objevovárna', media: 'media-rose', href: '/krouzky-pro-deti/#objevovarna' },
+  { t: 'Dětská Zumba', d: 'Taneční lekce pro děti v rytmu Zumby — koordinace a pohyb, ale hlavně zábava. Vede Eliška Velázquez.', img: 'dětská zumba', media: 'media-sand', href: '/krouzky-pro-deti/#detska-zumba' },
   { t: 'Supermamky', d: 'Skupinová lekce pro maminky a tatínky s dětmi — kruhový trénink přizpůsobený realitě rodičovství. S miminkem nebo batoletem u tebe.', img: 'supermamky', media: 'media-forest', href: '/supermamky/' },
 ];
 
@@ -77,9 +77,9 @@ export const kidsActivities: { t: string; d: string; img: string; media: string;
 // Příměstský tábor se už nedělá — do nabídky nevracet (rozhodnuto 7/2026).
 export const kidsBand = [
   { t: 'Kroužky pro děti', d: 'Základy gymnastiky, pozemní i závěsná akrobacie a žonglování — pod vedením akrobatů La Putyka.', href: '/krouzky-pro-deti/' },
-  { t: 'Cirkusová školička', d: 'Pro nejmenší — základní pohybové dovednosti hravou formou.', href: '/krouzky-pro-deti/#cirkusova-skolicka' },
-  { t: 'Objevovárna', d: 'Pro nejmenší děti do 5 let — 6 pohybových stanovišť, kde děti prozkoumávají svět pohybem.', href: '/krouzky-pro-deti/#objevovarna' },
-  { t: 'Dětská Zumba', d: 'Taneční lekce pro děti v rytmu Zumby — zábava, koordinace a pohyb hravou formou. Vede Eliška Velázquez.', href: '/krouzky-pro-deti/#detska-zumba' },
+  { t: 'Cirkusová školička', d: 'Pro nejmenší — první krok k pohybu: rovnováha, koordinace a odvaha zkusit něco nového.', href: '/krouzky-pro-deti/#cirkusova-skolicka' },
+  { t: 'Objevovárna', d: 'Pro děti do 5 let — 6 pohybových stanovišť, na kterých si samy zkoušejí, co jejich tělo zvládne.', href: '/krouzky-pro-deti/#objevovarna' },
+  { t: 'Dětská Zumba', d: 'Taneční lekce pro děti v rytmu Zumby — koordinace a pohyb, ale hlavně zábava. Vede Eliška Velázquez.', href: '/krouzky-pro-deti/#detska-zumba' },
   { t: 'Supermamky', d: 'Tréninky pro maminky — cvičení přizpůsobené realitě rodičovství. S miminkem nebo batoletem u tebe.', href: '/supermamky/' },
 ];
 
@@ -91,9 +91,9 @@ export const firmyServices: { t: string; d: string; href?: string }[] = [
 
 export const lpHighlights = [
   '2× týdně vedený trénink v malé skupině',
-  'Vstupní a závěrečné měření — viditelný posun, ne jen pocit',
+  'Vstupní a závěrečné měření — vidíš to v číslech, ne jen podle pocitu',
   'Uzavřená skupina, jednoduchý deník návyků',
-  'Postupné zlepšení síly, kondice a režimu — žádné zázraky',
+  'Osm týdnů na to, aby se pohyb stal součástí týdne, ne výjimkou',
 ];
 
 export const bodyPurpose = [
