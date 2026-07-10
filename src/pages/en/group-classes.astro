@@ -5,21 +5,7 @@ import Footer from '../../components/Footer.astro';
 import MediaFrame from '../../components/MediaFrame.astro';
 import { Image } from 'astro:assets';
 import { classes } from '../../data/home.en';
-
-import imgKruhac from '../../assets/lekce/kruhac-01.jpg';
-import imgSilovy from '../../assets/lekce/silovy-trenink-09.jpg';
-import imgSupermamky from '../../assets/supermamky/supermamky-01.jpg';
-import imgVlastniVaha from '../../assets/lekce/vlastni-vaha-01.jpg';
-import imgPowerZone from '../../assets/lekce/silovy-trenink-08.jpg';
-
-import type { ImageMetadata } from 'astro';
-const classPhotos: Record<string, { src: ImageMetadata; alt: string; pos?: string }> = {
-  kruhac:          { src: imgKruhac,     alt: 'Circuit training at BoHeMi — group working through stations' },
-  'silovy-trenink':{ src: imgSilovy,     alt: 'Strength training at BoHeMi — barbell squat under a coach’s eye' },
-  supermamky:      { src: imgSupermamky, alt: 'Supermums — a mum training with her child at BoHeMi' },
-  'vlastni-vaha':  { src: imgVlastniVaha, alt: 'Bodyweight training at BoHeMi' },
-  'power-zone':    { src: imgPowerZone,  alt: 'Power Zone at BoHeMi — functional strength training with a kettlebell', pos: 'object-[50%_30%]' },
-};
+import { photosEN as classPhotos } from '../../data/photos';
 ---
 <Layout
   title="Group classes — BoHeMi fitness Vinohrady"

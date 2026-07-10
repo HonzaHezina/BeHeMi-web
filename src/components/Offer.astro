@@ -1,7 +1,6 @@
 ---
-import { Image } from 'astro:assets';
 import Button from './Button.astro';
-import MediaFrame from './MediaFrame.astro';
+import ClassCard from './ClassCard.astro';
 import {
   classes as classesCS,
   individualServices as individualServicesCS,
@@ -12,22 +11,8 @@ import {
   individualServices as individualServicesEN,
   firmyServices as firmyServicesEN,
 } from '../data/home.en';
+import { photosCS, photosEN } from '../data/photos';
 import type { Lang } from '../i18n/ui';
-
-import imgKruhac from '../assets/lekce/kruhac-01.jpg';
-import imgSilovy from '../assets/lekce/silovy-trenink-09.jpg';
-import imgSupermamky from '../assets/supermamky/supermamky-01.jpg';
-import imgVlastniVaha from '../assets/lekce/vlastni-vaha-01.jpg';
-import imgPowerZone from '../assets/lekce/silovy-trenink-08.jpg';
-
-import type { ImageMetadata } from 'astro';
-const classPhotos: Record<string, { src: ImageMetadata; alt: string; pos?: string }> = {
-  kruhac:          { src: imgKruhac,      alt: 'Kruháč v sále BoHeMi — skupina cvičí na stanovištích' },
-  'silovy-trenink':{ src: imgSilovy,      alt: 'Silový trénink v BoHeMi — dřep s osou pod vedením trenéra' },
-  supermamky:      { src: imgSupermamky,  alt: 'Supermamky — máma cvičí s dítětem v sále BoHeMi' },
-  'vlastni-vaha':  { src: imgVlastniVaha, alt: 'Trénink s vlastní vahou v sále BoHeMi' },
-  'power-zone':    { src: imgPowerZone,   alt: 'Power Zone v BoHeMi — funkční silový trénink s kettlebellem', pos: 'object-[50%_30%]' },
-};
 
 interface Props {
   lang?: Lang;
@@ -35,6 +20,7 @@ interface Props {
 const { lang = 'cs' } = Astro.props;
 
 const classes = lang === 'en' ? classesEN : classesCS;
+const photos = lang === 'en' ? photosEN : photosCS;
 const individualServices = lang === 'en' ? individualServicesEN : individualServicesCS;
 const firmyServices = lang === 'en' ? firmyServicesEN : firmyServicesCS;
 
@@ -78,25 +64,16 @@ const classHref = (c: (typeof classes)[number]) => c.page ?? `${scheduleHref}#${
     </div>
     <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {classes.slice(0, 6).map((c) => (
-        <a href={classHref(c)} class="block cursor-pointer overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-20px_rgba(33,31,26,0.24)]">
-          <MediaFrame media={c.media} rounded="rounded-none" class="h-40" alt={classPhotos[c.id]?.alt ?? `${lang === 'en' ? 'Class' : 'Lekce'} — ${c.img}`}>
-            {classPhotos[c.id] && (
-              <Image
-                src={classPhotos[c.id].src}
-                alt={classPhotos[c.id].alt}
-                class={`h-full w-full object-cover ${classPhotos[c.id].pos ?? 'object-center'}`}
-                widths={[480, 640]}
-                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                loading="lazy"
-              />
-            )}
-          </MediaFrame>
-          <div class="p-[22px]">
-            <h4 class="mb-2 text-[21px] font-extrabold tracking-[-0.02em]">{c.t}</h4>
-            <p class="text-[15.5px] leading-[1.5] text-ink-soft">{c.d}</p>
-            <div class="mt-3 text-[12.5px] font-bold tracking-[0.02em] text-brand">{c.bhm}</div>
-          </div>
-        </a>
+        <ClassCard
+          href={classHref(c)}
+          media={c.media}
+          photo={photos[c.id]}
+          fallbackAlt={`${lang === 'en' ? 'Class' : 'Lekce'} — ${c.img}`}
+          title={c.t}
+          description={c.d}
+          meta={c.bhm}
+          headingTag="h4"
+        />
       ))}
     </div>
   </div>

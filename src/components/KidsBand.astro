@@ -2,27 +2,19 @@
 // Plnoformátový pruh „Pro děti a rodiny" — vysoko na homepage (hned za
 // ApproachGrid). Děti = po homepage nejsilnější publikum (docs/redirect-map.md),
 // pruh dává rodičům cestu bez scrollování celou dospěláckou linií.
-import { Image } from 'astro:assets';
 import Button from './Button.astro';
-import MediaFrame from './MediaFrame.astro';
+import ClassCard from './ClassCard.astro';
 import { kidsBand as kidsBandCS } from '../data/home';
 import { kidsBand as kidsBandEN } from '../data/home.en';
+import { photosCS, photosEN } from '../data/photos';
 import type { Lang } from '../i18n/ui';
-
-import imgObjevovarna from '../assets/deti/objevovarna-01.jpg';
-import imgSupermamky from '../assets/supermamky/supermamky-01.jpg';
-
-import type { ImageMetadata } from 'astro';
-const kidsPhotos: Record<string, { src: ImageMetadata; alt: string }> = {
-  objevovarna: { src: imgObjevovarna, alt: 'Objevovárna — dítě na pohybové stanici v BoHeMi' },
-  supermamky:  { src: imgSupermamky,  alt: 'Supermamky — máma cvičí s dítětem v sále BoHeMi' },
-};
 
 interface Props {
   lang?: Lang;
 }
 const { lang = 'cs' } = Astro.props;
 const kidsBand = lang === 'en' ? kidsBandEN : kidsBandCS;
+const photos = lang === 'en' ? photosEN : photosCS;
 ---
 <section class="bg-sand">
   <div class="mx-auto max-w-[1220px] px-5 py-16 md:px-8 md:py-20">
@@ -37,24 +29,15 @@ const kidsBand = lang === 'en' ? kidsBandEN : kidsBandCS;
 
     <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {kidsBand.map((k) => (
-        <a href={k.href} class="block cursor-pointer overflow-hidden rounded-[18px] border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_20px_40px_-20px_rgba(33,31,26,0.24)]">
-          <MediaFrame media={k.media} rounded="rounded-none" class="h-40" alt={kidsPhotos[k.id]?.alt ?? k.t}>
-            {kidsPhotos[k.id] && (
-              <Image
-                src={kidsPhotos[k.id].src}
-                alt={kidsPhotos[k.id].alt}
-                class="h-full w-full object-cover"
-                widths={[480, 640]}
-                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                loading="lazy"
-              />
-            )}
-          </MediaFrame>
-          <div class="p-7">
-            <h3 class="mb-2 text-xl font-extrabold tracking-[-0.02em]">{k.t}</h3>
-            <p class="text-[15.5px] leading-[1.5] text-ink-soft">{k.d}</p>
-          </div>
-        </a>
+        <ClassCard
+          href={k.href}
+          media={k.media}
+          photo={photos[k.id]}
+          fallbackAlt={k.t}
+          title={k.t}
+          description={k.d}
+          bodyClass="p-7"
+        />
       ))}
     </div>
 

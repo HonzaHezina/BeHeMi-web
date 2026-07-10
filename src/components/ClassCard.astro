@@ -1,0 +1,53 @@
+---
+// Sdílená dlaždice pro lekce a dětské aktivity — celý box je <a>, MediaFrame
+// s reálnou fotkou (je-li v src/data/photos.ts) nebo placeholder rámečkem.
+// Použito na HP (Offer, KidsBand), rozcestníku i EN mutacích — jedna
+// komponenta, aby fotka přidaná v photos.ts naskočila všude najednou.
+import { Image } from 'astro:assets';
+import MediaFrame from './MediaFrame.astro';
+import type { Photo } from '../data/photos';
+
+interface Props {
+  href: string;
+  media: string;
+  photo?: Photo;
+  fallbackAlt: string;
+  title: string;
+  description: string;
+  meta?: string;
+  headingTag?: 'h2' | 'h3' | 'h4';
+  imgClass?: string;
+  bodyClass?: string;
+}
+const {
+  href,
+  media,
+  photo,
+  fallbackAlt,
+  title,
+  description,
+  meta,
+  headingTag: Heading = 'h3',
+  imgClass = 'h-40',
+  bodyClass = 'p-[22px]',
+} = Astro.props;
+---
+<a href={href} class="block cursor-pointer overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-20px_rgba(33,31,26,0.24)]">
+  <MediaFrame media={media} rounded="rounded-none" class={imgClass} alt={photo?.alt ?? fallbackAlt}>
+    {photo && (
+      <Image
+        src={photo.src}
+        alt={photo.alt}
+        class={`h-full w-full object-cover ${photo.pos ?? 'object-center'}`}
+        widths={[480, 640]}
+        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+        loading="lazy"
+      />
+    )}
+  </MediaFrame>
+  <div class={bodyClass}>
+    <Heading class="mb-2 text-[21px] font-extrabold tracking-[-0.02em]">{title}</Heading>
+    <p class="text-[15.5px] leading-[1.5] text-ink-soft">{description}</p>
+    {meta && <div class="mt-3 text-[12.5px] font-bold tracking-[0.02em] text-brand">{meta}</div>}
+  </div>
+</a>
