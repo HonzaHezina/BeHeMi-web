@@ -1,8 +1,3 @@
-export const marquee = [
-  'Circuit Training', 'Bodyweight', 'Functional Movement', 'Strength', 'Conditioning',
-  'Back Health', 'Mobility', 'Sleep', 'Routine', 'Endurance', 'Technique', 'Consistency',
-];
-
 export const triad = [
   { k: 'Body', cs: 'Tělo', dot: 'bg-accent', d: 'Movement, strength, technique and recovery. A body that serves you at work, in sport, and in everyday life — not just in the mirror.' },
   { k: 'Health', cs: 'Zdraví', dot: 'bg-ink', d: 'A routine you can sustain: sleep, food, water, movement and consistency. No extremes, no complicated theories.' },

@@ -3,7 +3,10 @@
 > ⚠️ **ARCHIV (5. 7. 2026)** — historický pracovní brief, přepis je dávno
 > aplikovaný. Neřiď se detaily: „Cesta" se dnes jmenuje **Program 8 týdnů**,
 > „Najdi se v tom" je přerámované na „Pro koho tu jsme", HP struktura se dál
-> vyvíjela (KidsBand, 6 karet lekcí, dedup). Aktuální stav = `/CLAUDE.md`.
+> vyvíjela (KidsBand, 6 karet lekcí, dedup). Sekce 2 (Marquee) a 5
+> ("Co znamená BoHeMi") už na homepage neexistují ve zmíněné podobě — Marquee
+> byl 7/2026 kompletně smazán (zpětná vazba: „jak povodňové zpravodajství") a
+> triáda je sloučená do `ProcTriad.astro`. Aktuální stav = `/CLAUDE.md`.
 
 Nová copy sekci po sekci. Tvůj civilní hlas, ne knižní. Pravidlo: drž skepsi
 (otestuj si to sám, žádné dogma), zabij wellness mluvu (energie, signály, tělo se

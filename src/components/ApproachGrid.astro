@@ -21,24 +21,24 @@ const approach = lang === 'en' ? approachEN : approachCS;
   <div class="relative mx-auto max-w-[1220px] px-5 py-20 md:px-8 md:py-24">
     <Eyebrow color="sage">{t(lang, 'approach_eyebrow')}</Eyebrow>
     <h2 class="mb-6 max-w-[26ch] text-[clamp(30px,4vw,48px)] font-extrabold leading-[1.03] tracking-[-0.03em]">
-      {lang === 'en' ? <>What people most often <span class="font-medium italic">work on here.</span></> : <>Vyber, co teď <span class="font-medium italic">potřebuješ.</span></>}
+      {lang === 'en' ? <>What people most often <span class="text-accent-text">work on here.</span></> : <>Vyber, co teď <span class="text-accent-text">potřebuješ.</span></>}
     </h2>
     <p class="mb-12 max-w-[60ch] text-[clamp(18px,2.2vw,24px)] font-normal leading-[1.4] text-cream-soft">
       {lang === 'en'
-        ? 'Training for different situations — starting out, fitness, back health, consistency, kids, mums, and companies.'
-        : 'Cvičení pro různé situace — začátek, kondici, záda, pravidelnost, děti, maminky i firmy.'}
+        ? 'Different situations, different starting points — beginners, people coming back, back pain, kids, mums, companies.'
+        : 'Různý bod startu, stejný cíl — začátečníci, návrat po pauze, bolavá záda, děti, maminky i firmy.'}
     </p>
 
     <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
       {approach.map((a) => a.href ? (
         <a href={a.href} class="block cursor-pointer rounded-[18px] border border-border-dark bg-cream/[0.04] px-7 py-8 transition-all duration-300 hover:-translate-y-1.5 hover:border-sage-soft hover:bg-cream/[0.07]">
-          <div class="mb-3.5 text-[30px] italic text-cream-muted" aria-hidden="true">{a.n}</div>
+          <div class="mb-3.5 text-[30px] text-cream-muted" aria-hidden="true">{a.n}</div>
           <h3 class="mb-2.5 text-xl font-extrabold tracking-[-0.02em] text-cream">{a.t}</h3>
           <p class="text-[15.5px] leading-[1.5] text-cream-soft">{a.d}</p>
         </a>
       ) : (
         <div class="rounded-[18px] border border-border-dark bg-cream/[0.04] px-7 py-8">
-          <div class="mb-3.5 text-[30px] italic text-cream-muted" aria-hidden="true">{a.n}</div>
+          <div class="mb-3.5 text-[30px] text-cream-muted" aria-hidden="true">{a.n}</div>
           <h3 class="mb-2.5 text-xl font-extrabold tracking-[-0.02em] text-cream">{a.t}</h3>
           <p class="text-[15.5px] leading-[1.5] text-cream-soft">{a.d}</p>
         </div>
@@ -47,8 +47,8 @@ const approach = lang === 'en' ? approachEN : approachCS;
 
     <p class="mt-12 max-w-[68ch] text-base leading-[1.6] text-cream-muted">
       {lang === 'en'
-        ? 'Does this sound familiar? Then BoHeMi is probably for you.'
-        : 'Zní ti tohle povědomě? Pak je BoHeMi pravděpodobně pro tebe.'}
+        ? "Pick what fits — the coach will help you with the rest."
+        : 'Vyber si to, co sedí nejvíc — se zbytkem ti pomůže trenér na místě.'}
     </p>
   </div>
 </section>

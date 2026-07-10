@@ -1,10 +1,6 @@
 // Obsah domovské stránky — vytaženo z Claude Design exportu
 // (renderVals() v "Bohemi Web.dc.html"). Zdroj pravdy pro texty.
 
-export const marquee = [
-  'Kruháče', 'Vlastní váha', 'Funkční pohyb', 'Síla', 'Kondice', 'Záda', 'Mobilita', 'Spánek', 'Režim', 'Výdrž', 'Technika', 'Pravidelnost',
-];
-
 export const triad = [
   // Triáda (krok 3): Body=červená, Health=neutrál (near-black), Mind=amber
   { k: 'Body', cs: 'Tělo', dot: 'bg-accent', d: 'Pohyb, síla, technika a regenerace. Tělo, které ti slouží v práci, sportu i běžném životě — ne jen v zrcadle.' },

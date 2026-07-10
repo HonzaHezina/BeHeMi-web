@@ -51,7 +51,7 @@ v `src/styles/global.css`; tady jsou klíčové z nich.
 |---|---|---|
 | `--color-bg` | `#f5efe6` | teplá off-white — hlavní pozadí (světlá zóna) |
 | `--color-surface` | `#fcf8f2` | karty, panely |
-| `--color-sand` | `#ede3d2` | pruhy (marquee), teplý band |
+| `--color-sand` | `#ede3d2` | teplý band, jemné pruhy |
 | `--color-mint` | `#f1e8db` | jemné teplé tint pozadí sekcí, hover |
 | `--color-ink-dark` | `#14110e` | teplá near-black — tmavé sekce (hero, manifest, footer) |
 | `--color-surface-dark` | `#1e1a15` | karty/panely na tmavém |
@@ -81,17 +81,20 @@ neonové zářivé barvy, grunge/distressed textury (to je hardcore-gym plakát,
 
 ## Typografie
 
-Google Fonts, **jedna rodina** (dle exportu). Akcenty se řeší vahou a kurzívou,
-ne druhým fontem — žádný serif.
+Google Fonts, **jedna rodina** (dle exportu). Akcenty se řeší **jen barvou**
+(`--color-accent-text` / `--color-accent`), ne druhým fontem, ne kurzívou.
 
 - **Vše:** `Hanken Grotesk` (400–800) — charakterní humanistický grotesk,
-  sportovní a čistý. Nadpisy 700/800, text 400/500, akcentová slova 500 *italic*.
+  sportovní a čistý. Nadpisy 700/800, text 400/500, akcentová slova stejná
+  váha jako okolní text, jen jinou barvou.
 - Scale (desktop): h1 ~clamp(44px,6.6vw,84px) / h2 ~clamp(30px,4vw,48px) /
   h3 ~1.45rem / body 1.0625–1.125rem / small 0.9rem. Line-height body ~1.55.
 
 **Zakázáno:** elegantní serify (Cormorant, Playfair, EB Garamond, Newsreader) —
-čtou se jako spa/svatba/ezoterika. Žádné script/handwriting fonty. Akcent =
-kurzíva/váha téhož grotesku.
+čtou se jako spa/svatba/ezoterika. Žádné script/handwriting fonty. **Žádná
+kurzíva** (rozhodnuto 7/2026, zpětná vazba copywriterky — mixování řezů fontu
+působilo návodně/old-school). Výjimka: kurzíva zůstává u skutečných citací
+(`<blockquote>` s citátem člověka) — tam je typograficky na místě.
 
 ## Spacing & layout
 
@@ -129,3 +132,5 @@ Decentní. Přechody 150–300 ms, jemné hover stavy. Respektuj
 - [ ] Responzivní na 375 / 768 / 1024 / 1440
 - [ ] `prefers-reduced-motion` respektováno
 - [ ] Žádná spa-pastel / serif / AI-gradient stopa
+- [ ] Žádná kurzíva (kromě skutečných citací) — akcent jen barvou
+- [ ] Copy nezní jako AI (žádné „ne X, ale Y", žádné vatové trojice, žádné „zní ti to povědomě?")

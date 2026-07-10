@@ -79,7 +79,7 @@ const faq: { q: string; a: string }[] = [
           <a href="/lekce-a-sluzby/" class="hover:text-ink">Lekce a služby</a> · Pro tebe · Vlajkový program
         </p>
         <h1 class="text-[clamp(40px,6.2vw,76px)] font-extrabold leading-[0.98] tracking-[-0.035em]">
-          Program <span class="font-medium italic text-accent-text">8 týdnů</span>
+          Program <span class="font-medium text-accent-text">8 týdnů</span>
         </h1>
         <p class="mt-6 max-w-[58ch] text-[clamp(18px,2.1vw,22px)] leading-[1.45] text-ink-warm">
           Osm týdnů, dva vedené tréninky týdně a jeden praktický blok. Uzavřená skupina
@@ -127,7 +127,7 @@ const faq: { q: string; a: string }[] = [
       <div class="grid gap-5 sm:grid-cols-2">
         {weeks.map((w) => (
           <div class="relative overflow-hidden rounded-2xl border border-border bg-surface p-7">
-            <span class="pointer-events-none absolute -right-1.5 -top-2.5 text-[64px] italic text-ink-ghost" aria-hidden="true">{w.n}</span>
+            <span class="pointer-events-none absolute -right-1.5 -top-2.5 text-[64px] text-ink-ghost" aria-hidden="true">{w.n}</span>
             <h3 class="relative mb-2 max-w-[85%] text-[21px] font-extrabold tracking-[-0.02em]">{w.t}</h3>
             <p class="relative text-[15.5px] leading-[1.5] text-ink-soft">{w.d}</p>
           </div>

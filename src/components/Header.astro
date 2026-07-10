@@ -54,7 +54,7 @@ const logoHref = lang === 'en' ? '/en/' : '/';
             >
               {navMenu.map((m) => (
                 <a href={m.href} class="flex items-start gap-3.5 rounded-xl p-3.5 transition-colors hover:bg-surface-hover">
-                  <span class="shrink-0 italic text-lg leading-tight text-accent-text">{m.num}</span>
+                  <span class="shrink-0 text-lg leading-tight text-accent-text">{m.num}</span>
                   <span>
                     <span class="block text-base font-bold tracking-tight text-ink">{m.label}</span>
                     <span class="mt-0.5 block text-[13.5px] text-ink-muted">{m.desc}</span>
@@ -114,7 +114,7 @@ const logoHref = lang === 'en' ? '/en/' : '/';
           </p>
           {navMenu.map((m) => (
             <a href={m.href} class="flex items-center gap-2.5 rounded-xl px-4 py-2.5 text-[15px] text-ink-soft hover:bg-surface-hover">
-              <span class="shrink-0 italic text-[13px] text-accent-text">{m.num}</span>
+              <span class="shrink-0 text-[13px] text-accent-text">{m.num}</span>
               <span>{m.label}</span>
             </a>
           ))}

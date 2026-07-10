@@ -51,6 +51,12 @@ luxusní wellness. Tělo jako cesta k síle, zdraví a klidu.
    nevymýšlet. **Fráze použité na `/program-8-tydnu/` se NESMÍ opakovat na
    HP** — HP smí z poolu nést jen slogan „Neber nic jako svaté…" (zatím
    nenasazen). Stav nasazení frází je vedený v `docs/fraze-pool.md`.
+   **Nepiš jako AI (zpětná vazba copywriterky, 7/2026):** vyhýbej se vzorci
+   „ne X, ale Y", trojicím podstatných jmen na sílu (síla/kondice/pohyb),
+   frázím „zní ti to povědomě?" a obecně větám, které znějí spíš jako
+   marketingová šablona než jako člověk. Piš kratší věty, konkrétní detaily
+   místo obecných tvrzení. Při pochybnosti o textu na klíčové stránce
+   navrhni a nech zkontrolovat copywriterkou, nerozhoduj to sám za Honzu.
 
 ## Anti-cíle (čeho se vědomě vyvarovat)
 
@@ -214,9 +220,13 @@ Kontrola po změnách odkazů: `npm run build && node scripts/check-links.mjs`
 
 Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web nerozejde:
 
-- **Font:** jediná rodina **Hanken Grotesk** (400–800). **Žádný serif** — akcentová
-  slova/eyebrow řešíme kurzívou + vahou téhož grotesku. (Export měl Newsreader;
-  Honza ho zamítl. MASTER.md serify zakazuje.)
+- **Font:** jediná rodina **Hanken Grotesk** (400–800). **Žádný serif** (Export měl
+  Newsreader; Honza ho zamítl. MASTER.md serify zakazuje.) **Žádná kurzíva**
+  (rozhodnuto 7/2026 podle zpětné vazby copywriterky — mixování řezů fontu
+  působilo návodně/old-school). Akcentová slova/eyebrow se odlišují **jen
+  barvou** (`text-accent-text` apod.), ne kurzívou ani odlišnou vahou fontu.
+  Výjimka: kurzíva zůstává u **skutečných citací** (blockquote na `/proc-bohemi/`,
+  `/en/why-bohemi/`, `/program-8-tydnu/`) — tam je typograficky na místě.
 - **Paleta = WARM-DARK (varianta B), black/white/red.** Zdroj pravdy je logo +
   plakáty, ne starý teplý export. Černá je **kotva, ne dominanta** — většina
   obsahu na teplém světlém pozadí (`bg #f5efe6`), tmavé kotvy (hero, manifest,
@@ -261,6 +271,17 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   „Ty. Tvoje děti. Tvoje firma.", karta 01 štítek „Dospělí". Osobní identifikaci
   dělá vedlejší sekce „Co u nás lidé nejčastěji řeší" (8 situací). **Nepřidávat
   další karty** — tři vstupy zrcadlí strukturu rozcestníku.
+- **Homepage zjednodušena (7/2026, dle zpětné vazby copywriterky — „hodně
+  zahuštěné, spousta duplicit"):** odstraněn `Marquee.astro` (scrollující pruh
+  slov, působil jako teleshopping — smazán i z dat `home.ts`/`home.en.ts` a
+  z `ui.ts`). Smazána duplicitní inline sekce „Jak se u nás cvičí" v
+  `index.astro` (dublovala `ApproachGrid` + Hero + Audiences). `ProcTeaser.astro`
+  + `TriadVenn.astro` sloučené do jedné komponenty **`ProcTriad.astro`**
+  (mint karta s textem „Proč BoHeMi" + venn diagram Body/Health/Mind vpravo,
+  bez samostatného odstavce popisu ke každé z trojice — ten zůstává na
+  `/proc-bohemi/`). HP teď jede: Hero → ApproachGrid → KidsBand → Offer →
+  LifePracticeFeature → ProcTriad → Audiences → Trainers → PricingTeaser.
+  Nevracet Marquee ani starou dvojici Proc/Triad zpět.
 - **Program 8 týdnů (7/2026):** jediný hotový program (Měsíční program, Osobní
   restart, Chlapi 40+ a cykly NEJSOU hotové → mřížka „Lekce a programy" stažena
   z HP). Detail `/program-8-tydnu/`: název **VŽDY „Program 8 týdnů"** (nikdy

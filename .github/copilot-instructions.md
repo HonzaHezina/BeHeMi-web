@@ -27,6 +27,9 @@ Ne spa, ne ezoterika, ne luxusní wellness, ne „sekta".
    „signály těla", „holistické", „samoregulace", „duše", „harmonie",
    „transformace", „vědomí". Fráze jen z `docs/fraze-pool.md` — fráze použité na
    `/program-8-tydnu/` se nesmí opakovat na homepage (stav → fraze-pool.md).
+   **Nepiš jako AI** (7/2026, zpětná vazba copywriterky): žádné „ne X, ale Y",
+   žádné vatové trojice podstatných jmen, žádné „zní ti to povědomě?". Kratší
+   věty, konkrétní detaily. U klíčových stránek nech zkontrolovat copywriterkou.
 
 ## Anti-cíle
 Žádná spa-pastel paleta (růžová/šalvějová/zlatá), žádné elegantní serify, žádné
@@ -46,6 +49,10 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
 - **Lokalita ≠ značka:** hero H1/tagline bez „Vinohrady" (BoHeMi = myšlenka,
   časem víc míst); lokalita jen v hero badge, SEO titles a kontaktech, dokud
   je jedno studio.
+- **Homepage zjednodušena (7/2026):** `Marquee.astro` (scrollující pruh slov)
+  smazán — nevracet. `ProcTeaser.astro` + `TriadVenn.astro` sloučené do
+  `ProcTriad.astro`. HP sekce: Hero → ApproachGrid → KidsBand → Offer →
+  LifePracticeFeature → ProcTriad → Audiences → Trainers → PricingTeaser.
 - **Navigace = tři vrstvy** (HP ochutnávka → rozcestník → detail): každý klik
   vede na **nejkonkrétnější existující stránku**. Služba → vlastní stránka; typ
   lekce → `/skupinove-lekce/#kotva` (typy lekcí nemají vlastní stránky); dětská
@@ -73,7 +80,8 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   bez hoveru, ať nevypadá klikací. Druhý odkaz uvnitř klikacího boxu (např.
   „Rezervovat →") = overlay `<a>` `absolute inset-0` + `aria-label`, druhý
   odkaz `relative` nad ním (vnořené `<a>` jsou nevalidní).
-- **Font:** jen **Hanken Grotesk** (bez serifu) — akcenty kurzívou + vahou.
+- **Font:** jen **Hanken Grotesk** (bez serifu) — akcenty **jen barvou**, žádná
+  kurzíva (zrušena 7/2026, mixování řezů fontu; výjimka: skutečné citace).
 - **Paleta = WARM-DARK (black/white/red).** Černá je kotva, ne dominanta: obsah na
   teplém světlém `bg #f5efe6`, tmavé kotvy na `ink-dark #14110e` (ne `#000`).
   `brand #1c1812` = struktura/near-black (nadpisy, tlačítka, badge — žádné velké

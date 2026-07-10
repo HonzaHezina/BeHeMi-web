@@ -59,7 +59,7 @@ export const ui = {
     hero_badge: 'Fitness studio na Vinohradech',
     hero_h1: 'Vedené tréninky, kruháče\na vlastní váha',
     hero_h1_accent: 'pro tělo, zdraví i hlavu.',
-    hero_body: 'BoHeMi je fitness studio zaměřené na vedené lekce, kruhové tréninky a funkční pohyb. Nejsme anonymní řetězec ani strojová posilovna — přijdeš na lekci, trenér tě vede, opraví techniku a pomůže ti postupně zlepšit sílu, kondici i pohyb.',
+    hero_body: 'Fitness studio na Vinohradech se skupinovými lekcemi a funkčním pohybem. Žádný anonymní řetězec ani samoobsluha u strojů — na lekci tě vede trenér a opravuje techniku.',
     hero_cta_primary: 'Zkus první lekci →',
     hero_cta_secondary: 'Podívat se na lekce',
     hero_social_proof: 'Malé skupiny —\ntrenér ví, jak na tebe.',
@@ -68,7 +68,6 @@ export const ui = {
     hero_float_3: '● Vlastní váha a pomůcky',
     hero_img_alt: 'Trénink ve funkčním sále BoHeMi',
     hero_kids_link: 'Hledáš něco pro děti? →',
-    // Marquee (long string — just re-export from data)
     // ApproachGrid
     approach_eyebrow: 'Začínáš? Vracíš se? Hledáš komunitu?',
     approach_h2_a: 'Co u nás lidé nejčastěji',
@@ -88,15 +87,6 @@ export const ui = {
     lp_body_1: 'Osm týdnů s malou skupinou, vedený trenérem. Každý týden dvě pohybové lekce a jeden praktický blok.',
     lp_body_2: 'Vstupní i závěrečné měření — aby sis mohl/a porovnat, kde jsi začínal/a a kde jsi teď.',
     lp_cta: 'Přijít na Program 8 týdnů →',
-    // ProcTeaser
-    proc_eyebrow: 'Proč BoHeMi',
-    proc_h2: 'Tělo jako nástroj pro život.',
-    proc_body: 'BoHeMi nejde jen o svalstvo ani o kilogramy — jde o pravidelný pohyb jako základ pro lepší soustředění, stabilitu, výdrž a schopnost věci dotahovat.',
-    proc_cta: 'Proč to tak děláme →',
-    // TriadVenn
-    triad_h2_a: 'Pohyb, zdraví',
-    triad_h2_b: 'a mysl.',
-    triad_body: 'BoHeMi = Body · Health · Mind. Tři oblasti, které se prolínají — a každou lekci pracuješ na všech třech, i když jdeš jen na kruháč.',
     // Trainers
     trainers_eyebrow: 'Lidé, které znáš jménem',
     trainers_h2: 'Naši trenéři',
@@ -109,8 +99,8 @@ export const ui = {
     ht_badge: 'Proč to děláme',
     ht_h2_a: 'Tělo není cíl.',
     ht_h2_b: 'Je to základ pro život.',
-    ht_body_1: 'Pohyb změnil naše životy ne tím, že jsme zhubli nebo přibrali svalovou hmotu — ale tím, že jsme se naučili pravidelně se o sebe starat a vracet se k tomu i po přestávkách.',
-    ht_body_2: 'Každá lekce BoHeMi je jedno zatrhnutí na cestě k životu, o kterém říkáš "žiju, jak chci".',
+    ht_body_1: 'Pohyb nás nezměnil tím, že bychom zhubli nebo nabrali svaly. Změnil to, jak se o sebe staráme — a že se k tomu vracíme i po pauze.',
+    ht_body_2: 'Každá lekce v BoHeMi je jeden krok k životu, který ti sedí.',
     ht_tracker_label: 'Jak to vypadá v praxi',
     // Common
     reserve: 'Rezervovat',
@@ -145,7 +135,7 @@ export const ui = {
     hero_badge: 'Fitness studio in Vinohrady, Prague',
     hero_h1: 'Coached workouts, circuits\nand bodyweight training',
     hero_h1_accent: 'for body, health and mind.',
-    hero_body: "BoHeMi is a fitness studio focused on coached group classes, circuit training, and functional movement. We're not an anonymous gym chain — you come to class, the coach leads you, corrects your form, and helps you gradually improve strength, fitness, and movement.",
+    hero_body: "A fitness studio in Vinohrady with group classes and functional movement. No anonymous gym chain, no self-service machines — the coach leads the class and corrects your form.",
     hero_cta_primary: 'Try your first class →',
     hero_cta_secondary: 'See the classes',
     hero_social_proof: 'Small groups —\nyour coach knows your name.',
@@ -173,15 +163,6 @@ export const ui = {
     lp_body_1: 'Eight weeks with a small group, led by a coach. Each week: two movement sessions and one practical workshop.',
     lp_body_2: 'Measurements at the start and end — so you can compare where you started and where you are now.',
     lp_cta: 'Join the 8-Week Program →',
-    // ProcTeaser
-    proc_eyebrow: 'Why BoHeMi',
-    proc_h2: 'The body as a tool for life.',
-    proc_body: "BoHeMi isn't just about muscle or weight — it's about regular movement as the foundation for better focus, stability, endurance, and the ability to follow through.",
-    proc_cta: 'Why we do it this way →',
-    // TriadVenn
-    triad_h2_a: 'Movement, health',
-    triad_h2_b: 'and mind.',
-    triad_body: 'BoHeMi = Body · Health · Mind. Three areas that overlap — and every class works on all three, even if you just came for circuits.',
     // Trainers
     trainers_eyebrow: 'People you know by name',
     trainers_h2: 'Our coaches',
@@ -194,8 +175,8 @@ export const ui = {
     ht_badge: 'Why we do this',
     ht_h2_a: 'The body is not the goal.',
     ht_h2_b: "It's the foundation for life.",
-    ht_body_1: "Movement changed our lives not because we lost weight or gained muscle — but because we learned to take care of ourselves regularly and come back to it even after breaks.",
-    ht_body_2: 'Every BoHeMi class is one check on the path to the life you want to live.',
+    ht_body_1: "Movement didn't change us by making us lose weight or build muscle. It changed how we take care of ourselves — and that we come back to it after a break.",
+    ht_body_2: 'Every class at BoHeMi is one step toward a life that actually fits you.',
     ht_tracker_label: 'What it looks like in practice',
     // Common
     reserve: 'Book',

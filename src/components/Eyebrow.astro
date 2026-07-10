@@ -1,6 +1,6 @@
 ---
 // Akcentový "eyebrow" nadpisek nad sekcí.
-// Bez serifu — odlišení vahou + kurzívou (rozhodnutí: žádné serify).
+// Bez serifu — odlišení jen barvou (rozhodnutí 7/2026: žádná kurzíva).
 interface Props {
   color?: 'accent' | 'faint' | 'brand-tint' | 'sage';
   class?: string;
@@ -13,6 +13,6 @@ const colors: Record<string, string> = {
   sage: 'text-sage-soft', // pro tmavé pozadí
 };
 ---
-<p class={`font-medium italic text-[23px] mb-2.5 ${colors[color]} ${extra}`}>
+<p class={`font-medium text-[23px] mb-2.5 ${colors[color]} ${extra}`}>
   <slot />
 </p>
