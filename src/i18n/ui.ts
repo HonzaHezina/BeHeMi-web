@@ -72,14 +72,6 @@ export const ui = {
     approach_eyebrow: 'Začínáš? Vracíš se? Hledáš komunitu?',
     approach_h2_a: 'Co u nás lidé nejčastěji',
     approach_h2_b: 'řeší.',
-    approach_body: 'Každý přichází s jinými cílem — ale vždycky jde o to, aby pohyb byl pravidelný, trenér znal tvoje jméno a ty viděl/a výsledky.',
-    approach_footer: 'Nic ti na tomhle webu neprodáme — jen ukážeme cestu.',
-    // Audiences
-    audiences_eyebrow: 'Pro koho tu jsme',
-    audiences_h2_a: 'BoHeMi není',
-    audiences_h2_b: 'jen posilovna.',
-    audiences_body: 'Máme programy pro jednotlivce, rodiny i firmy — vždy s trenérem, v malé skupině, kde každý ví, jak se jmenuješ.',
-    audiences_cta: 'Co nabízíme →',
     // LifePracticeFeature
     lp_eyebrow: '8 týdnů · malá skupina · vedený program',
     lp_h2_a: 'Program 8 týdnů:',
@@ -148,14 +140,6 @@ export const ui = {
     approach_eyebrow: 'Starting out? Coming back? Looking for community?',
     approach_h2_a: "What people most often",
     approach_h2_b: 'work on here.',
-    approach_body: 'Everyone arrives with different goals — but it always comes down to making movement regular, having a coach who knows your name, and seeing real results.',
-    approach_footer: "We won't sell you anything on this site — we'll just show you the way.",
-    // Audiences
-    audiences_eyebrow: "Who we're here for",
-    audiences_h2_a: 'BoHeMi is more than',
-    audiences_h2_b: 'just a gym.',
-    audiences_body: 'We have programs for individuals, families and companies — always with a coach, in a small group where everyone knows your name.',
-    audiences_cta: 'What we offer →',
     // LifePracticeFeature
     lp_eyebrow: '8 weeks · small group · coached program',
     lp_h2_a: '8-Week Program:',

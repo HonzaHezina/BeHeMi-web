@@ -173,13 +173,12 @@ stejné slugy, jen cestu `/en/group-classes/#…`):**
 - **Zmínky Programu 8 týdnů vedou na `/program-8-tydnu/`** (footer, rozcestník,
   Proč BoHeMi, HP CTA „Jak program funguje →"). HP sekce s kotvou `#program`
   zůstává jen jako ochutnávka — kotvu neměnit.
-- **`audiences[].anchor` musí být absolutní cesta**, nikdy samotný `#hash`.
-  Komponenta `Audiences.astro` se renderuje na homepage — lokální hash jako
-  `#pro-firmy` na homepage neexistuje a odkaz nikam nevede. Správně:
-  `/firmy/` (dedikovaná stránka), `/lekce-a-sluzby/#pro-tebe` (sekce rozcestníku),
-  `/krouzky-pro-deti/` (stránka). **EN mutace:** bez EN stránek pro firmy/treneri/
-  osobni-treninky → anchor jde na `/en/classes-and-services/#sekce` (nejkonkrétnější
-  dostupný EN cíl).
+- **`Audiences.astro` smazána (7/2026)** — dublovala trojici Pro tebe/Pro děti/
+  Pro firmy, kterou `Offer.astro` už ukazuje přímo na HP s konkrétním obsahem
+  (viz „Homepage zjednodušena" níž). Pokud se bude rozcestníková karta
+  „Ty/Tvoje děti/Tvoje firma" vracet (např. na `/lekce-a-sluzby/`), platí totéž
+  pravidlo jako dřív: `anchor` musí být absolutní cesta, nikdy samotný `#hash`
+  (lokální hash na jiné stránce, než kde sekce žije, nikam nevede).
 - **Pravidlo boxů (platí všude, i v ceníku):** má-li obsah boxu/dlaždice
   detailní stránku nebo kotvu, je klikací CELÝ box (`<a>`, hover zdvih),
   ne textový odkaz vedle. **Žádný nápis „Detail →" v boxech (rozhodnuto
@@ -271,17 +270,29 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   „Ty. Tvoje děti. Tvoje firma.", karta 01 štítek „Dospělí". Osobní identifikaci
   dělá vedlejší sekce „Co u nás lidé nejčastěji řeší" (8 situací). **Nepřidávat
   další karty** — tři vstupy zrcadlí strukturu rozcestníku.
-- **Homepage zjednodušena (7/2026, dle zpětné vazby copywriterky — „hodně
-  zahuštěné, spousta duplicit"):** odstraněn `Marquee.astro` (scrollující pruh
-  slov, působil jako teleshopping — smazán i z dat `home.ts`/`home.en.ts` a
-  z `ui.ts`). Smazána duplicitní inline sekce „Jak se u nás cvičí" v
-  `index.astro` (dublovala `ApproachGrid` + Hero + Audiences). `ProcTeaser.astro`
-  + `TriadVenn.astro` sloučené do jedné komponenty **`ProcTriad.astro`**
-  (mint karta s textem „Proč BoHeMi" + venn diagram Body/Health/Mind vpravo,
-  bez samostatného odstavce popisu ke každé z trojice — ten zůstává na
-  `/proc-bohemi/`). HP teď jede: Hero → ApproachGrid → KidsBand → Offer →
-  LifePracticeFeature → ProcTriad → Audiences → Trainers → PricingTeaser.
-  Nevracet Marquee ani starou dvojici Proc/Triad zpět.
+- **Homepage zjednodušena (7/2026, dle opakované zpětné vazby copywriterky —
+  „hodně zahuštěné, spousta duplicit", i po prvním kole úprav pořád „hodně
+  nacpaná"):**
+  - Smazán `Marquee.astro` (scrollující pruh slov, působil jako teleshopping —
+    smazán i z dat `home.ts`/`home.en.ts` a z `ui.ts`).
+  - Smazána duplicitní inline sekce „Jak se u nás cvičí" v `index.astro`
+    (dublovala `ApproachGrid` + Hero).
+  - `ProcTeaser.astro` + `TriadVenn.astro` sloučené do **`ProcTriad.astro`**
+    (mint karta s textem „Proč BoHeMi" + venn diagram Body/Health/Mind vpravo,
+    bez samostatného odstavce popisu ke každé z trojice — ten zůstává na
+    `/proc-bohemi/`).
+  - **`Audiences.astro` smazána úplně** (komponenta i data `audiences` v
+    `home.ts`/`home.en.ts` i i18n klíče `audiences_*`) — trojice „Ty. Tvoje
+    děti. Tvoje firma." s odrážkami byla item-for-item duplicát toho, co
+    `Offer.astro` (sekce Pro tebe/Pro děti/Pro firmy) ukazuje o kousek výš už
+    s konkrétním obsahem (kartami lekcí, službami). Když se bude podobná
+    rozcestníková karta chtít vrátit, patří spíš na `/lekce-a-sluzby/` jako
+    vstupní jump-links, ne znovu na HP vedle Offer.
+  - HP teď jede: Hero → ApproachGrid → KidsBand → Offer → LifePracticeFeature
+    → ProcTriad → Trainers → PricingTeaser (z původních 12 bloků na 8).
+  - Nevracet Marquee, starou dvojici Proc/Triad ani Audiences zpět bez
+    nového rozhodnutí Honzy — pokud se HP bude zase plnit, řešit to jako
+    nové zvážení obsahu, ne přidáváním starých komponent.
 - **Program 8 týdnů (7/2026):** jediný hotový program (Měsíční program, Osobní
   restart, Chlapi 40+ a cykly NEJSOU hotové → mřížka „Lekce a programy" stažena
   z HP). Detail `/program-8-tydnu/`: název **VŽDY „Program 8 týdnů"** (nikdy

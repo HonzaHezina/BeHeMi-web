@@ -17,12 +17,6 @@ export const approach: { n: string; t: string; d: string; href?: string }[] = [
   { n: '08', t: 'I want a movement program for my team', d: 'FitTeams — coached circuit training designed specifically for company groups. No gym required.', href: '/en/classes-and-services/#pro-firmy' },
 ];
 
-export const audiences = [
-  { fig: '01', tagline: 'Adults', label: 'For you', d: "Whether you're starting out, coming back after a break, or just don't want an anonymous gym.", items: ['8-Week Program', 'Group classes', 'Personal training & Open gym', 'Recovery & photobiomodulation'], anchor: '/en/classes-and-services/#pro-tebe' },
-  // Kids card links to the dedicated page (strongest audience), not the anchor.
-  { fig: '02', tagline: 'Kids & families', label: 'For kids & families', d: "Movement for the youngest and for parents who don't want to stop.", items: ['Circus School', 'Movement clubs & acrobatics', 'Discovery Room & Kids Zumba', 'Supermums — babies welcome'], anchor: '/krouzky-pro-deti/' },
-  { fig: '03', tagline: 'Teams & organisations', label: 'For companies', d: 'A healthier and more cohesive team without needing your own gym.', items: ['FitTeams — team training', 'Corporate wellbeing programs', 'Hall rental for events'], anchor: '/en/classes-and-services/#pro-firmy' },
-];
 
 // href = clickable card; no href = no dedicated page/anchor yet.
 // NOT RENDERED (7/2026): programs other than the 8-Week Program aren't ready —

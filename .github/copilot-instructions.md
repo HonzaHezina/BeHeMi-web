@@ -51,8 +51,9 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   je jedno studio.
 - **Homepage zjednodušena (7/2026):** `Marquee.astro` (scrollující pruh slov)
   smazán — nevracet. `ProcTeaser.astro` + `TriadVenn.astro` sloučené do
-  `ProcTriad.astro`. HP sekce: Hero → ApproachGrid → KidsBand → Offer →
-  LifePracticeFeature → ProcTriad → Audiences → Trainers → PricingTeaser.
+  `ProcTriad.astro`. **`Audiences.astro` smazána úplně** (dublovala Offer's
+  Pro tebe/Pro děti/Pro firmy). HP sekce: Hero → ApproachGrid → KidsBand →
+  Offer → LifePracticeFeature → ProcTriad → Trainers → PricingTeaser.
 - **Navigace = tři vrstvy** (HP ochutnávka → rozcestník → detail): každý klik
   vede na **nejkonkrétnější existující stránku**. Služba → vlastní stránka; typ
   lekce → `/skupinove-lekce/#kotva` (typy lekcí nemají vlastní stránky); dětská

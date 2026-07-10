@@ -21,13 +21,6 @@ export const approach: { n: string; t: string; d: string; href?: string }[] = [
   { n: '08', t: 'Chci pohybový program pro tým', d: 'FitTeams — vedené kruhové tréninky navržené přímo pro firemní skupiny. Bez vlastní tělocvičny.', href: '/firmy/' },
 ];
 
-export const audiences = [
-  { fig: '01', tagline: 'Dospělí', label: 'Pro tebe', d: 'Ať začínáš, vracíš se po pauze, nebo jen nechceš anonymní posilovnu.', items: ['Program 8 týdnů', 'Skupinové lekce', 'Osobní tréninky a Open gym', 'Regenerace a fotobiomodulace'], anchor: '/lekce-a-sluzby/#pro-tebe' },
-  // Dětská karta vede na vlastní stránku (nejsilnější publikum), ne na kotvu.
-  { fig: '02', tagline: 'Děti a maminky', label: 'Pro děti a rodiny', d: 'Pohyb pro nejmenší i pro rodiče, co nechtějí přestat.', items: ['Cirkusová školička', 'Pohybové kroužky a akrobacie', 'Objevovárna a Dětská Zumba', 'Supermamky — i s dětmi vedle'], anchor: '/krouzky-pro-deti/' },
-  { fig: '03', tagline: 'Týmy a organizace', label: 'Pro firmy', d: 'Zdravější a sehranější tým bez vlastní tělocvičny.', items: ['FitTeams — tréninky pro týmy', 'Firemní wellbeing programy', 'Pronájem sálů na akce'], anchor: '/firmy/' },
-];
-
 // href = klik vede na nejkonkrétnější existující cíl; bez href karta
 // zůstává neklikací (program/cyklus zatím bez vlastní stránky či kotvy).
 // NEZOBRAZUJE SE (7/2026): programy kromě Programu 8 týdnů nejsou hotové —
