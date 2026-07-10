@@ -33,15 +33,12 @@ const classHref = (c: (typeof classes)[number]) => c.page ?? `${scheduleHref}#${
 <section id="nabidka" class="mx-auto max-w-[1220px] px-5 md:px-8">
   <!-- ───── PRO TEBE / FOR YOU ───── -->
   <div id="pro-tebe" class="scroll-mt-24 pt-16 md:pt-16">
-    <div class="flex flex-wrap items-baseline gap-x-4 gap-y-2 border-b-2 border-ink pb-[18px]">
-      <span class="text-xl text-accent-text">01</span>
-      <span class="text-[13px] font-extrabold uppercase tracking-[0.08em] text-brand">
-        {lang === 'en' ? 'For you' : 'Pro tebe'}
-      </span>
-      <span class="text-base text-ink-muted">
-        {lang === 'en' ? 'Individuals who want energy, strength and calm' : 'Jednotlivci, kteří chtějí energii, sílu a klid'}
-      </span>
-    </div>
+    <h2 class="text-[13px] font-extrabold uppercase tracking-[0.08em] text-accent-text">
+      {lang === 'en' ? 'For you' : 'Pro tebe'}
+    </h2>
+    <p class="mt-2 max-w-[60ch] text-lg leading-[1.5] text-ink-soft">
+      {lang === 'en' ? 'Individuals who want energy, strength and calm' : 'Jednotlivci, kteří chtějí energii, sílu a klid'}
+    </p>
   </div>
 
   <!-- Blok „Lekce a programy" (data `paths`) stažen z HP 7/2026 — programy
@@ -97,46 +94,24 @@ const classHref = (c: (typeof classes)[number]) => c.page ?? `${scheduleHref}#${
     </div>
   </div>
 
-  <!-- ───── PRO DĚTI / FOR KIDS ───── -->
-  <div id="pro-deti" class="scroll-mt-24 pt-18">
-    <div class="flex flex-wrap items-baseline gap-x-4 gap-y-2 border-b-2 border-ink pb-[18px]">
-      <span class="text-xl text-accent-text">02</span>
-      <span class="text-[13px] font-extrabold uppercase tracking-[0.08em] text-brand">
-        {lang === 'en' ? 'For kids & families' : 'Pro děti a rodiny'}
-      </span>
-      <span class="text-base text-ink-muted">
-        {lang === 'en' ? 'Movement for the youngest and for mums' : 'Pohyb pro nejmenší i pro maminky'}
-      </span>
-    </div>
-  </div>
-
-  <!-- Dlaždice dětských aktivit žijí na HP jen v KidsBand výš — tady jen odkaz,
-       ať se stejný obsah neopakuje dvakrát na jedné stránce. -->
-  <div class="pt-9">
-    <p class="mb-6 max-w-[64ch] text-[17px] leading-[1.55] text-ink-warm">
-      {lang === 'en'
-        ? 'Clubs, circus, the Discovery Room and Supermums — everything for kids lives on one page.'
-        : 'Kroužky, cirkus, Objevovárna i Supermamky — celá dětská nabídka je pohromadě na jedné stránce.'}
-    </p>
-    <Button href="/krouzky-pro-deti/" variant="dark" class="px-6 py-3 text-[15.5px]">
-      {lang === 'en' ? 'Kids clubs & activities →' : 'Kroužky pro děti →'}
-    </Button>
-  </div>
+  <!-- Sekce „Pro děti a rodiny" tady byla duplicitní s KidsBand.astro výš na HP
+       (stejný nadpis i odkaz na /krouzky-pro-deti/) — smazána 10. 7. 2026,
+       nevracet. Dětská nabídka na HP žije jen v KidsBand. -->
 
   <!-- ───── PRO FIRMY / FOR COMPANIES ───── -->
-  <div id="pro-firmy" class="scroll-mt-24 pt-18">
-    <div class="flex flex-wrap items-baseline gap-x-4 gap-y-2 border-b-2 border-ink pb-[18px]">
-      <span class="text-xl text-accent-text">03</span>
-      <span class="text-[13px] font-extrabold uppercase tracking-[0.08em] text-brand">
-        {lang === 'en' ? 'For companies' : 'Pro firmy'}
-      </span>
-      <span class="text-base text-ink-muted">
-        {lang === 'en' ? 'A healthier and more cohesive team without your own gym' : 'Zdravější a sehranější tým bez vlastní tělocvičny'}
-      </span>
-    </div>
+  <div id="pro-firmy" class="scroll-mt-24 border-t border-border pt-14">
+    <h2 class="text-[13px] font-extrabold uppercase tracking-[0.08em] text-accent-text">
+      {lang === 'en' ? 'For companies' : 'Pro firmy'}
+    </h2>
+    <p class="mt-2 max-w-[60ch] text-lg leading-[1.5] text-ink-soft">
+      {lang === 'en' ? 'A healthier and more cohesive team without your own gym' : 'Zdravější a sehranější tým bez vlastní tělocvičny'}
+    </p>
   </div>
 
   <div class="pt-9">
+    <h3 class="mb-[22px] text-2xl font-extrabold tracking-[-0.02em]">
+      {lang === 'en' ? 'Services for companies' : 'Služby pro firmy'}
+    </h3>
     <div class="grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
       {firmyServices.map((f) => f.href ? (
         <a href={f.href} class="block cursor-pointer bg-surface p-[30px] transition-colors hover:bg-surface-hover">

@@ -287,15 +287,23 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   - **`Audiences.astro` smazána úplně** (komponenta i data `audiences` v
     `home.ts`/`home.en.ts` i i18n klíče `audiences_*`) — trojice „Ty. Tvoje
     děti. Tvoje firma." s odrážkami byla item-for-item duplicát toho, co
-    `Offer.astro` (sekce Pro tebe/Pro děti/Pro firmy) ukazuje o kousek výš už
+    `Offer.astro` (sekce Pro tebe/Pro firmy — viz níž) ukazuje o kousek výš už
     s konkrétním obsahem (kartami lekcí, službami). Když se bude podobná
     rozcestníková karta chtít vrátit, patří spíš na `/lekce-a-sluzby/` jako
     vstupní jump-links, ne znovu na HP vedle Offer.
+  - **Sekce „02 Pro děti a rodiny" v `Offer.astro` smazána (10. 7. 2026)** —
+    duplikovala `KidsBand.astro`, který na HP jede o kousek výš se stejným
+    nadpisem i odkazem na `/krouzky-pro-deti/`. `Offer.astro` má teď jen dvě
+    číslované sekce: **„01 Pro tebe"** (skupinové lekce + individuální služby)
+    a **„02 Pro firmy"** (přečíslováno z „03") — `id="pro-deti"` na HP zmizelo
+    (nic naň neodkazovalo, na rozdíl od `#pro-deti` na `/lekce-a-sluzby/`
+    a `/en/classes-and-services/`, které jsou samostatná stránka a zůstávají
+    beze změny). Dětská nabídka na HP žije jen v `KidsBand.astro`.
   - HP teď jede: Hero → ApproachGrid → KidsBand → Offer → LifePracticeFeature
     → ProcTriad → Trainers → PricingTeaser (z původních 12 bloků na 8).
-  - Nevracet Marquee, starou dvojici Proc/Triad ani Audiences zpět bez
-    nového rozhodnutí Honzy — pokud se HP bude zase plnit, řešit to jako
-    nové zvážení obsahu, ne přidáváním starých komponent.
+  - Nevracet Marquee, starou dvojici Proc/Triad, Audiences ani „Pro děti"
+    sekci v Offer zpět bez nového rozhodnutí Honzy — pokud se HP bude zase
+    plnit, řešit to jako nové zvážení obsahu, ne přidáváním starých komponent.
 - **Program 8 týdnů (7/2026):** jediný hotový program (Měsíční program, Osobní
   restart, Chlapi 40+ a cykly NEJSOU hotové → mřížka „Lekce a programy" stažena
   z HP). Detail `/program-8-tydnu/`: název **VŽDY „Program 8 týdnů"** (nikdy
