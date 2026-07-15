@@ -60,8 +60,10 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
 - **Navigace = tři vrstvy** (HP ochutnávka → rozcestník → detail): každý klik
   vede na **nejkonkrétnější existující stránku**. Služba → vlastní stránka; typ
   lekce → `/skupinove-lekce/#kotva` (typy lekcí nemají vlastní stránky); dětská
-  aktivita → `/krouzky-pro-deti/#kotva`. **Kotvy (`classes[].id` v datech +
-  dětské `#cirkusova-skolicka` ap.) se NIKDY nemění**; cíl kotvy má `scroll-mt-24`.
+  aktivita → `/krouzky-pro-deti/#kotva`; trenér → `/treneri/#kotva` (`trainers[].id`
+  v datech, `/treneri/` je jen CZ — EN karty na HP vedou na stejné české kotvy).
+  **Kotvy (`classes[].id`/`trainers[].id` v datech + dětské `#cirkusova-skolicka`
+  ap.) se NIKDY nemění**; cíl kotvy má `scroll-mt-24`.
   Provozní údaje (rozvrh, kapacita) jen na detailu, ne v dlaždicích; stejný
   odstavec nesmí být na rozcestníku i detailu. **HP nabídka i rozcestníky (CZ/EN)
   ukazují 6 karet lekcí** (`classes.slice(0, 6)`), všech 10 jen na
@@ -79,7 +81,9 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   stránka → doplnit `href`/`page` v datech + footer sloupec „Služby".
   Platí všude (i ceník): box s detailem/kotvou = klikací celý, nikdy textový
   odkaz „… — detail →" vedle boxu; odkaz sekce na detail patří do hlavičky
-  sekce vedle `<h2>`. Cenové dlaždice variant jedné služby neklikací.
+  sekce vedle `<h2>`, **vždy jako textový odkaz** (`text-accent-text`), nikdy
+  `<Button>` — `<Button>` jen pro samostatnou finální CTA na konci sekce.
+  Cenové dlaždice variant jedné služby neklikací.
   **Hover efekt (zdvih/stín/bg) jen na klikacích boxech** — neklikací `<div>`
   bez hoveru, ať nevypadá klikací. Druhý odkaz uvnitř klikacího boxu (např.
   „Rezervovat →") = overlay `<a>` `absolute inset-0` + `aria-label`, druhý
