@@ -383,8 +383,31 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   `src/assets/treneri/`. Nepoužité fotky (`kruhac-06–08`, `silovy-trenink-04/06/10`)
   jsou připravené pro sekce na `/skupinove-lekce/` (placeholder boxy čekají na
   Honzova data).
-  Zpracování nových fotek: `npm run photos -- _raw/<složka> <cíl>` (skript
-  `scripts/prep-photos.mjs`, staging přes `_raw/` podsložky v rootu repa).
+  **Staging nových fotek přes `_raw/` (v rootu repa, v `.gitignore`, nikdy se
+  necommituje):** má pevnou strukturu podsložek pojmenovaných podle `id` z
+  `home.ts` — fotku nahraješ rovnou do správné podsložky, žádné rozhodování
+  při zpracování.
+  ```
+  _raw/lekce/kruhac/          _raw/lekce/silovy-trenink/    _raw/lekce/hiit/
+  _raw/lekce/zumba/           _raw/lekce/vlastni-vaha/      _raw/lekce/power-zone/
+  _raw/lekce/brisni-pekac/    _raw/lekce/solid-booty/       _raw/lekce/enduro/
+  _raw/deti/cirkusova-skolicka/    _raw/deti/zaklady-gymnastiky/
+  _raw/deti/akrobacie-zonglovani/  _raw/deti/objevovarna/  _raw/deti/detska-zumba/
+  _raw/treneri/klara-mechurova/  _raw/treneri/jitka-stepankova/
+  _raw/treneri/eliska-velazquez/ _raw/treneri/jan-hezina/
+  _raw/supermamky/
+  _raw/studio/    (pronájem sálů)
+  _raw/galerie/   (cokoliv bez vlastního `id` — hero, atmosféra, budoucí `/fotky/`)
+  ```
+  Pozor: kruhový trénink má `id: 'kruhac'`, ne „kruhovy-trenink". Než fotku
+  nahraješ do `_raw/`, přejmenuj ji na smysluplný ascii název (`kruhac-09.jpg`) —
+  výstupní název kopíruje zdrojový, takže je zbytečné přejmenovávat až v
+  `src/assets/`.
+  Zpracování: `npm run photos -- _raw/<kategorie>/<id> <kategorie>` (skript
+  `scripts/prep-photos.mjs`) — `dest` je vždy jen `lekce`/`deti`/`treneri`/…,
+  protože výstup v `src/assets/` je plochý (bez podsložek podle `id`). Skript
+  zdroj jen čte, nic v `_raw/` nemaže ani neupravuje — po ověření výstupu je
+  bezpečné zdrojové soubory z `_raw/` smazat.
 
 ## Tailwind v4 — vývojové gotchy (ušetří hodiny)
 

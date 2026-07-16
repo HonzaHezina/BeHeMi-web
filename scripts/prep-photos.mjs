@@ -3,13 +3,16 @@
  * prep-photos.mjs — příprava fotek pro web BoHeMi (Node + sharp)
  * Zmenší na max 2000px, ODSTRANÍ metadata (EXIF vč. GPS!), přejmenuje na ASCII.
  *
+ * Staging: fotky nejdřív nahraj (přejmenované na smysluplný ascii název, viz
+ * CLAUDE.md → „Fotky") do _raw/<kategorie>/<id>/ (v .gitignore, necommituje se).
+ *
  * Použití (z rootu repa, funguje v PowerShellu i bashi):
  *   npm run photos -- <zdrojová_složka> <cílová_podsložka>
  * Příklad:
- *   npm run photos -- C:\Users\janhe\Downloads\kruhac-fotky lekce
- *   → fotky skončí v src/assets/lekce/
+ *   npm run photos -- _raw/lekce/kruhac lekce
+ *   → fotky skončí v src/assets/lekce/ (plochá složka, bez podsložky "kruhac")
  *
- * Cílové podsložky: lekce · treneri · deti · studio · galerie
+ * Cílové podsložky: lekce · treneri · deti · supermamky · studio · galerie
  * Vyžaduje: npm i -D sharp   (Astro ho nejspíš už má)
  * Pozn.: HEIC z iPhonu sharp neumí — na iPhonu nastav focení na
  * „Nejkompatibilnější" (JPG), nebo fotky nejdřív zkonvertuj.
