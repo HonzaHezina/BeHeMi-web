@@ -6,29 +6,7 @@ import Button from '../components/Button.astro';
 import MediaFrame from '../components/MediaFrame.astro';
 import { Image } from 'astro:assets';
 import imgStudio01 from '../assets/studio/studio-01.jpg';
-import imgStudio02 from '../assets/studio/studio-02.jpg';
-import imgStudio03 from '../assets/studio/studio-03.jpg';
-import imgStudio04 from '../assets/studio/studio-04.jpg';
-import imgStudio05 from '../assets/studio/studio-05.jpg';
 import imgStudio06 from '../assets/studio/studio-06.jpg';
-import imgStudio07 from '../assets/studio/studio-07.jpg';
-import imgStudio08 from '../assets/studio/studio-08.jpg';
-import imgStudio09 from '../assets/studio/studio-09.jpg';
-import imgStudio10 from '../assets/studio/studio-10.jpg';
-import imgStudio11 from '../assets/studio/studio-11.jpg';
-
-const atmosphere = [
-  { src: imgStudio06, alt: 'Fitness sál BoHeMi — vybavení a cvičební pomůcky' },
-  { src: imgStudio02, alt: 'Atmosféra studia — tematický trénink v BoHeMi' },
-  { src: imgStudio03, alt: 'Atmosféra studia — skupina cvičenců v BoHeMi' },
-  { src: imgStudio04, alt: 'Atmosféra studia — tým BoHeMi v sále se zrcadly' },
-  { src: imgStudio09, alt: 'Hudební koutek studia — bicí souprava' },
-  { src: imgStudio10, alt: 'Hudební koutek studia — klávesy' },
-  { src: imgStudio11, alt: 'Hudební koutek studia — celkový pohled' },
-  { src: imgStudio07, alt: 'Atmosféra studia — BoHeMi tým se čtyřnohým hostem' },
-  { src: imgStudio05, alt: 'Tým BoHeMi před studiem na Vinohradech' },
-  { src: imgStudio08, alt: 'Instalace vývěsního štítu BoHeMi na fasádě' },
-];
 
 const halls = [
   {
@@ -125,26 +103,20 @@ const forWhom = [
               </li>
             ))}
           </ul>
-          <p class="text-[15px] text-ink-soft">
+          <p class="mb-5 text-[15px] text-ink-soft">
             Sály pronajímáme mimo provozní hodiny studia — konkrétní termíny si domluvíme individuálně.
             Cena závisí na sálu, délce a pravidelnosti pronájmu.
           </p>
+          <a href="/fotky/" class="cursor-pointer text-[15px] font-bold text-accent-text hover:text-ink">Víc fotek ze studia →</a>
         </div>
-        <MediaFrame media="media-clay" rounded="rounded-none" class="min-h-[240px] lg:min-h-full" alt="Fitness sál BoHeMi na Vinohradech">
-          <Image src={imgStudio01} alt="Fitness sál BoHeMi — vybavení pro funkční a silový trénink" class="h-full w-full object-cover" widths={[480, 800]} sizes="(min-width: 1024px) 45vw, 100vw" />
-        </MediaFrame>
-      </div>
-    </section>
-
-    <!-- ATMOSFÉRA -->
-    <section class="mx-auto max-w-[1220px] px-5 pt-10 md:px-8">
-      <h2 class="mb-8 text-[clamp(26px,3.2vw,38px)] font-extrabold tracking-[-0.03em]">Atmosféra studia</h2>
-      <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
-        {atmosphere.map((photo) => (
-          <a href={photo.src.src} target="_blank" rel="noopener noreferrer" class="block aspect-square cursor-pointer overflow-hidden rounded-[14px] border border-border transition-opacity hover:opacity-90">
-            <Image src={photo.src} alt={photo.alt} class="h-full w-full object-cover" widths={[240, 400]} sizes="(min-width: 768px) 20vw, 45vw" />
-          </a>
-        ))}
+        <div class="grid grid-cols-2 gap-1">
+          <MediaFrame media="media-clay" rounded="rounded-none" class="min-h-[240px] lg:min-h-full" alt="Fitness sál BoHeMi na Vinohradech">
+            <Image src={imgStudio01} alt="Fitness sál BoHeMi — vybavení pro funkční a silový trénink" class="h-full w-full object-cover" widths={[320, 480]} sizes="(min-width: 1024px) 22vw, 50vw" />
+          </MediaFrame>
+          <MediaFrame media="media-sand" rounded="rounded-none" class="min-h-[240px] lg:min-h-full" alt="Fitness sál BoHeMi na Vinohradech">
+            <Image src={imgStudio06} alt="Fitness sál BoHeMi — prázdný sál s vybavením" class="h-full w-full object-cover" widths={[320, 480]} sizes="(min-width: 1024px) 22vw, 50vw" />
+          </MediaFrame>
+        </div>
       </div>
     </section>
 

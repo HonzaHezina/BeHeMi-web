@@ -88,6 +88,7 @@ luxusní wellness. Tělo jako cesta k síle, zdraví a klidu.
 | Trenéři | `/treneri/` | `treneri.astro` |
 | Ceník | `/cenik/` | `cenik.astro` |
 | Kontakt | `/kontakt/` | `kontakt.astro` |
+| Fotky | `/fotky/` | `fotky.astro` |
 | 404 | — | `404.astro` |
 
 EN mutace (`src/pages/en/`): home, classes-and-services, group-classes,
@@ -100,8 +101,8 @@ klíčové stránky: **Skupinové lekce → `/skupinove-lekce/` · Osobní trén
 `/firmy/` · Trenéři → `/treneri/`** (data v `navMenu` v `home.ts`).
 Footer má sloupec **Služby** (Skupinové lekce, Kroužky pro děti, Supermamky,
 Open gym, Fotobiomodulace, Osobní tréninky, Pronájem sálů, Pro firmy) — každá
-nová service stránka se přidává i sem. Program 8 týdnů je ve sloupci **Web**
-(`/program-8-tydnu/`), ne ve Službách — je to program, ne služba.
+nová service stránka se přidává i sem. Program 8 týdnů a Fotky jsou ve sloupci
+**Web** (`/program-8-tydnu/`, `/fotky/`), ne ve Službách — nejsou to služby.
 
 > ✅ **Slugy jsou ověřené z reálné GSC (12 měsíců).** Zdroj pravdy =
 > **`docs/redirect-map.md`** (KEEP / 301 / WP / LEGAL + trailing-slash pravidlo).
