@@ -8,6 +8,13 @@ import { Image } from 'astro:assets';
 import { RESERVE_URL } from '../data/home';
 import { photosCS } from '../data/photos';
 import imgObjevovarna from '../assets/deti/objevovarna-01.jpg';
+import imgObjevovarna02 from '../assets/deti/objevovarna-02.jpg';
+import imgObjevovarna03 from '../assets/deti/objevovarna-03.jpg';
+
+const objevovarnaExtra = [
+  { src: imgObjevovarna02, alt: 'Objevovárna — dítě si hraje s kinetickým pískem' },
+  { src: imgObjevovarna03, alt: 'Objevovárna — dítě staví z barevných kostek' },
+];
 
 // Reálná data z bohemi.fit/akademie-cirk-la-putyka/, /detska-zumba/ a /hernicka/.
 // Dětská Zumba dle WP (5. 7. 2026): 6–12 let, středa 17:00, 55 min,
@@ -113,6 +120,15 @@ const objevovarnaFacts = [
               <h3 class="mb-2 text-[21px] font-extrabold tracking-[-0.02em]">{c.t}</h3>
               <div class="mb-3 text-[12.5px] font-bold tracking-[0.02em] text-brand">{c.age} · {c.when}</div>
               <p class="text-[15.5px] leading-[1.5] text-ink-soft">{c.d}</p>
+              {photosCS[c.id]?.extra && (
+                <div class="mt-4 flex flex-wrap gap-2">
+                  {photosCS[c.id]!.extra!.map((photo) => (
+                    <a href={photo.src.src} target="_blank" rel="noopener noreferrer" class="block h-14 w-14 cursor-pointer overflow-hidden rounded-lg border border-border transition-opacity hover:opacity-90">
+                      <Image src={photo.src} alt={photo.alt} class="h-full w-full object-cover" widths={[112, 168]} sizes="56px" loading="lazy" />
+                    </a>
+                  ))}
+                </div>
+              )}
               <div class="mt-auto flex items-center justify-between gap-3 pt-4">
                 <span class="text-[15px] font-extrabold text-ink">{c.price}</span>
                 <a href={RESERVE_URL} class="cursor-pointer text-[14px] font-bold text-accent-text hover:text-ink">Přihlásit →</a>
@@ -150,6 +166,13 @@ const objevovarnaFacts = [
             ))}
           </ul>
           <Button href={RESERVE_URL} variant="brand">Rezervovat místo →</Button>
+          <div class="mt-6 flex flex-wrap gap-2.5">
+            {objevovarnaExtra.map((photo) => (
+              <a href={photo.src.src} target="_blank" rel="noopener noreferrer" class="block h-16 w-16 cursor-pointer overflow-hidden rounded-lg border border-border transition-opacity hover:opacity-90">
+                <Image src={photo.src} alt={photo.alt} class="h-full w-full object-cover" widths={[128, 192]} sizes="64px" loading="lazy" />
+              </a>
+            ))}
+          </div>
         </div>
         <MediaFrame media="media-rose" rounded="rounded-none" class="min-h-[240px] lg:min-h-full" alt="Objevovárna — hernička pro nejmenší">
           <Image

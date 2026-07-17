@@ -233,6 +233,15 @@ const picker = [
                 <span aria-hidden="true">·</span>
                 <span>{l.bring}</span>
               </div>
+              {lessonPhotos[l.id]?.extra && (
+                <div class="mt-5 flex flex-wrap gap-2.5">
+                  {lessonPhotos[l.id]!.extra!.map((photo) => (
+                    <a href={photo.src.src} target="_blank" rel="noopener noreferrer" class="block h-16 w-16 cursor-pointer overflow-hidden rounded-lg border border-border transition-opacity hover:opacity-90">
+                      <Image src={photo.src} alt={photo.alt} class="h-full w-full object-cover" widths={[128, 192]} sizes="64px" loading="lazy" />
+                    </a>
+                  ))}
+                </div>
+              )}
               <a href={RESERVE_URL} rel="noopener noreferrer" class="mt-5 inline-block cursor-pointer text-[15px] font-bold text-accent-text hover:text-ink">Rezervovat →</a>
             </div>
           </article>

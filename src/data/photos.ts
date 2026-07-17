@@ -2,17 +2,30 @@ import type { ImageMetadata } from 'astro';
 
 import imgKruhac from '../assets/lekce/kruhac-01.jpg';
 import imgKruhacDetail from '../assets/lekce/kruhac-09.jpg';
+import imgKruhac06 from '../assets/lekce/kruhac-06.jpg';
+import imgKruhac07 from '../assets/lekce/kruhac-07.jpg';
+import imgKruhac08 from '../assets/lekce/kruhac-08.jpg';
 import imgSilovy from '../assets/lekce/silovy-trenink-09.jpg';
 import imgSilovyDetail from '../assets/lekce/silovy-trenink-11.jpg';
+import imgSilovy04 from '../assets/lekce/silovy-trenink-04.jpg';
+import imgSilovy06 from '../assets/lekce/silovy-trenink-06.jpg';
+import imgSilovy10 from '../assets/lekce/silovy-trenink-10.jpg';
 import imgPowerZone from '../assets/lekce/silovy-trenink-08.jpg';
 import imgVlastniVaha from '../assets/lekce/vlastni-vaha-01.jpg';
 import imgVlastniVahaDetail from '../assets/lekce/vlastni-vaha-02.jpg';
+import imgVlastniVaha03 from '../assets/lekce/vlastni-vaha-03.jpg';
 import imgSupermamky from '../assets/supermamky/supermamky-01.jpg';
 import imgObjevovarna from '../assets/deti/objevovarna-01.jpg';
 import imgCirkusovaSkolicka from '../assets/deti/cirkusova-skolicka-02.jpg';
 import imgCirkusovaSkolickaDetail from '../assets/deti/cirkusova-skolicka-03.jpg';
+import imgCirkusovaSkolicka01 from '../assets/deti/cirkusova-skolicka-01.jpg';
+import imgCirkusovaSkolicka04 from '../assets/deti/cirkusova-skolicka-04.jpg';
 
-export type Photo = { src: ImageMetadata; alt: string; pos?: string; srcDetail?: ImageMetadata; altDetail?: string };
+export type Photo = {
+  src: ImageMetadata; alt: string; pos?: string;
+  srcDetail?: ImageMetadata; altDetail?: string;
+  extra?: { src: ImageMetadata; alt: string }[];
+};
 
 // Centrální registr fotek pro lekce a dětské aktivity — klíč = id z classes[]/
 // kidsActivities[]/kidsBand[] (src/data/home.ts). Fotka se přidá JEDNOU sem a
@@ -23,14 +36,36 @@ export type Photo = { src: ImageMetadata; alt: string; pos?: string; srcDetail?:
 // (/skupinove-lekce/, /krouzky-pro-deti/…), aby HP/rozcestník a detail
 // neukazovaly identický záběr — jen tam, kde máme z natáčení víc dobrých
 // fotek stejné aktivity. Bez srcDetail detail spadne na src (žádná regrese).
+//
+// extra = VŠECHNY zbylé zpracované fotky dané aktivity — vykreslují se jako
+// klikací thumbnail strip pod hlavní fotkou jen na detailní stránce (stejný
+// vzor jako trainerGallery v trainer-photos.ts). Cíl: nic z toho, co se
+// zpracuje do src/assets, nezůstane nevyužité.
 export const photosCS: Record<string, Photo> = {
-  kruhac:           { src: imgKruhac,      alt: 'Kruháč v sále BoHeMi — skupina cvičí na stanovištích', srcDetail: imgKruhacDetail, altDetail: 'Kruháč v BoHeMi — úder perlíkem do pneumatiky na stanovišti' },
-  'silovy-trenink': { src: imgSilovy,      alt: 'Silový trénink v BoHeMi — dřep s osou pod vedením trenéra', srcDetail: imgSilovyDetail, altDetail: 'Silový trénink v BoHeMi — skupina cvičí na TRX a s činkami' },
+  kruhac:           { src: imgKruhac,      alt: 'Kruháč v sále BoHeMi — skupina cvičí na stanovištích', srcDetail: imgKruhacDetail, altDetail: 'Kruháč v BoHeMi — úder perlíkem do pneumatiky na stanovišti',
+    extra: [
+      { src: imgKruhac06, alt: 'Kruháč v BoHeMi — protažení s odporovou gumou' },
+      { src: imgKruhac07, alt: 'Kruháč v BoHeMi — cvik na gymballu' },
+      { src: imgKruhac08, alt: 'Kruháč v BoHeMi — balanční stanoviště' },
+    ] },
+  'silovy-trenink': { src: imgSilovy,      alt: 'Silový trénink v BoHeMi — dřep s osou pod vedením trenéra', srcDetail: imgSilovyDetail, altDetail: 'Silový trénink v BoHeMi — skupina cvičí na TRX a s činkami',
+    extra: [
+      { src: imgSilovy04, alt: 'Silový trénink v BoHeMi — cvičení na TRX' },
+      { src: imgSilovy06, alt: 'Silový trénink v BoHeMi — hip thrust s osou' },
+      { src: imgSilovy10, alt: 'Silový trénink v BoHeMi — bench press' },
+    ] },
   'power-zone':     { src: imgPowerZone,   alt: 'Power Zone v BoHeMi — funkční silový trénink s kettlebellem', pos: 'object-[50%_30%]' },
-  'vlastni-vaha':   { src: imgVlastniVaha, alt: 'Trénink s vlastní vahou v sále BoHeMi', srcDetail: imgVlastniVahaDetail, altDetail: 'Trénink s vlastní vahou v BoHeMi — skupina v podpěru na lokty' },
+  'vlastni-vaha':   { src: imgVlastniVaha, alt: 'Trénink s vlastní vahou v sále BoHeMi', srcDetail: imgVlastniVahaDetail, altDetail: 'Trénink s vlastní vahou v BoHeMi — skupina v podpěru na lokty',
+    extra: [
+      { src: imgVlastniVaha03, alt: 'Trénink s vlastní vahou v BoHeMi — dřep s vlastní vahou' },
+    ] },
   supermamky:       { src: imgSupermamky,  alt: 'Supermamky — máma cvičí s dítětem v sále BoHeMi' },
   objevovarna:      { src: imgObjevovarna, alt: 'Objevovárna — dítě na pohybové stanici v BoHeMi' },
-  'cirkusova-skolicka': { src: imgCirkusovaSkolicka, alt: 'Cirkusová školička — dítě na houpačce s trenérkou v sále BoHeMi', srcDetail: imgCirkusovaSkolickaDetail, altDetail: 'Cirkusová školička — děti a rodiče při hodině v sále BoHeMi' },
+  'cirkusova-skolicka': { src: imgCirkusovaSkolicka, alt: 'Cirkusová školička — dítě na houpačce s trenérkou v sále BoHeMi', srcDetail: imgCirkusovaSkolickaDetail, altDetail: 'Cirkusová školička — děti a rodiče při hodině v sále BoHeMi',
+    extra: [
+      { src: imgCirkusovaSkolicka01, alt: 'Cirkusová školička — děti s trenéry na akrobatických prvcích' },
+      { src: imgCirkusovaSkolicka04, alt: 'Cirkusová školička — děti a rodiče na visuté šále' },
+    ] },
 };
 
 export const photosEN: Record<string, Photo> = {
