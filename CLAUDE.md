@@ -113,7 +113,8 @@ nová service stránka se přidává i sem. Program 8 týdnů a Fotky jsou ve sl
 
 ### Zatím nepostavené (KEEP slugy z redirect-map)
 
-`/fotky/`, LEGAL stránky (VOP, GDPR, provozní řád…).
+LEGAL stránky (VOP, GDPR, provozní řád…). (`/fotky/` postaven 17. 7. 2026 —
+viz sekce „Fotky" níž.)
 
 - **Hula hoop skončil (rozhodnuto 7. 7. 2026):** stránka se nestaví a lekce se
   na webu nikde nezmiňuje. `/hula-hoop/` i `/hooping/` jsou 301; cíl čeká na
@@ -358,32 +359,76 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   (slot pattern — placeholder se skryje, když je `<Image />` ve slotu). Navigace:
   kotvy formou `/#…` (fungují i z podstránek), aktivní stav přes
   `<Header current="/slug/" />`.
-- **Fotky (stav 10. 7. 2026):** Reálné fotky zapojeny na klíčových stránkách.
-  Zdrojové soubory v `src/assets/`: `lekce/` (kruhač, silový trénink, vlastní váha),
-  `supermamky/`, `deti/` (Objevovárna), `treneri/` (Klára Měchurová).
+- **Fotky (stav 17. 7. 2026):** Reálné fotky zapojeny na všech klíčových
+  stránkách. Zdrojové soubory v `src/assets/`: `lekce/` (kruháč, silový
+  trénink, vlastní váha), `supermamky/`, `deti/` (Objevovárna, cirkusová
+  školička), `treneri/` (Klára Měchurová, Jan Hezina), `studio/` (pronájem
+  sálů + obecná atmosféra studia).
   **Centrální registr fotek lekcí a dětských aktivit = `src/data/photos.ts`**
-  (`photosCS`/`photosEN`, `Record<string, {src, alt, pos?}>`, klíč = `id` z
-  `classes[]`/`kidsActivities[]`/`kidsBand[]` v `src/data/home.ts`). Fotka se
-  přidává **jen jednou sem** — objeví se všude, kde se dané `id` používá (HP,
-  rozcestník, detail, EN mutace), místo aby se kopírovala do každé stránky
-  zvlášť (tak vznikaly mezery — fotka byla zapojená na jedné stránce, na jiné
-  s týmž boxem chyběla). `pos` je Tailwind `object-*` třída pro ořez.
+  (`photosCS`/`photosEN`, klíč = `id` z `classes[]`/`kidsActivities[]`/
+  `kidsBand[]` v `src/data/home.ts`). Fotka se přidává **jen jednou sem** —
+  objeví se všude, kde se dané `id` používá (HP, rozcestník, detail, EN
+  mutace), místo aby se kopírovala do každé stránky zvlášť. Typ `Photo`:
+  - `src`/`alt` — hlavní fotka, používá ji `<ClassCard>` (HP teasery,
+    rozcestník) i fallback pro detail.
+  - `pos?` — Tailwind `object-*` třída pro ořez.
+  - `srcDetail?`/`altDetail?` — volitelná DRUHÁ fotka jen pro skutečnou
+    detailní stránku (`/skupinove-lekce/`, `/krouzky-pro-deti/`), aby HP/
+    rozcestník a detail neukazovaly identický záběr. Bez `srcDetail` detail
+    spadne na `src` (žádná regrese).
+  - `extra?` — pole VŠECH zbylých zpracovaných fotek dané aktivity; vykreslí
+    se jako malý klikací thumbnail strip (64px, otvírá plnou velikost v nové
+    záložce) pod hlavním obsahem detailní stránky. Cíl: žádná fotka
+    zpracovaná do `src/assets/` nesmí zůstat nevyužitá — pokud jich pro
+    jednu aktivitu je víc, jdou do `extra`, ne se nezahazují.
   **Dlaždice lekcí/aktivit renderuj přes `<ClassCard>`** (`src/components/ClassCard.astro`)
   — sdílená komponenta pro vzor „celý box je `<a>`, `MediaFrame` + fotka z
   `photosCS`/`photosEN`, nadpis, popis, volitelná `meta` řádka“. Používá ji
   `Offer.astro`, `KidsBand.astro`, `lekce-a-sluzby.astro` a
-  `en/classes-and-services.astro`. Bohatší/odlišné layouty (`skupinove-lekce.astro`
-  detail, `en/group-classes.astro` s dvěma odkazy v boxu) mají vlastní markup,
-  ale fotku čerpají taky z `photos.ts` — ne vlastní kopii mapy. **Nová fotka
-  lekce/aktivity → přidej `id` do `photosCS`/`photosEN` v `photos.ts`, nikdy
-  nevytvářej lokální `classPhotos`/`kidsPhotos` mapu v jednotlivé stránce.**
-  Vzor pro trenéry zůstává oddělený: **centrální mapa `src/data/trainer-photos.ts`**
-  (`Record<string, ImageMetadata>`, klíč = přesné jméno trenéra) — importovat v
-  `Trainers.astro`, `treneri.astro` i `osobni-treninky.astro`. Nový trenér
-  s fotkou = přidat do `trainer-photos.ts`, fotku zpracovat do
-  `src/assets/treneri/`. Nepoužité fotky (`kruhac-06–08`, `silovy-trenink-04/06/10`)
-  jsou připravené pro sekce na `/skupinove-lekce/` (placeholder boxy čekají na
-  Honzova data).
+  `en/classes-and-services.astro` — ty vždy čtou jen `src`/`alt` (teaser).
+  Bohatší detailní stránky (`skupinove-lekce.astro`, `krouzky-pro-deti.astro`,
+  `supermamky.astro`) mají vlastní markup, ale fotky čerpají taky z
+  `photos.ts` (`srcDetail ?? src` + `extra`) — ne vlastní kopii mapy.
+  `en/group-classes.astro` je svým obsahem teaser (karty jako na rozcestníku,
+  ne bohatý detail jako CS `/skupinove-lekce/`) → čte jen `src`/`alt`, ne
+  `srcDetail`/`extra`. **Nová fotka lekce/aktivity → přidej `id` do
+  `photosCS`/`photosEN` v `photos.ts`, nikdy nevytvářej lokální
+  `classPhotos`/`kidsPhotos` mapu v jednotlivé stránce.** Supermamky a
+  Objevovárna mají vlastní detailní stránku/sekci s lokálním importem
+  extra fotek přímo v `supermamky.astro`/`krouzky-pro-deti.astro` (stejný
+  thumbnail-strip vzor, jen mimo centrální registr, protože jejich primární
+  foto se čerpá odjinud než `photosCS`).
+  **Trenéři mají oddělený vzor:** centrální mapa `src/data/trainer-photos.ts`,
+  klíč = přesné jméno trenéra:
+  - `trainerPhotos: Record<string, ImageMetadata>` — jedna hlavní portrétní
+    fotka, používá `Trainers.astro` (HP), `treneri.astro` i
+    `osobni-treninky.astro`.
+  - `trainerGallery: Record<string, {src, alt}[]>` — VŠECHNY další zpracované
+    fotky trenéra; `/treneri/` je vykreslí jako klikací thumbnail strip pod
+    bio (stejný vzor jako `extra` u lekcí). Nový trenér s fotkami → hlavní do
+    `trainerPhotos`, zbytek do `trainerGallery`, fotky zpracovat do
+    `src/assets/treneri/`.
+  **`/treneri/` je bohatý detail, HP (`Trainers.astro`) jen ochutnávka**
+  (potvrzeno 17. 7. 2026) — stejné rozdělení jako `/skupinove-lekce/` vs. HP
+  `Offer.astro`. Detail má anchor-navigaci na jednotlivé trenéry v hero,
+  řádkový layout (foto vlevo, bio + „Co vede" chipy s odkazy na konkrétní
+  kotvy vpravo) místo gridu karet. Chipy „Co vede" psát jen tam, kde je vazba
+  trenér→lekce potvrzená (bio nebo atribuce na `/skupinove-lekce/`) —
+  nevymýšlet.
+  **`/pronajem-salu/`** má jen fotky, které skutečně ukazují pronajímatelný
+  prostor (dnes: fitness sál). Cokoliv obecně o atmosféře studia (tým, akce,
+  zázemí mimo sály) patří na **`/fotky/`** (rezervovaný KEEP slug z
+  redirect-map, postaven 17. 7. 2026) — samostatná galerie, odkaz jen ve
+  Footeru (sloupec Web), ne v hlavním menu. Rozhodnutí padlo, protože fotky
+  ze štábu měly mix skutečných záběrů sálů a nesouvisející tematické
+  oslavy/eventu — ty dvě věci se nemají plést do jedné sekce.
+  **Klikací thumbnail strip = obecný vzor** (zaveden 17. 7. 2026, používá ho
+  `treneri.astro`, `skupinove-lekce.astro`, `krouzky-pro-deti.astro`,
+  `supermamky.astro`, `pronajem-salu.astro`, `fotky.astro`): malý čtvercový
+  náhled v `<a href={photo.src.src} target="_blank" rel="noopener noreferrer">`
+  (`photo.src.src` je platná URL na plnou velikost zpracovaného Astro Image
+  assetu), uvnitř `<Image>` s `object-cover`. Žádná lightbox knihovna —
+  stačí to na „chci vidět fotku ve větší velikosti".
   **Staging nových fotek přes `_raw/` (v rootu repa, v `.gitignore`, nikdy se
   necommituje):** má pevnou strukturu podsložek pojmenovaných podle `id` z
   `home.ts` — fotku nahraješ rovnou do správné podsložky, žádné rozhodování
@@ -397,8 +442,9 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   _raw/treneri/klara-mechurova/  _raw/treneri/jitka-stepankova/
   _raw/treneri/eliska-velazquez/ _raw/treneri/jan-hezina/
   _raw/supermamky/
-  _raw/studio/    (pronájem sálů)
-  _raw/galerie/   (cokoliv bez vlastního `id` — hero, atmosféra, budoucí `/fotky/`)
+  _raw/studio/    (pronájem sálů + obecná atmosféra studia, viz výš — na
+                   webu se dnes rozděluje mezi /pronajem-salu/ a /fotky/)
+  _raw/galerie/   (cokoliv bez vlastního `id` a bez vazby na studio/sály)
   ```
   Pozor: kruhový trénink má `id: 'kruhac'`, ne „kruhovy-trenink". Než fotku
   nahraješ do `_raw/`, přejmenuj ji na smysluplný ascii název (`kruhac-09.jpg`) —
@@ -408,7 +454,12 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   `scripts/prep-photos.mjs`) — `dest` je vždy jen `lekce`/`deti`/`treneri`/…,
   protože výstup v `src/assets/` je plochý (bez podsložek podle `id`). Skript
   zdroj jen čte, nic v `_raw/` nemaže ani neupravuje — po ověření výstupu je
-  bezpečné zdrojové soubory z `_raw/` smazat.
+  bezpečné zdrojové soubory z `_raw/` smazat. **Použij VŠECHNY zpracované
+  fotky** (rozhodnuto Honzou 17. 7. 2026) — pokud jich pro jeden `id`/trenéra
+  je víc než jedna, zbytek nezahazuj, zapoj přes `extra`/`trainerGallery`
+  (viz výš), i fotky, které nejsou čistě „profesionální" (event/atmosféra) —
+  jediná výjimka je obsah mimo téma webu (viz rozdělení pronájem vs. `/fotky/`
+  výš).
 
 ## Tailwind v4 — vývojové gotchy (ušetří hodiny)
 

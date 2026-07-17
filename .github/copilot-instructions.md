@@ -39,9 +39,14 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
 ## Stav & konvence (drž konzistenci)
 - **Postaveno:** `/`, `/proc-bohemi/`, `/lekce-a-sluzby/`, `/skupinove-lekce/`,
   `/krouzky-pro-deti/`, `/supermamky/`, `/open-gym/`, `/fotobiomodulacni-terapie/`,
-  `/osobni-treninky/`, `/pronajem-salu/`, `/firmy/`, `/treneri/`,
+  `/osobni-treninky/`, `/pronajem-salu/`, `/firmy/`, `/treneri/`, `/fotky/`,
   `/program-8-tydnu/`, `/cenik/`, `/kontakt/`, 404 + EN mutace v `src/pages/en/`.
   Menu: Domů · Proč BoHeMi · Lekce a služby · Ceník · Kontakt · Rezervovat.
+  `/treneri/` je bohatý detail (řádkový layout, anchor nav, „Co vede" chipy) —
+  HP `Trainers.astro` zůstává jen ochutnávka, stejný vzor jako
+  `/skupinove-lekce/` vs. `Offer.astro`. `/fotky/` = obecná galerie atmosféry
+  studia (Footer sloupec Web, ne hlavní menu) — odděleně od `/pronajem-salu/`,
+  který má jen fotky skutečného pronajímatelného prostoru.
 - **Program 8 týdnů:** název VŽDY „Program 8 týdnů" (nikdy „Life Practice"/„Cesta";
   velké P i uprostřed věty). Zmínky vedou na `/program-8-tydnu/`. Interní podklady
   `docs/program-8-tydnu-podklady.md` NEPUBLIKOVAT. Mřížka `paths` („Lekce a
@@ -104,8 +109,14 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   (`photosCS`/`photosEN`, klíč = `id` z `classes[]`/`kidsActivities[]`/
   `kidsBand[]`) — fotka se přidává jednou tam, ne po stránkách. Dlaždice
   renderuj přes `<ClassCard>` (`src/components/ClassCard.astro`), nepiš
-  vlastní box + lokální fotku-mapu znovu. Trenéři mají vlastní
-  `src/data/trainer-photos.ts` (klíč = jméno).
+  vlastní box + lokální fotku-mapu znovu. `Photo` typ má i `srcDetail?`
+  (druhá fotka jen pro bohatou detailní stránku, HP/rozcestník dál ukazují
+  `src`) a `extra?` (pole VŠECH zbylých zpracovaných fotek — klikací
+  thumbnail strip, otvírá plnou velikost v nové záložce). **Žádná fotka
+  zpracovaná do `src/assets/` nesmí zůstat nevyužitá.** Trenéři mají vlastní
+  `src/data/trainer-photos.ts` (`trainerPhotos` = hlavní portrét, klíč =
+  jméno; `trainerGallery` = stejný „extra" vzor pro zbylé fotky). Detaily
+  a historie rozhodnutí: `/CLAUDE.md` sekce „Fotky".
 - **Tailwind v4:** reset patří do `@layer base`; zlomky spacing (4.5/5.5/6.5/7.5)
   nejdou — piš `[18px]/[22px]/[26px]/[30px]`; po nové stránce restartuj dev server.
 - **Deploy:** Coolify statika — `dist/`, „Is it a static site?" ON, SPA OFF.
