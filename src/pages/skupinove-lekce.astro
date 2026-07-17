@@ -201,8 +201,8 @@ const picker = [
             <MediaFrame media={media[l.id].media} rounded="rounded-none" class="h-44 md:h-full" alt={lessonPhotos[l.id]?.alt ?? `Lekce — ${media[l.id].img}`}>
               {lessonPhotos[l.id] && (
                 <Image
-                  src={lessonPhotos[l.id].src}
-                  alt={lessonPhotos[l.id].alt}
+                  src={lessonPhotos[l.id].srcDetail ?? lessonPhotos[l.id].src}
+                  alt={lessonPhotos[l.id].altDetail ?? lessonPhotos[l.id].alt}
                   class={`h-full w-full object-cover ${lessonPhotos[l.id].pos ?? 'object-center'}`}
                   widths={[480, 640]}
                   sizes="(min-width: 768px) 320px, 100vw"

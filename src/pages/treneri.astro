@@ -6,7 +6,7 @@ import Button from '../components/Button.astro';
 import MediaFrame from '../components/MediaFrame.astro';
 import { Image } from 'astro:assets';
 import { trainers, RESERVE_URL } from '../data/home';
-import { trainerPhotos } from '../data/trainer-photos';
+import { trainerPhotos, trainerGallery } from '../data/trainer-photos';
 
 // Bohatší obsah (co kdo vede — odkazy na kotvy) žije jen tady, stejný vzor
 // jako lessons[] v /skupinove-lekce/.astro. Krátké karty pro HP zůstávají
@@ -91,6 +91,15 @@ const leads: Record<string, { t: string; href: string }[]> = {
                   <span class="text-[13.5px] font-bold text-ink-muted">Co vede:</span>
                   {leads[tr.id].map((l) => (
                     <a href={l.href} class="cursor-pointer rounded-full border-[1.5px] border-border-button px-3.5 py-1.5 text-[13.5px] font-bold text-ink-line transition-colors hover:border-brand hover:text-brand">{l.t}</a>
+                  ))}
+                </div>
+              )}
+              {trainerGallery[tr.name] && (
+                <div class="mt-5 flex flex-wrap gap-3">
+                  {trainerGallery[tr.name].map((photo) => (
+                    <a href={photo.src.src} target="_blank" rel="noopener noreferrer" class="block h-24 w-24 cursor-pointer overflow-hidden rounded-xl border border-border">
+                      <Image src={photo.src} alt={photo.alt} class="h-full w-full object-cover" widths={[160, 240]} sizes="96px" loading="lazy" />
+                    </a>
                   ))}
                 </div>
               )}

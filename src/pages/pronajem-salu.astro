@@ -141,9 +141,9 @@ const forWhom = [
       <h2 class="mb-8 text-[clamp(26px,3.2vw,38px)] font-extrabold tracking-[-0.03em]">Atmosféra studia</h2>
       <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
         {atmosphere.map((photo) => (
-          <div class="aspect-square overflow-hidden rounded-[14px] border border-border">
+          <a href={photo.src.src} target="_blank" rel="noopener noreferrer" class="block aspect-square cursor-pointer overflow-hidden rounded-[14px] border border-border transition-opacity hover:opacity-90">
             <Image src={photo.src} alt={photo.alt} class="h-full w-full object-cover" widths={[240, 400]} sizes="(min-width: 768px) 20vw, 45vw" />
-          </div>
+          </a>
         ))}
       </div>
     </section>

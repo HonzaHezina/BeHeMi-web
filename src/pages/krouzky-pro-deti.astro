@@ -6,6 +6,7 @@ import Button from '../components/Button.astro';
 import MediaFrame from '../components/MediaFrame.astro';
 import { Image } from 'astro:assets';
 import { RESERVE_URL } from '../data/home';
+import { photosCS } from '../data/photos';
 import imgObjevovarna from '../assets/deti/objevovarna-01.jpg';
 
 // Reálná data z bohemi.fit/akademie-cirk-la-putyka/, /detska-zumba/ a /hernicka/.
@@ -96,7 +97,18 @@ const objevovarnaFacts = [
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {circusCourses.map((c) => (
           <div id={c.id} class="flex scroll-mt-24 flex-col overflow-hidden rounded-2xl border border-border bg-surface">
-            <MediaFrame media={c.media} rounded="rounded-none" class="h-44" alt={`Kroužek — ${c.img}`} />
+            <MediaFrame media={c.media} rounded="rounded-none" class="h-44" alt={photosCS[c.id]?.altDetail ?? photosCS[c.id]?.alt ?? `Kroužek — ${c.img}`}>
+              {photosCS[c.id] && (
+                <Image
+                  src={photosCS[c.id].srcDetail ?? photosCS[c.id].src}
+                  alt={photosCS[c.id].altDetail ?? photosCS[c.id].alt}
+                  class={`h-full w-full object-cover ${photosCS[c.id].pos ?? 'object-center'}`}
+                  widths={[480, 640]}
+                  sizes="(min-width: 768px) 33vw, 100vw"
+                  loading="lazy"
+                />
+              )}
+            </MediaFrame>
             <div class="flex flex-1 flex-col p-[22px]">
               <h3 class="mb-2 text-[21px] font-extrabold tracking-[-0.02em]">{c.t}</h3>
               <div class="mb-3 text-[12.5px] font-bold tracking-[0.02em] text-brand">{c.age} · {c.when}</div>
