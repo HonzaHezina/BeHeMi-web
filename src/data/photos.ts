@@ -6,6 +6,7 @@ import imgPowerZone from '../assets/lekce/silovy-trenink-08.jpg';
 import imgVlastniVaha from '../assets/lekce/vlastni-vaha-01.jpg';
 import imgSupermamky from '../assets/supermamky/supermamky-01.jpg';
 import imgObjevovarna from '../assets/deti/objevovarna-01.jpg';
+import imgCirkusovaSkolicka from '../assets/deti/cirkusova-skolicka-02.jpg';
 
 export type Photo = { src: ImageMetadata; alt: string; pos?: string };
 
@@ -20,6 +21,7 @@ export const photosCS: Record<string, Photo> = {
   'vlastni-vaha':   { src: imgVlastniVaha, alt: 'Trénink s vlastní vahou v sále BoHeMi' },
   supermamky:       { src: imgSupermamky,  alt: 'Supermamky — máma cvičí s dítětem v sále BoHeMi' },
   objevovarna:      { src: imgObjevovarna, alt: 'Objevovárna — dítě na pohybové stanici v BoHeMi' },
+  'cirkusova-skolicka': { src: imgCirkusovaSkolicka, alt: 'Cirkusová školička — dítě na houpačce s trenérkou v sále BoHeMi' },
 };
 
 export const photosEN: Record<string, Photo> = {
@@ -29,4 +31,5 @@ export const photosEN: Record<string, Photo> = {
   'vlastni-vaha':   { src: imgVlastniVaha, alt: 'Bodyweight training at BoHeMi' },
   supermamky:       { src: imgSupermamky,  alt: 'Supermums — a mum training with her child at BoHeMi' },
   objevovarna:      { src: imgObjevovarna, alt: 'Discovery Room — a child at a movement station at BoHeMi' },
+  'cirkusova-skolicka': { src: imgCirkusovaSkolicka, alt: 'Circus School — a child on the swing with a coach at BoHeMi' },
 };
