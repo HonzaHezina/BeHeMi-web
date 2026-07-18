@@ -12,7 +12,7 @@ z ní udělat silnou stránku, která tu spící poptávku proměňuje.
 - Jak lekce probíhá — 2–3 věty: struktura (rozehřátí → bloky → dojezd), co se dělá
 - Pro koho — 1–2 věty vč. „zvládne i začátečník?" (škálování na úroveň)
 - Prakticky — délka · intenzita (1–3 škála) · co s sebou
-- CTA — „Rezervovat →" (https://bohemi.fit/rezervace/, ideálně rovnou filtr lekce)
+- CTA — „Rezervovat →" (https://studio.bohemi.fit/, ideálně rovnou filtr lekce)
 
 TÓN: konkrétní, civilní, žádné nálady. Co se v sále DĚJE, ne jak se u toho člověk
 CÍTÍ. Rozdíly mezi lekcemi musí být jasné — když si po přečtení dvou sekcí nejsem
@@ -86,7 +86,7 @@ Pravidla:
   jsou tu důležitější než kde jinde.
 - Kotvy: scroll-margin-top kvůli sticky headeru; kotvy-menu nahoře na všechny
   sekce.
-- CTA Rezervovat → https://bohemi.fit/rezervace/ (pokud booking umí deep-link
+- CTA Rezervovat → https://studio.bohemi.fit/ (pokud booking umí deep-link
   na konkrétní lekci, zeptej se mě na formát URL).
 - Po dokončení: audit odkazů — všechny zmínky typů lekcí kdekoli na webu (HP,
   ceník, program, děti) vedou na /skupinove-lekce/#kotva. Spusť check-links.

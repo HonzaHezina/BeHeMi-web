@@ -15,7 +15,7 @@ logika navíc, než co Astro generuje.
 
 Tohle repo je **prezentační vrstva vedle WordPressu**, ne náhrada celého webu.
 Rezervace, login, členství, platby a admin zůstávají ve WordPressu pod
-`bohemi.fit/rezervace/`. Sem nikdy nepatří.
+`studio.bohemi.fit/`. Sem nikdy nepatří.
 
 Značka: **BoHeMi = Body – Health – Mind.** Komunitní studio, lidskost, žádná
 anonymita ani tlak. Není to spa, není to ezoterika, není to „sekta", není to
@@ -27,7 +27,7 @@ luxusní wellness. Tělo jako cesta k síle, zdraví a klidu.
    který něco odesílá do systému. Pokud něco potřebuje stav uživatele, kapacitu
    lekce, platbu nebo storno → **to není stránka, to je WordPress.**
 2. **Booking = odkaz ven.** Každé tlačítko „Rezervovat" je `<a>` na
-   `https://bohemi.fit/rezervace/` (případně konkrétní lekci). Nikdy iframe,
+   `https://studio.bohemi.fit/` (případně konkrétní lekci). Nikdy iframe,
    nikdy vlastní formulář.
 3. **URL se nemění.** Slugy musí přesně odpovídat současnému webu (viz seznam
    níž). Nová stránka jen po explicitním rozhodnutí. Změněná URL = 301 redirect,
@@ -136,7 +136,7 @@ viz sekce „Fotky" níž.)
   `/krouzky-pro-deti/#objevovarna`. Plný seznam v redirect-map. Implementace
   zatím nerozhodnutá (Astro vs. nginx).
 
-Mimo repo (WordPress, neřešíš tady): `bohemi.fit/rezervace/` — rezervace,
+Mimo repo (WordPress, neřešíš tady): `studio.bohemi.fit/` — rezervace,
 „Můj účet" / login / členství.
 
 ## Navigační logika — tři vrstvy (sjednoceno 7/2026, drž ji)

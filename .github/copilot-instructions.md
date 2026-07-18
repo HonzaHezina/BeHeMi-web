@@ -7,14 +7,14 @@ ber barvy, fonty a spacing z `design-system/MASTER.md`** — nikdy je nehardcodu
 ## Co tohle repo je
 Statický prezentační web studia BoHeMi fitness. Stack: **Astro + Tailwind**.
 Prezentační vrstva **vedle WordPressu**, ne náhrada. Rezervace, login, členství,
-platby = WordPress na `bohemi.fit/rezervace/`, sem nepatří.
+platby = WordPress na `studio.bohemi.fit/`, sem nepatří.
 
 Značka: **BoHeMi = Body – Health – Mind.** Komunitní, lidské, grounded.
 Ne spa, ne ezoterika, ne luxusní wellness, ne „sekta".
 
 ## Tvrdá pravidla
 1. **Statika only.** Žádný formulář, který odesílá rezervaci, platbu nebo login.
-2. **Booking = odkaz ven** na `https://bohemi.fit/rezervace/`. Nikdy iframe, nikdy
+2. **Booking = odkaz ven** na `https://studio.bohemi.fit/`. Nikdy iframe, nikdy
    vlastní rezervační formulář.
 3. **URL/slugy se nemění** — zdroj pravdy je `docs/redirect-map.md` (reálná GSC
    data). Nové slugy nevymýšlet. Jediná schválená výjimka: `/program-8-tydnu/`.

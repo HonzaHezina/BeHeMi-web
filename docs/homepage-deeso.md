@@ -155,7 +155,7 @@ Tvrdá pravidla:
   (v sekci Proč zůstává).
 - „Cesta" zůstává jako NÁZEV produktu (URL i ceník nech být). Měň jen kazatelské
   věty kolem ní.
-- Slugy a odkazy nech beze změny (Rezervovat → https://bohemi.fit/rezervace/).
+- Slugy a odkazy nech beze změny (Rezervovat → https://studio.bohemi.fit/).
 - Nepiš nic doslova „jak se o tom píše jinde" — drž civilní, úsečný tón z návrhu.
 
 Na konci: souhrn, které sekce změněné, a výpis, jestli na homepage zůstalo

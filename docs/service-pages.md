@@ -50,7 +50,7 @@ STRUKTURA stránky (konkrétní, ne esej):
 - pro koho / pro koho ne
 - prakticky: kde, jak dlouho, co si vzít, kapacita
 - cena (jen pokud ji mám potvrzenou; jinak placeholder + dotaz)
-- CTA „Rezervovat" → https://bohemi.fit/rezervace/
+- CTA „Rezervovat" → https://studio.bohemi.fit/
 
 TVRDÁ PRAVIDLA:
 - Service stránka je BETON, ne filozofie. ŽÁDNÝ knižní rámec, žádná „holistic

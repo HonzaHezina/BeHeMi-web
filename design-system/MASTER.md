@@ -33,7 +33,7 @@ Hero-centric + social proof, konverze emocí přes komunitu.
 6. **Social proof** — reference / Multisport & benefity / lokalita.
 7. **CTA + kontakt** — opakované „Rezervovat", mapa, doprava.
 
-CTA „Rezervovat" je **vždy odkaz na `bohemi.fit/rezervace/`**.
+CTA „Rezervovat" je **vždy odkaz na `studio.bohemi.fit/`**.
 
 ## Barvy (tokeny)
 
@@ -122,7 +122,7 @@ Decentní. Přechody 150–300 ms, jemné hover stavy. Respektuj
 ## Pre-delivery checklist
 
 - [ ] Barvy a fonty výhradně z tokenů (nic natvrdo)
-- [ ] CTA „Rezervovat" míří na `bohemi.fit/rezervace/`
+- [ ] CTA „Rezervovat" míří na `studio.bohemi.fit/`
 - [ ] Slug stránky sedí se současným webem
 - [ ] Jeden `<h1>`, `<title>` + `meta description`
 - [ ] Kontrast textu ≥ 4.5:1, viditelný focus pro klávesnici

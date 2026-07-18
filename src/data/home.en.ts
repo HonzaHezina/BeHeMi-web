@@ -135,4 +135,4 @@ export const navMenu = [
   { num: '05', label: 'Trainers', desc: 'Who will guide you', href: '/treneri/' },
 ];
 
-export const RESERVE_URL = 'https://bohemi.fit/rezervace/';
+export const RESERVE_URL = 'https://studio.bohemi.fit/';

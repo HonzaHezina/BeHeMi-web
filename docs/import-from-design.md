@@ -67,7 +67,7 @@ Pravidla:
 
 4. FONTY — napoj přes Google Fonts <link> nebo @fontsource, ne inline.
 
-5. REZERVACE — každé tlačítko „Rezervovat" je <a href="https://bohemi.fit/rezervace/">.
+5. REZERVACE — každé tlačítko „Rezervovat" je <a href="https://studio.bohemi.fit/">.
    Žádný formulář, žádný iframe, žádná booking logika. Statika only.
 
 6. SEO — jeden <h1>, smysluplný <title> + <meta name="description">, sémantické
