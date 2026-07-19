@@ -1,10 +1,13 @@
 # BoHeMi WP UI
 
-Vlastní hlavička pro `studio.bohemi.fit` (WordPress / Twenty Twenty-Five /
-Booking Activities / Paid Memberships Pro), vizuálně sladěná s hlavičkou
-hlavního marketingového webu postaveného v Astro (`bohemi.fit`).
+Vlastní hlavička pro `studio.bohemi.fit` (WordPress / Twenty Twenty-Five,
+resp. jeho child theme `bohemi-twentytwentyfive-child` — viz
+`wordpress/README.md` / Booking Activities / Paid Memberships Pro),
+vizuálně sladěná s hlavičkou hlavního marketingového webu postaveného v
+Astro (`bohemi.fit`).
 
-Plugin **neupravuje žádný soubor Twenty Twenty-Five** ani jiného pluginu.
+Plugin **neupravuje žádný soubor Twenty Twenty-Five ani child theme nad ním**.
+Funguje nezávisle na aktivním motivu (viz „Proč core/html" níž).
 Dodává vlastní block pattern (`bohemi-wp-ui/header`), vlastní CSS/JS a
 vlastní logo — vše pod jmenným prostorem `bohemi-header-*` / `bohemi_wp_ui_*`.
 
@@ -38,7 +41,8 @@ WordPress instalace slouží jen jako rezervační/členská část, takže head
 zde má jiný obsah než na `bohemi.fit`:
 
 - **Hlavní web** → `bohemi.fit` (marketingový Astro web)
-- **Rezervace lekcí** → stránka s Booking Activities
+- **Rezervace lekcí** → stránka s Booking Activities (aktuálně front page
+  `/`, viz „⚠️ `/rezervace/`" níž)
 - **Členství** → PMPro „levels" stránka
 - **Můj účet** → PMPro „account" stránka (řeší přihlášení i odhlášení sama —
   PMPro shortcode na této stránce zobrazuje login formulář odhlášeným a
@@ -61,7 +65,7 @@ nepřenáší — WP nabídka je jiná (viz výše), ne rozcestník lekcí.
 | `BOHEMI_MAIN_SITE_URL` | `bohemi_wp_ui_main_site_url` | Hlavní web | `https://bohemi.fit/` |
 | `BOHEMI_BOOKING_URL` | `bohemi_wp_ui_booking_url` | Rezervace lekcí | hledá stránku `rezervace-lekci` / `rezervace` / `booking` / `lekce` / `kalendar` |
 | `BOHEMI_MEMBERSHIP_URL` | `bohemi_wp_ui_membership_url` | Členství | `pmpro_url('levels')`, pokud je PMPro aktivní |
-| `BOHEMI_ACCOUNT_URL` | `bohemi_wp_ui_account_url` | Můj účet | `pmpro_url('account')`, pokud je PMPro aktivní |
+| `BOHEMI_ACCOUNT_URL` | `bohemi_wp_ui_account_url` | Můj účet | `pmpro_url('account')`, jinak stránka `ucet-clenstvi` (potvrzeno živě 20. 7. 2026) |
 | `BOHEMI_RESERVE_URL` | `bohemi_wp_ui_reserve_url` | CTA „Rezervovat" | stránka rezervací → PMPro checkout → home |
 
 Příklad přepsání ve `wp-config.php`:
@@ -136,7 +140,9 @@ kořen problému) — to je potřeba opravit ve wp-admin, viz
 
 1. Nahraj `dist/bohemi-wp-ui.zip` do **Pluginy → Přidat nový → Nahrát plugin** a klikni **Instalovat**.
 2. **Aktivuj** plugin.
-3. Jdi do **Vzhled → Editor** (Site Editor Twenty Twenty-Five).
+3. Jdi do **Vzhled → Editor** (Site Editor — funguje stejně na čistém Twenty
+   Twenty-Five i na `bohemi-twentytwentyfive-child`, protože ten motiv
+   žádnou vlastní hlavičku nedodává, viz `wordpress/README.md`).
 4. V levém menu zvol **Šablony** → nebo přímo **Vzory** (Site Editor je
    verzí od verze k verzi trochu jinak pojmenovává — hledej „Template Parts"
    / „Části šablony").
@@ -167,9 +173,10 @@ pryč, smaž ji ručně ve Vzhled → Editor → Části šablony → Záhlaví.
 
 ```
 bohemi-wp-ui/
-├── bohemi-wp-ui.php       # bootstrap: konstanty, enqueue CSS/JS, resource hints
+├── bohemi-wp-ui.php       # bootstrap: konstanty, enqueue CSS/JS (filemtime verze), resource hints
 ├── includes/
-│   └── urls.php           # resolvery URL (konstanta → filtr → WP lookup → fallback)
+│   ├── urls.php           # resolvery URL (konstanta → filtr → WP lookup → fallback)
+│   └── cache.php          # Cache-Control na stránce s kalendářem + volitelné Clear-Site-Data
 ├── patterns/
 │   └── header.php         # generuje HTML hlavičky + registruje block pattern
 ├── assets/

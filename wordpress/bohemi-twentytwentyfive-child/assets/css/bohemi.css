@@ -1,0 +1,90 @@
+
+:root {
+ --bohemi-bg:#f5efe6;
+ --bohemi-surface:#fcf8f2;
+ --bohemi-dark:#14110e;
+ --bohemi-ink:#16130f;
+ --bohemi-soft:#4a4337;
+ --bohemi-border:#e7dcc8;
+ --bohemi-accent:#e2231a;
+ --bohemi-accent-dark:#b71c13;
+ --bohemi-cream:#f5f1ea;
+}
+
+body {
+ background:var(--bohemi-bg);
+ color:var(--bohemi-ink);
+ font-family:"Hanken Grotesk",system-ui,sans-serif;
+}
+
+.bohemi-container {
+ max-width:1140px;
+ margin-inline:auto;
+ padding-inline:24px;
+}
+
+.bohemi-header {
+ padding:24px 0;
+}
+
+.bohemi-brand-title {
+ font-size:42px;
+ font-weight:800;
+ line-height:1;
+}
+
+.bohemi-tagline {
+ font-size:12px;
+ letter-spacing:3px;
+ text-transform:uppercase;
+}
+
+.bohemi-panel,
+.bohemi-card {
+ background:var(--bohemi-surface);
+ border:1px solid var(--bohemi-border);
+ border-radius:16px;
+ padding:32px;
+}
+
+.bohemi-title {
+ font-size:clamp(40px,6vw,72px);
+ line-height:1.05;
+ font-weight:800;
+}
+
+.bohemi-accent {
+ color:var(--bohemi-accent);
+}
+
+.wp-block-button__link,
+.pmpro_btn,
+.booking-activities button,
+.booking-activities input[type="submit"] {
+ background:var(--bohemi-accent)!important;
+ color:var(--bohemi-cream)!important;
+ border:none!important;
+ border-radius:999px!important;
+ padding:14px 28px!important;
+ font-weight:700;
+}
+
+.booking-activities input,
+.booking-activities select,
+.booking-activities textarea {
+ background:var(--bohemi-surface);
+ border:1px solid var(--bohemi-border);
+ border-radius:12px;
+ padding:12px 16px;
+ color:var(--bohemi-ink);
+}
+
+.bohemi-footer {
+ background:var(--bohemi-dark);
+ color:var(--bohemi-cream);
+ padding:56px 24px;
+}
+
+.bohemi-footer a {
+ color:var(--bohemi-cream);
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "settings": {
+    "layout": {
+      "contentSize": "1140px",
+      "wideSize": "1400px"
+    },
+    "color": {
+      "palette": [
+        {
+          "slug": "bg",
+          "color": "#f5efe6",
+          "name": "BoHeMi Background"
+        },
+        {
+          "slug": "surface",
+          "color": "#fcf8f2",
+          "name": "BoHeMi Surface"
+        },
+        {
+          "slug": "dark",
+          "color": "#14110e",
+          "name": "BoHeMi Dark"
+        },
+        {
+          "slug": "ink",
+          "color": "#16130f",
+          "name": "BoHeMi Ink"
+        },
+        {
+          "slug": "accent",
+          "color": "#e2231a",
+          "name": "BoHeMi Accent"
+        },
+        {
+          "slug": "cream",
+          "color": "#f5f1ea",
+          "name": "BoHeMi Cream"
+        }
+      ]
+    }
+  }
+}

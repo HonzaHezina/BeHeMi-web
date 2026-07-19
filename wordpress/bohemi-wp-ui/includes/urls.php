@@ -89,6 +89,9 @@ function bohemi_wp_ui_membership_url(): string {
  * when logged out, account dashboard + logout link when logged in), so this
  * single link intentionally also carries most of the "Přihlášení / Odhlášení"
  * job — see bohemi_wp_ui_auth_link() below for the dedicated text link.
+ *
+ * `ucet-clenstvi` is confirmed live on studio.bohemi.fit (20. 7. 2026, see
+ * wordpress/README.md) — checked first, ahead of the earlier guesses.
  */
 function bohemi_wp_ui_account_url(): string {
 	if ( defined( 'BOHEMI_ACCOUNT_URL' ) && BOHEMI_ACCOUNT_URL ) {
@@ -96,7 +99,7 @@ function bohemi_wp_ui_account_url(): string {
 	} elseif ( function_exists( 'pmpro_url' ) ) {
 		$url = pmpro_url( 'account' );
 	} else {
-		$url = bohemi_wp_ui_find_page_url( array( 'muj-ucet', 'my-account', 'ucet' ) )
+		$url = bohemi_wp_ui_find_page_url( array( 'ucet-clenstvi', 'muj-ucet', 'my-account', 'ucet' ) )
 			?? home_url( '/' );
 	}
 

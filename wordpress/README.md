@@ -1,28 +1,33 @@
 # WordPress (studio.bohemi.fit)
 
 Tenhle adresář **není** buildovaný Astro webem, je to čistě staging/reference
-pro `studio.bohemi.fit`. V repu je z něj sledovaný jen **`bohemi-wp-ui/`** —
-plugin pro hlavičku, protože to je jediná WP věc, na které se v tomhle repu
-aktivně pracuje. Zbytek stacku (viz níž) na `studio.bohemi.fit` běží, ale
-tenhle repo ho nespravuje ani neverzuje.
+pro `studio.bohemi.fit`. Sledují se tu dvě věci, každá pro jinou práci:
+**`bohemi-wp-ui/`** (plugin — header) a **`bohemi-twentytwentyfive-child/`**
+(child theme — globální styly, PMPro/Booking Activities boxy, obsahové
+patterny). Zbytek stacku (viz níž) na `studio.bohemi.fit` běží, ale tenhle
+repo ho nespravuje ani neverzuje.
 
 ## Celý obrázek — co běží na studio.bohemi.fit
 
 | Vrstva | Co | Kde to je | Spravuje tenhle repo? |
 |---|---|---|---|
-| Motiv | ⚠️ **`bohemi-twentytwentyfive-child`** (ne čisté TT5, viz „⚠️ Aktivní motiv" níž) | child theme, live na produkci | ne — nesledovaný, viz poznámka |
+| Motiv | **`bohemi-twentytwentyfive-child`** (child theme nad TT5) | live na produkci, ⚠️ CSS aktuálně 403 — viz níž | ✅ ano — [`bohemi-twentytwentyfive-child/`](bohemi-twentytwentyfive-child/), ZIP v [`dist/bohemi-twentytwentyfive-child.zip`](dist/bohemi-twentytwentyfive-child.zip) |
 | Rezervace | **Booking Activities** | WP plugin (booking systém) | ne — vendor, needituje se |
 | Členství/platby | **Paid Memberships Pro** | WP plugin | ne — vendor, needituje se |
 | Styl formulářů Booking Activities + PMPro | **`bohemi-custom-ui`** v1.16 | vlastní plugin, submit tlačítko/cenové a uživatelské boxy | ne — jen `_raw/bohemi-custom-ui-v116.zip` (gitignored) |
 | Hlavička | **`bohemi-wp-ui`** | vlastní plugin | ✅ ano — [`bohemi-wp-ui/`](bohemi-wp-ui/), instalační ZIP v [`dist/bohemi-wp-ui.zip`](dist/bohemi-wp-ui.zip) |
 
-`bohemi-wp-ui` a `bohemi-custom-ui` řeší **různé věci** (hlavička vs. styl
-formulářů) a klidně běží vedle sebe — jeden nenahrazuje druhý.
+`bohemi-wp-ui`, `bohemi-twentytwentyfive-child` a `bohemi-custom-ui` řeší
+**tři různé věci** (header / globální styly + obsahové patterny / styl
+formulářů) a běží vedle sebe — žádný nenahrazuje druhý.
 
 ## Instalační checklist (v tomhle pořadí)
 
-1. **Twenty Twenty-Five** — pokud ještě není aktivní motiv, aktivuj ho
-   (Vzhled → Motivy). Nic se v něm needituje.
+1. **`bohemi-twentytwentyfive-child`** — aktivuj jako motiv (Vzhled →
+   Motivy). Na produkci pravděpodobně už běží (viz „⚠️ CSS 403" níž) —
+   pokud ano, jen **přehraj soubory přes FTP/SFTP** stejnou složkou
+   (`wp-content/themes/bohemi-twentytwentyfive-child/`), aktivace se
+   nemění, WordPress bere identitu motivu podle názvu složky.
 2. **Booking Activities** + **Paid Memberships Pro** — musí být nainstalované
    a nakonfigurované (stránky pro rezervace/členství/účet, viz
    `bohemi-wp-ui/includes/urls.php` pro to, jak si `bohemi-wp-ui` tyhle
@@ -35,25 +40,64 @@ formulářů) a klidně běží vedle sebe — jeden nenahrazuje druhý.
    [`bohemi-wp-ui/README.md`](bohemi-wp-ui/README.md#instalace).
 
 Po instalaci všech čtyř kroků by `studio.bohemi.fit` měl mít: fungující
-rezervace a členství, stylizované formuláře a hlavičku vizuálně sladěnou s
-`bohemi.fit`.
+rezervace a členství, stylizované formuláře, hlavičku vizuálně sladěnou s
+`bohemi.fit` a funkční vlastní styly z child theme.
 
-## ⚠️ Aktivní motiv na produkci je child theme, ne čisté TT5
+## Motiv — audit a oprava (20. 7. 2026)
 
-Zjištěno 20. 7. 2026 při diagnóze cache problému (viz níž) — živý
-`studio.bohemi.fit` běží na `wp-content/themes/bohemi-twentytwentyfive-child/`,
-ne na holém Twenty Twenty-Five, jak jsme předpokládali při návrhu
-`bohemi-wp-ui` (plugin vs. šablona, rozhodnutí zůstat u pluginu). Tenhle
-child theme má skoro identické jméno a účel jako `bohemi-wp-final-child`,
-co jsme si prohlédli jako „inspiraci" a z repa smazali — buď je to jeho
-starší nasazená verze, nebo samostatný, o kterém nevíme víc, protože do
-souborů na produkci nevidím (žádný SSH/FTP přístup, jen HTTP).
+Zjištěno při diagnóze cache problému (viz níž): živý `studio.bohemi.fit`
+běží na `wp-content/themes/bohemi-twentytwentyfive-child/`, ne na holém
+Twenty Twenty-Five, jak jsme předpokládali při návrhu `bohemi-wp-ui`
+(rozhodnutí zůstat jen u pluginu). Ukázalo se, že motiv i plugin jsou
+potřeba, každý pro jinou práci — plugin pro header, motiv pro globální
+styly a obsahové patterny (viz tabulka výš).
 
-**Neřeším to sám** — `bohemi-wp-ui` funguje nezávisle na aktivním motivu,
-takže header instalace popsaná výš je platná tak jak je. Ale stojí za to,
-abys v `Vzhled → Motivy` na `studio.bohemi.fit` zkontroloval, co přesně ten
-child theme dělá (vlastní `header.html`? Koliduje s `bohemi-wp-ui`
-patternem?) — dej vědět, co tam najdeš, ať to dorovnáme.
+**Zdroj tohoto adresáře:** stejný ZIP jako dřívější „inspirace"
+`bohemi-wp-final-child.zip` (Honza ho 20. 7. 2026 znovu nahrál do `_raw/`,
+identický obsah/velikost jako předtím) — **není to čerstvý export přímo z
+produkce**, na skutečné soubory na hostingu se nedostanu (viz „⚠️ CSS 403"
+níž, přímý HTTP přístup do té složky je zablokovaný a SSH/FTP nemám).
+Pracuju s nejlepším dostupným zdrojem a opravil jsem, co šlo ověřit zvenku:
+
+- **`parts/header.html` smazán** — byl to hrubý pokus o totéž, co dělá
+  `bohemi-wp-ui` (prázdný `wp:navigation`, bez loga/stylu). Motiv teď nemá
+  vlastní header template part vůbec, dědí default a nahrazuje se stejně
+  jako na čistém TT5 — `functions.php` má komentář, co to vysvětluje.
+- **`patterns/reservation-page.html` a `patterns/account-page.html`
+  převedeny na `.php`** se správnou hlavičkou (`Title:`/`Slug:`/`Categories:`)
+  — jako `.html` je WordPress nikdy nenačetl (theme patterns se
+  auto-discoverují jen z `.php` souborů s tímhle formátem). `functions.php`
+  navíc registruje pattern kategorii `bohemi`, kterou používají.
+  Beze změny obsahu jinak.
+- **`parts/footer.html` opraven** — odkazoval na `/rezervace/` (potvrzeno
+  jako trvalý 301 na `/`, viz „Cache diagnostika" níž) a na
+  `/membership-account/` (nikdy neexistoval). Opraveno na `/` a na skutečný
+  ověřený slug `/ucet-clenstvi/`. „Členství" zůstalo beze změny — nemáme
+  ověřený slug PMPro levels stránky.
+- **`assets/css/bohemi.css` verzování** — `functions.php` teď používá
+  `filemtime()` místo statického `'1.0'`.
+
+### ⚠️ CSS 403 — potřebuje zásah na hostingu, ne v kódu
+
+Ověřeno `curl` (i s reálným browser User-Agentem, kontrolní request na
+plugin CSS ve stejnou chvíli vrátil 200 OK):
+
+```
+curl wp-content/themes/bohemi-twentytwentyfive-child/assets/css/bohemi.css
+→ HTTP 403 "Server unable to read htaccess file, denying access to be safe"
+```
+
+Celá složka motivu je takhle zablokovaná (i `style.css`, `theme.json`,
+`parts/header.html` — jen tahle jedna složka, pluginy fungují normálně).
+**Znamená to, že vlastní BoHeMi styly z tohohle motivu se na produkci teď
+vůbec nenačítají.** Hláška „Server unable to read htaccess file" ukazuje na
+problém s oprávněními/čitelností `.htaccess` souboru někde v cestě k té
+složce na úrovni souborového systému — to není něco, co opraví jiný obsah
+motivu, potřebuje to zásah přes hosting (zkontrolovat/opravit oprávnění,
+případně kontaktovat podporu hostingu). Doporučený postup: přes FTP/SFTP
+zkontrolovat `chmod` složky `wp-content/themes/bohemi-twentytwentyfive-child/`
+(očekávané 755 pro složky, 644 pro soubory) a případný `.htaccess` v ní
+nebo nad ní.
 
 ## Cache diagnostika — Booking Activities nefunguje pro vracející se návštěvníky
 
@@ -122,24 +166,25 @@ pluginu ve WordPressu — přesně jak zadání předpokládalo v bodě 1, jen t
    `BOHEMI_WP_UI_CLEAR_SITE_DATA_UNTIL` na pár dní, ať se stuck návštěvníci
    sami „opraví" bez nutnosti jim říkat „vymažte cache".
 
-## Co tu dřív bylo a proč zmizelo z repa
+## Historie `_raw/` zdrojů (co zůstalo, co se vrátilo, co je jen vendor)
 
-19. 7. 2026 sem byly krátce přesunuté i starší nálezy z `_raw/` (plugin
-`bohemi-custom-ui`, child theme `bohemi-wp-final-child` s vlastním pokusem o
-header + patterny pro rezervace/účet, a vendor ZIPy Booking Activities +
-Twenty Twenty-Five). Sloužily jen jako inspirace/reference při stavbě
-`bohemi-wp-ui` a byly z repa zase smazané, protože tenhle repo má sledovat
-jen to, na čem se aktivně pracuje. **Nebyly nikdy commitnuté do gitu**
-(`wordpress/` byl celou dobu untracked), takže v historii repa nejsou —
-pořád jsou to ale ty samé ZIPy, které jsi nahrával do `_raw/` (gitignored,
-zůstávají tam beze změny):
+19. 7. 2026 sem byly krátce přesunuté starší nálezy z `_raw/` (plugin
+`bohemi-custom-ui`, child theme `bohemi-wp-final-child`, vendor ZIPy
+Booking Activities + Twenty Twenty-Five) jako inspirace při stavbě
+`bohemi-wp-ui` a zase smazané, protože v tu chvíli šlo jen o header. O den
+později se ukázalo, že ten „child theme inspirace" je ve skutečnosti (starší
+verze) toho, co běží živě na produkci — vrátil se zpátky, opravený, viz
+„Motiv — audit a oprava" výš. **Nic z tohohle nebylo nikdy commitnuté do
+gitu** (`wordpress/` byl celou dobu untracked), takže v historii repa nejsou
+— zdrojem pravdy zůstávají ZIPy v `_raw/` (gitignored):
 
 - `_raw/bohemi-custom-ui-v116.zip` — pořád aktivně potřeba, viz checklist výš.
   (Krátce jsem ho omylem smazal beze zálohy při úklidu `wordpress/` — zpátky
   do `_raw/` ho 20. 7. 2026 znovu nahrál Honza.)
 - `_raw/booking-activities.zip`, `_raw/twentytwentyfive.zip` — vendor,
   needituje se, jen pro referenci/rychlou instalaci.
-- child theme `bohemi-wp-final-child` — nebyl znovu vrácen do `_raw/` (byl
-  jen inspirace, jeho header konfliktoval s `bohemi-wp-ui` a byl vyřešen
-  jeho smazáním, zbytek — barevná paleta, patterny pro rezervace/účet — se
-  nikam nepoužívá).
+- `_raw/bohemi-wp-final-child.zip` — ukázalo se, že to NENÍ jen inspirace,
+  ale (nejspíš starší verze) toho, co skutečně běží na produkci jako
+  `bohemi-twentytwentyfive-child` — motiv se 20. 7. 2026 vrátil zpátky,
+  opravený, jako [`bohemi-twentytwentyfive-child/`](bohemi-twentytwentyfive-child/)
+  (viz „Motiv — audit a oprava" výš). Zdrojový ZIP zůstává i v `_raw/`.
