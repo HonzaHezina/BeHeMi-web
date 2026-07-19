@@ -1,0 +1,312 @@
+/**
+ * BoHeMi WP header.
+ *
+ * All values below are copied 1:1 from the Astro site's source of truth:
+ *   src/components/Header.astro   (structure, spacing, breakpoints)
+ *   src/styles/global.css         (@theme design tokens)
+ *   src/components/Button.astro   (CTA colors + hover states)
+ *
+ * Do not hardcode a different hex/font here — if a value is missing,
+ * check those three files again before guessing.
+ *
+ * Namespace: every selector is scoped under .bohemi-header-* so this
+ * stylesheet cannot collide with Twenty Twenty-Five, Booking Activities
+ * or Paid Memberships Pro markup.
+ */
+
+:root {
+	/* Astro --color-bg at 80% opacity + backdrop-blur (header is sticky/translucent) */
+	--bohemi-header-bg: rgba(245, 239, 230, 0.8);
+	--bohemi-header-blur: 12px;
+
+	/* Astro --color-ink / --color-ink-line / --color-ink-muted / --color-brand */
+	--bohemi-header-text: #16130f;
+	--bohemi-header-text-line: #2a251e;
+	--bohemi-header-text-muted: #56503f;
+	--bohemi-header-brand-hover: #1c1812;
+
+	/* Astro --color-accent / --color-accent-text / --color-accent-deep / --color-cream */
+	--bohemi-header-accent: #e2231a;
+	--bohemi-header-accent-text: #b71c13;
+	--bohemi-header-accent-deep: #8f150d;
+	--bohemi-header-cream: #f5f1ea;
+
+	/* Astro --color-surface / --color-surface-hover / --color-border / --color-border-strong */
+	--bohemi-header-surface: #fcf8f2;
+	--bohemi-header-surface-hover: #f4ece0;
+	--bohemi-header-border: #e7dcc8;
+	--bohemi-header-border-strong: #dfd3bc;
+
+	/* Layout — Astro: max-w-[1220px], px-5 (mobile) / px-8 (md+), py-3.5 */
+	--bohemi-header-max-width: 1220px;
+	--bohemi-header-padding-x: 20px;
+	--bohemi-header-padding-x-md: 32px;
+	--bohemi-header-padding-y: 14px;
+	/* Advisory only (Astro has no fixed header height, it's padding-driven —
+	   see .bohemi-header-inner below). Useful as a scroll-margin-top offset
+	   elsewhere on the WP site if a page ever needs one. */
+	--bohemi-header-height: 76px;
+
+	/* Astro CTA: rounded-full; dropdown/mobile menu: rounded-2xl (16px) */
+	--bohemi-header-radius: 999px;
+	--bohemi-header-radius-panel: 16px;
+
+	/* Astro breakpoints (Tailwind defaults): md = 768px, lg = 1024px */
+	--bohemi-header-bp-tablet: 768px;
+	--bohemi-header-bp-desktop: 1024px;
+}
+
+.bohemi-header,
+.bohemi-header * {
+	box-sizing: border-box;
+}
+
+.bohemi-header {
+	position: sticky;
+	top: 0;
+	z-index: 500;
+	background: var(--bohemi-header-bg);
+	-webkit-backdrop-filter: blur(var(--bohemi-header-blur));
+	backdrop-filter: blur(var(--bohemi-header-blur));
+	border-bottom: 1px solid var(--bohemi-header-border-strong);
+	font-family: "Hanken Grotesk", system-ui, -apple-system, sans-serif;
+}
+
+.bohemi-header-inner {
+	max-width: var(--bohemi-header-max-width);
+	margin-inline: auto;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 24px;
+	padding: var(--bohemi-header-padding-y) var(--bohemi-header-padding-x);
+}
+
+@media (min-width: 768px) {
+	.bohemi-header-inner {
+		padding-inline: var(--bohemi-header-padding-x-md);
+	}
+}
+
+/* Logo — Astro: flex column, image h-12 (48px), wordmark 21px/800 */
+.bohemi-header-logo {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 2px;
+	text-decoration: none;
+	cursor: pointer;
+	flex-shrink: 0;
+}
+
+.bohemi-header-logo-img {
+	height: 48px;
+	width: auto;
+	display: block;
+}
+
+.bohemi-header-wordmark {
+	font-size: 21px;
+	font-weight: 800;
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	color: var(--bohemi-header-text);
+}
+
+/* Tagline — Astro: hidden until lg (1024px), then flex-1 + centered */
+.bohemi-header-tagline {
+	display: none;
+	color: var(--bohemi-header-text-muted);
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+@media (min-width: 1024px) {
+	.bohemi-header-tagline {
+		display: block;
+		flex: 1;
+	}
+}
+
+/* Desktop nav — Astro: hidden until lg, then flex row, gap-0.5 (2px) */
+.bohemi-header-nav {
+	display: none;
+	align-items: center;
+	gap: 2px;
+}
+
+@media (min-width: 1024px) {
+	.bohemi-header-nav {
+		display: flex;
+	}
+}
+
+.bohemi-header-link {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	padding: 8px 14px;
+	font-size: 15.5px;
+	font-weight: 600;
+	letter-spacing: -0.01em;
+	color: var(--bohemi-header-text-line);
+	text-decoration: none;
+	transition: color 0.15s ease;
+}
+
+.bohemi-header-link:hover {
+	color: var(--bohemi-header-brand-hover);
+}
+
+.bohemi-header-link[aria-current="page"]::after {
+	content: "";
+	position: absolute;
+	left: 14px;
+	right: 14px;
+	bottom: 2px;
+	height: 2px;
+	border-radius: 999px;
+	background: var(--bohemi-header-accent);
+}
+
+.bohemi-header-link--auth {
+	margin-left: 4px;
+	padding: 8px 12px;
+	font-size: 13px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	color: var(--bohemi-header-text-muted);
+}
+
+.bohemi-header-link--auth:hover {
+	color: var(--bohemi-header-brand-hover);
+}
+
+/* CTA "Rezervovat" — Astro Button.astro variant="brand" */
+.bohemi-header-cta {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	margin-left: 6px;
+	padding: 10px 22px;
+	font-size: 15px;
+	font-weight: 700;
+	border-radius: var(--bohemi-header-radius);
+	background: var(--bohemi-header-accent-text);
+	color: var(--bohemi-header-cream);
+	text-decoration: none;
+	transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.bohemi-header-cta:hover {
+	background: var(--bohemi-header-accent-deep);
+	transform: translateY(-1px);
+	color: var(--bohemi-header-cream);
+}
+
+/* Mobile cluster — Astro: visible until lg, CTA + hamburger */
+.bohemi-header-mobile {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+@media (min-width: 1024px) {
+	.bohemi-header-mobile {
+		display: none;
+	}
+}
+
+.bohemi-header-cta--mobile {
+	padding: 8px 16px;
+	font-size: 14px;
+}
+
+.bohemi-header-toggle {
+	position: relative;
+}
+
+.bohemi-header-toggle-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	border-radius: 999px;
+	border: 1px solid var(--bohemi-header-border-strong);
+	color: var(--bohemi-header-text);
+	cursor: pointer;
+	list-style: none;
+}
+
+.bohemi-header-toggle-btn::-webkit-details-marker {
+	display: none;
+}
+
+.bohemi-header-icon-open,
+.bohemi-header-icon-close {
+	width: 20px;
+	height: 20px;
+}
+
+.bohemi-header-icon-close {
+	display: none;
+}
+
+.bohemi-header-toggle[open] .bohemi-header-icon-open {
+	display: none;
+}
+
+.bohemi-header-toggle[open] .bohemi-header-icon-close {
+	display: block;
+}
+
+.bohemi-header-mobile-panel {
+	position: absolute;
+	right: 0;
+	top: calc(100% + 10px);
+	width: 290px;
+	max-width: calc(100vw - 40px);
+	border-radius: var(--bohemi-header-radius-panel);
+	border: 1px solid var(--bohemi-header-border);
+	background: var(--bohemi-header-surface);
+	padding: 12px;
+	box-shadow: 0 22px 48px -16px rgba(33, 31, 26, 0.3);
+}
+
+.bohemi-header-mobile-link {
+	display: block;
+	border-radius: 12px;
+	padding: 12px 16px;
+	font-size: 16px;
+	font-weight: 600;
+	color: var(--bohemi-header-text-line);
+	text-decoration: none;
+}
+
+.bohemi-header-mobile-link:hover {
+	background: var(--bohemi-header-surface-hover);
+}
+
+.bohemi-header-mobile-divider {
+	margin: 6px 4px;
+	border-top: 1px solid var(--bohemi-header-border);
+}
+
+/* Focus-visible — matches Astro's global :focus-visible ring */
+.bohemi-header a:focus-visible,
+.bohemi-header summary:focus-visible {
+	outline: 2px solid var(--bohemi-header-accent);
+	outline-offset: 2px;
+	border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.bohemi-header-cta {
+		transition: none;
+	}
+}
