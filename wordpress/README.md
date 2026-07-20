@@ -11,7 +11,7 @@ repo ho nespravuje ani neverzuje.
 
 | Vrstva | Co | Kde to je | Spravuje tenhle repo? |
 |---|---|---|---|
-| Motiv | **`bohemi-twentytwentyfive-child`** (child theme nad TT5) | live na produkci, ⚠️ CSS aktuálně 403 — viz níž | ✅ ano — [`bohemi-twentytwentyfive-child/`](bohemi-twentytwentyfive-child/), ZIP v [`dist/bohemi-twentytwentyfive-child.zip`](dist/bohemi-twentytwentyfive-child.zip) |
+| Motiv | **`bohemi-twentytwentyfive-child`** (child theme nad TT5) | ✅ live na produkci, CSS/logo se načítají | ✅ ano — [`bohemi-twentytwentyfive-child/`](bohemi-twentytwentyfive-child/), ZIP v [`dist/bohemi-twentytwentyfive-child.zip`](dist/bohemi-twentytwentyfive-child.zip) |
 | Rezervace | **Booking Activities** | WP plugin (booking systém) | ne — vendor, needituje se |
 | Členství/platby | **Paid Memberships Pro** | WP plugin | ne — vendor, needituje se |
 | Styl formulářů Booking Activities + PMPro | **`bohemi-custom-ui`** v1.16 | vlastní plugin, submit tlačítko/cenové a uživatelské boxy | ne — jen `_raw/bohemi-custom-ui-v116.zip` (gitignored) |
@@ -24,10 +24,12 @@ formulářů) a běží vedle sebe — žádný nenahrazuje druhý.
 ## Instalační checklist (v tomhle pořadí)
 
 1. **`bohemi-twentytwentyfive-child`** — aktivuj jako motiv (Vzhled →
-   Motivy). Na produkci pravděpodobně už běží (viz „⚠️ CSS 403" níž) —
-   pokud ano, jen **přehraj soubory přes FTP/SFTP** stejnou složkou
-   (`wp-content/themes/bohemi-twentytwentyfive-child/`), aktivace se
-   nemění, WordPress bere identitu motivu podle názvu složky.
+   Motivy). Na produkci už běží — stačí **přehrát soubory přes FTP/SFTP**
+   stejnou složkou (`wp-content/themes/bohemi-twentytwentyfive-child/`),
+   aktivace se nemění, WordPress bere identitu motivu podle názvu složky.
+   ⚠️ Po každém přehrání nových/přidaných souborů zkontroluj oprávnění (viz
+   „Motiv — audit a oprava" níž, sekce „Oprávnění po nahrání FTP") — nový
+   upload může znovu dostat špatná práva.
 2. **Booking Activities** + **Paid Memberships Pro** — musí být nainstalované
    a nakonfigurované (stránky pro rezervace/členství/účet, viz
    `bohemi-wp-ui/includes/urls.php` pro to, jak si `bohemi-wp-ui` tyhle
@@ -43,6 +45,16 @@ Po instalaci všech čtyř kroků by `studio.bohemi.fit` měl mít: fungující
 rezervace a členství, stylizované formuláře, hlavičku vizuálně sladěnou s
 `bohemi.fit` a funkční vlastní styly z child theme.
 
+### ✅ Stav k 20. 7. 2026
+
+- **Header** — live, vizuálně sladěný s `bohemi.fit` (potvrzeno `curl` i
+  vizuálně v Site Editoru).
+- **Motiv `bohemi-twentytwentyfive-child`** — live, CSS/logo se načítají
+  (viz „Motiv — audit a oprava" níž, oprávnění opravena přes FTP).
+- **Otevřené:** `/rezervace/` pořád 301-redirectuje na `/` (viz „Cache
+  diagnostika" níž — potřebuje rozhodnutí ve wp-adminu, ne kód), kontrola
+  DevTools Service Workers zatím neproběhla.
+
 ## Motiv — audit a oprava (20. 7. 2026)
 
 Zjištěno při diagnóze cache problému (viz níž): živý `studio.bohemi.fit`
@@ -54,10 +66,11 @@ styly a obsahové patterny (viz tabulka výš).
 
 **Zdroj tohoto adresáře:** stejný ZIP jako dřívější „inspirace"
 `bohemi-wp-final-child.zip` (Honza ho 20. 7. 2026 znovu nahrál do `_raw/`,
-identický obsah/velikost jako předtím) — **není to čerstvý export přímo z
-produkce**, na skutečné soubory na hostingu se nedostanu (viz „⚠️ CSS 403"
-níž, přímý HTTP přístup do té složky je zablokovaný a SSH/FTP nemám).
-Pracuju s nejlepším dostupným zdrojem a opravil jsem, co šlo ověřit zvenku:
+identický obsah/velikost jako předtím) — **nebyl to čerstvý export přímo z
+produkce**, na skutečné soubory na hostingu jsem se nedostal (žádný
+SSH/FTP přístup, jen HTTP, a přímý HTTP přístup do té složky byl tou dobou
+navíc zablokovaný 403 — viz „CSS 403" níž). Pracoval jsem s nejlepším
+dostupným zdrojem a opravil, co šlo ověřit zvenku:
 
 - **`parts/header.html` smazán** — byl to hrubý pokus o totéž, co dělá
   `bohemi-wp-ui` (prázdný `wp:navigation`, bez loga/stylu). Motiv teď nemá
@@ -77,27 +90,45 @@ Pracuju s nejlepším dostupným zdrojem a opravil jsem, co šlo ověřit zvenku
 - **`assets/css/bohemi.css` verzování** — `functions.php` teď používá
   `filemtime()` místo statického `'1.0'`.
 
-### ⚠️ CSS 403 — potřebuje zásah na hostingu, ne v kódu
+### ✅ CSS 403 — vyřešeno 20. 7. 2026 (oprávnění po FTP uploadu)
 
-Ověřeno `curl` (i s reálným browser User-Agentem, kontrolní request na
-plugin CSS ve stejnou chvíli vrátil 200 OK):
+Po nahrání `bohemi-twentytwentyfive-child` i `bohemi-wp-ui` přes FTP (Total
+Commander, Wedos hosting) vracely jejich statické assety (CSS/JS/PNG) `403
+Forbidden`, i s reálným browser User-Agentem:
 
 ```
 curl wp-content/themes/bohemi-twentytwentyfive-child/assets/css/bohemi.css
 → HTTP 403 "Server unable to read htaccess file, denying access to be safe"
 ```
 
-Celá složka motivu je takhle zablokovaná (i `style.css`, `theme.json`,
-`parts/header.html` — jen tahle jedna složka, pluginy fungují normálně).
-**Znamená to, že vlastní BoHeMi styly z tohohle motivu se na produkci teď
-vůbec nenačítají.** Hláška „Server unable to read htaccess file" ukazuje na
-problém s oprávněními/čitelností `.htaccess` souboru někde v cestě k té
-složce na úrovni souborového systému — to není něco, co opraví jiný obsah
-motivu, potřebuje to zásah přes hosting (zkontrolovat/opravit oprávnění,
-případně kontaktovat podporu hostingu). Doporučený postup: přes FTP/SFTP
-zkontrolovat `chmod` složky `wp-content/themes/bohemi-twentytwentyfive-child/`
-(očekávané 755 pro složky, 644 pro soubory) a případný `.htaccess` v ní
-nebo nad ní.
+**Příčina:** nově nahrané složky dostaly přes FTP jiná oprávnění/skupinu
+než existující, funkční složky:
+
+```
+bohemi-twentytwentyfive-child   drwxr-x---   vlastník 256765   skupina 256765
+twentytwentyfive (funkční)      drwxr-xr-x   vlastník 256765   skupina 500
+```
+
+Chybělo právo pro „ostatní" (`o+rx`) a nová složka měla skupinu shodnou s
+vlastníkem místo skupiny `500`, pod kterou zjevně běží statický webserver
+na tomhle Wedos hostingu. PHP soubory tím dotčené nebyly (WordPress/PHP-FPM
+čte soubory jako vlastník, ne jako „ostatní") — proto pattern s menu
+fungoval (viz Site Editor screenshot), ale CSS/JS/PNG, které si prohlížeč
+stahuje napřímo, ne.
+
+**Oprava:** rekurzivní `chmod 755` na složky / `644` na soubory přes FTP
+(Total Commander: označit → **Soubory → Změnit atributy...**, ne Ctrl+M —
+to je Multi-Rename). Total Commanderova rekurze se navíc ukázala
+nespolehlivá u víceúrovňových složek (`assets/css/…`) — musely se projít
+i podsložky zvlášť (`assets/`, `assets/css/`, `assets/js/`,
+`assets/images/` a soubory v nich jednotlivě). Po opravě `curl -I` na
+všechny assety obou balíčků vrací `200 OK` a header i motiv se na
+produkci zobrazují správně.
+
+**Pro příště:** stejný postup zopakuj po každém dalším FTP nahrání
+nových/přidaných souborů do těchto dvou složek — nejde o nastavení, které
+by se zapamatovalo natrvalo, dokud to Wedos podpora neediteje výchozí
+skupinu FTP účtu (žádost na to jsme jim zatím neposílali).
 
 ## Cache diagnostika — Booking Activities nefunguje pro vracející se návštěvníky
 
