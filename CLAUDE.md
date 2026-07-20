@@ -347,10 +347,13 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
 - **Ceny kroužků sjednocené s WP 5. 7. 2026:** akademie 4 000 / 4 600 / 5 500 Kč,
   Dětská Zumba 3 400 Kč (vše „/ semestr"), Objevovárna 250 Kč / vstup. Při změně
   držet v synku tři místa: detail `/krouzky-pro-deti/` + ceník CZ + ceník EN.
-  Otevřené (čeká na Honzu): názvy kurzů akademie se na webu liší od WP — web má
-  „Základy cirkusového tréninku" a „Hlavou ve vzduchu", WP „Základy gymnastiky
-  a akrobacie formou hry" a „Pozemní a závěsná akrobacie, žonglování". Jestli
-  mají sedět s WP bookingem 1:1, rozhodne Honza — zatím nechat webové názvy.
+  **Názvy kurzů akademie přejmenované na WP názvy (potvrzeno Honzou 20. 7. 2026):**
+  „Základy cirkusového tréninku" → **„Základy gymnastiky a akrobacie formou hry"**,
+  „Hlavou ve vzduchu" → **„Pozemní a závěsná akrobacie, žonglování"** — sedí 1:1
+  s WP bookingem. Drženo v synku na `/krouzky-pro-deti/`, `home.ts`/`home.en.ts`
+  (kotvy `#zaklady-gymnastiky`/`#akrobacie-zonglovani` beze změny) i ceník CZ/EN.
+  **Semestr potvrzen (20. 7. 2026):** 16. 9. 2026 – 27. 1. 2027 je zimní semestr
+  (WP popisek „letní" byl zavádějící, data zůstávají).
 - **Přístupnost:** všechny stránky projdou **axe-core (WCAG 2.1 A+AA) = 0 chyb**.
   Drž text ≥ 4.5:1 (velký ≥ 3:1), globální `:focus-visible` ring je v `@layer base`,
   animace respektují `prefers-reduced-motion`. Po změně barev spusť axe znovu.

@@ -57,8 +57,8 @@ export const individualServices: { t: string; d: string; href?: string }[] = [
 // href = detail page; the whole card is clickable. Kids detail pages are CS-only for now.
 export const kidsActivities: { id: string; t: string; d: string; img: string; media: string; href?: string }[] = [
   { id: 'cirkusova-skolicka', t: 'Circus School', d: 'For the youngest — a first step into movement: balance, coordination, and the confidence to try something new.', img: 'circus school', media: 'media-sand', href: '/krouzky-pro-deti/#cirkusova-skolicka' },
-  { id: 'zaklady-gymnastiky', t: 'Gymnastics & Acrobatics basics', d: 'Gymnastics and acrobatics led by La Putyka acrobats.', img: 'acrobatics', media: 'media-clay', href: '/krouzky-pro-deti/#zaklady-gymnastiky' },
-  { id: 'akrobacie-zonglovani', t: 'Hlavou ve vzduchu', d: 'Floor and aerial acrobatics and juggling.', img: 'kids clubs', media: 'media-green', href: '/krouzky-pro-deti/#akrobacie-zonglovani' },
+  { id: 'zaklady-gymnastiky', t: 'Gymnastics & acrobatics through play', d: 'Gymnastics and acrobatics led by La Putyka acrobats.', img: 'acrobatics', media: 'media-clay', href: '/krouzky-pro-deti/#zaklady-gymnastiky' },
+  { id: 'akrobacie-zonglovani', t: 'Floor & aerial acrobatics, juggling', d: 'Floor and aerial acrobatics and juggling.', img: 'kids clubs', media: 'media-green', href: '/krouzky-pro-deti/#akrobacie-zonglovani' },
   { id: 'objevovarna', t: 'Discovery Room', d: 'For kids up to age 5 — 6 movement stations where they figure out on their own what their body can do.', img: 'discovery room', media: 'media-rose', href: '/krouzky-pro-deti/#objevovarna' },
   { id: 'detska-zumba', t: 'Kids Zumba', d: 'Dance classes for children in Zumba style — coordination and movement, but mostly fun. Led by Eliška Velázquez.', img: 'kids zumba', media: 'media-sand', href: '/krouzky-pro-deti/#detska-zumba' },
   { id: 'supermamky', t: 'Supermums', d: 'A group class for mums and dads with kids — circuit training adapted to the reality of parenthood. With your baby or toddler right beside you.', img: 'supermums', media: 'media-forest', href: '/supermamky/' },

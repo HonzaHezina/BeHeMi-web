@@ -21,8 +21,8 @@ const objevovarnaExtra = [
 // pololetní kroužek 3 400 Kč — v ceníku vedená jako „/ semestr".
 // Ceny ověřené proti WP 5. 7. 2026 (4 000 / 4 600 / 5 500 Kč) — drž v synku
 // s cenik.astro a en/pricing.astro.
-// TODO(Honza): před nasazením ověřit termíny semestru — WP uvádí
-// „letní semestr 16. 9. 2026 – 27. 1. 2027", což vypadá jako zimní.
+// Termín semestru potvrzen Honzou 20. 7. 2026: 16. 9. 2026 – 27. 1. 2027 je
+// zimní semestr (WP popisek „letní" byl chybný/zavádějící, data platí).
 // WP u kurzů ukazuje i počty míst (10/9/11) — vypadá to jako volná místa
 // z bookingu, ne kapacita → na statický web nepatří (viz CLAUDE.md).
 // id = stabilní kotva /krouzky-pro-deti/#<id> (ASCII, nikdy neměnit) —
@@ -40,7 +40,7 @@ const circusCourses = [
   },
   {
     id: 'zaklady-gymnastiky',
-    t: 'Základy cirkusového tréninku',
+    t: 'Základy gymnastiky a akrobacie formou hry',
     age: '6–8 let',
     when: 'každou středu od 15:15',
     price: '4 600 Kč / semestr',
@@ -50,7 +50,7 @@ const circusCourses = [
   },
   {
     id: 'akrobacie-zonglovani',
-    t: 'Hlavou ve vzduchu',
+    t: 'Pozemní a závěsná akrobacie, žonglování',
     age: '9–12 let',
     when: 'každou středu od 16:30',
     price: '5 500 Kč / semestr',
