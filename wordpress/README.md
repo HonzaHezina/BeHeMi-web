@@ -48,12 +48,50 @@ rezervace a členství, stylizované formuláře, hlavičku vizuálně sladěnou
 ### ✅ Stav k 20. 7. 2026
 
 - **Header** — live, vizuálně sladěný s `bohemi.fit` (potvrzeno `curl` i
-  vizuálně v Site Editoru).
+  vizuálně v Site Editoru, i na reálném mobilu).
 - **Motiv `bohemi-twentytwentyfive-child`** — live, CSS/logo se načítají
   (viz „Motiv — audit a oprava" níž, oprávnění opravena přes FTP).
+- **Patička (`parts/footer.html`, v1.2)** — přepracovaná, viz „Patička —
+  redesign" níž. **Zatím jen v repu, čeká na nahrání na produkci** (stejný
+  FTP postup jako u předchozích souborů, pozor na oprávnění po uploadu).
 - **Otevřené:** `/rezervace/` pořád 301-redirectuje na `/` (viz „Cache
   diagnostika" níž — potřebuje rozhodnutí ve wp-adminu, ne kód), kontrola
   DevTools Service Workers zatím neproběhla.
+
+## Patička — redesign (20. 7. 2026)
+
+Honza chtěl patičku „profi" na obou webech — sladit vzhled aktuální
+patičky na `bohemi.fit` (kterou nahrazuje Astro web) s tím, co už bylo
+hezké na `studio.bohemi.fit`. Uděláno na obou stranách zvlášť (ne sdílený
+kód — Astro a WordPress jsou different runtime), ale se stejným obsahem:
+
+- **Astro (`src/components/Footer.astro`)** — přidány otevírací doba, odkaz
+  „Zobrazit na mapě →" (stejný vzor jako `/kontakt/`), sociální sítě
+  (Facebook/Instagram — zatím placeholder URL, stejné `// TODO` jako
+  `kontakt.astro`), a nový spodní řádek s právními odkazy (Obchodní
+  podmínky, Zpracování osobních údajů, Provozní řád). **Právní stránky
+  ještě nejsou postavené v Astro** (CLAUDE.md: „Zatím nepostavené"), takže
+  odkazy dočasně míří ven na potvrzené WordPress URL
+  (`studio.bohemi.fit/vseobecne-obchodni-podminky/` atd.) — až vzniknou
+  vlastní Astro stránky, přepsat na interní odkazy. **Žádný kontaktní
+  formulář** — CLAUDE.md pravidlo 1 (jen statika, `mailto:`/`tel:`),
+  Honza to potvrdil explicitně. Smazán i nepoužívaný a věcně špatný
+  i18n klíč `footer_address` („Blanická 25" — stará/mrtvá hodnota, nikde se
+  nepoužívala). Build (`npm run build`) i `node scripts/check-links.mjs`
+  prošly bez chyb.
+- **WordPress (`bohemi-twentytwentyfive-child/parts/footer.html`)** —
+  stejný obsah (kontakt, mapa, otevírací doba, sociální sítě, právní
+  odkazy — tady už jako interní `/vseobecne-obchodni-podminky/` atd., je to
+  stejná doména), navíc sloupec „Odkazy" (Hlavní web → `bohemi.fit`,
+  Rezervace lekcí → `/`, Můj účet → `/ucet-clenstvi/`). Bez kontaktního
+  formuláře stejně jako Astro (šlo o jednoduchost/konzistenci, ne o tvrdé
+  pravidlo jako u Astra — pokud bys chtěl fungující formulář, potřeboval by
+  to plugin jako Contact Form 7/WPForms, není to jen úprava šablony).
+  **Bonus oprava:** v `assets/css/bohemi.css` bylo zapomenuté pravidlo
+  `.bohemi-header { padding:24px 0; }` ze starého smazaného draftu headeru
+  — kolidovalo se stejnojmennou třídou v `bohemi-wp-ui` a přidávalo
+  nechtěný padding do živého headeru. Smazáno spolu s dalšími nepoužitými
+  třídami (`bohemi-brand-title`, `bohemi-tagline`).
 
 ## Motiv — audit a oprava (20. 7. 2026)
 

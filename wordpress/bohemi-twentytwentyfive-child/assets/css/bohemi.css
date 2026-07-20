@@ -23,22 +23,6 @@ body {
  padding-inline:24px;
 }
 
-.bohemi-header {
- padding:24px 0;
-}
-
-.bohemi-brand-title {
- font-size:42px;
- font-weight:800;
- line-height:1;
-}
-
-.bohemi-tagline {
- font-size:12px;
- letter-spacing:3px;
- text-transform:uppercase;
-}
-
 .bohemi-panel,
 .bohemi-card {
  background:var(--bohemi-surface);
@@ -82,9 +66,75 @@ body {
 .bohemi-footer {
  background:var(--bohemi-dark);
  color:var(--bohemi-cream);
- padding:56px 24px;
+ padding:56px 24px 32px;
 }
 
 .bohemi-footer a {
  color:var(--bohemi-cream);
+ text-decoration:none;
+}
+
+.bohemi-footer a:hover {
+ opacity:0.75;
+}
+
+.bohemi-footer p {
+ margin:0 0 8px;
+ font-size:15px;
+ line-height:1.7;
+ opacity:0.85;
+}
+
+.bohemi-footer-grid {
+ gap:32px 40px !important;
+ padding-bottom:32px;
+ margin-bottom:24px;
+ border-bottom:1px solid rgba(245,241,234,0.15);
+}
+
+.bohemi-footer-col {
+ flex:1 1 190px;
+ min-width:180px;
+}
+
+.bohemi-footer-brand {
+ font-size:22px !important;
+ font-weight:800;
+ opacity:1 !important;
+ margin-bottom:10px !important;
+}
+
+.bohemi-footer-tagline {
+ margin-left:8px;
+ font-size:12px;
+ font-weight:600;
+ letter-spacing:0.08em;
+ text-transform:uppercase;
+ opacity:0.7;
+}
+
+.bohemi-footer-heading {
+ font-size:12px !important;
+ font-weight:700;
+ text-transform:uppercase;
+ letter-spacing:0.06em;
+ opacity:0.6 !important;
+ margin-bottom:10px !important;
+}
+
+.bohemi-footer-bottom {
+ padding-top:8px;
+ font-size:13px;
+ opacity:0.75;
+ gap:10px 24px;
+}
+
+.bohemi-footer-bottom p {
+ margin:0;
+ font-size:13px;
+ opacity:1;
+}
+
+.bohemi-footer-legal a {
+ white-space:nowrap;
 }
