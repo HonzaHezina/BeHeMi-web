@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.1.1 — 2026-07-20
+
+Oprava chyby: **„Můj účet" v headeru měl prázdný `href=""`** (potvrzeno
+živě na `studio.bohemi.fit`). Příčina: `pmpro_url()` vrací prázdný řetězec
+(ne `null`/`false`), když PMPro nemá ve svém nastavení vyplněnou vlastní
+stránku pro danou roli — `??` operátor prázdný řetězec nezachytí (není to
+`null`), takže se nepoužil žádný fallback. Opraveno v `includes/urls.php`
+explicitní kontrolou `!empty()` na výsledek `pmpro_url()` ve všech třech
+místech, kde se používá: `bohemi_wp_ui_account_url()`,
+`bohemi_wp_ui_membership_url()`, `bohemi_wp_ui_reserve_url()`. Teď správně
+spadnou na vyhledání stránky podle slugu (`ucet-clenstvi` u účtu) a nakonec
+na `home_url()`.
+
 ## 1.1.0 — 2026-07-20
 
 Cache/versioning fixy — diagnostika popsaná ve `wordpress/README.md`

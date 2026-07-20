@@ -68,15 +68,24 @@ function bohemi_wp_ui_booking_url(): string {
 
 /**
  * Paid Memberships Pro levels page ("Členství").
+ *
+ * `pmpro_url()` returns an EMPTY STRING (not null/false) when PMPro's own
+ * "Levels Page" setting isn't configured — `??` doesn't catch that (empty
+ * string isn't null), so we check `!empty()` explicitly before trusting it.
+ * Same pattern in bohemi_wp_ui_account_url() and bohemi_wp_ui_reserve_url()
+ * below — this exact bug caused a dead `href=""` on "Můj účet" in the
+ * header, confirmed live 20. 7. 2026 (footer had it hardcoded, so it was
+ * fine there — only the dynamic resolver was affected).
  */
 function bohemi_wp_ui_membership_url(): string {
 	if ( defined( 'BOHEMI_MEMBERSHIP_URL' ) && BOHEMI_MEMBERSHIP_URL ) {
 		$url = BOHEMI_MEMBERSHIP_URL;
-	} elseif ( function_exists( 'pmpro_url' ) ) {
-		$url = pmpro_url( 'levels' );
 	} else {
-		$url = bohemi_wp_ui_find_page_url( array( 'clenstvi', 'membership', 'membership-levels', 'cenik-clenstvi' ) )
-			?? home_url( '/' );
+		$pmpro_url = function_exists( 'pmpro_url' ) ? pmpro_url( 'levels' ) : '';
+		$url       = ! empty( $pmpro_url ) ? $pmpro_url : (
+			bohemi_wp_ui_find_page_url( array( 'clenstvi', 'membership', 'membership-levels', 'cenik-clenstvi' ) )
+				?? home_url( '/' )
+		);
 	}
 
 	return apply_filters( 'bohemi_wp_ui_membership_url', $url );
@@ -96,11 +105,12 @@ function bohemi_wp_ui_membership_url(): string {
 function bohemi_wp_ui_account_url(): string {
 	if ( defined( 'BOHEMI_ACCOUNT_URL' ) && BOHEMI_ACCOUNT_URL ) {
 		$url = BOHEMI_ACCOUNT_URL;
-	} elseif ( function_exists( 'pmpro_url' ) ) {
-		$url = pmpro_url( 'account' );
 	} else {
-		$url = bohemi_wp_ui_find_page_url( array( 'ucet-clenstvi', 'muj-ucet', 'my-account', 'ucet' ) )
-			?? home_url( '/' );
+		$pmpro_url = function_exists( 'pmpro_url' ) ? pmpro_url( 'account' ) : '';
+		$url       = ! empty( $pmpro_url ) ? $pmpro_url : (
+			bohemi_wp_ui_find_page_url( array( 'ucet-clenstvi', 'muj-ucet', 'my-account', 'ucet' ) )
+				?? home_url( '/' )
+		);
 	}
 
 	return apply_filters( 'bohemi_wp_ui_account_url', $url );
@@ -115,9 +125,9 @@ function bohemi_wp_ui_reserve_url(): string {
 	if ( defined( 'BOHEMI_RESERVE_URL' ) && BOHEMI_RESERVE_URL ) {
 		$url = BOHEMI_RESERVE_URL;
 	} else {
-		$url = bohemi_wp_ui_find_page_url( array( 'rezervace-lekci', 'rezervace', 'booking' ) )
-			?? ( function_exists( 'pmpro_url' ) ? pmpro_url( 'checkout' ) : null )
-			?? home_url( '/' );
+		$page_url  = bohemi_wp_ui_find_page_url( array( 'rezervace-lekci', 'rezervace', 'booking' ) );
+		$pmpro_url = function_exists( 'pmpro_url' ) ? pmpro_url( 'checkout' ) : '';
+		$url       = $page_url ?? ( ! empty( $pmpro_url ) ? $pmpro_url : home_url( '/' ) );
 	}
 
 	return apply_filters( 'bohemi_wp_ui_reserve_url', $url );
