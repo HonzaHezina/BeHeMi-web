@@ -3,7 +3,7 @@
  * Plugin Name:       BoHeMi WP UI
  * Plugin URI:        https://bohemi.fit/
  * Description:       Vlastní hlavička pro studio.bohemi.fit vizuálně sladěná s hlavním Astro webem (bohemi.fit). Dodává block pattern pro šablonovou část Záhlaví, nezasahuje do Twenty Twenty-Five, Booking Activities ani Paid Memberships Pro.
- * Version:           1.1.1
+ * Version:           1.1.2
  * Requires at least: 6.4
  * Requires PHP:      7.4
  * Author:            BoHeMi
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // No direct access.
 }
 
-define( 'BOHEMI_WP_UI_VERSION', '1.1.1' );
+define( 'BOHEMI_WP_UI_VERSION', '1.1.2' );
 define( 'BOHEMI_WP_UI_FILE', __FILE__ );
 define( 'BOHEMI_WP_UI_DIR', plugin_dir_path( __FILE__ ) );
 define( 'BOHEMI_WP_UI_URL', plugin_dir_url( __FILE__ ) );

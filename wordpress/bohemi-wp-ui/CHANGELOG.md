@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.1.2 — 2026-07-20
+
+`bohemi_wp_ui_account_url()` už nezkouší `pmpro_url('account')` ani
+page-lookup — vrací natvrdo `https://studio.bohemi.fit/ucet-clenstvi/`
+(pořád přepsatelné konstantou `BOHEMI_ACCOUNT_URL`). Dynamický resolver
+(oprava v 1.1.1) na produkci nevrátil opravenou hodnotu ani po nahrání
+souboru a znovu-vložení patternu — nepodařilo se živě určit, jestli
+příčinou bylo nenahrání souboru, PHP OPcache, nebo konfigurace PMPro.
+Honza se rozhodl to nedebugovat naslepo dál a hardcodovat ověřenou URL
+místo toho.
+
 ## 1.1.1 — 2026-07-20
 
 Oprava chyby: **„Můj účet" v headeru měl prázdný `href=""`** (potvrzeno

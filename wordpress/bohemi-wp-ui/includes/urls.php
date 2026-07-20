@@ -99,18 +99,19 @@ function bohemi_wp_ui_membership_url(): string {
  * single link intentionally also carries most of the "Přihlášení / Odhlášení"
  * job — see bohemi_wp_ui_auth_link() below for the dedicated text link.
  *
- * `ucet-clenstvi` is confirmed live on studio.bohemi.fit (20. 7. 2026, see
- * wordpress/README.md) — checked first, ahead of the earlier guesses.
+ * Hardcoded on purpose (20. 7. 2026, Honza's call): `pmpro_url('account')`
+ * was returning an empty string on studio.bohemi.fit for reasons we
+ * couldn't pin down live (upload vs. OPcache vs. PMPro config — never
+ * confirmed which), which produced a dead `href=""` in the header. Rather
+ * than keep debugging blind, the confirmed-working URL is now the direct
+ * default. `BOHEMI_ACCOUNT_URL` in wp-config.php still overrides this if
+ * the URL ever needs to change without a plugin update.
  */
 function bohemi_wp_ui_account_url(): string {
 	if ( defined( 'BOHEMI_ACCOUNT_URL' ) && BOHEMI_ACCOUNT_URL ) {
 		$url = BOHEMI_ACCOUNT_URL;
 	} else {
-		$pmpro_url = function_exists( 'pmpro_url' ) ? pmpro_url( 'account' ) : '';
-		$url       = ! empty( $pmpro_url ) ? $pmpro_url : (
-			bohemi_wp_ui_find_page_url( array( 'ucet-clenstvi', 'muj-ucet', 'my-account', 'ucet' ) )
-				?? home_url( '/' )
-		);
+		$url = 'https://studio.bohemi.fit/ucet-clenstvi/';
 	}
 
 	return apply_filters( 'bohemi_wp_ui_account_url', $url );
