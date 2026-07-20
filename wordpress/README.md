@@ -53,19 +53,21 @@ sladěné s `bohemi.fit`, a funkční vlastní styly z child theme.
 
 ### ✅ Stav k 20. 7. 2026
 
-- **Header** — live, vizuálně sladěný s `bohemi.fit` (potvrzeno `curl` i
-  vizuálně v Site Editoru, i na reálném mobilu).
+- **Header** — live, vizuálně sladěný s `bohemi.fit`, všechny odkazy
+  ověřené `curl` (Hlavní web, Rezervace lekcí, Můj účet, Rezervovat) —
+  viz „Header — mrtvý odkaz „Můj účet"" níž pro historii jedné opravy.
 - **Motiv `bohemi-twentytwentyfive-child`** — live, CSS/logo se načítají
   (viz „Motiv — audit a oprava" níž, oprávnění opravena přes FTP).
-- **Patička** — přepracovaná, teď jako Vzor (Pattern) ve stejné složce
-  „BoHeMi" jako header, viz „Patička — redesign" a „Patička — zjištění:
-  nebyla to Část šablony" níž pro celou historii rozhodování. **Zatím jen
-  v repu, čeká na nahrání `functions.php` + `patterns/*.php` na produkci +
-  ruční výměnu starého vzoru za nový v každé šabloně** (stejný FTP postup
-  jako u předchozích souborů, pozor na oprávnění po uploadu).
-- **Otevřené:** `/rezervace/` pořád 301-redirectuje na `/` (viz „Cache
-  diagnostika" níž — potřebuje rozhodnutí ve wp-adminu, ne kód), kontrola
-  DevTools Service Workers zatím neproběhla.
+- **Patička** — live, jako Vzor (Pattern) ve stejné složce „BoHeMi" jako
+  header, viz „Patička — redesign" a „Patička — zjištění: nebyla to Část
+  šablony" níž pro celou historii rozhodování.
+- **Otevřené:**
+  - „Členství" v headeru/patičce vede jen na homepage (fallback), ne na
+    konkrétní PMPro „levels" stránku — chybí potvrzená URL, viz „Header —
+    mrtvý odkaz" níž.
+  - `/rezervace/` pořád 301-redirectuje na `/` (viz „Cache diagnostika"
+    níž — potřebuje rozhodnutí ve wp-adminu, ne kód).
+  - Kontrola DevTools Service Workers zatím neproběhla.
 
 ## Patička — redesign (20. 7. 2026)
 
@@ -156,6 +158,39 @@ na každé šabloně zvlášť. Pro tenhle web (málo šablon, patička se nemě
 často) je to přijatelná cena za jednodušší a konzistentní ovládání. Kdyby
 se to v budoucnu ukázalo jako otravné, dá se to kdykoliv vrátit na
 sdílenou Část šablony (viz výš, jak na to).
+
+## Header — mrtvý odkaz „Můj účet" (20. 7. 2026)
+
+Po nasazení headeru se ukázalo, že **„Můj účet" má `href=""`** (odkaz na
+sebe sama — klikneš a nic se nestane, resp. na homepage to vypadá jako
+nefunkční, na `/ucet-clenstvi/` samotné to vypadalo „funkčně" jen proto,
+že `href=""` tam náhodou vedlo tam, kde už uživatel byl). „Členství" mělo
+stejnou chybu.
+
+**Příčina:** `bohemi_wp_ui_account_url()` (a `_membership_url()`,
+`_reserve_url()`) věřily `pmpro_url()` bez kontroly — ta ale vrací **prázdný
+řetězec** (ne `null`/`false`), když PMPro nemá ve svém nastavení vyplněnou
+vlastní stránku pro danou roli. Operátor `??` prázdný řetězec nezachytí
+(není to `null`), takže se nepoužil žádný fallback a `href` zůstal prázdný.
+
+**První oprava (v1.1.1):** přidána explicitní kontrola `!empty()` na
+výsledek `pmpro_url()` ve všech třech funkcích, s fallbackem na vyhledání
+stránky podle slugu. Po nahrání na produkci a znovu-vložení header patternu
+se ale výsledek nezměnil — nepodařilo se live rozlišit, jestli byl problém
+v nenahraném souboru, PHP OPcache na Wedos hostingu, nebo něčem jiném (žádné
+z toho jsme nemohli ověřit zvenku, na server nemám přístup).
+
+**Finální oprava (v1.1.2, Honzovo rozhodnutí):** `bohemi_wp_ui_account_url()`
+nezkouší `pmpro_url()` ani page-lookup vůbec — vrací natvrdo
+`https://studio.bohemi.fit/ucet-clenstvi/` (pořád přepsatelné konstantou
+`BOHEMI_ACCOUNT_URL`, kdyby se URL v budoucnu změnila). Ověřeno `curl`
+20. 7. 2026 — funguje na desktopu, mobilu i v patičce.
+
+**`bohemi_wp_ui_membership_url()` zůstala beze změny** (pořád má tu
+`!empty()` opravu z 1.1.1, ne hardcoded hodnotu) — proto teď „Členství"
+nemá prázdný `href`, ale spadne na fallback `home_url('/')`, protože
+nemáme potvrzenou URL PMPro „levels" stránky. Až ji Honza dohledá, dá se
+stejným způsobem hardcodovat jako účet.
 
 ## Motiv — audit a oprava (20. 7. 2026)
 

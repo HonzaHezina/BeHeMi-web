@@ -64,8 +64,8 @@ nepřenáší — WP nabídka je jiná (viz výše), ne rozcestník lekcí.
 |---|---|---|---|
 | `BOHEMI_MAIN_SITE_URL` | `bohemi_wp_ui_main_site_url` | Hlavní web | `https://bohemi.fit/` |
 | `BOHEMI_BOOKING_URL` | `bohemi_wp_ui_booking_url` | Rezervace lekcí | hledá stránku `rezervace-lekci` / `rezervace` / `booking` / `lekce` / `kalendar` |
-| `BOHEMI_MEMBERSHIP_URL` | `bohemi_wp_ui_membership_url` | Členství | `pmpro_url('levels')`, pokud je PMPro aktivní |
-| `BOHEMI_ACCOUNT_URL` | `bohemi_wp_ui_account_url` | Můj účet | `pmpro_url('account')`, jinak stránka `ucet-clenstvi` (potvrzeno živě 20. 7. 2026) |
+| `BOHEMI_MEMBERSHIP_URL` | `bohemi_wp_ui_membership_url` | Členství | `pmpro_url('levels')`, jinak stránka podle slugu, jinak home (viz „Header — mrtvý odkaz" ve `wordpress/README.md` — tahle cesta u „Členství" aktuálně spadá na home, chybí potvrzená URL) |
+| `BOHEMI_ACCOUNT_URL` | `bohemi_wp_ui_account_url` | Můj účet | natvrdo `https://studio.bohemi.fit/ucet-clenstvi/` (od v1.1.2 — `pmpro_url()` se tu vůbec nezkouší, viz „Header — mrtvý odkaz" ve `wordpress/README.md`) |
 | `BOHEMI_RESERVE_URL` | `bohemi_wp_ui_reserve_url` | CTA „Rezervovat" | stránka rezervací → PMPro checkout → home |
 
 Příklad přepsání ve `wp-config.php`:
