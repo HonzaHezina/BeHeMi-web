@@ -274,17 +274,16 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   není to dětský web. **Dětské dlaždice jsou na HP JEN v KidsBand** (rozhodnuto
   5. 7. 2026) — sekce 02 v HP nabídce (`Offer.astro`) je zeštíhlená na hlavičku
   + větu + tlačítko na `/krouzky-pro-deti/`, mřížku `kidsActivities` nevracet.
-  **`kidsBand[]` obsahuje jen skutečné aktivity s reálnou fotkou** (rozhodnuto
+  **`kidsBand[]` nesmí obsahovat souhrnnou dlaždici celé stránky** (rozhodnuto
   20. 7. 2026) — dřívější generická položka `id: 'krouzky'` („Kroužky pro
-  děti" s textem opisujícím konkrétní kurzy) byla smazána: neměla fotku v
-  `photos.ts` (spadala na placeholder gradient) a duplikovala texty
-  jednotlivých kurzů. Nadpis sekce s odkazem „Vše pro děti a rodiny →" už
-  plní roli „ochutnávka → celá stránka" — žádná další souhrnná dlaždice
-  navíc. Nová položka do `kidsBand` = jen skutečná aktivita s vlastním `id` a
-  fotkou v `photosCS`/`photosEN` (viz „Fotky" níž), nikdy obecný odkaz na
-  celou stránku. **Dětská Zumba zatím nemá fotku** (žádný zdroj v
-  `_raw/deti/detska-zumba/`) — na HP i tak zobrazuje placeholder, dokud
-  fotka nedorazí.
+  děti" s textem opisujícím konkrétní kurzy) byla smazána, protože duplikovala
+  texty jednotlivých kurzů a nadpis sekce s odkazem „Vše pro děti a rodiny →"
+  už roli „ochutnávka → celá stránka" plní sám. Nová položka do `kidsBand` =
+  vždy konkrétní skutečná aktivita, nikdy obecný odkaz na celou stránku
+  `/krouzky-pro-deti/`. (Mimochodem tahle položka navíc neměla fotku v
+  `photos.ts`, takže padala na placeholder gradient — to ale nebyl důvod
+  smazání, jen doprovodný symptom. Fotka do `kidsBand` patří stejně jako u
+  ostatních položek, viz „Fotky" níž, ale sama o sobě položku neospravedlní.)
 - **Lokalita ≠ značka (7/2026):** BoHeMi se má časem rozšířit o další místa —
   „BoHeMi je myšlenka, může být kdekoliv". Značková vrstva je bez Vinohrad:
   hero H1 akcent „pro tělo, zdraví i hlavu.", footer tagline „…Body – Health –
