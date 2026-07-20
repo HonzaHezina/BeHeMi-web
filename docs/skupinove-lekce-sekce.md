@@ -98,7 +98,20 @@ nulové duplicity se stránkami supermamky/hula-hoop.
 ---
 
 ## Čeká na Honzu
-- Potvrdit seznam lekcí, který Claude Code vytáhne (co jede / nejede)
-- Fakta k lekcím: délka, intenzita, struktura, vybavení
 - Umí booking deep-link na konkrétní lekci? (formát URL)
 - Pořadí lekcí na stránce (od nejnavštěvovanějších — ty víš, které to jsou)
+
+## Hotovo (20. 7. 2026)
+- Seznam lekcí potvrzen (co jede / nejede).
+- Fakta k lekcím doplněna do `src/pages/skupinove-lekce.astro`: kruhový trénink
+  a silový trénink mají strukturu 10 min warm up → hlavní trénink → 10 min
+  protažení (silový navíc finisher; vybavení: činky, kettlebelly, osy,
+  slambally). Silový trénink potvrzen jako nevhodný pro úplné začátečníky.
+  Power Zone má potvrzenou blokovou strukturu (rozehřátí/aktivace → technika
+  a síla → kondiční kruh → protažení) a je škálovatelný i pro začátečníky.
+  Enduro je příprava na závody typu BCross Run (Hyrox se NEJMENUJE — je to
+  ochranná známka), stejná struktura 10/35–40/10 min; jednorázový vstup je
+  199 Kč stejně jako ostatní lekce (žádná zvláštní cena, opraveno i v
+  `src/data/home.ts`/`home.en.ts`, pole `note` u ceníku).
+- Intenzita ●●● u Power Zone a Enduro potvrzena jako odhad, ponechána beze
+  změny (obě jsou vysoce intenzivní hybridní formáty).
