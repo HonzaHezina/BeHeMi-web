@@ -40,10 +40,16 @@ formulářů) a běží vedle sebe — žádný nenahrazuje druhý.
 4. **`bohemi-wp-ui`** — nahraj `dist/bohemi-wp-ui.zip`, aktivuj, vlož pattern
    do šablonové části Záhlaví. Plný postup je v
    [`bohemi-wp-ui/README.md`](bohemi-wp-ui/README.md#instalace).
+5. **Patička** — ve Vzorech (`+` → záložka „Vzory" → složka „BoHeMi") najdi
+   **„BoHeMi — Footer"** a vlož ho do každé šablony, kde je teď starý
+   výchozí vzor („page", „Úvodní stránka webu", „Jednotlivé příspěvky",
+   „Stránka 404", „Všechny archivy", „Výsledky vyhledávání") — starý vzor
+   nejdřív odeber. Detaily a proč to není jednorázová Část šablony jsou v
+   „Patička — zjištění: nebyla to Část šablony" níž.
 
-Po instalaci všech čtyř kroků by `studio.bohemi.fit` měl mít: fungující
-rezervace a členství, stylizované formuláře, hlavičku vizuálně sladěnou s
-`bohemi.fit` a funkční vlastní styly z child theme.
+Po instalaci všech pěti kroků by `studio.bohemi.fit` měl mít: fungující
+rezervace a členství, stylizované formuláře, hlavičku i patičku vizuálně
+sladěné s `bohemi.fit`, a funkční vlastní styly z child theme.
 
 ### ✅ Stav k 20. 7. 2026
 
@@ -51,11 +57,12 @@ rezervace a členství, stylizované formuláře, hlavičku vizuálně sladěnou
   vizuálně v Site Editoru, i na reálném mobilu).
 - **Motiv `bohemi-twentytwentyfive-child`** — live, CSS/logo se načítají
   (viz „Motiv — audit a oprava" níž, oprávnění opravena přes FTP).
-- **Patička (`parts/footer.html`, v1.2)** — přepracovaná, viz „Patička —
-  redesign" a „Patička — zjištění: nebyla to Část šablony" níž. **Zatím jen
-  v repu, čeká na nahrání na produkci + ruční přepojení v šablonách**
-  (stejný FTP postup jako u předchozích souborů, pozor na oprávnění po
-  uploadu).
+- **Patička** — přepracovaná, teď jako Vzor (Pattern) ve stejné složce
+  „BoHeMi" jako header, viz „Patička — redesign" a „Patička — zjištění:
+  nebyla to Část šablony" níž pro celou historii rozhodování. **Zatím jen
+  v repu, čeká na nahrání `functions.php` + `patterns/*.php` na produkci +
+  ruční výměnu starého vzoru za nový v každé šabloně** (stejný FTP postup
+  jako u předchozích souborů, pozor na oprávnění po uploadu).
 - **Otevřené:** `/rezervace/` pořád 301-redirectuje na `/` (viz „Cache
   diagnostika" níž — potřebuje rozhodnutí ve wp-adminu, ne kód), kontrola
   DevTools Service Workers zatím neproběhla.
@@ -81,8 +88,9 @@ kód — Astro a WordPress jsou different runtime), ale se stejným obsahem:
   i18n klíč `footer_address` („Blanická 25" — stará/mrtvá hodnota, nikde se
   nepoužívala). Build (`npm run build`) i `node scripts/check-links.mjs`
   prošly bez chyb.
-- **WordPress (`bohemi-twentytwentyfive-child/parts/footer.html`)** —
-  stejný obsah (kontakt, mapa, otevírací doba, sociální sítě, právní
+- **WordPress** (obsah pak přesunutý z `parts/footer.html` do
+  `functions.php` jako Vzor, viz „Patička — zjištění" níž) — stejný obsah
+  (kontakt, mapa, otevírací doba, sociální sítě, právní
   odkazy — tady už jako interní `/vseobecne-obchodni-podminky/` atd., je to
   stejná doména), navíc sloupec „Odkazy" (Hlavní web → `bohemi.fit`,
   Rezervace lekcí → `/`, Můj účet → `/ucet-clenstvi/`). Bez kontaktního
@@ -106,34 +114,48 @@ natvrdo vložený přímo do jednotlivých šablon stránek (potvrzeno aspoň v
 šabloně „page"). Proto náš `parts/footer.html` nikdo nikdy nenačetl — nic
 na webu na tenhle soubor neodkazovalo.
 
-**Rozhodnutí (Honza, 20. 7. 2026): předělat to pořádně**, aby patička
-fungovala stejným mechanismem jako header (skutečná Část šablony), místo
-provizorního přepsání obsahu toho starého vzoru. Na naší straně (repo)
-připraveno:
+**První pokus:** předělat to na skutečnou Část šablony (`theme.json`
+`templateParts` + `parts/footer.html`), stejný mechanismus jako header.
+Fungovalo by to, ale ukázalo se to jako matoucí — vkládání Části šablony
+jde přes jinou cestu (záložka „Bloky" → „Šablonová část") než vkládání
+headeru (záložka „Vzory" → BoHeMi), a Honza chtěl radši mít oboje stejně,
+i za cenu menší technické čistoty.
 
-- `theme.json` nově deklaruje `templateParts` s `"name":"footer"` a
-  `"area":"footer"` — dá to Site Editoru vědět, že `parts/footer.html` je
-  oficiální Část šablony „Patička", ne jen obyčejný soubor.
-- `parts/footer.html` (v1.2, viz „Patička — redesign" výš) je připravená a
-  beze změny obsahu.
+**Finální rozhodnutí (Honza, 20. 7. 2026): patička jako Vzor, stejně jako
+header.** `parts/footer.html` i `templateParts` deklarace v `theme.json`
+byly odstraněné. Místo toho `functions.php` registruje
+`bohemi-twentytwentyfive-child/footer` jako `register_block_pattern()` —
+identický vzor přístupu jako `bohemi-wp-ui/patterns/header.php` (jeden
+`core/html` blok, žádné riziko „neplatného bloku", stejný jmenný prostor
+CSS tříd z `bohemi.css`).
 
-**Honza dodělá ručně ve wp-adminu** (dal přednost udělat si to sám, ne
-nechat mě hádat, na kolika šablonách je ten starý vzor vložený):
+**Bonus oprava při té příležitosti:** zjistilo se, že se ve „Vzorech"
+zobrazovaly **dvě různé složky „BoHeMi"** (matoucí samo o sobě) — plugin
+`bohemi-wp-ui` registruje kategorii vzorů se slugem `bohemi-header`, ale
+motiv dřív používal jiný slug `bohemi` (oba měly stejný **label** „BoHeMi",
+ale WordPress skupiny vzorů rozlišuje podle slugu, ne podle labelu, takže
+vznikly dvě oddělené složky se stejným jménem). Sjednoceno — motiv teď
+používá stejný slug `bohemi-header` jako plugin (`functions.php` i oba
+content patterny `reservation-page.php`/`account-page.php`), takže header,
+footer i patterny pro rezervace/účet jsou od teď pohromadě v jedné složce
+„BoHeMi".
 
-1. V každé šabloně, kde je patička ručně vložená jako Vzor (minimálně
-   „page", zkontrolovat i „Úvodní stránka webu", „Jednotlivé příspěvky",
-   „Stránka 404", „Všechny archivy", „Výsledky vyhledávání" — to jsou
-   šablony teoreticky se stejným footerem), ten starý vzor **odebrat**
-   (označit blok → Možnosti → Odstranit).
-2. Na stejné místo vložit skutečnou **Část šablony „Patička"** (blok
-   „Template Part" / „Část šablony" → vybrat Patička) — díky
-   `templateParts` deklaraci výš by se měla nabídnout rovnou s naším
-   obsahem z `parts/footer.html`.
+**Vkládání teď funguje stejně jako u headeru:**
+1. V každé šabloně, kde je patička natvrdo vložená jako starý Vzor
+   (minimálně „page", zkontrolovat i „Úvodní stránka webu", „Jednotlivé
+   příspěvky", „Stránka 404", „Všechny archivy", „Výsledky vyhledávání"),
+   ten starý vzor **odebrat** (označit blok → Možnosti → Odstranit).
+2. **„+" → záložka „Vzory" → složka „BoHeMi" → „BoHeMi — Footer"** — vloží
+   se jedním klikem, stejně jako header.
 3. Uložit každou upravenou šablonu.
 
-Po dokončení bude patička fungovat identicky jako header — jedna Část
-šablony, editovatelná na jednom místě, žádný ručně kopírovaný Vzor v
-každé šabloně zvlášť.
+**Vědomý trade-off:** protože je to (stejně jako header) nesynchronizovaný
+vzor, každé vložení vytvoří **nezávislou kopii** — budoucí úprava patičky
+se neprojeví automaticky všude, kde už byla vložená, musí se to zopakovat
+na každé šabloně zvlášť. Pro tenhle web (málo šablon, patička se nemění
+často) je to přijatelná cena za jednodušší a konzistentní ovládání. Kdyby
+se to v budoucnu ukázalo jako otravné, dá se to kdykoliv vrátit na
+sdílenou Část šablony (viz výš, jak na to).
 
 ## Motiv — audit a oprava (20. 7. 2026)
 
@@ -159,14 +181,14 @@ dostupným zdrojem a opravil, co šlo ověřit zvenku:
 - **`patterns/reservation-page.html` a `patterns/account-page.html`
   převedeny na `.php`** se správnou hlavičkou (`Title:`/`Slug:`/`Categories:`)
   — jako `.html` je WordPress nikdy nenačetl (theme patterns se
-  auto-discoverují jen z `.php` souborů s tímhle formátem). `functions.php`
-  navíc registruje pattern kategorii `bohemi`, kterou používají.
-  Beze změny obsahu jinak.
-- **`parts/footer.html` opraven** — odkazoval na `/rezervace/` (potvrzeno
-  jako trvalý 301 na `/`, viz „Cache diagnostika" níž) a na
-  `/membership-account/` (nikdy neexistoval). Opraveno na `/` a na skutečný
-  ověřený slug `/ucet-clenstvi/`. „Členství" zůstalo beze změny — nemáme
-  ověřený slug PMPro levels stránky.
+  auto-discoverují jen z `.php` souborů s tímhle formátem). Kategorie se
+  od té doby ještě jednou změnila (`bohemi` → `bohemi-header`), viz
+  „Patička — zjištění" níž. Beze změny obsahu jinak.
+- **`parts/footer.html` opraven, později celý odstraněný** — nejdřív
+  opraven (odkazy na `/rezervace/` a `/membership-account/`), pak se
+  ukázalo, že ho web vůbec nepoužívá (viz „Patička — zjištění" níž), a
+  patička skončila jako Vzor v `functions.php` místo souboru v `parts/`.
+  Historická oprava odkazů se přenesla do nového `functions.php`.
 - **`assets/css/bohemi.css` verzování** — `functions.php` teď používá
   `filemtime()` místo statického `'1.0'`.
 

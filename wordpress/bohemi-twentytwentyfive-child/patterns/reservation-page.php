@@ -2,7 +2,7 @@
 /**
  * Title: Rezervace lekcí
  * Slug: bohemi-twentytwentyfive-child/reservation-page
- * Categories: bohemi
+ * Categories: bohemi-header
  * Description: Obsah stránky s rezervačním kalendářem — nadpis + [bookingactivities] shortcode v panelu.
  *
  * Byl to dřív statický reservation-page.html, který WordPress nikdy

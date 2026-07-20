@@ -2,7 +2,7 @@
 /**
  * Title: Můj účet
  * Slug: bohemi-twentytwentyfive-child/account-page
- * Categories: bohemi
+ * Categories: bohemi-header
  * Description: Obsah stránky s účtem — nadpis + úvodní věta nad PMPro account shortcode.
  *
  * Byl to dřív statický account-page.html, který WordPress nikdy nenačetl —
