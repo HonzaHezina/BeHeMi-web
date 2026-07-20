@@ -52,8 +52,10 @@ rezervace a členství, stylizované formuláře, hlavičku vizuálně sladěnou
 - **Motiv `bohemi-twentytwentyfive-child`** — live, CSS/logo se načítají
   (viz „Motiv — audit a oprava" níž, oprávnění opravena přes FTP).
 - **Patička (`parts/footer.html`, v1.2)** — přepracovaná, viz „Patička —
-  redesign" níž. **Zatím jen v repu, čeká na nahrání na produkci** (stejný
-  FTP postup jako u předchozích souborů, pozor na oprávnění po uploadu).
+  redesign" a „Patička — zjištění: nebyla to Část šablony" níž. **Zatím jen
+  v repu, čeká na nahrání na produkci + ruční přepojení v šablonách**
+  (stejný FTP postup jako u předchozích souborů, pozor na oprávnění po
+  uploadu).
 - **Otevřené:** `/rezervace/` pořád 301-redirectuje na `/` (viz „Cache
   diagnostika" níž — potřebuje rozhodnutí ve wp-adminu, ne kód), kontrola
   DevTools Service Workers zatím neproběhla.
@@ -92,6 +94,46 @@ kód — Astro a WordPress jsou different runtime), ale se stejným obsahem:
   — kolidovalo se stejnojmennou třídou v `bohemi-wp-ui` a přidávalo
   nechtěný padding do živého headeru. Smazáno spolu s dalšími nepoužitými
   třídami (`bohemi-brand-title`, `bohemi-tagline`).
+
+## Patička — zjištění: nebyla to Část šablony (20. 7. 2026)
+
+Po nahrání `parts/footer.html` na produkci se v patičce nic nezměnilo.
+Důvod: **live patička na `studio.bohemi.fit` není Část šablony (Template
+Part)** jako header, ale ručně vytvořený **synchronizovaný Vzor** (Pattern,
+`core/fullwidth-footer-with-background-color-and-three-columns` — výchozí
+TT5 ukázkový vzor s placeholder obsahem „2020 Lomita Blvd, Torrance, CA"),
+natvrdo vložený přímo do jednotlivých šablon stránek (potvrzeno aspoň v
+šabloně „page"). Proto náš `parts/footer.html` nikdo nikdy nenačetl — nic
+na webu na tenhle soubor neodkazovalo.
+
+**Rozhodnutí (Honza, 20. 7. 2026): předělat to pořádně**, aby patička
+fungovala stejným mechanismem jako header (skutečná Část šablony), místo
+provizorního přepsání obsahu toho starého vzoru. Na naší straně (repo)
+připraveno:
+
+- `theme.json` nově deklaruje `templateParts` s `"name":"footer"` a
+  `"area":"footer"` — dá to Site Editoru vědět, že `parts/footer.html` je
+  oficiální Část šablony „Patička", ne jen obyčejný soubor.
+- `parts/footer.html` (v1.2, viz „Patička — redesign" výš) je připravená a
+  beze změny obsahu.
+
+**Honza dodělá ručně ve wp-adminu** (dal přednost udělat si to sám, ne
+nechat mě hádat, na kolika šablonách je ten starý vzor vložený):
+
+1. V každé šabloně, kde je patička ručně vložená jako Vzor (minimálně
+   „page", zkontrolovat i „Úvodní stránka webu", „Jednotlivé příspěvky",
+   „Stránka 404", „Všechny archivy", „Výsledky vyhledávání" — to jsou
+   šablony teoreticky se stejným footerem), ten starý vzor **odebrat**
+   (označit blok → Možnosti → Odstranit).
+2. Na stejné místo vložit skutečnou **Část šablony „Patička"** (blok
+   „Template Part" / „Část šablony" → vybrat Patička) — díky
+   `templateParts` deklaraci výš by se měla nabídnout rovnou s naším
+   obsahem z `parts/footer.html`.
+3. Uložit každou upravenou šablonu.
+
+Po dokončení bude patička fungovat identicky jako header — jedna Část
+šablony, editovatelná na jednom místě, žádný ručně kopírovaný Vzor v
+každé šabloně zvlášť.
 
 ## Motiv — audit a oprava (20. 7. 2026)
 
