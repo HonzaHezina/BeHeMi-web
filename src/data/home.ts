@@ -77,7 +77,6 @@ export const kidsActivities: { id: string; t: string; d: string; img: string; me
 // odpovídá bohemi.fit). Popisy převzaté z kidsActivities výš, žádné nové texty.
 // Příměstský tábor se už nedělá — do nabídky nevracet (rozhodnuto 7/2026).
 export const kidsBand = [
-  { id: 'krouzky', t: 'Kroužky pro děti', d: 'Základy gymnastiky, pozemní i závěsná akrobacie a žonglování — pod vedením akrobatů La Putyka.', media: 'media-sand', href: '/krouzky-pro-deti/' },
   { id: 'cirkusova-skolicka', t: 'Cirkusová školička', d: 'Pro nejmenší — první krok k pohybu: rovnováha, koordinace a odvaha zkusit něco nového.', media: 'media-clay', href: '/krouzky-pro-deti/#cirkusova-skolicka' },
   { id: 'objevovarna', t: 'Objevovárna', d: 'Pro děti do 5 let — 6 pohybových stanovišť, na kterých si samy zkoušejí, co jejich tělo zvládne.', media: 'media-rose', href: '/krouzky-pro-deti/#objevovarna' },
   { id: 'detska-zumba', t: 'Dětská Zumba', d: 'Taneční lekce pro děti v rytmu Zumby — koordinace a pohyb, ale hlavně zábava. Vede Eliška Velázquez.', media: 'media-green', href: '/krouzky-pro-deti/#detska-zumba' },

@@ -274,6 +274,17 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   není to dětský web. **Dětské dlaždice jsou na HP JEN v KidsBand** (rozhodnuto
   5. 7. 2026) — sekce 02 v HP nabídce (`Offer.astro`) je zeštíhlená na hlavičku
   + větu + tlačítko na `/krouzky-pro-deti/`, mřížku `kidsActivities` nevracet.
+  **`kidsBand[]` obsahuje jen skutečné aktivity s reálnou fotkou** (rozhodnuto
+  20. 7. 2026) — dřívější generická položka `id: 'krouzky'` („Kroužky pro
+  děti" s textem opisujícím konkrétní kurzy) byla smazána: neměla fotku v
+  `photos.ts` (spadala na placeholder gradient) a duplikovala texty
+  jednotlivých kurzů. Nadpis sekce s odkazem „Vše pro děti a rodiny →" už
+  plní roli „ochutnávka → celá stránka" — žádná další souhrnná dlaždice
+  navíc. Nová položka do `kidsBand` = jen skutečná aktivita s vlastním `id` a
+  fotkou v `photosCS`/`photosEN` (viz „Fotky" níž), nikdy obecný odkaz na
+  celou stránku. **Dětská Zumba zatím nemá fotku** (žádný zdroj v
+  `_raw/deti/detska-zumba/`) — na HP i tak zobrazuje placeholder, dokud
+  fotka nedorazí.
 - **Lokalita ≠ značka (7/2026):** BoHeMi se má časem rozšířit o další místa —
   „BoHeMi je myšlenka, může být kdekoliv". Značková vrstva je bez Vinohrad:
   hero H1 akcent „pro tělo, zdraví i hlavu.", footer tagline „…Body – Health –

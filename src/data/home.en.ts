@@ -66,7 +66,6 @@ export const kidsActivities: { id: string; t: string; d: string; img: string; me
 
 // Homepage "For kids & families" band — mirrors kidsBand in home.ts.
 export const kidsBand = [
-  { id: 'krouzky', t: 'Kids clubs', d: 'Gymnastics basics, floor and aerial acrobatics, and juggling — led by La Putyka acrobats.', media: 'media-sand', href: '/krouzky-pro-deti/' },
   { id: 'cirkusova-skolicka', t: 'Circus School', d: 'For the youngest — a first step into movement: balance, coordination, and the confidence to try something new.', media: 'media-clay', href: '/krouzky-pro-deti/#cirkusova-skolicka' },
   { id: 'objevovarna', t: 'Discovery Room', d: 'For kids up to age 5 — 6 movement stations where they figure out on their own what their body can do.', media: 'media-rose', href: '/krouzky-pro-deti/#objevovarna' },
   { id: 'detska-zumba', t: 'Kids Zumba', d: 'Dance classes for children in Zumba style — coordination and movement, but mostly fun. Led by Eliška Velázquez.', media: 'media-green', href: '/krouzky-pro-deti/#detska-zumba' },
