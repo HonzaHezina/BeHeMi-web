@@ -106,7 +106,7 @@ export const healthTracker = [
 // id must match the CS file — shared anchor on the CS-only /treneri/ page.
 export const trainers = [
   { id: 'klara-mechurova', name: 'Klára Měchurová', role: 'Coach · functional training', media: 'media-green', bio: 'Klára has been active since childhood — ballet, tennis, basketball, dance. Certified fitness instructor since 2015, active since 2013. She leads circuit, strength and HIIT classes and offers personal training.' },
-  { id: 'jitka-stepankova', name: 'Jitka Štěpánková', role: 'Instructor · Power Zone', media: 'media-sand', bio: '' },
+  { id: 'jitka-stepankova', name: 'Jitka Štěpánková', role: 'Instructor · Power Zone', media: 'media-sand', bio: 'Jitka specialises in CrossFit, weightlifting, functional training and HIIT. Her classes are varied, dynamic and never the same twice — she builds an environment where people support each other and build a team spirit. Whether you\'re a beginner or an experienced athlete, you\'ll work together on making training enjoyable and effective.' },
   { id: 'eliska-velazquez', name: 'Eliška Velázquez', role: 'Instructor · Zumba and Kids Zumba', media: 'media-forest', bio: 'Eliška brings Latin rhythm and the joy of movement to BoHeMi. She leads Zumba for adults and Kids Zumba — classes where you exercise but most of all have fun.' },
   { id: 'jan-hezina', name: 'Jan Hezina', role: 'founder · operations & tech', media: 'media-clay', bio: '' },
 ];
