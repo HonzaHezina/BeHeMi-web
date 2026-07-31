@@ -40,12 +40,19 @@ formulářů) a běží vedle sebe — žádný nenahrazuje druhý.
 4. **`bohemi-wp-ui`** — nahraj `dist/bohemi-wp-ui.zip`, aktivuj, vlož pattern
    do šablonové části Záhlaví. Plný postup je v
    [`bohemi-wp-ui/README.md`](bohemi-wp-ui/README.md#instalace).
-5. **Patička** — ve Vzorech (`+` → záložka „Vzory" → složka „BoHeMi") najdi
-   **„BoHeMi — Footer"** a vlož ho do každé šablony, kde je teď starý
-   výchozí vzor („page", „Úvodní stránka webu", „Jednotlivé příspěvky",
-   „Stránka 404", „Všechny archivy", „Výsledky vyhledávání") — starý vzor
-   nejdřív odeber. Detaily a proč to není jednorázová Část šablony jsou v
-   „Patička — zjištění: nebyla to Část šablony" níž.
+5. **Patička** — od 31. 7. 2026 se vkládá **stejně jako header** (viz
+   „Patička — zpět na Část šablony" níž): **Vzhled → Editor → Šablonové
+   části → Patička**, smaž starý výchozí obsah, „+" → najdi **„BoHeMi —
+   Footer"** (kategorie „BoHeMi") a vlož. Ulož. Tohle stačí **jednou** —
+   žádné šablony stránek už se nemusí editovat zvlášť, **pokud** tyhle
+   šablony skutečně odkazují na sdílenou Část šablony Patička (výchozí
+   chování Twenty Twenty-Five). Pokud v nějaké konkrétní šabloně (page,
+   Úvodní stránka webu, 404, archivy, výsledky vyhledávání) pořád vidíš
+   starou/jinou patičku i po tomhle kroku, ta šablona má nejspíš ještě
+   nezávislou vloženou kopii z předchozího postupu (viz „Patička —
+   zjištění" níž) — otevři ji, smaž vloženou patičku a nech tam jen
+   výchozí odkaz na Část šablony (nebo znovu vlož „BoHeMi — Footer" tam,
+   je to jednorázová oprava jen pro tu jednu šablonu).
 
 Po instalaci všech pěti kroků by `studio.bohemi.fit` měl mít: fungující
 rezervace a členství, stylizované formuláře, hlavičku i patičku vizuálně
@@ -68,6 +75,49 @@ sladěné s `bohemi.fit`, a funkční vlastní styly z child theme.
   - `/rezervace/` pořád 301-redirectuje na `/` (viz „Cache diagnostika"
     níž — potřebuje rozhodnutí ve wp-adminu, ne kód).
   - Kontrola DevTools Service Workers zatím neproběhla.
+
+## Sladění s Astro po drift kontrole (31. 7. 2026)
+
+Honza si všiml, že se `studio.bohemi.fit` „chová a vypadá hodně odlišně" od
+`bohemi.fit` a požádal o srovnání. Ověřil jsem živý stav přes `curl` (žádný
+SSH/FTP přístup, jen HTTP — stejné omezení jako celý zbytek téhle historie)
+a porovnal s `src/components/Header.astro`/`Footer.astro`. Vizuální styl
+(barvy, font, spacing, CTA, sticky/blur header) sedí 1:1 — to se nerozešlo.
+Rozdílný obsah navigace (WP: Hlavní web/Rezervace lekcí/Členství/Můj účet
+vs. Astro: Proč BoHeMi/Lekce a služby/Ceník/Kontakt) je **záměrný**, ne
+drift — `studio.bohemi.fit` je rezervační/členský portál, ne druhá kopie
+marketingového webu, viz tabulka „Celý obrázek" výš. Reálný drift byl jen
+ve dvou věcech:
+
+1. **Mobilní menu šlo zavřít jen křížkem/odkazem/Escape, ne kliknutím mimo
+   něj.** Astro dostal tohle chování týž den (`Header.astro`, viz
+   `CLAUDE.md`) a WP na to zapomnělo dorovnat. Opraveno v
+   `bohemi-wp-ui/assets/js/header.js` (`document` click listener, zavře
+   `<details>`, pokud klik nespadá do jeho `contains()`) — plugin
+   `bohemi-wp-ui` → **1.1.3**, viz jeho `CHANGELOG.md`.
+2. **Sociální sítě v patičce byly na placeholder URL** (`facebook.com/`,
+   `instagram.com/` bez cesty na profil) — Astro `Footer.astro` dávno ukazuje
+   reálné odkazy (`facebook.com/people/Bohemi-fitness/100090517103019/`,
+   `instagram.com/bohemi.fit/`), patička ve `bohemi-twentytwentyfive-child`
+   se za tím prostě opozdila. Opraveno v `functions.php`
+   (`bohemi_wp_final_child_get_footer_html()`) — motiv → **1.3**.
+
+Oba `dist/*.zip` přegenerované (`Compress-Archive`, top-level složka
+odpovídá názvu pluginu/motivu, ověřeno rozbalením). **Nic z tohohle není
+živě nasazené** — stejně jako celá historie níž, tenhle adresář je jen
+staging, potřebuje ruční nahrání:
+
+- `dist/bohemi-wp-ui.zip` → Pluginy → Nahrát plugin → aktivovat (přepíše
+  starou verzi 1.1.2).
+- `bohemi-twentytwentyfive-child/` → přehrát přes FTP/SFTP stejnou složkou
+  jako dřív (`wp-content/themes/bohemi-twentytwentyfive-child/`) — motiv se
+  nemusí znovu aktivovat, jen se změní soubor na disku. Po přehrání zkontroluj
+  oprávnění (viz „CSS 403" níž — nové FTP uploady občas dostanou špatná
+  práva).
+- Patička je vložená jako nesynchronizovaný Vzor (viz „Patička — zjištění"
+  níž) — po přehrání `functions.php` **znovu vlož** „BoHeMi — Footer" do
+  každé šablony, kde už je, jinak si stránky drží starou vloženou kopii se
+  starými placeholder odkazy.
 
 ## Patička — redesign (20. 7. 2026)
 
@@ -158,6 +208,48 @@ na každé šabloně zvlášť. Pro tenhle web (málo šablon, patička se nemě
 často) je to přijatelná cena za jednodušší a konzistentní ovládání. Kdyby
 se to v budoucnu ukázalo jako otravné, dá se to kdykoliv vrátit na
 sdílenou Část šablony (viz výš, jak na to).
+
+## Patička — zpět na Část šablony (31. 7. 2026)
+
+Honza si po nasazení všiml, že patička „nefunguje stejně jako header" —
+myslel tím konkrétně: po úpravě patičky očekával, že se změna propíše
+všude, tak jako u headeru, ne že ji musí znovu vkládat do každé šablony
+zvlášť. To je přesně ten trade-off, který si sám vybral 20. 7. 2026 (viz
+zápis výš) — tehdy prioritou byla konzistence ovládání (obojí přes záložku
+„Vzory"), teď prioritou je funkčnost (propagace jako u headeru). Vrácena
+tedy funkcionalita, ne kód patičky samotné — obsah patičky (kontakt, mapa,
+otevírací doba, odkazy, právní stránky, teď i opravené Facebook/Instagram
+odkazy, viz „Sladění s Astro" výš) zůstává stejný.
+
+**Co se změnilo v `functions.php`:** vzor `bohemi-twentytwentyfive-child/footer`
+dostal `'blockTypes' => array('core/template-part/footer')` — stejný hint,
+jaký `bohemi-wp-ui/patterns/header.php` dávno používá pro header
+(`core/template-part/header`). Nic jiného v PHP se neměnilo — pattern pořád
+existuje, generuje stejné HTML, jen se WordPressu řekne, že patří do
+Části šablony Patička, takže se v inserteru nabídne přednostně i tam.
+Motiv → **1.4** (`style.css`).
+
+**Co musí Honza udělat živě (nemám tam přístup, nejde to automatizovat):**
+1. **Vzhled → Editor → Šablonové části → Patička** — otevři, smaž
+   jakýkoliv starý obsah, „+" → najdi „BoHeMi — Footer" (kategorie
+   „BoHeMi") → vlož → Ulož. Todle je teď JEDINÉ místo, které se do
+   budoucna edituje.
+2. Zkontroluj živě aspoň jednu stránku každého typu (obyčejná stránka,
+   úvodní stránka webu, 404) — pokud patička sedí všude, šablony správně
+   dědí ze sdílené Části šablony a krok 3 níž není potřeba.
+3. **Pokud** se v nějaké konkrétní šabloně pořád zobrazuje stará/jiná
+   patička (typicky proto, že do ní byla 20.–31. 7. 2026 vložená
+   nezávislá kopie vzoru, viz zápis výš) — otevři tu jednu šablonu ve
+   Site Editoru, smaž vloženou patičku (blok → Možnosti → Odstranit) a
+   nech tam jen to, co zůstane po smazání (výchozí odkaz na sdílenou Část
+   šablony by se měl znovu ukázat sám). Tohle je oprava **jen pro tu
+   jednu šablonu, jen jednou** — ne nový trvalý zdroj údržby.
+
+**Proč jsem to nemohl ověřit sám:** žádný SSH/FTP/WP-admin přístup, jen
+`curl` na veřejné URL (viz „Sladění s Astro" výš) — jestli konkrétní
+šablony `page`/`front-page`/`404`/atd. skutečně obsahují
+`wp:template-part {"slug":"footer"}`, nebo mají footer pořád natvrdo
+vložený, musí ověřit Honza přímo v Site Editoru.
 
 ## Header — mrtvý odkaz „Můj účet" (20. 7. 2026)
 

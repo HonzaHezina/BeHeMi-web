@@ -3,10 +3,12 @@
  *
  * The mobile menu is a native <details>/<summary> disclosure, so it works
  * with zero JS (keyboard-operable, no layout shift). This file only adds
- * the three behaviours native <details> doesn't give us for free:
+ * the four behaviours native <details> doesn't give us for free:
  *   1. keep aria-expanded on the toggle button in sync with open state
  *   2. close the menu after a nav link is clicked
  *   3. close the menu on Escape and return focus to the toggle button
+ *   4. close the menu when clicking anywhere outside it (matches the Astro
+ *      site's Header.astro, fixed there 31. 7. 2026 — this file mirrors it)
  */
 (function () {
 	'use strict';
@@ -36,6 +38,12 @@
 				if (event.key === 'Escape' && details.open) {
 					details.open = false;
 					summary.focus();
+				}
+			});
+
+			document.addEventListener('click', function (event) {
+				if (details.open && !details.contains(event.target)) {
+					details.open = false;
 				}
 			});
 		});

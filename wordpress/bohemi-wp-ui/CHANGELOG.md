@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.3 — 2026-07-31
+
+Sladěno s Astro headerem po jeho úpravě téhož dne (`src/components/Header.astro`):
+mobilní menu se teď zavírá i **kliknutím kamkoliv mimo něj**, ne jen křížkem/
+odkazem/Escape jako dřív. Přidán `document` click listener v
+`assets/js/header.js`, který zavře `<details>`, pokud je otevřený a klik
+nespadá do jeho `contains()`. Beze změny v CSS ani markupu.
+
 ## 1.1.2 — 2026-07-20
 
 `bohemi_wp_ui_account_url()` už nezkouší `pmpro_url('account')` ani

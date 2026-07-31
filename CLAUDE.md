@@ -136,8 +136,15 @@ viz sekce „Fotky" níž.)
   `/krouzky-pro-deti/#objevovarna`. Plný seznam v redirect-map. Implementace
   zatím nerozhodnutá (Astro vs. nginx).
 
-Mimo repo (WordPress, neřešíš tady): `studio.bohemi.fit/` — rezervace,
-„Můj účet" / login / členství.
+Mimo repo běží (WordPress): `studio.bohemi.fit/` — rezervace, „Můj účet" /
+login / členství, Booking Activities, Paid Memberships Pro. **Ale od
+19. 7. 2026 tenhle repo přece jen sleduje kus WP** — adresář `wordpress/`
+(staging/reference, ne buildovaný Astrem) drží zdroj pro plugin
+`bohemi-wp-ui` (header) a child theme `bohemi-twentytwentyfive-child`
+(globální styly, PMPro/Booking Activities boxy, patička jako Vzor), obojí
+vizuálně sladěné s Astro headerem/patičkou. Nasazení je pořád ruční (FTP/WP
+admin, žádný SSH ani CI) — detaily, historie rozhodnutí a instalační
+checklist v [`wordpress/README.md`](wordpress/README.md).
 
 ## Navigační logika — tři vrstvy (sjednoceno 7/2026, drž ji)
 
@@ -295,8 +302,21 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
 - **HP sekce „Pro koho tu jsme" (dřív „Najdi se v tom", přerámováno 7/2026):**
   je to rozcestník, ne osobní identifikace — eyebrow „Pro koho tu jsme", H2
   „Ty. Tvoje děti. Tvoje firma.", karta 01 štítek „Dospělí". Osobní identifikaci
-  dělá vedlejší sekce „Co u nás lidé nejčastěji řeší" (8 situací). **Nepřidávat
-  další karty** — tři vstupy zrcadlí strukturu rozcestníku.
+  dělá vedlejší sekce „Co u nás lidé nejčastěji řeší" (`ApproachGrid.astro`,
+  data `approach` v `home.ts`/`home.en.ts`). **Nepřidávat další karty** do
+  „Pro koho tu jsme" — tři vstupy zrcadlí strukturu rozcestníku.
+- **`ApproachGrid` zúžen z 8 na 4 karty (31. 7. 2026)** — původní karta
+  „Nechci chodit do anonymní posilovny" smazána (zbytečná/obranná), stejně
+  „Bolí mě záda" a „Chci pohybový program pro tým" (firmy řeší už samostatná
+  sekce „Pro firmy" v `Offer.astro`). Zůstává: start / kondice / máma / děti —
+  **všechny 4 mají `href`** (žádná zůstává neklikací `<div>`, to bylo důvodem,
+  proč mřížka předtím působila nekonzistentně). Cíle: „Chci začít znovu
+  cvičit" → `/skupinove-lekce/#prvni-lekce`, „Zpevnit tělo a kondici" →
+  `/skupinove-lekce/`, „Cvičit i jako máma" → `/supermamky/`, „Pohyb pro děti"
+  → `/krouzky-pro-deti/`. EN verze: kotva `#prvni-lekce` na EN stránce
+  neexistuje (viz komentář v `Offer.astro`), takže první dvě EN karty vedou
+  obě na `/en/group-classes/` místo na kotvu — sedí s konvencí „kids/supermums
+  jsou CZ-only, EN odkazuje českým slugem".
 - **Homepage zjednodušena (7/2026, dle opakované zpětné vazby copywriterky —
   „hodně zahuštěné, spousta duplicit", i po prvním kole úprav pořád „hodně
   nacpaná"):**
@@ -372,11 +392,24 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   (slot pattern — placeholder se skryje, když je `<Image />` ve slotu). Navigace:
   kotvy formou `/#…` (fungují i z podstránek), aktivní stav přes
   `<Header current="/slug/" />`.
-- **Fotky (stav 17. 7. 2026):** Reálné fotky zapojeny na všech klíčových
+- **Mobilní menu (`Header.astro`) = nativní `<details>/<summary>`, žádná
+  React/Vue island.** Od 31. 7. 2026 má malý inline `<script>` (na konci
+  komponenty, cílí `details[data-mobile-menu]`), který menu zavře i kliknutím
+  mimo něj nebo na libovolný odkaz uvnitř — dřív šlo zavřít jen křížkem
+  (`<summary>` toggle). Nový mobilní panel/dropdown v hlavičce ať respektuje
+  stejné chování (buď použij stejný `<details>` vzor, nebo panel taky napoj na
+  tenhle listener).
+- **Fotky (stav 31. 7. 2026):** Reálné fotky zapojeny na všech klíčových
   stránkách. Zdrojové soubory v `src/assets/`: `lekce/` (kruháč, silový
   trénink, vlastní váha), `supermamky/`, `deti/` (Objevovárna, cirkusová
   školička), `treneri/` (Klára Měchurová, Jan Hezina), `studio/` (pronájem
   sálů + obecná atmosféra studia).
+  **HP hero (`Hero.astro`) má od 31. 7. 2026 reálnou fotku** —
+  `src/assets/studio/studio-12-hero.jpg` vložená přímo přes `<Image>` do
+  slotu `<MediaFrame>` (dřív jen placeholder gradient s alt textem
+  „Trénink ve funkčním sále BoHeMi"). Mimo centrální registr `photos.ts`,
+  protože jde o jednu konkrétní pozici v jedné komponentě, ne o dlaždici s
+  `id` — stejný důvod jako u Supermamek/Objevovárny níž.
   **Centrální registr fotek lekcí a dětských aktivit = `src/data/photos.ts`**
   (`photosCS`/`photosEN`, klíč = `id` z `classes[]`/`kidsActivities[]`/
   `kidsBand[]` v `src/data/home.ts`). Fotka se přidává **jen jednou sem** —

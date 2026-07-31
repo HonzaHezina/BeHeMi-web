@@ -62,6 +62,13 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   jen „01 Pro tebe" a „02 Pro firmy", dětská nabídka na HP jen v KidsBand.
   HP sekce: Hero → ApproachGrid → KidsBand → Offer → LifePracticeFeature →
   ProcTriad → Trainers → PricingTeaser.
+- **`ApproachGrid` (sekce „Co u nás lidé nejčastěji řeší") = 4 karty, ne 8**
+  (zúženo 31/2026) — start / kondice / máma / děti, všechny klikací (`href`
+  v `approach` datech). Nepřidávat zpět zrušené („anonymní posilovna", „bolí
+  záda", firmy — ty řeší `Offer.astro`).
+- **Mobilní menu (`Header.astro`) = `<details>` se zavírá i klikem mimo něj**
+  (inline `<script>`, `data-mobile-menu` atribut) — nový mobilní panel napoj na
+  stejné chování, nevracet menu zavíratelné jen křížkem.
 - **Navigace = tři vrstvy** (HP ochutnávka → rozcestník → detail): každý klik
   vede na **nejkonkrétnější existující stránku**. Služba → vlastní stránka; typ
   lekce → `/skupinove-lekce/#kotva` (typy lekcí nemají vlastní stránky); dětská

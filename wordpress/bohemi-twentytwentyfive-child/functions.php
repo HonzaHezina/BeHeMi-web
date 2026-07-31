@@ -6,13 +6,15 @@
  * until the bohemi-wp-ui pattern is inserted (works the same whether this
  * child theme is active or not). See wordpress/README.md.
  *
- * Footer works the same way, on purpose (consistency requested by Honza,
- * 20. 7. 2026): a plain insertable pattern in the "BoHeMi" category, not a
- * real Template Part — see bohemi_wp_final_child_get_footer_html() below.
- * Trade-off: because it's an unsynced pattern, each page template gets its
- * own independent copy when you insert it — editing one later does NOT
- * update the others. If that becomes annoying, this can be converted to a
- * real shared Template Part later (see wordpress/README.md history).
+ * Footer works the same way NOW (reversed 31. 7. 2026, see wordpress/README.md
+ * "Patička — zpět na Část šablony"): the pattern below is meant to be
+ * inserted ONCE into the shared Footer template part (Vzhled → Editor →
+ * Šablonové části → Patička), exactly like the header goes into the shared
+ * Header template part — NOT pasted into individual page templates. Between
+ * 20. 7. 2026 and 31. 7. 2026 it was deliberately a per-template pattern
+ * (Honza's call, for insertion-UI consistency with the header); he later
+ * decided he wanted true one-edit-updates-everywhere behaviour instead, like
+ * the header already has, so that trade-off was reverted.
  */
 
 add_action('wp_enqueue_scripts', function () {
@@ -40,10 +42,12 @@ add_action('init', function () {
     register_block_pattern(
         'bohemi-twentytwentyfive-child/footer',
         array(
-            'title'       => __('BoHeMi — Footer', 'bohemi-twentytwentyfive-child'),
-            'description' => __('BoHeMi patička — kontakt, mapa, otevírací doba, odkazy, právní stránky.', 'bohemi-twentytwentyfive-child'),
-            'categories'  => array('bohemi-header'),
-            'content'     => bohemi_wp_final_child_get_footer_html(),
+            'title'         => __('BoHeMi — Footer', 'bohemi-twentytwentyfive-child'),
+            'description'   => __('BoHeMi patička — kontakt, mapa, otevírací doba, odkazy, právní stránky. Vlož do šablonové části Patička (stejně jako header).', 'bohemi-twentytwentyfive-child'),
+            'categories'    => array('bohemi-header'),
+            'blockTypes'    => array('core/template-part/footer'),
+            'content'       => bohemi_wp_final_child_get_footer_html(),
+            'viewportWidth' => 1220,
         )
     );
 });
@@ -68,7 +72,7 @@ function bohemi_wp_final_child_get_footer_html(): string {
 		<div class="bohemi-footer-col">
 			<p class="bohemi-footer-heading">Otevírací doba</p>
 			<p>Po — Pá: dle rozvrhu</p>
-			<p class="bohemi-footer-social"><a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">Facebook</a> · <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a></p>
+			<p class="bohemi-footer-social"><a href="https://www.facebook.com/people/Bohemi-fitness/100090517103019/" target="_blank" rel="noopener noreferrer">Facebook</a> · <a href="https://www.instagram.com/bohemi.fit/" target="_blank" rel="noopener noreferrer">Instagram</a></p>
 		</div>
 	</div>
 	<div class="bohemi-footer-bottom">
