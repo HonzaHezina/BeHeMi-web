@@ -251,6 +251,54 @@ Motiv → **1.4** (`style.css`).
 `wp:template-part {"slug":"footer"}`, nebo mají footer pořád natvrdo
 vložený, musí ověřit Honza přímo v Site Editoru.
 
+## Patička — obsah sjednocen na 4 sloupce jako Astro (31. 7. 2026)
+
+Honza upřesnil zadání: header i patička mají na obou webech **vypadat a
+chovat se stejně**, jen budou mít jinde jiné odkazy (WP je jiný web s jinou
+nabídkou stránek). U patičky to znamená doslova stejnou strukturu sloupců
+jako `src/components/Footer.astro`, ne jen podobný vizuál. Potvrzeno přes
+AskUserQuestion (varianta „4 sloupce jako Astro, WP-odkazy do Kontaktu").
+
+**Staré rozvržení WP patičky:** Brand (bez CTA) / Kontakt / Odkazy (Hlavní
+web, Rezervace lekcí, Můj účet — 3 položky) / Otevírací doba + sociální
+sítě. **Nové (`functions.php`, `bohemi_wp_final_child_get_footer_html()`):**
+
+1. **Brand** — stejné „BoHeMi · Body · Health · Mind" + popisek (WP-specifický
+   text zůstal, popisuje samotný rezervační systém, ne marketing) + **nové
+   CTA tlačítko „Rezervovat lekci →"** (Astro ho má, WP dřív ne) — vede na
+   `bohemi_wp_ui_reserve_url()` z pluginu (fallback `home_url('/')`, kdyby
+   plugin nebyl aktivní).
+2. **Web** — stejných **6 položek ve stejném pořadí** jako Astro
+   (`webLinks`): Proč BoHeMi, Lekce a služby, Program 8 týdnů, Ceník, Fotky,
+   Kontakt. Protože tyhle stránky na `studio.bohemi.fit` neexistují, každá
+   míří na `bohemi.fit` (cross-domain, `target="_blank"`) — jediný rozdíl
+   oproti Astro je cíl odkazu, ne jeho existence/pořadí/label.
+3. **Služby** — stejných **8 položek ve stejném pořadí** jako Astro
+   (`serviceLinks`): Skupinové lekce, Kroužky pro děti, Supermamky, Open
+   gym, Fotobiomodulace, Osobní tréninky, Pronájem sálů, Pro firmy — stejně
+   cross-domain na `bohemi.fit`.
+4. **Kontakt** — beze změny (telefon/e-mail/adresa/mapa/hodiny/sociální
+   sítě), **plus dvě WP-only položky přibalené dovnitř** (Rezervace lekcí,
+   Můj účet — přes `bohemi_wp_ui_booking_url()`/`bohemi_wp_ui_account_url()`
+   z pluginu), aby zůstal **stejný počet sloupců (4)** jako na Astru místo
+   přidávání pátého jen pro WP-specifika.
+
+Spodní řádek (copyright + právní odkazy) beze změny — ten už sedí.
+
+**CSS (`assets/css/bohemi.css`):** přidán token `--bohemi-accent-deep:#8f150d`
+(chyběl, Astro ho má jako `accent-deep` pro hover CTA), nová třída
+`.bohemi-footer-cta` (červené pilulkovité tlačítko, stejné barvy jako Astro
+`Button.astro` variant="brand") a `.bohemi-footer-col--brand` (širší první
+sloupec, `flex:1.4` — odpovídá Astro `lg:grid-cols-[1.4fr_1fr_1fr_1fr]`).
+Motiv → **1.5**. Nová sdílená funkce `bohemi_wp_final_child_footer_link_list()`
+generuje `<a>` seznamy pro Web/Služby sloupce (`$external=true` přidává
+`target="_blank" rel="noopener noreferrer"` na všechny odkazy mířící na
+`bohemi.fit`).
+
+**Nic dalšího se nemění na instalaci** — pořád platí postup ze sekce
+„Patička — zpět na Část šablony" výš (vlož do Šablonové části → Patička,
+jednou). `dist/bohemi-twentytwentyfive-child.zip` přegenerovaný.
+
 ## Header — mrtvý odkaz „Můj účet" (20. 7. 2026)
 
 Po nasazení headeru se ukázalo, že **„Můj účet" má `href=""`** (odkaz na

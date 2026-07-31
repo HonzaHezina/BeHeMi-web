@@ -8,6 +8,7 @@
  --bohemi-border:#e7dcc8;
  --bohemi-accent:#e2231a;
  --bohemi-accent-dark:#b71c13;
+ --bohemi-accent-deep:#8f150d;
  --bohemi-cream:#f5f1ea;
 }
 
@@ -99,11 +100,40 @@ body {
  min-width:180px;
 }
 
+/* Wider first column (brand + description + CTA), mirrors Astro's
+   lg:grid-cols-[1.4fr_1fr_1fr_1fr] proportion for the same 4-column grid. */
+.bohemi-footer-col--brand {
+ flex:1.4 1 240px;
+}
+
 .bohemi-footer-brand {
  font-size:22px !important;
  font-weight:800;
  opacity:1 !important;
  margin-bottom:10px !important;
+}
+
+.bohemi-footer-cta {
+ display:inline-flex;
+ align-items:center;
+ margin-top:14px;
+ padding:10px 22px;
+ border-radius:999px;
+ background:var(--bohemi-accent-dark);
+ color:var(--bohemi-cream) !important;
+ font-size:15px;
+ font-weight:700;
+ opacity:1 !important;
+ transition:background-color 0.2s ease;
+}
+
+.bohemi-footer-cta:hover {
+ background:var(--bohemi-accent-deep);
+ opacity:1 !important;
+}
+
+.bohemi-footer-hours {
+ margin-top:4px;
 }
 
 .bohemi-footer-tagline {

@@ -141,10 +141,19 @@ login / členství, Booking Activities, Paid Memberships Pro. **Ale od
 19. 7. 2026 tenhle repo přece jen sleduje kus WP** — adresář `wordpress/`
 (staging/reference, ne buildovaný Astrem) drží zdroj pro plugin
 `bohemi-wp-ui` (header) a child theme `bohemi-twentytwentyfive-child`
-(globální styly, PMPro/Booking Activities boxy, patička jako Vzor), obojí
-vizuálně sladěné s Astro headerem/patičkou. Nasazení je pořád ruční (FTP/WP
-admin, žádný SSH ani CI) — detaily, historie rozhodnutí a instalační
-checklist v [`wordpress/README.md`](wordpress/README.md).
+(globální styly, PMPro/Booking Activities boxy, patička), obojí vizuálně
+sladěné s Astro headerem/patičkou. **Header i patička se od 31. 7. 2026
+vkládají stejným způsobem** — jednorázově do sdílené Části šablony
+(Šablonové části → Záhlaví / Patička v Site Editoru), ne do jednotlivých
+šablon stránek zvlášť (dřív to u patičky bylo per-template, viz
+`wordpress/README.md` „Patička — zpět na Část šablony"). **Patička na WP
+má i obsahově stejnou strukturu 4 sloupců jako `Footer.astro`** (Brand+CTA
+/ Web / Služby / Kontakt) — jen „Web"/„Služby" míří cross-domain na
+`bohemi.fit`, protože ty stránky na WP nejsou, a dva WP-specifické odkazy
+(Rezervace lekcí, Můj účet) jsou přibalené do sloupce Kontakt, ne jako
+vlastní pátý sloupec. Nasazení je pořád ruční (FTP/WP admin, žádný SSH ani
+CI) — detaily, historie rozhodnutí a instalační checklist v
+[`wordpress/README.md`](wordpress/README.md).
 
 ## Navigační logika — tři vrstvy (sjednoceno 7/2026, drž ji)
 
