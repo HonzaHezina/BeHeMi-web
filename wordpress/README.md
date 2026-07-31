@@ -338,6 +338,47 @@ zůstává v obou menu jako běžný odkaz — plní stejnou roli bez CTA stylu.
 
 Oba `dist/*.zip` přegenerované.
 
+## Vzory ve wp-adminu — kategorie + „proč se to nezobrazuje" (1. 8. 2026)
+
+Honza procházel **Vzhled → Editor → Vzory** ve wp-adminu (screenshoty) a
+narazil na dvě věci:
+
+1. **Vestavěná kategorie „Zápatí" ukazuje jen výchozí TT5 vzory** (Zápatí
+   vycentrované, se sloupci, …), „BoHeMi — Footer" tam nebylo — najde se
+   jen ve vlastní složce „BoHeMi". **Skutečná mezera v kódu**, ne jen
+   nedorozumění: `bohemi-wp-ui/patterns/header.php` registruje header do
+   **dvou** kategorií (`array( 'bohemi-header', 'header' )`), takže se
+   ukáže jak v „BoHeMi", tak ve vestavěné „Záhlaví". Footer v
+   `functions.php` měl jen jednu (`array('bohemi-header')`) — chybějící
+   `'footer'`. **Opraveno** (`categories => array('bohemi-header',
+   'footer')`) — od teď „BoHeMi — Footer" najdeš i ve vestavěné složce
+   „Zápatí", stejná parita jako u headeru. Motiv → **1.7**.
+2. **„Header/footer se mi nezobrazuje v záhlaví/zápatí šablon, jen ve
+   vzorech BoHeMi — je to OK?"** — **ano, přesně tak to má být** v tomhle
+   bodě instalace. Vzor ve složce „BoHeMi" = **jen dostupný k vložení**,
+   ne automaticky použitý nikde. Dokud ho fyzicky nevložíš do sdílené
+   Části šablony, žádná stránka ho nepoužije — přesně proto instalační
+   checklist (výš) i sekce „Patička — zpět na Část šablony" popisují
+   krok **„Vzhled → Editor → Šablonové části → Záhlaví/Patička → + →
+   najdi BoHeMi — Header/Footer → vlož → Ulož"**. Bez tohohle
+   jednorázového kroku zůstane vzor navždy jen v knihovně, viditelný a
+   připravený, ale nikde živě použitý.
+
+**„Obrázek 2 vypadá divně"** (thumbnaily „BoHeMi — Header" mají černé
+pruhy, „BoHeMi — Footer" nemá tmavé pozadí jako živý web) — nejpravdě-
+podobnější vysvětlení: náhledy vzorů ve „Vzorech" se dokreslují
+asynchronně (WP je renderuje zvlášť přes iframe/AJAX až po načtení
+stránky) a screenshot padl doprostřed toho renderování — proto
+neobarvené pozadí a placeholder pruhy místo textu. **Nemám jak si to
+ověřit živě** (žádný přístup do wp-adminu) — zkus stránku „Vzory" tvrdě
+obnovit (Ctrl/Shift+R) a počkat pár vteřin, než se náhledy dokreslí; živý
+`curl` na homepage z dřívějška (viz „Sladění s Astro" výš) potvrzuje, že
+skutečně vykreslený header na produkci má správné CSS/pozadí, takže jde
+nejspíš jen o kosmetiku náhledu ve wp-adminu, ne o reálně rozbitý vzor.
+Pokud po obnovení stránky pořád vidíš černé pruhy, napiš přesněji, co je
+na nich vidět (text? úplně černá plocha? jen v Header, nebo i ve Footer?),
+ověřím to podle toho, co doopravdy generuje `header.php`.
+
 ## Header — mrtvý odkaz „Můj účet" (20. 7. 2026)
 
 Po nasazení headeru se ukázalo, že **„Můj účet" má `href=""`** (odkaz na

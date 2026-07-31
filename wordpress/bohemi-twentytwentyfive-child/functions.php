@@ -44,7 +44,7 @@ add_action('init', function () {
         array(
             'title'         => __('BoHeMi — Footer', 'bohemi-twentytwentyfive-child'),
             'description'   => __('BoHeMi patička — kontakt, mapa, otevírací doba, odkazy, právní stránky. Vlož do šablonové části Patička (stejně jako header).', 'bohemi-twentytwentyfive-child'),
-            'categories'    => array('bohemi-header'),
+            'categories'    => array('bohemi-header', 'footer'),
             'blockTypes'    => array('core/template-part/footer'),
             'content'       => bohemi_wp_final_child_get_footer_html(),
             'viewportWidth' => 1220,
