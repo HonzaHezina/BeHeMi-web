@@ -2,9 +2,22 @@
 import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
+  // Nutné pro canonical <link>, sitemap a absolutní OG/hreflang URL.
+  site: 'https://bohemi.fit',
+
+  integrations: [
+    sitemap({
+      i18n: {
+        defaultLocale: 'cs',
+        locales: { cs: 'cs-CZ', en: 'en-US' },
+      },
+    }),
+  ],
+
   // ───────────────────────────────────────────────────────────────
   // 301 REDIRECT MAPA — konsolidace menu (staré slugy → nové cíle).
   // TODO(Honza): doplnit, AŽ přijde reálný seznam starých URL ze Search
