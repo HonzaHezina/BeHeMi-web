@@ -95,7 +95,7 @@ const logoHref = lang === 'en' ? '/en/' : '/';
         class="px-2.5 py-2 text-[12px] font-bold uppercase tracking-[0.06em] text-ink-muted hover:text-brand"
       >{langSwitchLabel}</a>
       <Button href={RESERVE_URL} variant="brand" external class="px-4 py-2 text-sm">{t(lang, 'nav_reserve')}</Button>
-      <details class="group relative">
+      <details class="group relative" data-mobile-menu>
         <summary class="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-full border border-border-strong text-ink [&::-webkit-details-marker]:hidden" aria-label={t(lang, 'nav_open_menu')}>
           <svg class="h-5 w-5 group-open:hidden" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
           <svg class="hidden h-5 w-5 group-open:block" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
@@ -123,3 +123,19 @@ const logoHref = lang === 'en' ? '/en/' : '/';
     </div>
   </div>
 </header>
+
+<script>
+  const menu = document.querySelector<HTMLDetailsElement>('header details[data-mobile-menu]');
+  if (menu) {
+    document.addEventListener('click', (e) => {
+      if (menu.open && !menu.contains(e.target as Node)) {
+        menu.open = false;
+      }
+    });
+    menu.querySelectorAll('a').forEach((a) => {
+      a.addEventListener('click', () => {
+        menu.open = false;
+      });
+    });
+  }
+</script>
