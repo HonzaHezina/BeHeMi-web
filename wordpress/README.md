@@ -21,6 +21,27 @@ repo ho nespravuje ani neverzuje.
 **tři různé věci** (header / globální styly + obsahové patterny / styl
 formulářů) a běží vedle sebe — žádný nenahrazuje druhý.
 
+## ⚠️ Nahrání souborů ≠ aktualizace živé stránky (přečti PŘED každou úpravou)
+
+**FTP/plugin-ZIP upload mění jen soubory na disku — CSS/JS se projeví hned
+(načítají se čerstvě), ale HTML header/patičky NE.** Obsah, který vidíš na
+`studio.bohemi.fit`, je **statická kopie uložená v databázi** z okamžiku,
+kdy jsi naposledy v Site Editoru vzor „BoHeMi — Header"/„BoHeMi — Footer"
+vložil a uložil (Gutenberg vzory se při vložení zkopírují jako obyčejný
+blok, ne jako živý odkaz na PHP zdroj). Aktualizace `header.php`/
+`functions.php` v tomhle repu **nikdy sama o sobě nezmění**, co je uložené
+v Šablonové části Záhlaví/Patička — dokud tam starý blok ručně nesmažeš a
+vzor znovu nevložíš + neuložíš, uvidíš starý HTML stylovaný novým CSS
+(typicky vypadá **hůř** než před update — chybí wrappery/třídy, na které
+nové CSS spoléhá, viz „Patička natažená přes celou šířku" a jeho oprava
+níž pro konkrétní příklad, kdy se přesně tohle stalo).
+
+**Po KAŽDÉ aktualizaci `bohemi-wp-ui` nebo `bohemi-twentytwentyfive-child`,
+která mění HTML markup patičky/headeru** (ne jen CSS): znovu otevři
+Vzhled → Editor → Šablonové části → Záhlaví (resp. Patička), smaž starý
+vložený blok, „+" → najdi aktuální vzor → vlož → Ulož. Je to nutné **při
+každé** takové změně, ne jen při prvním nastavení.
+
 ## Instalační checklist (v tomhle pořadí)
 
 1. **`bohemi-twentytwentyfive-child`** — aktivuj jako motiv (Vzhled →
@@ -43,15 +64,15 @@ formulářů) a běží vedle sebe — žádný nenahrazuje druhý.
 5. **Patička** — od 31. 7. 2026 se vkládá **stejně jako header** (viz
    „Patička — zpět na Část šablony" níž): **Vzhled → Editor → Šablonové
    části → Patička**, smaž starý výchozí obsah, „+" → najdi **„BoHeMi —
-   Footer"** (kategorie „BoHeMi") a vlož. Ulož. Tohle stačí **jednou** —
-   žádné šablony stránek už se nemusí editovat zvlášť, **pokud** tyhle
-   šablony skutečně odkazují na sdílenou Část šablony Patička (výchozí
-   chování Twenty Twenty-Five). Pokud v nějaké konkrétní šabloně (page,
-   Úvodní stránka webu, 404, archivy, výsledky vyhledávání) pořád vidíš
-   starou/jinou patičku i po tomhle kroku, ta šablona má nejspíš ještě
-   nezávislou vloženou kopii z předchozího postupu (viz „Patička —
-   zjištění" níž) — otevři ji, smaž vloženou patičku a nech tam jen
-   výchozí odkaz na Část šablony (nebo znovu vlož „BoHeMi — Footer" tam,
+   Footer"** (kategorie „BoHeMi" nebo „Zápatí") a vlož. Ulož. Sdílená
+   Část šablony se propíše do všech šablon, které na ni odkazují,
+   **pokud** tyhle šablony skutečně odkazují na sdílenou Část šablony
+   Patička (výchozí chování Twenty Twenty-Five). Pokud v nějaké konkrétní
+   šabloně (page, Úvodní stránka webu, 404, archivy, výsledky vyhledávání)
+   pořád vidíš starou/jinou patičku i po tomhle kroku, ta šablona má
+   nejspíš ještě nezávislou vloženou kopii z předchozího postupu (viz
+   „Patička — zjištění" níž) — otevři ji, smaž vloženou patičku a nech tam
+   jen výchozí odkaz na Část šablony (nebo znovu vlož „BoHeMi — Footer" tam,
    je to jednorázová oprava jen pro tu jednu šablonu).
 
 Po instalaci všech pěti kroků by `studio.bohemi.fit` měl mít: fungující
@@ -400,6 +421,19 @@ dohromady (stejně jako Astro obaluje obojí jedním `<div>`). CSS
 24px 32px; }`) — padding se přesunul z `.bohemi-footer` sem, `.bohemi-footer`
 teď drží jen tmavé pozadí přes celou šířku. Motiv → **1.8**, ZIP
 přegenerovaný.
+
+**Bezprostřední follow-up téhož dne — „teď je to ještě horší":** Honza
+nahrál 1.8 přes FTP, ale **nevrátil se do Šablonové části → Patička znovu
+vzor vložit a uložit**. Výsledek přesně sedí na mechaniku popsanou v nové
+sekci „⚠️ Nahrání souborů ≠ aktualizace živé stránky" úplně nahoře: nové
+CSS (padding/max-width teď na `.bohemi-footer-inner`) se aplikovalo na
+**starý uložený HTML bez tohohle wrapperu** → patička byla najednou úplně
+bez paddingu (nalepená na okraje) a pořád přes celou šířku, tedy hůř než
+předtím. Diagnostikováno přes AskUserQuestion (potvrdil: „jen jsem nahrál
+soubory přes FTP"). Řešení není další kód — je to re-insert: smazat starou
+vloženou patičku a znovu vložit + uložit čerstvý „BoHeMi — Footer". Tahle
+zkušenost je přesně důvod, proč teď celá sekce s varováním existuje hned
+na začátku souboru — ať se stejná past nezopakuje u příští změny.
 
 ## Header — mrtvý odkaz „Můj účet" (20. 7. 2026)
 

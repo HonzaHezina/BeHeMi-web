@@ -144,6 +144,17 @@ kořen problému) — to je potřeba opravit ve wp-admin, viz
 
 ## Instalace
 
+**⚠️ Tenhle postup se neomezuje na první instalaci.** Nahrání nové verze
+pluginu (ZIP upload, „Aktivuj") mění jen soubory na disku — CSS/JS se
+projeví hned, ale HTML hlavičky NE. Vzor „BoHeMi — Header" se do Části
+šablony Záhlaví vloží jako **statická kopie v databázi** v okamžiku
+uložení; pozdější aktualizace `patterns/header.php` v tomhle repu ji sama
+od sebe nezmění. **Po každé verzi, která mění HTML markup headeru (ne jen
+CSS), zopakuj kroky 5–8 níž znovu** (smaž starý blok, vlož čerstvý vzor,
+ulož) — jinak uvidíš starý HTML stylovaný novým CSS, což typicky vypadá
+hůř, ne líp (viz `wordpress/README.md` „⚠️ Nahrání souborů ≠ aktualizace
+živé stránky" a konkrétní příklad z patičky, kde se přesně tohle stalo).
+
 1. Nahraj `dist/bohemi-wp-ui.zip` do **Pluginy → Přidat nový → Nahrát plugin** a klikni **Instalovat**.
 2. **Aktivuj** plugin.
 3. Jdi do **Vzhled → Editor** (Site Editor — funguje stejně na čistém Twenty
