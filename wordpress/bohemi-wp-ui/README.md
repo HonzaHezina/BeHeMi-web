@@ -48,7 +48,13 @@ zde má jiný obsah než na `bohemi.fit`:
   PMPro shortcode na této stránce zobrazuje login formulář odhlášeným a
   dashboard přihlášeným uživatelům)
 - **Přihlásit se / Odhlásit se** → samostatný textový odkaz vedle „Můj účet"
-- **Rezervovat** (CTA) → skutečná rezervační stránka
+
+Header **nemá vlastní CTA tlačítko „Rezervovat"** (odstraněno 31. 7. 2026,
+Honzovo rozhodnutí) — na `studio.bohemi.fit` samotném nedávalo smysl mít
+v hlavičce tlačítko, které tě posílá zpátky na web, na kterém už jsi;
+„Rezervace lekcí" v menu (viz výš) tuhle roli plní jako běžný odkaz.
+Ekvivalentní CTA zůstává jen v patičce (`bohemi-twentytwentyfive-child`,
+viz `wordpress/README.md`).
 
 Dropdown „Lekce a služby" z marketingového webu se do WP hlavičky záměrně
 nepřenáší — WP nabídka je jiná (viz výše), ne rozcestník lekcí.
@@ -66,7 +72,7 @@ nepřenáší — WP nabídka je jiná (viz výše), ne rozcestník lekcí.
 | `BOHEMI_BOOKING_URL` | `bohemi_wp_ui_booking_url` | Rezervace lekcí | hledá stránku `rezervace-lekci` / `rezervace` / `booking` / `lekce` / `kalendar` |
 | `BOHEMI_MEMBERSHIP_URL` | `bohemi_wp_ui_membership_url` | Členství | `pmpro_url('levels')`, jinak stránka podle slugu, jinak home (viz „Header — mrtvý odkaz" ve `wordpress/README.md` — tahle cesta u „Členství" aktuálně spadá na home, chybí potvrzená URL) |
 | `BOHEMI_ACCOUNT_URL` | `bohemi_wp_ui_account_url` | Můj účet | natvrdo `https://studio.bohemi.fit/ucet-clenstvi/` (od v1.1.2 — `pmpro_url()` se tu vůbec nezkouší, viz „Header — mrtvý odkaz" ve `wordpress/README.md`) |
-| `BOHEMI_RESERVE_URL` | `bohemi_wp_ui_reserve_url` | CTA „Rezervovat" | stránka rezervací → PMPro checkout → home |
+| `BOHEMI_RESERVE_URL` | `bohemi_wp_ui_reserve_url` | CTA „Rezervovat lekci" v patičce (`bohemi-twentytwentyfive-child`) — header vlastní CTA nemá, viz „Menu ve WordPressu" výš | stránka rezervací → PMPro checkout → home |
 
 Příklad přepsání ve `wp-config.php`:
 

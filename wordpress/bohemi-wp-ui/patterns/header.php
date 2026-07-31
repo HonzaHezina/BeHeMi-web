@@ -56,7 +56,6 @@ function bohemi_wp_ui_get_header_html(): string {
 	$booking   = bohemi_wp_ui_booking_url();
 	$members   = bohemi_wp_ui_membership_url();
 	$account   = bohemi_wp_ui_account_url();
-	$reserve   = bohemi_wp_ui_reserve_url();
 	$auth      = bohemi_wp_ui_auth_link();
 
 	$nav_items = array(
@@ -90,15 +89,9 @@ function bohemi_wp_ui_get_header_html(): string {
 				<?php echo bohemi_wp_ui_nav_link( $href, $label, 'bohemi-header-link', $external ); ?>
 			<?php endforeach; ?>
 			<?php echo bohemi_wp_ui_nav_link( $auth['href'], $auth['label'], 'bohemi-header-link bohemi-header-link--auth' ); ?>
-			<a href="<?php echo esc_url( $reserve ); ?>" class="bohemi-header-cta">
-				<?php esc_html_e( 'Rezervovat', 'bohemi-wp-ui' ); ?>
-			</a>
 		</nav>
 
 		<div class="bohemi-header-mobile">
-			<a href="<?php echo esc_url( $reserve ); ?>" class="bohemi-header-cta bohemi-header-cta--mobile">
-				<?php esc_html_e( 'Rezervovat', 'bohemi-wp-ui' ); ?>
-			</a>
 			<details class="bohemi-header-toggle">
 				<summary
 					class="bohemi-header-toggle-btn"

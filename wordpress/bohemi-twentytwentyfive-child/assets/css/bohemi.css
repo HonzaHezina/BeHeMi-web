@@ -132,16 +132,11 @@ body {
  opacity:1 !important;
 }
 
-.bohemi-footer-hours {
- margin-top:4px;
-}
-
 .bohemi-footer-tagline {
  margin-left:8px;
  font-size:12px;
  font-weight:600;
  letter-spacing:0.08em;
- text-transform:uppercase;
  opacity:0.7;
 }
 
@@ -152,6 +147,21 @@ body {
  letter-spacing:0.06em;
  opacity:0.6 !important;
  margin-bottom:10px !important;
+}
+
+/* Second heading further down the same column (e.g. "Otevírací doba"
+   under Kontakt) — same look as .bohemi-footer-heading, just with room
+   above it instead of sitting at the top of the column. */
+.bohemi-footer-heading--sub {
+ margin-top:16px !important;
+}
+
+.bohemi-footer-social a {
+ margin-right:16px;
+}
+
+.bohemi-footer-social a:last-child {
+ margin-right:0;
 }
 
 .bohemi-footer-bottom {

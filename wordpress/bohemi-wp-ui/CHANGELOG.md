@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.1.4 — 2026-07-31
+
+Odstraněno CTA tlačítko **„Rezervovat"** z headeru (desktop i mobilní
+cluster) — Honzovo rozhodnutí: na `studio.bohemi.fit` samotném nedávalo
+smysl mít v hlavičce tlačítko, které vede zpátky na web, na kterém už
+jsi. „Rezervace lekcí" zůstává v obou menu jako běžný nav odkaz a plní
+tuhle roli dál. `bohemi_wp_ui_reserve_url()` v `includes/urls.php` beze
+změny — používá ji teď jen patička (`bohemi-twentytwentyfive-child`, viz
+`wordpress/README.md`). Uklizeny i navazující nepoužívané CSS třídy
+(`.bohemi-header-cta`, `.bohemi-header-cta--mobile`) a proměnné
+(`--bohemi-header-accent-text`, `--bohemi-header-accent-deep`,
+`--bohemi-header-cream`, `--bohemi-header-radius`) v `assets/css/header.css`.
+
 ## 1.1.3 — 2026-07-31
 
 Sladěno s Astro headerem po jeho úpravě téhož dne (`src/components/Header.astro`):

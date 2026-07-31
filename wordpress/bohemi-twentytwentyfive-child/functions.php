@@ -137,13 +137,14 @@ function bohemi_wp_final_child_get_footer_html(): string {
 				'<p class="bohemi-footer-heading">Kontakt</p>' .
 				'<p><a href="tel:+420603989762">+420 603 989 762</a><br><a href="mailto:info@bohemi.fit">info@bohemi.fit</a><br>Vinohradská 1438/70, Praha 3</p>' .
 				'<p><a href="https://www.google.com/maps/search/?api=1&amp;query=Vinohradsk%C3%A1%201438%2F70%2C%20Praha%203" target="_blank" rel="noopener noreferrer">Zobrazit na mapě →</a></p>' .
-				'<p class="bohemi-footer-hours">Po — Pá: dle rozvrhu</p>' .
 				sprintf(
 					'<p><a href="%s">Rezervace lekcí</a><br><a href="%s">Můj účet</a></p>',
 					esc_url( $booking ),
 					esc_url( $account )
 				) .
-				'<p class="bohemi-footer-social"><a href="https://www.facebook.com/people/Bohemi-fitness/100090517103019/" target="_blank" rel="noopener noreferrer">Facebook</a> · <a href="https://www.instagram.com/bohemi.fit/" target="_blank" rel="noopener noreferrer">Instagram</a></p>' .
+				'<p class="bohemi-footer-heading bohemi-footer-heading--sub">Otevírací doba</p>' .
+				'<p>Po — Pá: dle rozvrhu</p>' .
+				'<p class="bohemi-footer-social"><a href="https://www.facebook.com/people/Bohemi-fitness/100090517103019/" target="_blank" rel="noopener noreferrer">Facebook</a><a href="https://www.instagram.com/bohemi.fit/" target="_blank" rel="noopener noreferrer">Instagram</a></p>' .
 			'</div>' .
 		'</div>' .
 		'<div class="bohemi-footer-bottom">' .

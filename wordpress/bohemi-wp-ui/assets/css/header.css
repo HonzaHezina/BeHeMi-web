@@ -4,7 +4,6 @@
  * All values below are copied 1:1 from the Astro site's source of truth:
  *   src/components/Header.astro   (structure, spacing, breakpoints)
  *   src/styles/global.css         (@theme design tokens)
- *   src/components/Button.astro   (CTA colors + hover states)
  *
  * Do not hardcode a different hex/font here — if a value is missing,
  * check those three files again before guessing.
@@ -25,11 +24,8 @@
 	--bohemi-header-text-muted: #56503f;
 	--bohemi-header-brand-hover: #1c1812;
 
-	/* Astro --color-accent / --color-accent-text / --color-accent-deep / --color-cream */
+	/* Astro --color-accent (active nav underline + focus ring) */
 	--bohemi-header-accent: #e2231a;
-	--bohemi-header-accent-text: #b71c13;
-	--bohemi-header-accent-deep: #8f150d;
-	--bohemi-header-cream: #f5f1ea;
 
 	/* Astro --color-surface / --color-surface-hover / --color-border / --color-border-strong */
 	--bohemi-header-surface: #fcf8f2;
@@ -47,8 +43,7 @@
 	   elsewhere on the WP site if a page ever needs one. */
 	--bohemi-header-height: 76px;
 
-	/* Astro CTA: rounded-full; dropdown/mobile menu: rounded-2xl (16px) */
-	--bohemi-header-radius: 999px;
+	/* Astro dropdown/mobile menu panel: rounded-2xl (16px) */
 	--bohemi-header-radius-panel: 16px;
 
 	/* Astro breakpoints (Tailwind defaults): md = 768px, lg = 1024px */
@@ -186,29 +181,13 @@
 	color: var(--bohemi-header-brand-hover);
 }
 
-/* CTA "Rezervovat" — Astro Button.astro variant="brand" */
-.bohemi-header-cta {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	margin-left: 6px;
-	padding: 10px 22px;
-	font-size: 15px;
-	font-weight: 700;
-	border-radius: var(--bohemi-header-radius);
-	background: var(--bohemi-header-accent-text);
-	color: var(--bohemi-header-cream);
-	text-decoration: none;
-	transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-.bohemi-header-cta:hover {
-	background: var(--bohemi-header-accent-deep);
-	transform: translateY(-1px);
-	color: var(--bohemi-header-cream);
-}
-
-/* Mobile cluster — Astro: visible until lg, CTA + hamburger */
+/* Mobile cluster — Astro: visible until lg. Only wraps the hamburger
+   toggle now — the "Rezervovat" CTA that used to sit here (and in the
+   desktop nav) was removed 31. 7. 2026: on studio.bohemi.fit itself a
+   "reserve" button in its own header/menu was pointing back at the site
+   you're already on, which Honza flagged as not making sense. The footer
+   still has an equivalent CTA (see bohemi-twentytwentyfive-child), and
+   "Rezervace lekcí" remains as a normal nav link in both menus. */
 .bohemi-header-mobile {
 	display: flex;
 	align-items: center;
@@ -219,11 +198,6 @@
 	.bohemi-header-mobile {
 		display: none;
 	}
-}
-
-.bohemi-header-cta--mobile {
-	padding: 8px 16px;
-	font-size: 14px;
 }
 
 .bohemi-header-toggle {
@@ -305,8 +279,3 @@
 	border-radius: 4px;
 }
 
-@media (prefers-reduced-motion: reduce) {
-	.bohemi-header-cta {
-		transition: none;
-	}
-}

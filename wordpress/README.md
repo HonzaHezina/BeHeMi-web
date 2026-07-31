@@ -299,6 +299,45 @@ generuje `<a>` seznamy pro Web/Služby sloupce (`$external=true` přidává
 „Patička — zpět na Část šablony" výš (vlož do Šablonové části → Patička,
 jednou). `dist/bohemi-twentytwentyfive-child.zip` přegenerovaný.
 
+## Patička — vizuální doladění + odstranění CTA z headeru (31. 7. 2026)
+
+Honza porovnal screenshoty obou paticěk vedle sebe („skoro jo, ještě to
+trochu poladit") a zároveň požádal o odstranění tlačítka „Rezervovat"
+z WP hlavičky, protože ve vlastním menu `studio.bohemi.fit` nedávalo smysl
+(vede zpátky na web, na kterém už jsi).
+
+**Patička — tři vizuální nesrovnalosti proti Astro `Footer.astro` opravené:**
+
+1. **Tagline „Body · Health · Mind" byla navíc VELKÝMI PÍSMENY** — WP CSS
+   (`.bohemi-footer-tagline`) měla `text-transform: uppercase`, Astro tenhle
+   text nechává v původním zápisu. Pravidlo odstraněno.
+2. **Chyběl nadpis „Otevírací doba"** — při přestavbě na 4 sloupce (viz
+   sekce výš) se omylem smazal, zůstala jen samotná hodnota „Po — Pá: dle
+   rozvrhu" bez nadpisu. Vrácen jako `.bohemi-footer-heading.bohemi-footer-heading--sub`
+   (stejný styl jako ostatní nadpisy sloupců, jen s `margin-top`, protože
+   sedí uprostřed sloupce Kontakt, ne na jeho vrcholu).
+3. **Facebook/Instagram byly odděleny tečkou „·"** — Astro je odděluje jen
+   mezerou (`flex gap-x-4`), bez tečky. Nahrazeno `margin-right` na
+   `.bohemi-footer-social a`. Zároveň se pořadí uvnitř sloupce Kontakt
+   přeskládalo tak, aby OTEVÍRACÍ DOBA + sociální sítě zůstaly na úplném
+   konci sloupce (přesně jako v Astru) a WP-specifické odkazy (Rezervace
+   lekcí, Můj účet) se vložily těsně za mapu, ne až za hodiny.
+
+`bohemi-twentytwentyfive-child` → **1.6** (`functions.php`, `assets/css/bohemi.css`).
+
+**Header — CTA „Rezervovat" odstraněno** (`bohemi-wp-ui/patterns/header.php`):
+smazán jak z desktopové navigace, tak z mobilního clusteru vedle hamburgeru.
+`bohemi_wp_ui_reserve_url()` v `includes/urls.php` zůstala — teď ji volá
+jen patička (viz výš), header ji přestal potřebovat. Uklizeny navazující
+nepoužívané CSS třídy/proměnné v `assets/css/header.css`
+(`.bohemi-header-cta`, `.bohemi-header-cta--mobile`,
+`--bohemi-header-accent-text`, `--bohemi-header-accent-deep`,
+`--bohemi-header-cream`, `--bohemi-header-radius`). „Rezervace lekcí"
+zůstává v obou menu jako běžný odkaz — plní stejnou roli bez CTA stylu.
+`bohemi-wp-ui` → **1.1.4** (`CHANGELOG.md`).
+
+Oba `dist/*.zip` přegenerované.
+
 ## Header — mrtvý odkaz „Můj účet" (20. 7. 2026)
 
 Po nasazení headeru se ukázalo, že **„Můj účet" má `href=""`** (odkaz na
