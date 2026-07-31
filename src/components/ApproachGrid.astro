@@ -25,19 +25,19 @@ const approach = lang === 'en' ? approachEN : approachCS;
     </h2>
     <p class="mb-12 max-w-[60ch] text-[clamp(18px,2.2vw,24px)] font-normal leading-[1.4] text-cream-soft">
       {lang === 'en'
-        ? 'Different situations, different starting points — beginners, people coming back, back pain, kids, mums, companies.'
-        : 'Různý bod startu, stejný cíl — začátečníci, návrat po pauze, bolavá záda, děti, maminky i firmy.'}
+        ? 'Different situations, different starting points — beginners, people coming back, mums, kids.'
+        : 'Různý bod startu, stejný cíl — začátečníci, návrat po pauze, maminky i děti.'}
     </p>
 
-    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
       {approach.map((a) => a.href ? (
-        <a href={a.href} class="block cursor-pointer rounded-[18px] border border-border-dark bg-cream/[0.04] px-7 py-8 transition-all duration-300 hover:-translate-y-1.5 hover:border-sage-soft hover:bg-cream/[0.07]">
+        <a href={a.href} class="block cursor-pointer rounded-[18px] border border-border-dark bg-cream/[0.04] px-7 py-9 transition-all duration-300 hover:-translate-y-1.5 hover:border-sage-soft hover:bg-cream/[0.07]">
           <div class="mb-3.5 text-[30px] text-cream-muted" aria-hidden="true">{a.n}</div>
           <h3 class="mb-2.5 text-xl font-extrabold tracking-[-0.02em] text-cream">{a.t}</h3>
           <p class="text-[15.5px] leading-[1.5] text-cream-soft">{a.d}</p>
         </a>
       ) : (
-        <div class="rounded-[18px] border border-border-dark bg-cream/[0.04] px-7 py-8">
+        <div class="rounded-[18px] border border-border-dark bg-cream/[0.04] px-7 py-9">
           <div class="mb-3.5 text-[30px] text-cream-muted" aria-hidden="true">{a.n}</div>
           <h3 class="mb-2.5 text-xl font-extrabold tracking-[-0.02em] text-cream">{a.t}</h3>
           <p class="text-[15.5px] leading-[1.5] text-cream-soft">{a.d}</p>

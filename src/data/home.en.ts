@@ -7,14 +7,10 @@ export const triad = [
 // href = clickable card leading to the most specific existing target.
 // Kids/Supermums detail pages are CS-only for now.
 export const approach: { n: string; t: string; d: string; href?: string }[] = [
-  { n: '01', t: 'I want to start exercising again', d: 'No burning out at the start. Gradually, regularly, with a coach who corrects you and remembers you.' },
-  { n: '02', t: 'I want to tone up and improve my fitness', d: 'Circuit and strength training in a small group. Everyone trains at their own level — but seriously.' },
-  { n: '03', t: "I don't want an anonymous gym", d: "You don't need to figure out machines or a plan on your own. Come to class and the coach guides you through the workout." },
-  { n: '04', t: 'My back hurts or I feel stiff', d: "We'll help you get moving, improve technique, and gradually build strength for everyday life." },
-  { n: '05', t: 'I want more energy and a better routine', d: 'Regular movement, simple habits, and workouts you can sustain long-term.' },
-  { n: '06', t: 'I want to train as a mum', d: 'Supermums are classes you can attend with your child. Training adapts to the reality of parenting.', href: '/supermamky/' },
-  { n: '07', t: 'I want movement for my kids', d: 'Circus School, acrobatics, and movement clubs led by experienced coaches.', href: '/krouzky-pro-deti/' },
-  { n: '08', t: 'I want a movement program for my team', d: 'FitTeams — coached circuit training designed specifically for company groups. No gym required.', href: '/en/classes-and-services/#pro-firmy' },
+  { n: '01', t: 'I want to start exercising again', d: 'No burning out at the start. Gradually, regularly, with a coach who corrects you and remembers you.', href: '/en/group-classes/' },
+  { n: '02', t: 'I want to tone up and improve my fitness', d: 'Circuit and strength training in a small group. Everyone trains at their own level — but seriously.', href: '/en/group-classes/' },
+  { n: '03', t: 'I want to train as a mum', d: 'Supermums are classes you can attend with your child. Training adapts to the reality of parenting.', href: '/supermamky/' },
+  { n: '04', t: 'I want movement for my kids', d: 'Circus School, acrobatics, and movement clubs led by experienced coaches.', href: '/krouzky-pro-deti/' },
 ];
 
 
