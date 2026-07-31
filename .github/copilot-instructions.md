@@ -13,9 +13,10 @@ adresář `wordpress/`** v tomhle repu (od 19/2026) je staging/reference pro
 theme, patička+styly). Header i patička mají na WP **stejnou strukturu
 i vzhled jako na Astru** (patička doslova stejné 4 sloupce jako
 `Footer.astro` — Brand+CTA/Web/Služby/Kontakt), liší se jen cíle odkazů
-tam, kde WP danou stránku nemá (cross-domain na `bohemi.fit`). Nasazuje se
-ručně (FTP/WP admin, žádný SSH/CI) — historie a instalační postup v
-`wordpress/README.md`.
+tam, kde WP danou stránku nemá (cross-domain na `bohemi.fit`). Výjimka:
+**WP header nemá CTA „Rezervovat"** (ve vlastním menu rezervačního webu
+nedávalo smysl) — patička ho má dál. Nasazuje se ručně (FTP/WP admin,
+žádný SSH/CI) — historie a instalační postup v `wordpress/README.md`.
 
 Značka: **BoHeMi = Body – Health – Mind.** Komunitní, lidské, grounded.
 Ne spa, ne ezoterika, ne luxusní wellness, ne „sekta".

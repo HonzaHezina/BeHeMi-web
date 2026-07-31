@@ -151,9 +151,12 @@ má i obsahově stejnou strukturu 4 sloupců jako `Footer.astro`** (Brand+CTA
 / Web / Služby / Kontakt) — jen „Web"/„Služby" míří cross-domain na
 `bohemi.fit`, protože ty stránky na WP nejsou, a dva WP-specifické odkazy
 (Rezervace lekcí, Můj účet) jsou přibalené do sloupce Kontakt, ne jako
-vlastní pátý sloupec. Nasazení je pořád ruční (FTP/WP admin, žádný SSH ani
-CI) — detaily, historie rozhodnutí a instalační checklist v
-[`wordpress/README.md`](wordpress/README.md).
+vlastní pátý sloupec. **WP header nemá vlastní CTA „Rezervovat"** (smazáno
+31. 7. 2026 — ve vlastním menu `studio.bohemi.fit` nedávalo smysl tlačítko
+vedoucí zpátky na web, na kterém už jsi; „Rezervace lekcí" zůstává jako
+běžný odkaz). Ekvivalentní CTA zůstává jen v patičce. Nasazení je pořád
+ruční (FTP/WP admin, žádný SSH ani CI) — detaily, historie rozhodnutí a
+instalační checklist v [`wordpress/README.md`](wordpress/README.md).
 
 ## Navigační logika — tři vrstvy (sjednoceno 7/2026, drž ji)
 
