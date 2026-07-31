@@ -435,6 +435,27 @@ vloženou patičku a znovu vložit + uložit čerstvý „BoHeMi — Footer". Ta
 zkušenost je přesně důvod, proč teď celá sekce s varováním existuje hned
 na začátku souboru — ať se stejná past nezopakuje u příští změny.
 
+## Header — zúžení nav + logo vede domů, ne na bohemi.fit (1. 8. 2026)
+
+Dvě Honzovy úpravy `bohemi-wp-ui/patterns/header.php`:
+
+1. **„Rezervace lekcí" a „Členství" pryč z nav** (desktop i mobilní panel) —
+   zůstává „Hlavní web", „Můj účet", Přihlásit/Odhlásit se. Resolvery
+   `bohemi_wp_ui_booking_url()`/`bohemi_wp_ui_membership_url()` v
+   `includes/urls.php` zůstaly nedotčené (booking URL pořád potřebuje
+   patička a `includes/cache.php` pro detekci rezervační stránky) — jen
+   přestaly být volané v headeru. Detaily viz `bohemi-wp-ui/README.md`
+   „Menu ve WordPressu".
+2. **Logo/wordmark v hlavičce vedlo na `bohemi.fit` i na `studio.bohemi.fit`
+   samotném** — Honza: „když kliknu na ikonu na studio.bohemi.fit, měl bych
+   se dostat na studio.bohemi.fit, ne na bohemi.fit". Logika předtím byla
+   „logo = hlavní web" všude; teď je to „logo = domů na webu, kde právě
+   jsi" (běžná konvence) — `href` změněn z `bohemi_wp_ui_main_site_url()`
+   na `home_url('/')`. Cesta na `bohemi.fit` zůstává přes nav odkaz
+   „Hlavní web", ten se neměnil.
+
+`bohemi-wp-ui` → **1.1.5** (`CHANGELOG.md`), ZIP přegenerovaný.
+
 ## Header — mrtvý odkaz „Můj účet" (20. 7. 2026)
 
 Po nasazení headeru se ukázalo, že **„Můj účet" má `href=""`** (odkaz na

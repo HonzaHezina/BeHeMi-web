@@ -53,15 +53,15 @@ function bohemi_wp_ui_nav_link( string $href, string $label, string $class, bool
  */
 function bohemi_wp_ui_get_header_html(): string {
 	$main_site = bohemi_wp_ui_main_site_url();
-	$booking   = bohemi_wp_ui_booking_url();
-	$members   = bohemi_wp_ui_membership_url();
 	$account   = bohemi_wp_ui_account_url();
 	$auth      = bohemi_wp_ui_auth_link();
 
+	// "Rezervace lekcí" a "Členství" odstraněny z nav 1. 8. 2026 (Honzovo
+	// rozhodnutí) — zůstávají jen jako resolvery v includes/urls.php
+	// (booking_url pořád používá patička a includes/cache.php, membership_url
+	// zatím nikde jinde), jen v tomhle menu se nezobrazují.
 	$nav_items = array(
 		array( $main_site, __( 'Hlavní web', 'bohemi-wp-ui' ), true ),
-		array( $booking, __( 'Rezervace lekcí', 'bohemi-wp-ui' ), false ),
-		array( $members, __( 'Členství', 'bohemi-wp-ui' ), false ),
 		array( $account, __( 'Můj účet', 'bohemi-wp-ui' ), false ),
 	);
 
@@ -71,7 +71,7 @@ function bohemi_wp_ui_get_header_html(): string {
 	?>
 <header class="bohemi-header">
 	<div class="bohemi-header-inner">
-		<a href="<?php echo esc_url( $main_site ); ?>" class="bohemi-header-logo" aria-label="<?php esc_attr_e( 'BoHeMi — přejít na hlavní web', 'bohemi-wp-ui' ); ?>">
+		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="bohemi-header-logo" aria-label="<?php esc_attr_e( 'BoHeMi — domů', 'bohemi-wp-ui' ); ?>">
 			<img
 				src="<?php echo esc_url( $logo_url ); ?>"
 				width="164" height="102"

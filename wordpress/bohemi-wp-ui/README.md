@@ -38,23 +38,31 @@ projektu placeholder nahradí finálním hexem, aktualizuj i
 ## Menu ve WordPressu ≠ menu na marketingovém webu
 
 WordPress instalace slouží jen jako rezervační/členská část, takže header
-zde má jiný obsah než na `bohemi.fit`:
+zde má jiný obsah než na `bohemi.fit`. Aktuální nav (od 1. 8. 2026, po
+zúžení — viz níž): **Hlavní web** → `bohemi.fit` (marketingový Astro web),
+**Můj účet** → PMPro „account" stránka (řeší přihlášení i odhlášení sama —
+PMPro shortcode na této stránce zobrazuje login formulář odhlášeným a
+dashboard přihlášeným uživatelům), **Přihlásit se / Odhlásit se** →
+samostatný textový odkaz vedle „Můj účet".
 
-- **Hlavní web** → `bohemi.fit` (marketingový Astro web)
-- **Rezervace lekcí** → stránka s Booking Activities (aktuálně front page
-  `/`, viz „⚠️ `/rezervace/`" níž)
-- **Členství** → PMPro „levels" stránka
-- **Můj účet** → PMPro „account" stránka (řeší přihlášení i odhlášení sama —
-  PMPro shortcode na této stránce zobrazuje login formulář odhlášeným a
-  dashboard přihlášeným uživatelům)
-- **Přihlásit se / Odhlásit se** → samostatný textový odkaz vedle „Můj účet"
+**„Rezervace lekcí" a „Členství" odstraněny z headeru (1. 8. 2026, Honzovo
+rozhodnutí).** Resolvery `bohemi_wp_ui_booking_url()`/
+`bohemi_wp_ui_membership_url()` v `includes/urls.php` zůstávají (booking
+URL pořád používá patička — viz `wordpress/README.md` — a
+`includes/cache.php` pro detekci rezervační stránky), jen přestaly být
+volané v tomhle menu.
 
 Header **nemá vlastní CTA tlačítko „Rezervovat"** (odstraněno 31. 7. 2026,
 Honzovo rozhodnutí) — na `studio.bohemi.fit` samotném nedávalo smysl mít
-v hlavičce tlačítko, které tě posílá zpátky na web, na kterém už jsi;
-„Rezervace lekcí" v menu (viz výš) tuhle roli plní jako běžný odkaz.
+v hlavičce tlačítko, které tě posílá zpátky na web, na kterém už jsi.
 Ekvivalentní CTA zůstává jen v patičce (`bohemi-twentytwentyfive-child`,
 viz `wordpress/README.md`).
+
+**Logo/wordmark vede na `home_url('/')` (studio.bohemi.fit), ne na
+`bohemi.fit` (1. 8. 2026, oprava)** — dřív logo v hlavičce odvádělo pryč
+z webu, na kterém uživatel právě je, což nedávalo smysl (běžná konvence:
+logo = domů, na aktuálním webu). Cesta na `bohemi.fit` zůstává přes nav
+odkaz „Hlavní web" výš.
 
 Dropdown „Lekce a služby" z marketingového webu se do WP hlavičky záměrně
 nepřenáší — WP nabídka je jiná (viz výše), ne rozcestník lekcí.
@@ -69,8 +77,8 @@ nepřenáší — WP nabídka je jiná (viz výše), ne rozcestník lekcí.
 | Konstanta | Filtr | Účel | Výchozí hodnota |
 |---|---|---|---|
 | `BOHEMI_MAIN_SITE_URL` | `bohemi_wp_ui_main_site_url` | Hlavní web | `https://bohemi.fit/` |
-| `BOHEMI_BOOKING_URL` | `bohemi_wp_ui_booking_url` | Rezervace lekcí | hledá stránku `rezervace-lekci` / `rezervace` / `booking` / `lekce` / `kalendar` |
-| `BOHEMI_MEMBERSHIP_URL` | `bohemi_wp_ui_membership_url` | Členství | `pmpro_url('levels')`, jinak stránka podle slugu, jinak home (viz „Header — mrtvý odkaz" ve `wordpress/README.md` — tahle cesta u „Členství" aktuálně spadá na home, chybí potvrzená URL) |
+| `BOHEMI_BOOKING_URL` | `bohemi_wp_ui_booking_url` | „Rezervace lekcí" v patičce + detekce rezervační stránky pro cache hlavičky (`includes/cache.php`) — v headeru od 1. 8. 2026 nepoužito | hledá stránku `rezervace-lekci` / `rezervace` / `booking` / `lekce` / `kalendar` |
+| `BOHEMI_MEMBERSHIP_URL` | `bohemi_wp_ui_membership_url` | zatím nikde v pluginu nepoužito (header ho ztratil 1. 8. 2026) — resolver zůstává pro budoucí použití (např. by se dal přidat do patičky stejně jako booking/account) | `pmpro_url('levels')`, jinak stránka podle slugu, jinak home (viz „Header — mrtvý odkaz" ve `wordpress/README.md` — tahle cesta aktuálně spadá na home, chybí potvrzená URL) |
 | `BOHEMI_ACCOUNT_URL` | `bohemi_wp_ui_account_url` | Můj účet | natvrdo `https://studio.bohemi.fit/ucet-clenstvi/` (od v1.1.2 — `pmpro_url()` se tu vůbec nezkouší, viz „Header — mrtvý odkaz" ve `wordpress/README.md`) |
 | `BOHEMI_RESERVE_URL` | `bohemi_wp_ui_reserve_url` | CTA „Rezervovat lekci" v patičce (`bohemi-twentytwentyfive-child`) — header vlastní CTA nemá, viz „Menu ve WordPressu" výš | stránka rezervací → PMPro checkout → home |
 

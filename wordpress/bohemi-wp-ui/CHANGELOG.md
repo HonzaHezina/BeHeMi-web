@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.1.5 — 2026-08-01
+
+Dvě Honzovy úpravy nav/loga:
+
+- **Odstraněny odkazy „Rezervace lekcí" a „Členství" z hlavičky** (desktop
+  i mobilní panel) — zůstává jen „Hlavní web", „Můj účet" a
+  Přihlásit/Odhlásit. `bohemi_wp_ui_booking_url()`/`bohemi_wp_ui_membership_url()`
+  v `includes/urls.php` zůstaly beze změny (booking URL pořád používá
+  patička a `includes/cache.php`), jen přestaly být volané v headeru.
+- **Logo/wordmark teď vede na `home_url('/')` (studio.bohemi.fit), ne na
+  `bohemi_wp_ui_main_site_url()` (bohemi.fit).** Klik na logo v hlavičce
+  dřív odváděl pryč z webu, na kterém uživatel je — teď se chová jako
+  běžné logo (vede na domovskou stránku aktuálního webu). Cesta na
+  `bohemi.fit` zůstává přes nav odkaz „Hlavní web".
+
 ## 1.1.4 — 2026-07-31
 
 Odstraněno CTA tlačítko **„Rezervovat"** z headeru (desktop i mobilní
