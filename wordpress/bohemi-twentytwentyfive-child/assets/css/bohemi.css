@@ -67,6 +67,15 @@ body {
 .bohemi-footer {
  background:var(--bohemi-dark);
  color:var(--bohemi-cream);
+}
+
+/* Content stays centered at the same 1220px as the header
+   (.bohemi-header-inner) instead of stretching edge-to-edge — the dark
+   background on .bohemi-footer is what's full-bleed, same as Astro's
+   Footer.astro (full-width <footer>, max-w-[1220px] inner wrapper). */
+.bohemi-footer-inner {
+ max-width:1220px;
+ margin-inline:auto;
  padding:56px 24px 32px;
 }
 

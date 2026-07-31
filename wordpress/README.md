@@ -379,6 +379,28 @@ Pokud po obnovení stránky pořád vidíš černé pruhy, napiš přesněji, co
 na nich vidět (text? úplně černá plocha? jen v Header, nebo i ve Footer?),
 ověřím to podle toho, co doopravdy generuje `header.php`.
 
+## Patička natažená přes celou šířku stránky (1. 8. 2026)
+
+Honza nahlásil, že patička na WP je „furt přes celou stránku, ne jako v
+Astro". Skutečná chyba, ne jen vizuální dojem: `.bohemi-footer` v
+`assets/css/bohemi.css` mělo jen `background`/`color`/`padding` — **žádné
+`max-width` + `margin-inline:auto`**. Header tohle řeší přes vlastní
+vnitřní wrapper (`.bohemi-header-inner { max-width: 1220px; margin-inline:
+auto; }`), ale footer žádný ekvivalentní vnitřní wrapper neměl — mřížka
+sloupců i spodní řádek seděly přímo v `.bohemi-footer`, takže se
+roztahovaly přes celou šířku obrazovky na širokých monitorech (přesně
+jako Astro `Footer.astro`: **vnější `<footer>` je full-bleed tmavé pozadí,
+ale vnitřní `<div class="mx-auto max-w-[1220px] ...">` drží obsah na
+1220px vycentrovaný** — na WP tahle vnitřní vrstva chyběla úplně).
+
+**Oprava:** nový wrapper `<div class="bohemi-footer-inner">` v
+`functions.php` obaluje `.bohemi-footer-grid` i `.bohemi-footer-bottom`
+dohromady (stejně jako Astro obaluje obojí jedním `<div>`). CSS
+(`.bohemi-footer-inner { max-width:1220px; margin-inline:auto; padding:56px
+24px 32px; }`) — padding se přesunul z `.bohemi-footer` sem, `.bohemi-footer`
+teď drží jen tmavé pozadí přes celou šířku. Motiv → **1.8**, ZIP
+přegenerovaný.
+
 ## Header — mrtvý odkaz „Můj účet" (20. 7. 2026)
 
 Po nasazení headeru se ukázalo, že **„Můj účet" má `href=""`** (odkaz na

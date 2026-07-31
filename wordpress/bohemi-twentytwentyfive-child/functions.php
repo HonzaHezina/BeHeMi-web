@@ -119,6 +119,7 @@ function bohemi_wp_final_child_get_footer_html(): string {
 	);
 
 	$html = '<footer class="bohemi-footer">' .
+		'<div class="bohemi-footer-inner">' .
 		'<div class="bohemi-footer-grid">' .
 			'<div class="bohemi-footer-col bohemi-footer-col--brand">' .
 				'<p class="bohemi-footer-brand">BoHeMi <span class="bohemi-footer-tagline">Body · Health · Mind</span></p>' .
@@ -150,6 +151,7 @@ function bohemi_wp_final_child_get_footer_html(): string {
 		'<div class="bohemi-footer-bottom">' .
 			'<p>© BoHeMi fitness s.r.o. · IČ 19115296 · Všechna práva vyhrazena.</p>' .
 			'<p class="bohemi-footer-legal"><a href="/vseobecne-obchodni-podminky/">Obchodní podmínky</a> · <a href="/zpracovani-osobnich-udaju/">Zpracování osobních údajů</a> · <a href="/provozni-rad/">Provozní řád</a></p>' .
+		'</div>' .
 		'</div>' .
 	'</footer>';
 
