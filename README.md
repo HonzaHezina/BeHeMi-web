@@ -28,6 +28,12 @@ záměrně noindex, aby staging (`bohemi.hezina.cz`) nikdy neproklouzl do Googlu
 
 > ⚠️ **Produkční deploy (`bohemi.fit`) MUSÍ mít `PUBLIC_SITE_ENV=production`,
 > jinak bude celý web `noindex` a vypadne z vyhledávání.**
+>
+> **Tohle není teoretické riziko — přesně tohle bylo živé na produkci
+> 1. 8. 2026** (proměnná v Coolify nebyla nastavená jako Build Variable, celý
+> `bohemi.fit` vracel `noindex,nofollow`). Po každém redeploy migrace/
+> proměnných ověř curlem, že tam `noindex` NENÍ:
+> `curl -s https://bohemi.fit/ | grep -i 'name="robots"'` (prázdný výstup = OK).
 
 ### Kde to nastavit v Coolify
 

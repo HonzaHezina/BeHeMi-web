@@ -452,6 +452,13 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   (slot pattern — placeholder se skryje, když je `<Image />` ve slotu). Navigace:
   kotvy formou `/#…` (fungují i z podstránek), aktivní stav přes
   `<Header current="/slug/" />`.
+- **⚠️ Nová stránka MUSÍ mít `current="/slug/"` na OBOU místech: `<Layout>` i
+  `<Header>`.** `Layout.astro` z `current` počítá canonical URL, `og:url` i
+  hreflang — bez něj spadne na default `'/'` a stránka nahlásí Googlu, že je
+  homepage (přesně tenhle bug byl 1. 8. 2026 živý na produkci na všech 17 CZ
+  stránkách, protože `current` chodilo jen do `<Header>`; opraveno, ale hlídej
+  to u každé nové stránky — `check-links.mjs` tenhle typ chyby nezachytí,
+  kontroluje jen interní odkazy/kotvy, ne canonical/hreflang).
 - **Mobilní menu (`Header.astro`) = nativní `<details>/<summary>`, žádná
   React/Vue island.** Od 31. 7. 2026 má malý inline `<script>` (na konci
   komponenty, cílí `details[data-mobile-menu]`), který menu zavře i kliknutím

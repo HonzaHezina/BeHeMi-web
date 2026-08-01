@@ -128,6 +128,11 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   (Bellydance, Vánoční členství, tábor) **nepoužívat** — nejsou v nabídce webu
   nebo je produkt zrušený. Plný seznam a zdůvodnění: `/CLAUDE.md`.
 - **Data** sdílená v `src/data/home.ts`, stránky skládají `src/components/`.
+- **⚠️ Nová stránka MUSÍ mít `current="/slug/"` na OBOU místech: `<Layout>` i
+  `<Header>`.** `Layout.astro` z `current` počítá canonical/`og:url`/hreflang —
+  bez něj spadne na default `'/'` a stránka se Googlu tváří jako homepage
+  (reálný bug live na produkci 1. 8. 2026 na všech 17 CZ stránkách, protože
+  `current` chodilo jen do `<Header>`). `check-links.mjs` tohle nezachytí.
 - **Fotky lekcí/dětských aktivit:** centrální registr `src/data/photos.ts`
   (`photosCS`/`photosEN`, klíč = `id` z `classes[]`/`kidsActivities[]`/
   `kidsBand[]`) — fotka se přidává jednou tam, ne po stránkách. Dlaždice
