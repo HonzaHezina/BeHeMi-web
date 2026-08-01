@@ -201,12 +201,33 @@ body {
    the background per category/activity but never touches that variable,
    so every light pastel category (e.g. #badf9a, #d8ecf0 — measured
    contrast 1.48:1 and 1.22:1, WCAG AA needs 4.5:1) ends up with
-   near-invisible white-on-pastel text. Overriding the variable itself
-   (rather than guessing at FullCalendar's internal event selectors) fixes
-   every category in one place, however Booking Activities colors them.
+   near-invisible white-on-pastel text.
+
+   UPDATE (1. 8. 2026, same day): the `--fc-event-text-color` override below
+   alone wasn't enough — confirmed live, Honza still saw washed-out/grey
+   text. Cause: FullCalendar v6 injects its OWN default stylesheet via
+   JavaScript at runtime (it has no separate .css file to load before
+   ours), so its `.fc { --fc-event-text-color: #fff; ... }` lands in the
+   DOM *after* `bohemi.css` and — same selector, same specificity — wins
+   the cascade by being later. On top of that Booking Activities layers a
+   translucent white overlay on every event (`.fc-event-main { background:
+   hsla(0,0%,100%,.15) }`), which is what turned "white" into a hazy grey
+   on the lighter pastels instead of a clean white. Fix: set `color`
+   directly with `!important` on the actual text elements — `!important`
+   beats FullCalendar's later non-important rule regardless of injection
+   order, so this can't lose the timing race the variable did. Kept the
+   variable override too as a harmless belt-and-suspenders for anything
+   that reads it directly.
    Caveat: if any category is ever given a genuinely DARK background, this
    would make ITS text hard to read instead — spot-check categories in
    Rezervace → Kategorie after any color change. */
 .fc {
  --fc-event-text-color: var(--bohemi-ink);
+}
+
+.fc .fc-event,
+.fc .fc-event-main,
+.fc .fc-event-title,
+.fc .fc-event-time {
+ color: var(--bohemi-ink) !important;
 }

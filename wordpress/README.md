@@ -538,8 +538,26 @@ Honza.
    ohledu na to, jak přesně je Booking Activities barví. **Nutná vizuální
    kontrola po nasazení** — pokud by někdy vznikla kategorie s tmavým
    pozadím, dostala by tmavý text na tmavém a byla by nečitelná obráceně;
-   zatím audit zmiňuje jen světlé pastely. `bohemi-twentytwentyfive-child`
-   → **2.0**.
+   zatím audit zmiňuje jen světlé pastely.
+
+   **Dodatek (1. 8. 2026, později týž den):** samotná proměnná nestačila —
+   Honza po nasazení 2.0 nahlásil, že text je pořád „sešedlý", hůř vidět
+   na barevném podkladu. Ověřeno živě, že CSS z bodu 3 opravdu běží (`curl`
+   na `bohemi.css?ver=…`, timestamp odpovídal), takže to nebyl problém
+   nasazení. Skutečná příčina: FullCalendar v6 nemá samostatný `.css`
+   soubor, svoje výchozí styly (včetně `.fc { --fc-event-text-color: #fff;
+   … }`) vkládá do stránky přes JavaScript za běhu — to se do DOMu dostane
+   AŽ PO `bohemi.css`, a při stejné specifitě selektoru (`.fc`) vyhrává,
+   co přišlo později. Naše přepsání proměnné tak prohrávalo tenhle souboj
+   o pořadí a bílá zůstávala; k tomu Booking Activities navíc přidává
+   `.fc-event-main { background: hsla(0,0%,100%,.15) }` (jemný bílý
+   poloprůhledný přelivu přes barvu kategorie), což z bílé udělalo přesně
+   ten „sešedlý" dojem, který Honza popsal. **Oprava:** místo (resp. vedle)
+   CSS proměnné teď `color` na `.fc-event`/`.fc-event-main`/
+   `.fc-event-title`/`.fc-event-time` nastavený přímo s `!important` —
+   to souboj o pořadí vkládání obchází úplně, protože `!important`
+   pravidlo porazí pozdější `!important`-prosté pravidlo bez ohledu na
+   pořadí. `bohemi-twentytwentyfive-child` → **2.1**.
 
 Oba `dist/*.zip` přegenerované. Nasazení stejné jako vždy: `bohemi-wp-ui.zip`
 přes Pluginy → Nahrát plugin (aktivuje se nová verze automaticky, žádný
