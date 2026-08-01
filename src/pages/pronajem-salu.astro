@@ -8,9 +8,9 @@ import { Image } from 'astro:assets';
 import imgStudio01 from '../assets/studio/studio-01.jpg';
 import imgStudio06 from '../assets/studio/studio-06.jpg';
 
-// Ceny a názvy ověřené s Klárkou 1. 8. 2026 (nahrazuje starší 4sálový/jiné ceny
-// seznam). Tři sály: Velký taneční (zrcadla, taneční/workshopy), Malý taneční
-// (tatami), Funkční (bývalý "Velký" — zrcadla + TRX, funkční a silový trénink).
+// Ceny a názvy ověřené s Klárkou 1. 8. 2026 (nahrazuje starší 4sálový seznam
+// s jinými cenami/názvy). Čtyři sály: Velký taneční, Malý taneční, Funkční
+// (největší, zrcadla + TRX) a Multifunkční (nyní tatami, i jako zkušebna).
 const halls = [
   {
     name: 'Velký taneční sál',
@@ -20,15 +20,21 @@ const halls = [
   },
   {
     name: 'Malý taneční sál',
-    desc: 'Nejmenší sál, s tatami na podlaze — na osobní tréninky, workshopy nebo duety stačí.',
+    desc: 'Nejmenší ze zrcadlových sálů — na osobní tréninky, workshopy nebo duety stačí.',
     capacity: 'do 8 osob',
     price: '500 Kč / hod',
   },
   {
     name: 'Funkční sál',
-    desc: 'Prostorný sál se zrcadly po celé délce a TRX — pro skupinové lekce, funkční a silový trénink i firemní akce.',
+    desc: 'Náš největší sál — zrcadla po celé délce a TRX, pro skupinové lekce, funkční a silový trénink i firemní akce.',
     capacity: 'do 20 osob',
     price: '700 Kč / hod',
+  },
+  {
+    name: 'Multifunkční sál (nyní tatami)',
+    desc: 'Menší sál s tatami, teď hlavně jako zkušebna — k dispozici elektrické bicí a klávesy.',
+    capacity: 'max 3 osoby',
+    price: '350 Kč / hod',
   },
 ];
 
@@ -75,7 +81,7 @@ const forWhom = [
     <!-- SÁLY -->
     <section class="mx-auto max-w-[1220px] px-5 pt-10 md:px-8">
       <h2 class="mb-8 text-[clamp(26px,3.2vw,38px)] font-extrabold tracking-[-0.03em]">Co nabízíme k pronájmu</h2>
-      <div class="grid gap-5 sm:grid-cols-3">
+      <div class="grid gap-5 sm:grid-cols-2">
         {halls.map((hall) => (
           <div class="rounded-[18px] border border-border bg-surface p-7">
             <h3 class="mb-2 text-[20px] font-extrabold tracking-[-0.02em]">{hall.name}</h3>
