@@ -501,6 +501,37 @@ někdy nastavil i wp-adminí Ikonu webu, vypíšou se oba zdroje najednou
 (neškodná duplicita) — radši to pole nechat prázdné. `bohemi-wp-ui` →
 **1.1.6**, ZIP přegenerovaný.
 
+## Editor preview — theme a plugin CSS nebyly sladěné (1. 8. 2026)
+
+Honza si všiml, že header a patička v editoru WordPressu (Site Editor)
+nevypadají, jak mají — přišlo mu, že motiv (`bohemi-twentytwentyfive-child`)
+a plugin (`bohemi-wp-ui`) nejsou sladěné.
+
+**Diagnóza:** design tokeny (barvy, font) v `bohemi.css` i `header.css` byly
+ve skutečnosti totožné (oba čerpají ze stejných hexů jako Astro
+`src/styles/global.css`, žádný drift v hodnotách) — problém byl v tom, KDY
+se který soubor načítá. `bohemi-wp-ui.php` enqueuje `header.css` na
+`enqueue_block_assets`, což běží na frontendu **i uvnitř Site Editoru**,
+takže header pattern se v editoru vždycky vykresloval nastylovaný. Motiv ale
+enqueueval `bohemi.css` jen na `wp_enqueue_scripts`, což běží **pouze na
+frontendu** — v editoru tak zůstal úplně bez stylu: patička (`.bohemi-footer`
+a spol.), `.bohemi-panel` (účet/rezervace patterny) i styly PMPro/Booking
+Activities tlačítek se v náhledu Site Editoru zobrazovaly jako holé
+nenastylované HTML, zatímco header vedle nich vypadal hotově — přesně ten
+dojem „nejsou sladěné".
+
+**Oprava:** `bohemi-twentytwentyfive-child/functions.php` — hook pro
+`bohemi.css` přepnutý z `wp_enqueue_scripts` na `enqueue_block_assets`,
+stejný hook, jaký už používá plugin pro `header.css`. Na frontendu se nic
+nemění (`enqueue_block_assets` tam běží taky), jen se navíc stejné CSS
+začne načítat i v editoru.
+
+`bohemi-twentytwentyfive-child` → **1.9** (`style.css`), ZIP přegenerovaný.
+**Nahraď přes FTP/SFTP celou složku** `wp-content/themes/bohemi-twentytwentyfive-child/`
+(jde jen o změnu v `functions.php` + `style.css`, žádný markup se neměnil,
+takže na rozdíl od header/footer změn **není potřeba re-insert** patternů
+v Site Editoru — jen refresh stránky/editoru po nahrání souborů).
+
 ## Header — odstraněn nefunkční odkaz Přihlásit/Odhlásit se (1. 8. 2026)
 
 Honza nahlásil, že samostatný textový odkaz „Přihlásit se" / „Odhlásit se"

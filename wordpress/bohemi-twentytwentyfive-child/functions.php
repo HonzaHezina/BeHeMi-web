@@ -17,7 +17,19 @@
  * the header already has, so that trade-off was reverted.
  */
 
-add_action('wp_enqueue_scripts', function () {
+/**
+ * `enqueue_block_assets` (not `wp_enqueue_scripts`) on purpose — it fires on
+ * BOTH the front end and inside the block editor / Site Editor, same as the
+ * bohemi-wp-ui plugin already does for its own header.css (see that plugin's
+ * bohemi_wp_ui_enqueue_assets()). Before this fix `bohemi.css` only loaded on
+ * the front end, so the Site Editor preview showed the header pattern styled
+ * (plugin CSS present) but the footer pattern, `.bohemi-panel` account/
+ * reservation patterns, and PMPro/Booking Activities boxes completely
+ * unstyled (raw HTML, no bohemi.css) — the two never actually had different
+ * design tokens, they just loaded in different places. See wordpress/README.md
+ * "Editor preview — theme a plugin CSS nebyly sladěné".
+ */
+add_action('enqueue_block_assets', function () {
     $path = get_stylesheet_directory() . '/assets/css/bohemi.css';
 
     wp_enqueue_style(
