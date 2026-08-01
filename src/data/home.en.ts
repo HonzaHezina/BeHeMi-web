@@ -107,10 +107,13 @@ export const trainers = [
   { id: 'jan-hezina', name: 'Jan Hezina', role: 'founder · operations & tech', media: 'media-clay', bio: '' },
 ];
 
+// href = direct membership payment link (WP level), same as the old site.
+// Single entry has no online signup (level 5 has registration disabled),
+// its button stays on /en/contact/.
 export const pricing = [
   { t: 'Single entry', d: 'When you come just occasionally', price: '199 CZK', per: '/ class', featured: false, badge: '', note: 'Open gym 450 CZK.', feat: ['Circuit, strength, HIIT, Supermums', 'Pay per class separately', 'No discount on other classes'] },
-  { t: 'Monthly membership', d: 'Movement as part of your routine', price: '1,499 CZK', per: '/ month', featured: true, badge: 'Most popular', note: '8 classes works out to ~187 CZK per class.', feat: ['8 group classes, 30-day validity', '1× Open gym + 10 min photobiomodulation', '10% off other classes'] },
-  { t: 'Annual membership', d: 'Movement as a long-term commitment', price: '1,199 CZK', per: '/ month', featured: false, badge: 'Best value', note: '96 classes works out to ~150 CZK per class.', feat: ['96 group classes, 14-month validity', '12× Open gym + 10 min photobio / month', '10% off other classes'] },
+  { t: 'Monthly membership', d: 'Movement as part of your routine', price: '1,499 CZK', per: '/ month', featured: true, badge: 'Most popular', note: '8 classes works out to ~187 CZK per class.', feat: ['8 group classes, 30-day validity', '1× Open gym + 10 min photobiomodulation', '10% off other classes'], href: 'https://studio.bohemi.fit/ucet-clenstvi/platba-clenstvi/?level=4' },
+  { t: 'Annual membership', d: 'Movement as a long-term commitment', price: '1,199 CZK', per: '/ month', featured: false, badge: 'Best value', note: '96 classes works out to ~150 CZK per class.', feat: ['96 group classes, 14-month validity', '12× Open gym + 10 min photobio / month', '10% off other classes'], href: 'https://studio.bohemi.fit/ucet-clenstvi/platba-clenstvi/?level=3' },
 ];
 
 export const nav = [

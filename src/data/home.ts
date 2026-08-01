@@ -124,10 +124,13 @@ export const trainers = [
   { id: 'jan-hezina', name: 'Jan Hezina', role: 'zakladatel · provoz a technika', media: 'media-clay', bio: '' },
 ];
 
+// href = přímý odkaz na platbu členství (WP level), stejně jako na starém webu.
+// Jednorázový vstup nemá online registraci (level 5 má "Povolit registraci: Ne"),
+// tlačítko zůstává na /kontakt/.
 export const pricing = [
   { t: 'Jednorázový vstup', d: 'Když přijdeš jen občas', price: '199 Kč', per: '/ lekce', featured: false, badge: '', note: 'Open gym 450 Kč.', feat: ['Kruhové, silové, HIIT, Supermamky', 'Platíš za každou lekci zvlášť', 'Žádná sleva na ostatní lekce'] },
-  { t: 'Měsíční členství', d: 'Pohyb jako součást rutiny', price: '1 499 Kč', per: '/ měsíc', featured: true, badge: 'Nejoblíbenější', note: '8 lekcí vychází na ~187 Kč za lekci.', feat: ['8 skupinových lekcí, 30 dní platnosti', '1× Open gym + 10 min fotobiomodulace', '10% sleva na ostatní lekce'] },
-  { t: 'Roční členství', d: 'Pohyb jako dlouhodobý závazek', price: '1 199 Kč', per: '/ měsíc', featured: false, badge: 'Nejlepší cena', note: '96 lekcí vychází na ~150 Kč za lekci.', feat: ['96 skupinových lekcí, 14 měsíců platnosti', '12× Open gym + 10 min fotobio / měsíc', '10% sleva na ostatní lekce'] },
+  { t: 'Měsíční členství', d: 'Pohyb jako součást rutiny', price: '1 499 Kč', per: '/ měsíc', featured: true, badge: 'Nejoblíbenější', note: '8 lekcí vychází na ~187 Kč za lekci.', feat: ['8 skupinových lekcí, 30 dní platnosti', '1× Open gym + 10 min fotobiomodulace', '10% sleva na ostatní lekce'], href: 'https://studio.bohemi.fit/ucet-clenstvi/platba-clenstvi/?level=4' },
+  { t: 'Roční členství', d: 'Pohyb jako dlouhodobý závazek', price: '1 199 Kč', per: '/ měsíc', featured: false, badge: 'Nejlepší cena', note: '96 lekcí vychází na ~150 Kč za lekci.', feat: ['96 skupinových lekcí, 14 měsíců platnosti', '12× Open gym + 10 min fotobio / měsíc', '10% sleva na ostatní lekce'], href: 'https://studio.bohemi.fit/ucet-clenstvi/platba-clenstvi/?level=3' },
 ];
 
 // Hlavní navigace. Kotvy míří na sekce homepage formou "/#…", ať fungují

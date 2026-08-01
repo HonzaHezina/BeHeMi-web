@@ -301,6 +301,32 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   kniha se na webu nejmenuje ani neodkazuje.
 - **Kontakt = statika:** export měl odesílací formulář → nahrazen přímými akcemi
   (`mailto:` / `tel:`) + odkaz ven na rezervaci. Žádný `<form>`/`<input>`.
+- **Přímé odkazy na platbu členství (WP „level" produkty) — realizováno 1. 8. 2026:**
+  starý web měl u některých kurzů/členství tlačítko rovnou na
+  `https://studio.bohemi.fit/ucet-clenstvi/platba-clenstvi/?level=<ID>` místo
+  obecného odkazu na `RESERVE_URL`. Kde takový level existuje a jde přihlásit
+  online, použij ho místo `RESERVE_URL`/`/kontakt/` — je to pořád „odkaz ven na
+  konkrétní lekci" z pravidla 2 výš, jen konkrétnější než generický
+  `studio.bohemi.fit/`. Honza dodal plný seznam levelů z WP (Paid Memberships
+  Pro), zapojené i vyřazené:
+  - **3 = Roční členství, 4 = Měsíční členství** → `href` v `pricing`
+    (`src/data/home.ts`/`home.en.ts`), tlačítko „Vybrat"/„Choose this" na
+    `/cenik/` a `/en/pricing/` (přes `Button ... external={Boolean(pl.href)}`).
+  - **7 = Cirkusová školička, 8 = Základy gymnastiky a akrobacie, 9 = Pozemní
+    a závěsná akrobacie/žonglování, 15 = Dětská Zumba** → `signupUrl` v
+    `circusCourses` + inline href u Dětské Zumby na `/krouzky-pro-deti/`
+    (`Přihlásit →` u každého kurzu).
+  - **5 = Jednorázový vstup** — WP má u něj „Povolit registraci: Ne" (nejde
+    koupit online), zůstává na `/kontakt/`.
+  - **10 = Tříměsíční neomezené členství** — na webu zatím není nabízené
+    (chybí v `pricing`), level existuje pro budoucí použití, až se přidá karta.
+  - **NEPOUŽÍVAT:** 6 = Kurz Fit Bellydance a 11 = Vánoční měsíční členství
+    (nejsou součástí aktuální nabídky webu, žádná stránka je nezmiňuje),
+    12–14 = turnusy příměstského tábora (tábor je zrušený, viz „Příměstský
+    tábor se už nedělá" výš — level existuje ve WP, ale nikdy ho nepoužívat).
+  - Nový kurz/členství s vlastním WP levelem → přidej `href`/`signupUrl`
+    stejným způsobem (per-item pole v datech, fallback na `RESERVE_URL` nebo
+    `/kontakt/`, ne přepisovat generickou konstantu).
 - **Děti a rodiny = po homepage nejsilnější publikum** (GSC: `/krouzky-pro-deti/`
   338 kliků). Realizováno (7/2026): hero má sekundární tlačítko „Hledáš něco pro
   děti?", vysoko na homepage je plný pruh `KidsBand.astro` (sand pozadí, dlaždice

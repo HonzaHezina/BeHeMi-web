@@ -120,6 +120,13 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
 - **Červená nikdy jako body text** — jen akcent/CTA/výplň. Výjimka: akcentové slovo
   v display nadpisu smí být červené (echo loga; na tmavém AA-large). Kontrast ≥ 4.5:1.
 - **Kontakt:** přímé akce `mailto:`/`tel:`, žádný `<form>`.
+- **Přímé odkazy na platbu členství (1. 8. 2026):** kde WP „level" produkt
+  jde koupit online, veď tam přímo (`.../ucet-clenstvi/platba-clenstvi/?level=<ID>`)
+  místo obecného `RESERVE_URL`/`/kontakt/` — level 3/4 (roční/měsíční členství,
+  `/cenik/`), 7/8/9/15 (kroužky + Dětská Zumba, `/krouzky-pro-deti/`). Level 5
+  (jednorázový vstup) nejde koupit online → zůstává `/kontakt/`. Levely 6/11/12–14
+  (Bellydance, Vánoční členství, tábor) **nepoužívat** — nejsou v nabídce webu
+  nebo je produkt zrušený. Plný seznam a zdůvodnění: `/CLAUDE.md`.
 - **Data** sdílená v `src/data/home.ts`, stránky skládají `src/components/`.
 - **Fotky lekcí/dětských aktivit:** centrální registr `src/data/photos.ts`
   (`photosCS`/`photosEN`, klíč = `id` z `classes[]`/`kidsActivities[]`/
