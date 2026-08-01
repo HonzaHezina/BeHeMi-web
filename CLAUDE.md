@@ -108,18 +108,24 @@ nová service stránka se přidává i sem. Program 8 týdnů a Fotky jsou ve sl
 > **`docs/redirect-map.md`** (KEEP / 301 / WP / LEGAL + trailing-slash pravidlo).
 > Nové slugy odsud, nevymýšlet. Jediná výjimka mimo GSC: `/program-8-tydnu/`
 > (nový produkt, explicitně schváleno 7/2026 — zapsán i v redirect-map).
-> **301 redirecty zbývá implementovat**
-> (Astro config vs. nginx/Coolify — zatím nerozhodnuto).
+> **301 redirecty implementované 1. 8. 2026** v `redirects` bloku
+> `astro.config.mjs` (statický meta-refresh + canonical, ne host-level 301 —
+> nginx v Coolify není z repa editovatelný). `trailingSlash: 'always'` taky
+> nastaveno. Zbývá jen pár položek, kde cíl/rozhodnutí ještě chybí
+> (`/hula-hoop/`, `/scioalaputyka/`, legal stránky natrvalo) — detail a stav
+> každé položky v `docs/redirect-map.md`.
 
 ### Zatím nepostavené (KEEP slugy z redirect-map)
 
-LEGAL stránky (VOP, GDPR, provozní řád…). (`/fotky/` postaven 17. 7. 2026 —
-viz sekce „Fotky" níž.)
+LEGAL stránky (VOP, GDPR, provozní řád…) — **rozhodnuto natrvalo 1. 8. 2026:
+zůstávají na `studio.bohemi.fit`, na Astru se nestaví.** 301 na ně je proto
+trvalé řešení, ne provizorium. (`/fotky/` postaven 17. 7. 2026 — viz sekce
+„Fotky" níž.)
 
-- **Hula hoop skončil (rozhodnuto 7. 7. 2026):** stránka se nestaví a lekce se
-  na webu nikde nezmiňuje. `/hula-hoop/` i `/hooping/` jsou 301; cíl čeká na
-  potvrzení Honzou (`/skupinove-lekce/` vs. `/krouzky-pro-deti/` — viz
-  redirect-map, poptávka 824 zobr. existuje).
+- **Hula hoop skončil (rozhodnuto 7. 7. 2026, cíl potvrzen 1. 8. 2026):**
+  stránka se nestaví a lekce se na webu nikde nezmiňuje. `/hula-hoop/` i
+  `/hooping/` jsou 301 na `/skupinove-lekce/` (byla to spíš dospělácká/fitness
+  lekce, ne dětská aktivita).
 
 - `/objevovarna/` se nestaví — obsah je sekce na `/krouzky-pro-deti/`.
 - **Dětské aktivity nemají vlastní stránky (potvrzeno 7/2026):** živé WP stránky
@@ -129,12 +135,12 @@ viz sekce „Fotky" níž.)
   (vzor: výjimka Supermamky, 72 kliků).
 - **Příměstský tábor se už nedělá (rozhodnuto 7/2026) — nevracet do nabídky.**
   Redirect `/primestsky-tabor/` → `/krouzky-pro-deti/` zůstává v platnosti.
-- **301 redirecty čekají:** `/nase-sluzby/osobni-treninky/` → `/osobni-treninky/`,
-  `/o-nas/` → `/proc-bohemi/`, `/treneri/` staré profily (Šauerová, Nováčková,
-  Bierhausová) → `/treneri/`, `/akademie-cirk-la-putyka/` → `/krouzky-pro-deti/`,
-  `/detska-zumba/` → `/krouzky-pro-deti/#detska-zumba`, `/hernicka/` →
-  `/krouzky-pro-deti/#objevovarna`. Plný seznam v redirect-map. Implementace
-  zatím nerozhodnutá (Astro vs. nginx).
+- **301 redirecty implementované (1. 8. 2026):** `/nase-sluzby/osobni-treninky/`
+  → `/osobni-treninky/`, `/o-nas/` → `/proc-bohemi/`, staré trenérské profily
+  (Šauerová, Nováčková, Bierhausová) → `/treneri/`, `/akademie-cirk-la-putyka/`
+  → `/krouzky-pro-deti/`, `/detska-zumba/` → `/krouzky-pro-deti/#detska-zumba`,
+  `/hernicka/` → `/krouzky-pro-deti/#objevovarna` a cca 30 dalších — plný
+  seznam a stav (implementováno / čeká na Honzu) v `docs/redirect-map.md`.
 
 Mimo repo běží (WordPress): `studio.bohemi.fit/` — rezervace, „Můj účet" /
 login / členství, Booking Activities, Paid Memberships Pro. **Ale od

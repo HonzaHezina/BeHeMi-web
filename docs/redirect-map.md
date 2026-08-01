@@ -5,6 +5,44 @@ slugu · 301 = přesměrovat na nový cíl · WP = nechat ve WordPressu (booking
 LEGAL = právní stránka, zachovat slug (nízký provoz, ale nutná) · IGNORE = asset,
 neřešit.
 
+## ✅ Stav (1. 8. 2026): bohemi.fit běží na Astru, redirecty implementované
+
+`bohemi.fit` je od 1. 8. 2026 v provozu na Astru (potvrzeno curl testem —
+`/`, `/krouzky-pro-deti/` atd. vrací 200 z nové stránky). Všechny 301 řádky
+níže označené **IMPLEMENTOVÁNO** jsou zapsané v `redirects` bloku
+`astro.config.mjs` (generují statickou HTML stránku s meta-refresh +
+`<link rel="canonical">` na cíl — ne skutečnou host-level 301, protože nginx
+config v Coolify není v tomto repu editovatelný; pokud se to změní, přesunout
+tam). `trailingSlash: 'always'` je nastaveno taky.
+
+**Druhý zdroj dat** (`_raw/bohemi-migrace.zip`, 31. 7. 2026 — nezávislý
+refresh GSC exportu) potvrdil čísla i seznam níž, žádné nové položky navíc
+kromě toho, co už bylo zapsané.
+
+### ✅ Rozhodnuto Honzou 1. 8. 2026
+- **`/hula-hoop/` + `/hooping/`** → `/skupinove-lekce/` (byla to spíš
+  dospělácká/fitness lekce než dětská aktivita) — implementováno.
+- **Právní stránky** zůstávají natrvalo na `studio.bohemi.fit` — 301 tam je
+  trvalé řešení, ne provizorium. Astro vlastní právní stránky stavět nebude.
+
+### ❓ Pořád čeká na Honzu (nevymýšlet, jen zapsat rozhodnutí)
+- **`/scioalaputyka/`** — pořád nevíme, co to bylo (spolupráce se Scio
+  školou?). Zatím 404 na produkci.
+- **`/blog/` → `/`** — IMPLEMENTOVÁNO jako bezpečný default (nový web blog
+  nemá), ale pokud existovaly jednotlivé indexované články
+  (`/blog/nazev-clanku/`), ty tahle mapa nezachytává — potvrdit, jestli
+  nějaké byly.
+- **Obrázky `/wp-content/uploads/*`** — staré obrázky mají vlastní pozici v
+  Google Images a odkazy z Facebooku/Instagramu. Potřeba zkopírovat složku ze
+  zálohy staré WP instalace do `public/wp-content/uploads/` — čeká na zálohu
+  od Honzy, nejde udělat bez souborů.
+- **GA4 měřicí ID** — kód je připravený (`PUBLIC_GA4_ID` env var, viz
+  `README.md`), ale samotné ID nikdo nezadal, takže se zatím nic neposílá.
+- **`/feed/` (RSS)** a query-string URL (`/?page_id=3`,
+  `.../platba-clenstvi/?level=4`) — nejde vyřešit v Astro `redirects` (neumí
+  410 ani match na query string), nízký dopad (0 kliků), řešit až při
+  host-level redirectech.
+
 ## KEEP — vlastní stránka, stejný slug (reálný provoz)
 | Stará URL | Kliky | Akce |
 |---|---|---|
@@ -21,68 +59,78 @@ neřešit.
 | /fotky/ | 3 | KEEP (659 zobr.) |
 
 ## 301 — přesměrovat starou URL na nový cíl
-| Stará URL | Kliky | → Cíl |
-|---|---|---|
-| /o-nas/ | 18 | → /proc-bohemi/  (1 333 zobr. — důležité) |
-| /hula-hoop/ | 46 | → CÍL POTVRDIT: /krouzky-pro-deti/ nebo /skupinove-lekce/ — hula hoop UŽ NEJEDE, ale poptávka existuje (824 zobr.); žádná vlastní stránka |
-| /nase-sluzby/osobni-treninky/ | 18 | → nová stránka osobních tréninků |
-| /treneri/ | 16 | → /proc-bohemi/#treneri (nebo samostatná /treneri/) |
-| /lenka-novackova/ | 15 | → trenéři (starý trenér, už u vás není) |
-| /scioalaputyka/ | 14 | → ? POTVRDIT co to je, pak cíl |
-| /klara-sauerova/ | 10 | → trenéři (starý trenér) |
-| /primestsky-tabor/ | 9 | → /krouzky-pro-deti/ (nebo sekce tábor) |
-| /informace/cirkusova-skola/ | 5 | → /krouzky-pro-deti/ |
-| /lucie-bierhausova/ | 2 | → trenéři (starý trenér) |
-| /ucet-clenstvi/cenik/ | 2 | → /cenik/ (duplicita) |
-| /mkb/ | 0 (565 zobr.) | → / nebo /proc-bohemi/ |
-| /nase-sluzby/ | 0 (405 zobr.) | → /lekce-a-sluzby/ |
-| /ai-a-bohemi/ | 0 | → /proc-bohemi/ |
-| /blog/ | 0 | → / (nebo ponechat, jestli chceš blogovat) |
-| /pripravujeme/ | 1 | → / |
-| /hernicka/ | 1 | → /krouzky-pro-deti/ |
-| /spoluprace/ | 1 | → / nebo /firmy/ |
-| /informace/kurzy-pro-deti/ | 1 | → /krouzky-pro-deti/ |
-| /nase-sluzby/meditace/ | 0 | → / (služba zrušena) |
-| /informace/fotobiomodulacni-terapie/ | 0 | → /fotobiomodulacni-terapie/ (duplicita) |
-| /informace/benefity/ | 0 | → /cenik/ |
-| /informace/vylepsujeme/ | 0 | → / |
+| Stará URL | Kliky | → Cíl | Stav |
+|---|---|---|---|
+| /o-nas/ | 18 | → /proc-bohemi/  (1 333 zobr. — důležité) | ✅ implementováno |
+| /hula-hoop/ | 46 | → /skupinove-lekce/ (hula hoop skončil natrvalo, cíl potvrzen 1. 8. 2026) | ✅ implementováno |
+| /nase-sluzby/osobni-treninky/ | 18 | → /osobni-treninky/ | ✅ implementováno |
+| /lenka-novackova/ | 15 | → /treneri/ (starý trenér, už u vás není) | ✅ implementováno |
+| /scioalaputyka/ | 14 | → ? POTVRDIT co to je, pak cíl | ❌ čeká na Honzu, dosud 404 |
+| /klara-sauerova/ | 10 | → /treneri/ (starý trenér) | ✅ implementováno |
+| /primestsky-tabor/ | 9 | → /krouzky-pro-deti/ (tábor zrušen natrvalo, rozhodnuto 7/2026) | ✅ implementováno |
+| /informace/cirkusova-skola/ | 5 | → /krouzky-pro-deti/ | ✅ implementováno |
+| /lucie-bierhausova/ | 2 | → /treneri/ (starý trenér) | ✅ implementováno |
+| /ucet-clenstvi/cenik/ | 2 | → /cenik/ (duplicita) | ✅ implementováno |
+| /mkb/ | 0 (565 zobr.) | → /lekce-a-sluzby/ | ✅ implementováno |
+| /nase-sluzby/ | 0 (405 zobr.) | → /lekce-a-sluzby/ | ✅ implementováno |
+| /ai-a-bohemi/ | 0 | → / | ✅ implementováno |
+| /blog/ | 0 | → / | ✅ implementováno (viz „čeká na Honzu" výš — jednotlivé články nezachyceny) |
+| /pripravujeme/ | 1 | → /lekce-a-sluzby/ | ✅ implementováno |
+| /hernicka/ | 1 | → /krouzky-pro-deti/#objevovarna | ✅ implementováno |
+| /spoluprace/ | 1 | → /kontakt/ | ✅ implementováno |
+| /informace/kurzy-pro-deti/ | 1 | → /krouzky-pro-deti/ | ✅ implementováno |
+| /nase-sluzby/meditace/ | 0 | → /lekce-a-sluzby/ (služba zrušena) | ✅ implementováno |
+| /informace/fotobiomodulacni-terapie/ | 0 | → /fotobiomodulacni-terapie/ (duplicita) | ✅ implementováno |
+| /informace/benefity/ | 0 | → /cenik/ | ✅ implementováno |
+| /informace/vylepsujeme/ | 0 | → / | ✅ implementováno |
+
+**Pozn. k /treneri/:** stará i nová URL jsou stejné (`/treneri/` je od
+17. 7. 2026 reálná KEEP stránka, ne redirect) — žádný redirect tu není
+potřeba, jen se od té doby nemá vracet stará myšlenka „→ /proc-bohemi/#treneri".
 
 ## 301 — druhá vlna: staré duplicity a legacy struktura (z indexace GSC)
 Tyhle v prvním exportu nebyly (Google je zná, ale neindexuje). Po přechodu by
 spadly do 404 — každá potřebuje 301 na aktuální cíl.
-| Stará URL | → Cíl |
-|---|---|
-| /nase-sluzby/skupinove-lekce/ | → /skupinove-lekce/ |
-| /nase-sluzby/skupinove-lekce/hiit/ | → /skupinove-lekce/ |
-| /hooping/ | → stejný cíl jako /hula-hoop/ (přímo, žádný řetěz redirectů) |
-| /fitteams-program-pro-firmy/ | → /firmy/ |
-| /primestsky-tabor-aktivitaci/ | → /krouzky-pro-deti/ (nebo sekce tábor) |
-| /treneri-2/ | → /proc-bohemi/#treneri |
-| /klara-mechurova/ | → /proc-bohemi/#treneri (aktuální trenérka) |
-| /ucet-clenstvi/urovne-clenstvi/ | → /cenik/ |
-| /kalendar/ | → /skupinove-lekce/ (nebo rozvrh) |
+| Stará URL | → Cíl | Stav |
+|---|---|---|
+| /nase-sluzby/skupinove-lekce/ | → /skupinove-lekce/ | ✅ implementováno |
+| /nase-sluzby/skupinove-lekce/hiit/ | → /skupinove-lekce/#hiit | ✅ implementováno |
+| /hooping/ | → /skupinove-lekce/ | ✅ implementováno |
+| /fitteams-program-pro-firmy/ | → /firmy/ | ✅ implementováno |
+| /primestsky-tabor-aktivitaci/ | → /krouzky-pro-deti/ | ✅ implementováno |
+| /treneri-2/ | → /treneri/ | ✅ implementováno |
+| /klara-mechurova/ | → /treneri/#klara-mechurova (aktuální trenérka) | ✅ implementováno |
+| /ucet-clenstvi/urovne-clenstvi/ | → /cenik/ | ✅ implementováno |
+| /kalendar/ | → /skupinove-lekce/ | ✅ implementováno |
+| /akademie-cirk-la-putyka/ | → /krouzky-pro-deti/ | ✅ implementováno |
+| /detska-zumba/ | → /krouzky-pro-deti/#detska-zumba | ✅ implementováno |
 
 ## Globální pravidlo — trailing slash (JEDNO nastavení, ne po stránkách)
 Google zná URL s lomítkem i bez (`/krouzky-pro-deti` vs `/krouzky-pro-deti/`,
 `/kontakt` vs `/kontakt/`, `/provozni-rad`). Vyber JEDNU variantu (Astro default =
 s lomítkem, `trailingSlash: 'always'`) a druhou nech 301 přesměrovat na ni.
-Nastav globálně, ať nevznikají nové duplicity.
+Nastav globálně, ať nevznikají nové duplicity. **✅ implementováno** 1. 8. 2026
+(`trailingSlash: 'always'` v `astro.config.mjs`).
 
 ## WP — nechat ve WordPressu (booking / účet)
-| Stará URL | Akce |
-|---|---|
-| /rezervace/ | WP (56 kliků — funkční booking) |
-| /login/ | WP |
-| /ucet-clenstvi/platba-clenstvi/ (i ?level=4) | WP |
-| /?page_id=3 | WP interní, ignore |
+| Stará URL | Akce | Stav |
+|---|---|---|
+| /rezervace/ | WP (56 kliků — funkční booking) | ✅ implementováno (301 na studio.bohemi.fit) |
+| /login/ | WP | ✅ implementováno |
+| /ucet-clenstvi/platba-clenstvi/ | WP | ✅ implementováno |
+| /ucet-clenstvi/platba-clenstvi/?level=4 | WP | ❌ Astro redirects neumí match na query string, nízký dopad (1 zobr.) |
+| /?page_id=3 | WP interní, ignore | ❌ totéž, irelevantní (odkaz ze staré cookie lišty) |
 
 ## LEGAL — zachovat slug (nutné, i když provoz ~0)
+**✅ implementováno jako trvalý 301 na `studio.bohemi.fit`** (ekvivalentní
+stránky tam existují a vrací 200) — potvrzeno Honzou 1. 8. 2026, Astro vlastní
+právní stránky stavět nebude.
 - /vseobecne-obchodni-podminky/
 - /zpracovani-osobnich-udaju/
 - /provozni-rad
 - /obchodni-podminky-pronajmu-prostor/
-- /privacy-policy/  (možná duplicita se zpracovani-osobnich-udaju — sjednotit)
-- /obchodni-podminky-akademie-clp/  (zachovat jen pokud akademie běží)
+- /privacy-policy/  → přesměrováno rovnou na /zpracovani-osobnich-udaju/ cíl (duplicita sjednocena)
+- /obchodni-podminky-akademie-clp/  (akademie stále běží, takže zachováno)
 
 ## IGNORE — WP šum, neřešit (nevznikne na novém webu)
 - /wp-content/uploads/*.jpg — obrázky
@@ -106,9 +154,10 @@ Po nasazení produkce ověř ve zdroji stránky, že tam NENÍ `noindex`.
    poptávka, kterou stránka neproměňuje.
 3. **Vlastní stránky:** krouzky-pro-deti, pronajem-salu, supermamky,
    skupinove-lekce (hub), fotobiomodulace, open-gym, firmy, osobni-treninky.
-   (Hula-hoop vypadl 7. 7. 2026 — služba skončila, URL je 301, cíl viz tabulka.)
+   (Hula-hoop vypadl 7. 7. 2026 — služba skončila, URL je 301 na /skupinove-lekce/.)
 4. **Typy lekcí (kruháč, HIIT…)** v datech nejsou → zůstávají v rozvrhu.
 5. **Nastav globální trailing-slash pravidlo** (`trailingSlash: 'always'`) —
-   jinak si duplicity vyrobíš nanovo.
-6. **Potvrdit:** co je /scioalaputyka/ · zda /blog/ chceš živý · které legal
-   stránky ještě platí · běží ještě akademie CLP?
+   jinak si duplicity vyrobíš nanovo. ✅ hotovo.
+6. **Potvrdit:** co je /scioalaputyka/ · existují jednotlivé články na starém
+   /blog/? Zbytek (trailing slash, redirecty na všechno rozhodnuté vč.
+   hula-hoop a legal stránek) je hotový, viz stavová sekce nahoře.

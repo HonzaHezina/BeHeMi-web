@@ -42,6 +42,13 @@ HTML při `npm run build`). V Coolify proto musí být označená jako **Build
 Variable** / „Available at Buildtime" — ne jen runtime. Prefix `PUBLIC_`
 zajišťuje, že ji Astro/Vite vůbec vystaví do klientského výstupu.
 
+## Google Analytics 4 — `PUBLIC_GA4_ID`
+
+GA4 (`gtag.js`) se vloží jen když je nastavená `PUBLIC_GA4_ID` (formát
+`G-XXXXXXXXXX`) **a zároveň** `PUBLIC_SITE_ENV=production` — stejná Build
+Variable logika jako výš. Bez proměnné se nic nenačítá (žádný placeholder ID
+v kódu). Logika je v [`src/layouts/Layout.astro`](./src/layouts/Layout.astro).
+
 ## Nasazení (Coolify na Hetzneru)
 
 Web běží jako statika (`output: static` → `dist/`). Nastavení viz `CLAUDE.md`
