@@ -127,6 +127,15 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   (jednorázový vstup) nejde koupit online → zůstává `/kontakt/`. Levely 6/11/12–14
   (Bellydance, Vánoční členství, tábor) **nepoužívat** — nejsou v nabídce webu
   nebo je produkt zrušený. Plný seznam a zdůvodnění: `/CLAUDE.md`.
+- **Jednorázový vstup NENÍ jednotná cena (opraveno Klárkou 1. 8. 2026):** 199 Kč
+  posilovací lekce, 250 Kč Zumba/Enduro/Objevovárna, 150 Kč Open gym — breakdown
+  v `pricing[0].feat` (`home.ts`/`home.en.ts`), sync v `cenik.astro`/`en/pricing.astro`.
+  **Pronájem sálů = 3 sály, ne 4** (přejmenováno 1. 8. 2026): Velký taneční
+  600 Kč, Malý taneční (tatami) 500 Kč, Funkční sál 700 Kč — `halls` v
+  `pronajem-salu.astro`, sync v `cenik.astro`/`en/pricing.astro`. Ke kroužkům
+  Akademie CLP, Dětské Zumbě a pronájmu patří viditelný odkaz na obchodní
+  podmínky (přímé `https://studio.bohemi.fit/obchodni-podminky-*` URL, stejný
+  vzor jako `Footer.astro`). Detaily: `/CLAUDE.md`.
 - **Data** sdílená v `src/data/home.ts`, stránky skládají `src/components/`.
 - **⚠️ Nová stránka MUSÍ mít `current="/slug/"` na OBOU místech: `<Layout>` i
   `<Header>`.** `Layout.astro` z `current` počítá canonical/`og:url`/hreflang —

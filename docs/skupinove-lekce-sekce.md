@@ -110,8 +110,15 @@ nulové duplicity se stránkami supermamky/hula-hoop.
   Power Zone má potvrzenou blokovou strukturu (rozehřátí/aktivace → technika
   a síla → kondiční kruh → protažení) a je škálovatelný i pro začátečníky.
   Enduro je příprava na závody typu BCross Run (Hyrox se NEJMENUJE — je to
-  ochranná známka), stejná struktura 10/35–40/10 min; jednorázový vstup je
-  199 Kč stejně jako ostatní lekce (žádná zvláštní cena, opraveno i v
-  `src/data/home.ts`/`home.en.ts`, pole `note` u ceníku).
+  ochranná známka), stejná struktura 10/35–40/10 min.
 - Intenzita ●●● u Power Zone a Enduro potvrzena jako odhad, ponechána beze
   změny (obě jsou vysoce intenzivní hybridní formáty).
+
+## Aktualizace (1. 8. 2026)
+- **Zrušeno tvrzení výš, že Enduro má jednorázový vstup 199 Kč „stejně jako
+  ostatní lekce"** — Klárka opravila (1. 8. 2026): jednorázový vstup má cenu
+  podle typu lekce, ne jednotnou. Enduro patří do 250Kč skupiny spolu se
+  Zumbou a Objevovárnou (ostatní posilovací lekce — kruháč, silový, HIIT,
+  vlastní váha, Power Zone, břišní pekáč, Solid Booty, Supermamky — zůstávají
+  na 199 Kč). Zdroj pravdy: `src/data/home.ts`/`home.en.ts` (`pricing[0].feat`)
+  + `cenik.astro`/`en/pricing.astro`, zdůvodnění v `/CLAUDE.md`.
