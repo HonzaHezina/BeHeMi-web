@@ -3,7 +3,7 @@
  * Plugin Name:       BoHeMi WP UI
  * Plugin URI:        https://bohemi.fit/
  * Description:       Vlastní hlavička pro studio.bohemi.fit vizuálně sladěná s hlavním Astro webem (bohemi.fit). Dodává block pattern pro šablonovou část Záhlaví, nezasahuje do Twenty Twenty-Five, Booking Activities ani Paid Memberships Pro.
- * Version:           1.1.7
+ * Version:           1.1.8
  * Requires at least: 6.4
  * Requires PHP:      7.4
  * Author:            BoHeMi
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // No direct access.
 }
 
-define( 'BOHEMI_WP_UI_VERSION', '1.1.7' );
+define( 'BOHEMI_WP_UI_VERSION', '1.1.8' );
 define( 'BOHEMI_WP_UI_FILE', __FILE__ );
 define( 'BOHEMI_WP_UI_DIR', plugin_dir_path( __FILE__ ) );
 define( 'BOHEMI_WP_UI_URL', plugin_dir_url( __FILE__ ) );
@@ -42,11 +42,22 @@ function bohemi_wp_ui_asset_version( string $relative_path ): string {
  * Enqueue header CSS + JS. `enqueue_block_assets` runs both on the front
  * end and inside the block editor / Site Editor, so the pattern preview
  * matches the live site instead of showing unstyled markup.
+ *
+ * Font weights trimmed to 400/600/700/800 (1. 8. 2026, WebPageTest audit) —
+ * those are the only ones `header.css`/`bohemi.css` actually set
+ * (font-weight: 600/700/800; body text is the unstyled default 400) and
+ * neither file ever uses italic. The old request also asked for 500 and
+ * three italic weights that no CSS on the site references — the browser
+ * never downloaded those anyway (nothing in the DOM matched them), so this
+ * is a correctness cleanup more than a real transfer-size win, but keeps
+ * the @font-face list honest about what's actually used. If a future page
+ * needs a weight/style not listed here, add it here first — don't
+ * hardcode a different Google Fonts URL elsewhere.
  */
 function bohemi_wp_ui_enqueue_assets(): void {
 	wp_enqueue_style(
 		'bohemi-header-font',
-		'https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&display=swap',
+		'https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&display=swap',
 		array(),
 		null
 	);

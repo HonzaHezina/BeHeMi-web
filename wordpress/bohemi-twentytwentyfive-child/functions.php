@@ -41,6 +41,24 @@ add_action('enqueue_block_assets', function () {
 });
 
 /**
+ * PMPro enqueues WordPress core's password-strength-meter (zxcvbn.min.js,
+ * ~400 KB uncompressed) on every front-end page, in case its account
+ * shortcode's password-change form appears there — but on this site that
+ * shortcode only ever lives on the "Můj účet" page. Dequeue everywhere else
+ * (1. 8. 2026, WebPageTest audit flagged it as the single largest asset on
+ * pages that don't even have a password field). Priority 100 = after PMPro's
+ * own enqueue call, so this actually removes it instead of racing it.
+ */
+add_action('wp_enqueue_scripts', function () {
+    if (is_page('ucet-clenstvi')) {
+        return;
+    }
+
+    wp_dequeue_script('zxcvbn-async');
+    wp_dequeue_script('password-strength-meter');
+}, 100);
+
+/**
  * Same category slug as the bohemi-wp-ui plugin ("bohemi-header") on
  * purpose — WordPress groups patterns by slug, not by label, so reusing it
  * merges header + footer + content patterns into ONE "BoHeMi" folder in

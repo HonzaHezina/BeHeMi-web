@@ -193,3 +193,20 @@ body {
 .bohemi-footer-legal a {
  white-space:nowrap;
 }
+
+/* Booking Activities calendar (FullCalendar v6) — accessibility fix
+   (1. 8. 2026, WebPageTest/axe audit): FullCalendar's own default theme
+   sets event text to white via its `--fc-event-text-color` CSS custom
+   property (see FullCalendar theming docs). Booking Activities overrides
+   the background per category/activity but never touches that variable,
+   so every light pastel category (e.g. #badf9a, #d8ecf0 — measured
+   contrast 1.48:1 and 1.22:1, WCAG AA needs 4.5:1) ends up with
+   near-invisible white-on-pastel text. Overriding the variable itself
+   (rather than guessing at FullCalendar's internal event selectors) fixes
+   every category in one place, however Booking Activities colors them.
+   Caveat: if any category is ever given a genuinely DARK background, this
+   would make ITS text hard to read instead — spot-check categories in
+   Rezervace → Kategorie after any color change. */
+.fc {
+ --fc-event-text-color: var(--bohemi-ink);
+}

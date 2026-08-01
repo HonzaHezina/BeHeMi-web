@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.1.8 — 2026-08-01
+
+Google Fonts request pro Hanken Grotesk zúžen z 8 řezů (`ital,wght@0,400;
+0,500;0,600;0,700;0,800;1,400;1,500;1,600`) na 4 (`wght@400;600;700;800`) —
+WebPageTest audit potvrdil, že `header.css`/`bohemi.css` používají jen
+400/600/700/800 a nikde kurzívu (shoduje se s CLAUDE.md pravidlem „žádná
+kurzíva"). Prohlížeč nepoužité řezy stejně nestahoval (font se nenačte, dokud
+ho nic v DOM nepoužije), takže jde hlavně o vyčištění deklarace, ne o velkou
+úsporu přenosu dat.
+
 ## 1.1.7 — 2026-08-01
 
 Odstraněn samostatný textový odkaz **„Přihlásit se" / „Odhlásit se"**

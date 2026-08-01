@@ -501,6 +501,89 @@ někdy nastavil i wp-adminí Ikonu webu, vypíšou se oba zdroje najednou
 (neškodná duplicita) — radši to pole nechat prázdné. `bohemi-wp-ui` →
 **1.1.6**, ZIP přegenerovaný.
 
+## WebPageTest audit studio.bohemi.fit (1. 8. 2026)
+
+Honza přinesl externí WebPageTest report. Ověřeno živě přes `curl` proti
+`studio.bohemi.fit` (1. 8. 2026, ~12:20) — všechna zjištění potvrzena, ne
+zastaralá. **Tenhle repo nemá SSH ani FTP přístup na server** (viz „Celý
+obrázek" výš), takže co šlo opravit v kódu, je opravené a čeká na nahrání;
+zbytek je čistě manuální zásah na serveru/ve wp-adminu, který musí udělat
+Honza.
+
+### Opraveno v repu
+
+1. **Google Fonts zúžen ze 8 řezů na 4** (`wght@400;600;700;800`, bez
+   kurzívy) — `bohemi-wp-ui.php`, `bohemi-wp-ui` → **1.1.8**. Detaily
+   `CHANGELOG.md`.
+2. **`zxcvbn`/password-strength-meter (~400 KB) dequeued mimo `/ucet-clenstvi/`**
+   — WordPress core skript, který PMPro věší na každou stránku pro případ,
+   že by na ní byl formulář změny hesla, i když ho tam nikdy není. Nový hook
+   v `bohemi-twentytwentyfive-child/functions.php` (`wp_enqueue_scripts`,
+   priorita 100, `is_page('ucet-clenstvi')` výjimka).
+3. **Kontrast kalendáře (WCAG)** — FullCalendar v6 (knihovna, kterou
+   Booking Activities používá) defaultně nastavuje text události na bílou
+   přes svou vlastní CSS proměnnou `--fc-event-text-color` (zdokumentovaný
+   FullCalendar theming mechanismus). Booking Activities přebarvuje jen
+   pozadí podle kategorie/aktivity a tuhle proměnnou nikdy nepřepisuje — u
+   světlých pastelových kategorií (audit naměřil např. `#badf9a` s bílým
+   textem = kontrast 1,48:1, `#d8ecf0` = 1,22:1; norma WCAG AA chce 4,5:1)
+   z toho vyjde prakticky nečitelný text. Oprava přepisuje tu samou
+   proměnnou na tmavou barvu (`--bohemi-ink`) v `bohemi.css`, scoped na
+   `.fc` (FullCalendar root), takže platí pro všechny kategorie najednou bez
+   ohledu na to, jak přesně je Booking Activities barví. **Nutná vizuální
+   kontrola po nasazení** — pokud by někdy vznikla kategorie s tmavým
+   pozadím, dostala by tmavý text na tmavém a byla by nečitelná obráceně;
+   zatím audit zmiňuje jen světlé pastely. `bohemi-twentytwentyfive-child`
+   → **2.0**.
+
+Oba `dist/*.zip` přegenerované. Nasazení stejné jako vždy: `bohemi-wp-ui.zip`
+přes Pluginy → Nahrát plugin (aktivuje se nová verze automaticky, žádný
+re-insert patternu není potřeba — mění se jen enqueue kód a CSS, ne
+uložený HTML header); `bohemi-twentytwentyfive-child/` přes FTP/SFTP
+přehráním složky (taky žádný re-insert, jde jen o CSS/PHP).
+
+### Vyžaduje manuální zásah (mimo dosah repa)
+
+Ověřeno živě, oprava vyžaduje SSH/FTP shell nebo wp-admin klikání:
+
+1. **🔴 Kritické — 19 souborů vrací 403** (potvrzeno `curl`em: všechny
+   `ba-prices-and-credits`/`ba-display-pack`/`ba-notification-pack`/
+   `ba-advanced-forms` CSS/JS + `bohemi-wp-ui/assets/images/favicon-16x16.png`
+   a `favicon-32x32.png` a `apple-touch-icon.png`). **Nejde o starý
+   migrační dluh — favicon soubory jsou z dnešního (1. 8. 2026) FTP
+   uploadu v tomhle sezení**, takže to skoro jistě ukazuje na FTP klienta,
+   který při nahrávání nezachovává práva/vlastníka stejně jako zbytek
+   `wp-content` (`logo-bohemi.png` ve stejné složce je 200 OK — jen nově
+   nahrané soubory padají). `ba-*` pluginy jsou nejspíš starší instance
+   stejného problému z prvotní migrace. Oprava (na serveru, SSH):
+   ```bash
+   find wp-content -type d -exec chmod 755 {} \;
+   find wp-content -type f -exec chmod 644 {} \;
+   chown -R <uživatel-webserveru>:<skupina> wp-content
+   ```
+   Bez SSH: přes hostingový File Manager/FTP klienta zkontrolovat a
+   opravit práva na `wp-content/plugins/ba-*/` a
+   `wp-content/plugins/bohemi-wp-ui/assets/images/`.
+2. **Chybějící Site Icon** — `wp-content/uploads/2023/02/cropped-cropped-logo-32x32.png`
+   a `-192x192.png` vrací 404 (potvrzeno). Nahraj znovu ve Vzhled →
+   Přizpůsobit → Identita webu.
+3. **Žádná page cache** — HTML se vrací s `no-cache, must-revalidate`,
+   TTFB 2,23 s. Nainstalovat WP Super Cache nebo LiteSpeed Cache (podle
+   toho, co hosting podporuje) ve wp-adminu.
+4. **Cache hlavičky na verzovaných assetech** (`max-age=259200` / 3 dny)
+   — assety mají `?ver=` cache-busting, mohly by mít roční cache. Řeší se
+   v Apache/nginx configu hostingu, ne v tomhle repu.
+5. **Bez CDN** — Cloudflare (zdarma) by při TTFB 2 s dost pomohl. Rozhodnutí
+   a nastavení DNS je mimo repo.
+6. **`fullcalendar/locales-all.global.min.js` (25 KB)** — Booking Activities
+   sám interně používá jen `cs` (potvrzeno v `bookacti_localized.fullcalendar_locale`),
+   ale enqueuje celý soubor se všemi jazyky. Nízká priorita (25 KB), navíc
+   vyžaduje filtr na vendor plugin, který jsme needitovali — needěláno.
+
+Honzovo doporučené pořadí (souhlasím): práva souborů → chybějící ikona →
+(už hotovo: dequeue zxcvbn) → page cache → (už hotovo: kontrast kalendáře)
+→ zbytek.
+
 ## Editor preview — theme a plugin CSS nebyly sladěné (1. 8. 2026)
 
 Honza si všiml, že header a patička v editoru WordPressu (Site Editor)
