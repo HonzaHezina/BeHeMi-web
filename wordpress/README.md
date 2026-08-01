@@ -456,6 +456,51 @@ Dvě Honzovy úpravy `bohemi-wp-ui/patterns/header.php`:
 
 `bohemi-wp-ui` → **1.1.5** (`CHANGELOG.md`), ZIP přegenerovaný.
 
+## Favicon — tab ikona sladěná s Astro (1. 8. 2026)
+
+Honza chtěl, aby ikonka v tabu prohlížeče byla na obou webech logo BoHeMi.
+**Astro měl ještě placeholder** (`public/favicon.svg` — Astro starter
+raketka, ne naše logo) a **WP neměl žádnou** vlastní ikonu vůbec.
+
+**Zdrojový soubor** je stejný jako pro header logo,
+`src/assets/logo_bohemi_trans.png` (164×102, kettlebell + dvě boční
+činky) — pro favicon se ale ukázalo, že celý lockup včetně činek při
+16–32px splihne do nečitelné červené šmouhy. Oříznuto na **jen
+kettlebell** (střední ~64 px šířky zdroje), vypadované na čtverec — jedna
+tučná značka, čitelná i v nejmenší velikosti. Vygenerováno skriptem
+(sharp, jednorázově, nezůstal v repu) do:
+
+- `public/favicon-16x16.png`, `favicon-32x32.png` — průhledné PNG
+- `public/favicon.ico` — ručně sestavený minimální ICO kontejner
+  obalující 32×32 PNG (PNG-in-ICO je platné od Windows Vista, bez
+  potřeby další knihovny — `sharp` samo o sobě ICO exportovat neumí)
+- `public/apple-touch-icon.png` — 180×180, na **krémovém pozadí**
+  (`#f5efe6`, brand token), ne průhledné — iOS by průhlednost vykreslilo
+  jako černý čtverec
+
+Stejné soubory (byte-for-byte) zkopírované i do
+`wordpress/bohemi-wp-ui/assets/images/`, aby favicon vypadal identicky na
+`bohemi.fit` i `studio.bohemi.fit`.
+
+**Astro** (`src/layouts/Layout.astro`): staré `<link rel="icon"
+type="image/svg+xml" href="/favicon.svg">` nahrazeno standardní čtveřicí
+(`favicon.ico`, `favicon-32x32.png`, `favicon-16x16.png`,
+`apple-touch-icon.png`); `businessJsonLd.logo` přesměrován z
+`/favicon.svg` na `/apple-touch-icon.png` (opaque, vhodnější pro
+schema.org). Starý `public/favicon.svg` smazán jako nepoužívaný.
+
+**WP** (`bohemi-wp-ui.php`): nová funkce `bohemi_wp_ui_favicon()` na
+`wp_head`, vypisuje stejné `<link>` tagy přímo z `assets/images/`.
+**Záměrně NE přes wp-adminí „Ikona webu"** (Nastavení → Obecné) — to by
+vyžadovalo ruční upload/ořez ve wp-adminu bez jakékoliv stopy v repu.
+Bonus: na rozdíl od headeru/patičky (Části šablony, viz varování nahoře
+souboru) se favicon přes `wp_head` **projeví hned po nahrání nové verze
+pluginu** — žádný re-insert v Site Editoru není potřeba, protože `wp_head`
+se generuje čerstvě při každém načtení stránky. Pokud by Honza přesto
+někdy nastavil i wp-adminí Ikonu webu, vypíšou se oba zdroje najednou
+(neškodná duplicita) — radši to pole nechat prázdné. `bohemi-wp-ui` →
+**1.1.6**, ZIP přegenerovaný.
+
 ## Header — mrtvý odkaz „Můj účet" (20. 7. 2026)
 
 Po nasazení headeru se ukázalo, že **„Můj účet" má `href=""`** (odkaz na

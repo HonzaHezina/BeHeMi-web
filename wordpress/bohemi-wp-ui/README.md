@@ -198,7 +198,7 @@ pryč, smaž ji ručně ve Vzhled → Editor → Části šablony → Záhlaví.
 
 ```
 bohemi-wp-ui/
-├── bohemi-wp-ui.php       # bootstrap: konstanty, enqueue CSS/JS (filemtime verze), resource hints
+├── bohemi-wp-ui.php       # bootstrap: konstanty, enqueue CSS/JS (filemtime verze), resource hints, favicon (wp_head)
 ├── includes/
 │   ├── urls.php           # resolvery URL (konstanta → filtr → WP lookup → fallback)
 │   └── cache.php          # Cache-Control na stránce s kalendářem + volitelné Clear-Site-Data
@@ -208,7 +208,10 @@ bohemi-wp-ui/
 │   ├── css/header.css     # veškerý styl, jmenný prostor .bohemi-header-*
 │   ├── js/header.js       # ~40 řádků: aria-expanded, zavření po kliku, Escape
 │   └── images/
-│       └── logo-bohemi.png
+│       ├── logo-bohemi.png       # logo v headeru (164×102, s bočními činkami)
+│       ├── favicon-16x16.png     # favicon — jen kettlebell mark, bez činek (čitelné i malé)
+│       ├── favicon-32x32.png
+│       └── apple-touch-icon.png  # 180×180, krémové pozadí (#f5efe6, ne průhledné)
 ├── README.md
 └── CHANGELOG.md
 ```

@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.1.6 — 2026-08-01
+
+Přidán **favicon** (tab ikona v prohlížeči) — stejný červený kettlebell
+mark jako na Astro webu (oříznutý z `src/assets/logo_bohemi_trans.png`,
+bez postranních činek, aby zůstal čitelný i v 16px). Nová funkce
+`bohemi_wp_ui_favicon()` na `wp_head` vypisuje `<link rel="icon">` +
+`apple-touch-icon` přímo z `assets/images/` — záměrně ne přes wp-adminí
+„Ikona webu" (Nastavení → Obecné), protože to by nebylo ničím
+verzované/trackované v repu a favicon by po dalším update pluginu zůstal
+neaktuální. Na rozdíl od headeru/patičky (Části šablony) se tenhle způsob
+projeví hned po nahrání nové verze — `wp_head` se generuje čerstvě při
+každém načtení stránky, žádný re-insert v Site Editoru není potřeba.
+Nové soubory: `assets/images/favicon-16x16.png`, `favicon-32x32.png`,
+`apple-touch-icon.png` (180×180, krémové pozadí — průhlednost by na iOS
+vypadala jako černý čtverec).
+
 ## 1.1.5 — 2026-08-01
 
 Dvě Honzovy úpravy nav/loga:

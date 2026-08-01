@@ -2,7 +2,6 @@
 import '../styles/global.css';
 import type { Lang } from '../i18n/ui';
 import { hreflangMap } from '../i18n/ui';
-import { Image } from 'astro:assets';
 import defaultOgImage from '../assets/studio/studio-12-hero.jpg';
 
 interface Props {
@@ -36,7 +35,7 @@ const businessJsonLd = {
   name: 'BoHeMi fitness',
   url: origin,
   image: ogImageUrl,
-  logo: new URL('/favicon.svg', origin).toString(),
+  logo: new URL('/apple-touch-icon.png', origin).toString(),
   telephone: '+420603989762',
   email: 'info@bohemi.fit',
   priceRange: '$$',
@@ -58,8 +57,10 @@ const businessJsonLd = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     {/* Žádný <meta name="generator"> — zbytečně prozrazuje verzi Astra. */}
     {(!isProduction || noindex) && <meta name="robots" content="noindex,nofollow" />}
     <title>{title}</title>
