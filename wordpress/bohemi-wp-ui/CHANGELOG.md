@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.1.9 — 2026-08-01
+
+Odkaz **„Hlavní web"** v horní i mobilní navigaci (`patterns/header.php`,
+`$nav_items`) už neotvírá `bohemi.fit` v nové záložce — `$external` flag
+změněn z `true` na `false`. Honza nahlásil, že návrat ze `studio.bohemi.fit`
+zpátky na hlavní web má zůstat v jedné záložce stejně jako cesta tam
+(Astro `Button`/„Rezervovat" odkazy na `studio.bohemi.fit` upraveny stejně
+ve stejný den, viz `CLAUDE.md`).
+
 ## 1.1.8 — 2026-08-01
 
 Google Fonts request pro Hanken Grotesk zúžen z 8 řezů (`ital,wght@0,400;

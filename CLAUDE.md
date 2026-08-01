@@ -163,6 +163,20 @@ vedoucí zpátky na web, na kterém už jsi; „Rezervace lekcí" zůstává jak
 běžný odkaz). Ekvivalentní CTA zůstává jen v patičce. Nasazení je pořád
 ruční (FTP/WP admin, žádný SSH ani CI) — detaily, historie rozhodnutí a
 instalační checklist v [`wordpress/README.md`](wordpress/README.md).
+**Přechody mezi bohemi.fit a studio.bohemi.fit zůstávají v jedné záložce,
+oběma směry (rozhodnuto Honzou 1. 8. 2026)** — dřív se otvíraly v nové:
+na Astru `Button.astro`'s `external` prop (`target="_blank"`) odstraněn ze
+všech „Rezervovat"/„Vybrat" odkazů (`RESERVE_URL`, membership `pl.href`
+payment linky) — `Header`, `Footer`, `skupinove-lekce.astro`,
+`krouzky-pro-deti.astro`, `treneri.astro`, `kontakt.astro`/`en/contact.astro`,
+`program-8-tydnu.astro`, `cenik.astro`/`en/pricing.astro`. Na WP straně
+(`wordpress/`) odkaz „Hlavní web" v headeru a sloupce Web/Služby v patičce
+mají `$external` na `false` místo `true` (`bohemi-wp-ui` → 1.1.9, motiv →
+2.2) — **po nahrání vyžaduje re-insert obou Šablonových částí** (Záhlaví
+i Patička jsou zamrzlé HTML snapshoty, PHP update je sám nezmění, viz
+`wordpress/README.md`). Skutečně externí odkazy (Facebook, Instagram,
+Google Maps, obchodní podmínky, Cirk La Putyka) `target="_blank"` dál mají
+— pravidlo platí jen pro navigaci mezi bohemi.fit a studio.bohemi.fit.
 
 ## Navigační logika — tři vrstvy (sjednoceno 7/2026, drž ji)
 

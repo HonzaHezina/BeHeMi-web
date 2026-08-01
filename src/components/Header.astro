@@ -83,7 +83,7 @@ const logoHref = lang === 'en' ? '/en/' : '/';
         class="ml-1 px-3 py-2 text-[13px] font-bold uppercase tracking-[0.06em] text-ink-muted hover:text-brand transition-colors"
       >{langSwitchLabel}</a>
 
-      <Button href={RESERVE_URL} variant="brand" external class="ml-1.5 px-[22px] py-2.5 text-[15px]">{t(lang, 'nav_reserve')}</Button>
+      <Button href={RESERVE_URL} variant="brand" class="ml-1.5 px-[22px] py-2.5 text-[15px]">{t(lang, 'nav_reserve')}</Button>
     </nav>
 
     <!-- Mobile -->
@@ -94,7 +94,7 @@ const logoHref = lang === 'en' ? '/en/' : '/';
         aria-label={`Switch to ${alternateLang === 'en' ? 'English' : 'Czech'}`}
         class="px-2.5 py-2 text-[12px] font-bold uppercase tracking-[0.06em] text-ink-muted hover:text-brand"
       >{langSwitchLabel}</a>
-      <Button href={RESERVE_URL} variant="brand" external class="px-4 py-2 text-sm">{t(lang, 'nav_reserve')}</Button>
+      <Button href={RESERVE_URL} variant="brand" class="px-4 py-2 text-sm">{t(lang, 'nav_reserve')}</Button>
       <details class="group relative" data-mobile-menu>
         <summary class="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-full border border-border-strong text-ink [&::-webkit-details-marker]:hidden" aria-label={t(lang, 'nav_open_menu')}>
           <svg class="h-5 w-5 group-open:hidden" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>

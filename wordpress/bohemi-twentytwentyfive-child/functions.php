@@ -84,9 +84,11 @@ add_action('init', function () {
 
 /**
  * Renders a `<a>` list joined by `<br>`, same shape as Astro's Footer.astro
- * `webLinks`/`serviceLinks` columns. `$external = true` marks cross-domain
- * links (target=_blank), used for every link that points at bohemi.fit,
- * since studio.bohemi.fit is a different site.
+ * `webLinks`/`serviceLinks` columns. `$external` used to mark cross-domain
+ * links (target=_blank) for every link pointing at bohemi.fit — dropped
+ * 1. 8. 2026 (Honza: cross-domain navigation should stay in one tab in both
+ * directions, same as the Astro-side "Rezervovat" links to studio.bohemi.fit).
+ * Parameter kept for future reuse, just unused by current call sites below.
  *
  * @param array<array{0:string,1:string}> $links Pairs of [label, href].
  */
@@ -129,8 +131,7 @@ function bohemi_wp_final_child_get_footer_html(): string {
 			array( 'Ceník', $main_site . 'cenik/' ),
 			array( 'Fotky', $main_site . 'fotky/' ),
 			array( 'Kontakt', $main_site . 'kontakt/' ),
-		),
-		true
+		)
 	);
 
 	// Same 8 items, same order as Astro Footer.astro `serviceLinks` (CZ).
@@ -144,8 +145,7 @@ function bohemi_wp_final_child_get_footer_html(): string {
 			array( 'Osobní tréninky', $main_site . 'osobni-treninky/' ),
 			array( 'Pronájem sálů', $main_site . 'pronajem-salu/' ),
 			array( 'Pro firmy', $main_site . 'firmy/' ),
-		),
-		true
+		)
 	);
 
 	$html = '<footer class="bohemi-footer">' .

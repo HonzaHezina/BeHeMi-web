@@ -297,12 +297,13 @@ sítě. **Nové (`functions.php`, `bohemi_wp_final_child_get_footer_html()`):**
 2. **Web** — stejných **6 položek ve stejném pořadí** jako Astro
    (`webLinks`): Proč BoHeMi, Lekce a služby, Program 8 týdnů, Ceník, Fotky,
    Kontakt. Protože tyhle stránky na `studio.bohemi.fit` neexistují, každá
-   míří na `bohemi.fit` (cross-domain, `target="_blank"`) — jediný rozdíl
-   oproti Astro je cíl odkazu, ne jeho existence/pořadí/label.
+   míří na `bohemi.fit` (cross-domain) — jediný rozdíl oproti Astro je cíl
+   odkazu, ne jeho existence/pořadí/label. **Otevírá se ve stejné záložce**
+   (`target="_blank"` odstraněn 1. 8. 2026, viz níž) — jediný rozdíl je cíl.
 3. **Služby** — stejných **8 položek ve stejném pořadí** jako Astro
    (`serviceLinks`): Skupinové lekce, Kroužky pro děti, Supermamky, Open
    gym, Fotobiomodulace, Osobní tréninky, Pronájem sálů, Pro firmy — stejně
-   cross-domain na `bohemi.fit`.
+   cross-domain na `bohemi.fit`, stejně ve stejné záložce.
 4. **Kontakt** — beze změny (telefon/e-mail/adresa/mapa/hodiny/sociální
    sítě), **plus dvě WP-only položky přibalené dovnitř** (Rezervace lekcí,
    Můj účet — přes `bohemi_wp_ui_booking_url()`/`bohemi_wp_ui_account_url()`
@@ -317,9 +318,9 @@ Spodní řádek (copyright + právní odkazy) beze změny — ten už sedí.
 `Button.astro` variant="brand") a `.bohemi-footer-col--brand` (širší první
 sloupec, `flex:1.4` — odpovídá Astro `lg:grid-cols-[1.4fr_1fr_1fr_1fr]`).
 Motiv → **1.5**. Nová sdílená funkce `bohemi_wp_final_child_footer_link_list()`
-generuje `<a>` seznamy pro Web/Služby sloupce (`$external=true` přidává
-`target="_blank" rel="noopener noreferrer"` na všechny odkazy mířící na
-`bohemi.fit`).
+generuje `<a>` seznamy pro Web/Služby sloupce (`$external` parametr od
+1. 8. 2026 nepoužitý — viz sekce „Odkazy mezi bohemi.fit a studio.bohemi.fit
+zůstávají v jedné záložce" níž).
 
 **Nic dalšího se nemění na instalaci** — pořád platí postup ze sekce
 „Patička — zpět na Část šablony" výš (vlož do Šablonové části → Patička,
@@ -872,3 +873,35 @@ gitu** (`wordpress/` byl celou dobu untracked), takže v historii repa nejsou
   `bohemi-twentytwentyfive-child` — motiv se 20. 7. 2026 vrátil zpátky,
   opravený, jako [`bohemi-twentytwentyfive-child/`](bohemi-twentytwentyfive-child/)
   (viz „Motiv — audit a oprava" výš). Zdrojový ZIP zůstává i v `_raw/`.
+
+## Odkazy mezi bohemi.fit a studio.bohemi.fit zůstávají v jedné záložce (1. 8. 2026)
+
+Honza nahlásil, že klik na „Rezervovat" (bohemi.fit → studio.bohemi.fit) i
+cesta zpátky (studio.bohemi.fit → bohemi.fit) mají zůstat ve stejné záložce,
+ne otvírat nové okno/kartu. Astro stranu (`Button.astro` `external` prop,
+`target="_blank"` na `RESERVE_URL`/membership odkazech) opraveno stejný den,
+viz `CLAUDE.md`. Na WP straně:
+
+- **Header** (`bohemi-wp-ui/patterns/header.php`, `$nav_items`) — odkaz
+  „Hlavní web" měl `$external = true` (třetí prvek pole), přepnuto na
+  `false`. „Můj účet" byl `false` už předtím, beze změny.
+- **Patička** (`bohemi-twentytwentyfive-child/functions.php`,
+  `bohemi_wp_final_child_footer_link_list()`) — sloupce „Web" a „Služby"
+  (obě mířící cross-domain na `bohemi.fit`) volaly funkci s `$external =
+  true`, teď bez parametru (default `false`). Samotný `$external` parametr
+  ve funkci zůstal (může se hodit příště pro jiný typ odkazu), jen ho tyhle
+  dva volání přestaly nastavovat na `true`.
+- **Beze změny zůstávají** — Google Maps, Facebook, Instagram (skutečně
+  externí služby, ne cross-domain BoHeMi odkaz) mají `target="_blank"` dál.
+
+`bohemi-wp-ui` → **1.1.9** (`CHANGELOG.md`), motiv → **2.2** (`style.css`).
+ZIPy je potřeba přegenerovat před nahráním (`dist/` v obou složkách zatím
+neaktualizovaný — stejný ruční postup jako u předchozích verzí, viz
+checklist na začátku souboru).
+
+**Po nahrání nutný re-insert obou vzorů v Site Editoru** (stejná mechanika
+jako u každé předchozí úpravy headeru/patičky výš — Šablonová část je
+zamrzlý HTML snapshot z okamžiku vložení, PHP update sám o sobě nic
+nezmění): **Vzhled → Editor → Šablonové části → Záhlaví** i **→ Patička** —
+u obou smazat starý vložený blok, „+" → najít „BoHeMi — Header"/„BoHeMi —
+Footer" (kategorie „BoHeMi") → vložit znovu → Uložit.

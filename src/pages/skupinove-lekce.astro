@@ -140,7 +140,7 @@ const picker = [
           Každá lekce trvá 60 minut a má jiné zaměření — vyber si podle toho, co od tréninku chceš.
         </p>
         <div class="mt-7 flex flex-wrap items-center gap-4">
-          <Button href={RESERVE_URL} variant="primary" external>Rezervovat lekci →</Button>
+          <Button href={RESERVE_URL} variant="primary">Rezervovat lekci →</Button>
           <p class="text-[15px] text-ink-muted">Aktuální rozvrh a volná místa najdeš v rezervačním kalendáři.</p>
         </div>
         <nav aria-label="Rychlá navigace na lekce" class="mt-8 flex flex-wrap gap-2.5">
@@ -173,7 +173,7 @@ const picker = [
             ))}
           </div>
           <div class="mt-9 flex flex-wrap items-center gap-4">
-            <Button href={RESERVE_URL} variant="primary" external>Rezervovat první lekci →</Button>
+            <Button href={RESERVE_URL} variant="primary">Rezervovat první lekci →</Button>
             <p class="text-[15px] text-cream-muted">Nemusíš nic kupovat předem — stačí jednorázový vstup.</p>
           </div>
         </div>
@@ -229,7 +229,7 @@ const picker = [
                   ))}
                 </div>
               )}
-              <a href={RESERVE_URL} rel="noopener noreferrer" class="mt-5 inline-block cursor-pointer text-[15px] font-bold text-accent-text hover:text-ink">Rezervovat →</a>
+              <a href={RESERVE_URL} class="mt-5 inline-block cursor-pointer text-[15px] font-bold text-accent-text hover:text-ink">Rezervovat →</a>
             </div>
           </article>
         ))}
@@ -297,7 +297,6 @@ const picker = [
         </div>
         <a
           href={RESERVE_URL}
-          rel="noopener noreferrer"
           class="relative inline-flex shrink-0 cursor-pointer items-center gap-2 rounded-full bg-accent-text px-7 py-3.5 text-[17px] font-bold text-cream transition-colors hover:bg-accent-deep"
         >
           Rezervovat →

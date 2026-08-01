@@ -69,8 +69,11 @@ function bohemi_wp_ui_get_header_html(): string {
 	// skutečnému stavu přihlášení návštěvníka. "Můj účet" (PMPro account
 	// stránka) řeší přihlášení i odhlášení sám a je vykreslovaný živě při
 	// každém načtení, takže zůstává jediná (funkční) cesta k oběma akcím.
+	// "Hlavní web" otevírá bohemi.fit ve STEJNÉ záložce (1. 8. 2026, Honzovo
+	// hlášení — cross-domain odkazy v obou směrech mají zůstat v jedné
+	// záložce, ne otvírat nová okna) — proto `false`, ne `true`.
 	$nav_items = array(
-		array( $main_site, __( 'Hlavní web', 'bohemi-wp-ui' ), true ),
+		array( $main_site, __( 'Hlavní web', 'bohemi-wp-ui' ), false ),
 		array( $account, __( 'Můj účet', 'bohemi-wp-ui' ), false ),
 	);
 
