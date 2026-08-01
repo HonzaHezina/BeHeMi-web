@@ -60,7 +60,12 @@ každé** takové změně, ne jen při prvním nastavení.
    `_raw/bohemi-custom-ui-v116.zip`.
 4. **`bohemi-wp-ui`** — nahraj `dist/bohemi-wp-ui.zip`, aktivuj, vlož pattern
    do šablonové části Záhlaví. Plný postup je v
-   [`bohemi-wp-ui/README.md`](bohemi-wp-ui/README.md#instalace).
+   [`bohemi-wp-ui/README.md`](bohemi-wp-ui/README.md#instalace). ⚠️ Pokud
+   soubory nahráváš přes FTP místo wp-adminí „Nahrát plugin" (např. rychlá
+   aktualizace jen `assets/images/`), zkontroluj oprávnění stejně jako u
+   motivu v kroku 1 — potvrzeno živě 1. 8. 2026, že nové soubory ve
+   `bohemi-wp-ui/assets/images/` dostaly stejný špatný Wedos default a
+   vracely 403 (viz „Motiv — audit a oprava" a „WebPageTest audit" níž).
 5. **Patička** — od 31. 7. 2026 se vkládá **stejně jako header** (viz
    „Patička — zpět na Část šablony" níž): **Vzhled → Editor → Šablonové
    části → Patička**, smaž starý výchozí obsah, „+" → najdi **„BoHeMi —
@@ -549,21 +554,32 @@ Ověřeno živě, oprava vyžaduje SSH/FTP shell nebo wp-admin klikání:
 1. **🔴 Kritické — 19 souborů vrací 403** (potvrzeno `curl`em: všechny
    `ba-prices-and-credits`/`ba-display-pack`/`ba-notification-pack`/
    `ba-advanced-forms` CSS/JS + `bohemi-wp-ui/assets/images/favicon-16x16.png`
-   a `favicon-32x32.png` a `apple-touch-icon.png`). **Nejde o starý
-   migrační dluh — favicon soubory jsou z dnešního (1. 8. 2026) FTP
-   uploadu v tomhle sezení**, takže to skoro jistě ukazuje na FTP klienta,
-   který při nahrávání nezachovává práva/vlastníka stejně jako zbytek
-   `wp-content` (`logo-bohemi.png` ve stejné složce je 200 OK — jen nově
-   nahrané soubory padají). `ba-*` pluginy jsou nejspíš starší instance
-   stejného problému z prvotní migrace. Oprava (na serveru, SSH):
+   a `favicon-32x32.png` a `apple-touch-icon.png`). **Není to nová záhada —
+   je to přesně ten samý bug jako „Motiv — audit a oprava" níž (20. 7. 2026):
+   Wedos hosting dává nově nahraným souborům/složkám přes FTP jinou skupinu
+   než mají existující funkční soubory (chybí `o+rx` pro „ostatní", pod
+   kterou zjevně běží statický webserver), takže PHP se k nim dostane
+   (proto pattern/menu fungují), ale přímé HTTP požadavky na CSS/JS/PNG
+   dostanou 403.** Favicon soubory jsou z dnešního (1. 8. 2026) FTP uploadu
+   v tomhle sezení — přesně proto padají a `logo-bohemi.png` ve stejné
+   složce (starší upload, práva už opravená) je 200 OK. `ba-*` pluginy jsou
+   nejspíš starší instance stejného problému. **Oprava = zopakovat postup
+   z „Motiv — audit a oprava"** (chmod 755 na složky / 644 na soubory,
+   případně přes Total Commander „Soubory → Změnit atributy...", ne jen
+   Ctrl+M), tentokrát na `wp-content/plugins/bohemi-wp-ui/assets/images/`
+   i na `wp-content/plugins/ba-*/`. Na serveru se SSH je to jednorázově:
    ```bash
    find wp-content -type d -exec chmod 755 {} \;
    find wp-content -type f -exec chmod 644 {} \;
    chown -R <uživatel-webserveru>:<skupina> wp-content
    ```
-   Bez SSH: přes hostingový File Manager/FTP klienta zkontrolovat a
-   opravit práva na `wp-content/plugins/ba-*/` a
-   `wp-content/plugins/bohemi-wp-ui/assets/images/`.
+   Bez SSH: přes hostingový File Manager/FTP klienta na
+   `wp-content/plugins/ba-*/` a `wp-content/plugins/bohemi-wp-ui/assets/images/`.
+   **Dlouhodobě:** dokud Wedos podpora needituje výchozí skupinu FTP účtu
+   (žádost jsme jim zatím neposílali, viz „Motiv — audit a oprava"), bude
+   se tohle opakovat po každém FTP uploadu nových souborů — viz aktualizovaný
+   „Instalace" krok u `bohemi-wp-ui` i instalační checklist výš, oba teď na
+   to výslovně upozorňují.
 2. **Chybějící Site Icon** — `wp-content/uploads/2023/02/cropped-cropped-logo-32x32.png`
    a `-192x192.png` vrací 404 (potvrzeno). Nahraj znovu ve Vzhled →
    Přizpůsobit → Identita webu.

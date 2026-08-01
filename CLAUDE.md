@@ -259,9 +259,18 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   Newsreader; Honza ho zamítl. MASTER.md serify zakazuje.) **Žádná kurzíva**
   (rozhodnuto 7/2026 podle zpětné vazby copywriterky — mixování řezů fontu
   působilo návodně/old-school). Akcentová slova/eyebrow se odlišují **jen
-  barvou** (`text-accent-text` apod.), ne kurzívou ani odlišnou vahou fontu.
+  barvou** (`text-accent` na tmavém pozadí, `text-accent-text` na světlém —
+  viz pravidlo u palety níž), ne kurzívou ani odlišnou vahou fontu.
   Výjimka: kurzíva zůstává u **skutečných citací** (blockquote na `/proc-bohemi/`,
   `/en/why-bohemi/`, `/program-8-tydnu/`) — tam je typograficky na místě.
+  **Font je od 1. 8. 2026 self-hosted** přes npm balíček
+  `@fontsource-variable/hanken-grotesk` (import v `src/styles/global.css`,
+  `--font-sans: "Hanken Grotesk Variable"`) — **žádné Google Fonts `<link>` tagy
+  v `Layout.astro`.** Důvod: výkon (odpadají 2 cross-origin round-tripy na
+  `fonts.googleapis.com`/`fonts.gstatic.com`, font se cachuje se zbytkem
+  `_astro/` assetů). Importují se jen `wght.css` (řezy 400–800) + `wght-italic.css`
+  (italic 400/500 pro citace výš) — nepřidávat zpátky Google Fonts link, nový
+  řez přidat přes balíček, ne přes `<link>`.
 - **Paleta = WARM-DARK (varianta B), black/white/red.** Zdroj pravdy je logo +
   plakáty, ne starý teplý export. Černá je **kotva, ne dominanta** — většina
   obsahu na teplém světlém pozadí (`bg #f5efe6`), tmavé kotvy (hero, manifest,
@@ -275,6 +284,13 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   - **Červená = CTA/akcent/výplň, NIKDY barva běžného (body) textu.** Výjimka:
     **akcentové slovo v display nadpisu smí být červené** (echo loga) — i na tmavém,
     kde projde jen jako *velký* text (AA-large ≥ 3:1). Rozhodnuto Honzou (hero „škola").
+    **Na tmavém pozadí (`bg-ink-dark`) je pro tohle vždy `text-accent`, NIKDY
+    `text-accent-text`** — `accent-text` je laděný na kontrast vůči světlému
+    pozadí (5,8:1) a na tmavém propadá pod AA-large (2,85:1 — reálný nález z
+    performance/a11y auditu 1. 8. 2026, `ApproachGrid.astro` používal
+    `text-accent-text` na `bg-ink-dark` a opraveno na `text-accent`, vzor viz
+    `Hero.astro`/`HealthTracker.astro`). Zkrátka: **světlé pozadí → `accent-text`,
+    tmavé pozadí → `accent`** — nikdy naopak.
   - `gold #e0a43a` / `gold-dark #8a5e0e` = amber, třetí akcent (Mind). **TENTATIVE.**
   - Triáda Body/Health/Mind = **červená / neutrál (cream·ink) / amber**.
   Tokeny jsou AA-laděné — neber zpět původní teplé (pískové/zelené/terakotové) hodnoty.
@@ -421,7 +437,11 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   slotu `<MediaFrame>` (dřív jen placeholder gradient s alt textem
   „Trénink ve funkčním sále BoHeMi"). Mimo centrální registr `photos.ts`,
   protože jde o jednu konkrétní pozici v jedné komponentě, ne o dlaždici s
-  `id` — stejný důvod jako u Supermamek/Objevovárny níž.
+  `id` — stejný důvod jako u Supermamek/Objevovárny níž. **Má `loading="eager"
+  fetchpriority="high"` na `<Image>` (přidáno 1. 8. 2026, perf audit)** — je to
+  LCP element, výchozí Astro `loading="lazy"` ho zbytečně řadil za ostatní
+  requesty. Jakýkoliv budoucí above-the-fold hero/LCP obrázek (na jiné stránce
+  než HP) potřebuje stejné dva atributy, jinak zůstává default `lazy`.
   **Centrální registr fotek lekcí a dětských aktivit = `src/data/photos.ts`**
   (`photosCS`/`photosEN`, klíč = `id` z `classes[]`/`kidsActivities[]`/
   `kidsBand[]` v `src/data/home.ts`). Fotka se přidává **jen jednou sem** —

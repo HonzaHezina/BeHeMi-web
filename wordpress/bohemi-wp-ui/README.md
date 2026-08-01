@@ -177,6 +177,20 @@ hůř, ne líp (viz `wordpress/README.md` „⚠️ Nahrání souborů ≠ aktua
 
 1. Nahraj `dist/bohemi-wp-ui.zip` do **Pluginy → Přidat nový → Nahrát plugin** a klikni **Instalovat**.
 2. **Aktivuj** plugin.
+
+   ⚠️ **Pokud místo téhle cesty aktualizuješ soubory přímo přes FTP**
+   (rychlejší pro drobné změny, ale obchází WordPressí vlastní rozbalení
+   ZIPu) — na tomhle Wedos hostingu nově nahrané soubory/složky občas
+   dostanou jinou skupinu než existující funkční soubory (chybí `o+rx` pro
+   „ostatní", pod kterou běží statický webserver), takže se PHP k nim
+   dostane normálně, ale přímý HTTP požadavek na CSS/JS/PNG dostane `403`.
+   Potvrzeno živě 1. 8. 2026 přesně na `assets/images/favicon-*.png` —
+   fungovaly PHP-generované `<link>` tagy (`wp_head`), ale prohlížeč
+   nemohl obrázky stáhnout. Po každém FTP uploadu nových/přidaných souborů
+   zkontroluj a případně oprav práva (`chmod 755` na složky / `644` na
+   soubory) — plný popis příčiny a postupu je ve
+   `wordpress/README.md` „Motiv — audit a oprava" (stejný bug, jen dřív
+   diagnostikovaný na motivu, ne na tomhle pluginu).
 3. Jdi do **Vzhled → Editor** (Site Editor — funguje stejně na čistém Twenty
    Twenty-Five i na `bohemi-twentytwentyfive-child`, protože ten motiv
    žádnou vlastní hlavičku nedodává, viz `wordpress/README.md`).

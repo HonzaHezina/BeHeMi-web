@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "@fontsource-variable/hanken-grotesk/wght.css";
+@import "@fontsource-variable/hanken-grotesk/wght-italic.css";
 
 /* ───────────────────────────────────────────────────────────────
    BoHeMi design tokeny — zdroj pravdy = logo/plakáty (black/white/red).
@@ -14,7 +16,7 @@
 
 @theme {
   /* Fonty — jediná rodina, akcenty řešíme vahou + kurzívou (bez serifu) */
-  --font-sans: "Hanken Grotesk", system-ui, -apple-system, sans-serif;
+  --font-sans: "Hanken Grotesk Variable", system-ui, -apple-system, sans-serif;
   --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
 
   /* Plochy / pozadí — SVĚTLÁ zóna (obsahové sekce) */

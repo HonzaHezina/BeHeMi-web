@@ -81,8 +81,11 @@ neonové zářivé barvy, grunge/distressed textury (to je hardcore-gym plakát,
 
 ## Typografie
 
-Google Fonts, **jedna rodina** (dle exportu). Akcenty se řeší **jen barvou**
-(`--color-accent-text` / `--color-accent`), ne druhým fontem, ne kurzívou.
+**Jedna rodina** (dle exportu), **self-hosted** (od 1. 8. 2026 přes npm balíček
+`@fontsource-variable/hanken-grotesk`, ne Google Fonts `<link>` — viz CLAUDE.md
+„Font" pro detail a důvod). Akcenty se řeší **jen barvou** — `--color-accent-text`
+na **světlém** pozadí, `--color-accent` na **tmavém** (nikdy naopak, viz sekce
+Barvy výš), ne druhým fontem, ne kurzívou.
 
 - **Vše:** `Hanken Grotesk` (400–800) — charakterní humanistický grotesk,
   sportovní a čistý. Nadpisy 700/800, text 400/500, akcentová slova stejná
