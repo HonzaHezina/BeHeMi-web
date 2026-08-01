@@ -8,30 +8,27 @@ import { Image } from 'astro:assets';
 import imgStudio01 from '../assets/studio/studio-01.jpg';
 import imgStudio06 from '../assets/studio/studio-06.jpg';
 
+// Ceny a názvy ověřené s Klárkou 1. 8. 2026 (nahrazuje starší 4sálový/jiné ceny
+// seznam). Tři sály: Velký taneční (zrcadla, taneční/workshopy), Malý taneční
+// (tatami), Funkční (bývalý "Velký" — zrcadla + TRX, funkční a silový trénink).
 const halls = [
   {
     name: 'Velký taneční sál',
-    desc: 'Prostorný sál se zrcadly po celé délce — pro skupinové lekce, tanec, kruhové tréninky i firemní akce.',
-    capacity: 'do 20 osob',
-    price: '700 Kč / hod',
-  },
-  {
-    name: 'Střední sál',
-    desc: 'Zrcadla, o něco komornější prostor. Dobrá volba pro workshopy, taneční kurzy nebo menší firemní akci.',
+    desc: 'Zrcadlový sál pro tanec a workshopy — dobrá volba pro taneční kurzy nebo menší firemní akci.',
     capacity: 'do 12 osob',
     price: '600 Kč / hod',
   },
   {
     name: 'Malý taneční sál',
-    desc: 'Nejmenší ze zrcadlových sálů — na osobní tréninky, workshopy nebo duety stačí.',
+    desc: 'Nejmenší sál, s tatami na podlaze — na osobní tréninky, workshopy nebo duety stačí.',
     capacity: 'do 8 osob',
     price: '500 Kč / hod',
   },
   {
-    name: 'Fitness sál',
-    desc: 'Vybavený pro funkční a silový trénink, ať už vedeš skupinu, nebo cvičíš s jedním klientem.',
-    capacity: 'do 12 osob',
-    price: '350 Kč / hod',
+    name: 'Funkční sál',
+    desc: 'Prostorný sál se zrcadly po celé délce a TRX — pro skupinové lekce, funkční a silový trénink i firemní akce.',
+    capacity: 'do 20 osob',
+    price: '700 Kč / hod',
   },
 ];
 
@@ -78,7 +75,7 @@ const forWhom = [
     <!-- SÁLY -->
     <section class="mx-auto max-w-[1220px] px-5 pt-10 md:px-8">
       <h2 class="mb-8 text-[clamp(26px,3.2vw,38px)] font-extrabold tracking-[-0.03em]">Co nabízíme k pronájmu</h2>
-      <div class="grid gap-5 sm:grid-cols-2">
+      <div class="grid gap-5 sm:grid-cols-3">
         {halls.map((hall) => (
           <div class="rounded-[18px] border border-border bg-surface p-7">
             <h3 class="mb-2 text-[20px] font-extrabold tracking-[-0.02em]">{hall.name}</h3>
@@ -90,7 +87,10 @@ const forWhom = [
           </div>
         ))}
       </div>
-      <p class="mt-4 text-[14.5px] text-ink-soft">Ceny jsou hodinové při smlouvě min. na 6 měsíců. Kratší nebo jednorázový pronájem na dotaz.</p>
+      <p class="mt-4 text-[14.5px] text-ink-soft">
+        Ceny jsou hodinové při smlouvě min. na 6 měsíců. Kratší nebo jednorázový pronájem na dotaz. ·
+        <a href="https://studio.bohemi.fit/obchodni-podminky-pronajmu-prostor/" rel="noopener noreferrer" target="_blank" class="font-bold text-accent-text hover:text-ink">Obchodní podmínky pronájmu ↗</a>
+      </p>
     </section>
     <section class="mx-auto max-w-[1220px] px-5 pt-10 md:px-8">
       <div class="grid gap-6 overflow-hidden rounded-[22px] border border-border bg-surface lg:grid-cols-[1.1fr_0.9fr]">

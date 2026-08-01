@@ -444,6 +444,22 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   (kotvy `#zaklady-gymnastiky`/`#akrobacie-zonglovani` beze změny) i ceník CZ/EN.
   **Semestr potvrzen (20. 7. 2026):** 16. 9. 2026 – 27. 1. 2027 je zimní semestr
   (WP popisek „letní" byl zavádějící, data zůstávají).
+- **Jednorázový vstup má cenu podle typu lekce (ověřeno Klárkou 1. 8. 2026),
+  ne jednotnou 199 Kč:** 199 Kč posilovací lekce (kruháč, silový, HIIT,
+  vlastní váha, Power Zone, břišní pekáč, Solid Booty, Supermamky), 250 Kč
+  Zumba/Enduro/Objevovárna, 150 Kč Open gym. `pricing[0]` v `home.ts`/
+  `home.en.ts` nese breakdown ve `feat`, `cenik.astro`/`en/pricing.astro`
+  bar chart i doprovodná věta pod ním jsou dolazené na stejná čísla.
+- **Pronájem sálů přejmenovaný na 3 sály (ověřeno Klárkou 1. 8. 2026, nahrazuje
+  starší 4sálový seznam):** Velký taneční sál 600 Kč (zrcadla, do 12 osob),
+  Malý taneční sál 500 Kč (tatami, do 8 osob), Funkční sál 700 Kč (bývalý
+  „Velký taneční sál" — zrcadla + TRX, do 20 osob). Bývalý „Fitness sál"
+  (350 Kč) a „Střední sál" (600 Kč) jako samostatné položky zanikly — mapování
+  na nová jména potvrdil Honza. Drženo v synku: `pronajem-salu.astro` (`halls`)
+  + `cenik.astro` + `en/pricing.astro`. Ke všem třem sálům + kroužkům Akademie
+  CLP a Dětské Zumbě patří viditelný odkaz na obchodní podmínky
+  (`https://studio.bohemi.fit/obchodni-podminky-*`, přímý externí odkaz jako
+  u `Footer.astro`, ne lokální redirect route).
 - **Přístupnost:** všechny stránky projdou **axe-core (WCAG 2.1 A+AA) = 0 chyb**.
   Drž text ≥ 4.5:1 (velký ≥ 3:1), globální `:focus-visible` ring je v `@layer base`,
   animace respektují `prefers-reduced-motion`. Po změně barev spusť axe znovu.
