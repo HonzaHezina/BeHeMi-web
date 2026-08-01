@@ -501,6 +501,32 @@ někdy nastavil i wp-adminí Ikonu webu, vypíšou se oba zdroje najednou
 (neškodná duplicita) — radši to pole nechat prázdné. `bohemi-wp-ui` →
 **1.1.6**, ZIP přegenerovaný.
 
+## Header — odstraněn nefunkční odkaz Přihlásit/Odhlásit se (1. 8. 2026)
+
+Honza nahlásil, že samostatný textový odkaz „Přihlásit se" / „Odhlásit se"
+vedle „Můj účet" v horním menu trvale svítí „Odhlásit se" i pro odhlášené
+návštěvníky a klik na něj nefunguje spolehlivě — matoucí pro návštěvníky.
+
+Přesně sedí na už dřív zdokumentované omezení tohohle odkazu (bývalá
+sekce „Přihlášení / Odhlášení — známé omezení" v `bohemi-wp-ui/README.md`):
+odkaz se vypočítal v okamžiku vložení patternu v Site Editoru (pod Honzovým
+přihlášeným účtem) a od té chvíle zůstal zamrzlý statický HTML snapshot —
+stejná mechanika jako „⚠️ Nahrání souborů ≠ aktualizace živé stránky" výš,
+jen aplikovaná na dynamický obsah uvnitř patternu, ne na CSS/markup kolem
+něj. Místo opravy (vyžadovala by dynamický blok `core/loginout`) byl odkaz
+**odstraněn úplně** z `patterns/header.php` (desktop i mobilní panel) —
+`bohemi_wp_ui_auth_link()` v `includes/urls.php` smazána, nepoužité CSS
+`.bohemi-header-link--auth`/`.bohemi-header-mobile-divider` smazáno.
+„Můj účet" v navigaci vede na PMPro account stránku, která přihlášení i
+odhlášení řeší sama a živě, takže funkčně nic nechybí. Detaily viz
+`bohemi-wp-ui/README.md` „Přihlášení / Odhlášení".
+
+`bohemi-wp-ui` → **1.1.7** (`CHANGELOG.md`), ZIP přegenerovaný. **Po
+nahrání nutný re-insert** patternu „BoHeMi — Header" v Site Editoru (smazat
+starý blok v Šablonové části Záhlaví, vložit + uložit znovu) — jinak zůstane
+starý (rozbitý) odkaz dál viset ve stávajícím uloženém HTML, viz varování
+úplně nahoře tohoto souboru.
+
 ## Header — mrtvý odkaz „Můj účet" (20. 7. 2026)
 
 Po nasazení headeru se ukázalo, že **„Můj účet" má `href=""`** (odkaz na

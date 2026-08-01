@@ -42,8 +42,12 @@ zde má jiný obsah než na `bohemi.fit`. Aktuální nav (od 1. 8. 2026, po
 zúžení — viz níž): **Hlavní web** → `bohemi.fit` (marketingový Astro web),
 **Můj účet** → PMPro „account" stránka (řeší přihlášení i odhlášení sama —
 PMPro shortcode na této stránce zobrazuje login formulář odhlášeným a
-dashboard přihlášeným uživatelům), **Přihlásit se / Odhlásit se** →
-samostatný textový odkaz vedle „Můj účet".
+dashboard přihlášeným uživatelům).
+
+Samostatný textový odkaz **„Přihlásit se / Odhlásit se"** vedle „Můj účet"
+byl součástí navigace, ale byl **odstraněn (1. 8. 2026)** — viz „Přihlášení
+/ Odhlášení" níž, proč se nedal spolehlivě opravit a proč jeho zmizení nic
+funkčně neubírá.
 
 **„Rezervace lekcí" a „Členství" odstraněny z headeru (1. 8. 2026, Honzovo
 rozhodnutí).** Resolvery `bohemi_wp_ui_booking_url()`/
@@ -102,21 +106,29 @@ ve WP admin vyřeší (buď se `/rezervace/` stane zase skutečnou stránkou s
 kalendářem, nebo se nav odkaz „Rezervovat" přepne rovnou na `/`), přepiš
 `BOHEMI_BOOKING_URL`/`BOHEMI_RESERVE_URL` zpátky na `/rezervace/`.
 
-### Přihlášení / Odhlášení — známé omezení
+### Přihlášení / Odhlášení — odkaz odstraněn (1. 8. 2026)
 
-Odkaz „Přihlásit se" / „Odhlásit se" se vypočítá v okamžiku, kdy pattern
-otevřeš nebo znovu vložíš v Site Editoru — Site Editor v tu chvíli běží pod
-tvým (přihlášeným) účtem, takže se do šablonové části uloží statický snapshot
-(nejčastěji „Odhlásit se" s nonce vázaným na tvou tehdejší session). Pro
-běžné návštěvníky to funguje bezpečně (WP u neplatného nonce jen zobrazí
-potvrzovací stránku odhlášení, nic se nerozbije), ale text/odkaz nereaguje
-živě na stav KAŽDÉHO konkrétního návštěvníka po uložení.
+Header dřív měl samostatný textový odkaz „Přihlásit se" / „Odhlásit se"
+vedle „Můj účet" (`bohemi_wp_ui_auth_link()` v `includes/urls.php`). Honza
+nahlásil, že trvale svítilo „Odhlásit se" i pro odhlášené návštěvníky a klik
+na něj nefungoval spolehlivě.
 
-Pokud je potřeba plně živý stav (jiný text pro přihlášené/nepřihlášené
-návštěvníky), nahraď po vložení patternu jen tento jeden odkaz nativním
-blokem **„Log In/Out"** (`core/loginout`) — je to standardní dynamický blok
-WordPressu, funguje v Site Editoru bez úprav. Případně napiš, ať doplníme
-plnohodnotný dynamický blok v další verzi.
+Příčina: odkaz se vypočítal v okamžiku, kdy pattern otevřeš nebo znovu
+vložíš v Site Editoru — Site Editor v tu chvíli běží pod tvým (přihlášeným)
+účtem, takže se do šablonové části uložil statický snapshot (nejčastěji
+„Odhlásit se" s nonce vázaným na tehdejší session). Odkaz/text pak nereagoval
+živě na stav KAŽDÉHO konkrétního návštěvníka po uložení — pro běžné
+návštěvníky to nebylo nebezpečné (WP u neplatného nonce jen zobrazí
+potvrzovací stránku odhlášení), ale bylo to matoucí.
+
+Řešením by bylo nahradit tenhle odkaz nativním dynamickým blokem
+**„Log In/Out"** (`core/loginout`), který v Site Editoru funguje bez úprav
+a reaguje živě na každého návštěvníka. Místo toho byl odkaz **rovnou
+smazán** — „Můj účet" v navigaci vede na PMPro account stránku, která
+přihlášení i odhlášení řeší sama a živě (viz „Menu ve WordPressu" výš),
+takže dedikovaný odkaz byl redundantní funkce navíc, ne nutnost. Pokud by
+se přece jen chtěl vrátit jako `core/loginout`, patří to jako nová položka
+do `$nav_items` v `patterns/header.php`.
 
 ### Cache hlavičky (od v1.1.0)
 

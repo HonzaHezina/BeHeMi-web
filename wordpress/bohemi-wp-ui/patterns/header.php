@@ -54,12 +54,21 @@ function bohemi_wp_ui_nav_link( string $href, string $label, string $class, bool
 function bohemi_wp_ui_get_header_html(): string {
 	$main_site = bohemi_wp_ui_main_site_url();
 	$account   = bohemi_wp_ui_account_url();
-	$auth      = bohemi_wp_ui_auth_link();
 
 	// "Rezervace lekcí" a "Členství" odstraněny z nav 1. 8. 2026 (Honzovo
 	// rozhodnutí) — zůstávají jen jako resolvery v includes/urls.php
 	// (booking_url pořád používá patička a includes/cache.php, membership_url
 	// zatím nikde jinde), jen v tomhle menu se nezobrazují.
+	//
+	// Samostatný textový odkaz "Přihlásit se / Odhlásit se" odstraněn
+	// 1. 8. 2026 (Honzovo hlášení: v horním menu trvale svítilo "Odhlásit
+	// se" i pro odhlášené návštěvníky a klik nefungoval spolehlivě) — jde
+	// o zdokumentované omezení, viz README "Přihlášení / Odhlášení":
+	// tenhle odkaz se do Šablonové části uloží jako zamrzlý HTML snímek z
+	// okamžiku vložení v Site Editoru, takže po čase přestane odpovídat
+	// skutečnému stavu přihlášení návštěvníka. "Můj účet" (PMPro account
+	// stránka) řeší přihlášení i odhlášení sám a je vykreslovaný živě při
+	// každém načtení, takže zůstává jediná (funkční) cesta k oběma akcím.
 	$nav_items = array(
 		array( $main_site, __( 'Hlavní web', 'bohemi-wp-ui' ), true ),
 		array( $account, __( 'Můj účet', 'bohemi-wp-ui' ), false ),
@@ -88,7 +97,6 @@ function bohemi_wp_ui_get_header_html(): string {
 			<?php foreach ( $nav_items as [ $href, $label, $external ] ) : ?>
 				<?php echo bohemi_wp_ui_nav_link( $href, $label, 'bohemi-header-link', $external ); ?>
 			<?php endforeach; ?>
-			<?php echo bohemi_wp_ui_nav_link( $auth['href'], $auth['label'], 'bohemi-header-link bohemi-header-link--auth' ); ?>
 		</nav>
 
 		<div class="bohemi-header-mobile">
@@ -106,8 +114,6 @@ function bohemi_wp_ui_get_header_html(): string {
 					<?php foreach ( $nav_items as [ $href, $label, $external ] ) : ?>
 						<?php echo bohemi_wp_ui_nav_link( $href, $label, 'bohemi-header-mobile-link', $external ); ?>
 					<?php endforeach; ?>
-					<div class="bohemi-header-mobile-divider"></div>
-					<?php echo bohemi_wp_ui_nav_link( $auth['href'], $auth['label'], 'bohemi-header-mobile-link' ); ?>
 				</nav>
 			</details>
 		</div>

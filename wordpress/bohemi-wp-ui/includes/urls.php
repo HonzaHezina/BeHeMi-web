@@ -96,8 +96,12 @@ function bohemi_wp_ui_membership_url(): string {
  *
  * PMPro's account shortcode already handles both auth states (login form
  * when logged out, account dashboard + logout link when logged in), so this
- * single link intentionally also carries most of the "Přihlášení / Odhlášení"
- * job — see bohemi_wp_ui_auth_link() below for the dedicated text link.
+ * single link carries the entire "Přihlášení / Odhlášení" job — the header
+ * used to also have a dedicated "Přihlásit se / Odhlásit se" text link
+ * (bohemi_wp_ui_auth_link(), removed 1. 8. 2026), but that link froze into
+ * a point-in-time HTML snapshot once inserted into a Site Editor template
+ * part and stopped reflecting each visitor's real login state — see README
+ * "Přihlášení / Odhlášení".
  *
  * Hardcoded on purpose (20. 7. 2026, Honza's call): `pmpro_url('account')`
  * was returning an empty string on studio.bohemi.fit for reasons we
@@ -132,28 +136,4 @@ function bohemi_wp_ui_reserve_url(): string {
 	}
 
 	return apply_filters( 'bohemi_wp_ui_reserve_url', $url );
-}
-
-/**
- * Login / logout text link.
- *
- * Baked at the moment the header pattern content is generated (see
- * README "Přihlášení / Odhlášení — známé omezení" for why this is a
- * point-in-time snapshot, not a live per-visitor state, once the pattern
- * has been inserted into a template part).
- *
- * @return array{label:string,href:string}
- */
-function bohemi_wp_ui_auth_link(): array {
-	if ( is_user_logged_in() ) {
-		return array(
-			'label' => __( 'Odhlásit se', 'bohemi-wp-ui' ),
-			'href'  => wp_logout_url( home_url( '/' ) ),
-		);
-	}
-
-	return array(
-		'label' => __( 'Přihlásit se', 'bohemi-wp-ui' ),
-		'href'  => wp_login_url(),
-	);
 }

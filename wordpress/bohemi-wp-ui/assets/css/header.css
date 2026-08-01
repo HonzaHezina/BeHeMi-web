@@ -167,20 +167,6 @@
 	background: var(--bohemi-header-accent);
 }
 
-.bohemi-header-link--auth {
-	margin-left: 4px;
-	padding: 8px 12px;
-	font-size: 13px;
-	font-weight: 700;
-	text-transform: uppercase;
-	letter-spacing: 0.06em;
-	color: var(--bohemi-header-text-muted);
-}
-
-.bohemi-header-link--auth:hover {
-	color: var(--bohemi-header-brand-hover);
-}
-
 /* Mobile cluster — Astro: visible until lg. Only wraps the hamburger
    toggle now — the "Rezervovat" CTA that used to sit here (and in the
    desktop nav) was removed 31. 7. 2026: on studio.bohemi.fit itself a
@@ -264,11 +250,6 @@
 
 .bohemi-header-mobile-link:hover {
 	background: var(--bohemi-header-surface-hover);
-}
-
-.bohemi-header-mobile-divider {
-	margin: 6px 4px;
-	border-top: 1px solid var(--bohemi-header-border);
 }
 
 /* Focus-visible — matches Astro's global :focus-visible ring */

@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.1.7 — 2026-08-01
+
+Odstraněn samostatný textový odkaz **„Přihlásit se" / „Odhlásit se"**
+z horní i mobilní navigace (`patterns/header.php`, funkce
+`bohemi_wp_ui_auth_link()` v `includes/urls.php` smazána, nepoužité CSS
+`.bohemi-header-link--auth` a `.bohemi-header-mobile-divider` smazáno).
+Honza nahlásil, že odkaz trvale zobrazoval „Odhlásit se" i pro odhlášené
+návštěvníky a klik na něj nefungoval spolehlivě — přesně sedí na
+zdokumentované omezení (viz README „Přihlášení / Odhlášení"): odkaz se
+do Šablonové části v Site Editoru uloží jako zamrzlý HTML snímek z
+okamžiku vložení (tehdy přihlášeného účtu), takže po čase přestane
+odpovídat reálnému stavu jednotlivých návštěvníků. Namísto opravy
+(vyžadovala by dynamický blok `core/loginout` nebo živé přerenderování)
+byl odkaz smazán úplně — „Můj účet" v navigaci vede na PMPro account
+stránku, která přihlášení i odhlášení řeší sama a živě, takže funkčně
+nic nechybí.
+
 ## 1.1.6 — 2026-08-01
 
 Přidán **favicon** (tab ikona v prohlížeči) — stejný červený kettlebell
