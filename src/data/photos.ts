@@ -5,6 +5,9 @@ import imgKruhacDetail from '../assets/lekce/kruhac-09.jpg';
 import imgKruhac06 from '../assets/lekce/kruhac-06.jpg';
 import imgKruhac07 from '../assets/lekce/kruhac-07.jpg';
 import imgKruhac08 from '../assets/lekce/kruhac-08.jpg';
+import imgHiit from '../assets/lekce/hiit-02.jpg';
+import imgHiit01 from '../assets/lekce/hiit-01.jpg';
+import imgBrisniPekac from '../assets/lekce/brisni-pekac-01.jpg';
 import imgSilovy from '../assets/lekce/silovy-trenink-09.jpg';
 import imgSilovyDetail from '../assets/lekce/silovy-trenink-11.jpg';
 import imgSilovy04 from '../assets/lekce/silovy-trenink-04.jpg';
@@ -48,6 +51,11 @@ export const photosCS: Record<string, Photo> = {
       { src: imgKruhac07, alt: 'Kruháč v BoHeMi — cvik na gymballu' },
       { src: imgKruhac08, alt: 'Kruháč v BoHeMi — balanční stanoviště' },
     ] },
+  hiit:             { src: imgHiit,        alt: 'HIIT v sále BoHeMi — skupina v běhu na místě',
+    extra: [
+      { src: imgHiit01, alt: 'HIIT v BoHeMi — protahovací stanoviště mezi koly' },
+    ] },
+  'brisni-pekac':   { src: imgBrisniPekac, alt: 'Břišní pekáč v BoHeMi — skupina cvičí rotační cvik na podložce' },
   'silovy-trenink': { src: imgSilovy,      alt: 'Silový trénink v BoHeMi — dřep s osou pod vedením trenéra', srcDetail: imgSilovyDetail, altDetail: 'Silový trénink v BoHeMi — skupina cvičí na TRX a s činkami',
     extra: [
       { src: imgSilovy04, alt: 'Silový trénink v BoHeMi — cvičení na TRX' },
@@ -70,6 +78,8 @@ export const photosCS: Record<string, Photo> = {
 
 export const photosEN: Record<string, Photo> = {
   kruhac:           { src: imgKruhac,      alt: 'Circuit training at BoHeMi — group working through stations', srcDetail: imgKruhacDetail, altDetail: 'Circuit training at BoHeMi — sledgehammer station on a tyre' },
+  hiit:             { src: imgHiit,        alt: 'HIIT at BoHeMi — group running on the spot' },
+  'brisni-pekac':   { src: imgBrisniPekac, alt: 'Core training at BoHeMi — group doing a rotational exercise on mats' },
   'silovy-trenink': { src: imgSilovy,      alt: "Strength training at BoHeMi — barbell squat under a coach's eye", srcDetail: imgSilovyDetail, altDetail: 'Strength training at BoHeMi — group working on TRX and dumbbells' },
   'power-zone':     { src: imgPowerZone,   alt: 'Power Zone at BoHeMi — functional strength training with a kettlebell', pos: 'object-[50%_30%]' },
   'vlastni-vaha':   { src: imgVlastniVaha, alt: 'Bodyweight training at BoHeMi', srcDetail: imgVlastniVahaDetail, altDetail: 'Bodyweight training at BoHeMi — group holding a plank' },
