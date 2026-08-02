@@ -503,11 +503,12 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   (`<summary>` toggle). Nový mobilní panel/dropdown v hlavičce ať respektuje
   stejné chování (buď použij stejný `<details>` vzor, nebo panel taky napoj na
   tenhle listener).
-- **Fotky (stav 31. 7. 2026):** Reálné fotky zapojeny na všech klíčových
+- **Fotky (stav 2. 8. 2026):** Reálné fotky zapojeny na všech klíčových
   stránkách. Zdrojové soubory v `src/assets/`: `lekce/` (kruháč, silový
-  trénink, vlastní váha), `supermamky/`, `deti/` (Objevovárna, cirkusová
-  školička), `treneri/` (Klára Měchurová, Jan Hezina), `studio/` (pronájem
-  sálů + obecná atmosféra studia).
+  trénink, vlastní váha, HIIT, břišní pekáč), `supermamky/`, `deti/`
+  (Objevovárna, cirkusová školička), `treneri/` (Klára Měchurová, Jitka
+  Štěpánková, Eliška Velázquez, Jan Hezina), `studio/` (pronájem sálů +
+  obecná atmosféra studia).
   **HP hero (`Hero.astro`) má od 31. 7. 2026 reálnou fotku** —
   `src/assets/studio/studio-12-hero.jpg` vložená přímo přes `<Image>` do
   slotu `<MediaFrame>` (dřív jen placeholder gradient s alt textem
