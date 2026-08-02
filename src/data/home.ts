@@ -120,7 +120,7 @@ export const healthTracker = [
 export const trainers = [
   { id: 'klara-mechurova', name: 'Klára Měchurová', role: 'Trenérka · funkční trénink', media: 'media-green', bio: 'Klára se pohybu věnuje od dětství — balet, tenis, basketbal, tanec. Certifikovaná fitness lektorka od roku 2015, aktivní od 2013. Vede kruháče, silové lekce i HIIT a nabízí osobní tréninky.' },
   { id: 'jitka-stepankova', name: 'Jitka Štěpánková', role: 'Lektorka · Power Zone', media: 'media-sand', bio: 'Jitka se specializuje na CrossFit, vzpírání, funkční trénink a HIIT. Její tréninky jsou pestré, dynamické a nikdy ne stejné — buduje prostředí, kde se lidé navzájem podporují a vytváří týmového ducha. Ať jsi začátečník nebo zkušený sportovec, společně budete pracovat na tom, aby tě trénink bavil a přinášel výsledky.' },
-  { id: 'eliska-velazquez', name: 'Eliška Velázquez', role: 'Lektorka · Zumba a Dětská Zumba', media: 'media-forest', bio: 'Eliška přináší do BoHeMi latinskoamerický rytmus a radost z pohybu. Vede Zumbu pro dospělé i Dětskou Zumbu — lekce, kde se cvičí, ale hlavně baví.' },
+  { id: 'eliska-velazquez', name: 'Eliška Velázquez', role: 'Lektorka · Zumba a Dětská Zumba', media: 'media-forest', bio: 'Eliška se Zumbě věnuje od roku 2017, kdy se k ní dostala během vysoké školy. Od roku 2022 má licenci instruktorky Zumba® a Zumba® Kids & Kids Jr. (aktivní ZIN členství), od roku 2025 i Aqua Zumba®. Lekce vedla v Německu (Dortmund, Wiesbaden) i v Česku, s dětmi pracuje od roku 2016 — jako vedoucí na táborech, instruktorka škol v přírodě i au pair. V BoHeMi vede Zumbu pro dospělé i Dětskou Zumbu.' },
   { id: 'jan-hezina', name: 'Jan Hezina', role: 'zakladatel · provoz a technika', media: 'media-clay', bio: '' },
 ];
 

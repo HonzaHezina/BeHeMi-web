@@ -11,11 +11,14 @@ import imgJanHezina04 from '../assets/treneri/jan-hezina-04.jpg';
 import imgJitkaStepankova from '../assets/treneri/jitka-stepankova-01.jpg';
 import imgJitkaStepankova02 from '../assets/treneri/jitka-stepankova-02.jpg';
 import imgJitkaStepankova03 from '../assets/treneri/jitka-stepankova-03.jpg';
+import imgEliskaVelazquez from '../assets/treneri/eliska-velazquez-02.jpg';
+import imgEliskaVelazquez02 from '../assets/treneri/eliska-velazquez-01.jpg';
 
 export const trainerPhotos: Record<string, ImageMetadata> = {
   'Klára Měchurová': imgKlaraMechurova,
   'Jan Hezina': imgJanHezina,
   'Jitka Štěpánková': imgJitkaStepankova,
+  'Eliška Velázquez': imgEliskaVelazquez,
 };
 
 // Galerie dalších fotek pod bio na /treneri/ detailu — VŠECHNY zpracované
@@ -37,5 +40,8 @@ export const trainerGallery: Record<string, { src: ImageMetadata; alt: string }[
   'Jitka Štěpánková': [
     { src: imgJitkaStepankova02, alt: 'Jitka Štěpánková v sále BoHeMi' },
     { src: imgJitkaStepankova03, alt: 'Jitka Štěpánková v sále BoHeMi' },
+  ],
+  'Eliška Velázquez': [
+    { src: imgEliskaVelazquez02, alt: 'Eliška Velázquez, instruktorka Zumby' },
   ],
 };
