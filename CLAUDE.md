@@ -161,8 +161,16 @@ vlastní pátý sloupec. **WP header nemá vlastní CTA „Rezervovat"** (smazá
 31. 7. 2026 — ve vlastním menu `studio.bohemi.fit` nedávalo smysl tlačítko
 vedoucí zpátky na web, na kterém už jsi; „Rezervace lekcí" zůstává jako
 běžný odkaz). Ekvivalentní CTA zůstává jen v patičce. Nasazení je pořád
-ruční (FTP/WP admin, žádný SSH ani CI) — detaily, historie rozhodnutí a
-instalační checklist v [`wordpress/README.md`](wordpress/README.md).
+ruční (WP admin ZIP upload — preferováno před FTP, který na tomhle
+hostingu dával novým souborům špatná oprávnění; žádný SSH ani CI) —
+detaily, historie rozhodnutí a instalační checklist v
+[`wordpress/README.md`](wordpress/README.md). **⚠️ Po JAKÉKOLIV úpravě
+souboru v `wordpress/bohemi-wp-ui/` nebo `wordpress/bohemi-twentytwentyfive-child/`
+musíš ve stejném kroku přegenerovat `wordpress/dist/*.zip`** (gitignored,
+takže git diff změnu neukáže — snadno se zapomene) — Honza nahrává přesně
+ten ZIP, jinak nahraje starý kód beze změny a bez chyby. Postup a příkazy
+(žádný `zip` CLI v tomhle prostředí, jen PowerShell `Compress-Archive`) v
+`wordpress/README.md` sekce „Honza nasazuje ze ZIPu".
 **Přechody mezi bohemi.fit a studio.bohemi.fit zůstávají v jedné záložce,
 oběma směry (rozhodnuto Honzou 1. 8. 2026)** — dřív se otvíraly v nové:
 na Astru `Button.astro`'s `external` prop (`target="_blank"`) odstraněn ze

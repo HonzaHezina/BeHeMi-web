@@ -21,6 +21,43 @@ repo ho nespravuje ani neverzuje.
 **tři různé věci** (header / globální styly + obsahové patterny / styl
 formulářů) a běží vedle sebe — žádný nenahrazuje druhý.
 
+## ⚠️ Honza nasazuje ze ZIPu, ne přes FTP soubor-po-souboru (potvrzeno 2. 8. 2026)
+
+**Preferovaný a spolehlivý postup je Pluginy/Vzhled → Nahrát → ZIP soubor**
+(`dist/bohemi-wp-ui.zip` / `dist/bohemi-twentytwentyfive-child.zip`), ne
+kopírování jednotlivých souborů přes FTP — FTP na tomhle hostingu (Wedos)
+opakovaně dávalo novým souborům špatná oprávnění (403), viz kroky 1 a 4
+v checklistu níž a „Motiv — audit a oprava". ZIP instalace přes wp-admin
+řeší práva správně sama.
+
+**Důsledek pro mě (Claude): kdykoliv upravím cokoliv v `wordpress/bohemi-wp-ui/`
+nebo `wordpress/bohemi-twentytwentyfive-child/`, MUSÍM ve stejném kroku
+přegenerovat i odpovídající `dist/*.zip`** — jinak Honza nahraje starý kód a
+nic se nezmění, bez jakékoli chybové hlášky (přesně se to stalo 2. 8. 2026 s
+opravou „Hlavní web" v novém okně — zdrojový `header.php` byl opravený,
+ale zapomenutý needitovaný ZIP furt obsahoval starou verzi). `dist/*.zip`
+jsou gitignored build artefakty, git diff/status je NEUKÁŽE jako změněné,
+takže je snadné na regeneraci zapomenout — kontroluj to ručně.
+
+Tohle prostředí nemá `zip` CLI (Git Bash na Windows) — přegeneruj přes
+PowerShell, zip musí mít kořenovou složku pojmenovanou přesně podle slugu
+(`bohemi-wp-ui/…`, ne obsah nahozený rovnou do kořene):
+
+```powershell
+$tmp = Join-Path $env:TEMP 'bohemi-wp-zip'
+Remove-Item $tmp -Recurse -Force -ErrorAction SilentlyContinue
+New-Item -ItemType Directory -Path $tmp | Out-Null
+Copy-Item wordpress\bohemi-wp-ui (Join-Path $tmp 'bohemi-wp-ui') -Recurse
+Compress-Archive -Path (Join-Path $tmp 'bohemi-wp-ui') -DestinationPath wordpress\dist\bohemi-wp-ui.zip -Force
+Copy-Item wordpress\bohemi-twentytwentyfive-child (Join-Path $tmp 'bohemi-twentytwentyfive-child') -Recurse
+Compress-Archive -Path (Join-Path $tmp 'bohemi-twentytwentyfive-child') -DestinationPath wordpress\dist\bohemi-twentytwentyfive-child.zip -Force
+Remove-Item $tmp -Recurse -Force
+```
+
+Po přegenerování ověř, že ZIP fakt obsahuje novou verzi (např.
+`unzip -p wordpress/dist/bohemi-wp-ui.zip "bohemi-wp-ui/bohemi-wp-ui.php" | grep Version`)
+— nespoléhej jen na to, že se příkaz proběhl bez chyby.
+
 ## ⚠️ Nahrání souborů ≠ aktualizace živé stránky (přečti PŘED každou úpravou)
 
 **FTP/plugin-ZIP upload mění jen soubory na disku — CSS/JS se projeví hned
