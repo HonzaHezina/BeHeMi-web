@@ -8,32 +8,34 @@ import { Image } from 'astro:assets';
 import imgStudio01 from '../assets/studio/studio-01.jpg';
 import imgStudio06 from '../assets/studio/studio-06.jpg';
 
-// Ceny a názvy ověřené s Klárkou 1. 8. 2026 (nahrazuje starší 4sálový seznam
-// s jinými cenami/názvy). Čtyři sály: Velký taneční, Malý taneční, Funkční
-// (největší, zrcadla + TRX) a Multifunkční (nyní tatami, i jako zkušebna).
+// Ceny a popisy ověřené s Klárkou 1.–2. 8. 2026 (nahrazuje starší 4sálový
+// seznam s jinými cenami/názvy). Čtyři sály: Velký taneční, Malý taneční,
+// Funkční (největší, TRX i další posilovací vybavení) a Multifunkční
+// (tatami, i jako zkušebna). Metráž = `capacity` pole (dřív kapacita osob,
+// Klárka teď dala m² u všech čtyř, drž tenhle formát).
 const halls = [
   {
     name: 'Velký taneční sál',
-    desc: 'Zrcadlový sál pro tanec a workshopy — dobrá volba pro taneční kurzy nebo menší firemní akci.',
-    capacity: 'do 12 osob',
+    desc: 'Zrcadla po jedné celé délce, denní světlo, klimatizace, k dispozici přenosný reproduktor. Vhodný pro taneční lekce, jógu, pilates, tréninky s vlastní vahou i workshopy.',
+    capacity: '65 m²',
     price: '600 Kč / hod',
   },
   {
     name: 'Malý taneční sál',
-    desc: 'Nejmenší ze zrcadlových sálů — na osobní tréninky, workshopy nebo duety stačí.',
-    capacity: 'do 8 osob',
+    desc: 'Zrcadla, denní světlo, klimatizace, k dispozici přenosný reproduktor. Vhodný pro taneční lekce, jógu, pilates, tréninky s vlastní vahou i workshopy.',
+    capacity: '35 m²',
     price: '500 Kč / hod',
   },
   {
     name: 'Funkční sál',
-    desc: 'Náš největší sál — zrcadla po celé délce a TRX, pro skupinové lekce, funkční a silový trénink i firemní akce.',
-    capacity: 'do 20 osob',
+    desc: 'Zrcadla, přenosný reproduktor, vzduchotechnika. Vybavení pro posilovací lekce — činky, osy, TRX, BOSU, lana, gymnastické míče, lavice a mnoho dalšího. Vhodný i na fly jógu, bungee workout nebo workshopy.',
+    capacity: '100 m²',
     price: '700 Kč / hod',
   },
   {
-    name: 'Multifunkční sál (nyní tatami)',
-    desc: 'Menší sál s tatami, teď hlavně jako zkušebna — k dispozici elektrické bicí a klávesy.',
-    capacity: 'max 3 osoby',
+    name: 'Multifunkční sál',
+    desc: 'Tatami, zrcadla, denní světlo, k dispozici přenosný reproduktor, činky, osa, BOSU a TRX. Dá se využít i na výuku hudebních nástrojů nebo jako zkušebna — k dispozici jsou elektrické bicí a klávesy.',
+    capacity: '20 m²',
     price: '350 Kč / hod',
   },
 ];
