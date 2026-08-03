@@ -37,7 +37,7 @@ const circusCourses = [
     d: 'Zkušení trenéři a akrobaté naučí děti základní pohybové dovednosti a zdolávání jednoduchých překážek — formou hry a s pomocí cirkusových vzdělávacích technik. Rodiče jsou na hodině vítáni.',
     media: 'media-sand',
     img: 'cirkusová školička',
-    signupUrl: 'https://studio.bohemi.fit/ucet-clenstvi/platba-clenstvi/?level=7',
+    full: true,
   },
   {
     id: 'zaklady-gymnastiky',
@@ -145,9 +145,22 @@ const objevovarnaFacts = [
                   ))}
                 </div>
               )}
+              {c.full && (
+                <div class="mt-5 rounded-xl border border-accent-text/25 bg-accent-text/5 px-5 py-4">
+                  <p class="text-[15px] font-bold text-accent-text">Kapacita naplněná</p>
+                  <p class="mt-1 text-[14.5px] leading-[1.5] text-ink-soft">
+                    Máš zájem o tenhle kroužek? Zavolej na{' '}
+                    <a href="tel:+420603989762" class="font-bold text-accent-text hover:text-ink">+420 603 989 762</a>{' '}
+                    nebo napiš na{' '}
+                    <a href="mailto:info@bohemi.fit" class="font-bold text-accent-text hover:text-ink">info@bohemi.fit</a>.
+                  </p>
+                </div>
+              )}
               <div class="mt-5 flex items-center justify-between gap-3">
                 <span class="text-[15px] font-extrabold text-ink">{c.price}</span>
-                <a href={c.signupUrl ?? RESERVE_URL} class="cursor-pointer text-[15px] font-bold text-accent-text hover:text-ink">Přihlásit →</a>
+                {!c.full && (
+                  <a href={c.signupUrl ?? RESERVE_URL} class="cursor-pointer text-[15px] font-bold text-accent-text hover:text-ink">Přihlásit →</a>
+                )}
               </div>
             </div>
           </article>
