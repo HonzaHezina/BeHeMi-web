@@ -13,6 +13,13 @@ interface Props {
 }
 const { lang = 'cs' } = Astro.props;
 const trainers = lang === 'en' ? trainersEN : trainersCS;
+
+// Tahle mřížka je skoro čtvercová (h-70), na rozdíl od vyšší dlaždice na
+// /treneri/ — u fotek z celotělových portrétů (ne headshot) proto default
+// center crop useknul obličej. Per-trenér override object-position jen tady.
+const photoPos: Record<string, string> = {
+  'Eliška Velázquez': 'object-[50%_18%]',
+};
 ---
 <section class="border-t border-border-strong bg-sand">
   <div class="mx-auto max-w-[1220px] px-5 py-16 md:px-8 md:py-23">
@@ -33,7 +40,7 @@ const trainers = lang === 'en' ? trainersEN : trainersCS;
               <Image
                 src={trainerPhotos[tr.name]}
                 alt={`${lang === 'en' ? 'Portrait' : 'Portrét'} — ${tr.name}`}
-                class="h-full w-full object-cover"
+                class={`h-full w-full object-cover ${photoPos[tr.name] ?? ''}`}
                 widths={[320, 640]}
                 sizes="(min-width: 1024px) 25vw, 50vw"
               />
