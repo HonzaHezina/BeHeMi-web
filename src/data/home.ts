@@ -151,10 +151,11 @@ export const nav = [
 
 export const navMenu = [
   { num: '01', label: 'Skupinové lekce', desc: 'Kruháče, HIIT, Zumba a další', href: '/skupinove-lekce/' },
-  { num: '02', label: 'Osobní tréninky', desc: 'Individuální vedení 1:1', href: '/osobni-treninky/' },
+  { num: '02', label: 'Individuální služby', desc: 'Individuální vedení 1:1', href: '/osobni-treninky/' },
   { num: '03', label: 'Kroužky pro děti', desc: 'Cirkus, akrobacie, Supermamky', href: '/krouzky-pro-deti/' },
   { num: '04', label: 'Pro firmy', desc: 'FitTeams, wellbeing, pronájem sálů', href: '/firmy/' },
   { num: '05', label: 'Trenéři', desc: 'Kdo vás bude vést', href: '/treneri/' },
+  { num: '06', label: 'Fotky', desc: 'Atmosféra a zázemí studia', href: '/fotky/' },
 ];
 
 export const RESERVE_URL = 'https://studio.bohemi.fit/';

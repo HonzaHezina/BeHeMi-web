@@ -131,10 +131,11 @@ export const nav = [
 // Kids, trainers and company pages are CS-only for now — links go to CS pages.
 export const navMenu = [
   { num: '01', label: 'Group classes', desc: 'Circuits, HIIT, Zumba & more', href: '/en/group-classes/' },
-  { num: '02', label: 'Personal training', desc: 'Individual coaching 1:1', href: '/en/classes-and-services/#pro-tebe' },
+  { num: '02', label: 'Individual services', desc: 'Individual coaching 1:1', href: '/en/classes-and-services/#pro-tebe' },
   { num: '03', label: 'Kids clubs', desc: 'Circus, acrobatics, Supermums', href: '/krouzky-pro-deti/' },
   { num: '04', label: 'For companies', desc: 'FitTeams, wellbeing, hall rental', href: '/en/classes-and-services/#pro-firmy' },
   { num: '05', label: 'Trainers', desc: 'Who will guide you', href: '/treneri/' },
+  { num: '06', label: 'Photos', desc: 'Studio atmosphere & space', href: '/fotky/' },
 ];
 
 export const RESERVE_URL = 'https://studio.bohemi.fit/';
