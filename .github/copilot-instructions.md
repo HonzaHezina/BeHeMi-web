@@ -39,6 +39,11 @@ Ne spa, ne ezoterika, ne luxusní wellness, ne „sekta".
    **Nepiš jako AI** (7/2026, zpětná vazba copywriterky): žádné „ne X, ale Y",
    žádné vatové trojice podstatných jmen, žádné „zní ti to povědomě?". Kratší
    věty, konkrétní detaily. U klíčových stránek nech zkontrolovat copywriterkou.
+   **Konkrétní příklad, co přejídal (Honza, 2. 8. 2026): „žádná anonymní
+   posilovna" / „trenér tě zná jménem"** — zrušeno na celém webu (hero_body,
+   meta description, trainers eyebrow), nahrazeno pozitivním tvrzením bez
+   kontrastu vůči strawmanovi („trenér tě celou lekci vidí a opravuje
+   techniku"). Nevracet, ani v obměně. Detail: `/CLAUDE.md`.
 
 ## Anti-cíle
 Žádná spa-pastel paleta (růžová/šalvějová/zlatá), žádné elegantní serify, žádné
@@ -154,7 +159,10 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   zpracovaná do `src/assets/` nesmí zůstat nevyužitá.** Trenéři mají vlastní
   `src/data/trainer-photos.ts` (`trainerPhotos` = hlavní portrét, klíč =
   jméno; `trainerGallery` = stejný „extra" vzor pro zbylé fotky). Detaily
-  a historie rozhodnutí: `/CLAUDE.md` sekce „Fotky".
+  a historie rozhodnutí: `/CLAUDE.md` sekce „Fotky". **Stejný teaser/detail
+  vzor platí od 2. 8. 2026 i na bio:** `trainers[]` má `bio` (plný, jen
+  `/treneri/`) + volitelné `bioShort` (HP teaser, `Trainers.astro` čte
+  `tr.bioShort ?? tr.bio`) — nový trenér potřebuje oboje.
 - **Tailwind v4:** reset patří do `@layer base`; zlomky spacing (4.5/5.5/6.5/7.5)
   nejdou — piš `[18px]/[22px]/[26px]/[30px]`; po nové stránce restartuj dev server.
 - **Deploy:** Coolify statika — `dist/`, „Is it a static site?" ON, SPA OFF.

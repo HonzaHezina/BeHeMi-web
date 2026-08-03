@@ -57,6 +57,13 @@ luxusní wellness. Tělo jako cesta k síle, zdraví a klidu.
    marketingová šablona než jako člověk. Piš kratší věty, konkrétní detaily
    místo obecných tvrzení. Při pochybnosti o textu na klíčové stránce
    navrhni a nech zkontrolovat copywriterkou, nerozhoduj to sám za Honzu.
+   **Konkrétní příklad „ne X, ale Y" vzorce, co se přejídal (Honza, 2. 8. 2026):**
+   „žádná anonymní posilovna" / „trenér tě zná jménem" — bylo na homepage
+   (`hero_body`, meta description) i EN eyebrow trenérů, znělo to jako
+   omáčka na konci věty. Nahrazeno konkrétním pozitivním tvrzením (malá
+   skupina, trenér tě vidí celou lekci a opravuje techniku) bez kontrastu
+   vůči anonymní posilovně jako strawmanovi. Nevracet tenhle vzorec — ani v
+   jiné obměně („žádný anonymní řetězec" ap.).
 
 ## Anti-cíle (čeho se vědomě vyvarovat)
 
@@ -573,8 +580,12 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
     `src/assets/treneri/`.
   **`/treneri/` je bohatý detail, HP (`Trainers.astro`) jen ochutnávka**
   (potvrzeno 17. 7. 2026) — stejné rozdělení jako `/skupinove-lekce/` vs. HP
-  `Offer.astro`. Detail má anchor-navigaci na jednotlivé trenéry v hero,
-  řádkový layout (foto vlevo, bio + „Co vede" chipy s odkazy na konkrétní
+  `Offer.astro`. **Od 2. 8. 2026 platí totéž i pro bio, ne jen pro fotky:**
+  `trainers[]` (`home.ts`/`home.en.ts`) má `bio` (plný text, jen `/treneri/`)
+  + volitelné `bioShort` (krátká verze pro HP teaser, `Trainers.astro` čte
+  `tr.bioShort ?? tr.bio`). Nový trenér → napiš oboje, ať se stejný odstavec
+  neopakuje na HP i detailu (stejné pravidlo jako u lekcí/kroužků).
+  Detail má anchor-navigaci na jednotlivé trenéry v hero, řádkový layout (foto vlevo, bio + „Co vede" chipy s odkazy na konkrétní
   kotvy vpravo) místo gridu karet. Chipy „Co vede" psát jen tam, kde je vazba
   trenér→lekce potvrzená (bio nebo atribuce na `/skupinove-lekce/`) —
   nevymýšlet.

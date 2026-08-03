@@ -64,7 +64,7 @@ export const ui = {
     hero_badge: 'Fitness studio na Vinohradech',
     hero_h1: 'Vedené tréninky, kruháče\na vlastní váha',
     hero_h1_accent: 'pro tělo, zdraví i hlavu.',
-    hero_body: 'Fitness studio na Vinohradech se skupinovými lekcemi a funkčním pohybem. Žádný anonymní řetězec ani samoobsluha u strojů — na lekci tě vede trenér a opravuje techniku.',
+    hero_body: 'Fitness studio na Vinohradech se skupinovými lekcemi a funkčním pohybem. Malá skupina, trenér tě celou lekci vidí a opravuje techniku.',
     hero_cta_primary: 'Zkus první lekci →',
     hero_cta_secondary: 'Podívat se na lekce',
     hero_social_proof: 'Malé skupiny —\ntrenér ví, jak na tebe.',
@@ -85,7 +85,7 @@ export const ui = {
     lp_body_2: 'Vstupní i závěrečné měření — aby sis mohl/a porovnat, kde jsi začínal/a a kde jsi teď.',
     lp_cta: 'Přijít na Program 8 týdnů →',
     // Trainers
-    trainers_eyebrow: 'Lidé, které znáš jménem',
+    trainers_eyebrow: 'Kdo tě na lekci povede',
     trainers_h2: 'Naši trenéři',
     // PricingTeaser
     pricing_eyebrow: 'Ceník',
@@ -136,10 +136,10 @@ export const ui = {
     hero_badge: 'Fitness studio in Vinohrady, Prague',
     hero_h1: 'Coached workouts, circuits\nand bodyweight training',
     hero_h1_accent: 'for body, health and mind.',
-    hero_body: "A fitness studio in Vinohrady with group classes and functional movement. No anonymous gym chain, no self-service machines — the coach leads the class and corrects your form.",
+    hero_body: "A fitness studio in Vinohrady with group classes and functional movement. Small groups, and a coach who's with you the whole class, correcting your form.",
     hero_cta_primary: 'Try your first class →',
     hero_cta_secondary: 'See the classes',
-    hero_social_proof: 'Small groups —\nyour coach knows your name.',
+    hero_social_proof: 'Small groups —\nyour coach knows what works for you.',
     hero_float_1: '● Functional training, no machines',
     hero_float_2: '● Coach corrects your form',
     hero_float_3: '● Bodyweight & equipment',
@@ -157,7 +157,7 @@ export const ui = {
     lp_body_2: 'Measurements at the start and end — so you can compare where you started and where you are now.',
     lp_cta: 'Join the 8-Week Program →',
     // Trainers
-    trainers_eyebrow: 'People you know by name',
+    trainers_eyebrow: 'Who leads your classes',
     trainers_h2: 'Our coaches',
     // PricingTeaser
     pricing_eyebrow: 'Pricing',
