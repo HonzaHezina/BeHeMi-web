@@ -43,7 +43,7 @@ const trainers = lang === 'en' ? trainersEN : trainersCS;
           )}
           <h3 class="text-[21px] font-extrabold tracking-[-0.02em]">{tr.name}</h3>
           <p class="text-[15px] text-ink-muted">{tr.role}</p>
-          {tr.bio && <p class="mt-1.5 text-[14.5px] leading-[1.5] text-ink-soft">{tr.bio}</p>}
+          {(tr.bioShort ?? tr.bio) && <p class="mt-1.5 text-[14.5px] leading-[1.5] text-ink-soft">{tr.bioShort ?? tr.bio}</p>}
         </a>
       ))}
     </div>
