@@ -103,13 +103,24 @@ open-gym, photobiomodulation-therapy, pricing, why-bohemi, contact.
 
 Hlavní menu (rozhodnuto Honzou): **Domů · Proč BoHeMi · Lekce a služby · Ceník ·
 Kontakt · Rezervovat**. Položka „Lekce a služby" má dropdown s přímými odkazy na
-klíčové stránky: **Skupinové lekce → `/skupinove-lekce/` · Osobní tréninky →
+klíčové stránky: **Skupinové lekce → `/skupinove-lekce/` · Individuální služby →
 `/osobni-treninky/` · Kroužky pro děti → `/krouzky-pro-deti/` · Pro firmy →
-`/firmy/` · Trenéři → `/treneri/`** (data v `navMenu` v `home.ts`).
+`/firmy/` · Trenéři → `/treneri/` · Fotky → `/fotky/`** (data v `navMenu` v
+`home.ts`/`home.en.ts`). **Popisek „Individuální služby" (3. 8. 2026, dřív
+„Osobní tréninky") platí JEN pro tuhle dropdown položku** — href zůstává
+`/osobni-treninky/` beze změny a zbytek webu (page `<title>`/H1 na
+`/osobni-treninky/`, Footer sloupec Služby, CTA tlačítko a „Co vede" chip na
+`/treneri/`) dál říká „Osobní tréninky", protože tam jde o popis konkrétní
+služby v textu, ne o položku menu — nesjednocovat bez nového rozhodnutí Honzy.
+**Dropdown smí nést i ne-service odkazy** (Trenéři, od 3. 8. 2026 i Fotky) —
+na rozdíl od hlavní lišty (6 pevných položek výš), kterou bez explicitního
+rozhodnutí Honzy neroztahovat.
 Footer má sloupec **Služby** (Skupinové lekce, Kroužky pro děti, Supermamky,
 Open gym, Fotobiomodulace, Osobní tréninky, Pronájem sálů, Pro firmy) — každá
 nová service stránka se přidává i sem. Program 8 týdnů a Fotky jsou ve sloupci
 **Web** (`/program-8-tydnu/`, `/fotky/`), ne ve Službách — nejsou to služby.
+Fotky tak od 3. 8. 2026 mají dva vstupy: Footer sloupec Web (jak bylo) i
+dropdown „Lekce a služby" v hlavičce (nově).
 
 > ✅ **Slugy jsou ověřené z reálné GSC (12 měsíců).** Zdroj pravdy =
 > **`docs/redirect-map.md`** (KEEP / 301 / WP / LEGAL + trailing-slash pravidlo).
