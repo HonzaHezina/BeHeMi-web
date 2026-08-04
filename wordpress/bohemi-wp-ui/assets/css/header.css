@@ -43,9 +43,6 @@
 	   elsewhere on the WP site if a page ever needs one. */
 	--bohemi-header-height: 76px;
 
-	/* Astro dropdown/mobile menu panel: rounded-2xl (16px) */
-	--bohemi-header-radius-panel: 16px;
-
 	/* Astro breakpoints (Tailwind defaults): md = 768px, lg = 1024px */
 	--bohemi-header-bp-tablet: 768px;
 	--bohemi-header-bp-desktop: 1024px;
@@ -126,25 +123,25 @@
 	}
 }
 
-/* Desktop nav — Astro: hidden until lg, then flex row, gap-0.5 (2px) */
+/* Nav — only 2 short items (Hlavní web / Můj účet), so unlike the Astro
+   site's 6-item nav this one doesn't collapse behind a hamburger at any
+   width (Honza's feedback 4. 8. 2026: hiding just two links behind an
+   extra click on mobile was worse than a slightly tighter top bar). Sizing
+   scales up at the same breakpoints the rest of the header already uses. */
 .bohemi-header-nav {
-	display: none;
+	display: flex;
 	align-items: center;
 	gap: 2px;
-}
-
-@media (min-width: 1024px) {
-	.bohemi-header-nav {
-		display: flex;
-	}
+	flex-shrink: 0;
 }
 
 .bohemi-header-link {
 	position: relative;
 	display: inline-flex;
 	align-items: center;
-	padding: 8px 14px;
-	font-size: 15.5px;
+	white-space: nowrap;
+	padding: 6px 8px;
+	font-size: 13px;
 	font-weight: 600;
 	letter-spacing: -0.01em;
 	color: var(--bohemi-header-text-line);
@@ -152,109 +149,75 @@
 	transition: color 0.15s ease;
 }
 
+@media (min-width: 480px) {
+	.bohemi-header-link {
+		padding: 8px 12px;
+		font-size: 14.5px;
+	}
+}
+
+@media (min-width: 768px) {
+	.bohemi-header-link {
+		padding: 8px 14px;
+		font-size: 15.5px;
+	}
+}
+
 .bohemi-header-link:hover {
 	color: var(--bohemi-header-brand-hover);
+}
+
+/* "Hlavní web" — light pill/button treatment (Honza, 4. 8. 2026), echoing
+   the shape of the Astro site's "Rezervovat" CTA (Button.astro
+   variant="brand": solid pill) but toned down: outline only, no fill,
+   no accent color — this is a way back to the marketing site, not a
+   conversion CTA, so it shouldn't compete with real CTAs for attention. */
+.bohemi-header-link--home {
+	border-radius: 999px;
+	border: 1.5px solid var(--bohemi-header-border-strong);
+	padding-left: 14px;
+	padding-right: 14px;
+}
+
+.bohemi-header-link--home:hover {
+	border-color: var(--bohemi-header-brand-hover);
+	background: var(--bohemi-header-surface-hover);
+}
+
+@media (min-width: 480px) {
+	.bohemi-header-link--home {
+		padding-left: 18px;
+		padding-right: 18px;
+	}
+}
+
+@media (min-width: 768px) {
+	.bohemi-header-link--home {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
 }
 
 .bohemi-header-link[aria-current="page"]::after {
 	content: "";
 	position: absolute;
-	left: 14px;
-	right: 14px;
+	left: 8px;
+	right: 8px;
 	bottom: 2px;
 	height: 2px;
 	border-radius: 999px;
 	background: var(--bohemi-header-accent);
 }
 
-/* Mobile cluster — Astro: visible until lg. Only wraps the hamburger
-   toggle now — the "Rezervovat" CTA that used to sit here (and in the
-   desktop nav) was removed 31. 7. 2026: on studio.bohemi.fit itself a
-   "reserve" button in its own header/menu was pointing back at the site
-   you're already on, which Honza flagged as not making sense. The footer
-   still has an equivalent CTA (see bohemi-twentytwentyfive-child), and
-   "Rezervace lekcí" remains as a normal nav link in both menus. */
-.bohemi-header-mobile {
-	display: flex;
-	align-items: center;
-	gap: 8px;
-}
-
-@media (min-width: 1024px) {
-	.bohemi-header-mobile {
-		display: none;
+@media (min-width: 768px) {
+	.bohemi-header-link[aria-current="page"]::after {
+		left: 14px;
+		right: 14px;
 	}
 }
 
-.bohemi-header-toggle {
-	position: relative;
-}
-
-.bohemi-header-toggle-btn {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 40px;
-	height: 40px;
-	border-radius: 999px;
-	border: 1px solid var(--bohemi-header-border-strong);
-	color: var(--bohemi-header-text);
-	cursor: pointer;
-	list-style: none;
-}
-
-.bohemi-header-toggle-btn::-webkit-details-marker {
-	display: none;
-}
-
-.bohemi-header-icon-open,
-.bohemi-header-icon-close {
-	width: 20px;
-	height: 20px;
-}
-
-.bohemi-header-icon-close {
-	display: none;
-}
-
-.bohemi-header-toggle[open] .bohemi-header-icon-open {
-	display: none;
-}
-
-.bohemi-header-toggle[open] .bohemi-header-icon-close {
-	display: block;
-}
-
-.bohemi-header-mobile-panel {
-	position: absolute;
-	right: 0;
-	top: calc(100% + 10px);
-	width: 290px;
-	max-width: calc(100vw - 40px);
-	border-radius: var(--bohemi-header-radius-panel);
-	border: 1px solid var(--bohemi-header-border);
-	background: var(--bohemi-header-surface);
-	padding: 12px;
-	box-shadow: 0 22px 48px -16px rgba(33, 31, 26, 0.3);
-}
-
-.bohemi-header-mobile-link {
-	display: block;
-	border-radius: 12px;
-	padding: 12px 16px;
-	font-size: 16px;
-	font-weight: 600;
-	color: var(--bohemi-header-text-line);
-	text-decoration: none;
-}
-
-.bohemi-header-mobile-link:hover {
-	background: var(--bohemi-header-surface-hover);
-}
-
 /* Focus-visible — matches Astro's global :focus-visible ring */
-.bohemi-header a:focus-visible,
-.bohemi-header summary:focus-visible {
+.bohemi-header a:focus-visible {
 	outline: 2px solid var(--bohemi-header-accent);
 	outline-offset: 2px;
 	border-radius: 4px;

@@ -5,11 +5,15 @@
  * The header is shipped as a single core/html block. That is a deliberate
  * choice, not a shortcut: core/html is a native, always-valid Gutenberg
  * block, so the pattern can never render as "invalid block" in the Site
- * Editor regardless of WordPress/theme updates, and it lets us reproduce
- * the Astro header's bespoke <details>/<summary> disclosure menu and exact
- * accessibility behaviour (aria-expanded, aria-controls, Escape-to-close)
- * pixel-for-pixel. The trade-off: the block is edited as raw HTML rather
- * than as separate sub-blocks — documented in README.md.
+ * Editor regardless of WordPress/theme updates, and it gives full control
+ * over exact markup/spacing/accessibility attributes to match the Astro
+ * header's design tokens. The trade-off: the block is edited as raw HTML
+ * rather than as separate sub-blocks — documented in README.md.
+ *
+ * Unlike the Astro site's header, this one has no collapsible mobile menu
+ * (removed 4. 8. 2026) — with only two nav items, they stay directly
+ * visible in the top bar at every screen width instead of hiding behind a
+ * hamburger/disclosure toggle. See the comment above $nav_items below.
  *
  * @package Bohemi_WP_UI
  */
@@ -29,7 +33,7 @@ function bohemi_wp_ui_is_current_url( string $href ): bool {
 }
 
 /**
- * Render one nav link (used for both the desktop row and the mobile panel).
+ * Render one nav link.
  */
 function bohemi_wp_ui_nav_link( string $href, string $label, string $class, bool $external = false ): string {
 	$current_attr = bohemi_wp_ui_is_current_url( $href ) ? ' aria-current="page"' : '';
@@ -72,9 +76,27 @@ function bohemi_wp_ui_get_header_html(): string {
 	// "Hlavní web" otevírá bohemi.fit ve STEJNÉ záložce (1. 8. 2026, Honzovo
 	// hlášení — cross-domain odkazy v obou směrech mají zůstat v jedné
 	// záložce, ne otvírat nová okna) — proto `false`, ne `true`.
+	//
+	// Oba odkazy jsou od 4. 8. 2026 natrvalo vidět v horní liště na všech
+	// šířkách obrazovky (viz .bohemi-header-nav v header.css) — dřív byly na
+	// mobilu schované za hamburger/rozbalovací panel (<details>). Honza
+	// nahlásil (screenshot z telefonu), že se dvě tak krátké položky nemají
+	// schovávat za extra klik, mají být vidět "na první dobrou". Hamburger
+	// markup (.bohemi-header-mobile, <details>) i jeho JS (header.js) byly
+	// proto smazané, ne jen skryté — s jedním viditelným <nav> pro obě šířky
+	// nemá co dělat.
+	//
+	// "Hlavní web" dostal navíc (4. 8. 2026, Honzovo přání) lehký button/pill
+	// look, aby vizuálně vynikl jako cesta ZPÁTKY z portálu na marketingový
+	// web — inspirováno tvarem Astro "Rezervovat" CTA (`Button.astro`
+	// variant="brand": plná pilulka), ale záměrně tlumenější: jen obrys,
+	// bez červené výplně, protože tohle není konverzní CTA a červená na webu
+	// patří jen skutečným akcím (CLAUDE.md pravidlo 4). "Můj účet" zůstává
+	// prostý textový odkaz jako dřív — modifier `bohemi-header-link--home`
+	// se přidává jen k prvnímu odkazu, ne k oběma.
 	$nav_items = array(
-		array( $main_site, __( 'Hlavní web', 'bohemi-wp-ui' ), false ),
-		array( $account, __( 'Můj účet', 'bohemi-wp-ui' ), false ),
+		array( $main_site, __( 'Hlavní web', 'bohemi-wp-ui' ), false, true ),
+		array( $account, __( 'Můj účet', 'bohemi-wp-ui' ), false, false ),
 	);
 
 	$logo_url = trailingslashit( BOHEMI_WP_UI_URL ) . 'assets/images/logo-bohemi.png';
@@ -97,29 +119,13 @@ function bohemi_wp_ui_get_header_html(): string {
 		<span class="bohemi-header-tagline">Body · Health · Mind</span>
 
 		<nav class="bohemi-header-nav" aria-label="<?php esc_attr_e( 'Hlavní navigace', 'bohemi-wp-ui' ); ?>">
-			<?php foreach ( $nav_items as [ $href, $label, $external ] ) : ?>
-				<?php echo bohemi_wp_ui_nav_link( $href, $label, 'bohemi-header-link', $external ); ?>
+			<?php foreach ( $nav_items as [ $href, $label, $external, $is_home ] ) : ?>
+				<?php
+				$link_class = 'bohemi-header-link' . ( $is_home ? ' bohemi-header-link--home' : '' );
+				echo bohemi_wp_ui_nav_link( $href, $label, $link_class, $external );
+				?>
 			<?php endforeach; ?>
 		</nav>
-
-		<div class="bohemi-header-mobile">
-			<details class="bohemi-header-toggle">
-				<summary
-					class="bohemi-header-toggle-btn"
-					aria-controls="bohemi-header-menu-panel"
-					aria-expanded="false"
-					aria-label="<?php esc_attr_e( 'Otevřít menu', 'bohemi-wp-ui' ); ?>"
-				>
-					<svg class="bohemi-header-icon-open" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
-					<svg class="bohemi-header-icon-close" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
-				</summary>
-				<nav id="bohemi-header-menu-panel" class="bohemi-header-mobile-panel" aria-label="<?php esc_attr_e( 'Hlavní navigace', 'bohemi-wp-ui' ); ?>">
-					<?php foreach ( $nav_items as [ $href, $label, $external ] ) : ?>
-						<?php echo bohemi_wp_ui_nav_link( $href, $label, 'bohemi-header-mobile-link', $external ); ?>
-					<?php endforeach; ?>
-				</nav>
-			</details>
-		</div>
 	</div>
 </header>
 	<?php

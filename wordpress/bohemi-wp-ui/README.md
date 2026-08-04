@@ -44,6 +44,13 @@ zúžení — viz níž): **Hlavní web** → `bohemi.fit` (marketingový Astro 
 PMPro shortcode na této stránce zobrazuje login formulář odhlášeným a
 dashboard přihlášeným uživatelům).
 
+Oba odkazy jsou od **4. 8. 2026 trvale vidět v horní liště na všech
+šířkách obrazovky** — dřív byly na mobilu schované za hamburger/rozbalovací
+panel (`<details>/<summary>`, jako na Astro webu). Honza nahlásil
+(screenshot z telefonu), že dvě tak krátké položky nemají důvod schovávat
+se za extra klik. Hamburger markup, jeho CSS i `header.js` (dřív jediné JS
+v pluginu) byly smazané, ne jen skryté — viz `CHANGELOG.md` 1.2.0.
+
 Samostatný textový odkaz **„Přihlásit se / Odhlásit se"** vedle „Můj účet"
 byl součástí navigace, ale byl **odstraněn (1. 8. 2026)** — viz „Přihlášení
 / Odhlášení" níž, proč se nedal spolehlivě opravit a proč jeho zmizení nic
@@ -153,7 +160,7 @@ vracející se návštěvníky" (plný popis a naměřené hodnoty ve `wordpress
   jakmile je jasné, že problém zmizel, konstantu radši smaž hned, nečekej na
   vypršení.
 
-Asset verze (`?ver=` u `header.css`/`header.js`) se od téhle verze počítá
+Asset verze (`?ver=` u `header.css`) se od téhle verze počítá
 z `filemtime()` (`bohemi_wp_ui_asset_version()` v `bohemi-wp-ui.php`), ne ze
 statického čísla — každá úprava souboru na disku automaticky dostane nové
 `?ver=` bez ručního bumpu verze pluginu.
@@ -232,7 +239,6 @@ bohemi-wp-ui/
 │   └── header.php         # generuje HTML hlavičky + registruje block pattern
 ├── assets/
 │   ├── css/header.css     # veškerý styl, jmenný prostor .bohemi-header-*
-│   ├── js/header.js       # ~40 řádků: aria-expanded, zavření po kliku, Escape
 │   └── images/
 │       ├── logo-bohemi.png       # logo v headeru (164×102, s bočními činkami)
 │       ├── favicon-16x16.png     # favicon — jen kettlebell mark, bez činek (čitelné i malé)

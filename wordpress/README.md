@@ -942,3 +942,37 @@ zamrzlý HTML snapshot z okamžiku vložení, PHP update sám o sobě nic
 nezmění): **Vzhled → Editor → Šablonové části → Záhlaví** i **→ Patička** —
 u obou smazat starý vložený blok, „+" → najít „BoHeMi — Header"/„BoHeMi —
 Footer" (kategorie „BoHeMi") → vložit znovu → Uložit.
+
+## Header — mobilní hamburger menu odstraněn (4. 8. 2026)
+
+Honza poslal screenshot z telefonu (`studio.bohemi.fit`, přihlašovací
+stránka) s kroužkem kolem rozbaleného mobilního menu headeru a zpětnou
+vazbou: „nemělo by být v rozbalovací menu, ale být na horní liště viditelné
+na 1. dobrou". V tu chvíli menu obsahovalo jen dvě položky — „Hlavní web" a
+„Můj účet" — takže schovávat je za hamburger/`<details>` panel byl zbytečný
+extra klik navíc, na rozdíl od Astro webu, kde má mobilní menu 6 položek +
+CTA + jazykový přepínač a kolaps dává smysl.
+
+Řešení: `.bohemi-header-nav` (dva odkazy) je teď vidět na všech šířkách
+obrazovky, ne jen od 1024px. Padding/font-size odkazů postupně roste přes
+tři breakpointy (mobile → 480px → 768px), aby se oba odkazy vešly vedle loga
+i na nejužší telefony. Hamburger markup (`.bohemi-header-mobile`, `<details>/
+<summary>` toggle + panel) byl z `patterns/header.php` smazaný celý, stejně
+jako navazující CSS třídy a `assets/js/header.js` (řešil jen
+aria-expanded/Escape/klik-mimo pro tenhle hamburger — bez něj už nemá co
+dělat, enqueue v `bohemi-wp-ui.php` odstraněn).
+
+`bohemi-wp-ui` → **1.2.0** (`CHANGELOG.md`). ZIP je potřeba přegenerovat
+před nahráním (viz checklist na začátku souboru). **Po nahrání nutný
+re-insert** vzoru „BoHeMi — Header" v **Vzhled → Editor → Šablonové části →
+Záhlaví** (stejná mechanika jako u každé předchozí úpravy HTML markupu
+headeru výš — jen CSS by se projevilo samo, ale tahle změna maže i markup).
+
+**Doplněno týž den (1.2.1):** Honza chtěl „Hlavní web" ještě vizuálně
+odlišit — „něco podobného jako je na tom Astro webu Rezervovat, ale zase ne
+tak moc". Dostal lehký button/pill vzhled (`.bohemi-header-link--home`):
+zaoblená pilulka s obrysem, ale bez výplně/červené barvy (ta zůstává
+vyhrazená skutečným CTA, CLAUDE.md pravidlo 4) — jen `patterns/header.php`
+(nový 4. prvek `$is_home` v `$nav_items`) a CSS, žádná změna v hamburger
+logice výš. „Můj účet" zůstává prostý textový odkaz. Stejný re-insert postup
+platí i pro tuhle verzi.

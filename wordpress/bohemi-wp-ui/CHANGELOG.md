@@ -1,5 +1,38 @@
 # Changelog
 
+## 1.2.1 — 2026-08-04
+
+**„Hlavní web" dostal lehký button/pill vzhled**, aby vizuálně vynikl jako
+zpáteční cesta z portálu na marketingový web — Honza chtěl něco podobného
+tvaru jako Astro CTA „Rezervovat" (plná pilulka), ale tlumenější. Nová
+třída `.bohemi-header-link--home` (jen na tomhle odkazu, `patterns/
+header.php` `$nav_items` má nový 4. prvek `$is_home`): zaoblená pilulka s
+obrysem (`border: 1.5px solid var(--bohemi-header-border-strong)`), bez
+výplně/červené barvy — červená zůstává vyhrazená skutečným CTA. „Můj účet"
+beze změny, zůstává prostý textový odkaz.
+
+## 1.2.0 — 2026-08-04
+
+**Mobilní hamburger menu odstraněno — „Hlavní web" a „Můj účet" jsou teď
+trvale vidět v horní liště na všech šířkách obrazovky**, ne schované za
+rozbalovací panel. Honza nahlásil (screenshot z telefonu), že se dvě tak
+krátké položky nemají schovávat za extra klik — mají být vidět „na první
+dobrou".
+
+- `patterns/header.php`: smazán `.bohemi-header-mobile` blok (`<details>/
+  <summary>` toggle + panel), `<nav class="bohemi-header-nav">` teď
+  vykresluje oba odkazy vždy, jen jednou.
+- `assets/css/header.css`: `.bohemi-header-nav` už není skrytá pod 1024px;
+  velikost odkazů (padding/font-size) postupně roste přes tři breakpointy
+  (mobile → 480px → 768px), aby se oba odkazy vešly i na nejužší telefony.
+  Smazané mrtvé třídy po hamburgeru (`.bohemi-header-mobile`,
+  `.bohemi-header-toggle*`, `.bohemi-header-mobile-panel`,
+  `.bohemi-header-mobile-link`) a nepoužívaná proměnná
+  `--bohemi-header-radius-panel`.
+- `assets/js/header.js` smazán úplně (řešil jen aria-expanded/Escape/
+  klik-mimo pro hamburger, který už neexistuje) — enqueue v
+  `bohemi-wp-ui.php` odstraněn.
+
 ## 1.1.9 — 2026-08-01
 
 Odkaz **„Hlavní web"** v horní i mobilní navigaci (`patterns/header.php`,

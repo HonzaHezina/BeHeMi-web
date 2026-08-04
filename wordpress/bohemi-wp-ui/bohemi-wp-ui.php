@@ -3,7 +3,7 @@
  * Plugin Name:       BoHeMi WP UI
  * Plugin URI:        https://bohemi.fit/
  * Description:       Vlastní hlavička pro studio.bohemi.fit vizuálně sladěná s hlavním Astro webem (bohemi.fit). Dodává block pattern pro šablonovou část Záhlaví, nezasahuje do Twenty Twenty-Five, Booking Activities ani Paid Memberships Pro.
- * Version:           1.1.9
+ * Version:           1.2.1
  * Requires at least: 6.4
  * Requires PHP:      7.4
  * Author:            BoHeMi
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // No direct access.
 }
 
-define( 'BOHEMI_WP_UI_VERSION', '1.1.8' );
+define( 'BOHEMI_WP_UI_VERSION', '1.2.1' );
 define( 'BOHEMI_WP_UI_FILE', __FILE__ );
 define( 'BOHEMI_WP_UI_DIR', plugin_dir_path( __FILE__ ) );
 define( 'BOHEMI_WP_UI_URL', plugin_dir_url( __FILE__ ) );
@@ -39,9 +39,12 @@ function bohemi_wp_ui_asset_version( string $relative_path ): string {
 }
 
 /**
- * Enqueue header CSS + JS. `enqueue_block_assets` runs both on the front
- * end and inside the block editor / Site Editor, so the pattern preview
- * matches the live site instead of showing unstyled markup.
+ * Enqueue header CSS. `enqueue_block_assets` runs both on the front end and
+ * inside the block editor / Site Editor, so the pattern preview matches the
+ * live site instead of showing unstyled markup.
+ *
+ * No JS enqueue here anymore (4. 8. 2026) — the mobile hamburger/disclosure
+ * menu it used to drive was removed, see patterns/header.php.
  *
  * Font weights trimmed to 400/600/700/800 (1. 8. 2026, WebPageTest audit) —
  * those are the only ones `header.css`/`bohemi.css` actually set
@@ -67,14 +70,6 @@ function bohemi_wp_ui_enqueue_assets(): void {
 		BOHEMI_WP_UI_URL . 'assets/css/header.css',
 		array( 'bohemi-header-font' ),
 		bohemi_wp_ui_asset_version( 'assets/css/header.css' )
-	);
-
-	wp_enqueue_script(
-		'bohemi-header',
-		BOHEMI_WP_UI_URL . 'assets/js/header.js',
-		array(),
-		bohemi_wp_ui_asset_version( 'assets/js/header.js' ),
-		true
 	);
 }
 add_action( 'enqueue_block_assets', 'bohemi_wp_ui_enqueue_assets' );
