@@ -62,7 +62,9 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   studia (Footer sloupec Web, ne hlavní menu) — odděleně od `/pronajem-salu/`,
   který má jen fotky skutečného pronajímatelného prostoru.
 - **Program 8 týdnů:** název VŽDY „Program 8 týdnů" (nikdy „Life Practice"/„Cesta";
-  velké P i uprostřed věty). Zmínky vedou na `/program-8-tydnu/`. Interní podklady
+  velké P i uprostřed věty). Zmínky vedou na `/program-8-tydnu/`. Cena
+  **7 900 Kč / celý program** (jen v `cenik.astro`, zvýšeno 5. 8. 2026 z
+  3 900 Kč — nevracet zpět bez rozhodnutí Honzy). Interní podklady
   `docs/program-8-tydnu-podklady.md` NEPUBLIKOVAT. Mřížka `paths` („Lekce a
   programy") je stažená z HP — ostatní programy nejsou hotové.
 - **Lokalita ≠ značka:** hero H1/tagline bez „Vinohrady" (BoHeMi = myšlenka,

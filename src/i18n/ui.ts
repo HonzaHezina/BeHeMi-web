@@ -59,6 +59,7 @@ export const ui = {
     footer_legal_privacy: 'Zpracování osobních údajů',
     footer_legal_rules: 'Provozní řád',
     footer_rights: 'Všechna práva vyhrazena.',
+    footer_credit: 'Web postavil Honza Hezina s AI',
     footer_lang_label: 'Jazyk',
     // Hero
     hero_badge: 'Fitness studio na Vinohradech',
@@ -131,6 +132,7 @@ export const ui = {
     footer_legal_privacy: 'Privacy Policy',
     footer_legal_rules: 'House Rules',
     footer_rights: 'All rights reserved.',
+    footer_credit: 'Built by Honza Hezina with AI',
     footer_lang_label: 'Language',
     // Hero
     hero_badge: 'Fitness studio in Vinohrady, Prague',

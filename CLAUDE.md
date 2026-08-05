@@ -455,7 +455,13 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   musí říkat stejně; název ve WP bookingu = samostatná migrace). Kapacita do
   12 lidí, cena jen v ceníku (na detailu jen odkaz), zdravotní věta „Program
   nenahrazuje lékařskou ani rehabilitační péči." u CTA, sekundární CTA vede na
-  `/skupinove-lekce/`. Interní podklady (osnovy 20min bloků, měřicí protokol,
+  `/skupinove-lekce/`. **Cena 7 900 Kč / celý program** (`cenik.astro`, jediné
+  místo na webu, kde cena je) — zvýšeno 5. 8. 2026 z původních 3 900 Kč po
+  Honzově vlastní pricing analýze (3 900 vycházelo na cenu nejlevnějšího
+  jednotlivého vstupu za setkání, levnější než dětský kroužek za semestr —
+  neodpovídalo hodnotě: 2 vedené tréninky + praktický blok týdně, měření na
+  začátku/konci, uzavřená skupina do 12, 70% vratka po 1. týdnu). Nevracet
+  zpět na 3 900 bez nového rozhodnutí Honzy. Interní podklady (osnovy 20min bloků, měřicí protokol,
   plná storno tabulka) = `docs/program-8-tydnu-podklady.md` — **NEPUBLIKOVAT**;
   předstartovní storno pásma patří do budoucích VOP. Termín na webu je záměrně
   „září 2026" (kandidát 14. 9.–8. 11. 2026 čeká na Honzovo potvrzení). EN
