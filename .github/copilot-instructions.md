@@ -67,6 +67,11 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   3 900 Kč — nevracet zpět bez rozhodnutí Honzy). Interní podklady
   `docs/program-8-tydnu-podklady.md` NEPUBLIKOVAT. Mřížka `paths` („Lekce a
   programy") je stažená z HP — ostatní programy nejsou hotové.
+- **„Jak vznikl web" sekce** (5. 8. 2026): jen na `/proc-bohemi/` +
+  `/en/why-bohemi/` (founder story stránky), odkaz ven na `hezina.cz`. Patička
+  na všech stránkách má kredit „Web postavil Honza Hezina s AI" → `hezina.cz`
+  (`footer_credit` klíč). Nekopírovat „Jak vznikl web" na jiné stránky —
+  duplikovalo by odstavec.
 - **Lokalita ≠ značka:** hero H1/tagline bez „Vinohrady" (BoHeMi = myšlenka,
   časem víc míst); lokalita jen v hero badge, SEO titles a kontaktech, dokud
   je jedno studio.

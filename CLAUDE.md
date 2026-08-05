@@ -122,6 +122,12 @@ nová service stránka se přidává i sem. Program 8 týdnů a Fotky jsou ve sl
 Fotky tak od 3. 8. 2026 mají dva vstupy: Footer sloupec Web (jak bylo) i
 dropdown „Lekce a služby" v hlavičce (nově).
 
+**Patička nese kredit „Web postavil Honza Hezina s AI" (5. 8. 2026)** — malý
+odkaz vedle copyrightu (`Footer.astro`, i18n klíč `footer_credit`), cílí na
+`https://hezina.cz/` s `target="_blank"` (skutečně externí web, ne
+bohemi.fit/studio.bohemi.fit pár, takže nová záložka platí normálně). Na
+všech stránkách CZ i EN (`Footer` bere `lang` prop).
+
 > ✅ **Slugy jsou ověřené z reálné GSC (12 měsíců).** Zdroj pravdy =
 > **`docs/redirect-map.md`** (KEEP / 301 / WP / LEGAL + trailing-slash pravidlo).
 > Nové slugy odsud, nevymýšlet. Jediná výjimka mimo GSC: `/program-8-tydnu/`
@@ -466,6 +472,17 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   předstartovní storno pásma patří do budoucích VOP. Termín na webu je záměrně
   „září 2026" (kandidát 14. 9.–8. 11. 2026 čeká na Honzovo potvrzení). EN
   stránka není — EN odkazuje českým slugem.
+- **„Jak (a proč) vznikl tenhle web" — sekce na `/proc-bohemi/` + `/en/why-bohemi/`
+  (5. 8. 2026):** krátký rámeček mezi „PŘECHOD" a `HealthTracker` — jak byl web
+  postavený (Honza + AI, bez agentury, Astro, WordPress na `studio.bohemi.fit`
+  nepřepisovaný, jen sladěná hlavička/patička) a odkaz ven na `hezina.cz`
+  (`target="_blank"`, skutečně externí). **Vědomě NENÍ nikde jinde na webu** —
+  je to jediná stránka s founder hlasem (příběh), jinde (ceník, kontakt, lekce)
+  by to bylo mimo kontext a duplikovalo by odstavec (pravidlo „stejný odstavec
+  nesmí být na dvou stránkách"). Text v první osobě k návštěvníkovi — vyhýbá se
+  tomu, aby AI mluvila samo o sobě/oslovovala čtenáře přímo (zvažovaná varianta
+  „tou samou, se kterou si teď čteš tenhle odstavec" byla zamítnuta jako jediné
+  místo na webu, kde by text zlomil čtvrtou stěnu — nevracet).
 - **Klikatelné karty:** detail se otvírá klikem na celý box, ne textovým
   odkazem pod mřížkou. Vzor a cíle odkazů → sekce **Navigační logika** výš.
 - **Lekce a služby (rozcestník `/lekce-a-sluzby/`) — rozhodnutá struktura (7/2026):**
