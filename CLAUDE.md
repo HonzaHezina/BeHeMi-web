@@ -481,7 +481,10 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   hands-on, progrese od „jak s AI mluvit" v týdnu 1 po čtení dat z deníku
   návyků v týdnu 7 a syntézu v týdnu 8) je v
   `docs/program-8-tydnu-podklady.md` — **NEPUBLIKOVAT**, jen pro lektora.
-  Časování a přesný obsah AI bloku Honza ještě dolaďuje.
+  Časování a přesný obsah AI bloku Honza ještě dolaďuje. `forYou` pole
+  (sekce „Pro koho to je") má 4. položku „Chceš se naučit používat AI a s
+  její pomocí dotáhnout vlastní cíle." — drž v synku s tímhle rozhodnutím,
+  pokud se AI část programu ještě přejmenuje/zmenší.
 - **„Jak (a proč) vznikl tenhle web" — sekce na `/proc-bohemi/` + `/en/why-bohemi/`
   (5. 8. 2026):** krátký rámeček mezi „PŘECHOD" a `HealthTracker` — jak byl web
   postavený (Honza + AI, bez agentury, Astro, WordPress na `studio.bohemi.fit`
