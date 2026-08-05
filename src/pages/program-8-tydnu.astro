@@ -12,7 +12,7 @@ import { RESERVE_URL } from '../data/home';
 
 const weekRhythm = [
   { t: '2× vedený trénink', d: 'Kruhový nebo silový trénink v malé skupině. Trenér tě zná, opraví techniku a nastaví zátěž podle tvé úrovně.' },
-  { t: '1× praktický blok', d: 'Zhruba 20 minut na jedno téma týdne — spánek, jídlo, dech… Konkrétní věci k vyzkoušení, žádná přednáška.' },
+  { t: '1× praktický blok', d: 'Necelá hodina na téma týdne — spánek, jídlo, dech, technika, rytmus — a jak si s ním pomoct pomocí AI. Konkrétní věci k vyzkoušení, žádná přednáška.' },
   { t: 'Deník návyků', d: 'Jedna otázka denně, dvě minuty času. Aby bylo na konci vidět, co se změnilo — ne jen pocit, že „to bylo fajn".' },
 ];
 
@@ -63,7 +63,7 @@ const faq: { q: string; a: string }[] = [
 ---
 <Layout
   title="Program 8 týdnů — BoHeMi fitness Vinohrady"
-  description="Vlajkový program BoHeMi: 8 týdnů, 2× týdně vedený trénink v uzavřené skupině do 12 lidí, praktické bloky o spánku, jídle a režimu, měření na začátku i na konci."
+  description="Vlajkový program BoHeMi: 8 týdnů, 2× týdně vedený trénink v uzavřené skupině do 12 lidí, praktické bloky o spánku, jídle, režimu a práci s AI, měření na začátku i na konci."
   current="/program-8-tydnu/"
 >
   <Header current="/program-8-tydnu/" />
@@ -121,9 +121,14 @@ const faq: { q: string; a: string }[] = [
     <!-- 8 TÉMAT -->
     <section class="mx-auto max-w-[1220px] px-5 pt-14 md:px-8">
       <h2 class="mb-3 text-[clamp(26px,3.2vw,38px)] font-extrabold leading-[1.06] tracking-[-0.03em]">8 týdnů, 8 témat</h2>
-      <p class="mb-8 max-w-[58ch] text-[17px] leading-[1.55] text-ink-soft">
+      <p class="mb-4 max-w-[58ch] text-[17px] leading-[1.55] text-ink-soft">
         Tréninky drží tělo, praktické bloky drží zbytek. Každý týden jedno téma —
         konkrétní, vyzkoušitelné a dost malé na to, aby vydrželo i po programu.
+      </p>
+      <p class="mb-8 max-w-[58ch] text-[15.5px] leading-[1.55] text-ink-soft">
+        Součástí každého bloku je i práce s AI — od základů, jak s ní vůbec mluvit,
+        až po konkrétní použití na téma týdne: plán tréninku, večerní rutina,
+        čtení vlastních dat z deníku návyků.
       </p>
       <div class="grid gap-5 sm:grid-cols-2">
         {weeks.map((w) => (

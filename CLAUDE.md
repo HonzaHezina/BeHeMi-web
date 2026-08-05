@@ -472,6 +472,16 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   předstartovní storno pásma patří do budoucích VOP. Termín na webu je záměrně
   „září 2026" (kandidát 14. 9.–8. 11. 2026 čeká na Honzovo potvrzení). EN
   stránka není — EN odkazuje českým slugem.
+- **Praktický blok rozšířen na ~50 minut + AI napříč tématy (5. 8. 2026):**
+  dřív 20 minut jen na tělesné téma týdne, teď necelá hodina — druhá
+  polovina je AI blok (obecná AI gramotnost + konkrétní use-case podle
+  tématu daného týdne, napříč všemi 8 týdny, ne jako samostatné 9. téma).
+  Web nese jen souhrn (`weekRhythm[1]` v `program-8-tydnu.astro` + odstavec
+  pod „8 týdnů, 8 témat"). Plný rozpis AI bloku po týdnech (formát ukázka +
+  hands-on, progrese od „jak s AI mluvit" v týdnu 1 po čtení dat z deníku
+  návyků v týdnu 7 a syntézu v týdnu 8) je v
+  `docs/program-8-tydnu-podklady.md` — **NEPUBLIKOVAT**, jen pro lektora.
+  Časování a přesný obsah AI bloku Honza ještě dolaďuje.
 - **„Jak (a proč) vznikl tenhle web" — sekce na `/proc-bohemi/` + `/en/why-bohemi/`
   (5. 8. 2026):** krátký rámeček mezi „PŘECHOD" a `HealthTracker` — jak byl web
   postavený (Honza + AI, bez agentury, Astro, WordPress na `studio.bohemi.fit`

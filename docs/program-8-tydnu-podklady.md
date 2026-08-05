@@ -9,6 +9,10 @@
 >   jednotně **„Program 8 týdnů"** (rozhodnuto Honzou 7/2026).
 > - Vyhozena/nahrazena zakázaná slova (CLAUDE.md): „signály těla" →
 >   konkrétní formulace (únava, bolest, zadýchání).
+> - **5. 8. 2026:** praktický blok rozšířen z 20 na 50 minut, druhá polovina
+>   je AI blok napříč všemi 8 týdny (Honzovo rozhodnutí — časování a přesný
+>   obsah ještě doladí). Web zmiňuje jen souhrnně, tenhle soubor nese
+>   plný rozpis pro lektora.
 
 ## Věta, která drží celý program
 
@@ -92,11 +96,44 @@ Výstup slovně: bez potíží · lehké omezení · výrazné omezení · boles
 
 ---
 
-## Praktické bloky — struktura 20 minut
+## Praktické bloky — struktura 50 minut (rozšířeno o AI, 5. 8. 2026)
 
-3 min proč to řešíme · 7 min praktické vysvětlení · 5 min mini cvičení /
-reflexe · 5 min úkol na týden. Žádné dlouhé přednášky, každý blok končí
-jednou jednoduchou akcí.
+Původní blok byl 20 minut jen na téma týdne. Od pilotního běhu (září 2026)
+se rozšiřuje na necelou hodinu — druhá polovina je vyhrazená AI, napříč
+všemi 8 týdny. Web to zmiňuje jen souhrnně (sekce „Jak vypadá jeden týden"
++ „8 týdnů, 8 témat"), tenhle rozpis je pro lektora.
+
+**Časování:** 5 min proč to řešíme (téma týdne) · 10 min praktické
+vysvětlení · 10 min mini cvičení/reflexe (tělo) · 20 min AI blok (ukázka +
+hands-on na vlastním telefonu) · 5 min úkol na týden. Žádné dlouhé
+přednášky, každý blok končí jednou jednoduchou akcí.
+
+### AI blok — společný rámec (platí pro všech 8 týdnů)
+
+**Cíl:** dvě věci najednou — obecná AI gramotnost (umět s ní běžně mluvit,
+vědět, k čemu je a k čemu ne) a konkrétní použití na vlastní téma týdne.
+Ne přednáška o umělé inteligenci — participant si vždycky něco vyzkouší
+rovnou na svém telefonu/notebooku, na vlastních datech.
+
+**Formát:** krátká ukázka lektora (2–3 min) → hands-on cvičení účastníků
+(zbytek času) → jedna věc, kterou si odnesou a použijí do příštího týdne.
+Tenhle formát (ukázka + rovnou zkusit na vlastním případu, ne poslouchat)
+je dnes nejvděčnější způsob, jak lidi bez technického backgroundu naučit
+nový nástroj — žádný dlouhý výklad, žádné funkce, které nepoužijí.
+
+**Nástroj:** libovolný běžný AI chatbot v telefonu (ChatGPT, Claude,
+Gemini — cokoliv účastník má nebo si nainstaluje na místě). BoHeMi
+nedoporučuje konkrétní appku, jen princip použití.
+
+**Tón:** stejná pravidla jako zbytek programu — žádný hype, žádné „AI ti
+změní život". AI je nástroj jako guma na cvičení: pomůže, když víš, na co
+ji použít. Rozšířit zakázaná slova (výše) i sem: „revoluce", „budoucnost
+práce", „AI ti rozumí lépe než ty sám".
+
+**Progrese napříč týdny:** obtížnost roste — týden 1 je čistě „jak s AI
+vůbec mluvit", týden 7 je nejnáročnější (čtení vlastních dat z deníku
+návyků), týden 8 je syntéza. Lektor nemusí nic z předchozích týdnů
+opakovat, staví se na tom.
 
 ### Týden 1: Kde jsi teď
 Hlavní věta: *Nehodnotíme tě. Zjišťujeme výchozí bod.*
@@ -106,6 +143,10 @@ kterou chce po 8 týdnech cítit jinak.
 Mini cvičení: Co mě v těle poslední dobou nejvíc brzdí?
 Úkol: bez změn, jen sledovat spánek, pohyb, energii, jídlo, vodu, dech.
 Pointa: Začínáme pozorováním, ne tlakem.
+**AI blok:** Základy — co je AI chatbot, jak s ním mluvit (konkrétně, s
+kontextem, ne jednoslovně). Cvičení: každý zadá AI svoje odpovědi z
+dotazníku režimu a nechá si je shrnout jednou srozumitelnou větou. Odnese
+si: umím AI popsat svou situaci a dostat použitelnou odpověď.
 
 ### Týden 2: Pohyb jako standard
 Hlavní věta: *Pohyb není bonus. Je to základní údržba člověka.*
@@ -116,6 +157,10 @@ Mini cvičení: dva pevné časy na pohyb · nouzová 10min varianta · co mě
 nejčastěji vyhodí z režimu.
 Úkol: pohyb do kalendáře jako schůzku, ne „až bude čas".
 Pointa: Kruháč učí dokončovat. Týden učí pravidelnost.
+**AI blok:** AI na sestavení realistického týdenního plánu. Cvičení:
+účastník popíše AI svůj skutečný týden (práce, děti, diář) a nechá si
+navrhnout 2 pevné časy na pohyb + nouzovou 10minutovou variantu. Odnese si:
+hotový plán, ne teorii o plánování.
 
 ### Týden 3: Spánek
 Hlavní věta: *Spánek není odměna. Je to součást tréninku.*
@@ -127,6 +172,9 @@ Mini cvičení: každý si vybere jednu večerní brzdu (mobil mimo postel, 20 m
 bez práce, lehčí večeře, stejný čas vstávání, krátké dýchání).
 Úkol: jeden večerní rituál na 7 dní.
 Pointa: Regenerace není slabost. Bez ní tělo nepostaví nic stabilního.
+**AI blok:** AI jako pomocník při hledání večerní brzdy. Cvičení: účastník
+popíše AI svůj typický večer a nechá si navrhnout jednu konkrétní změnu
+(ne seznam deseti rad). Odnese si: jeden rituál, který si sám vybral.
 
 ### Týden 4: Jídlo a voda — DRŽET FYZIOLOGII (rozhodnuto)
 Hlavní věta: *Po jídle poznáš, jestli ti sedlo.*
@@ -139,6 +187,10 @@ Mini cvičení: Po kterém jídle mám energii? Po kterém padám? Kdy jím z hl
 a kdy z napětí?
 Úkol: po jednom hlavním jídle denně zapsat „energie po jídle: + / 0 / −".
 Pointa: Neřešíme ideální jídelníček. Učíme se číst reakci těla.
+**AI blok:** POZOR — držet stejné hranice jako tělesnou část týdne, žádné
+kalorické tabulky ani diety. Cvičení: účastník řekne AI, co má doma / co
+běžně jí, a nechá si navrhnout rychlou, nedietní úpravu jednoho jídla.
+Odnese si: konkrétní nápad na jedno jídlo, ne jídelníček.
 
 ### Týden 5: Dech — DRŽET FYZIOLOGII (rozhodnuto)
 Hlavní věta: *Dech je nejjednodušší nástroj, který máš pořád u sebe.*
@@ -150,6 +202,10 @@ Mini cvičení (3 min): sed/leh, ruka na břicho, nádech nosem, výdech delší
 nádech, bez výkonu.
 Úkol: každý den 3 minuty, ideálně stejný čas.
 Pointa: Nejde o spiritualitu. Jde o návrat těla z napětí do klidu.
+**AI blok:** POZOR — stejná hranice jako u tělesné části, žádné meditační
+appky ani rámování. Cvičení: účastník si s AI nastaví jednoduchou denní
+připomínku dechu (kdy, jak, kam si ji dát) — jde jen o organizaci, ne o
+obsah cvičení samotného. Odnese si: funkční připomínku, ne novou aplikaci.
 
 ### Týden 6: Držení těla a technika
 Hlavní věta: *Co se naučíš v sále, má fungovat i mimo sál.*
@@ -160,6 +216,10 @@ Mini cvičení: 3 běžné situace — zvednutí věci ze země, sed u počíta�
 ve frontě / MHD.
 Úkol: vybrat jednu denní situaci a všímat si techniky.
 Pointa: Trénink není izolovaná hodina. Je to nácvik života.
+**AI blok:** AI na jednoduchou kontrolní checklist. Cvičení: účastník
+popíše AI svou nejčastější denní situaci (sezení u počítače, zvedání
+nákupu) a nechá si od ní udělat 3bodovou kontrolu, kterou si dá do
+telefonu. Odnese si: checklist, ne teorii o biomechanice.
 
 ### Týden 7: Rytmus
 Hlavní věta: *Jedna věc, která vydrží, je víc než deset věcí na týden.*
@@ -170,6 +230,11 @@ Mini cvičení: jedna věc, která mi funguje · jedna, kterou zmenším · jedn
 kterou nechám být.
 Úkol: JEDNA změna, kterou držím další 2 týdny.
 Pointa: Zdraví není heroický výkon. Je to rytmus, ke kterému se vracíš.
+**AI blok — vyvrcholení AI části:** účastníci mají po 6 týdnech deník
+návyků plný dat. Cvičení: přepíšou/nahrají zápisky do AI a nechají si
+pomoct najít vzorec — co skutečně drží, co ne, kdy to nejčastěji selže.
+Nejnáročnější AI cvičení programu — staví na všem z předchozích týdnů
+(zadávání kontextu, konkrétní otázky). Odnese si: vlastní vzorec, ne cizí radu.
 
 ### Týden 8: Kde jsi teď — podruhé
 Hlavní věta: *Nejde o konec programu. Jde o začátek vlastního režimu.*
@@ -181,6 +246,10 @@ dál tlačit? Jak vypadá můj další měsíc?
 Úkol po programu: 2 pohybové body týdně · 1 dechový/klidový rituál · 1 návyk
 pro spánek nebo jídlo · 1 věc, kterou sleduju.
 Pointa: Program končí, praxe pokračuje.
+**AI blok — syntéza:** účastník zadá AI vstupní i výstupní měření/odpovědi
+(týden 1 vs. týden 8) a nechá si je srovnat + navrhnout plán na další
+měsíc podle toho, co sám určí jako priority. Odnese si: napsaný plán na
+měsíc dopředu — a zkušenost, že tohle umí udělat sám i po skončení programu.
 
 ---
 
