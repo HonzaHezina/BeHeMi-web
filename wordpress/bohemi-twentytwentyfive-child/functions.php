@@ -59,6 +59,126 @@ add_action('wp_enqueue_scripts', function () {
 }, 100);
 
 /**
+ * Single login/registration front door for `/ucet-clenstvi/` (5. 8. 2026).
+ *
+ * Honza had THREE things fighting over the same job: `[pmpro_login]`
+ * (login only) and `[bookingactivities_login form="3"]` (Honza confirmed
+ * "3" is a REGISTRATION-only form, no login fields — first assumed
+ * otherwise) sat together on a standalone "Log In" page, while
+ * `[pmpro_account]` on `/ucet-clenstvi/` renders its OWN login form when
+ * logged out. Two different login UIs for the same WP session is the
+ * "mlátí se to" confusion.
+ *
+ * Landed design (Honza's call, weighing "BA registration fields are
+ * already tuned, don't redo that work" against "I'll likely drop Booking
+ * Activities at some point, don't wire login through a plugin I plan to
+ * replace"): **login is plugin-independent** (plain WP `wp_signon()`),
+ * plus a "lost password" link. **Registration stays on Booking Activities'
+ * form "3"** (fields already tuned; if Booking Activities is ever
+ * replaced, the registration UI needs redoing anyway regardless of what
+ * it's built on today — see wordpress/README.md "Sjednocení loginu" for
+ * the full reasoning). PMPro never renders its own login/registration UI
+ * anywhere, only the dashboard half of `[pmpro_account]` once logged in.
+ *
+ * First cut used core `wp_login_form()`, which posts to the real
+ * `wp-login.php` — confirmed live (5. 8. 2026) that submitting it with
+ * correct credentials on `/login/` never actually logged Honza in, just
+ * reloaded the login form. Most likely cause: some "hide/rename
+ * wp-login.php" security measure intercepting direct wp-login.php
+ * requests (can't confirm without wp-admin access, and it's also exactly
+ * why `/login/` existed as a mystery URL in the first place — see
+ * README). Rather than chase that down, authentication now happens
+ * in-page: the form posts to itself, `wp_signon()` runs on
+ * `template_redirect` (before any output), so this never touches
+ * wp-login.php at all — immune to whatever that mechanism is doing, and
+ * matches Honza's "don't wire login through something I don't control"
+ * preference even better than `wp_login_form()` did.
+ *
+ * Replace `/ucet-clenstvi/`'s page content — currently
+ * `[bookingactivities_list ...]` + `[pmpro_account]` — with just
+ * `[bohemi_account]`. The standalone "Log In" page becomes redundant once
+ * this is live; trash it or 301 it to `/ucet-clenstvi/`.
+ */
+add_action('template_redirect', function () {
+    if ('POST' !== $_SERVER['REQUEST_METHOD'] || ! isset($_POST['bohemi_login'])) {
+        return;
+    }
+
+    if (! isset($_POST['bohemi_login_nonce']) || ! wp_verify_nonce($_POST['bohemi_login_nonce'], 'bohemi_login')) {
+        return;
+    }
+
+    $redirect_to = ! empty($_POST['redirect_to'])
+        ? wp_validate_redirect(wp_unslash($_POST['redirect_to']), home_url('/ucet-clenstvi/'))
+        : home_url('/ucet-clenstvi/');
+
+    $user = wp_signon(array(
+        'user_login'    => isset($_POST['log']) ? sanitize_user(wp_unslash($_POST['log'])) : '',
+        'user_password' => isset($_POST['pwd']) ? wp_unslash($_POST['pwd']) : '',
+        'remember'      => ! empty($_POST['rememberme']),
+    ));
+
+    if (is_wp_error($user)) {
+        wp_safe_redirect(add_query_arg('bohemi_login_error', '1', wp_get_referer() ?: home_url('/ucet-clenstvi/')));
+        exit;
+    }
+
+    wp_safe_redirect($redirect_to);
+    exit;
+});
+
+add_shortcode('bohemi_account', function () {
+    if (is_user_logged_in()) {
+        return do_shortcode('[bookingactivities_list columns="events,quantity,creation_date,status,actions"]')
+            . do_shortcode('[pmpro_account]');
+    }
+
+    $redirect_to = home_url('/ucet-clenstvi/');
+    if (! empty($_GET['redirect_to'])) {
+        $redirect_to = wp_validate_redirect(wp_unslash($_GET['redirect_to']), $redirect_to);
+    }
+
+    $error_notice = '';
+    if (! empty($_GET['bohemi_login_error'])) {
+        $error_notice = '<p class="bohemi-login-error">Nesprávné uživatelské jméno nebo heslo.</p>';
+    }
+
+    $login_form = sprintf(
+        '<form name="loginform" id="loginform" method="post" action="%1$s">
+            %2$s
+            <p class="login-username">
+                <label for="user_login">Uživatelské jméno nebo e-mail</label>
+                <input type="text" name="log" id="user_login" autocomplete="username" class="input" value="" size="20" />
+            </p>
+            <p class="login-password">
+                <label for="user_pass">Heslo</label>
+                <input type="password" name="pwd" id="user_pass" autocomplete="current-password" class="input" value="" size="20" />
+            </p>
+            <p class="login-remember">
+                <label for="rememberme"><input name="rememberme" type="checkbox" id="rememberme" value="forever" checked="checked" /> Pamatovat si mě</label>
+            </p>
+            <p class="login-submit">
+                <input type="submit" name="wp-submit" id="wp-submit" class="button button-primary" value="Přihlásit se" />
+                <input type="hidden" name="redirect_to" value="%3$s" />
+                <input type="hidden" name="bohemi_login" value="1" />
+                %4$s
+            </p>
+        </form>',
+        esc_url(get_permalink()),
+        $error_notice,
+        esc_attr($redirect_to),
+        wp_nonce_field('bohemi_login', 'bohemi_login_nonce', true, false)
+    );
+
+    $lost_password = sprintf(
+        '<p class="bohemi-lost-password"><a href="%s">Zapomněli jste heslo?</a></p>',
+        esc_url(wp_lostpassword_url())
+    );
+
+    return $login_form . $lost_password . do_shortcode('[bookingactivities_login form="3"]');
+});
+
+/**
  * Same category slug as the bohemi-wp-ui plugin ("bohemi-header") on
  * purpose — WordPress groups patterns by slug, not by label, so reusing it
  * merges header + footer + content patterns into ONE "BoHeMi" folder in
