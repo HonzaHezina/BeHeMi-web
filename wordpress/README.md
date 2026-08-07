@@ -579,14 +579,15 @@ Honza.
    + `assets/fonts/*.woff2`, viz `bohemi-wp-ui/CHANGELOG.md` 1.2.2) — žádný
    cross-origin request na Google Fonts už nezbyl.
 
-   **⏳ Čeká na nahrání (7. 8. 2026, ještě není živě):** `bohemi-wp-ui` →
-   **1.2.2** a `bohemi-twentytwentyfive-child` → **2.7**, oba `dist/*.zip`
-   přegenerované. Honza musí nahrát oba přes wp-admin (Pluginy → Nahrát
-   plugin / motiv přehrát složkou) — mění se jen enqueue kód a CSS
-   (`font-family` v `header.css` i `bohemi.css` přejmenovaný na „Hanken
-   Grotesk Variable"), **žádný re-insert Šablonové části není potřeba**.
-   Po nahrání ověřit, že v síťovém panelu/waterfallu zmizely požadavky na
-   `fonts.googleapis.com`/`fonts.gstatic.com`.
+   **✅ Živě nasazeno 7. 8. 2026** (`bohemi-wp-ui` → **1.2.2**,
+   `bohemi-twentytwentyfive-child` → **2.7**). Ověřeno `curl`em: HTML už
+   neobsahuje žádnou zmínku `fonts.googleapis.com`/`fonts.gstatic.com`.
+   **Po nahrání se ale nové soubory (`assets/css/fonts.css`,
+   `assets/fonts/*.woff2`) krátce vracely jako `403`** — stejný opakovaný
+   Wedos bug se špatnými právy nově nahraných souborů (viz „Motiv — audit a
+   oprava" a bod 1 níž v tomhle auditu). Vyřešeno stejným jednoklikovým
+   nástrojem: **Webhosting → Nástroje → „Oprava práv u souborů"** — po
+   kliknutí `fonts.css` i oba `.woff2` vrací `200`.
 2. **`zxcvbn`/password-strength-meter (~400 KB) dequeued mimo `/ucet-clenstvi/`**
    — WordPress core skript, který PMPro věší na každou stránku pro případ,
    že by na ní byl formulář změny hesla, i když ho tam nikdy není. Nový hook
