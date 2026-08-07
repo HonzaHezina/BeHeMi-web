@@ -116,20 +116,25 @@ každé** takové změně, ne jen při prvním nastavení.
    „Patička — zjištění" níž) — otevři ji, smaž vloženou patičku a nech tam
    jen výchozí odkaz na Část šablony (nebo znovu vlož „BoHeMi — Footer" tam,
    je to jednorázová oprava jen pro tu jednu šablonu).
-6. **Stránka „Můj účet" (`/ucet-clenstvi/`)** — obsah = jediný shortcode
-   `[bohemi_account]` (definovaný v `bohemi-twentytwentyfive-child/functions.php`,
-   viz „Sjednocení loginu" níž pro celé zdůvodnění). Řeší login,
-   registraci (přes Booking Activities), i dashboard rezervací/členství —
-   žádný jiný login/registrační shortcode nikam jinam na web nepatří.
-   **Na téhle stránce nesmí být aktivní žádné PMPro omezení „vyžadovat
-   členství"** (postranní panel v editoru) — jinak WordPress přesměruje
-   odhlášené návštěvníky pryč dřív, než se `[bohemi_account]` vůbec
-   vykreslí, a login/registrace se stanou nedostupné.
+6. **Login/registrace/účet — DVĚ stránky, stejný shortcode** (viz
+   „Sjednocení loginu" níž pro celé zdůvodnění, včetně proč to nejde
+   sloučit do jedné): obě mají obsah jen `[bohemi_account]`
+   (definovaný v `bohemi-twentytwentyfive-child/functions.php`) — žádný
+   jiný login/registrační shortcode nikam jinam na web nepatří.
+   - **„Můj účet" (`/ucet-clenstvi/`)** — v PMPro nastavená jako
+     **„Stránka účtu" (Account Page)**. „Require Membership" na téhle
+     stránce nechat prázdné (nikdy nebyl problém), PMPro ji stejně sama
+     gatuje vestavěně podle role Account Page.
+   - **„Log In" (`/login/`)** — v PMPro nastavená jako **„Přihlašovací
+     stránka" (Login Page)**. ⚠️ **Nikdy nenastavovat „Přihlašovací
+     stránka" na `/ucet-clenstvi/`** — PMPro pak přesměrovává Account
+     Page na sebe sama = nekonečná smyčka (`ERR_TOO_MANY_REDIRECTS`,
+     živě potvrzeno 5. 8. 2026).
 
 Po instalaci všech šesti kroků by `studio.bohemi.fit` měl mít: fungující
-rezervace, členství a přihlášení/registraci na jedné stránce, stylizované
-formuláře, hlavičku i patičku vizuálně sladěné s `bohemi.fit`, a funkční
-vlastní styly z child theme.
+rezervace, členství a přihlášení/registraci, stylizované formuláře,
+hlavičku i patičku vizuálně sladěné s `bohemi.fit`, a funkční vlastní
+styly z child theme.
 
 ### ✅ Stav k 20. 7. 2026
 
@@ -987,24 +992,36 @@ vyhrazená skutečným CTA, CLAUDE.md pravidlo 4) — jen `patterns/header.php`
 logice výš. „Můj účet" zůstává prostý textový odkaz. Stejný re-insert postup
 platí i pro tuhle verzi.
 
-## Sjednocení loginu — `/ucet-clenstvi/` jako jediná stránka, vlastní `wp_signon()` handler (5. 8. 2026, ✅ hotovo a nasazeno)
+## Sjednocení loginu — dvě stránky, jeden shortcode, vlastní `wp_signon()` handler (5. 8. 2026, ✅ hotovo a nasazeno)
 
-**Stav: uzavřeno.** `studio.bohemi.fit` mělo tři kolidující login vstupy
-(core WP `/login/`, samostatnou stránku „Log In", a `/ucet-clenstvi/",
-jejíž `[pmpro_account]` navíc sám vykresloval vlastní login formulář) —
-teď je jen jedna stránka, jeden formulář, funkčně otestováno živě.
+**Stav: uzavřeno a funkčně otestováno živě.** `studio.bohemi.fit` mělo tři
+kolidující login vstupy (core WP `/login/`, samostatnou stránku „Log In",
+a `/ucet-clenstvi/`, jejíž `[pmpro_account]` navíc sám vykresloval vlastní
+login formulář). **Finální řešení NENÍ jedna sloučená stránka** — první
+verze o to usilovala a narazila na vestavěné PMPro chování (viz „Proč dvě
+stránky, ne jedna" níž) — je to **dvě stránky se stejným shortcode**:
 
-**Finální architektura** (shortcode `[bohemi_account]` v
-`bohemi-twentytwentyfive-child/functions.php`, motiv **2.6**):
+- **`/ucet-clenstvi/`** — PMPro „Stránka účtu" (Account Page). Obsah
+  `[bohemi_account]`. V praxi ji vidí jen přihlášení (PMPro sem
+  nepřihlášené sama přesměruje pryč, viz níž), takže reálně vždy ukazuje
+  dashboard (`[bookingactivities_list …]` + `[pmpro_account]`).
+- **`/login/`** (post id 26, „Log In" — obnovená, viz historie níž) —
+  PMPro „Přihlašovací stránka" (Login Page). Obsah **stejný shortcode**
+  `[bohemi_account]`. Protože sem přijde vždy jen nepřihlášený návštěvník,
+  reálně vždy ukazuje login formulář + registraci.
+
+**Shortcode `[bohemi_account]`** (`bohemi-twentytwentyfive-child/functions.php`,
+motiv **2.6**) sám rozhoduje podle `is_user_logged_in()`, takže obě
+stránky můžou nést identický obsah a chovat se správně podle toho, kdo na
+ně přijde — žádná duplicitní logika, žádné dvě sady kódu k údržbě:
 - **Odhlášený vidí:** vlastní login formulář (POSTuje sám na sebe, ne na
   `wp-login.php` — viz „Proč vlastní `wp_signon()` handler" níž) + odkaz
   „Zapomněli jste heslo?" (`wp_lostpassword_url()`) + registrace přes
   `[bookingactivities_login form="3"]` (Honza potvrdil živě, že "3" je
   čistě registrační formulář, žádná login pole).
 - **Přihlášený vidí:** `[bookingactivities_list …]` (rezervace) +
-  `[pmpro_account]` (dashboard členství) — beze změny oproti původnímu
-  obsahu stránky, žádná kolize, protože `[pmpro_account]` v přihlášeném
-  stavu login formulář nevykresluje.
+  `[pmpro_account]` (dashboard členství) — `[pmpro_account]` v
+  přihlášeném stavu login formulář nevykresluje, žádná kolize.
 - **PMPro nikdy nevykresluje vlastní login/registraci** samostatně, jen
   tenhle dashboard.
 - Přihlášení zpracovává vlastní hook na `template_redirect` —
@@ -1012,6 +1029,26 @@ teď je jen jedna stránka, jeden formulář, funkčně otestováno živě.
   `wp_validate_redirect()` (z `redirect_to` parametru, fallback
   `/ucet-clenstvi/`), chybné údaje vrátí `?bohemi_login_error=1` (červená
   hláška na stránce). Žádná závislost na `wp-login.php`.
+
+**Proč dvě stránky, ne jedna — PMPro „Stránka účtu" má vestavěné
+přesměrování, nezávislé na „Require Membership":** první verze dala
+`[bohemi_account]` jen na `/ucet-clenstvi/`, smazala „Log In" jako
+zbytečnou a přesměrovala globální PMPro „Přihlašovací stránka" nastavení
+zpátky na `/ucet-clenstvi/` (logicky — proč potřebovat samostatnou login
+stránku, když jedna stránka umí obojí?). **Výsledek: nekonečná
+přesměrovací smyčka** (`/ucet-clenstvi/` → `/ucet-clenstvi/?redirect_to=…`
+→ pořád dokola, `ERR_TOO_MANY_REDIRECTS`), protože PMPro má u své
+„Account Page" **vestavěné** chování „nepřihlášený sem nesmí, přesměruj
+na Přihlašovací stránku" — úplně nezávislé na checkboxu „Require
+Membership" (ten byl celou dobu prázdný, nebyl to zdroj problému).
+Přesměrování na sebe sama = smyčka. I po dočasném nastavení „Přihlašovací
+stránka" = „Use WordPress Default" (smyčka zmizela, ale nepřihlášené to
+posílalo na holý `wp-login.php` místo na `[bohemi_account]`) zůstávalo
+jasné, že `/ucet-clenstvi/` jako PMPro Account Page **nikdy neuvidí
+odhlášený návštěvník**, ať je v jejím obsahu cokoliv — PMPro ho přesměruje
+pryč dřív, než se stránka vykreslí. Řešení: pracovat s tímhle PMPro
+vzorcem (samostatná Login Page + gatovaná Account Page), ne proti němu —
+obnovit `/login/` a nastavit ji jako PMPro „Přihlašovací stránku".
 
 **Proč vlastní `wp_signon()` handler místo core `wp_login_form()`:** první
 verze používala `wp_login_form()`, což POSTuje na skutečné `wp-login.php`.
@@ -1032,13 +1069,15 @@ při budoucí výměně booking systému zůstává přihlášení funkční —
 registrační formulář by se musel předělat, ať by byl postavený na
 čemkoliv dnes.
 
-**Dokončeno přímo Honzou ve wp-adminu:**
-1. ✅ `/ucet-clenstvi/` má obsah `[bohemi_account]`.
-2. ✅ Stránka „Log In" (post id 26) smazána — `/login/` se nepoužívá.
-3. ✅ PMPro omezení „jen pro členy" na `/ucet-clenstvi/` zrušeno (bylo to
-   zdrojem starého `/login/?redirect_to=…` přesměrování — `/login/` byla
-   ta stránka „Log In", teď smazaná).
-4. ✅ Login živě otestovaný a funkční (`wp_signon()` verze).
+**Dokončeno přímo Honzou ve wp-adminu (finální stav):**
+1. ✅ `/ucet-clenstvi/` má obsah `[bohemi_account]`, PMPro „Stránka účtu"
+   = tahle stránka, „Require Membership" prázdné (nikdy nebyl problém).
+2. ✅ `/login/` (post id 26) obnovena/existuje, obsah `[bohemi_account]`.
+3. ✅ PMPro „Přihlašovací stránka" nastavená na `/login/` (ne na
+   `/ucet-clenstvi/` — to byl zdroj smyčky, ne na „Use WordPress Default"
+   — to obcházelo náš formulář).
+4. ✅ Login živě otestovaný a funkční (`wp_signon()` verze), redirect
+   smyčka potvrzeně pryč (`curl` trasování čisté, jeden hop na `/login/`).
 5. ✅ Vizuální styl `#loginform` (červené pilulkovité tlačítko, krémové
    inputy) potvrzený na screenshotu, sedí se zbytkem panelu.
 
