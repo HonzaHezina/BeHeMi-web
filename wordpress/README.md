@@ -1054,34 +1054,84 @@ jde skoro jistě o markup uvnitř `[bookingactivities_login form="3"]"`
 (cizí plugin, needitujeme) — nepotvrzeno vizuální kontrolou konkrétního
 elementu v DevTools, nízká priorita (nebrání použití formuláře).
 
-## `/ucet-clenstvi/` — ERR_HTTP2_PROTOCOL_ERROR, nesouvisí s loginem (5. 8. 2026, mimo dosah repa)
+## `ERR_HTTP2_PROTOCOL_ERROR` na `/ucet-clenstvi/` — dlouhodobý Wedos ATS bug, nesouvisí s loginem/kódem (5. 8. 2026)
 
-Při testování výš se náhodně (~1×/10, občas častěji) objevovala
-`ERR_HTTP2_PROTOCOL_ERROR` a prázdná stránka. **Důkladně vyloučeno jako
-příčina aplikace/DB:**
-- Autentizovaný `curl --http1.1` (10 opakování) prošel **10/10 čistě**,
-  `200`, ~0,6–1 s, konzistentní ~480 KB.
+**Stav: diagnostikováno a uzavřeno na naší straně, čeká se na Wedos.**
+Honza při testování loginu narážel na nahodilé (~1×/10, občas častěji)
+`ERR_HTTP2_PROTOCOL_ERROR` a prázdnou stránku na `/ucet-clenstvi/`.
+Časová shoda s testováním `[bohemi_account]` vypadala podezřele, ale
+**tohle je dlouho existující problém Wedos infrastruktury, ne důsledek
+naší práce** — Honza si dodatečně vzpomněl, že si na podobné chování
+stěžovali návštěvníci webu už dřív (jen jemu osobně to předtím fungovalo,
+typické pro nahodilý HTTP/2 proxy bug závislý na síti/trase).
+
+**Důkazy, že to není aplikace/DB/kód:**
+- Autentizovaný `curl --http1.1` (10 opakování na `/ucet-clenstvi/`)
+  prošel **10/10 čistě**, `200`, ~0,6–1 s, konzistentní ~480 KB.
 - Query Monitor na živém requestu: **159 DB dotazů za 0,0398 s celkem**
   (40 ms), hook timing (`init` 75 ms, `template_redirect` 29 ms) v normě.
   „5 Doing it Wrong" jsou jen neškodné standardní hlášky WP 6.7+ o
-  pozdním načtení překladů v Booking Activities pluginech (`ba-*`),
+  pozdním načtení překladů v Booking Activities pluginech (`ba-*`) —
   netýkají se výkonu.
-- Diagnostický mu-plugin (`bohemi-profiler.php`) byl kvůli tomuhle
-  přidaný a pak zase smazaný ze staging repa ve stejný den, dřív než ho
-  Honza vůbec nahrál — jakmile `curl` test ukázal čistých 10/10, neměl už
-  co zachytit.
+- Odpověď serveru nese `Server: ATS` (Apache Traffic Server — proxy/cache
+  vrstva Wedosu před samotným PHP), chyba se projevuje jen přes HTTP/2.
+- Rešerše na help.wedos.cz našla **dvě starší vlákna od jiných
+  zákazníků** se stejnou chybou
+  ([104908](https://help.wedos.cz/otazka/neterr_http2_protocol_error/104908/),
+  [98521](https://help.wedos.cz/otazka/neterr_http2_protocol_error-200/98521/) —
+  druhé má dokonce stejnou kombinaci „ERR_HTTP2_PROTOCOL_ERROR" + status
+  200 jako u nás). V obou případech Wedos podpora eskalovala na technické
+  oddělení a chtěla testovací účet + dočasný FTP přístup — **veřejně
+  publikované řešení/příčina nikde**, potvrzený delší dobu neřešený
+  problém na jejich straně.
+- Diagnostický mu-plugin (`bohemi-profiler.php`) byl kvůli tomuhle krátce
+  přidaný a zase smazaný ze staging repa ve stejný den, dřív než ho Honza
+  vůbec nahrál na server — jakmile `curl` test ukázal čistých 10/10,
+  neměl už co zachytit.
 
-**Závěr: HTTP/2 vrstva mezi klientem a Wedos ATS proxy** (`Server: ATS`
-v hlavičkách), ne PHP/WordPress. Honza si navíc vzpomněl, že si na
-podobné chování stěžovali návštěvníci webu už dřív, jen jemu osobně to
-předtím fungovalo (typické pro intermitentní HTTP/2 proxy bug — projeví
-se různě podle sítě/trasy) — **je to tedy předem existující problém,
-časově se jen potkal s testováním loginu, ne jeho důsledek.** Nasazení
-`[bohemi_account]` proběhlo nezávisle na tomhle a funguje bez ohledu na
-to, jestli se HTTP/2 problém vyřeší.
+**Ověřeno, že Wedos administrace nemá self-service HTTP/2 přepínač** —
+zkontrolováno Honzou přímo v „Nástroje", „Konfigurace PHP" i „HTTPS"
+(jen výběr varianty certifikátu; **pozor, změna varianty HTTPS tam
+nevratně smaže nastavení certifikátu**, neexperimentovat kvůli tomuhle).
 
-**Další krok je na Honzovi** — nahlásit Wedos podpoře (`ERR_HTTP2_PROTOCOL_ERROR`,
-`Server: ATS`, nahodilé selhání přes HTTP/2, čisté 10/10 přes HTTP/1.1;
-hotový text hlášení byl připravený v konverzaci, není v repu — mimo
-verzovaný obsah, čistě podpůrný text pro tiket). Zůstává otevřené, jestli
-se to potvrdí i z jiného prohlížeče/sítě/`curl --http2` z Honzova stroje.
+**Další kroky (v tomhle pořadí, žádný zatím proveden):**
+1. **Nahlásit Wedos podpoře** — text hlášení byl připravený v konverzaci
+   (mimo repo, čistě podpůrný text pro tiket), odkazuje i na obě starší
+   help.wedos.cz vlákna výš, ať Wedos neopakuje diagnostiku od nuly.
+   **Honza se rozhodl počkat na jejich odpověď**, než sahat po dalších
+   krocích.
+2. **Pokud Wedos support nepomůže/nebude reagovat: Cloudflare (zdarma)
+   před doménu.** Terminace HTTP/2 s návštěvníkem by se přesunula na
+   Cloudflare edge (zralá implementace); spojení Cloudflare → Wedos origin
+   jede na free plánu defaultně přes HTTP/1.1 (HTTP/2-to-origin je
+   placená/pokročilá funkce, musela by se zapínat ručně) — a HTTP/1.1
+   vůči Wedosu už máme ověřené jako čisté 10/10. Čistě DNS změna, žádný
+   zásah do WordPressu, plně reverzibilní. Bonus: řeší i starší
+   doporučení z WebPageTest auditu níž („Bez CDN"). Připravená možnost,
+   zatím neprovedená.
+3. **Migrace celého `studio.bohemi.fit` na Hetzner** (kde už běží Astro
+   `bohemi.fit`) — těžší, invazivnější plán C, jen kdyby Cloudflare
+   nepomohl. Riziko pro platby/rezervace (PMPro/Booking Activities), ne
+   první volba.
+
+**Dva vedlejší nálezy z procházení Wedos administrace** (nesouvisí s
+HTTP/2, ale stojí za zapamatování):
+- **Webhosting → Nástroje → „Oprava práv u souborů"** — jedním klikem
+  řeší přesně ten opakovaný 403 bug zdokumentovaný níž („Motiv — audit a
+  oprava", „WebPageTest audit" bod 1), který jsme dřív museli opravovat
+  ručně přes SSH/FTP `chmod`. **Použít při každém budoucím výskytu 403**
+  na nově nahraných souborech (motiv, `bohemi-wp-ui`, `ba-*` pluginy)
+  místo manuálního postupu. „Obnovení výchozího .htaccessu" ve stejné
+  sekci nepoužívat bez rozmyslu — mohlo by smazat WordPress permalink
+  pravidla.
+- **Konfigurace PHP:** `display_errors: zapnuto` + `log_errors: vypnuto`
+  — obráceně, než by mělo být na produkci s platbami/členstvím (chyby se
+  zobrazují návštěvníkům, nikam se neukládají). Doporučeno prohodit,
+  není naléhavé.
+
+**Cena omylu, než se tohle vyjasnilo:** Honza dřív kvůli týhle chybě
+opakovaně měnil/přeinstalovával pluginy v domnění, že příčina je někde
+v aplikaci — byla to ale celou dobu Wedos infrastruktura. Stojí za to mít
+na paměti při jakémkoliv budoucím podivném/nekonzistentním chování na
+`studio.bohemi.fit`: nejdřív zvážit hosting/proxy vrstvu (Wedos ATS), než
+sahat po změnách pluginů.
