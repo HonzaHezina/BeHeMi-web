@@ -15,7 +15,7 @@
 body {
  background:var(--bohemi-bg);
  color:var(--bohemi-ink);
- font-family:"Hanken Grotesk",system-ui,sans-serif;
+ font-family:"Hanken Grotesk Variable",system-ui,sans-serif;
 }
 
 .bohemi-container {

@@ -322,7 +322,10 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   `fonts.googleapis.com`/`fonts.gstatic.com`, font se cachuje se zbytkem
   `_astro/` assetů). Importují se jen `wght.css` (řezy 400–800) + `wght-italic.css`
   (italic 400/500 pro citace výš) — nepřidávat zpátky Google Fonts link, nový
-  řez přidat přes balíček, ne přes `<link>`.
+  řez přidat přes balíček, ne přes `<link>`. **Stejný self-hosted přístup
+  má od 7. 8. 2026 i `studio.bohemi.fit`** (`wordpress/bohemi-wp-ui/assets/css/fonts.css`
+  + `assets/fonts/*.woff2`, kopie souborů ze stejného npm balíčku) — viz
+  `wordpress/README.md` sekce „WebPageTest audit".
 - **Paleta = WARM-DARK (varianta B), black/white/red.** Zdroj pravdy je logo +
   plakáty, ne starý teplý export. Černá je **kotva, ne dominanta** — většina
   obsahu na teplém světlém pozadí (`bg #f5efe6`), tmavé kotvy (hero, manifest,
@@ -697,10 +700,10 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
 
 ## DNS (Cloudflare, od 7. 8. 2026)
 
-**DNS zóna `bohemi.fit` se stěhuje z Wedosu na Cloudflare** (hosting beze
-změny — Astro dál na Hetzneru, `studio.bohemi.fit` dál na Wedosu, jen kdo
-řídí DNS). Stav migrace, plná tabulka DNS záznamů (proxy status per
-záznam), SSL/TLS mód a rollback postup jsou v
+**DNS zóna `bohemi.fit` běží na Cloudflare** (hosting beze změny — Astro
+dál na Hetzneru, `studio.bohemi.fit` dál na Wedosu, jen kdo řídí DNS).
+Plná tabulka DNS záznamů (proxy status per záznam), SSL/TLS mód a
+rollback postup jsou v
 [`docs/cloudflare-dns-migration.md`](docs/cloudflare-dns-migration.md) —
 **nikdy neproxovat `ftp` a oba `wedos-dkim` CNAME**, jinak přijde Honza o
 FTP přístup / DKIM podpis e-mailu. Motivace i souvislost s

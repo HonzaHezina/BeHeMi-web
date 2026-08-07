@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.2.2 — 2026-08-07
+
+**Hanken Grotesk self-hosted, Google Fonts pryč.** WebPageTest waterfall na
+`studio.bohemi.fit` (po přechodu na Cloudflare) ukázal `fonts.googleapis.com`
+→ `fonts.gstatic.com` jako pozdě doběhlý cross-origin request, pravděpodobná
+příčina naměřené CLS 0.315 (text se přeskládal, až font konečně dorazil).
+Stejná oprava, jaká proběhla na Astro webu 1. 8. 2026 — font teď enqueue
+lokální `assets/css/fonts.css` (nová) místo Google Fonts CSS2 API URL,
+soubory `assets/fonts/*.woff2` (variabilní font, latin + latin-ext, kopie
+z `node_modules/@fontsource-variable/hanken-grotesk/files/`). Preconnect
+hint na `fonts.googleapis.com`/`fonts.gstatic.com` odstraněn, není už
+potřeba. Family name je „Hanken Grotesk Variable" (jméno z fontsource, ne
+„Hanken Grotesk") — `header.css` i `bohemi-twentytwentyfive-child/assets/css/bohemi.css`
+upravené, aby na něj `font-family` ukazovaly, jinak by text tiše spadl na
+`system-ui`.
+
 ## 1.2.1 — 2026-08-04
 
 **„Hlavní web" dostal lehký button/pill vzhled**, aby vizuálně vynikl jako

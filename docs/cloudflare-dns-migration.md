@@ -1,21 +1,31 @@
 # Migrace DNS z Wedosu na Cloudflare
 
-## Stav: 🟡 probíhá (nameservery přepnuté 7. 8. 2026, čeká se na propagaci)
+## Stav: ✅ hotovo (7. 8. 2026)
 
-Doména **`bohemi.fit`** se stěhuje DNS správou z Wedosu na Cloudflare
-(zdarma plán). **Hosting se nemění** — jde jen o to, kdo řídí DNS zónu:
+Nameservery přepnuté a propagované rychleji, než avizoval Wedos (v řádu
+hodin, ne 6+). Po přepnutí byla krátká přechodová fáze (~desítky minut),
+kdy oba weby vracely `ERR_SSL_VERSION_OR_CIPHER_MISMATCH` — Cloudflare
+Universal SSL certifikát se ještě dokončoval/šířil po edge síti, i když
+zóna už měla status „Active". Vyřešilo se samo bez zásahu, jakmile
+certifikát doběhl. Ověřeno `curl`em i v prohlížeči: `bohemi.fit` i
+`studio.bohemi.fit` vrací `200 OK` přes Cloudflare (`Server: cloudflare`
+v hlavičkách), `/ucet-clenstvi/` 5× po sobě konzistentní `302` (login
+redirect pro nepřihlášeného, žádná náhodná chyba).
+
+Doména **`bohemi.fit`** se přestěhovala DNS správou z Wedosu na Cloudflare
+(zdarma plán). **Hosting se neměnil** — jde jen o to, kdo řídí DNS zónu:
 
 - `bohemi.fit` / `www` → dál Astro na **Hetzneru/Coolify**
 - `studio.bohemi.fit` → dál **WordPress na Wedosu**
-- Wedos zůstává registrátor domény (nameservery se mění, doména se
-  nepřevádí jinam)
+- Wedos zůstává registrátor domény (nameservery se změnily, doména se
+  nepřevedla jinam)
 
-**Motivace:** primárně možná oprava dlouhodobého Wedos ATS bugu
+**Motivace:** primárně oprava dlouhodobého Wedos ATS bugu
 (`ERR_HTTP2_PROTOCOL_ERROR` na `/ucet-clenstvi/`, viz
 [`wordpress/README.md`](../wordpress/README.md) sekce „`ERR_HTTP2_PROTOCOL_ERROR`
-na `/ucet-clenstvi/`") — byl to tam už zapsaný „plán B", teď se realizuje.
-Vedlejší bonus: CDN/cache před oběma weby, řeší i starší WebPageTest
-doporučení „Bez CDN".
+na `/ucet-clenstvi/`") — byl to tam zapsaný „plán B", teď realizovaný a
+**potvrzeně funkční** (viz „Ověřeno naostro" níž). Vedlejší bonus:
+CDN/cache před oběma weby, řeší i starší WebPageTest doporučení „Bez CDN".
 
 ## DNS záznamy — zdroj pravdy (ověřeno 7. 8. 2026, přeneseno 1:1 z Wedosu)
 
@@ -62,14 +72,19 @@ Pokud by po propagaci něco nefungovalo (web, e-mail, FTP):
    Cloudflare typicky 1–2 h) — rollback není okamžitý
 3. DNS záznamy v Cloudflare zůstávají netknuté, není potřeba je mazat
 
-## Po potvrzení, že migrace běží stabilně
+## Ověřeno naostro (7. 8. 2026)
 
-- [ ] Ověřit, jestli se tím vyřešil `ERR_HTTP2_PROTOCOL_ERROR` na
-      `/ucet-clenstvi/` (opakovat `curl` test z
-      [`wordpress/README.md`](../wordpress/README.md), případně
-      ruční klikací test v prohlížeči) — aktualizovat tamní sekci
-      s výsledkem
+- ✅ Web — `bohemi.fit` i `studio.bohemi.fit` čisté `200 OK` přes Cloudflare
+- ✅ E-mail — testovací zpráva došla v pořádku
+- ✅ FTP — přihlášení funguje (Honza potvrdil)
+- ✅ `ERR_HTTP2_PROTOCOL_ERROR` na `/ucet-clenstvi/` — po opakovaném
+  testování se chyba znovu neukázala. Diagnóza „vadná Wedos ATS HTTP/2
+  vrstva" potvrzena, zapsáno i do `wordpress/README.md`.
+
+Migrace je tímto kompletně uzavřená, žádný ze čtyř kritických bodů
+(web/e-mail/FTP/DKIM) nebyl migrací poškozen.
+
+## Zbývá (volitelné, nic naléhavého)
+
 - [ ] Zvážit „Only allow Cloudflare IP addresses at your origin"
       (firewall na Hetzneru/Wedosu) — volitelné zpřísnění, ne nutné
-- [ ] Aktualizovat `CLAUDE.md` sekci „Nasazení", až bude stav trvale
-      potvrzený jako Active

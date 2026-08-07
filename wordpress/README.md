@@ -572,7 +572,21 @@ Honza.
 
 1. **Google Fonts zúžen ze 8 řezů na 4** (`wght@400;600;700;800`, bez
    kurzívy) — `bohemi-wp-ui.php`, `bohemi-wp-ui` → **1.1.8**. Detaily
-   `CHANGELOG.md`.
+   `CHANGELOG.md`. **Nahrazeno úplně 7. 8. 2026** — po přechodu na
+   Cloudflare ukázal nový WebPageTest waterfall, že `fonts.googleapis.com` →
+   `fonts.gstatic.com` pořád doráží pozdě (pravděpodobná příčina naměřené
+   CLS 0.315). Font je teď **self-hosted stejně jako na Astru** (`assets/css/fonts.css`
+   + `assets/fonts/*.woff2`, viz `bohemi-wp-ui/CHANGELOG.md` 1.2.2) — žádný
+   cross-origin request na Google Fonts už nezbyl.
+
+   **⏳ Čeká na nahrání (7. 8. 2026, ještě není živě):** `bohemi-wp-ui` →
+   **1.2.2** a `bohemi-twentytwentyfive-child` → **2.7**, oba `dist/*.zip`
+   přegenerované. Honza musí nahrát oba přes wp-admin (Pluginy → Nahrát
+   plugin / motiv přehrát složkou) — mění se jen enqueue kód a CSS
+   (`font-family` v `header.css` i `bohemi.css` přejmenovaný na „Hanken
+   Grotesk Variable"), **žádný re-insert Šablonové části není potřeba**.
+   Po nahrání ověřit, že v síťovém panelu/waterfallu zmizely požadavky na
+   `fonts.googleapis.com`/`fonts.gstatic.com`.
 2. **`zxcvbn`/password-strength-meter (~400 KB) dequeued mimo `/ucet-clenstvi/`**
    — WordPress core skript, který PMPro věší na každou stránku pro případ,
    že by na ní byl formulář změny hesla, i když ho tam nikdy není. Nový hook
@@ -1093,9 +1107,16 @@ jde skoro jistě o markup uvnitř `[bookingactivities_login form="3"]"`
 (cizí plugin, needitujeme) — nepotvrzeno vizuální kontrolou konkrétního
 elementu v DevTools, nízká priorita (nebrání použití formuláře).
 
-## `ERR_HTTP2_PROTOCOL_ERROR` na `/ucet-clenstvi/` — dlouhodobý Wedos ATS bug, nesouvisí s loginem/kódem (5. 8. 2026)
+## `ERR_HTTP2_PROTOCOL_ERROR` na `/ucet-clenstvi/` — dlouhodobý Wedos ATS bug, nesouvisí s loginem/kódem (5. 8. 2026, vyřešeno 7. 8. 2026)
 
-**Stav: diagnostikováno a uzavřeno na naší straně, čeká se na Wedos.**
+**✅ Stav: vyřešeno migrací na Cloudflare.** Honza po několika dnech
+běžného testování po přechodu na Cloudflare (viz sekce „Cloudflare (zdarma)
+před doménu" níž a [`docs/cloudflare-dns-migration.md`](../docs/cloudflare-dns-migration.md))
+potvrdil, že se chyba znovu neobjevila — potvrzuje to diagnózu, že šlo
+celou dobu o vadnou Wedos ATS HTTP/2 vrstvu, ne o kód/WordPress/login.
+Cloudflare teď terminuje HTTP/2 s návštěvníky sama a k Wedos originu jde
+přes HTTP/1.1, takže se ta vadná vrstva úplně obchází. Wedos podpoře se
+tiket ani nemusel posílat.
 Honza při testování loginu narážel na nahodilé (~1×/10, občas častěji)
 `ERR_HTTP2_PROTOCOL_ERROR` a prázdnou stránku na `/ucet-clenstvi/`.
 Časová shoda s testováním `[bohemi_account]` vypadala podezřele, ale
@@ -1139,10 +1160,10 @@ nevratně smaže nastavení certifikátu**, neexperimentovat kvůli tomuhle).
    help.wedos.cz vlákna výš, ať Wedos neopakuje diagnostiku od nuly.
    **Honza se rozhodl počkat na jejich odpověď**, než sahat po dalších
    krocích.
-2. **🟡 Realizuje se od 7. 8. 2026: Cloudflare (zdarma) před doménu.**
-   Nameservery přepnuté ve Wedosu na `ridge.ns.cloudflare.com` /
-   `vera.ns.cloudflare.com`, čeká se na propagaci (Wedos avizuje min. 6 h).
-   Terminace HTTP/2 s návštěvníkem se přesune na Cloudflare edge (zralá
+2. **✅ Provedeno 7. 8. 2026: Cloudflare (zdarma) před doménu.** Nameservery
+   přepnuté ve Wedosu na `ridge.ns.cloudflare.com` / `vera.ns.cloudflare.com`,
+   propagace doběhla během hodin (rychleji, než Wedos avizoval). Terminace
+   HTTP/2 s návštěvníkem se přesunula na Cloudflare edge (zralá
    implementace); spojení Cloudflare → Wedos origin jede na free plánu
    defaultně přes HTTP/1.1 (HTTP/2-to-origin je placená/pokročilá funkce,
    musela by se zapínat ručně) — a HTTP/1.1 vůči Wedosu už máme ověřené
@@ -1150,9 +1171,15 @@ nevratně smaže nastavení certifikátu**, neexperimentovat kvůli tomuhle).
    reverzibilní. Bonus: řeší i starší doporučení z WebPageTest auditu níž
    („Bez CDN"). Plný záznam migrace (DNS tabulka, SSL/TLS mód, rollback
    postup) v [`docs/cloudflare-dns-migration.md`](../docs/cloudflare-dns-migration.md).
-   **Až propagace doběhne, ověřit znovu `curl --http1.1`/živý test na
-   `/ucet-clenstvi/` a zapsat sem výsledek — teprve to potvrdí, jestli
-   to bug skutečně vyřešilo.**
+
+   **Ověřeno po propagaci:** `curl` na `bohemi.fit` i `studio.bohemi.fit`
+   vrací čisté `200 OK` přes Cloudflare (`Server: cloudflare` v hlavičkách);
+   `/ucet-clenstvi/` 5× po sobě konzistentní `302` (login redirect pro
+   nepřihlášeného), žádná náhodná chyba. **Ale bug byl nahodilý (~1×/10),
+   takže tenhle jednorázový test finální důkaz není** — strukturálně by
+   měl být vyřešený (vadná Wedos ATS HTTP/2 vrstva se teď úplně obchází),
+   ale skutečné potvrzení přijde až z týdnů běžného provozu bez hlášení
+   od Honzy nebo návštěvníků.
 3. **Migrace celého `studio.bohemi.fit` na Hetzner** (kde už běží Astro
    `bohemi.fit`) — těžší, invazivnější plán C, jen kdyby Cloudflare
    nepomohl. Riziko pro platby/rezervace (PMPro/Booking Activities), ne

@@ -61,7 +61,7 @@
 	-webkit-backdrop-filter: blur(var(--bohemi-header-blur));
 	backdrop-filter: blur(var(--bohemi-header-blur));
 	border-bottom: 1px solid var(--bohemi-header-border-strong);
-	font-family: "Hanken Grotesk", system-ui, -apple-system, sans-serif;
+	font-family: "Hanken Grotesk Variable", system-ui, -apple-system, sans-serif;
 }
 
 .bohemi-header-inner {

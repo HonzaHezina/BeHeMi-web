@@ -22,7 +22,7 @@ byly převzaty přímo z Astro projektu, ne odhadnuty:
 | Barvy, font, border-radius (design tokeny) | `src/styles/global.css` (`@theme` blok) |
 | Vzhled CTA tlačítka „Rezervovat" | `src/components/Button.astro` (`variant="brand"`) |
 | Logo | `src/assets/logo_bohemi_trans.png` (zkopírováno do `assets/images/logo-bohemi.png`) |
-| Font (Hanken Grotesk, řezy 400–800) | `src/layouts/Layout.astro` (stejná Google Fonts URL) |
+| Font (Hanken Grotesk Variable, self-hosted) | `src/styles/global.css` (`@fontsource-variable/hanken-grotesk`) — od 7. 8. 2026 stejný princip i tady, viz `assets/css/fonts.css` |
 
 CSS proměnné v `assets/css/header.css` (`--bohemi-header-bg`,
 `--bohemi-header-text`, `--bohemi-header-accent`, `--bohemi-header-max-width`,

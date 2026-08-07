@@ -3,7 +3,7 @@
  * Plugin Name:       BoHeMi WP UI
  * Plugin URI:        https://bohemi.fit/
  * Description:       Vlastní hlavička pro studio.bohemi.fit vizuálně sladěná s hlavním Astro webem (bohemi.fit). Dodává block pattern pro šablonovou část Záhlaví, nezasahuje do Twenty Twenty-Five, Booking Activities ani Paid Memberships Pro.
- * Version:           1.2.1
+ * Version:           1.2.2
  * Requires at least: 6.4
  * Requires PHP:      7.4
  * Author:            BoHeMi
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // No direct access.
 }
 
-define( 'BOHEMI_WP_UI_VERSION', '1.2.1' );
+define( 'BOHEMI_WP_UI_VERSION', '1.2.2' );
 define( 'BOHEMI_WP_UI_FILE', __FILE__ );
 define( 'BOHEMI_WP_UI_DIR', plugin_dir_path( __FILE__ ) );
 define( 'BOHEMI_WP_UI_URL', plugin_dir_url( __FILE__ ) );
@@ -46,23 +46,29 @@ function bohemi_wp_ui_asset_version( string $relative_path ): string {
  * No JS enqueue here anymore (4. 8. 2026) — the mobile hamburger/disclosure
  * menu it used to drive was removed, see patterns/header.php.
  *
- * Font weights trimmed to 400/600/700/800 (1. 8. 2026, WebPageTest audit) —
- * those are the only ones `header.css`/`bohemi.css` actually set
- * (font-weight: 600/700/800; body text is the unstyled default 400) and
- * neither file ever uses italic. The old request also asked for 500 and
- * three italic weights that no CSS on the site references — the browser
- * never downloaded those anyway (nothing in the DOM matched them), so this
- * is a correctness cleanup more than a real transfer-size win, but keeps
- * the @font-face list honest about what's actually used. If a future page
- * needs a weight/style not listed here, add it here first — don't
- * hardcode a different Google Fonts URL elsewhere.
+ * Font self-hosted since 7. 8. 2026 (WebPageTest waterfall on studio.bohemi.fit
+ * showed fonts.googleapis.com → fonts.gstatic.com as a cold cross-origin
+ * round-trip loading in late, plausible cause of the measured CLS 0.315 —
+ * same fix already applied to the Astro site 1. 8. 2026, see CLAUDE.md
+ * "Font je od 1. 8. 2026 self-hosted"). Files copied byte-for-byte from
+ * node_modules/@fontsource-variable/hanken-grotesk/files/ (latin + latin-ext
+ * only — no cyrillic/vietnamese text anywhere on the site) into
+ * assets/fonts/, declared in assets/css/fonts.css. Family name is "Hanken
+ * Grotesk Variable" (fontsource's name, not "Hanken Grotesk") — header.css
+ * and bohemi.css were updated to match, otherwise text would silently fall
+ * back to system-ui.
+ *
+ * Font weights: this is a variable font (weight 100–900 in one file), so
+ * unlike the old Google Fonts request there's no separate weight list to
+ * maintain — 400/600/700/800 (the only weights header.css/bohemi.css set)
+ * all come from the same two files. No italic — neither file ever uses it.
  */
 function bohemi_wp_ui_enqueue_assets(): void {
 	wp_enqueue_style(
 		'bohemi-header-font',
-		'https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&display=swap',
+		BOHEMI_WP_UI_URL . 'assets/css/fonts.css',
 		array(),
-		null
+		bohemi_wp_ui_asset_version( 'assets/css/fonts.css' )
 	);
 
 	wp_enqueue_style(
@@ -73,25 +79,6 @@ function bohemi_wp_ui_enqueue_assets(): void {
 	);
 }
 add_action( 'enqueue_block_assets', 'bohemi_wp_ui_enqueue_assets' );
-
-/**
- * Preconnect to Google Fonts, same as the Astro site, so the font request
- * doesn't start cold.
- */
-function bohemi_wp_ui_resource_hints( array $urls, string $relation_type ): array {
-	if ( 'preconnect' === $relation_type ) {
-		$urls[] = array(
-			'href' => 'https://fonts.googleapis.com',
-		);
-		$urls[] = array(
-			'href'        => 'https://fonts.gstatic.com',
-			'crossorigin' => 'anonymous',
-		);
-	}
-
-	return $urls;
-}
-add_filter( 'wp_resource_hints', 'bohemi_wp_ui_resource_hints', 10, 2 );
 
 /**
  * Favicon — same kettlebell mark as the Astro site's `public/favicon-*` /
