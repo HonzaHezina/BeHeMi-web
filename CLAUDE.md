@@ -695,6 +695,18 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   Tailwindu bývá stale a nové utility (např. `grid-cols-2` na nové stránce) se
   nevygenerují. `astro build` je vždy správně; dev může lhát.
 
+## DNS (Cloudflare, od 7. 8. 2026)
+
+**DNS zóna `bohemi.fit` se stěhuje z Wedosu na Cloudflare** (hosting beze
+změny — Astro dál na Hetzneru, `studio.bohemi.fit` dál na Wedosu, jen kdo
+řídí DNS). Stav migrace, plná tabulka DNS záznamů (proxy status per
+záznam), SSL/TLS mód a rollback postup jsou v
+[`docs/cloudflare-dns-migration.md`](docs/cloudflare-dns-migration.md) —
+**nikdy neproxovat `ftp` a oba `wedos-dkim` CNAME**, jinak přijde Honza o
+FTP přístup / DKIM podpis e-mailu. Motivace i souvislost s
+`ERR_HTTP2_PROTOCOL_ERROR` bugem na `studio.bohemi.fit` je v
+`wordpress/README.md`.
+
 ## Nasazení (Coolify na Hetzneru)
 
 Web běží jako **statika** (Astro `output: static` → složka `dist/`). V Coolify:

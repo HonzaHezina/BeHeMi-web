@@ -1139,15 +1139,20 @@ nevratně smaže nastavení certifikátu**, neexperimentovat kvůli tomuhle).
    help.wedos.cz vlákna výš, ať Wedos neopakuje diagnostiku od nuly.
    **Honza se rozhodl počkat na jejich odpověď**, než sahat po dalších
    krocích.
-2. **Pokud Wedos support nepomůže/nebude reagovat: Cloudflare (zdarma)
-   před doménu.** Terminace HTTP/2 s návštěvníkem by se přesunula na
-   Cloudflare edge (zralá implementace); spojení Cloudflare → Wedos origin
-   jede na free plánu defaultně přes HTTP/1.1 (HTTP/2-to-origin je
-   placená/pokročilá funkce, musela by se zapínat ručně) — a HTTP/1.1
-   vůči Wedosu už máme ověřené jako čisté 10/10. Čistě DNS změna, žádný
-   zásah do WordPressu, plně reverzibilní. Bonus: řeší i starší
-   doporučení z WebPageTest auditu níž („Bez CDN"). Připravená možnost,
-   zatím neprovedená.
+2. **🟡 Realizuje se od 7. 8. 2026: Cloudflare (zdarma) před doménu.**
+   Nameservery přepnuté ve Wedosu na `ridge.ns.cloudflare.com` /
+   `vera.ns.cloudflare.com`, čeká se na propagaci (Wedos avizuje min. 6 h).
+   Terminace HTTP/2 s návštěvníkem se přesune na Cloudflare edge (zralá
+   implementace); spojení Cloudflare → Wedos origin jede na free plánu
+   defaultně přes HTTP/1.1 (HTTP/2-to-origin je placená/pokročilá funkce,
+   musela by se zapínat ručně) — a HTTP/1.1 vůči Wedosu už máme ověřené
+   jako čisté 10/10. Čistě DNS změna, žádný zásah do WordPressu, plně
+   reverzibilní. Bonus: řeší i starší doporučení z WebPageTest auditu níž
+   („Bez CDN"). Plný záznam migrace (DNS tabulka, SSL/TLS mód, rollback
+   postup) v [`docs/cloudflare-dns-migration.md`](../docs/cloudflare-dns-migration.md).
+   **Až propagace doběhne, ověřit znovu `curl --http1.1`/živý test na
+   `/ucet-clenstvi/` a zapsat sem výsledek — teprve to potvrdí, jestli
+   to bug skutečně vyřešilo.**
 3. **Migrace celého `studio.bohemi.fit` na Hetzner** (kde už běží Astro
    `bohemi.fit`) — těžší, invazivnější plán C, jen kdyby Cloudflare
    nepomohl. Riziko pro platby/rezervace (PMPro/Booking Activities), ne
