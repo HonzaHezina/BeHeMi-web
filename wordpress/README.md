@@ -116,10 +116,20 @@ každé** takové změně, ne jen při prvním nastavení.
    „Patička — zjištění" níž) — otevři ji, smaž vloženou patičku a nech tam
    jen výchozí odkaz na Část šablony (nebo znovu vlož „BoHeMi — Footer" tam,
    je to jednorázová oprava jen pro tu jednu šablonu).
+6. **Stránka „Můj účet" (`/ucet-clenstvi/`)** — obsah = jediný shortcode
+   `[bohemi_account]` (definovaný v `bohemi-twentytwentyfive-child/functions.php`,
+   viz „Sjednocení loginu" níž pro celé zdůvodnění). Řeší login,
+   registraci (přes Booking Activities), i dashboard rezervací/členství —
+   žádný jiný login/registrační shortcode nikam jinam na web nepatří.
+   **Na téhle stránce nesmí být aktivní žádné PMPro omezení „vyžadovat
+   členství"** (postranní panel v editoru) — jinak WordPress přesměruje
+   odhlášené návštěvníky pryč dřív, než se `[bohemi_account]` vůbec
+   vykreslí, a login/registrace se stanou nedostupné.
 
-Po instalaci všech pěti kroků by `studio.bohemi.fit` měl mít: fungující
-rezervace a členství, stylizované formuláře, hlavičku i patičku vizuálně
-sladěné s `bohemi.fit`, a funkční vlastní styly z child theme.
+Po instalaci všech šesti kroků by `studio.bohemi.fit` měl mít: fungující
+rezervace, členství a přihlášení/registraci na jedné stránce, stylizované
+formuláře, hlavičku i patičku vizuálně sladěné s `bohemi.fit`, a funkční
+vlastní styly z child theme.
 
 ### ✅ Stav k 20. 7. 2026
 
@@ -977,139 +987,101 @@ vyhrazená skutečným CTA, CLAUDE.md pravidlo 4) — jen `patterns/header.php`
 logice výš. „Můj účet" zůstává prostý textový odkaz. Stejný re-insert postup
 platí i pro tuhle verzi.
 
-## Sjednocení loginu — WP core login + Booking Activities registrace (5. 8. 2026)
+## Sjednocení loginu — `/ucet-clenstvi/` jako jediná stránka, vlastní `wp_signon()` handler (5. 8. 2026, ✅ hotovo a nasazeno)
 
-Honza měl na `studio.bohemi.fit` tři kolidující login vstupy: core WP
-`/login/`, samostatnou stránku „Log In" (`[pmpro_login redirect="…"]` +
-`[bookingactivities_login form="3"]` vedle sebe) a `/ucet-clenstvi/`, jejíž
-`[pmpro_account]` navíc **sám od sebe** vykresluje svůj vlastní login
-formulář, když je návštěvník odhlášený — takže i tahle jedna stránka uměla
-zobrazit dva různé login boxy najednou, kdyby na ni přibyl i BA shortcode.
+**Stav: uzavřeno.** `studio.bohemi.fit` mělo tři kolidující login vstupy
+(core WP `/login/`, samostatnou stránku „Log In", a `/ucet-clenstvi/",
+jejíž `[pmpro_account]` navíc sám vykresloval vlastní login formulář) —
+teď je jen jedna stránka, jeden formulář, funkčně otestováno živě.
 
-**Rozhodnutí (po pár kolech ladění s Honzou):**
-- `[bookingactivities_login form="3"]` je **jen registrace, žádný login pole**
-  (Honza to potvrdil živě — první odhad, že jde o kombinovaný login+register
-  box, byl mylný). Registrační pole má Honza už vyladěná, přepisovat je
-  nemá smysl.
-- **Login jede přes WP core** (`wp_login_form()`), ne přes žádný plugin.
-  Důvod: přihlášení je vždycky jen `wp_signon()` bez ohledu na to, čí UI ho
-  spustí, takže je to jediná část, kterou má smysl držet nezávisle na
-  konkrétním pluginu — Honza počítá, že Booking Activities časem
-  pravděpodobně opustí/vymění, a nechce mít login vázaný na plugin, který
-  plánuje nahradit. (Účty samotné jsou stejně jen obyčejní `wp_users`,
-  takže i kdyby zůstal na BA registraci, existující přihlášení by
-  přechod na jiný booking systém nijak neohrozil — jen samotný registrační
-  formulář by se musel předělat, ať je postavený na čemkoliv dnes.)
-- **PMPro nikdy nevykresluje vlastní login/registraci** — jen dashboard
-  (`[pmpro_account]`) pro už přihlášeného.
+**Finální architektura** (shortcode `[bohemi_account]` v
+`bohemi-twentytwentyfive-child/functions.php`, motiv **2.6**):
+- **Odhlášený vidí:** vlastní login formulář (POSTuje sám na sebe, ne na
+  `wp-login.php` — viz „Proč vlastní `wp_signon()` handler" níž) + odkaz
+  „Zapomněli jste heslo?" (`wp_lostpassword_url()`) + registrace přes
+  `[bookingactivities_login form="3"]` (Honza potvrdil živě, že "3" je
+  čistě registrační formulář, žádná login pole).
+- **Přihlášený vidí:** `[bookingactivities_list …]` (rezervace) +
+  `[pmpro_account]` (dashboard členství) — beze změny oproti původnímu
+  obsahu stránky, žádná kolize, protože `[pmpro_account]` v přihlášeném
+  stavu login formulář nevykresluje.
+- **PMPro nikdy nevykresluje vlastní login/registraci** samostatně, jen
+  tenhle dashboard.
+- Přihlášení zpracovává vlastní hook na `template_redirect` —
+  `wp_signon()` přímo, nonce ověřený, redirect cíl validovaný přes
+  `wp_validate_redirect()` (z `redirect_to` parametru, fallback
+  `/ucet-clenstvi/`), chybné údaje vrátí `?bohemi_login_error=1` (červená
+  hláška na stránce). Žádná závislost na `wp-login.php`.
 
-**Implementace:** shortcode `[bohemi_account]`
-(`bohemi-twentytwentyfive-child/functions.php`) — odhlášenému vrátí
-`wp_login_form()` (labely počeštěné) + odkaz „Zapomněli jste heslo?"
-(`wp_lostpassword_url()`) + `[bookingactivities_login form="3"]`
-(registrace); přihlášenému `[bookingactivities_list …]` + `[pmpro_account]`
-(dashboard, žádná kolize, protože v přihlášeném stavu `[pmpro_account]`
-login formulář nevykresluje). `wp_login_form()` nemá na rozdíl od
-`.booking-activities` shortcodů žádnou stylovou třídu k navázání — doplněné
-CSS (`#loginform`, `.bohemi-lost-password` v `assets/css/bohemi.css`) mu dává
-stejný vzhled (inputy, pilulkovité tlačítko) jako zbytku panelu. Motiv →
-**2.4**, ZIP přegenerovaný.
+**Proč vlastní `wp_signon()` handler místo core `wp_login_form()`:** první
+verze používala `wp_login_form()`, což POSTuje na skutečné `wp-login.php`.
+Živě se ukázalo, že správné přihlašovací údaje přes tenhle formulář
+nikdy nezalogovaly — nejpravděpodobnější příčina je nějaký bezpečnostní
+mechanismus blokující/přesměrovávající přímé požadavky na `wp-login.php`
+(nejde ověřit bez wp-admin přístupu; přímá návštěva `wp-login.php` mimo
+formulář funguje Honzovi normálně, takže konkrétní mechanismus zůstává
+neznámý). Řešení obchází `wp-login.php` úplně — sedí to navíc lépe na
+Honzovo přání „login nechci vázaný na mechanismus, který nekontroluju".
 
-**Co musí Honza udělat živě (nemám tam přístup):**
-1. Na `/ucet-clenstvi/` nahradit obsah stránky (dnes `[bookingactivities_list
-   columns="events,quantity,creation_date,status,actions"]` +
-   `[pmpro_account]`) jediným shortcodem `[bohemi_account]`.
-2. Smazat nebo 301 přesměrovat samostatnou stránku „Log In" (post id 26,
-   dnes `[pmpro_login]` + `[bookingactivities_login form="3"]"`) — je od
-   teď zbytečná, `/ucet-clenstvi/` pokrývá login i registraci sama.
-3. Zkontrolovat, co přesně produkuje `/login/?loggedout=true` (core WP
-   přesměrování po odhlášení, nebo samostatná stránka) a případně ho
-   přesměrovat na `/ucet-clenstvi/` — nebylo možné ověřit vzdáleně, řešeno
-   jen `curl`em/screenshoty, ne přímým přístupem do wp-adminu.
-4. V nastavení Booking Activities zkontrolovat, jestli plugin sám
-   nevynucuje vlastní login/registrační box i jinde (např. na kalendáři
-   `/rezervace/` pro nepřihlášené) — pokud ano, přesměrovat na
-   `/ucet-clenstvi/` místo vlastního UI.
-5. Po nahrání ZIPu vizuálně zkontrolovat `#loginform` na `/ucet-clenstvi/`
-   (odhlášený stav) — CSS je odhadnuté podle core WP markupu
-   (`wp_login_form()`), ne živě ověřené, protože nemám do wp-adminu přístup.
+**Rozhodnutí "BA jen pro registraci, ne pro login":** Honza zvažoval
+„buď jen Booking Activities, nebo jen PMPro" a nakonec zvolil rozdělení —
+registrační pole u BA má už vyladěná (nemá smysl je psát znovu), ale
+login chtěl nezávislý na pluginu, protože BA časem pravděpodobně
+opustí/vymění. Účty samotné jsou stejně jen obyčejní `wp_users`, takže i
+při budoucí výměně booking systému zůstává přihlášení funkční — jen
+registrační formulář by se musel předělat, ať by byl postavený na
+čemkoliv dnes.
 
-## `/ucet-clenstvi/` — ERR_HTTP2_PROTOCOL_ERROR / prázdná stránka po přihlášení (5. 8. 2026)
+**Dokončeno přímo Honzou ve wp-adminu:**
+1. ✅ `/ucet-clenstvi/` má obsah `[bohemi_account]`.
+2. ✅ Stránka „Log In" (post id 26) smazána — `/login/` se nepoužívá.
+3. ✅ PMPro omezení „jen pro členy" na `/ucet-clenstvi/` zrušeno (bylo to
+   zdrojem starého `/login/?redirect_to=…` přesměrování — `/login/` byla
+   ta stránka „Log In", teď smazaná).
+4. ✅ Login živě otestovaný a funkční (`wp_signon()` verze).
+5. ✅ Vizuální styl `#loginform` (červené pilulkovité tlačítko, krémové
+   inputy) potvrzený na screenshotu, sedí se zbytkem panelu.
 
-Po nasazení `[bohemi_account]` výš hlásil Honza nekonzistentní pád stránky
-`/ucet-clenstvi/` v přihlášeném stavu — `<title>` dorazí, tělo zůstane
-prázdné, prohlížeč hlásí `ERR_HTTP2_PROTOCOL_ERROR`, funguje to nahodile
-(~1×/10). To ukazuje na proces, který umírá uprostřed renderování obsahu
-(timeout/paměť/tvrdý kill), ne na deterministickou PHP chybu — ta by
-padala pokaždé stejně.
+**Zbývá jen jedna neověřená věc:** jestli Booking Activities sám
+nevynucuje vlastní login/registrační box i jinde na webu (např. na
+kalendáři `/rezervace/` pro nepřihlášené) — nebylo výslovně
+zkontrolováno, nízká priorita, protože se to nikde neprojevilo.
 
-**Zjištění, které mění obrázek:** `curl` z tohohle repa (bez přihlašovacích
-cookies) na `/ucet-clenstvi/` dostal okamžitě čistou `302` s hlavičkou
-`X-Redirect-By: WordPress` na `https://studio.bohemi.fit/login/?redirect_to=…ucet-clenstvi…`.
-To je nativní WP/PMPro přesměrování na úrovni stránky (typicky „vyžaduje
-členství"/`auth_redirect()`), ne náš shortcode — **řeší to starou záhadu, co
-je zač `/login/`** (nejspíš stránka „Log In", post id 26), ale zároveň to
-znamená, že `curl` test **netestoval padající cestu** (ta nastává jen u
-přihlášeného stavu, kam se anonymní request nedostane) a že `[bohemi_account]`
-login formulář možná nikdy neuvidí odhlášený návštěvník, pokud na
-`/ucet-clenstvi/` visí PMPro omezení „jen pro členy" — **čeká na Honzovo
-ověření v editoru té stránky.**
+**Vedlejší nález, zatím neopravený:** DevTools hlásil "A `<label>` isn't
+associated with a form field" (10×) na `/ucet-clenstvi/`. Naše
+`#loginform` markup má `for`/`id` správně spárované (core WP vzor), takže
+jde skoro jistě o markup uvnitř `[bookingactivities_login form="3"]"`
+(cizí plugin, needitujeme) — nepotvrzeno vizuální kontrolou konkrétního
+elementu v DevTools, nízká priorita (nebrání použití formuláře).
 
-**Diagnostický mu-plugin (`bohemi-profiler.php`) byl přidaný a pak zase
-smazaný ze staging repa v rámci téhož dne** — dřív než ho Honza vůbec nahrál
-na server. Důvod: autentizovaný `curl` test (10× `--http1.1` s reálnou
-session cookie z Honzova prohlížeče) proběhl **10/10 čistě**, `200`,
-~0,6–1 s, konzistentní ~480 KB — server (PHP, DB, oba shortcody) je v
-pořádku a rychlý, takže hypotézy „pomalý DB dotaz"/„tvrdý kill
-procesu"/„chyba v `[bohemi_account]` na hraně limitu" z předchozího zápisu
-odpadly a profiler mířený na PHP-vrstvu už nemá co zachytit.
+## `/ucet-clenstvi/` — ERR_HTTP2_PROTOCOL_ERROR, nesouvisí s loginem (5. 8. 2026, mimo dosah repa)
 
-**Zbývající hypotéza: HTTP/2 vrstva mezi klientem a serverem**, ne PHP —
-sedí to i na přesný název chyby (`ERR_HTTP2_PROTOCOL_ERROR`) a na hlavičku
-`Server: ATS` (Apache Traffic Server, proxy/cache vrstva před PHP, typické
-místo pro HTTP/2 framing bugy u větších odpovědí). Prostředí, ve kterém
-běží tenhle repo, nemá `libcurl` s podporou `--http2`, takže se to nedalo
-ověřit odsud přímo. **Čeká se na Honzu**, jestli se chyba reprodukuje i v
-jiném prohlížeči/na jiné síti/přes `curl --http2` z jeho stroje — pokud
-ano, je to problém na straně Wedos ATS proxy, mimo dosah tohohle repa.
+Při testování výš se náhodně (~1×/10, občas častěji) objevovala
+`ERR_HTTP2_PROTOCOL_ERROR` a prázdná stránka. **Důkladně vyloučeno jako
+příčina aplikace/DB:**
+- Autentizovaný `curl --http1.1` (10 opakování) prošel **10/10 čistě**,
+  `200`, ~0,6–1 s, konzistentní ~480 KB.
+- Query Monitor na živém requestu: **159 DB dotazů za 0,0398 s celkem**
+  (40 ms), hook timing (`init` 75 ms, `template_redirect` 29 ms) v normě.
+  „5 Doing it Wrong" jsou jen neškodné standardní hlášky WP 6.7+ o
+  pozdním načtení překladů v Booking Activities pluginech (`ba-*`),
+  netýkají se výkonu.
+- Diagnostický mu-plugin (`bohemi-profiler.php`) byl kvůli tomuhle
+  přidaný a pak zase smazaný ze staging repa ve stejný den, dřív než ho
+  Honza vůbec nahrál — jakmile `curl` test ukázal čistých 10/10, neměl už
+  co zachytit.
 
-**Uzavřeno (5. 8. 2026, později týž den): NESOUVISÍ s prací na loginu.**
-Honza si vzpomněl, že si na podobné chování stěžovali návštěvníci webu už
-dřív, jen jemu osobně to předtím fungovalo (typické pro intermitentní
-HTTP/2 proxy bug — projeví se různě podle sítě/geografické trasy ke
-Wedosu). Je to tedy **předem existující problém na Wedos ATS proxy vrstvě,
-časově se jen potkal s testováním `[bohemi_account]`**, ne jeho důsledek.
-Další krok je na Honzovi — nahlásit Wedos podpoře s tímhle podkladem
-(`ERR_HTTP2_PROTOCOL_ERROR`, `Server: ATS`, ~1×/10 přes HTTP/2, čisté
-10/10 přes HTTP/1.1). Nasazení `[bohemi_account]` na `/ucet-clenstvi/`
-může pokračovat nezávisle na vyřešení tohohle ticketu.
+**Závěr: HTTP/2 vrstva mezi klientem a Wedos ATS proxy** (`Server: ATS`
+v hlavičkách), ne PHP/WordPress. Honza si navíc vzpomněl, že si na
+podobné chování stěžovali návštěvníci webu už dřív, jen jemu osobně to
+předtím fungovalo (typické pro intermitentní HTTP/2 proxy bug — projeví
+se různě podle sítě/trasy) — **je to tedy předem existující problém,
+časově se jen potkal s testováním loginu, ne jeho důsledek.** Nasazení
+`[bohemi_account]` proběhlo nezávisle na tomhle a funguje bez ohledu na
+to, jestli se HTTP/2 problém vyřeší.
 
-## Login formulář nikdy nepřihlásil — `wp_login_form()` nahrazená vlastním `wp_signon()` (5. 8. 2026)
-
-Samostatná chyba, objevená při testování výš: Honza vyplnil správné
-přihlašovací údaje do formuláře z `[bohemi_account]` (v tu chvíli postavený
-na core `wp_login_form()`) a zůstal odhlášený — formulář se jen znovu
-načetl. `wp_login_form()` odesílá POST na skutečné `wp-login.php`; funkčně
-nejpravděpodobnější příčina je nějaký „skrij/přejmenuj wp-login.php"
-bezpečnostní mechanismus, který přímé požadavky na `wp-login.php`
-blokuje/přesměrovává — to by mimochodem vysvětlovalo i to, proč `/login/`
-existuje jako záhadná vlastní URL od úplně první zprávy v tomhle vlákně.
-Nejde to ověřit bez wp-admin přístupu.
-
-**Řešení: přihlášení běží celé samo, bez `wp-login.php`.** Formulář
-odesílá POST sám na sebe (`action="<aktuální URL>"`), nový hook na
-`template_redirect` v `functions.php` ho zachytí (ověření nonce, pak
-`wp_signon()` přímo), a buď přesměruje na `redirect_to` (validované přes
-`wp_validate_redirect()`, jinak fallback `/ucet-clenstvi/`), nebo při
-špatných údajích vrátí zpět s `?bohemi_login_error=1` (zobrazí se
-červená hláška „Nesprávné uživatelské jméno nebo heslo."). Žádná
-závislost na `wp-login.php` ani na tom, co s ním dělá jakýkoliv
-bezpečnostní plugin — sedí to i lépe na Honzovo dřívější přání „login
-nechci vázaný na mechanismus, který nemám pod kontrolou". Motiv →
-**2.6**, ZIP přegenerovaný.
-
-**Zůstává otevřené:** `/login/?redirect_to=…` samo o sobě pořád existuje
-jako cíl PMPro „jen pro členy" bounce z `/ucet-clenstvi/` (viz sekce
-výš) — teď už by tam ale měl fungovat login, jen se pořád doporučuje
-sjednotit na jednu URL (sundat PMPro omezení, smazat/přesměrovat starou
-stránku „Log In"), viz krok 1–2 v sekci „Sjednocení loginu" výš.
+**Další krok je na Honzovi** — nahlásit Wedos podpoře (`ERR_HTTP2_PROTOCOL_ERROR`,
+`Server: ATS`, nahodilé selhání přes HTTP/2, čisté 10/10 přes HTTP/1.1;
+hotový text hlášení byl připravený v konverzaci, není v repu — mimo
+verzovaný obsah, čistě podpůrný text pro tiket). Zůstává otevřené, jestli
+se to potvrdí i z jiného prohlížeče/sítě/`curl --http2` z Honzova stroje.
