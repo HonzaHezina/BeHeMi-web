@@ -514,8 +514,11 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   Dynamické údaje (volná místa) na statický web nepatří — WP u kurzů akademie
   ukazuje „kapacitu" 10/9/11 míst, což jsou volná místa z bookingu, nepřenášet.
 - **Ceny kroužků sjednocené s WP 5. 7. 2026:** akademie 4 000 / 4 600 / 5 500 Kč,
-  Dětská Zumba 3 400 Kč (vše „/ semestr"), Objevovárna 250 Kč / vstup. Při změně
+  Dětská Zumba (vše „/ semestr"), Objevovárna 250 Kč / vstup. Při změně
   držet v synku tři místa: detail `/krouzky-pro-deti/` + ceník CZ + ceník EN.
+  **Dětská Zumba upravena Honzou 25. 8. 2026:** cena 3 400 → **3 100 Kč**,
+  start nového semestru **7. 10. 2026** (dřív na webu vůbec neuvedený) —
+  přidáno do meta řádku na `/krouzky-pro-deti/#detska-zumba`.
   **Názvy kurzů akademie přejmenované na WP názvy (potvrzeno Honzou 20. 7. 2026):**
   „Základy cirkusového tréninku" → **„Základy gymnastiky a akrobacie formou hry"**,
   „Hlavou ve vzduchu" → **„Pozemní a závěsná akrobacie, žonglování"** — sedí 1:1
