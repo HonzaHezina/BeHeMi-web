@@ -81,13 +81,13 @@ export const specializationCourses: SpecializationCourse[] = [
     duration: '4 × 60 min',
     price: '1 290 Kč',
     status: 'active',
-    d: 'Pro úplné začátečníky. Začneš s jedním míčkem a přesným obloukem, přidáš druhý a rytmus a do konce kurzu uděláš první souvislé pokusy o kaskádu se třemi míčky.',
-    teaser: 'Od jednoho míčku k první kaskádě se třemi — čtyři lekce pro úplné začátečníky.',
+    d: 'Pro úplné začátečníky. Začneš s jedním míčkem a přesným obloukem, přes druhý míček a rytmus dojdeš až ke kaskádě se třemi míčky, kterou na konci kurzu zvládneš.',
+    teaser: 'Od jednoho míčku ke kaskádě se třemi — čtyři lekce pro úplné začátečníky.',
     skills: [
       'Práce s jedním míčkem a přesný oblouk',
       'Přehazování mezi rukama',
       'Dva míčky a rytmus',
-      'První pokusy o kaskádu se třemi míčky',
+      'Kaskáda se třemi míčky',
     ],
     nextCourse: 'Žonglování II — tři míčky a dál',
     media: 'media-clay',
@@ -123,8 +123,23 @@ export const specializationCourses: SpecializationCourse[] = [
 // Přímé navazující kurzy (úroveň II) — zatím jen výhled, bez karty, ceny
 // nebo kotvy. Vzdálenější obory (lidské pyramidy, závěsná akrobacie,
 // balanc — viz interní zadání) se na web zatím nedávají vůbec.
+//
+// Kalistenika (rozhodnuto Honzou 31. 8. 2026): jednotlivé navazující kurzy
+// jdou první, případný velký průběžný program (obdoba Akademie Cirk La
+// Putyka / cirkusové školy — jedna ucelená disciplína) se zatím nezveřejňuje
+// ani nenaznačuje na webu — nejdřív se ověří zájem přes tyhle kratší kurzy.
+// Platí jen pro kalisteniku (má na to potenciál jako vlastní obor), ne pro
+// žonglování/stojky — ty zůstávají jen sekvence I→II bez vyhlídky na velký
+// program. Planche (nejpokročilejší dovednost, „král kalisteniky") se do
+// veřejného výhledu zatím nedává vůbec — je moc vzdálená, zůstává jen jako
+// interní poznámka pro budoucí uvažování.
 export const upcomingCourses: { title: string; d: string }[] = [
-  { title: 'Kalistenika II — síla pro cirkus', d: 'Shyby, L-sit průprava, stojková síla a přechody mezi visem, přítahy a vzpory.' },
-  { title: 'Žonglování II — tři míčky a dál', d: 'Stabilizace kaskády, změny výšky a rytmu, žonglování při pohybu.' },
+  { title: 'Kalistenika II — síla pro cirkus', d: 'Shyby, negativní shyby, L-sit průprava a přechody mezi visem, přítahy a vzpory.' },
+  { title: 'Muscle-up — cesta k prvnímu přetahu', d: 'Nejžádanější jednotlivá dovednost v kalistenice — navazuje na shyb, spojuje tah a tlak do jednoho plynulého pohybu.' },
+  { title: 'Přední váha (Front lever)', d: 'Pokročilá tahová dovednost — držet tělo vodorovně ve visu vyžaduje sílu i kontrolu středu.' },
+  { title: 'Vlajka (Human Flag)', d: 'Jeden z nejvíc ikonických prvků kalisteniky — síla, rovnováha a stabilizace celého těla ve vodorovné poloze.' },
+  { title: 'Pistol squat — síla na jedné noze', d: 'Jednonohý dřep od základů: rovnováha, mobilita kotníku a síla nohou bez opory.' },
   { title: 'Stojky II — bez opory', d: 'Odlepení od stěny, práce prstů, hledání těžiště, první samostatné výdrže.' },
+  { title: 'Ruční stojný tlak (Handstand push-up)', d: 'Tlaková síla vzhůru nohama — navazuje na samostatnou stojku ze Stojek II.' },
+  { title: 'Žonglování II — tři míčky a dál', d: 'Stabilizace kaskády, změny výšky a rytmu, žonglování při pohybu.' },
 ];
