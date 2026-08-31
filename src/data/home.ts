@@ -156,6 +156,7 @@ export const navMenu = [
   { num: '04', label: 'Pro firmy', desc: 'FitTeams, wellbeing, pronájem sálů', href: '/firmy/' },
   { num: '05', label: 'Trenéři', desc: 'Kdo vás bude vést', href: '/treneri/' },
   { num: '06', label: 'Fotky', desc: 'Atmosféra a zázemí studia', href: '/fotky/' },
+  { num: '07', label: 'Program 8 týdnů', desc: 'Vlajkový program, uzavřená skupina', href: '/program-8-tydnu/' },
 ];
 
 export const RESERVE_URL = 'https://studio.bohemi.fit/';

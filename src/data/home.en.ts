@@ -136,6 +136,7 @@ export const navMenu = [
   { num: '04', label: 'For companies', desc: 'FitTeams, wellbeing, hall rental', href: '/en/classes-and-services/#pro-firmy' },
   { num: '05', label: 'Trainers', desc: 'Who will guide you', href: '/treneri/' },
   { num: '06', label: 'Photos', desc: 'Studio atmosphere & space', href: '/fotky/' },
+  { num: '07', label: '8-Week Program', desc: 'Flagship program, closed group', href: '/program-8-tydnu/' },
 ];
 
 export const RESERVE_URL = 'https://studio.bohemi.fit/';

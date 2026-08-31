@@ -475,6 +475,23 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   předstartovní storno pásma patří do budoucích VOP. Termín na webu je záměrně
   „září 2026" (kandidát 14. 9.–8. 11. 2026 čeká na Honzovo potvrzení). EN
   stránka není — EN odkazuje českým slugem.
+- **Early-bird sleva pro prvních 5 přihlášených (31. 8. 2026):** 6 900 Kč
+  místo 7 900 Kč — cena a přeškrtnutá původní cena jsou (jako jediné místo
+  s cenou vůbec) jen v `cenik.astro`; `/program-8-tydnu/` CTA na slevu jen
+  upozorňuje větou bez čísla („Prvních 5 přihlášených má slevu.") a odkazuje
+  do ceníku — drží se tím pravidlo „cena jen v ceníku". **Sleva se nedá
+  vynutit technicky** — Program nemá vlastní WP/PMPro level jako
+  Zumba/akademie (viz „WP membership level signup links" výš), rezervace
+  jde přes obecný `RESERVE_URL`, takže kdo je „prvních 5" musí Honza hlídat
+  ručně. Až sleva doslouží nebo se počet/cena změní, uprav `cenik.astro`
+  (badge + oba ceny) a větu v CTA na `/program-8-tydnu/` současně.
+- **Program 8 týdnů v hlavičkovém dropdownu (31. 8. 2026):** přidán jako
+  položka `07` do `navMenu` (`home.ts`/`home.en.ts`) vedle Trenérů a Fotek —
+  do teď byl z hlavního menu dohledatelný jen přes odkazy v obsahu stránek
+  (HP, `/lekce-a-sluzby/`, `/proc-bohemi/`, `/cenik/`, footer sloupec Web),
+  ne přímo z navigace. Stejný precedent jako Trenéři/Fotky: ne-service odkaz
+  v dropdownu je OK, hlavní lišta (6 pevných položek) se bez nového
+  rozhodnutí Honzy dál neroztahuje.
 - **Praktický blok rozšířen na ~50 minut + AI napříč tématy (5. 8. 2026):**
   dřív 20 minut jen na tělesné téma týdne, teď necelá hodina — druhá
   polovina je AI blok (obecná AI gramotnost + konkrétní use-case podle
