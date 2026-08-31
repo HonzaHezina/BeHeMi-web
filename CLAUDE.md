@@ -518,7 +518,7 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   ale ne zas tak moc — ať si hned nenaběhneme"). Byla součástí prvního
   návrhu jako volitelný 4. MVP kurz, ale nepublikovat, dokud Honza prostory
   neověří — pak přidat zpět stejným vzorem jako ostatní tři.
-  **Ceny záměrně chybí (`price` je `undefined` u všech čtyř MVP kurzů) —
+  **Ceny záměrně chybí (`price` je `undefined` u všech tří MVP kurzů) —
   karta místo částky ukazuje „Cena se upřesňuje", CTA vede na `/kontakt/`.**
   Původní „pracovní ceny" z prvního zadání (1 390/1 490/1 190 Kč…) Honza
   explicitně odmítl publikovat, dokud nedodá závaznou cenu — **nepoužívat
@@ -531,19 +531,52 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   kalistenika byla nejdřív přidaná jako běžná opakovaná lekce (`classes[]`
   položka + karta na `/skupinove-lekce/`) a jako samostatný kroužkový blok
   na `/krouzky-pro-deti/` — obojí bylo smazáno a nahrazeno modelem
-  „Kalistenika I/II" výš, protože nové zadání (kalistenika = jeden ze čtyř
+  „Kalistenika I/II" výš, protože nové zadání (kalistenika = jeden ze tří
   uzavřených specializačních minikurzů, ne ongoing lekce) by jinak vytvořilo
   dva rozporné popisy stejného tématu na webu. Nevracet tu starou verzi
   zpět.
   Stránka je zatím CS-only (žádná EN mutace, stejná konvence jako u
   dětských stránek) — EN `navMenu` (`03`) i tak odkazuje přímo na `/kurzy/`.
-  **Cross-linky na `/kurzy/` (31. 8. 2026):** mint banner na HP (`Offer.astro`,
-  za blokem „Individuální služby"), na `/lekce-a-sluzby/` a
-  `/en/classes-and-services/` (za blokem Programu 8 týdnů), a na
-  `/skupinove-lekce/` + `/krouzky-pro-deti/` (viz výš) — `/kurzy/` bez těchhle
-  odkazů nebyla z HP ani z rozcestníku vůbec dohledatelná, i když byla v
-  headeru a footeru; nový produkt potřebuje odkaz i v samotném obsahu stránek,
-  ne jen v navigaci.
+  **Cross-linky na `/kurzy/` — stav po třech kolech oprav (31. 8. 2026):**
+  `/kurzy/` bez odkazů v obsahu stránek (jen v headeru/footeru) nebyla z HP
+  ani z rozcestníku vůbec dohledatelná — nový produkt potřebuje odkaz
+  v samotném obsahu, ne jen v navigaci. Finální podoba:
+  - **HP (`Offer.astro`)** a **`/skupinove-lekce/`**: krátký mint banner
+    (text + `Button`/textový odkaz) na konci relevantní sekce. Copy
+    explicitně říká „pro děti i dospělé"/„for kids and adults" — bez toho
+    to vedle Individuálních služeb / uvnitř adult-only stránky působilo
+    jako adult-only nabídka, přestože kurzy jsou pro obě publika.
+  - **`/krouzky-pro-deti/`**: mint banner „Chceš se hýbat i ty?" (dospělí)
+    a cross-link na Kurzy jsou sloučené do jednoho boxu, dva odstavce
+    oddělené `border-t` — dřív dva stackované mint boxy hned pod sebou
+    splývaly/působily jako nedomyšlený přívěsek.
+  - **`/lekce-a-sluzby/` a `/en/classes-and-services/`**: **žádný banner** —
+    plnohodnotná sekce „Krátké kurzy"/„Short courses" stejným vzorem jako
+    „Skupinové lekce" výš na téže stránce (nadpis + „Všechny kurzy →"
+    v hlavičce, intro věta, `grid` tří `<ClassCard>` z
+    `specializationCourses`, `href={`/kurzy/#${c.id}`}`, `meta={c.duration}`).
+    Honza (31. 8. 2026): jednořádkový text v mint boxu byl nesourodý s tím,
+    že úplně všechno ostatní na stránce (lekce, kroužky, firmy) má
+    plnokrevnou klikací kartu — udělalo to kurzy přehlédnutelné. Sekce žije
+    **za mřížkou `kidsActivities` v „02 Pro děti a rodiny"**, ne v „01 Pro
+    tebe" — kdyby zůstala u Individuálních služeb, čtenář by si dovodil
+    adult-only (Program 8 týdnů zůstal sám v „01", ten je skutečně jen pro
+    dospělé). `/en/classes-and-services.astro` má lokální `courseTextEN`
+    slovník (jen `title`/`teaser` podle `id`) — `/kurzy/` nemá EN mutaci
+    (konvence jako u dětských stránek), takže id/`duration`/`media` zůstávají
+    jednozdrojové z `specialization-courses.ts`, lokalizuje se jen text.
+  **`SpecializationCourse.teaser` (31. 8. 2026):** krátká věta pro klikací
+  dlaždici na rozcestníku, oddělená od `d` (plný text jen na `/kurzy/`) —
+  stejné pravidlo jako `kidsActivities[].d` vs. `circusCourses[].d`. Nový
+  aktivní kurz potřebuje oboje, jinak `ClassCard` na rozcestníku spadne na
+  `undefined`.
+  **Datový model do budoucna:** `SpecializationCourse.audience` už dnes
+  podporuje rozdělení jednoho kurzu na dětskou a dospělou variantu zvlášť
+  (dva objekty, stejná `category`, jiná `id`, `audience: ['deti']` /
+  `['dospeli']`) — není to podmínka, tam kde jedna náplň sedí oběma
+  (dnešní 3 MVP kurzy), zůstávají sloučené v `audience: ['deti',
+  'dospeli']`. Žádná změna typu potřeba, až se první kurz rozdělí — jen
+  nové řádky v `specialization-courses.ts`.
   **`navMenu` přeuspořádán (31. 8. 2026, Honza: „Kurzy nemají být tak dole a
   Fotky tak nahoře"):** pořadí teď jde podle síly nabídky/publika, ne podle
   data přidání — Skupinové lekce · Kroužky pro děti · Kurzy (skutečné

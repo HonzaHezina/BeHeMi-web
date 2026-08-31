@@ -6,12 +6,22 @@ import Button from '../../components/Button.astro';
 import ClassCard from '../../components/ClassCard.astro';
 import { classes, individualServices, kidsActivities, firmyServices } from '../../data/home.en';
 import { photosEN as photos } from '../../data/photos';
+import { specializationCourses } from '../../data/specialization-courses';
 
 const jumps = [
   { n: '01', label: 'For you', href: '#pro-tebe' },
   { n: '02', label: 'For kids & families', href: '#pro-deti' },
   { n: '03', label: 'For companies', href: '#pro-firmy' },
 ];
+
+// /kurzy/ has no EN page (same convention as kids content — EN links to the
+// CS slug), so only title/teaser need a translation here; id/duration/media
+// stay single-sourced from specialization-courses.ts.
+const courseTextEN: Record<string, { title: string; teaser: string }> = {
+  'kalistenika-1': { title: 'Calisthenics I – Bodyweight Strength', teaser: 'Hangs, shoulders, push-ups and core control — bodyweight basics in four lessons.' },
+  'zonglovani-1': { title: 'Juggling I – From One Ball to a Cascade', teaser: 'From a single ball to your first three-ball cascade — four lessons for complete beginners.' },
+  'stojky-1': { title: 'Handstands I – Upside Down', teaser: 'Safe handstand technique — from weight transfer on your hands to kicking up and coming down.' },
+};
 ---
 <Layout
   title="Classes & services — BoHeMi fitness Vinohrady"
@@ -91,18 +101,9 @@ const jumps = [
           </div>
         ))}
       </div>
-      <div class="mt-[22px] rounded-2xl border border-mint-border bg-mint p-7 md:p-9">
-        <p class="mb-6 text-[13px] font-extrabold uppercase tracking-[0.08em] text-brand">Want to go further?</p>
-        <div class="grid gap-8 sm:grid-cols-2">
-          <div class="flex flex-col">
-            <p class="text-[16px] leading-[1.5] text-ink"><strong class="font-bold">Want to go deeper than just classes?</strong> The 8-Week Program guides you through movement, habits and community together.</p>
-            <Button href="/program-8-tydnu/" variant="brand" class="mt-5 self-start px-[22px] py-3 text-[15.5px]">8-Week Program →</Button>
-          </div>
-          <div class="flex flex-col">
-            <p class="text-[16px] leading-[1.5] text-ink"><strong class="font-bold">Want one specific skill, not a regular class?</strong> Calisthenics, juggling, handstands — short courses, no full semester needed.</p>
-            <Button href="/kurzy/" variant="brand" class="mt-5 self-start px-[22px] py-3 text-[15.5px]">Short courses →</Button>
-          </div>
-        </div>
+      <div class="mt-[22px] flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-mint-border bg-mint px-7 py-6">
+        <p class="max-w-[48ch] text-[16.5px] text-ink"><strong class="font-bold">Want to go deeper than just classes?</strong> The 8-Week Program guides you through movement, habits and community together.</p>
+        <Button href="/program-8-tydnu/" variant="brand" class="shrink-0 px-[22px] py-3 text-[15.5px]">8-Week Program →</Button>
       </div>
     </section>
 
@@ -125,6 +126,27 @@ const jumps = [
             fallbackAlt={`For kids — ${k.img}`}
             title={k.t}
             description={k.d}
+            imgClass="h-[150px]"
+          />
+        ))}
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-[1220px] px-5 pt-11 md:px-8">
+      <div class="mb-[22px] flex flex-wrap items-end justify-between gap-4">
+        <h2 class="text-2xl font-extrabold tracking-[-0.02em]">Short courses</h2>
+        <a href="/kurzy/" class="cursor-pointer text-base font-bold text-accent-text hover:text-ink">All courses →</a>
+      </div>
+      <p class="mb-[22px] max-w-[64ch] text-[17px] leading-[1.55] text-ink-warm">Calisthenics, juggling or handstands — closed courses on one skill, for kids and adults, no full semester needed.</p>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {specializationCourses.map((c) => (
+          <ClassCard
+            href={`/kurzy/#${c.id}`}
+            media={c.media}
+            fallbackAlt={courseTextEN[c.id]?.title ?? c.title}
+            title={courseTextEN[c.id]?.title ?? c.title}
+            description={courseTextEN[c.id]?.teaser ?? c.teaser}
+            meta={c.duration}
             imgClass="h-[150px]"
           />
         ))}

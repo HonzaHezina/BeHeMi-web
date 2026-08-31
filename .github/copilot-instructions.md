@@ -86,9 +86,16 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   ceny z prvního zadání se nepoužívají, dokud Honza nedodá závaznou cenu.
   **„Párová akrobacie I" záměrně vynechána** — nejistá výška stropu v sálech
   BoHeMi pro zvedačky, nepřidávat bez ověření prostor. Cross-linkovaná
-  obousměrně (mint banner na HP/`Offer.astro`, `/lekce-a-sluzby/`,
-  `/skupinove-lekce/`, `/krouzky-pro-deti/` → `/kurzy/`). CS-only, žádná EN
-  mutace. Detail a plné zdůvodnění: `/CLAUDE.md`.
+  odevšad: mint banner na HP/`Offer.astro`, `/skupinove-lekce/`,
+  `/krouzky-pro-deti/` → `/kurzy/`; ale **na `/lekce-a-sluzby/` +
+  `/en/classes-and-services/` je to plnohodnotná sekce „Krátké kurzy"
+  s `<ClassCard>` gridem** (stejný vzor jako „Skupinové lekce" na téže
+  stránce), ne banner — jednořádkový mint box vedle plnokrevných karet
+  ostatních sekcí působil nesourodě. Karta čte `teaser` (krátká věta pro
+  dlaždici), ne `d` (plný text, jen na `/kurzy/`) — nový kurz potřebuje
+  oboje. `/kurzy/` samo CS-only, žádná EN mutace — EN rozcestník má lokální
+  `courseTextEN` slovník jen pro title/teaser. Detail a plné zdůvodnění:
+  `/CLAUDE.md`.
 - **„Jak vznikl web" sekce** (5. 8. 2026): jen na `/proc-bohemi/` +
   `/en/why-bohemi/` (founder story stránky), odkaz ven na `hezina.cz`. Patička
   na všech stránkách má kredit „Web postavil Honza Hezina s AI" → `hezina.cz`
