@@ -27,6 +27,16 @@
 // kurz = dva samostatné objekty se stejným `category`, jinými `id`
 // (`kalistenika-1-deti`/`kalistenika-1-dospeli` apod.), každý s
 // `audience: ['deti']` nebo `['dospeli']` a vlastním obsahem/`skills`.
+//
+// Kalistenika I zůstává mixed-age (potvrzeno znovu 31. 8. 2026 po externí
+// zpětné vazbě, která navrhovala plný split na dětskou/dospělou variantu —
+// Honza split zamítl, chce otce a syna ve stejné lekci). Řešením místo
+// splitu je `minAge` (viz níž) + `d` text, který explicitně říká, že
+// variantu cviku určuje LEKTOR podle síly, ne rodič podle počtu opakování —
+// cílí na konkrétní obavu „ať tam nepřijde 5leté dítě a táta ho nenutí dělat
+// 20 kliků". Split na dva objekty dává smysl až u pokročilých dovedností
+// (muscle-up, front lever…), kde zátěž není vhodná pro dítě nezávisle na
+// variantě — viz `upcomingCourses` a memory `kalistenika-mixed-age-training`.
 export type CourseAudience = 'deti' | 'dospeli';
 export type CourseStatus = 'active' | 'soon';
 
@@ -36,6 +46,11 @@ export type SpecializationCourse = {
   category: string;
   level: 1 | 2;
   audience: CourseAudience[];
+  /** Spodní věková hranice pro děti v mixed-age kurzu (viz kalistenika-1) —
+   * nezaměňovat s kategorickým split na dva objekty (viz komentář výš u
+   * `audience`), řeší jinou věc: kdy je lekce vůbec vhodná pro dítě, ne jak
+   * moc se metodika liší dítě/dospělý. */
+  minAge?: number;
   duration: string;
   price?: string;
   status: CourseStatus;
@@ -58,10 +73,11 @@ export const specializationCourses: SpecializationCourse[] = [
     category: 'kalistenika',
     level: 1,
     audience: ['deti', 'dospeli'],
+    minAge: 12,
     duration: '4 × 60 min',
     price: '1 290 Kč',
     status: 'active',
-    d: 'Základy práce s vlastním tělem — správný vis, aktivní ramena, lopatkové přítahy, klik i jeho lehčí varianty, zpevnění středu těla. Lektor u každého cviku hlídá provedení, tempo a zátěž si volíš podle sebe. Děti i dospělí cvičí ve stejné lekci — každý na cviku, který odpovídá jeho aktuální síle, lektor hlídá, aby zátěž seděla věku i schopnostem. Stejnou sílu a kontrolu těla pak využiješ i ve stojkách nebo akrobacii.',
+    d: 'Základy práce s vlastním tělem — správný vis, aktivní ramena, lopatkové přítahy, klik i jeho lehčí varianty, zpevnění středu těla. Lektor u každého cviku určuje variantu i zátěž podle toho, kde reálně jsi — ne podle počtu opakování. Lekce je společná pro dospělé a děti od 12 let, každý cvičí verzi cviku odpovídající jeho aktuální síle. Stejnou sílu a kontrolu těla pak využiješ i ve stojkách nebo akrobacii.',
     teaser: 'Vis, ramena, klik a zpevnění středu — základy práce s vlastním tělem ve čtyřech lekcích.',
     skills: [
       'Správný vis a aktivní ramena',
@@ -69,7 +85,7 @@ export const specializationCourses: SpecializationCourse[] = [
       'Klik a jeho varianty podle úrovně',
       'Zpevnění středu těla (hollow body)',
     ],
-    nextCourse: 'Kalistenika II — síla pro cirkus',
+    nextCourse: 'Kalistenika II – Síla a dovednosti',
     media: 'media-sand',
   },
   {
@@ -133,13 +149,13 @@ export const specializationCourses: SpecializationCourse[] = [
 // program. Planche (nejpokročilejší dovednost, „král kalisteniky") se do
 // veřejného výhledu zatím nedává vůbec — je moc vzdálená, zůstává jen jako
 // interní poznámka pro budoucí uvažování.
-export const upcomingCourses: { title: string; d: string }[] = [
-  { title: 'Kalistenika II — síla pro cirkus', d: 'Shyby, negativní shyby, L-sit průprava a přechody mezi visem, přítahy a vzpory.' },
-  { title: 'Muscle-up — cesta k prvnímu přetahu', d: 'Nejžádanější jednotlivá dovednost v kalistenice — navazuje na shyb, spojuje tah a tlak do jednoho plynulého pohybu.' },
-  { title: 'Přední váha (Front lever)', d: 'Pokročilá tahová dovednost — držet tělo vodorovně ve visu vyžaduje sílu i kontrolu středu.' },
-  { title: 'Vlajka (Human Flag)', d: 'Jeden z nejvíc ikonických prvků kalisteniky — síla, rovnováha a stabilizace celého těla ve vodorovné poloze.' },
-  { title: 'Pistol squat — síla na jedné noze', d: 'Jednonohý dřep od základů: rovnováha, mobilita kotníku a síla nohou bez opory.' },
-  { title: 'Stojky II — bez opory', d: 'Odlepení od stěny, práce prstů, hledání těžiště, první samostatné výdrže.' },
-  { title: 'Ruční stojný tlak (Handstand push-up)', d: 'Tlaková síla vzhůru nohama — navazuje na samostatnou stojku ze Stojek II.' },
-  { title: 'Žonglování II — tři míčky a dál', d: 'Stabilizace kaskády, změny výšky a rytmu, žonglování při pohybu.' },
+export const upcomingCourses: { title: string; d: string; category: 'kalistenika' | 'stojky' | 'zonglovani' }[] = [
+  { category: 'kalistenika', title: 'Kalistenika II – Síla a dovednosti', d: 'Shyby, negativní shyby, L-sit průprava a přechody mezi visem, přítahy a vzpory. Získané dovednosti se dál rozvíjí v kalistenice, akrobacii i cirkusu.' },
+  { category: 'kalistenika', title: 'Muscle-up — cesta k prvnímu přetahu', d: 'Nejžádanější jednotlivá dovednost v kalistenice — navazuje na shyb, spojuje tah a tlak do jednoho plynulého pohybu.' },
+  { category: 'kalistenika', title: 'Přední váha (Front lever)', d: 'Pokročilá tahová dovednost — držet tělo vodorovně ve visu vyžaduje sílu i kontrolu středu.' },
+  { category: 'kalistenika', title: 'Vlajka (Human Flag)', d: 'Jeden z nejvíc ikonických prvků kalisteniky — síla, rovnováha a stabilizace celého těla ve vodorovné poloze.' },
+  { category: 'kalistenika', title: 'Pistol squat — síla na jedné noze', d: 'Jednonohý dřep od základů: rovnováha, mobilita kotníku a síla nohou bez opory.' },
+  { category: 'kalistenika', title: 'Ruční stojný tlak (Handstand push-up)', d: 'Tlaková síla vzhůru nohama — navazuje na samostatnou stojku ze Stojek II.' },
+  { category: 'stojky', title: 'Stojky II — bez opory', d: 'Odlepení od stěny, práce prstů, hledání těžiště, první samostatné výdrže.' },
+  { category: 'zonglovani', title: 'Žonglování II — tři míčky a dál', d: 'Stabilizace kaskády, změny výšky a rytmu, žonglování při pohybu.' },
 ];

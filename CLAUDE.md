@@ -612,8 +612,12 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   - **La Putyka a CIRQUEON = partneři** (dodávají BoHeMi lektory), ne
     konkurence — web proto nestaví komunikaci „BoHeMi vs. La Putyka" a
     nejmenuje je jako srovnání ani jako autoritu, ze které by web „vedl"
-    (konzistentní s anti-cílem „žádná externí kniha/autorita" výš) — copy
-    zůstává obecné („zkušení cirkusoví lektoři").
+    (konzistentní s anti-cílem „žádná externí kniha/autorita" výš). Copy na
+    `/kurzy/` zůstává obecné — od 31. 8. 2026 (pozdě odpoledne, viz „Externí
+    zpětná vazba" níž) přesněji „Kurzy vedou trenéři BoHeMi a lektoři
+    spolupracující s naším cirkusovým programem podle konkrétní disciplíny",
+    ne „zkušení cirkusoví lektoři" (nebyla by pravdivá, pokud kalisteniku
+    povede trenér BoHeMi bez cirkusové vazby).
   - **Pedagogický princip (CIRQUEON-style):** hraní → učení → předvádění,
     ne sportovní model učení → výkon → hodnocení. Cíl je sebedůvěra/
     koordinace/spolupráce/práce s chybou, ne výkonnostní žebříček — proto
@@ -631,9 +635,20 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
     řeší se to škálováním cviku podle aktuální síly účastníka (stejný
     pohybový vzor, jiná varianta/zátěž), ne podle věku jako pevné
     kategorie — lektor vede skupinu na jednom cviku, každý dělá jinou
-    variantu podle toho, kde reálně je. Věta v `kalistenika-1.d`: „Děti i
-    dospělí cvičí ve stejné lekci — každý na cviku, který odpovídá jeho
-    aktuální síle, lektor hlídá, aby zátěž seděla věku i schopnostem."
+    variantu podle toho, kde reálně je.
+    **Znovu potvrzeno pozdě odpoledne 31. 8. 2026** po externí zpětné vazbě
+    (konzultantka/copywriterka hodnotila `/kurzy/` a navrhla přesný opak —
+    plný split na dětskou/dospělou variantu, viz „Externí zpětná vazba" níž).
+    Honza split znovu zamítl (chce umožnit např. otci a synovi cvičit spolu),
+    ale zpřesnil konkrétní obavu: „nechci, aby tam přišlo 5leté dítě a táta
+    ho nutil dělat 20 kliků." Řešení: nové pole **`SpecializationCourse.minAge`**
+    (`kalistenika-1.minAge = 12`) — spodní věková hranice mixed-age kurzu,
+    zobrazuje se v badge na `/kurzy/` („Děti od 12 let i dospělí",
+    `audienceLabel()` v `kurzy.astro`). Aktuální věta v `kalistenika-1.d`:
+    „Lektor u každého cviku určuje variantu i zátěž podle toho, kde reálně
+    jsi — ne podle počtu opakování. Lekce je společná pro dospělé a děti od
+    12 let, každý cvičí verzi cviku odpovídající jeho aktuální síle." —
+    explicitně říká, že variantu určuje LEKTOR, ne rodič.
     **Split na dva objekty (`audience: ['deti']`/`['dospeli']`, mechanismus
     už podporovaný datovým modelem výš) dává smysl až u pokročilejších
     dovedností** (muscle-up, přední váha/front lever, vlajka/human flag —
@@ -646,7 +661,13 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
     Pistol squat, Ruční stojný tlak (Handstand push-up) — vedle už
     existujících Kalistenika II / Žonglování II / Stojky II. Planche
     („král kalisteniky") se do veřejného výhledu vědomě nedává — moc
-    vzdálená, jen interní poznámka.
+    vzdálená, jen interní poznámka. **Pole `category` (`'kalistenika' |
+    'stojky' | 'zonglovani'`) přidáno pozdě odpoledne 31. 8. 2026** — sekce
+    „Další kurzy připravujeme" na `/kurzy/` teď seskupuje položky podle
+    disciplíny (`upcomingCategoryLabel` v `kurzy.astro`) místo plochého
+    seznamu. Nová položka do `upcomingCourses` musí mít `category`
+    vyplněné, jinak spadne mimo všechny skupiny (frontmatter iteruje pevnou
+    trojici `['kalistenika', 'stojky', 'zonglovani']`).
   - **Žonglování I text zpřesněn:** kurz teď končí „kaskádou se třemi
     míčky" (dosažený výsledek), ne „prvními pokusy o kaskádu" (nejistý
     výsledek) — jasně navazuje na Žonglování II, které začíná stabilizací
@@ -665,6 +686,22 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
     dětské vystoupení místo soutěžního rámce) se na web zatím nepromítá
     vůbec — je to jen směr uvažování pro budoucí rozhodování, ne závazek
     nebo termín.
+  - **Externí zpětná vazba na hotové `/kurzy/` (pozdě odpoledne 31. 8. 2026,
+    konzultantka/copywriterka, hodnocení 8,5/10):** vedle už zapracované
+    věkové hranice (viz „Smíšené skupiny" výš, jediný bod, kde Honza
+    nesouhlasil) implementováno rovnou, protože nekoliduje s ničím dřív
+    rozhodnutým:
+    - „Kalistenika II — síla pro cirkus" → **„Kalistenika II – Síla a
+      dovednosti"** (`upcomingCourses[0].title`) — cirkus je jedna z větví,
+      kam se dá pokročilá kalistenika rozvíjet, ne povinný cíl (dospělý,
+      co chce shyby/dipy/L-sit, nemusí chtít cirkus).
+    - Věta „Kurzy vedou zkušení cirkusoví lektoři" → přesnější (viz „La
+      Putyka a CIRQUEON = partneři" výš).
+    - `upcomingCourses` seskupen podle disciplíny (viz `category` pole výš).
+    - **Homepage se vědomě NEpřestavovala** — shoda s konzultantkou, že web
+      má zůstat BoHeMi, ne přes noc vypadat jako calisthenics gym.
+    - **Zamítnuto/neimplementováno:** plný split Kalisteniky I (viz
+      „Smíšené skupiny" výš — vyřešeno přes `minAge` místo splitu).
 - **Praktický blok rozšířen na ~50 minut + AI napříč tématy (5. 8. 2026):**
   dřív 20 minut jen na tělesné téma týdne, teď necelá hodina — druhá
   polovina je AI blok (obecná AI gramotnost + konkrétní use-case podle

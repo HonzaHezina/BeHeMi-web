@@ -5,8 +5,17 @@ import Footer from '../components/Footer.astro';
 import MediaFrame from '../components/MediaFrame.astro';
 import { specializationCourses, upcomingCourses } from '../data/specialization-courses';
 
-const audienceLabel = (a: ('deti' | 'dospeli')[]) =>
-  a.includes('deti') && a.includes('dospeli') ? 'Děti i dospělí' : a.includes('deti') ? 'Děti' : 'Dospělí';
+const audienceLabel = (a: ('deti' | 'dospeli')[], minAge?: number) => {
+  const kids = minAge ? `Děti od ${minAge} let` : 'Děti';
+  if (a.includes('deti') && a.includes('dospeli')) return `${kids} i dospělí`;
+  return a.includes('deti') ? kids : 'Dospělí';
+};
+
+const upcomingCategoryLabel: Record<'kalistenika' | 'stojky' | 'zonglovani', string> = {
+  kalistenika: 'Kalistenika — navazující dovednosti',
+  stojky: 'Stojky — navazující dovednosti',
+  zonglovani: 'Žonglování — navazující dovednosti',
+};
 ---
 <Layout
   title="Kurzy — kalistenika, žonglování, stojky | BoHeMi"
@@ -65,8 +74,9 @@ const audienceLabel = (a: ('deti' | 'dospeli')[]) =>
           ))}
         </ul>
         <p class="mt-6 text-[14.5px] text-ink-muted">
-          Kurzy vedou zkušení cirkusoví lektoři — dítě z pravidelného kroužku si tak může
-          některou disciplínu přidat navíc, nebo se s ní jen seznámit bez celého semestru.
+          Kurzy vedou trenéři BoHeMi a lektoři spolupracující s naším cirkusovým programem podle
+          konkrétní disciplíny — dítě z pravidelného kroužku si tak může některou disciplínu přidat
+          navíc, nebo se s ní jen seznámit bez celého semestru.
           <a href="/krouzky-pro-deti/" class="font-bold text-accent-text hover:text-ink">Kroužky pro děti →</a>
         </p>
       </div>
@@ -80,7 +90,7 @@ const audienceLabel = (a: ('deti' | 'dospeli')[]) =>
             <MediaFrame media={c.media} rounded="rounded-none" class="h-44 md:h-full" alt={`${c.title} — BoHeMi`} />
             <div class="p-7 md:p-9">
               <h2 class="text-[clamp(22px,2.6vw,28px)] font-extrabold tracking-[-0.02em]">{c.title}</h2>
-              <div class="mt-2 text-[13.5px] font-bold tracking-[0.02em] text-brand">{c.duration} · {audienceLabel(c.audience)}</div>
+              <div class="mt-2 text-[13.5px] font-bold tracking-[0.02em] text-brand">{c.duration} · {audienceLabel(c.audience, c.minAge)}</div>
               <p class="mt-4 max-w-[68ch] text-[15.5px] leading-[1.55] text-ink-soft">{c.d}</p>
               <ul class="mt-4 flex flex-col gap-2">
                 {c.skills.map((s) => (
@@ -105,14 +115,24 @@ const audienceLabel = (a: ('deti' | 'dospeli')[]) =>
     <section class="mx-auto max-w-[1220px] px-5 pt-10 md:px-8">
       <div class="rounded-2xl border border-border bg-sand p-7 md:p-9">
         <h2 class="mb-5 text-[19px] font-extrabold tracking-[-0.02em]">Další kurzy připravujeme</h2>
-        <ul class="grid gap-x-8 gap-y-4 sm:grid-cols-2">
-          {upcomingCourses.map((u) => (
-            <li>
-              <p class="text-[15px] font-bold text-ink">{u.title}</p>
-              <p class="mt-0.5 text-[14px] leading-[1.5] text-ink-soft">{u.d}</p>
-            </li>
-          ))}
-        </ul>
+        <div class="space-y-7">
+          {(['kalistenika', 'stojky', 'zonglovani'] as const).map((cat) => {
+            const items = upcomingCourses.filter((u) => u.category === cat);
+            return items.length > 0 && (
+              <div>
+                <p class="mb-3 text-[12.5px] font-extrabold uppercase tracking-[0.06em] text-ink-muted">{upcomingCategoryLabel[cat]}</p>
+                <ul class="grid gap-x-8 gap-y-4 sm:grid-cols-2">
+                  {items.map((u) => (
+                    <li>
+                      <p class="text-[15px] font-bold text-ink">{u.title}</p>
+                      <p class="mt-0.5 text-[14px] leading-[1.5] text-ink-soft">{u.d}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
 
