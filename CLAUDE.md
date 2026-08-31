@@ -596,6 +596,75 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   rezervovat, proto úplně dole). `num` v `navMenu` odpovídá pořadí v poli —
   při další změně pořadí přečíslovat `01`–`08` v obou souborech
   (`home.ts`/`home.en.ts`) současně.
+- **Kalistenika — pozicování, filozofie a smíšené skupiny (31. 8. 2026,
+  dva doplňující briefy od Honzy):** rozšířily kontext pro `/kurzy/`,
+  promítnuté do textů a datového souboru:
+  - **Obchodní důvod (interní, na web se nepíše):** skupinové fitness lekce
+    silně závisí na MultiSport kartě. Krátké kurzy se prodávají jako
+    uzavřený vzdělávací produkt (platí se za celý kurz najednou), ne jako
+    jednorázový MultiSport vstup — vědomý krok k části nabídky nezávislé
+    na MultiSport ekonomice.
+  - **Pozicování kalisteniky:** NENÍ druhý sport nalepený vedle cirkusu —
+    je to pohybová průprava (síla/stabilita/mobilita/kontrola těla), kterou
+    lze využít ve stojkách a akrobacii. Akademie Cirk La Putyka zůstává
+    hlavní dlouhodobý program, kurzy jsou přídavná vrstva — žádná vlastní
+    vizuální identita/branding pro kalisteniku.
+  - **La Putyka a CIRQUEON = partneři** (dodávají BoHeMi lektory), ne
+    konkurence — web proto nestaví komunikaci „BoHeMi vs. La Putyka" a
+    nejmenuje je jako srovnání ani jako autoritu, ze které by web „vedl"
+    (konzistentní s anti-cílem „žádná externí kniha/autorita" výš) — copy
+    zůstává obecné („zkušení cirkusoví lektoři").
+  - **Pedagogický princip (CIRQUEON-style):** hraní → učení → předvádění,
+    ne sportovní model učení → výkon → hodnocení. Cíl je sebedůvěra/
+    koordinace/spolupráce/práce s chybou, ne výkonnostní žebříček — proto
+    se nikde nepoužívá jazyk „level 1–8" ani „certifikace" (interní
+    `level: 1 | 2` pole se nikde nevykresluje).
+  - **Spojení kalistenika → akrobacie/stojky vysvětleno přímo v textu
+    kurzu:** `kalistenika-1.d` v `specialization-courses.ts` má větu
+    „Stejnou sílu a kontrolu těla pak využiješ i ve stojkách nebo
+    akrobacii." Zvažovaná abstraktnější věta („motor pod kapotou") byla
+    zamítnuta jako moc obecná/frázovitá — tahle konkrétnější verze ji
+    nahradila.
+  - **Smíšené skupiny děti + dospělí (Honza, 31. 8. 2026): Kalistenika I
+    zůstává JEDNA společná lekce, NErozděluje se na dětskou/dospělou
+    variantu.** Honza chce, aby cvičili spolu, ale děti nemají tolik síly —
+    řeší se to škálováním cviku podle aktuální síly účastníka (stejný
+    pohybový vzor, jiná varianta/zátěž), ne podle věku jako pevné
+    kategorie — lektor vede skupinu na jednom cviku, každý dělá jinou
+    variantu podle toho, kde reálně je. Věta v `kalistenika-1.d`: „Děti i
+    dospělí cvičí ve stejné lekci — každý na cviku, který odpovídá jeho
+    aktuální síle, lektor hlídá, aby zátěž seděla věku i schopnostem."
+    **Split na dva objekty (`audience: ['deti']`/`['dospeli']`, mechanismus
+    už podporovaný datovým modelem výš) dává smysl až u pokročilejších
+    dovedností** (muscle-up, přední váha/front lever, vlajka/human flag —
+    viz `upcomingCourses`), protože tyhle cviky nejsou vhodná zátěž pro
+    dítě nezávisle na variantě. Zatím nejsou live produkt (jen text bez
+    `audience` pole) — až se některý aktivuje, tehdy prověřit potřebu
+    `audience: ['dospeli']`.
+  - **`upcomingCourses` rozšířen (31. 8. 2026)** o konkrétní navazující
+    dovednosti: Muscle-up, Přední váha (Front lever), Vlajka (Human Flag),
+    Pistol squat, Ruční stojný tlak (Handstand push-up) — vedle už
+    existujících Kalistenika II / Žonglování II / Stojky II. Planche
+    („král kalisteniky") se do veřejného výhledu vědomě nedává — moc
+    vzdálená, jen interní poznámka.
+  - **Žonglování I text zpřesněn:** kurz teď končí „kaskádou se třemi
+    míčky" (dosažený výsledek), ne „prvními pokusy o kaskádu" (nejistý
+    výsledek) — jasně navazuje na Žonglování II, které začíná stabilizací
+    už zvládnuté kaskády.
+  - **Zváženo a zamítnuto** (oba briefy, obě `Recommended` volby při
+    odsouhlasení s Honzou): Párová akrobacie I jako 4. MVP kurz (stropy
+    pořád neověřené, viz výš), rozdílné ceny podle kurzu (1390/1490/1190 Kč
+    z briefu — zůstává jednotná 1290 Kč), plné rozdělení Kalistenika I na
+    dva produkty (viz smíšené skupiny výš), kompletní týdenní osnova/herní
+    názvy „Opičí škola" apod. a SEO přepis title/meta — brief sám
+    doporučoval tohle zatím neimplementovat do detailu, drží se to
+    s principem „nejdřív ověřit zájem, pak stavět víc" (stejná logika jako
+    u velkého programu kalisteniky, viz níž).
+  - Dlouhodobá vize z briefu (Kalistenika → Skills/Akrobacie →
+    Triky/Freestyle → cirkusové dovednosti, případné budoucí společné
+    dětské vystoupení místo soutěžního rámce) se na web zatím nepromítá
+    vůbec — je to jen směr uvažování pro budoucí rozhodování, ne závazek
+    nebo termín.
 - **Praktický blok rozšířen na ~50 minut + AI napříč tématy (5. 8. 2026):**
   dřív 20 minut jen na tělesné téma týdne, teď necelá hodina — druhá
   polovina je AI blok (obecná AI gramotnost + konkrétní use-case podle

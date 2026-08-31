@@ -98,6 +98,14 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   oboje. `/kurzy/` samo CS-only, žádná EN mutace — EN rozcestník má lokální
   `courseTextEN` slovník jen pro title/teaser. Detail a plné zdůvodnění:
   `/CLAUDE.md`.
+  **Kalistenika I = jedna společná lekce pro děti i dospělé, NErozdělovat
+  na dvě varianty** — Honza chce, aby cvičili spolu; rozdílná síla se řeší
+  škálováním cviku (jiná varianta/zátěž), ne věkovým splitem. Split na
+  `audience: ['deti']`/`['dospeli']` (model to podporuje) dává smysl až u
+  pokročilých skills (muscle-up, front lever…), ne na level 1. Kalistenika
+  je pozicovaná jako průprava pro stojky/akrobacii, ne konkurenční sport
+  vedle Akademie Cirk La Putyka — žádný vlastní branding, žádné „level
+  1–8"/„certifikace" na webu. Plné zdůvodnění: `/CLAUDE.md`.
 - **„Jak vznikl web" sekce** (5. 8. 2026): jen na `/proc-bohemi/` +
   `/en/why-bohemi/` (founder story stránky), odkaz ven na `hezina.cz`. Patička
   na všech stránkách má kredit „Web postavil Honza Hezina s AI" → `hezina.cz`
