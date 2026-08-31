@@ -4,6 +4,15 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Button from '../components/Button.astro';
 import { pricing } from '../data/home';
+import { specializationCourses } from '../data/specialization-courses';
+
+// Krátké dlaždicové popisky (odlišné od teaser/d, ať se stejný odstavec
+// neopakuje potřetí — teaser už žije na HP i /lekce-a-sluzby/).
+const courseBlurb: Record<string, string> = {
+  'kalistenika-1': 'Základy práce s vlastním tělem',
+  'zonglovani-1': 'Od jednoho míčku ke kaskádě',
+  'stojky-1': 'Bezpečná technika stojky',
+};
 
 // Ceník přebírá stejné varianty jako ceník teaser na homepage.
 const priceNotes = [
@@ -218,6 +227,24 @@ const priceNotes = [
           <div class="text-[30px] font-extrabold tracking-[-0.02em] text-accent-text">250 Kč</div>
           <div class="text-[14px] text-ink-muted">/ vstup</div>
         </a>
+      </div>
+    </section>
+
+    <!-- KRÁTKÉ KURZY -->
+    <section class="mx-auto max-w-[1220px] px-5 pb-10 md:px-8">
+      <div class="mb-6 flex flex-wrap items-end justify-between gap-4">
+        <h2 class="text-2xl font-extrabold tracking-[-0.02em]">Krátké kurzy</h2>
+        <a href="/kurzy/" class="cursor-pointer text-base font-bold text-accent-text hover:text-ink">Krátké kurzy — detail →</a>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-3">
+        {specializationCourses.map((c) => (
+          <a href={`/kurzy/#${c.id}`} class="block cursor-pointer rounded-2xl border border-border bg-surface p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-20px_rgba(33,31,26,0.24)]">
+            <h3 class="mb-1 text-[19px] font-extrabold tracking-[-0.02em]">{c.title}</h3>
+            <p class="mb-3 text-[14.5px] text-ink-soft">{courseBlurb[c.id] ?? c.teaser}</p>
+            <div class="text-[30px] font-extrabold tracking-[-0.02em] text-accent-text">{c.price ?? 'Cena se upřesňuje'}</div>
+            <div class="text-[14px] text-ink-muted">/ 4 lekce</div>
+          </a>
+        ))}
       </div>
     </section>
 

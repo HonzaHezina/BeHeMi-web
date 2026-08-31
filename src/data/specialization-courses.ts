@@ -6,11 +6,19 @@
 //
 // id = stabilní kotva /kurzy/#<id>, ASCII, nikdy neměnit.
 //
-// Ceny (rozhodnuto Honzou 31. 8. 2026): "pracovní ceny" z prvního návrhu
-// (1 390/1 490/1 190 Kč...) NEJSOU potvrzené k publikaci — price zůstává
-// undefined u všech kurzů, dokud Honza nedodá závaznou cenu. Karta pak
-// místo částky ukazuje "Cena se upřesňuje" a CTA vede na /kontakt/ (žádný
-// WP membership level pro tyhle kurzy zatím neexistuje).
+// Ceny (rozhodnuto Honzou 31. 8. 2026): 1 290 Kč / 4 lekce, JEDNOTNĚ napříč
+// všemi třemi MVP kurzy — bez rozdílu podle disciplíny, dokud pro to nebude
+// konkrétní důvod (jiné nároky na vybavení/přípravu lektora). Vychází to na
+// ~322,5 Kč/lekci, doloženě uprostřed zjištěného tržního pásma 300–350 Kč
+// (ne odhad z rukávu) a pořád citelně pod Programem 8 týdnů (~494 Kč/trénink)
+// — cenová hierarchie nabídky tak dává smysl, vlajkový program zůstává
+// nejdražší na lekci. Zvažovaná alternativa 1 490 Kč zamítnuta — sedí nad
+// horní hranicí zjištěného pásma a signalizuje jinou pozici („specializované,
+// ne levný přívazek"), kterou Honza vědomě nechtěl; blíž to BoHeMi tónu
+// (přístupné, ne prémiové). Odpovídající dlaždice jsou i v `cenik.astro`
+// (sekce „Krátké kurzy") — drž v synku, pokud se cena změní. Žádný WP
+// membership level pro tyhle kurzy zatím neexistuje, `bookingUrl` proto
+// zůstává `undefined` → CTA na `/kurzy/` pořád vede na `/kontakt/`.
 // Publiku (31. 8. 2026, Honza): do budoucna se některé kurzy pravděpodobně
 // rozdělí na samostatné dětské a dospělé varianty (jiná úroveň/obsah pro
 // každou skupinu), ale NENÍ to podmínka — tam, kde jedna náplň sedí oběma
@@ -51,6 +59,7 @@ export const specializationCourses: SpecializationCourse[] = [
     level: 1,
     audience: ['deti', 'dospeli'],
     duration: '4 × 60 min',
+    price: '1 290 Kč',
     status: 'active',
     d: 'Základy práce s vlastním tělem — správný vis, aktivní ramena, lopatkové přítahy, klik i jeho lehčí varianty, zpevnění středu těla. Lektor u každého cviku hlídá provedení, tempo a zátěž si volíš podle sebe.',
     teaser: 'Vis, ramena, klik a zpevnění středu — základy práce s vlastním tělem ve čtyřech lekcích.',
@@ -70,6 +79,7 @@ export const specializationCourses: SpecializationCourse[] = [
     level: 1,
     audience: ['deti', 'dospeli'],
     duration: '4 × 60 min',
+    price: '1 290 Kč',
     status: 'active',
     d: 'Pro úplné začátečníky. Začneš s jedním míčkem a přesným obloukem, přidáš druhý a rytmus a do konce kurzu uděláš první souvislé pokusy o kaskádu se třemi míčky.',
     teaser: 'Od jednoho míčku k první kaskádě se třemi — čtyři lekce pro úplné začátečníky.',
@@ -89,6 +99,7 @@ export const specializationCourses: SpecializationCourse[] = [
     level: 1,
     audience: ['deti', 'dospeli'],
     duration: '4 × 60 min',
+    price: '1 290 Kč',
     status: 'active',
     d: 'Po čtyřech lekcích budeš znát techniku stojky a mít bezpečný základ pro další trénink — jak přenést váhu na ruce, jak pracovat s rameny a jak bezpečně vykopnout i sestoupit. Samotná stojka bez opory přijde s časem.',
     teaser: 'Bezpečná technika stojky — od přenášení váhy na ruce až po výkop a sestup.',

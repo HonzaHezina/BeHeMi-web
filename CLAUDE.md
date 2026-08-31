@@ -522,15 +522,21 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   ale ne zas tak moc — ať si hned nenaběhneme"). Byla součástí prvního
   návrhu jako volitelný 4. MVP kurz, ale nepublikovat, dokud Honza prostory
   neověří — pak přidat zpět stejným vzorem jako ostatní tři.
-  **Ceny záměrně chybí (`price` je `undefined` u všech tří MVP kurzů) —
-  karta místo částky ukazuje „Cena se upřesňuje", CTA vede na `/kontakt/`.**
-  Původní „pracovní ceny" z prvního zadání (1 390/1 490/1 190 Kč…) Honza
-  explicitně odmítl publikovat, dokud nedodá závaznou cenu — **nepoužívat
-  je ani jako placeholder**, dokud nepřijde nové rozhodnutí. Až cena bude
-  potvrzená: doplnit `price` v datech + přidat dlaždici do `cenik.astro`
-  (vzor sekce „Kroužky a cirkus") — zatím tam záměrně není. Žádný WP
+  **Cena potvrzená (Honza, 31. 8. 2026): 1 290 Kč / 4 lekce, JEDNOTNĚ pro
+  všechny tři MVP kurzy** (`price` vyplněno u všech tří v
+  `specialization-courses.ts`) — nahrazuje dřívější stav „cena se
+  upřesňuje". Zdůvodnění (celé v komentáři v datovém souboru): ~322,5
+  Kč/lekci, doloženě uprostřed zjištěného tržního pásma 300–350 Kč, pořád
+  pod Programem 8 týdnů (~494 Kč/trénink) — cenová hierarchie sedí,
+  vlajkový program zůstává nejdražší na lekci. Zvažovaná alternativa
+  1 490 Kč zamítnuta (nad pásmem, jiná pozice „specializované" — Honza to
+  nechtěl). Dlaždice s cenou přidané do `cenik.astro` (sekce „Krátké
+  kurzy", vzor „Kroužky a cirkus") **i do `en/pricing.astro`** (hardcoded
+  anglické tituly + „CZK", stejná konvence jako existující sekce „Clubs &
+  circus" tam) — obojí drž v synku, pokud se cena znovu změní. Žádný WP
   membership level pro tyhle kurzy zatím neexistuje, `bookingUrl` je
-  všude `undefined` → fallback `/kontakt/`.
+  všude `undefined` → CTA na `/kurzy/` pořád vede na `/kontakt/` (cena je
+  vidět, online koupit zatím nejde).
   **Nahrazuje dřívější krátkodobou implementaci ze stejného dne:**
   kalistenika byla nejdřív přidaná jako běžná opakovaná lekce (`classes[]`
   položka + karta na `/skupinove-lekce/`) a jako samostatný kroužkový blok

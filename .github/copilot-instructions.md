@@ -81,9 +81,11 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   Akademie Cirk La Putyka (`/krouzky-pro-deti/`), NE náhrada — uzavřené bloky
   (`4 × 60 min`) na jednu dovednost, otevřené dětem i dospělým. Data v
   `src/data/specialization-courses.ts` (`SpecializationCourse[]`). **3 aktivní
-  MVP kurzy** (kalistenika, žonglování, stojky) — **žádné ceny** (`price`
-  `undefined`, karta ukazuje „Cena se upřesňuje", CTA → `/kontakt/`); pracovní
-  ceny z prvního zadání se nepoužívají, dokud Honza nedodá závaznou cenu.
+  MVP kurzy** (kalistenika, žonglování, stojky) — **cena 1 290 Kč / 4 lekce,
+  jednotně** (potvrzeno Honzou 31. 8. 2026, zdůvodnění v komentáři datového
+  souboru), dlaždice i v `cenik.astro`/`en/pricing.astro`. CTA na `/kurzy/`
+  pořád vede na `/kontakt/` (žádný WP membership level zatím neexistuje,
+  online koupit nejde).
   **„Párová akrobacie I" záměrně vynechána** — nejistá výška stropu v sálech
   BoHeMi pro zvedačky, nepřidávat bez ověření prostor. Cross-linkovaná
   odevšad: mint banner na HP/`Offer.astro`, `/skupinove-lekce/`,
