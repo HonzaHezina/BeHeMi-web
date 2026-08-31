@@ -149,15 +149,20 @@ export const nav = [
   { label: 'Kontakt', href: '/kontakt/' },
 ];
 
+// Pořadí (přeuspořádáno 31. 8. 2026, Honzou): nejdřív skutečné nabídky lekcí
+// a kurzů (seřazené podle síly publika — kroužky mají v GSC nejvíc kliků ze
+// všech podstránek, viz docs/redirect-map.md), pak individuální služby a
+// vlajkový program, pak firmy (menší B2B publikum), a nakonec informační
+// položky (Trenéři, Fotky) — ty nejsou produkt/služba k rezervaci.
 export const navMenu = [
   { num: '01', label: 'Skupinové lekce', desc: 'Kruháče, HIIT, Zumba a další', href: '/skupinove-lekce/' },
-  { num: '02', label: 'Individuální služby', desc: 'Individuální vedení 1:1', href: '/osobni-treninky/' },
-  { num: '03', label: 'Kroužky pro děti', desc: 'Cirkus, akrobacie, Supermamky', href: '/krouzky-pro-deti/' },
-  { num: '04', label: 'Pro firmy', desc: 'FitTeams, wellbeing, pronájem sálů', href: '/firmy/' },
-  { num: '05', label: 'Trenéři', desc: 'Kdo vás bude vést', href: '/treneri/' },
-  { num: '06', label: 'Fotky', desc: 'Atmosféra a zázemí studia', href: '/fotky/' },
-  { num: '07', label: 'Program 8 týdnů', desc: 'Vlajkový program, uzavřená skupina', href: '/program-8-tydnu/' },
-  { num: '08', label: 'Kurzy', desc: 'Kalistenika, žonglování, stojky', href: '/kurzy/' },
+  { num: '02', label: 'Kroužky pro děti', desc: 'Cirkus, akrobacie, Supermamky', href: '/krouzky-pro-deti/' },
+  { num: '03', label: 'Kurzy', desc: 'Kalistenika, žonglování, stojky', href: '/kurzy/' },
+  { num: '04', label: 'Individuální služby', desc: 'Individuální vedení 1:1', href: '/osobni-treninky/' },
+  { num: '05', label: 'Program 8 týdnů', desc: 'Vlajkový program, uzavřená skupina', href: '/program-8-tydnu/' },
+  { num: '06', label: 'Pro firmy', desc: 'FitTeams, wellbeing, pronájem sálů', href: '/firmy/' },
+  { num: '07', label: 'Trenéři', desc: 'Kdo vás bude vést', href: '/treneri/' },
+  { num: '08', label: 'Fotky', desc: 'Atmosféra a zázemí studia', href: '/fotky/' },
 ];
 
 export const RESERVE_URL = 'https://studio.bohemi.fit/';

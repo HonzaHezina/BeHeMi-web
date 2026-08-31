@@ -19,6 +19,12 @@ const navMenu = lang === 'en' ? navMenuEN : navMenuCS;
 // Classes & services hub href for dropdown detection
 const servicesHref = lang === 'en' ? '/en/classes-and-services/' : '/lekce-a-sluzby/';
 
+// "Lekce a služby" counts as the active nav item both on the hub page itself
+// and on any of its dropdown targets (skupinove-lekce, kurzy, treneri…) —
+// without this, the header shows no active indicator at all on most of the
+// site, while Domů/Ceník/Kontakt highlight fine on their own pages.
+const isServicesActive = current === servicesHref || navMenu.some((m) => m.href.split('#')[0] === current);
+
 const alternateLang = lang === 'en' ? 'cs' : 'en';
 const alternateUrl = routeMap[current] ?? (lang === 'en' ? '/' : '/en/');
 const langSwitchLabel = lang === 'en' ? 'CS' : 'EN';
@@ -42,12 +48,14 @@ const logoHref = lang === 'en' ? '/en/' : '/';
           <div class="group relative">
             <a
               href={item.href}
+              aria-current={isServicesActive ? 'page' : undefined}
               class="relative flex items-center gap-1.5 px-3.5 py-2 text-[15.5px] font-semibold tracking-tight text-ink-line hover:text-brand"
             >
               {item.label}
               <svg class="h-2.5 w-2.5 opacity-55" viewBox="0 0 10 6" fill="none" aria-hidden="true">
                 <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
+              {isServicesActive && <span class="absolute inset-x-3.5 bottom-0.5 h-0.5 rounded-full bg-accent"></span>}
             </a>
             <div
               class="invisible absolute left-1/2 top-[calc(100%+6px)] z-60 w-[340px] -translate-x-1/2 rounded-2xl border border-border bg-surface p-2 opacity-0 shadow-[0_22px_48px_-16px_rgba(33,31,26,0.3)] transition-[opacity,visibility] duration-150 delay-200 group-hover:visible group-hover:opacity-100 group-hover:delay-0 group-focus-within:visible group-focus-within:opacity-100 group-focus-within:delay-0"
@@ -105,15 +113,30 @@ const logoHref = lang === 'en' ? '/en/' : '/';
             <a
               href={item.href}
               aria-current={item.href === current ? 'page' : undefined}
-              class="block rounded-xl px-4 py-3 text-base font-semibold text-ink-line hover:bg-surface-hover"
+              class:list={[
+                'block rounded-xl px-4 py-3 text-base font-semibold hover:bg-surface-hover',
+                item.href === current ? 'bg-surface-hover text-brand' : 'text-ink-line',
+              ]}
             >{item.label}</a>
           ))}
           <div class="my-1.5 border-t border-border"></div>
-          <p class="px-4 pb-1 pt-0.5 text-[11px] font-bold uppercase tracking-[0.08em] text-ink-muted">
+          <p
+            class:list={[
+              'px-4 pb-1 pt-0.5 text-[11px] font-bold uppercase tracking-[0.08em]',
+              isServicesActive ? 'text-accent-text' : 'text-ink-muted',
+            ]}
+          >
             {lang === 'en' ? 'Classes & services' : 'Lekce a služby'}
           </p>
           {navMenu.map((m) => (
-            <a href={m.href} class="flex items-center gap-2.5 rounded-xl px-4 py-2.5 text-[15px] text-ink-soft hover:bg-surface-hover">
+            <a
+              href={m.href}
+              aria-current={m.href.split('#')[0] === current ? 'page' : undefined}
+              class:list={[
+                'flex items-center gap-2.5 rounded-xl px-4 py-2.5 text-[15px] hover:bg-surface-hover',
+                m.href.split('#')[0] === current ? 'bg-surface-hover font-bold text-ink' : 'text-ink-soft',
+              ]}
+            >
               <span class="shrink-0 text-[13px] text-accent-text">{m.num}</span>
               <span>{m.label}</span>
             </a>

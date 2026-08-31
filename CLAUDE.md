@@ -104,12 +104,13 @@ open-gym, photobiomodulation-therapy, pricing, why-bohemi, contact.
 
 Hlavní menu (rozhodnuto Honzou): **Domů · Proč BoHeMi · Lekce a služby · Ceník ·
 Kontakt · Rezervovat**. Položka „Lekce a služby" má dropdown s přímými odkazy na
-klíčové stránky: **Skupinové lekce → `/skupinove-lekce/` · Individuální služby →
-`/osobni-treninky/` · Kroužky pro děti → `/krouzky-pro-deti/` · Pro firmy →
-`/firmy/` · Trenéři → `/treneri/` · Fotky → `/fotky/` · Program 8 týdnů →
-`/program-8-tydnu/` · Kurzy → `/kurzy/`** (data v `navMenu` v
-`home.ts`/`home.en.ts`, 8 položek — poslední dvě přidané 31. 8. 2026, viz
-sekce „Stav implementace" níž). **Popisek „Individuální služby" (3. 8. 2026, dřív
+klíčové stránky, seřazené podle síly nabídky/publika, ne abecedně (přeuspořádáno
+31. 8. 2026 — viz sekce „Stav implementace" níž): **Skupinové lekce →
+`/skupinove-lekce/` · Kroužky pro děti → `/krouzky-pro-deti/` · Kurzy →
+`/kurzy/` · Individuální služby → `/osobni-treninky/` · Program 8 týdnů →
+`/program-8-tydnu/` · Pro firmy → `/firmy/` · Trenéři → `/treneri/` · Fotky →
+`/fotky/`** (data v `navMenu` v `home.ts`/`home.en.ts`, 8 položek).
+**Popisek „Individuální služby" (3. 8. 2026, dřív
 „Osobní tréninky") platí JEN pro tuhle dropdown položku** — href zůstává
 `/osobni-treninky/` beze změny a zbytek webu (page `<title>`/H1 na
 `/osobni-treninky/`, Footer sloupec Služby, CTA tlačítko a „Co vede" chip na
@@ -533,7 +534,23 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   dva rozporné popisy stejného tématu na webu. Nevracet tu starou verzi
   zpět.
   Stránka je zatím CS-only (žádná EN mutace, stejná konvence jako u
-  dětských stránek) — EN `navMenu` (`08`) i tak odkazuje přímo na `/kurzy/`.
+  dětských stránek) — EN `navMenu` (`03`) i tak odkazuje přímo na `/kurzy/`.
+  **Cross-linky na `/kurzy/` (31. 8. 2026):** mint banner na HP (`Offer.astro`,
+  za blokem „Individuální služby"), na `/lekce-a-sluzby/` a
+  `/en/classes-and-services/` (za blokem Programu 8 týdnů), a na
+  `/skupinove-lekce/` + `/krouzky-pro-deti/` (viz výš) — `/kurzy/` bez těchhle
+  odkazů nebyla z HP ani z rozcestníku vůbec dohledatelná, i když byla v
+  headeru a footeru; nový produkt potřebuje odkaz i v samotném obsahu stránek,
+  ne jen v navigaci.
+  **`navMenu` přeuspořádán (31. 8. 2026, Honza: „Kurzy nemají být tak dole a
+  Fotky tak nahoře"):** pořadí teď jde podle síly nabídky/publika, ne podle
+  data přidání — Skupinové lekce · Kroužky pro děti · Kurzy (skutečné
+  nabídky, kroužky mají v GSC nejvíc kliků ze všech podstránek) ·
+  Individuální služby · Program 8 týdnů (vlajkový program) · Pro firmy (menší
+  B2B publikum) · Trenéři · Fotky (informační položky, žádná se nedá
+  rezervovat, proto úplně dole). `num` v `navMenu` odpovídá pořadí v poli —
+  při další změně pořadí přečíslovat `01`–`08` v obou souborech
+  (`home.ts`/`home.en.ts`) současně.
 - **Praktický blok rozšířen na ~50 minut + AI napříč tématy (5. 8. 2026):**
   dřív 20 minut jen na tělesné téma týdne, teď necelá hodina — druhá
   polovina je AI blok (obecná AI gramotnost + konkrétní use-case podle

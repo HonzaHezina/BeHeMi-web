@@ -94,6 +94,16 @@ const classHref = (c: (typeof classes)[number]) => c.page ?? `${scheduleHref}#${
     </div>
   </div>
 
+  <div class="pt-6">
+    <div class="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-mint-border bg-mint px-7 py-6">
+      <p class="max-w-[52ch] text-[16px] leading-[1.55] text-ink">
+        <strong class="font-bold">{lang === 'en' ? 'Want one specific skill, not a regular class?' : 'Chceš jednu konkrétní dovednost, ne pravidelnou lekci?'}</strong>
+        {' '}{lang === 'en' ? 'Calisthenics, juggling, handstands — short courses alongside the regular schedule.' : 'Kalistenika, žonglování nebo stojky — krátké kurzy vedle pravidelného rozvrhu.'}
+      </p>
+      <a href="/kurzy/" class="shrink-0 cursor-pointer text-[15px] font-bold text-accent-text hover:text-ink">{lang === 'en' ? 'Short courses →' : 'Krátké kurzy →'}</a>
+    </div>
+  </div>
+
   <!-- Sekce „Pro děti a rodiny" tady byla duplicitní s KidsBand.astro výš na HP
        (stejný nadpis i odkaz na /krouzky-pro-deti/) — smazána 10. 7. 2026,
        nevracet. Dětská nabídka na HP žije jen v KidsBand. -->
