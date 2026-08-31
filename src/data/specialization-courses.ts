@@ -61,7 +61,7 @@ export const specializationCourses: SpecializationCourse[] = [
     duration: '4 × 60 min',
     price: '1 290 Kč',
     status: 'active',
-    d: 'Základy práce s vlastním tělem — správný vis, aktivní ramena, lopatkové přítahy, klik i jeho lehčí varianty, zpevnění středu těla. Lektor u každého cviku hlídá provedení, tempo a zátěž si volíš podle sebe.',
+    d: 'Základy práce s vlastním tělem — správný vis, aktivní ramena, lopatkové přítahy, klik i jeho lehčí varianty, zpevnění středu těla. Lektor u každého cviku hlídá provedení, tempo a zátěž si volíš podle sebe. Děti i dospělí cvičí ve stejné lekci — každý na cviku, který odpovídá jeho aktuální síle, lektor hlídá, aby zátěž seděla věku i schopnostem. Stejnou sílu a kontrolu těla pak využiješ i ve stojkách nebo akrobacii.',
     teaser: 'Vis, ramena, klik a zpevnění středu — základy práce s vlastním tělem ve čtyřech lekcích.',
     skills: [
       'Správný vis a aktivní ramena',
