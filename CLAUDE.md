@@ -96,6 +96,7 @@ luxusní wellness. Tělo jako cesta k síle, zdraví a klidu.
 | Ceník | `/cenik/` | `cenik.astro` |
 | Kontakt | `/kontakt/` | `kontakt.astro` |
 | Fotky | `/fotky/` | `fotky.astro` |
+| Kurzy | `/kurzy/` | `kurzy.astro` |
 | 404 | — | `404.astro` |
 
 EN mutace (`src/pages/en/`): home, classes-and-services, group-classes,
@@ -105,8 +106,10 @@ Hlavní menu (rozhodnuto Honzou): **Domů · Proč BoHeMi · Lekce a služby · 
 Kontakt · Rezervovat**. Položka „Lekce a služby" má dropdown s přímými odkazy na
 klíčové stránky: **Skupinové lekce → `/skupinove-lekce/` · Individuální služby →
 `/osobni-treninky/` · Kroužky pro děti → `/krouzky-pro-deti/` · Pro firmy →
-`/firmy/` · Trenéři → `/treneri/` · Fotky → `/fotky/`** (data v `navMenu` v
-`home.ts`/`home.en.ts`). **Popisek „Individuální služby" (3. 8. 2026, dřív
+`/firmy/` · Trenéři → `/treneri/` · Fotky → `/fotky/` · Program 8 týdnů →
+`/program-8-tydnu/` · Kurzy → `/kurzy/`** (data v `navMenu` v
+`home.ts`/`home.en.ts`, 8 položek — poslední dvě přidané 31. 8. 2026, viz
+sekce „Stav implementace" níž). **Popisek „Individuální služby" (3. 8. 2026, dřív
 „Osobní tréninky") platí JEN pro tuhle dropdown položku** — href zůstává
 `/osobni-treninky/` beze změny a zbytek webu (page `<title>`/H1 na
 `/osobni-treninky/`, Footer sloupec Služby, CTA tlačítko a „Co vede" chip na
@@ -115,9 +118,9 @@ služby v textu, ne o položku menu — nesjednocovat bez nového rozhodnutí Ho
 **Dropdown smí nést i ne-service odkazy** (Trenéři, od 3. 8. 2026 i Fotky) —
 na rozdíl od hlavní lišty (6 pevných položek výš), kterou bez explicitního
 rozhodnutí Honzy neroztahovat.
-Footer má sloupec **Služby** (Skupinové lekce, Kroužky pro děti, Supermamky,
-Open gym, Fotobiomodulace, Osobní tréninky, Pronájem sálů, Pro firmy) — každá
-nová service stránka se přidává i sem. Program 8 týdnů a Fotky jsou ve sloupci
+Footer má sloupec **Služby** (Skupinové lekce, Kroužky pro děti, Kurzy,
+Supermamky, Open gym, Fotobiomodulace, Osobní tréninky, Pronájem sálů, Pro
+firmy) — každá nová service stránka se přidává i sem. Program 8 týdnů a Fotky jsou ve sloupci
 **Web** (`/program-8-tydnu/`, `/fotky/`), ne ve Službách — nejsou to služby.
 Fotky tak od 3. 8. 2026 mají dva vstupy: Footer sloupec Web (jak bylo) i
 dropdown „Lekce a služby" v hlavičce (nově).
@@ -492,6 +495,45 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   ne přímo z navigace. Stejný precedent jako Trenéři/Fotky: ne-service odkaz
   v dropdownu je OK, hlavní lišta (6 pevných položek) se bez nového
   rozhodnutí Honzy dál neroztahuje.
+- **`/kurzy/` — krátké specializační kurzy (31. 8. 2026, druhá výjimka mimo
+  GSC po `/program-8-tydnu/`, schváleno Honzou):** nová vrstva vedle Akademie
+  Cirk La Putyka — uzavřené bloky (typicky `4 × 60 min`) zaměřené na JEDNU
+  dovednost, otevřené dětem i dospělým, s i bez členství v Akademii. Akademie
+  zůstává beze změny (název, obsah, ceny) — `/kurzy/` je čistě přídavná
+  vrstva, cross-linkovaná obousměrně (mint banner na `/skupinove-lekce/`
+  i `/krouzky-pro-deti/` → `/kurzy/`, odstavec na `/kurzy/` →
+  `/krouzky-pro-deti/`). Data v `src/data/specialization-courses.ts`
+  (`SpecializationCourse[]`, `id` = stabilní kotva `/kurzy/#<id>`) — **3**
+  aktivní MVP kurzy (`*-1`, level 1: kalistenika, žonglování, stojky) plus
+  `upcomingCourses[]` jen jako text bez karty/ceny/kotvy pro přímé navazující
+  kurzy (level 2). Vzdálenější obory (lidské pyramidy, závěsná akrobacie,
+  balanc) se na web zatím vůbec nedávají — jsou jen v interním zadání, ne
+  v kódu.
+  **„Párová akrobacie I" (base/flyer/spotter zvedačky) záměrně VYNECHÁNA**
+  (Honza, 31. 8. 2026) — nejistá vhodnost prostor, výška stropu v sálech
+  BoHeMi není potvrzená jako dostatečná pro zvedačky („máme vyšší stropy,
+  ale ne zas tak moc — ať si hned nenaběhneme"). Byla součástí prvního
+  návrhu jako volitelný 4. MVP kurz, ale nepublikovat, dokud Honza prostory
+  neověří — pak přidat zpět stejným vzorem jako ostatní tři.
+  **Ceny záměrně chybí (`price` je `undefined` u všech čtyř MVP kurzů) —
+  karta místo částky ukazuje „Cena se upřesňuje", CTA vede na `/kontakt/`.**
+  Původní „pracovní ceny" z prvního zadání (1 390/1 490/1 190 Kč…) Honza
+  explicitně odmítl publikovat, dokud nedodá závaznou cenu — **nepoužívat
+  je ani jako placeholder**, dokud nepřijde nové rozhodnutí. Až cena bude
+  potvrzená: doplnit `price` v datech + přidat dlaždici do `cenik.astro`
+  (vzor sekce „Kroužky a cirkus") — zatím tam záměrně není. Žádný WP
+  membership level pro tyhle kurzy zatím neexistuje, `bookingUrl` je
+  všude `undefined` → fallback `/kontakt/`.
+  **Nahrazuje dřívější krátkodobou implementaci ze stejného dne:**
+  kalistenika byla nejdřív přidaná jako běžná opakovaná lekce (`classes[]`
+  položka + karta na `/skupinove-lekce/`) a jako samostatný kroužkový blok
+  na `/krouzky-pro-deti/` — obojí bylo smazáno a nahrazeno modelem
+  „Kalistenika I/II" výš, protože nové zadání (kalistenika = jeden ze čtyř
+  uzavřených specializačních minikurzů, ne ongoing lekce) by jinak vytvořilo
+  dva rozporné popisy stejného tématu na webu. Nevracet tu starou verzi
+  zpět.
+  Stránka je zatím CS-only (žádná EN mutace, stejná konvence jako u
+  dětských stránek) — EN `navMenu` (`08`) i tak odkazuje přímo na `/kurzy/`.
 - **Praktický blok rozšířen na ~50 minut + AI napříč tématy (5. 8. 2026):**
   dřív 20 minut jen na tělesné téma týdne, teď necelá hodina — druhá
   polovina je AI blok (obecná AI gramotnost + konkrétní use-case podle

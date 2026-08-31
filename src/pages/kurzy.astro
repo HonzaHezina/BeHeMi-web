@@ -1,0 +1,141 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MediaFrame from '../components/MediaFrame.astro';
+import { specializationCourses, upcomingCourses } from '../data/specialization-courses';
+
+const audienceLabel = (a: ('deti' | 'dospeli')[]) =>
+  a.includes('deti') && a.includes('dospeli') ? 'Děti i dospělí' : a.includes('deti') ? 'Děti' : 'Dospělí';
+---
+<Layout
+  title="Kurzy — kalistenika, žonglování, stojky | BoHeMi"
+  description="Krátké čtyřlekční kurzy pro děti i dospělé vedle Akademie Cirk La Putyka — kalistenika, žonglování a stojky. Jedna dovednost od základů, bez závazku na celý semestr."
+  current="/kurzy/"
+>
+  <Header current="/kurzy/" />
+  <main>
+    <!-- HERO -->
+    <section class="relative mx-auto max-w-[1220px] overflow-hidden px-5 pb-8 pt-16 md:px-8 md:pt-20">
+      <div
+        class="pointer-events-none absolute right-0 top-2.5 h-[400px] w-[400px] rounded-full"
+        style="background:radial-gradient(circle, rgba(226,35,26,0.12), rgba(226,35,26,0) 70%);"
+        aria-hidden="true"
+      ></div>
+      <div class="relative">
+        <p class="mb-4 text-[13px] font-extrabold uppercase tracking-[0.08em] text-accent-text">
+          <a href="/lekce-a-sluzby/" class="hover:text-ink">Lekce a služby</a> · Kurzy
+        </p>
+        <h1 class="text-[clamp(40px,6.2vw,76px)] font-extrabold leading-[0.98] tracking-[-0.035em]">
+          Krátké <span class="font-medium text-accent-text">kurzy</span>
+        </h1>
+        <p class="mt-6 max-w-[58ch] text-[clamp(18px,2.1vw,22px)] leading-[1.45] text-ink-warm">
+          Chceš se naučit jednu konkrétní dovednost, ale nechceš se hned hlásit na celý semestr?
+          Vedle pravidelných kroužků Akademie Cirk La Putyka otevíráme i kratší tematické kurzy
+          pro děti i dospělé — každý vede od úplných základů ke konkrétní dovednosti.
+        </p>
+      </div>
+    </section>
+
+    <!-- KURZY VS. AKADEMIE -->
+    <section class="mx-auto max-w-[1220px] px-5 pb-4 md:px-8">
+      <div class="rounded-2xl border border-border bg-surface p-7 md:p-9">
+        <h2 class="mb-4 text-[19px] font-extrabold tracking-[-0.02em]">V čem se to liší od Akademie Cirk La Putyka</h2>
+        <div class="grid gap-6 sm:grid-cols-2">
+          <div>
+            <p class="mb-1.5 text-[15px] font-bold text-brand">Akademie Cirk La Putyka</p>
+            <p class="text-[15px] leading-[1.55] text-ink-soft">Pravidelný kroužek na celý semestr, kde dítě postupně poznává víc oblastí cirkusu najednou.</p>
+          </div>
+          <div>
+            <p class="mb-1.5 text-[15px] font-bold text-brand">Krátké kurzy</p>
+            <p class="text-[15px] leading-[1.55] text-ink-soft">Uzavřený blok pár lekcí zaměřený na jednu dovednost. Nemusíš být v Akademii ani mít žádnou zkušenost — stačí přijít.</p>
+          </div>
+        </div>
+        <ul class="mt-6 grid gap-x-8 gap-y-2.5 sm:grid-cols-2">
+          {[
+            'Bez předchozí zkušenosti',
+            'Nemusíš být členem Akademie',
+            'Část kurzů je pro děti, část i pro dospělé',
+            'Platí se za celý kurz, ne po jednotlivých lekcích',
+          ].map((f) => (
+            <li class="flex items-start gap-2.5 text-[15px] text-ink-line">
+              <span class="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden="true"></span>
+              <span>{f}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="mt-6 text-[14.5px] text-ink-muted">
+          Kurzy vedou lektoři spolupracující s Akademií Cirk La Putyka — dítě z Akademie si tak může
+          některou disciplínu přidat navíc, nebo se s ní jen seznámit bez celého semestru.
+          <a href="/krouzky-pro-deti/" class="font-bold text-accent-text hover:text-ink">Akademie Cirk La Putyka →</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- AKTIVNÍ KURZY -->
+    <section class="mx-auto max-w-[1220px] px-5 pt-8 md:px-8" aria-label="Přehled kurzů">
+      <div class="space-y-6">
+        {specializationCourses.map((c) => (
+          <article id={c.id} class="scroll-mt-24 overflow-hidden rounded-2xl border border-border bg-surface md:grid md:grid-cols-[minmax(240px,320px)_1fr]">
+            <MediaFrame media={c.media} rounded="rounded-none" class="h-44 md:h-full" alt={`${c.title} — BoHeMi`} />
+            <div class="p-7 md:p-9">
+              <h2 class="text-[clamp(22px,2.6vw,28px)] font-extrabold tracking-[-0.02em]">{c.title}</h2>
+              <div class="mt-2 text-[13.5px] font-bold tracking-[0.02em] text-brand">{c.duration} · {audienceLabel(c.audience)}</div>
+              <p class="mt-4 max-w-[68ch] text-[15.5px] leading-[1.55] text-ink-soft">{c.d}</p>
+              <ul class="mt-4 flex flex-col gap-2">
+                {c.skills.map((s) => (
+                  <li class="flex items-start gap-2.5 text-[15px] text-ink-line">
+                    <span class="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden="true"></span>
+                    <span>{s}</span>
+                  </li>
+                ))}
+              </ul>
+              {c.nextCourse && <p class="mt-4 text-[14px] text-ink-muted">Navazuje: {c.nextCourse}</p>}
+              <div class="mt-5 flex flex-wrap items-center justify-between gap-3">
+                <span class="text-[15px] font-bold text-ink-muted">{c.price ?? 'Cena se upřesňuje'}</span>
+                <a href={c.bookingUrl ?? '/kontakt/'} class="cursor-pointer text-[15px] font-bold text-accent-text hover:text-ink">Mám zájem →</a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- DALŠÍ KURZY PŘIPRAVUJEME -->
+    <section class="mx-auto max-w-[1220px] px-5 pt-10 md:px-8">
+      <div class="rounded-2xl border border-border bg-sand p-7 md:p-9">
+        <h2 class="mb-5 text-[19px] font-extrabold tracking-[-0.02em]">Další kurzy připravujeme</h2>
+        <ul class="grid gap-x-8 gap-y-4 sm:grid-cols-2">
+          {upcomingCourses.map((u) => (
+            <li>
+              <p class="text-[15px] font-bold text-ink">{u.title}</p>
+              <p class="mt-0.5 text-[14px] leading-[1.5] text-ink-soft">{u.d}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- FINÁLNÍ CTA -->
+    <section class="mx-auto max-w-[1220px] px-5 pb-16 pt-14 md:px-8 md:pb-23">
+      <div class="relative flex flex-wrap items-center justify-between gap-6 overflow-hidden rounded-[22px] bg-ink-dark p-8 text-cream md:p-[clamp(32px,5vw,56px)]">
+        <div
+          class="pointer-events-none absolute -bottom-22 -right-12 h-[340px] w-[340px] rounded-full"
+          style="background:radial-gradient(circle, rgba(226,35,26,0.18), rgba(226,35,26,0) 70%);"
+          aria-hidden="true"
+        ></div>
+        <div class="relative">
+          <h2 class="max-w-[22ch] text-[clamp(26px,3.4vw,40px)] font-extrabold tracking-[-0.03em]">Nevíš, který kurz vybrat?</h2>
+          <p class="mt-3 max-w-[44ch] text-[17px] text-cream-muted">Napiš nám věk, zkušenosti a co by tě (nebo dítě) bavilo — poradíme.</p>
+        </div>
+        <a
+          href="/kontakt/"
+          class="relative inline-flex shrink-0 cursor-pointer items-center gap-2 rounded-full bg-accent-text px-7 py-3.5 text-[17px] font-bold text-cream transition-colors hover:bg-accent-deep"
+        >
+          Napsat nám →
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
