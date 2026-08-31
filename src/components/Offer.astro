@@ -12,7 +12,6 @@ import {
   firmyServices as firmyServicesEN,
 } from '../data/home.en';
 import { photosCS, photosEN } from '../data/photos';
-import { specializationCourses } from '../data/specialization-courses';
 import type { Lang } from '../i18n/ui';
 
 interface Props {
@@ -24,16 +23,6 @@ const classes = lang === 'en' ? classesEN : classesCS;
 const photos = lang === 'en' ? photosEN : photosCS;
 const individualServices = lang === 'en' ? individualServicesEN : individualServicesCS;
 const firmyServices = lang === 'en' ? firmyServicesEN : firmyServicesCS;
-
-// /kurzy/ has no EN page (same convention as kids content) — only
-// title/teaser need translating here, id/duration/media stay
-// single-sourced from specialization-courses.ts. Same dict as
-// en/classes-and-services.astro; keep both in sync if wording changes.
-const courseTextEN: Record<string, { title: string; teaser: string }> = {
-  'kalistenika-1': { title: 'Calisthenics I – Bodyweight Strength', teaser: 'Hangs, shoulders, push-ups and core control — bodyweight basics in four lessons.' },
-  'zonglovani-1': { title: 'Juggling I – From One Ball to a Cascade', teaser: 'From a single ball to your first three-ball cascade — four lessons for complete beginners.' },
-  'stojky-1': { title: 'Handstands I – Upside Down', teaser: 'Safe handstand technique — from weight transfer on your hands to kicking up and coming down.' },
-};
 
 const scheduleHref = lang === 'en' ? '/en/group-classes/' : '/skupinove-lekce/';
 const contactHref = lang === 'en' ? '/en/contact/' : '/kontakt/';
@@ -105,32 +94,19 @@ const classHref = (c: (typeof classes)[number]) => c.page ?? `${scheduleHref}#${
     </div>
   </div>
 
-  <div class="pt-12">
-    <div class="mb-[22px] flex flex-wrap items-end justify-between gap-4">
-      <h3 class="text-2xl font-extrabold tracking-[-0.02em]">
-        {lang === 'en' ? 'Short courses' : 'Krátké kurzy'}
-      </h3>
-      <a href="/kurzy/" class="cursor-pointer text-base font-bold text-accent-text hover:text-ink">
-        {lang === 'en' ? 'All courses →' : 'Všechny kurzy →'}
-      </a>
-    </div>
-    <p class="mb-[22px] max-w-[60ch] text-[15.5px] leading-[1.5] text-ink-soft">
-      {lang === 'en'
-        ? 'Calisthenics, juggling or handstands — closed courses on one skill, for kids and adults, no full semester needed.'
-        : 'Kalistenika, žonglování nebo stojky — uzavřené kurzy na jednu dovednost, pro děti i dospělé, i bez celého semestru.'}
-    </p>
-    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      {specializationCourses.map((c) => (
-        <ClassCard
-          href={`/kurzy/#${c.id}`}
-          media={c.media}
-          fallbackAlt={lang === 'en' ? (courseTextEN[c.id]?.title ?? c.title) : c.title}
-          title={lang === 'en' ? (courseTextEN[c.id]?.title ?? c.title) : c.title}
-          description={lang === 'en' ? (courseTextEN[c.id]?.teaser ?? c.teaser) : c.teaser}
-          meta={c.duration}
-          headingTag="h4"
-        />
-      ))}
+  <div class="pt-9">
+    <div class="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-mint-border bg-mint px-7 py-6">
+      <p class="max-w-[48ch] text-[16.5px] text-ink">
+        <strong class="font-bold">
+          {lang === 'en' ? 'Looking for one specific skill, not a regular class?' : 'Hledáš jednu konkrétní dovednost, ne pravidelnou lekci?'}
+        </strong>{' '}
+        {lang === 'en'
+          ? 'Calisthenics, juggling or handstands — short courses for kids and adults.'
+          : 'Kalistenika, žonglování nebo stojky — krátké kurzy pro děti i dospělé.'}
+      </p>
+      <Button href="/kurzy/" variant="brand" class="shrink-0 px-[22px] py-3 text-[15.5px]">
+        {lang === 'en' ? 'Short courses →' : 'Krátké kurzy →'}
+      </Button>
     </div>
   </div>
 
