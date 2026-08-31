@@ -26,7 +26,8 @@ Ne spa, ne ezoterika, ne luxusní wellness, ne „sekta".
 2. **Booking = odkaz ven** na `https://studio.bohemi.fit/`. Nikdy iframe, nikdy
    vlastní rezervační formulář.
 3. **URL/slugy se nemění** — zdroj pravdy je `docs/redirect-map.md` (reálná GSC
-   data). Nové slugy nevymýšlet. Jediná schválená výjimka: `/program-8-tydnu/`.
+   data). Nové slugy nevymýšlet. Schválené výjimky: `/program-8-tydnu/` a
+   `/kurzy/`.
 4. **Barvy a fonty jen z `design-system/MASTER.md`.** Chybí token → zeptej se.
 5. **SEO basics:** jeden `<h1>`, `<title>` + `meta description`, sémantické
    nadpisy, alt texty.
@@ -54,8 +55,13 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
 - **Postaveno:** `/`, `/proc-bohemi/`, `/lekce-a-sluzby/`, `/skupinove-lekce/`,
   `/krouzky-pro-deti/`, `/supermamky/`, `/open-gym/`, `/fotobiomodulacni-terapie/`,
   `/osobni-treninky/`, `/pronajem-salu/`, `/firmy/`, `/treneri/`, `/fotky/`,
-  `/program-8-tydnu/`, `/cenik/`, `/kontakt/`, 404 + EN mutace v `src/pages/en/`.
+  `/program-8-tydnu/`, `/kurzy/`, `/cenik/`, `/kontakt/`, 404 + EN mutace v
+  `src/pages/en/`.
   Menu: Domů · Proč BoHeMi · Lekce a služby · Ceník · Kontakt · Rezervovat.
+  Dropdown „Lekce a služby" (`navMenu`, 8 položek, seřazeno podle síly
+  nabídky/publika, ne data přidání — přeuspořádáno 31. 8. 2026): Skupinové
+  lekce → Kroužky pro děti → Kurzy → Individuální služby → Program 8 týdnů →
+  Pro firmy → Trenéři → Fotky (informační položky vždy na konci).
   `/treneri/` je bohatý detail (řádkový layout, anchor nav, „Co vede" chipy) —
   HP `Trainers.astro` zůstává jen ochutnávka, stejný vzor jako
   `/skupinove-lekce/` vs. `Offer.astro`. `/fotky/` = obecná galerie atmosféry
@@ -71,6 +77,18 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   všemi 8 týdny (obecná AI gramotnost + use-case podle tématu týdne, ne
   samostatné 9. téma) — souhrn na webu, plný rozpis pro lektora v
   `docs/program-8-tydnu-podklady.md`. `forYou` má 4. položku o učení AI.
+- **`/kurzy/` — krátké specializační kurzy (31. 8. 2026):** vrstva vedle
+  Akademie Cirk La Putyka (`/krouzky-pro-deti/`), NE náhrada — uzavřené bloky
+  (`4 × 60 min`) na jednu dovednost, otevřené dětem i dospělým. Data v
+  `src/data/specialization-courses.ts` (`SpecializationCourse[]`). **3 aktivní
+  MVP kurzy** (kalistenika, žonglování, stojky) — **žádné ceny** (`price`
+  `undefined`, karta ukazuje „Cena se upřesňuje", CTA → `/kontakt/`); pracovní
+  ceny z prvního zadání se nepoužívají, dokud Honza nedodá závaznou cenu.
+  **„Párová akrobacie I" záměrně vynechána** — nejistá výška stropu v sálech
+  BoHeMi pro zvedačky, nepřidávat bez ověření prostor. Cross-linkovaná
+  obousměrně (mint banner na HP/`Offer.astro`, `/lekce-a-sluzby/`,
+  `/skupinove-lekce/`, `/krouzky-pro-deti/` → `/kurzy/`). CS-only, žádná EN
+  mutace. Detail a plné zdůvodnění: `/CLAUDE.md`.
 - **„Jak vznikl web" sekce** (5. 8. 2026): jen na `/proc-bohemi/` +
   `/en/why-bohemi/` (founder story stránky), odkaz ven na `hezina.cz`. Patička
   na všech stránkách má kredit „Web postavil Honza Hezina s AI" → `hezina.cz`
@@ -94,6 +112,11 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
 - **Mobilní menu (`Header.astro`) = `<details>` se zavírá i klikem mimo něj**
   (inline `<script>`, `data-mobile-menu` atribut) — nový mobilní panel napoj na
   stejné chování, nevracet menu zavíratelné jen křížkem.
+- **Aktivní stav menu (31. 8. 2026):** „Lekce a služby" se v `Header.astro`
+  zvýrazní (desktop podtržení, mobil bg/tučně) na hub stránce `/lekce-a-sluzby/`
+  i na všech 8 cílech jejího dropdownu (`isServicesActive` — dřív se
+  nezvýrazňovalo nic, jen 4 pevné nav položky to uměly). Nerozbíjet zpět na
+  jen-4-položkovou logiku.
 - **Navigace = tři vrstvy** (HP ochutnávka → rozcestník → detail): každý klik
   vede na **nejkonkrétnější existující stránku**. Služba → vlastní stránka; typ
   lekce → `/skupinove-lekce/#kotva` (typy lekcí nemají vlastní stránky); dětská

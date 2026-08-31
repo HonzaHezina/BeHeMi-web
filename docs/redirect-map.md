@@ -58,6 +58,15 @@ kromě toho, co už bylo zapsané.
 | /firmy/ | 7 | KEEP |
 | /fotky/ | 3 | KEEP (659 zobr.) |
 
+### Nové sluby MIMO tuhle GSC tabulku (schváleno Honzou, ne z historického provozu)
+Žádný z těchhle slugů nemá historii kliků — je to nová nabídka, ne migrace
+starého obsahu. Zapsáno sem, aby platilo pravidlo „nové slugy odsud,
+nevymýšlet" i pro ně.
+| Slug | Schváleno | Poznámka |
+|---|---|---|
+| /program-8-tydnu/ | 7/2026 | Vlajkový program, samostatná stránka |
+| /kurzy/ | 31. 8. 2026 | Krátké specializační kurzy (kalistenika, žonglování, stojky) vedle Akademie Cirk La Putyka |
+
 ## 301 — přesměrovat starou URL na nový cíl
 | Stará URL | Kliky | → Cíl | Stav |
 |---|---|---|---|

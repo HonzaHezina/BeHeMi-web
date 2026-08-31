@@ -134,8 +134,10 @@ všech stránkách CZ i EN (`Footer` bere `lang` prop).
 
 > ✅ **Slugy jsou ověřené z reálné GSC (12 měsíců).** Zdroj pravdy =
 > **`docs/redirect-map.md`** (KEEP / 301 / WP / LEGAL + trailing-slash pravidlo).
-> Nové slugy odsud, nevymýšlet. Jediná výjimka mimo GSC: `/program-8-tydnu/`
-> (nový produkt, explicitně schváleno 7/2026 — zapsán i v redirect-map).
+> Nové slugy odsud, nevymýšlet. Výjimky mimo GSC (nové produkty, ne migrace
+> starého obsahu): `/program-8-tydnu/` (7/2026) a `/kurzy/` (31. 8. 2026) —
+> obě explicitně schválené Honzou a zapsané v redirect-map v sekci „Nové
+> slugy mimo tuhle GSC tabulku".
 > **301 redirecty implementované 1. 8. 2026** v `redirects` bloku
 > `astro.config.mjs` (statický meta-refresh + canonical, ne host-level 301 —
 > nginx v Coolify není z repa editovatelný). `trailingSlash: 'always'` taky
@@ -647,6 +649,19 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   (`<summary>` toggle). Nový mobilní panel/dropdown v hlavičce ať respektuje
   stejné chování (buď použij stejný `<details>` vzor, nebo panel taky napoj na
   tenhle listener).
+- **Aktivní stav menu opraven (31. 8. 2026, Honza: „menu se chová na každé
+  stránce jinak"):** položka „Lekce a služby" v `Header.astro` neměla vůbec
+  žádnou aria-current/podtržení logiku — na `/cenik/`, `/kontakt/` apod. se
+  aktivní položka podtrhla, ale na `/lekce-a-sluzby/` a všech 8 podstránkách
+  jejího dropdownu (`/skupinove-lekce/`, `/kurzy/`, `/treneri/`…) se
+  nezvýraznilo nic, takže menu na většině webu vypadalo jinak než na
+  zbylých 4 stránkách. Mobilní menu navíc nemělo aktivní stav vůbec nikde.
+  Oprava: `isServicesActive = current === servicesHref ||
+  navMenu.some((m) => m.href.split('#')[0] === current)` — „Lekce a služby"
+  se teď zvýrazní (desktop podtržení i mobilní bg/tučně) na hub stránce i na
+  všech dropdown cílech; mobilní hlavní položky (Domů/Ceník/…) i konkrétní
+  dropdown položka (např. „Kurzy" na `/kurzy/`) mají teď stejné zvýraznění
+  jako desktop. Platí pro CZ i EN (`navMenu`/`servicesHref` jsou lang-aware).
 - **Fotky (stav 2. 8. 2026):** Reálné fotky zapojeny na všech klíčových
   stránkách. Zdrojové soubory v `src/assets/`: `lekce/` (kruháč, silový
   trénink, vlastní váha, HIIT, břišní pekáč), `supermamky/`, `deti/`
