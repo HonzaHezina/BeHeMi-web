@@ -231,11 +231,15 @@ Pravidlo pro celý web: **každý klik vede na NEJKONKRÉTNĚJŠÍ existující 
 stejné slugy, jen cestu `/en/group-classes/#…`):**
 
 - `/skupinove-lekce/`: `#kruhac #silovy-trenink #hiit #supermamky #vlastni-vaha
-  #power-zone #zumba #brisni-pekac #solid-booty #enduro` + blok `#prvni-lekce`
+  #power-zone #brisni-pekac #solid-booty #enduro` + blok `#prvni-lekce`
   („Tvoje první lekce" — konverzní jádro stránky, přidáno 7. 7. 2026; vedou na
   něj odkazy „Jdeš poprvé? →" z HP a z dětské stránky). **Move Smart NEJEDE**
   (rozhodnuto Honzou 7. 7. 2026) — lekce visí už jen na starém WP, na nový web
-  nepatří a kotva `#move-smart` neexistuje.
+  nepatří a kotva `#move-smart` neexistuje. **Zumba pro dospělé zrušena
+  (rozhodnuto Honzou 31. 8. 2026)** — kotva `#zumba` na `/skupinove-lekce/`
+  smazána (lekce úplně pryč, ne přesunuta jinam). **Dětská Zumba zůstává beze
+  změny** (`#detska-zumba` na `/krouzky-pro-deti/`, Eliška Velázquez ji dál
+  vede) — nejde plést dohromady, jde jen o zrušení dospělácké varianty.
 - `/krouzky-pro-deti/`: `#cirkusova-skolicka #zaklady-gymnastiky
   #akrobacie-zonglovani #objevovarna #detska-zumba`
 - `/treneri/`: `#klara-mechurova #jitka-stepankova #eliska-velazquez #jan-hezina`
@@ -640,7 +644,7 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
 - **Jednorázový vstup má cenu podle typu lekce (ověřeno Klárkou 1. 8. 2026),
   ne jednotnou 199 Kč:** 199 Kč posilovací lekce (kruháč, silový, HIIT,
   vlastní váha, Power Zone, břišní pekáč, Solid Booty, Supermamky), 250 Kč
-  Zumba/Enduro/Objevovárna, 150 Kč Open gym. `pricing[0]` v `home.ts`/
+  Enduro/Objevovárna, 150 Kč Open gym. `pricing[0]` v `home.ts`/
   `home.en.ts` nese breakdown ve `feat`, `cenik.astro`/`en/pricing.astro`
   bar chart i doprovodná věta pod ním jsou dolazené na stejná čísla.
 - **Pronájem sálů = 4 sály s novými jmény/cenami/popisy (ověřeno Klárkou
@@ -786,7 +790,7 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   při zpracování.
   ```
   _raw/lekce/kruhac/          _raw/lekce/silovy-trenink/    _raw/lekce/hiit/
-  _raw/lekce/zumba/           _raw/lekce/vlastni-vaha/      _raw/lekce/power-zone/
+  _raw/lekce/vlastni-vaha/    _raw/lekce/power-zone/
   _raw/lekce/brisni-pekac/    _raw/lekce/solid-booty/       _raw/lekce/enduro/
   _raw/deti/cirkusova-skolicka/    _raw/deti/zaklady-gymnastiky/
   _raw/deti/akrobacie-zonglovani/  _raw/deti/objevovarna/  _raw/deti/detska-zumba/

@@ -174,7 +174,7 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   (Bellydance, Vánoční členství, tábor) **nepoužívat** — nejsou v nabídce webu
   nebo je produkt zrušený. Plný seznam a zdůvodnění: `/CLAUDE.md`.
 - **Jednorázový vstup NENÍ jednotná cena (opraveno Klárkou 1. 8. 2026):** 199 Kč
-  posilovací lekce, 250 Kč Zumba/Enduro/Objevovárna, 150 Kč Open gym — breakdown
+  posilovací lekce, 250 Kč Enduro/Objevovárna, 150 Kč Open gym — breakdown
   v `pricing[0].feat` (`home.ts`/`home.en.ts`), sync v `cenik.astro`/`en/pricing.astro`.
   **Pronájem sálů = 4 sály s novými jmény/cenami** (opraveno 1. 8. 2026):
   Velký taneční 600 Kč, Malý taneční 500 Kč, Funkční sál 700 Kč (největší,
