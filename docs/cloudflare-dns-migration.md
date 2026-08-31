@@ -88,3 +88,28 @@ Migrace je tímto kompletně uzavřená, žádný ze čtyř kritických bodů
 
 - [ ] Zvážit „Only allow Cloudflare IP addresses at your origin"
       (firewall na Hetzneru/Wedosu) — volitelné zpřísnění, ne nutné
+
+## Známý problém: stránka se občas objeví nestylovaná (stará HTML z cache)
+
+Nahlášeno Honzou 31. 8. 2026 (příklad: `/program-8-tydnu/`) — stránka se
+občas načte úplně bez CSS (holé podtržené odkazy, obří nezmenšené SVG
+logo), reload ji hned opraví. **Diagnóza:** Astro hashuje CSS/JS soubory
+podle obsahu (`_astro/xxxxx.css`) a každý nový deploy přepíše `dist/` —
+staré hashované soubory zmizí. Pokud prohlížeč nebo Cloudflare edge cache
+drží HTML z doby před posledním deployem, odkazuje na CSS, které už na
+originu neexistuje → CSS spadne na 404 → stránka je nestylovaná. Tvrdý
+reload stáhne aktuální HTML se správnými odkazy → vypadá v pořádku.
+Objevilo se až po migraci na Cloudflare (7. 8. 2026), dřív bez CDN k tomu
+nebyl prostor.
+
+**Doporučený fix (nastavuje se v Cloudflare dashboardu, ne v repu) — zatím
+NEIMPLEMENTOVÁNO, čeká na provedení:**
+
+1. Caching → Cache Rules: HTML dokumenty (`Content-Type` `text/html`,
+   resp. vše mimo `/_astro/*`) → **Bypass cache** (nebo velmi krátké TTL) —
+   HTML je malé, přenačítat ho z originu při každém requestu je levné a
+   zaručí vždy aktuální odkazy na assety.
+2. `/_astro/*` naopak cachovat agresivně (názvy mají content-hash, jsou
+   bezpečně „immutable") — dlouhé Edge/Browser TTL.
+3. Než bude pravidlo z bodu 1 hotové: po každém deployi ručně „Purge
+   Everything" v Cloudflare jako dočasná záplata.
