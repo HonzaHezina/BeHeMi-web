@@ -302,6 +302,7 @@ function bohemi_wp_final_child_get_footer_html(): string {
 			'<p>© BoHeMi fitness s.r.o. · IČ 19115296 · Všechna práva vyhrazena.</p>' .
 			'<p class="bohemi-footer-legal"><a href="/vseobecne-obchodni-podminky/">Obchodní podmínky</a> · <a href="/zpracovani-osobnich-udaju/">Zpracování osobních údajů</a> · <a href="/provozni-rad/">Provozní řád</a></p>' .
 		'</div>' .
+		'<p class="bohemi-footer-credits">Rezervace a členství tu běží na <a href="https://wordpress.org/" target="_blank" rel="noopener">WordPressu</a>. Kalendář obstarává <a href="https://wordpress.org/plugins/booking-activities/" target="_blank" rel="noopener">Booking Activities</a>, členství <a href="https://www.paidmembershipspro.com/" target="_blank" rel="noopener">Paid Memberships Pro</a>. Oboje doporučujeme.</p>' .
 		'</div>' .
 	'</footer>';
 

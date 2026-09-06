@@ -257,6 +257,15 @@ body {
  white-space:nowrap;
 }
 
+/* Poděkování za pluginy (Booking Activities, PMPro) — pod copyright řádkem,
+   stejná velikost/opacity jako .bohemi-footer-bottom p, jen mimo jeho flex
+   řádek, aby nešlo do space-between rozpočtu se dvěma sloupci nad ním. */
+.bohemi-footer-credits {
+ margin:8px 0 0;
+ font-size:13px;
+ opacity:0.75;
+}
+
 /* Booking Activities calendar (FullCalendar v6) — accessibility fix
    (1. 8. 2026, WebPageTest/axe audit): FullCalendar's own default theme
    sets event text to white via its `--fc-event-text-color` CSS custom
