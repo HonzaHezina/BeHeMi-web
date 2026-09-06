@@ -380,7 +380,25 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   - **7 = Cirkusová školička, 8 = Základy gymnastiky a akrobacie, 9 = Pozemní
     a závěsná akrobacie/žonglování, 15 = Dětská Zumba** → `signupUrl` v
     `circusCourses` + inline href u Dětské Zumby na `/krouzky-pro-deti/`
-    (`Přihlásit →` u každého kurzu).
+    (`Přihlásit →` u každého kurzu) — **jen dokud má kurz volnou kapacitu**,
+    viz `full: true` pattern hned níž (level 9 od 6. 9. 2026 kapacitu nemá,
+    `signupUrl` je pryč, level pro budoucí znovuotevření zůstává v tomhle
+    seznamu zdokumentovaný).
+  - **`circusCourses[].full: true` (`krouzky-pro-deti.astro`) = kapacita
+    naplněná** — `Přihlásit →` (a jeho `signupUrl`) zmizí, nahrazuje ho box
+    „Kapacita naplněná" s telefonem/e-mailem (`+420 603 989 762` /
+    `info@bohemi.fit`). Cenové dlaždice v `cenik.astro`/`en/pricing.astro`
+    se NEMĚNÍ (pořád jen odkaz na kotvu `/krouzky-pro-deti/#<id>` — detail
+    tam ukáže aktuální stav sám, žádná duplicitní logika v ceníku).
+    Stav (6. 9. 2026): **`cirkusova-skolicka` a `zaklady-gymnastiky`** mají
+    `full: true` odedávna; **`akrobacie-zonglovani`** (level 9) doplněn
+    6. 9. 2026 na Honzův pokyn „zruš přihlášení stejně jako ostatní" —
+    `signupUrl` u něj byl smazán (stejná podoba objektu jako u zbylých dvou
+    plných kurzů). **Zatím žádný cirkusový kurz nemá volnou kapacitu**
+    (všechny tři `full: true`) — jen `detska-zumba` (level 15, samostatný
+    blok mimo `circusCourses`) pořád nabírá přímo online. Až Honza oznámí
+    uvolněnou kapacitu u některého kurzu, smaž jeho `full: true` a vrať
+    `signupUrl` s odpovídajícím `level=<ID>` z tabulky výš.
   - **5 = Jednorázový vstup** — WP má u něj „Povolit registraci: Ne" (nejde
     koupit online), zůstává na `/kontakt/`.
   - **10 = Tříměsíční neomezené členství** — na webu zatím není nabízené
