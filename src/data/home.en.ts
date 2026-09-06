@@ -7,7 +7,7 @@ export const triad = [
 // href = clickable card leading to the most specific existing target.
 // Kids/Supermums detail pages are CS-only for now.
 export const approach: { n: string; t: string; d: string; href?: string }[] = [
-  { n: '01', t: 'I want to start exercising again', d: 'No burning out at the start. Gradually, regularly, with a coach who corrects you and remembers you.', href: '/en/group-classes/' },
+  { n: '01', t: 'I want to start exercising again', d: "No burning out at the start. Classes aren't tied to a term or start date — join your first one whenever you're ready.", href: '/en/group-classes/' },
   { n: '02', t: 'I want to tone up and improve my fitness', d: 'Circuit and strength training in a small group. Everyone trains at their own level — but seriously.', href: '/en/group-classes/' },
   { n: '03', t: 'I want to train as a mum', d: 'Supermums are classes you can attend with your child. Training adapts to the reality of parenting.', href: '/supermamky/' },
   { n: '04', t: 'I want movement for my kids', d: 'Circus School, acrobatics, and movement clubs led by experienced coaches.', href: '/krouzky-pro-deti/' },
@@ -30,7 +30,7 @@ export const paths: { tag: string; t: string; d: string; href?: string }[] = [
 // (home.ts), never change them; links across the site point at them.
 // page = class has its own page (CS-only for now); mentions link there.
 export const classes: { id: string; t: string; d: string; img: string; media: string; bhm: string; page?: string }[] = [
-  { id: 'kruhac', t: 'Circuit Training', d: 'Eight to ten stations in a circuit — bodyweight, kettlebells, TRX. Your coach watches the whole time and corrects your form.', img: 'circuit training', media: 'media-green', bhm: 'Timed stations · small group' },
+  { id: 'kruhac', t: 'Circuit Training', d: 'Eight to ten stations in a circuit — bodyweight, kettlebells, TRX. Work each station for a set time, then move on.', img: 'circuit training', media: 'media-green', bhm: 'Timed stations · small group' },
   { id: 'silovy-trenink', t: 'Strength Training', d: 'A handful of compound lifts across several sets — squat, pull, push. Heavier weight comes once the technique is solid.', img: 'strength training', media: 'media-forest', bhm: 'Technique · gradual load' },
   { id: 'hiit', t: 'HIIT', d: '30 seconds all-out, barely any rest, three rounds through. Cardio and strength in one, heart rate stays up the whole hour.', img: 'HIIT class', media: 'media-clay', bhm: 'High tempo · short intervals' },
   { id: 'vlastni-vaha', t: 'Bodyweight', d: 'Squats, push-ups, lunges, planks — fundamental movement patterns, no equipment. Every move has an easier and a harder version.', img: 'bodyweight', media: 'media-rose', bhm: 'No equipment · any level' },

@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { getImage } from 'astro:assets';
 import type { Lang } from '../i18n/ui';
 import { hreflangMap } from '../i18n/ui';
 import defaultOgImage from '../assets/studio/studio-12-hero.jpg';
@@ -26,7 +27,11 @@ const ga4Id = import.meta.env.PUBLIC_GA4_ID;
 const hreflang = hreflangMap[current] ?? null;
 const origin = 'https://bohemi.fit';
 const canonicalUrl = new URL(current, origin).toString();
-const ogImageUrl = new URL(image.src, origin).toString();
+// Zdrojová fotka je na výšku (3:4) — pro OG/Twitter kartu ji ořízneme na
+// standardní 1200×630 (fit: cover, position: attention nechá sharp najít
+// nejzajímavější výřez), jinak platformy zobrazí jen malý ořez portrétu.
+const ogImage = await getImage({ src: image, width: 1200, height: 630, fit: 'cover', position: 'attention', format: 'jpeg' });
+const ogImageUrl = new URL(ogImage.src, origin).toString();
 const ogLocale = lang === 'en' ? 'en_US' : 'cs_CZ';
 
 const businessJsonLd = {
@@ -78,8 +83,8 @@ const businessJsonLd = {
     {description && <meta property="og:description" content={description} />}
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={ogImageUrl} />
-    <meta property="og:image:width" content={String(image.width)} />
-    <meta property="og:image:height" content={String(image.height)} />
+    <meta property="og:image:width" content={String(ogImage.attributes.width ?? 1200)} />
+    <meta property="og:image:height" content={String(ogImage.attributes.height ?? 630)} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     {description && <meta name="twitter:description" content={description} />}

@@ -11,7 +11,7 @@ export const triad = [
 // href = karta je klikací a vede na nejkonkrétnější existující cíl zmíněné
 // služby. Bez href zůstává neklikací (obecná situace bez vlastní stránky).
 export const approach: { n: string; t: string; d: string; href?: string }[] = [
-  { n: '01', t: 'Chci začít znovu cvičit', d: 'Bez přepáleného startu. Postupně, pravidelně a s trenérem, který tě opraví a nezapomene na tebe.', href: '/skupinove-lekce/#prvni-lekce' },
+  { n: '01', t: 'Chci začít znovu cvičit', d: 'Bez přepáleného startu. Skupiny nejsou vázané na semestr ani termín — přijít můžeš na první lekci kdykoliv.', href: '/skupinove-lekce/#prvni-lekce' },
   { n: '02', t: 'Chci zpevnit tělo a zlepšit kondici', d: 'Kruhové a silové tréninky v malé skupině. Každý cvičí podle svých možností, ale poctivě.', href: '/skupinove-lekce/' },
   { n: '03', t: 'Chci cvičit i jako máma', d: 'Supermamky jsou tréninky, kam můžeš přijít i s dítětem. Cvičení se přizpůsobí realitě rodičovství.', href: '/supermamky/' },
   { n: '04', t: 'Hledám pohyb pro děti', d: 'Cirkusová školička, akrobacie a pohybové kroužky pod vedením zkušených lektorů.', href: '/krouzky-pro-deti/' },
@@ -35,7 +35,7 @@ export const paths: { tag: string; t: string; d: string; href?: string }[] = [
 // mutace (home.en.ts), ať odkazy fungují napříč jazyky.
 // page = lekce má vlastní stránku; zmínky pak vedou na ni, ne na kotvu.
 export const classes: { id: string; t: string; d: string; img: string; media: string; bhm: string; page?: string }[] = [
-  { id: 'kruhac', t: 'Kruhové tréninky', d: 'Osm až deset stanovišť v kruhu — vlastní váha, kettlebell, TRX. Trenér tě vidí celou dobu a opraví techniku.', img: 'kruhový trénink', media: 'media-green', bhm: 'Stanoviště na čas · malá skupina' },
+  { id: 'kruhac', t: 'Kruhové tréninky', d: 'Osm až deset stanovišť v kruhu — vlastní váha, kettlebell, TRX. Na každém odcvičíš daný čas, pak se posouváš dál.', img: 'kruhový trénink', media: 'media-green', bhm: 'Stanoviště na čas · malá skupina' },
   { id: 'silovy-trenink', t: 'Silové tréninky', d: 'Pár komplexních cviků ve více sériích — dřep, tah, tlak. Těžší váha přijde, až sedí technika.', img: 'silový trénink', media: 'media-forest', bhm: 'Technika · postupná zátěž' },
   { id: 'hiit', t: 'HIIT', d: '30 vteřin naplno, minimum pauzy, tři kola dokola. Kardio a posilování v jednom, tep nahoře celou hodinu.', img: 'HIIT lekce', media: 'media-clay', bhm: 'Vysoké tempo · krátké intervaly' },
   { id: 'vlastni-vaha', t: 'Vlastní váha', d: 'Dřepy, kliky, výpady, plank — základní pohybové vzory bez nářadí. Každý cvik má lehčí i těžší variantu.', img: 'vlastní váha', media: 'media-rose', bhm: 'Bez nářadí · pro každou úroveň' },
