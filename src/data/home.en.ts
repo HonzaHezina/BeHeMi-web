@@ -119,19 +119,23 @@ export const pricing = [
   { t: 'Annual membership', d: 'Movement as a long-term commitment', price: '1,199 CZK', per: '/ month', featured: false, badge: 'Best value', note: '96 classes works out to ~150 CZK per class.', feat: ['96 group classes, 14-month validity', '12× Open gym + 10 min photobio / month', '10% off other classes'], href: 'https://studio.bohemi.fit/ucet-clenstvi/platba-clenstvi/?level=3' },
 ];
 
+// "Home" intentionally omitted — the header logo already links home, see
+// home.ts for the CZ rationale (same decision, 6 Sept 2026).
 export const nav = [
-  { label: 'Home', href: '/en/' },
   { label: 'Why BoHeMi', href: '/en/why-bohemi/' },
   { label: 'Classes & services', href: '/en/classes-and-services/' },
+  { label: 'Trainers', href: '/treneri/' },
+  { label: 'Photos', href: '/fotky/' },
   { label: 'Pricing', href: '/en/pricing/' },
   { label: 'Contact', href: '/en/contact/' },
 ];
 
-// Kids, trainers and company pages are CS-only for now — links go to CS pages.
+// Kids and company pages are CS-only for now — links go to CS pages.
 // Order mirrors home.ts (reordered 31 Aug 2026) — real offerings first
 // (classes/clubs/courses, strongest by GSC traffic), then individual
-// services and the flagship program, then companies, then informational
-// items (Trainers, Photos) last.
+// services and the flagship program, then companies.
+// Trainers and Photos moved to the main `nav` bar above (6 Sept 2026) —
+// see home.ts for why.
 export const navMenu = [
   { num: '01', label: 'Group classes', desc: 'Circuits, HIIT & more', href: '/en/group-classes/' },
   { num: '02', label: 'Kids clubs', desc: 'Circus, acrobatics, Supermums', href: '/krouzky-pro-deti/' },
@@ -139,8 +143,6 @@ export const navMenu = [
   { num: '04', label: 'Individual services', desc: 'Individual coaching 1:1', href: '/en/classes-and-services/#pro-tebe' },
   { num: '05', label: '8-Week Program', desc: 'Flagship program, closed group', href: '/program-8-tydnu/' },
   { num: '06', label: 'For companies', desc: 'FitTeams, wellbeing, hall rental', href: '/en/classes-and-services/#pro-firmy' },
-  { num: '07', label: 'Trainers', desc: 'Who will guide you', href: '/treneri/' },
-  { num: '08', label: 'Photos', desc: 'Studio atmosphere & space', href: '/fotky/' },
 ];
 
 export const RESERVE_URL = 'https://studio.bohemi.fit/';

@@ -140,10 +140,14 @@ export const pricing = [
 
 // Hlavní navigace. Kotvy míří na sekce homepage formou "/#…", ať fungují
 // i z podstránek. Slugy podstránek ověřit proti reálné sitemap (CLAUDE.md).
+// „Domů" záměrně chybí — logo v hlavičce už vede na homepage, druhý odkaz
+// se stejným cílem by byl zbytečný (rozhodnuto Honzou 6. 9. 2026 zároveň
+// s přesunem Trenérů a Fotek sem z dropdownu, ať se lišta nepřeplní).
 export const nav = [
-  { label: 'Domů', href: '/' },
   { label: 'Proč BoHeMi', href: '/proc-bohemi/' },
   { label: 'Lekce a služby', href: '/lekce-a-sluzby/' },
+  { label: 'Trenéři', href: '/treneri/' },
+  { label: 'Fotky', href: '/fotky/' },
   { label: 'Ceník', href: '/cenik/' },
   { label: 'Kontakt', href: '/kontakt/' },
 ];
@@ -151,8 +155,10 @@ export const nav = [
 // Pořadí (přeuspořádáno 31. 8. 2026, Honzou): nejdřív skutečné nabídky lekcí
 // a kurzů (seřazené podle síly publika — kroužky mají v GSC nejvíc kliků ze
 // všech podstránek, viz docs/redirect-map.md), pak individuální služby a
-// vlajkový program, pak firmy (menší B2B publikum), a nakonec informační
-// položky (Trenéři, Fotky) — ty nejsou produkt/služba k rezervaci.
+// vlajkový program, pak firmy (menší B2B publikum).
+// Trenéři a Fotky byly do 6. 9. 2026 poslední dvě položky tady (informační,
+// ne produkt k rezervaci) — přesunuty do hlavní lišty `nav` výš, protože si
+// zasloužily stejnou viditelnost jako Ceník/Kontakt (Honza).
 export const navMenu = [
   { num: '01', label: 'Skupinové lekce', desc: 'Kruháče, HIIT a další', href: '/skupinove-lekce/' },
   { num: '02', label: 'Kroužky pro děti', desc: 'Cirkus, akrobacie, Supermamky', href: '/krouzky-pro-deti/' },
@@ -160,8 +166,6 @@ export const navMenu = [
   { num: '04', label: 'Individuální služby', desc: 'Individuální vedení 1:1', href: '/osobni-treninky/' },
   { num: '05', label: 'Program 8 týdnů', desc: 'Vlajkový program, uzavřená skupina', href: '/program-8-tydnu/' },
   { num: '06', label: 'Pro firmy', desc: 'FitTeams, wellbeing, pronájem sálů', href: '/firmy/' },
-  { num: '07', label: 'Trenéři', desc: 'Kdo vás bude vést', href: '/treneri/' },
-  { num: '08', label: 'Fotky', desc: 'Atmosféra a zázemí studia', href: '/fotky/' },
 ];
 
 export const RESERVE_URL = 'https://studio.bohemi.fit/';

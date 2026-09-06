@@ -39,10 +39,13 @@ const logoHref = lang === 'en' ? '/en/' : '/';
     </a>
 
     <!-- Tagline — fills the gap between logo and nav on desktop -->
-    <span class="hidden flex-1 text-center text-[13px] font-semibold tracking-[0.12em] uppercase text-ink-muted lg:block">Body · Health · Mind</span>
+    <span class="hidden flex-1 text-center text-[13px] font-semibold tracking-[0.12em] uppercase text-ink-muted xl:block">Body · Health · Mind</span>
 
-    <!-- Desktop nav -->
-    <nav class="hidden items-center gap-0.5 lg:flex" aria-label={t(lang, 'nav_menu_label')}>
+    <!-- Desktop nav — breakpoint je xl (1280px), ne lg (1024px): od 6. 9. 2026
+         má lišta 6 položek + jazyk + CTA (Trenéři/Fotky přesunuty z dropdownu
+         sem, Domů zmizelo — logo už na homepage vede), na 1024–1279px (běžný
+         menší notebook) by se to nevešlo na řádek. -->
+    <nav class="hidden items-center gap-0.5 xl:flex" aria-label={t(lang, 'nav_menu_label')}>
       {nav.map((item) => (
         item.href === servicesHref ? (
           <div class="group relative">
@@ -94,8 +97,8 @@ const logoHref = lang === 'en' ? '/en/' : '/';
       <Button href={RESERVE_URL} variant="brand" class="ml-1.5 px-[22px] py-2.5 text-[15px]">{t(lang, 'nav_reserve')}</Button>
     </nav>
 
-    <!-- Mobile -->
-    <div class="flex items-center gap-2 lg:hidden">
+    <!-- Mobile / tablet (< xl, viz komentář u desktop nav výš) -->
+    <div class="flex items-center gap-2 xl:hidden">
       <a
         href={alternateUrl}
         hreflang={alternateLang}
