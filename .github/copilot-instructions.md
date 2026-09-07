@@ -15,8 +15,12 @@ i vzhled jako na Astru** (patička doslova stejné 4 sloupce jako
 `Footer.astro` — Brand+CTA/Web/Služby/Kontakt), liší se jen cíle odkazů
 tam, kde WP danou stránku nemá (cross-domain na `bohemi.fit`). Výjimka:
 **WP header nemá CTA „Rezervovat"** (ve vlastním menu rezervačního webu
-nedávalo smysl) — patička ho má dál. Nasazuje se ručně (FTP/WP admin,
-žádný SSH/CI) — historie a instalační postup v `wordpress/README.md`.
+nedávalo smysl) — patička ho má dál. Patička na WP má od 6. 9. 2026 i
+poděkovací řádek s odkazy na WordPress.org/Booking Activities/PMPro
+(`bohemi-footer-credits` třída, `target="_blank"`, bez `nofollow`).
+Nasazuje se ručně (FTP/WP admin, žádný SSH/CI) — historie a instalační
+postup v `wordpress/README.md`. **Po každé úpravě v `wordpress/` musíš
+přegenerovat `wordpress/dist/*.zip`** (gitignored, `git diff` to neukáže).
 
 Značka: **BoHeMi = Body – Health – Mind.** Komunitní, lidské, grounded.
 Ne spa, ne ezoterika, ne luxusní wellness, ne „sekta".
@@ -188,10 +192,18 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
 - **Přímé odkazy na platbu členství (1. 8. 2026):** kde WP „level" produkt
   jde koupit online, veď tam přímo (`.../ucet-clenstvi/platba-clenstvi/?level=<ID>`)
   místo obecného `RESERVE_URL`/`/kontakt/` — level 3/4 (roční/měsíční členství,
-  `/cenik/`), 7/8/9/15 (kroužky + Dětská Zumba, `/krouzky-pro-deti/`). Level 5
+  `/cenik/`), 7/8/9/15 (kroužky + Dětská Zumba, `/krouzky-pro-deti/`), **jen
+  dokud má kurz volnou kapacitu** (viz `full: true` níž). Level 5
   (jednorázový vstup) nejde koupit online → zůstává `/kontakt/`. Levely 6/11/12–14
   (Bellydance, Vánoční členství, tábor) **nepoužívat** — nejsou v nabídce webu
   nebo je produkt zrušený. Plný seznam a zdůvodnění: `/CLAUDE.md`.
+  **`circusCourses[].full: true` (`krouzky-pro-deti.astro`) = kapacita
+  naplněná** — smaže se `signupUrl`, `Přihlásit →` nahradí box „Kapacita
+  naplněná" s telefonem/e-mailem. Ceníkové dlaždice se neupravují (jen odkaz
+  na kotvu, detail si stav ukáže sám). Stav 6. 9. 2026: všechny tři kurzy
+  Akademie (`cirkusova-skolicka`, `zaklady-gymnastiky`, `akrobacie-zonglovani`)
+  mají `full: true` — poslední jmenovaný doplněn 6. 9. 2026, `signupUrl`
+  smazán. Uvolní-li se místo, smaž `full: true` a vrať `signupUrl`.
 - **Jednorázový vstup NENÍ jednotná cena (opraveno Klárkou 1. 8. 2026):** 199 Kč
   posilovací lekce, 250 Kč Enduro/Objevovárna, 150 Kč Open gym — breakdown
   v `pricing[0].feat` (`home.ts`/`home.en.ts`), sync v `cenik.astro`/`en/pricing.astro`.
