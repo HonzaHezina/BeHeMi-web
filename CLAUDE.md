@@ -102,29 +102,47 @@ luxusní wellness. Tělo jako cesta k síle, zdraví a klidu.
 EN mutace (`src/pages/en/`): home, classes-and-services, group-classes,
 open-gym, photobiomodulation-therapy, pricing, why-bohemi, contact.
 
-Hlavní menu (rozhodnuto Honzou): **Domů · Proč BoHeMi · Lekce a služby · Ceník ·
-Kontakt · Rezervovat**. Položka „Lekce a služby" má dropdown s přímými odkazy na
-klíčové stránky, seřazené podle síly nabídky/publika, ne abecedně (přeuspořádáno
+**Hlavní menu (přeskládáno Honzou 6. 9. 2026): Proč BoHeMi · Lekce a služby ·
+Trenéři · Fotky · Ceník · Kontakt · Rezervovat.** „Domů" záměrně chybí — logo
+v hlavičce už na homepage vede, druhý odkaz se stejným cílem byl zbytečný.
+Trenéři a Fotky byly do 6. 9. 2026 poslední dvě (informační, ne k rezervaci)
+položky dropdownu „Lekce a služby" — přesunuty do hlavní lišty, protože si
+podle Honzy zaslouží stejnou viditelnost jako Ceník/Kontakt, ne schované za
+hover. **Zbylá pravidla o hlavní liště (šest pevných položek, neroztahovat
+bez explicitního rozhodnutí Honzy) teď platí na tuhle novou sedmičku**
+(šest textových odkazů + CTA Rezervovat).
+**Kvůli tomu se v `Header.astro` posunul breakpoint desktopové lišty z `lg`
+(1024px) na `xl` (1280px)** — se 6 položkami + jazykovým přepínačem + CTA by
+se na běžný menší notebook (1024–1279px) nevešla na řádek. Pod 1280px teď
+naskakuje mobilní/tabletové hamburger menu (dřív jen pod 1024px). Platí pro
+tagline „Body · Health · Mind" (`hidden ... xl:block`) i mobilní `<div>`
+(`xl:hidden`) — drž oba na stejném breakpointu, ať nevznikne mezera, kde není
+vidět ani desktopová lišta, ani hamburger.
+Položka „Lekce a služby" má dál dropdown s přímými odkazy na klíčové
+stránky, seřazené podle síly nabídky/publika, ne abecedně (přeuspořádáno
 31. 8. 2026 — viz sekce „Stav implementace" níž): **Skupinové lekce →
 `/skupinove-lekce/` · Kroužky pro děti → `/krouzky-pro-deti/` · Kurzy →
 `/kurzy/` · Individuální služby → `/osobni-treninky/` · Program 8 týdnů →
-`/program-8-tydnu/` · Pro firmy → `/firmy/` · Trenéři → `/treneri/` · Fotky →
-`/fotky/`** (data v `navMenu` v `home.ts`/`home.en.ts`, 8 položek).
+`/program-8-tydnu/` · Pro firmy → `/firmy/`** (data v `navMenu` v
+`home.ts`/`home.en.ts`, **6 položek** od 6. 9. 2026 — dřív 8, Trenéři a
+Fotky viz výš).
 **Popisek „Individuální služby" (3. 8. 2026, dřív
 „Osobní tréninky") platí JEN pro tuhle dropdown položku** — href zůstává
 `/osobni-treninky/` beze změny a zbytek webu (page `<title>`/H1 na
 `/osobni-treninky/`, Footer sloupec Služby, CTA tlačítko a „Co vede" chip na
 `/treneri/`) dál říká „Osobní tréninky", protože tam jde o popis konkrétní
 služby v textu, ne o položku menu — nesjednocovat bez nového rozhodnutí Honzy.
-**Dropdown smí nést i ne-service odkazy** (Trenéři, od 3. 8. 2026 i Fotky) —
-na rozdíl od hlavní lišty (6 pevných položek výš), kterou bez explicitního
-rozhodnutí Honzy neroztahovat.
+**Dropdown smí dál nést i ne-service odkazy** (dnes žádný aktivně — Trenéři a
+Fotky jsou pryč, ale princip platí, kdyby přibyla další informační položka) —
+na rozdíl od hlavní lišty, kterou bez explicitního rozhodnutí Honzy
+neroztahovat (viz breakpointová poznámka výš, proč se to už jednou stalo
+a proč to bolí).
 Footer má sloupec **Služby** (Skupinové lekce, Kroužky pro děti, Kurzy,
 Supermamky, Open gym, Fotobiomodulace, Osobní tréninky, Pronájem sálů, Pro
 firmy) — každá nová service stránka se přidává i sem. Program 8 týdnů a Fotky jsou ve sloupci
 **Web** (`/program-8-tydnu/`, `/fotky/`), ne ve Službách — nejsou to služby.
-Fotky tak od 3. 8. 2026 mají dva vstupy: Footer sloupec Web (jak bylo) i
-dropdown „Lekce a služby" v hlavičce (nově).
+Fotky tak mají dva vstupy: Footer sloupec Web (jak bylo) i hlavní lišta
+(od 6. 9. 2026 — dřív dropdown „Lekce a služby").
 
 **Patička nese kredit „Web postavil Honza Hezina s AI" (5. 8. 2026)** — malý
 odkaz vedle copyrightu (`Footer.astro`, i18n klíč `footer_credit`), cílí na
@@ -215,6 +233,39 @@ i Patička jsou zamrzlé HTML snapshoty, PHP update je sám nezmění, viz
 `wordpress/README.md`). Skutečně externí odkazy (Facebook, Instagram,
 Google Maps, obchodní podmínky, Cirk La Putyka) `target="_blank"` dál mají
 — pravidlo platí jen pro navigaci mezi bohemi.fit a studio.bohemi.fit.
+
+**Patička na WP dostala 6. 9. 2026 poděkovací řádek** pod copyright/legal
+řádek: „Rezervace a členství tu běží na WordPressu. Kalendář obstarává
+Booking Activities, členství Paid Memberships Pro. Oboje doporučujeme." —
+tři odkazy (WordPress.org, plugin Booking Activities, Paid Memberships Pro),
+`target="_blank" rel="noopener"`, **bez `nofollow`** (upřímné doporučení, ne
+placený odkaz — kdyby se do budoucna zapojil PMPro affiliate program, odkaz
+na PMPro potřebuje `rel="sponsored"`, řekni mi to). `bohemi_wp_final_child_get_footer_html()`
+v `functions.php` + nová CSS třída `.bohemi-footer-credits` v `bohemi.css`
+(mimo flex řádek `.bohemi-footer-bottom`, aby nerozbila jeho
+`justify-content: space-between` se dvěma sloupci). Motiv → **2.8**, ZIP
+přegenerován. Mění HTML markup, ne jen CSS → vyžaduje re-insert Šablonové
+části Patička (viz `wordpress/README.md`).
+
+**⚠️ Past: záměna „vzor" a „šablonová část" v Gutenbergu (6. 9. 2026):**
+Honza narazil na matoucí stav v Site Editoru — hlavička/patička se
+nezobrazovala konzistentně napříč šablonami. Příčina: `bohemi-wp-ui`/
+`bohemi-twentytwentyfive-child` dodávají header/footer jako Gutenberg
+**vzor** (block pattern, `register_block_pattern`) — přetažením z knihovny
+Vzorů se vytvoří **jednorázová kopie** vložená jen do TÉ jedné konkrétní
+šablony (např. „Stránky"), ne živý odkaz na sdílenou **Šablonovou část**
+(Template Part). Tenhle rozdíl je snadné přehlédnout, protože obojí se
+v inserteru tváří podobně. Pokud se vzor takhle omylem vloží přímo do
+šablony místo do Šablonové části Záhlaví/Patička, každá další šablona
+(Příspěvek, Archiv…) potřebuje ruční vložení zvlášť a příští aktualizace
+(jako poděkovací řádek výš) se neprojeví všude najednou. **Správný postup
+zůstává** ten z checklistu v `wordpress/README.md`: vzor vlož PŘESNĚ JEDNOU
+do Vzhled → Editor → **Šablonové části** → Záhlaví / Patička, ne do
+jednotlivých šablon stránek. Honza to 6. 9. 2026 opravil živě v adminu
+(potvrdil „už to funguje") — přesný stav (jestli je teď Patička skutečně
+jedna sdílená Šablonová část, nebo pořád per-šablona kopie) nebyl ověřen
+screenshotem, takže při dalším podobném hlášení zkontroluj napřed
+Šablonové části → Patička, ne rovnou předpokládej, že je to OK.
 
 ## Navigační logika — tři vrstvy (sjednoceno 7/2026, drž ji)
 
@@ -513,13 +564,16 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   jde přes obecný `RESERVE_URL`, takže kdo je „prvních 5" musí Honza hlídat
   ručně. Až sleva doslouží nebo se počet/cena změní, uprav `cenik.astro`
   (badge + oba ceny) a větu v CTA na `/program-8-tydnu/` současně.
-- **Program 8 týdnů v hlavičkovém dropdownu (31. 8. 2026):** přidán jako
-  položka `07` do `navMenu` (`home.ts`/`home.en.ts`) vedle Trenérů a Fotek —
-  do teď byl z hlavního menu dohledatelný jen přes odkazy v obsahu stránek
-  (HP, `/lekce-a-sluzby/`, `/proc-bohemi/`, `/cenik/`, footer sloupec Web),
-  ne přímo z navigace. Stejný precedent jako Trenéři/Fotky: ne-service odkaz
-  v dropdownu je OK, hlavní lišta (6 pevných položek) se bez nového
-  rozhodnutí Honzy dál neroztahuje.
+- **Program 8 týdnů v hlavičkovém dropdownu (31. 8. 2026):** přidán do
+  `navMenu` (`home.ts`/`home.en.ts`) — do teď byl z hlavního menu dohledatelný
+  jen přes odkazy v obsahu stránek (HP, `/lekce-a-sluzby/`, `/proc-bohemi/`,
+  `/cenik/`, footer sloupec Web), ne přímo z navigace. V té době šlo o
+  položku `07` vedle Trenérů (`08`) a Fotek (později `09`) — **od 6. 9. 2026
+  Trenéři a Fotky z dropdownu zmizely (přesunuty do hlavní lišty, viz sekce
+  „Hlavní menu" výš), takže dnešní `navMenu` má jen 6 položek a Program
+  8 týdnů je `05`** (přečíslováno spolu s reorderem 31. 8. 2026 popsaným
+  níž). Zůstává v platnosti obecný precedent: ne-service odkaz v dropdownu
+  je OK, hlavní lišta se bez nového rozhodnutí Honzy neroztahuje.
 - **`/kurzy/` — krátké specializační kurzy (31. 8. 2026, druhá výjimka mimo
   GSC po `/program-8-tydnu/`, schváleno Honzou):** nová vrstva vedle Akademie
   Cirk La Putyka — uzavřené bloky (typicky `4 × 60 min`) zaměřené na JEDNU
@@ -614,6 +668,12 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   rezervovat, proto úplně dole). `num` v `navMenu` odpovídá pořadí v poli —
   při další změně pořadí přečíslovat `01`–`08` v obou souborech
   (`home.ts`/`home.en.ts`) současně.
+  **Aktualizováno 6. 9. 2026:** Trenéři a Fotky se z dropdownu přesunuly do
+  hlavní lišty (viz sekce „Hlavní menu" na začátku tohohle souboru) — dnešní
+  `navMenu` má 6 položek, `01`–`06`, končí u „Pro firmy". Historický kontext
+  odstavce výš (proč byly Trenéři/Fotky dřív úplně dole v dropdownu) zůstává
+  platný jako vysvětlení PROČ byly informační položky vzadu, jen dnes už
+  nejsou v tomhle poli vůbec.
 - **Kalistenika — pozicování, filozofie a smíšené skupiny (31. 8. 2026,
   dva doplňující briefy od Honzy):** rozšířily kontext pro `/kurzy/`,
   promítnuté do textů a datového souboru:
@@ -945,6 +1005,40 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   (viz výš), i fotky, které nejsou čistě „profesionální" (event/atmosféra) —
   jediná výjimka je obsah mimo téma webu (viz rozdělení pronájem vs. `/fotky/`
   výš).
+- **OG/Twitter obrázek ořezaný na 1200×630 (6. 9. 2026):** `Layout.astro`
+  posílal do `og:image` výchozí hero fotku (`studio-12-hero.jpg`) přímo v
+  jejím zdrojovém rozměru 1500×2000 (na výšku) — Facebook/LinkedIn/WhatsApp
+  by ji tak zobrazily jako useknutý svislý pruh, ne standardní kartu na
+  šířku. Oprava: `getImage()` z `astro:assets` ořízne libovolný `image` prop
+  (výchozí i per-stránkový) na 1200×630 (`fit: 'cover', position:
+  'attention'`) a natvrdo converuje na JPEG (`format: 'jpeg'`) — Astro by
+  jinak defaultně vydalo WebP, který starší crawlery (hlavně WhatsApp) čtou
+  nespolehlivě. Žádná stránka dnes `image` prop nepřepisuje (grep ověřeno),
+  takže tahle jedna oprava v Layoutu opravuje OG kartu všude. Ověřeno buildem:
+  `dist/index.html` má `og:image:width=1200`/`height=630` a `.jpeg` příponu.
+- **Opakovaná fráze o trenérovi zredukovaná napříč webem (6. 9. 2026,
+  podnět od externí konzultantky/copywriterky):** varianta „trenér tě celou
+  dobu vidí a opravuje techniku" (viz „Konkrétní příklad „ne X, ale Y"
+  vzorce" výš, kam se nahradila 2. 8. 2026 za „zná jménem"/„anonymní
+  posilovna") se sama stala novým opakovaným sloganem — grep našel **9**
+  výskytů napříč webem (homepage 6×, `/skupinove-lekce/` 3×). Zredukováno na
+  **3 záměrné výskyty**: `ui.ts` `hero_body` (hero podnadpis pod H1 — jediná
+  homepage zmínka, co zůstává), jedna věta v úvodním odstavci
+  `/skupinove-lekce.astro` (jediná autoritativní zmínka na detailu — smazány
+  duplicity v meta description a v `how` textu lekce `kruhac` na téže
+  stránce) a `/program-8-tydnu.astro` (`weekRhythm[0].d` — necháno beze
+  změny, je to jiný produkt: uzavřená skupina do 12 lidí na 8 týdnů, kde
+  „trenér tě zná" je fakticky pravda, ne recyklovaný slib).
+  Zbylých 6 míst (homepage meta description, `home.ts`/`home.en.ts` karty
+  „Chci začít znovu cvičit" a `kruhac`, `ui.ts` `hero_float_2` CZ+EN, pill
+  text v `Hero.astro`) nahrazeno konkrétními fakty od Honzy: **skupina
+  5–12 lidí**, **žádná vazba na semestr/termín — na první lekci se dá
+  přijít kdykoliv**. `hero_float_2` teď říká „● 5–12 lidí na lekci" místo
+  „● Trenér tě opraví" (stejný vzor jako sousední floaty `hero_float_1`/`_3`
+  — krátký fakt o formátu, ne slib). Pill text pod hero CTA („Malé skupiny —
+  trenér ví, jak na tebe.") → „Malé skupiny — nikdo tu na tebe nekouká."
+  (reassurance proti obavě z posilovny, ne další slib o trenérovi). Build +
+  `node scripts/check-links.mjs` (0 chyb) ověřeno po zásahu.
 
 ## Tailwind v4 — vývojové gotchy (ušetří hodiny)
 

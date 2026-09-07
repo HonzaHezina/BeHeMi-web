@@ -458,6 +458,27 @@ Pokud po obnovení stránky pořád vidíš černé pruhy, napiš přesněji, co
 na nich vidět (text? úplně černá plocha? jen v Header, nebo i ve Footer?),
 ověřím to podle toho, co doopravdy generuje `header.php`.
 
+**Dodatek (6. 9. 2026) — konkrétní podoba chyby, když se bod 2 poruší:**
+Honza narazil na variantu popsanou výš, jen o krok dál — vzor „BoHeMi —
+Footer" neskončil jen nepoužitý v knihovně, ale **vložený přímo do
+konkrétní šablony „Stránky"** (Vzhled → Editor → Šablony → Stránky), místo
+do sdílené Šablonové části Patička. Poznat se to dá tak, že v levém panelu
+editoru šablony (Osnova bloků) vidíš „BoHeMi — Footer" jako blok přímo
+v seznamu bloků TÉ šablony, ne jako samostatný odkaz/chip na Šablonovou
+část. Důsledek: patička se sice zobrazí (proto to na pohled vypadá OK), ale
+je to **jednorázová kopie** — na jiných šablonách (Příspěvek, Archiv…) buď
+chybí, nebo je tam další nezávislá kopie, a žádná budoucí úprava
+`functions.php` (jako poděkovací řádek přidaný 6. 9. 2026, viz `CLAUDE.md`)
+se neprojeví automaticky nikde, dokud se ručně nepřevloží v každé šabloně
+zvlášť. Oprava: v šabloně smazat ten vložený blok, otevřít Vzhled → Editor →
+**Šablonové části** → Patička, ověřit/vložit tam aktuální vzor, uložit —
+šablony samy o sobě už na sdílenou Část odkazují (block themes to mají
+zapojené defaultně), takže není potřeba nic přidávat zpátky do každé
+šablony ručně. Honza to večer 6. 9. 2026 opravil sám v adminu a potvrdil
+„už to funguje" — přesný krok, který to spravil, nezaznamenaný (nebyl
+poslaný finální screenshot), takže při dalším hlášení podobného příznaku
+ověř napřed stavem Šablonové části → Patička, ne rovnou předpokládej OK.
+
 ## Patička natažená přes celou šířku stránky (1. 8. 2026)
 
 Honza nahlásil, že patička na WP je „furt přes celou stránku, ne jako v
@@ -1207,3 +1228,43 @@ v aplikaci — byla to ale celou dobu Wedos infrastruktura. Stojí za to mít
 na paměti při jakémkoliv budoucím podivném/nekonzistentním chování na
 `studio.bohemi.fit`: nejdřív zvážit hosting/proxy vrstvu (Wedos ATS), než
 sahat po změnách pluginů.
+
+## Patička — poděkovací řádek pluginům (6. 9. 2026)
+
+Honza chtěl v patičce viditelně (ne skrytě/nofollow) poděkovat autorům
+pluginů, na kterých rezervační systém běží — ne jako povinnou citaci, ale
+jako gesto, aby autoři viděli, že je někdo používá a doporučuje.
+
+**Přidáno** pod stávající řádek `© BoHeMi fitness s.r.o. · IČ 19115296 …` +
+`Obchodní podmínky · …` (ten zůstal beze změny, jen o řádek níž přibylo):
+
+> Rezervace a členství tu běží na WordPressu. Kalendář obstarává Booking
+> Activities, členství Paid Memberships Pro. Oboje doporučujeme.
+
+Tři odkazy (WordPress.org, plugin Booking Activities na wordpress.org,
+Paid Memberships Pro) — `target="_blank" rel="noopener"`, **bez `nofollow`**.
+Zdůvodnění: je to upřímné doporučení provozovatele, ne placený odkaz, takže
+nofollow by autorům bral přesně to, co jim Honza chtěl dát (SEO váhu).
+**Pozor na budoucnost:** PMPro má affiliate program. Pokud se do něj Honza
+někdy přihlásí a odkaz na PMPro se stane provizním, ten konkrétní odkaz
+musí dostat `rel="sponsored"` (Google/FTC pravidla pro affiliate odkazy) —
+zatím nekomerční varianta, `rel="sponsored"` NEpřidávat, dokud se to
+nezmění.
+
+**Kód:** `bohemi_wp_final_child_get_footer_html()` v
+`bohemi-twentytwentyfive-child/functions.php` — nový `<p
+class="bohemi-footer-credits">` vložený PO uzavření `.bohemi-footer-bottom`
+divu (ne dovnitř), protože `.bohemi-footer-bottom` je `display:flex;
+justify-content:space-between` se dvěma sloupci (copyright vlevo, právní
+odkazy vpravo) — třetí prvek uvnitř by ten řádek rozbil. Styl (`.bohemi-footer-credits`
+v `assets/css/bohemi.css`, hned pod `.bohemi-footer-legal`) drží stejnou
+`font-size:13px` a efektivní `opacity:0.75` jako sousední copyright řádek
+(zděděno z `.bohemi-footer a` pro barvu/underline odkazů, nic nového
+nezavádí). **Motiv → 2.8** (`style.css`), ZIP přegenerován a ověřen
+(`unzip`/PowerShell čtení potvrdilo verzi 2.8 i přítomnost
+`bohemi-footer-credits` uvnitř archivu). Mění HTML markup patičky, ne jen
+CSS → **vyžaduje re-insert Šablonové části Patička** po nahrání ZIPu (viz
+„Nahrání souborů ≠ aktualizace živé stránky" výš) — Honza to nasadil
+a potvrdil funkčnost týž den (viz taky dodatek v sekci „Vzory ve
+wp-adminu" výš, kde narazil na související záměnu vzor/šablonová část
+při stejné příležitosti).

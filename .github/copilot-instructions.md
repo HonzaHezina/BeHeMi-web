@@ -44,7 +44,13 @@ Ne spa, ne ezoterika, ne luxusní wellness, ne „sekta".
    posilovna" / „trenér tě zná jménem"** — zrušeno na celém webu (hero_body,
    meta description, trainers eyebrow), nahrazeno pozitivním tvrzením bez
    kontrastu vůči strawmanovi („trenér tě celou lekci vidí a opravuje
-   techniku"). Nevracet, ani v obměně. Detail: `/CLAUDE.md`.
+   techniku"). Nevracet, ani v obměně.
+   **Ta náhrada sama přejídala dál (6. 9. 2026)** — 9 opakování napříč
+   webem. Zredukováno na 3 záměrné výskyty (hero podnadpis, jedna věta na
+   `/skupinove-lekce/`, `/program-8-tydnu/`), zbytek nahrazen fakty od
+   Honzy: **skupina 5–12 lidí, žádná vazba na semestr/termín**. Nový text
+   o trenérovi na dalším místě → radši fakt o provozu než další slib.
+   Detail: `/CLAUDE.md`.
 
 ## Anti-cíle
 Žádná spa-pastel paleta (růžová/šalvějová/zlatá), žádné elegantní serify, žádné
@@ -57,11 +63,14 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   `/osobni-treninky/`, `/pronajem-salu/`, `/firmy/`, `/treneri/`, `/fotky/`,
   `/program-8-tydnu/`, `/kurzy/`, `/cenik/`, `/kontakt/`, 404 + EN mutace v
   `src/pages/en/`.
-  Menu: Domů · Proč BoHeMi · Lekce a služby · Ceník · Kontakt · Rezervovat.
-  Dropdown „Lekce a služby" (`navMenu`, 8 položek, seřazeno podle síly
-  nabídky/publika, ne data přidání — přeuspořádáno 31. 8. 2026): Skupinové
-  lekce → Kroužky pro děti → Kurzy → Individuální služby → Program 8 týdnů →
-  Pro firmy → Trenéři → Fotky (informační položky vždy na konci).
+  Menu (přeskládáno 6. 9. 2026): Proč BoHeMi · Lekce a služby · Trenéři ·
+  Fotky · Ceník · Kontakt · Rezervovat. Bez „Domů" (logo už na homepage vede).
+  Trenéři/Fotky přesunuty z dropdownu do hlavní lišty — kvůli tomu se
+  v `Header.astro` breakpoint desktop nav/mobile menu posunul z `lg` (1024px)
+  na `xl` (1280px), jinak se 6 položek + jazyk + CTA nevejde na menší notebook.
+  Dropdown „Lekce a služby" (`navMenu`, **6 položek** od 6. 9. 2026, dřív 8,
+  seřazeno podle síly nabídky/publika): Skupinové lekce → Kroužky pro děti →
+  Kurzy → Individuální služby → Program 8 týdnů → Pro firmy.
   `/treneri/` je bohatý detail (řádkový layout, anchor nav, „Co vede" chipy) —
   HP `Trainers.astro` zůstává jen ochutnávka, stejný vzor jako
   `/skupinove-lekce/` vs. `Offer.astro`. `/fotky/` = obecná galerie atmosféry
@@ -199,6 +208,13 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   bez něj spadne na default `'/'` a stránka se Googlu tváří jako homepage
   (reálný bug live na produkci 1. 8. 2026 na všech 17 CZ stránkách, protože
   `current` chodilo jen do `<Header>`). `check-links.mjs` tohle nezachytí.
+- **`og:image` se ořezává na 1200×630 přímo v `Layout.astro`** (`getImage()`
+  z `astro:assets`, `fit:'cover', position:'attention', format:'jpeg'`) —
+  když stránka přepisuje `image` prop vlastní fotkou, nedávej portrétovou
+  (na výšku) bez rozmyslu, Layout ji ořízne automaticky, ale ověř výřez.
+  Nevkládej surový `image.src`/`image.width` přímo do meta tagů, vždy přes
+  tenhle `getImage()` krok (6. 9. 2026 oprava — dřív šla ven fotka
+  1500×2000 na výšku, na FB/WhatsApp vypadala jako useknutý pruh).
 - **Fotky lekcí/dětských aktivit:** centrální registr `src/data/photos.ts`
   (`photosCS`/`photosEN`, klíč = `id` z `classes[]`/`kidsActivities[]`/
   `kidsBand[]`) — fotka se přidává jednou tam, ne po stránkách. Dlaždice
