@@ -54,6 +54,10 @@ Ne spa, ne ezoterika, ne luxusní wellness, ne „sekta".
    `/skupinove-lekce/`, `/program-8-tydnu/`), zbytek nahrazen fakty od
    Honzy: **skupina 5–12 lidí, žádná vazba na semestr/termín**. Nový text
    o trenérovi na dalším místě → radši fakt o provozu než další slib.
+   **Další nález stejného vzorce (audit 7. 9. 2026):** HP teaser Programu
+   8 týdnů (`LifePracticeFeature.astro`, CZ+EN) — „Cílem není dokonalost,
+   ale pravidelnost a viditelný posun." → „Výsledek: pravidelnost a
+   viditelný posun." (bez kontrastu vůči strawmanovi).
    Detail: `/CLAUDE.md`.
 
 ## Anti-cíle
@@ -241,7 +245,10 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   a historie rozhodnutí: `/CLAUDE.md` sekce „Fotky". **Stejný teaser/detail
   vzor platí od 2. 8. 2026 i na bio:** `trainers[]` má `bio` (plný, jen
   `/treneri/`) + volitelné `bioShort` (HP teaser, `Trainers.astro` čte
-  `tr.bioShort ?? tr.bio`) — nový trenér potřebuje oboje.
+  `tr.bioShort ?? tr.bio`) — nový trenér potřebuje oboje. Výjimka:
+  `osobni-treninky.astro` má vlastní jednu větu natvrdo, ne `bio`/`bioShort`
+  (audit 7. 9. 2026 — obě pole by tam duplikovala jinou stránku, detail
+  v `/CLAUDE.md`).
 - **Tailwind v4:** reset patří do `@layer base`; zlomky spacing (4.5/5.5/6.5/7.5)
   nejdou — piš `[18px]/[22px]/[26px]/[30px]`; po nové stránce restartuj dev server.
 - **Deploy:** Coolify statika — `dist/`, „Is it a static site?" ON, SPA OFF.

@@ -143,6 +143,9 @@ firmy) — každá nová service stránka se přidává i sem. Program 8 týdnů
 **Web** (`/program-8-tydnu/`, `/fotky/`), ne ve Službách — nejsou to služby.
 Fotky tak mají dva vstupy: Footer sloupec Web (jak bylo) i hlavní lišta
 (od 6. 9. 2026 — dřív dropdown „Lekce a služby").
+**EN patička má užší verzi sloupce Služby** (jen služby s EN dosahem +
+Kurzy, který stejně jako `navMenu` odkazuje na český slug) — chybějící
+Courses doplněny auditem 7. 9. 2026, viz „Audit 7. 9. 2026" níž.
 
 **Patička nese kredit „Web postavil Honza Hezina s AI" (5. 8. 2026)** — malý
 odkaz vedle copyrightu (`Footer.astro`, i18n klíč `footer_credit`), cílí na
@@ -647,6 +650,18 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
     slovník (jen `title`/`teaser` podle `id`) — `/kurzy/` nemá EN mutaci
     (konvence jako u dětských stránek), takže id/`duration`/`media` zůstávají
     jednozdrojové z `specialization-courses.ts`, lokalizuje se jen text.
+  **Drift zjištěn a opraven auditem (7. 9. 2026):** `Offer.astro` (HP) se
+  mezitím rozjel od téhle specifikace — místo krátkého mint banneru měl
+  plnou sekci s nadpisem/intro větou/gridem tří `<ClassCard>`, identickou
+  strukturou jako `/lekce-a-sluzby/`, umístěnou navíc hned za Individuálními
+  službami v „01 Pro tebe" (přesně scénář „adult-only", kterému se
+  `/lekce-a-sluzby/` vědomě vyhnula přesunem do „02 Pro děti a rodiny" —
+  viz odstavec výš). Vytvářelo to i doslovně duplicitní odstavec vůči
+  `/lekce-a-sluzby/` (chytil `check-links.mjs`). Opraveno zpátky na banner
+  podle týhle specifikace — `courseTextEN`/`ClassCard`/`specializationCourses`
+  import v `Offer.astro` smazán, zůstal jen `Button` odkaz na `/kurzy/`.
+  Kdyby se úplná sekce na HP měla vrátit, je to nové rozhodnutí Honzy, ne
+  tichý drift.
   **`SpecializationCourse.teaser` (31. 8. 2026):** krátká věta pro klikací
   dlaždici na rozcestníku, oddělená od `d` (plný text jen na `/kurzy/`) —
   stejné pravidlo jako `kidsActivities[].d` vs. `circusCourses[].d`. Nový
@@ -960,6 +975,15 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   kotvy vpravo) místo gridu karet. Chipy „Co vede" psát jen tam, kde je vazba
   trenér→lekce potvrzená (bio nebo atribuce na `/skupinove-lekce/`) —
   nevymýšlet.
+  **`osobni-treninky.astro` NEPOUŽÍVÁ `bio`/`bioShort` vzor** (zjištěno
+  auditem 7. 9. 2026) — má vlastní jednu větu natvrdo (Klára, certifikace
+  2015 + „na míru tvé kondici"), jinou než obě pole v `trainers[]`. Důvod:
+  stránka má i vlastní odkaz „Celý tým →" na `/treneri/`, takže číst `bio`
+  duplikovalo plný text detailu a `bioShort` zase duplikovalo HP teaser
+  (`Trainers.astro`) — na téhle jedné stránce se tak žádná ze dvou hodnot
+  nedala použít bez nové duplicity. Nový trenér na `osobni-treninky.astro`
+  stejným vzorem (dnes jen Klára) potřebuje podobně samostatnou třetí větu,
+  ne recyklovat `bio`/`bioShort`.
   **`/pronajem-salu/`** má jen fotky, které skutečně ukazují pronajímatelný
   prostor (dnes: fitness sál). Cokoliv obecně o atmosféře studia (tým, akce,
   zázemí mimo sály) patří na **`/fotky/`** (rezervovaný KEEP slug z
@@ -1039,6 +1063,28 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   trenér ví, jak na tebe.") → „Malé skupiny — nikdo tu na tebe nekouká."
   (reassurance proti obavě z posilovny, ne další slib o trenérovi). Build +
   `node scripts/check-links.mjs` (0 chyb) ověřeno po zásahu.
+- **Audit 7. 9. 2026 (technický + obsahový, na žádost Honzy) — čtyři opravy:**
+  vedle driftu `/kurzy/` na HP a chybějícího vlastního textu na
+  `osobni-treninky.astro` (obě popsané výš u „Cross-linky na `/kurzy/`" a
+  u bio/`bioShort`) ještě dvě samostatné věci:
+  - **EN patička dostala chybějící odkaz na Kurzy** — `Footer.astro`
+    `serviceLinks` pro `lang === 'en'` neměly `Courses → /kurzy/` vůbec,
+    zatímco EN `navMenu` (položka `03`) na `/kurzy/` odkazuje dávno.
+    Přidáno na stejnou pozici jako v CZ sloupci (za Kids clubs).
+  - **Další výskyt vzorce „ne X, ale Y"** (viz „Konkrétní příklad" v Copy
+    tón výš) — `LifePracticeFeature.astro` (CZ+EN, teaser Programu 8 týdnů
+    na HP): „Cílem není dokonalost, ale pravidelnost a viditelný posun."
+    / „The goal is not perfection, but consistency and visible progress."
+    Nahrazeno přímým tvrzením bez kontrastu vůči strawmanovi: „Výsledek:
+    pravidelnost a viditelný posun." / „The result: consistency and
+    visible progress."
+  Ověřeno po zásahu: `npm run build` + `check-links.mjs` (0 chyb) + axe-core
+  na dotčených stránkách (0 nových chyb).
+  **Nevyřešeno, jen zaznamenáno:** `ProcTriad.astro` venn diagram
+  (Body/Health/Mind kruhy na HP) má kontrast popisků pod 4.5:1 (naměřeno
+  3.96 a 4.49) — bílý text na poloprůhledných barevných kruzích s
+  `mix-blend-multiply`. Je to designové rozhodnutí (sytější podklad kruhu
+  nebo jiná barva textu), ne mechanická oprava — čeká na Honzu.
 
 ## Tailwind v4 — vývojové gotchy (ušetří hodiny)
 
