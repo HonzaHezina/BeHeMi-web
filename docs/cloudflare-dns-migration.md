@@ -84,6 +84,15 @@ Pokud by po propagaci něco nefungovalo (web, e-mail, FTP):
 Migrace je tímto kompletně uzavřená, žádný ze čtyř kritických bodů
 (web/e-mail/FTP/DKIM) nebyl migrací poškozen.
 
+**⚠️ Update 8. 9. 2026:** Migrace vyřešila konkrétně `ERR_HTTP2_PROTOCOL_ERROR`
+(Cloudflare obchází vadnou Wedos ATS HTTP/2 vrstvu), ale **ne kořenovou
+nestabilitu Wedos originu** — ta se 8. 9. 2026 projevila jinak, jako
+Cloudflare `502 Bad Gateway` na `studio.bohemi.fit`. Potvrzeno srovnávacím
+`curl` testem (Wedos: timeouty/pomalé odpovědi/502, Hetzner `bohemi.fit`
+souběžně čistě 200 OK). Plný detail a odeslaný Wedos tiket v
+`wordpress/README.md` sekce `ERR_HTTP2_PROTOCOL_ERROR / Cloudflare 502`,
+podsekce „Recidiva 8. 9. 2026".
+
 ## Zbývá (volitelné, nic naléhavého)
 
 - [ ] Zvážit „Only allow Cloudflare IP addresses at your origin"

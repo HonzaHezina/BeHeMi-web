@@ -1129,16 +1129,20 @@ jde skoro jistě o markup uvnitř `[bookingactivities_login form="3"]"`
 (cizí plugin, needitujeme) — nepotvrzeno vizuální kontrolou konkrétního
 elementu v DevTools, nízká priorita (nebrání použití formuláře).
 
-## `ERR_HTTP2_PROTOCOL_ERROR` na `/ucet-clenstvi/` — dlouhodobý Wedos ATS bug, nesouvisí s loginem/kódem (5. 8. 2026, vyřešeno 7. 8. 2026)
+## `ERR_HTTP2_PROTOCOL_ERROR` / Cloudflare 502 na `studio.bohemi.fit` — dlouhodobý Wedos infra problém, nesouvisí s loginem/kódem (5. 8. 2026, dočasně vyřešeno 7. 8. 2026, recidiva 8. 9. 2026)
 
-**✅ Stav: vyřešeno migrací na Cloudflare.** Honza po několika dnech
-běžného testování po přechodu na Cloudflare (viz sekce „Cloudflare (zdarma)
-před doménu" níž a [`docs/cloudflare-dns-migration.md`](../docs/cloudflare-dns-migration.md))
-potvrdil, že se chyba znovu neobjevila — potvrzuje to diagnózu, že šlo
-celou dobu o vadnou Wedos ATS HTTP/2 vrstvu, ne o kód/WordPress/login.
-Cloudflare teď terminuje HTTP/2 s návštěvníky sama a k Wedos originu jde
-přes HTTP/1.1, takže se ta vadná vrstva úplně obchází. Wedos podpoře se
-tiket ani nemusel posílat.
+**⚠️ Stav: NENÍ definitivně vyřešeno, jen se mění podoba.** Migrace na
+Cloudflare (7. 8. 2026, viz sekce „Cloudflare (zdarma) před doménu" níž a
+[`docs/cloudflare-dns-migration.md`](../docs/cloudflare-dns-migration.md))
+odstranila konkrétně `ERR_HTTP2_PROTOCOL_ERROR` (ta vadná Wedos ATS HTTP/2
+vrstva se obchází, protože Cloudflare → origin jede přes HTTP/1.1). Ale
+**8. 9. 2026 se problém vrátil v jiné podobě — Cloudflare 502 Bad Gateway**
+(Cloudflare v pořádku, „Host: Error" — Wedos origin neodpověděl). Závěr:
+je to pořád stejná dlouhodobá nestabilita Wedos hostingu, Cloudflare jen
+zakrývá jeden konkrétní symptom (HTTP/2 negociaci), ne kořenovou příčinu
+(nespolehlivý origin server). Detail recidivy je v sekci níž. Wedos
+podpoře se tiket při prvním kole (5.–7. 8. 2026) neposílal, protože se to
+zdálo vyřešené migrací — při recidivě 8. 9. 2026 už ano (viz níž).
 Honza při testování loginu narážel na nahodilé (~1×/10, občas častěji)
 `ERR_HTTP2_PROTOCOL_ERROR` a prázdnou stránku na `/ucet-clenstvi/`.
 Časová shoda s testováním `[bohemi_account]` vypadala podezřele, ale
@@ -1205,7 +1209,48 @@ nevratně smaže nastavení certifikátu**, neexperimentovat kvůli tomuhle).
 3. **Migrace celého `studio.bohemi.fit` na Hetzner** (kde už běží Astro
    `bohemi.fit`) — těžší, invazivnější plán C, jen kdyby Cloudflare
    nepomohl. Riziko pro platby/rezervace (PMPro/Booking Activities), ne
-   první volba.
+   první volba. **Po recidivě 8. 9. 2026 (viz níž) je tenhle plán o
+   něco blíž vážnému zvážení**, pokud se 502/nedostupnost bude opakovat.
+
+### Recidiva 8. 9. 2026 — Cloudflare 502, hlásilo víc lidí na `/wp-admin`
+
+Honza dostal na `studio.bohemi.fit` Cloudflare hlášku „Bad gateway,
+Error code 502" — Cloudflare „Working", origin „Error". Po reloadu za
+pár minut fungovalo. **Víc lidí nezávisle na sobě hlásilo stejnou chybu
+při přihlašování do `/wp-admin`, ale postupně v čase, ne najednou** — to
+vyloučilo hypotézu „zátěžová špička od souběžných loginů" a potvrdilo, že
+jde o nahodilou nestabilitu originu, stejně jako u `ERR_HTTP2_PROTOCOL_ERROR`
+výš.
+
+**Ověřovací test (8. 9. 2026, ~14:00 UTC):** 5× `curl` na
+`https://studio.bohemi.fit/wp-login.php` v krátkém sledu, pro srovnání 3×
+na `https://bohemi.fit/` (Hetzner, mimo Wedos):
+
+| # | studio.bohemi.fit (Wedos) | bohemi.fit (Hetzner, baseline) |
+|---|---|---|
+| 1 | timeout, žádná odpověď do 20 s | 200 OK, 0,15 s |
+| 2 | 200 OK, ale 11,3 s do první byte | 200 OK, 0,06 s |
+| 3 | 502, 2,9 s | 200 OK, 0,10 s |
+| 4 | 502, 0,09 s | — |
+| 5 | 502, 0,11 s | — |
+
+Hetzner běžel bez jediného výkyvu. Wedos origin střídal timeout, extrémně
+pomalou odpověď a rychlé 502 (typicky odpověď z cache/rate-limitu, kdy
+backend okamžitě vzdal spojení) — jednoznačně potvrzuje problém na Wedos
+straně, ne v síti/kódu/appce.
+
+**Stavová stránka Wedosu (`vedos.status.online/cs/`) v době incidentu
+(8. 9. 2026, kontrola k 12:00 UTC) hlásila „všechny služby OK"** — žádný
+veřejně přiznaný incident, přestože reálné testy ukazovaly opak. Proto se
+problém nahlásil ručně přes support (tiket odeslán Honzou 8. 9. 2026, text
+připravený v konverzaci — obsahuje curl výsledky výš, srovnání s Hetznerem
+a poznámku o víc uživatelích na `/wp-admin`).
+
+**Poučení pro příště:** stavová stránka Wedosu není spolehlivý indikátor
+lokálních/nahodilých problémů jednoho serverového uzlu — při podezření na
+Wedos nestabilitu nespoléhat na „vypadá to zeleně", radši rovnou udělat
+srovnávací `curl` test (postižená doména vs. jiná doména mimo Wedos) a
+poslat vlastní hlášení s daty.
 
 **Dva vedlejší nálezy z procházení Wedos administrace** (nesouvisí s
 HTTP/2, ale stojí za zapamatování):
