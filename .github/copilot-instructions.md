@@ -158,7 +158,12 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   v datech, `/treneri/` je jen CZ — EN karty na HP vedou na stejné české kotvy).
   **Kotvy (`classes[].id`/`trainers[].id` v datech + dětské `#cirkusova-skolicka`
   ap.) se NIKDY nemění**; cíl kotvy má `scroll-mt-24`.
-  Provozní údaje (rozvrh, kapacita) jen na detailu, ne v dlaždicích; stejný
+  Provozní údaje (rozvrh, kapacita) jen na detailu, ne v dlaždicích. **Rozvrh
+  na `/skupinove-lekce/` (+ EN) se od 15. 9. 2026 čte ŽIVĚ** z read-only
+  endpointu na studio (`ScheduleWeek.astro`, `src/data/schedule.ts`, mapa BA
+  `activity_id` → `classes[].id`; endpoint v child theme) s deep-linkem na
+  konkrétní událost — jen čtení, rezervace dál jen ve WP, nic víc dynamického
+  nepřidávat (viz `/CLAUDE.md` „Audit prodejní cesty 15. 9. 2026"). Stejný
   odstavec nesmí být na rozcestníku i detailu. **HP nabídka i rozcestníky (CZ/EN)
   ukazují 6 karet lekcí** (`classes.slice(0, 6)`), všech 10 jen na
   `/skupinove-lekce/`. Detaily v `/CLAUDE.md`.
@@ -198,7 +203,9 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   místo obecného `RESERVE_URL`/`/kontakt/` — level 3/4 (roční/měsíční členství,
   `/cenik/`), 7/8/9/15 (kroužky + Dětská Zumba, `/krouzky-pro-deti/`), **jen
   dokud má kurz volnou kapacitu** (viz `full: true` níž). Level 5
-  (jednorázový vstup) nejde koupit online → zůstává `/kontakt/`. Levely 6/11/12–14
+  (jednorázový vstup) nejde koupit online, ale jednotlivou lekci si host
+  rezervuje přímo v kalendáři → „Vybrat" vede na `RESERVE_URL` (15. 9. 2026),
+  ne na `/kontakt/`. Levely 6/11/12–14
   (Bellydance, Vánoční členství, tábor) **nepoužívat** — nejsou v nabídce webu
   nebo je produkt zrušený. Plný seznam a zdůvodnění: `/CLAUDE.md`.
   **`circusCourses[].full: true` (`krouzky-pro-deti.astro`) = kapacita

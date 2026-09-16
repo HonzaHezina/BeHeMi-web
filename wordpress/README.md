@@ -1313,3 +1313,90 @@ CSS → **vyžaduje re-insert Šablonové části Patička** po nahrání ZIPu (
 a potvrdil funkčnost týž den (viz taky dodatek v sekci „Vzory ve
 wp-adminu" výš, kde narazil na související záměnu vzor/šablonová část
 při stejné příležitosti).
+
+## Read-only rozvrh pro bohemi.fit + noindex + poslední EN řetězce (15. 9. 2026)
+
+Podnět: externí audit prodejní cesty (15. 9. 2026) — „rozvrh je nákupní
+informace číslo jedna a je schovaná za nejslabším bodem stacku (kalendář na
+studio)". Řešení = fáze 1 z auditu: read-only endpoint z Booking Activities
+a rozvrh přímo na `bohemi.fit/skupinove-lekce/` s odkazem na konkrétní
+událost. Motiv → **2.9**, ZIP přegenerovaný. Jen PHP (`functions.php`),
+**žádný re-insert Šablonových částí není potřeba** — nemění se HTML vzorů.
+
+### 1. `GET /wp-json/bohemi/v1/schedule?days=8`
+
+`bohemi_wp_final_child_rest_schedule()` → `bohemi_wp_final_child_build_schedule()`:
+
+- Atributy bere z **kalendářového pole formuláře č. 1**
+  (`bookacti_get_form_field_data_by_name(1, 'calendar')` →
+  `bookacti_get_calendar_field_booking_system_attributes()`), takže rozvrh
+  na webu vidí přesně to, co veřejný kalendář: stejné kalendáře (`[1,6,3]`),
+  stejný filtr aktivit, stejná pravidla „už začalo / uzavřeno". Když Honza
+  něco změní v nastavení formuláře, projeví se to i na webu bez zásahu do
+  kódu. **Pokud by se veřejný formulář někdy přečísloval, změň
+  `BOHEMI_SCHEDULE_FORM_ID`.**
+- Data pak generuje BA samo (`bookacti_get_booking_system_data()` — stejná
+  funkce, která plní inline JSON na homepage), endpoint jen zredukuje na
+  `{id, activity_id, title, start, end, capacity, available, bookable, url}`
+  a vyhodí události s kapacitou 0 (pronájmy sálů, semestrální kroužky přes
+  PMPro — přes kalendář se stejně rezervovat nedají).
+- `url` = **deep-link do kalendáře s tou událostí už vybranou**:
+  `/?selected_events[0][id]=…&selected_events[0][start]=…&selected_events[0][end]=…`.
+  Nic vlastního — BA 1.15.20 čte `$_REQUEST['selected_events']` v
+  `bookacti_get_calendar_field_booking_system_attributes()` a předvybere
+  událost server-side (`picked_events`), JS si ji pak při načtení označí
+  (`bookacti_fill_picked_events_list`). Ověřeno živě 15. 9. 2026 před
+  jakoukoliv změnou kódu. Skládá se přes `http_build_query()`, ne
+  `add_query_arg()` — to hodnoty neenkóduje a mezera v datu by v URL zůstala
+  syrová.
+- Cache: transient 60 s (`bohemi_schedule_<days>`) + `Cache-Control:
+  public, max-age=120`. Pokud potřebuješ okamžitě vidět změnu rozvrhu na
+  webu, počkej minutu nebo smaž transient (`wp transient delete
+  bohemi_schedule_8` / plugin na transienty).
+- CORS: filtr `allowed_http_origins` přidává `https://bohemi.fit`,
+  `https://www.bohemi.fit` a `http://localhost:4321` (Astro dev). WP pak
+  sám pošle `Access-Control-Allow-Origin` (`rest_send_cors_headers`).
+  Bez tohohle filtru `fetch()` z bohemi.fit spadne na CORS a web ukáže jen
+  fallback odkaz na kalendář (nic se nerozbije, jen není rozvrh).
+
+**Ověření po nahrání:** otevři
+`https://studio.bohemi.fit/wp-json/bohemi/v1/schedule?days=8` — má vrátit
+JSON s `events` (ne 404 = starý motiv / rewrite cache, ne 503 = BA
+neaktivní). Pak `bohemi.fit/skupinove-lekce/#rozvrh` musí místo věty
+„Aktuální termíny a volná místa najdeš v rezervačním kalendáři." ukázat
+seznam dnů. Pokud zůstane věta, otevři konzoli prohlížeče — CORS chyba
+znamená, že filtr origin nesedí (www vs. bez www).
+
+### 2. `noindex` na celém studio kromě právních stránek
+
+Filtr `wp_robots`: každá stránka dostane `noindex`, **kromě** slugů
+`vseobecne-obchodni-podminky`, `zpracovani-osobnich-udaju`, `provozni-rad`
+a čehokoliv začínajícího `obchodni-podminky` (pronájem, akademie CLP…).
+Důvod (audit): studio je rezervační aplikace, ne prezentace — indexovaný
+kalendář posílá lidi z brandových dotazů mimo bohemi.fit, kde je popis
+lekcí, ceník i rozvrh. Právní stránky zůstávají indexovatelné, protože
+bohemi.fit na ně 301kuje (`docs/redirect-map.md`, sekce LEGAL) a jinde
+neexistují. **Zvrátit = smazat ten jeden filtr.** Google změnu vstřebá
+řádově týdny; sleduj v GSC property `studio.bohemi.fit`, jestli pokles
+nezasáhl i něco, co jsme chtěli nechat.
+
+### 3. Poslední anglické řetězce BA
+
+`gettext` filtr pro doménu `booking-activities`: `Send` → `Odeslat`,
+`Please enter {nb} or more characters.` → `Zadejte alespoň {nb} znaky.` —
+jediné dva EN řetězce, které zůstaly v `bookacti_localized` na živém webu
+(ostatní, které audit zmiňoval — Loading/Items/Price/Quantity — už jsou
+česky: Načítání/Položky/Cena/Množství; audit zjevně koukal na starší stav
+nebo jiný locale). Překlep „Přijmení" na živém webu není (formulář
+registrace má správně „Příjmení") a „==Na lekce Zumba…==" je jen `<mark>`
+zvýraznění na homepage studia, které si auditorův nástroj vykreslil jako
+markdown — obojí bez zásahu.
+
+### Co z auditu zůstává na Honzovi (v adminu, ne v repu)
+
+- Popisek volby „Rezervace bez registrace" ve formuláři č. 1 (BA → Formuláře
+  → pole Přihlášení → text volby bez účtu) — audit ho četl jako nadpis;
+  klidnější varianta: „Bez účtu (jako host)".
+- Titulek studia už JE sjednocený („BoHeMi – Rezervace lekcí a členství"),
+  audit citoval starší „Nejlepší skupinové lekce na Vinohradech" — nic
+  neměnit.

@@ -26,9 +26,16 @@ luxusní wellness. Tělo jako cesta k síle, zdraví a klidu.
 1. **Statika only.** Nepiš žádný rezervační/platební/přihlašovací formulář,
    který něco odesílá do systému. Pokud něco potřebuje stav uživatele, kapacitu
    lekce, platbu nebo storno → **to není stránka, to je WordPress.**
+   **Jediná výjimka (15. 9. 2026): rozvrh a volná místa se na
+   `/skupinove-lekce/` jen ČTOU** z read-only endpointu na studio
+   (`ScheduleWeek.astro`, `src/data/schedule.ts`) — nic se neodesílá, žádný
+   stav uživatele, rezervace dál jen ve WP. Detail v „Audit prodejní cesty
+   (15. 9. 2026)" v sekci Stav implementace níž. Další dynamiku nezavádět.
 2. **Booking = odkaz ven.** Každé tlačítko „Rezervovat" je `<a>` na
    `https://studio.bohemi.fit/` (případně konkrétní lekci). Nikdy iframe,
-   nikdy vlastní formulář.
+   nikdy vlastní formulář. Od 15. 9. 2026 může „Rezervovat" u konkrétního
+   termínu vést na deep-link události (`?selected_events[0][id]=…`, BA ji
+   předvybere) — pořád je to odkaz ven na studio, pravidlo platí.
 3. **URL se nemění.** Slugy musí přesně odpovídat současnému webu (viz seznam
    níž). Nová stránka jen po explicitním rozhodnutí. Změněná URL = 301 redirect,
    ne tichá změna.
@@ -454,7 +461,9 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
     uvolněnou kapacitu u některého kurzu, smaž jeho `full: true` a vrať
     `signupUrl` s odpovídajícím `level=<ID>` z tabulky výš.
   - **5 = Jednorázový vstup** — WP má u něj „Povolit registraci: Ne" (nejde
-    koupit online), zůstává na `/kontakt/`.
+    koupit online) — ale od 15. 9. 2026 „Vybrat" v ceníku vede do kalendáře
+    (`pricing[0].href`, CZ i EN), kde si host jednotlivou lekci rezervuje bez
+    účtu („Rezervace bez registrace"); na `/kontakt/` už nevede.
   - **10 = Tříměsíční neomezené členství** — na webu zatím není nabízené
     (chybí v `pricing`), level existuje pro budoucí použití, až se přidá karta.
   - **NEPOUŽÍVAT:** 6 = Kurz Fit Bellydance a 11 = Vánoční měsíční členství
@@ -1085,6 +1094,81 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   3.96 a 4.49) — bílý text na poloprůhledných barevných kruzích s
   `mix-blend-multiply`. Je to designové rozhodnutí (sytější podklad kruhu
   nebo jiná barva textu), ne mechanická oprava — čeká na Honzu.
+
+- **Audit prodejní cesty (15. 9. 2026, externí konzultant, Honza řekl
+  „uprav to na webu") — co se udělalo a co čeká:**
+  - **Rozvrh na `/skupinove-lekce/` (a `/en/group-classes/`) — živě z
+    rezervačního kalendáře.** Komponenta `ScheduleWeek.astro`
+    (sekce `#rozvrh` CZ / `#schedule` EN hned pod hero, PŘED `#prvni-lekce`),
+    data + mapa BA `activity_id` → `classes[].id` v `src/data/schedule.ts`,
+    endpoint `GET studio.bohemi.fit/wp-json/bohemi/v1/schedule?days=8` v
+    child theme (`wordpress/README.md`, sekce „Read-only rozvrh"). Server
+    vyrenderuje jen hlavičku + neutrální větu s odkazem na kalendář; inline
+    skript doplní dny → řádky `čas · lekce (kotva) · volná místa ·
+    Rezervovat →`, kde **„Rezervovat" vede na KONKRÉTNÍ událost**
+    (`?selected_events[0][id]=…`, BA ji předvybere — ověřeno živě). Stejný
+    skript plní `<p data-next-for={l.id}>` u každé karty lekce („Nejbližší
+    termíny: Út 16. 9. 7:00 → · …", nebo „V příštích 7 dnech není v
+    rozvrhu"). Když feed spadne (Wedos, CORS), zůstane věta + odkaz na
+    kalendář — nic se nerozbije. **Tohle je vědomá výjimka z pravidla 1
+    (statika only): jen ČTENÍ, nic se neodesílá, žádný stav uživatele,
+    rezervace je pořád jen ve WP.** Proč ne statická tabulka: sloty St/Čt
+    7:00, 8:00, 17:00, 18:00 rotují týden od týdne mezi Břišním pekáčem,
+    Silovým, HIIT a Vlastní vahou (data BA za září 2026) — pevný rozvrh by
+    lhal. Nová lekce ve WP = nový řádek v `baActivityToClass`, jinak se v
+    rozvrhu neukáže. Ověřeno: build, `check-links.mjs` 0 chyb, jsdom smoke
+    test skriptu (CZ/EN + fail path) proti reálným datům BA.
+    **Feed funguje až po nahrání ZIPu motivu 2.9** — do té doby web ukazuje
+    fallback větu, což je stejný stav jako dřív.
+  - **Hero CTA „Zkus první lekci →"** vede na `/skupinove-lekce/#rozvrh`
+    (EN `/en/group-classes/#schedule`), ne na rozcestník `/lekce-a-sluzby/`
+    — kdo je rozhodnutý, dostane termín, ne další přehled. Odkazy „Jdeš
+    poprvé? →" dál míří na `#prvni-lekce` (ten blok je hned pod rozvrhem).
+  - **Program 8 týdnů — CTA „Rezervovat místo" už nevede do kalendáře
+    lekcí** (žádný program tam není, audit to správně vytkl). Teď
+    `mailto:info@bohemi.fit?subject=Program 8 týdnů…` s popiskem
+    „Přihlásit se e-mailem →" — stejný vzor jako ostatní kontaktní akce
+    (žádný `<form>`). Až Program dostane vlastní WP level/událost, vrať
+    přímý odkaz podle vzoru „WP membership level signup links" výš.
+  - **Ceník — „Vybrat" u jednorázového vstupu vede do kalendáře**
+    (`pricing[0].href = RESERVE_URL`, CZ i EN), ne na `/kontakt/`. PMPro
+    level 5 online koupit nejde (viz seznam levelů výš — platí dál), ale
+    jednotlivou lekci si host rezervuje a platí přímo v kalendáři („Rezervace
+    bez registrace" ve formuláři BA č. 1) — kontakt byl zbytečná oklika.
+  - **Ověřeno jako už neplatné / stale v auditu** (nic se neměnilo): nav se
+    mezi stránkami neliší (Ceník má Kurzy i Program 8 týdnů v dropdownu,
+    grep v `dist/`), cena Programu je 7 900 Kč (audit citoval starých
+    3 900), titulek studia je „BoHeMi – Rezervace lekcí a členství",
+    BA řetězce Loading/Items/Price/Quantity jsou česky, „Přijmení" na webu
+    není, „==…==" je `<mark>` zvýraznění. Detail ve `wordpress/README.md`.
+  - **Studio: noindex mimo právní stránky** + poslední dva EN řetězce BA —
+    v child theme 2.9 (`wp_robots`, `gettext`), viz `wordpress/README.md`.
+  - **ČEKÁ NA HONZU (rozhodnutí o obsahu, nedělat potichu):**
+    1. `/program-8-tydnu/` CTA pořád říká „První běh připravujeme na září
+       2026 — přesný termín zveřejníme" — dnes je 15. 9. 2026, audit: „buď
+       běží, nebo je datum pryč; obojí zabíjí důvěru". Kandidát 14. 9.–
+       8. 11. 2026 nikdy nebyl potvrzen. Potřeba: reálný termín, nebo
+       přeformulovat na „říjen/podzim 2026", nebo „termín oznámíme —
+       nech nám e-mail". Text jsem neměnil (CLAUDE.md: termín je záměrný).
+    2. Program 8 týdnů je na HP až za KidsBand/Offer (pořadí bloků viz
+       „Homepage zjednodušena"). Audit: „strategie říká prodávej program,
+       struktura prodává všechno stejně". Přesun výš = nové rozhodnutí o
+       HP, ne drift.
+    3. Sociální důkaz — žádné recenze/Google hodnocení nikde na webu.
+       Potřebuje reálné citace od reálných lidí + odkaz na Google profil;
+       nevymýšlet.
+    4. Členství konvertuje přes `platba-clenstvi/?level=…` na Wedosu, který
+       padá (viz „Wedos ATS HTTP/2 bug" v paměti) — mimo repo, ale je to
+       nejdražší produkt na nejnestabilnější URL.
+    5. Solid Booty a Enduro nejsou v kalendáři BA vůbec (září 2026), Vlastní
+       váha/Břišní pekáč jen některé týdny — rozvrh na webu to teď ukáže
+       upřímně („V příštích 7 dnech není v rozvrhu"). Buď je do rozvrhu
+       vrátit, nebo zvážit, jestli mají mít na `/skupinove-lekce/` plnou
+       kartu.
+    6. `/open-gym/` rozvrh zatím nemá (Open gym = activity 8, ~20 slotů
+       denně) — `ScheduleWeek` by šel rozšířit o filtr, až bude chtít.
+    7. Auditor chce GSC dotazy a BA poměr registrovaní/hosté + návratnost
+       po první lekci, než potvrdí body 3–4 — data má jen Honza.
 
 ## Tailwind v4 — vývojové gotchy (ušetří hodiny)
 

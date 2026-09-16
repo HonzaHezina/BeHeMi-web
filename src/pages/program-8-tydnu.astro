@@ -4,7 +4,6 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Button from '../components/Button.astro';
 import MediaFrame from '../components/MediaFrame.astro';
-import { RESERVE_URL } from '../data/home';
 
 // Detail vlajkového programu. Obsahové zdroje: fraze-pool.md (fráze použité
 // tady se NESMÍ opakovat na homepage — HP drží jen slogan „Neber nic jako
@@ -263,7 +262,10 @@ const faq: { q: string; a: string }[] = [
             </p>
           </div>
           <div class="flex flex-col items-start gap-3.5">
-            <Button href={RESERVE_URL} variant="primary">Rezervovat místo →</Button>
+            {/* Program nemá WP level ani událost v kalendáři lekcí — obecný RESERVE_URL
+                vedl do kalendáře, kde žádný program není (audit 15. 9. 2026).
+                Přihlášení = e-mail, stejně jako ostatní kontaktní akce (mailto:, žádný form). */}
+            <Button href="mailto:info@bohemi.fit?subject=Program%208%20t%C3%BDdn%C5%AF%20%E2%80%94%20m%C3%ADsto%20ve%20skupin%C4%9B" variant="primary">Přihlásit se e-mailem →</Button>
             <Button href="/skupinove-lekce/" variant="outline-light" class="px-5 py-2.5 text-[15px]">Nejsi si jistý? Přijď nejdřív na jednu lekci →</Button>
           </div>
         </div>

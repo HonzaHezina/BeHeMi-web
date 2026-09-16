@@ -308,3 +308,222 @@ function bohemi_wp_final_child_get_footer_html(): string {
 
 	return "<!-- wp:html -->\n{$html}\n<!-- /wp:html -->";
 }
+
+/**
+ * ---------------------------------------------------------------------------
+ * Read-only rozvrh pro bohemi.fit (15. 9. 2026)
+ * ---------------------------------------------------------------------------
+ * GET https://studio.bohemi.fit/wp-json/bohemi/v1/schedule?days=8
+ *
+ * Vrací lekce na příštích N dní přesně tak, jak je vidí veřejný rezervační
+ * kalendář (formulář Booking Activities č. 1 — stejné kalendáře, stejný filtr
+ * aktivit, stejná pravidla „kdy se dá ještě rezervovat"). Astro web na
+ * bohemi.fit z toho na /skupinove-lekce/ vykresluje rozvrh na příštích
+ * 7 dní s počtem volných míst a odkazem přímo na konkrétní událost. Nic
+ * nezapisuje, žádný stav uživatele — rezervace samotná dál probíhá jen tady
+ * na WordPressu.
+ *
+ * Deep-link na událost NEPOTŘEBUJE žádný vlastní kód: Booking Activities už
+ * čte `$_REQUEST['selected_events']` v
+ * bookacti_get_calendar_field_booking_system_attributes(), takže
+ *   /?selected_events[0][id]=4116&selected_events[0][start]=2026-09-16 07:00:00&selected_events[0][end]=2026-09-16 08:00:00
+ * otevře kalendář s tou lekcí už vybranou (ověřeno živě 15. 9. 2026, BA 1.15.20).
+ * Endpoint tuhle URL rovnou vrací v poli `url`, ať ji Astro neskládá samo.
+ *
+ * Odpověď je 60 s v transientu (Wedos hosting je nestabilní, DB dotazů BA
+ * není málo) + `Cache-Control: public, max-age=120`, takže i Cloudflare /
+ * prohlížeč ji chvíli podrží. Stejná data jsou už dnes veřejně v HTML
+ * homepage (inline JSON booking systému) — endpoint nic nového neodhaluje.
+ */
+const BOHEMI_SCHEDULE_FORM_ID = 1;
+
+add_action('rest_api_init', function () {
+    register_rest_route('bohemi/v1', '/schedule', array(
+        'methods'             => 'GET',
+        'permission_callback' => '__return_true',
+        'args'                => array(
+            'days' => array(
+                'default'           => 8,
+                'sanitize_callback' => function ($value) {
+                    return max(1, min(31, intval($value)));
+                },
+            ),
+        ),
+        'callback'            => 'bohemi_wp_final_child_rest_schedule',
+    ));
+});
+
+function bohemi_wp_final_child_rest_schedule(WP_REST_Request $request) {
+    $days = (int) $request->get_param('days');
+
+    if (! function_exists('bookacti_get_booking_system_data') || ! function_exists('bookacti_get_calendar_field_booking_system_attributes')) {
+        return new WP_Error('bohemi_ba_missing', 'Booking Activities není aktivní.', array('status' => 503));
+    }
+
+    $cache_key = 'bohemi_schedule_' . $days;
+    $payload   = get_transient($cache_key);
+
+    if (! is_array($payload)) {
+        $payload = bohemi_wp_final_child_build_schedule($days);
+        set_transient($cache_key, $payload, MINUTE_IN_SECONDS);
+    }
+
+    $response = new WP_REST_Response($payload, 200);
+    $response->header('Cache-Control', 'public, max-age=120');
+    return $response;
+}
+
+function bohemi_wp_final_child_build_schedule(int $days): array {
+    $tz_name  = bookacti_get_setting_value('bookacti_general_settings', 'timezone');
+    $timezone = new DateTimeZone($tz_name ? $tz_name : 'Europe/Prague');
+    $now      = new DateTime('now', $timezone);
+    $from     = (clone $now)->setTime(0, 0, 0);
+    $to       = (clone $from)->modify('+' . ($days - 1) . ' days')->setTime(23, 59, 59);
+    $from_str = $from->format('Y-m-d H:i:s');
+    $to_str   = $to->format('Y-m-d H:i:s');
+
+    // Stejné atributy jako veřejný kalendář ve formuláři č. 1 (kalendáře,
+    // aktivity, trim, past_events…) — jediný zdroj pravdy, nic se tu neopisuje.
+    $calendar_field = function_exists('bookacti_get_form_field_data_by_name')
+        ? bookacti_get_form_field_data_by_name(BOHEMI_SCHEDULE_FORM_ID, 'calendar')
+        : array();
+    $atts = bookacti_get_calendar_field_booking_system_attributes(is_array($calendar_field) ? $calendar_field : array());
+
+    $atts['auto_load']           = 1;
+    $atts['past_events']         = 0;
+    $atts['events_min_interval'] = array('start' => $from_str, 'end' => $to_str);
+
+    $data = bookacti_get_booking_system_data($atts);
+
+    $events = array();
+    foreach ((array) (isset($data['events']) ? $data['events'] : array()) as $event) {
+        if (empty($event['id']) || empty($event['start'])) {
+            continue;
+        }
+        if ($event['start'] < $from_str || $event['start'] > $to_str) {
+            continue;
+        }
+
+        $event_data = isset($data['events_data'][$event['id']]) ? $data['events_data'][$event['id']] : array();
+        $capacity   = isset($event_data['availability']) ? (int) $event_data['availability'] : 0;
+        // Kapacita 0 = událost, která se přes kalendář rezervovat nedá
+        // (pronájmy sálů, semestrální kroužky přes členství) — na web nepatří.
+        if ($capacity <= 0) {
+            continue;
+        }
+
+        $booking = isset($data['bookings'][$event['id']][$event['start']]) ? $data['bookings'][$event['id']][$event['start']] : null;
+        if (is_array($booking)) {
+            $available = isset($booking['availability']) ? (int) $booking['availability'] : $capacity;
+            $capacity  = isset($booking['total_availability']) ? (int) $booking['total_availability'] : $capacity;
+        } else {
+            $available = $capacity;
+        }
+
+        $end = isset($event['end']) ? (string) $event['end'] : '';
+
+        $events[] = array(
+            'id'          => (int) $event['id'],
+            'activity_id' => isset($event['activity_id']) ? (int) $event['activity_id'] : 0,
+            'title'       => isset($event['title']) ? (string) $event['title'] : '',
+            'start'       => (string) $event['start'],
+            'end'         => $end,
+            'capacity'    => $capacity,
+            'available'   => max(0, $available),
+            'bookable'    => ! empty($event['is_available']) && $available > 0,
+            // http_build_query, ne add_query_arg — to hodnoty neenkóduje (mezera
+            // v datu by zůstala v URL syrová); enkódované závorky BA čte v pohodě.
+            'url'         => home_url('/') . '?' . http_build_query(array(
+                'selected_events' => array(array(
+                    'id'    => (int) $event['id'],
+                    'start' => (string) $event['start'],
+                    'end'   => $end,
+                )),
+            )),
+        );
+    }
+
+    usort($events, function ($a, $b) {
+        return strcmp($a['start'], $b['start']);
+    });
+
+    $activities = array();
+    foreach ((array) (isset($data['activities_data']) ? $data['activities_data'] : array()) as $id => $activity) {
+        $activities[(int) $id] = isset($activity['title']) ? (string) $activity['title'] : '';
+    }
+
+    return array(
+        'generated_at' => $now->format(DATE_ATOM),
+        'timezone'     => $timezone->getName(),
+        'from'         => $from->format('Y-m-d'),
+        'to'           => $to->format('Y-m-d'),
+        'calendar_url' => home_url('/'),
+        'activities'   => $activities,
+        'events'       => $events,
+    );
+}
+
+/**
+ * CORS pro endpoint výš: WP posílá `Access-Control-Allow-Origin` jen pro
+ * originy z `allowed_http_origins` (default = jen vlastní home/site URL).
+ * bohemi.fit je stejný provozovatel, localhost:4321 je Astro dev server.
+ */
+add_filter('allowed_http_origins', function (array $origins): array {
+    return array_merge($origins, array(
+        'https://bohemi.fit',
+        'https://www.bohemi.fit',
+        'http://localhost:4321',
+    ));
+});
+
+/**
+ * noindex na celém studio.bohemi.fit kromě právních stránek (15. 9. 2026,
+ * podnět z externího auditu prodejní cesty). studio.bohemi.fit je rezervační
+ * aplikace, ne prezentace — když ho Google indexuje, posílá lidi z brandových
+ * dotazů rovnou do kalendáře místo na bohemi.fit, kde je popis lekcí, ceník
+ * a rozvrh. Právní stránky (VOP, GDPR, provozní řád, obchodní podmínky
+ * pronájmu/akademie) zůstávají indexovatelné — bohemi.fit na ně 301kuje
+ * (docs/redirect-map.md, sekce LEGAL) a jinde neexistují.
+ */
+add_filter('wp_robots', function (array $robots): array {
+    if (is_admin()) {
+        return $robots;
+    }
+
+    $legal_slugs = array(
+        'vseobecne-obchodni-podminky',
+        'zpracovani-osobnich-udaju',
+        'provozni-rad',
+        'obchodni-podminky-pronajmu-prostor',
+        'obchodni-podminky-akademie-clp',
+    );
+
+    $post = get_queried_object();
+    $slug = ($post instanceof WP_Post) ? $post->post_name : '';
+
+    if ($slug && (in_array($slug, $legal_slugs, true) || 0 === strpos($slug, 'obchodni-podminky'))) {
+        return $robots;
+    }
+
+    $robots['noindex'] = true;
+    unset($robots['max-image-preview']);
+    return $robots;
+});
+
+/**
+ * Poslední anglické zbytky Booking Activities, které český jazykový balíček
+ * nepokrývá (ověřeno v `bookacti_localized` na živém webu 15. 9. 2026).
+ * Ostatní BA řetězce („Načítání", „Položky", „Cena"…) už česky jsou.
+ */
+add_filter('gettext', function (string $translation, string $text, string $domain): string {
+    if ('booking-activities' !== $domain) {
+        return $translation;
+    }
+
+    $map = array(
+        'Send'                                  => 'Odeslat',
+        'Please enter {nb} or more characters.' => 'Zadejte alespoň {nb} znaky.',
+    );
+
+    return (isset($map[$text]) && $translation === $text) ? $map[$text] : $translation;
+}, 10, 3);

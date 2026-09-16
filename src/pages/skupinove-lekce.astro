@@ -7,6 +7,7 @@ import MediaFrame from '../components/MediaFrame.astro';
 import { Image } from 'astro:assets';
 import { classes, RESERVE_URL } from '../data/home';
 import { photosCS as lessonPhotos } from '../data/photos';
+import ScheduleWeek from '../components/ScheduleWeek.astro';
 
 // Bohatý obsah sekcí žije jen tady (CZ stránka) — krátké dlaždicové popisy
 // pro HP a rozcestník zůstávají v classes[] v src/data/home.ts.
@@ -132,10 +133,11 @@ const picker = [
         </p>
         <div class="mt-7 flex flex-wrap items-center gap-4">
           <Button href={RESERVE_URL} variant="primary">Rezervovat lekci →</Button>
-          <p class="text-[15px] text-ink-muted">Aktuální rozvrh a volná místa najdeš v rezervačním kalendáři.</p>
+          <p class="text-[15px] text-ink-muted"><a href="#rozvrh" class="cursor-pointer font-bold text-accent-text hover:text-ink">Rozvrh na příštích 7 dní</a> i volná místa jsou níž na stránce.</p>
         </div>
         <nav aria-label="Rychlá navigace na lekce" class="mt-8 flex flex-wrap gap-2.5">
           <a href="#prvni-lekce" class="rounded-full bg-brand px-[18px] py-2.5 text-[14.5px] font-bold text-cream transition-colors hover:bg-brand-dark">Jdeš poprvé? →</a>
+          <a href="#rozvrh" class="rounded-full border-[1.5px] border-border-button px-[18px] py-2.5 text-[14.5px] font-bold text-ink-line transition-colors hover:border-brand hover:text-brand">Rozvrh</a>
           {lessons.map((l) => (
             <a href={`#${l.id}`} class="rounded-full border-[1.5px] border-border-button px-[18px] py-2.5 text-[14.5px] font-bold text-ink-line transition-colors hover:border-brand hover:text-brand">{l.t}</a>
           ))}
@@ -143,6 +145,11 @@ const picker = [
         </nav>
       </div>
     </section>
+
+    <!-- ROZVRH — živě z rezervačního kalendáře, s deep-linkem na konkrétní
+         událost (15. 9. 2026, viz src/data/schedule.ts). Před #prvni-lekce
+         záměrně: kdo je rozhodnutý, chce termín, ne další text. -->
+    <ScheduleWeek />
 
     <!-- TVOJE PRVNÍ LEKCE — konverzní jádro stránky -->
     <section id="prvni-lekce" class="mx-auto max-w-[1220px] scroll-mt-24 px-5 pb-14 md:px-8">
@@ -220,7 +227,10 @@ const picker = [
                   ))}
                 </div>
               )}
-              <a href={RESERVE_URL} class="mt-5 inline-block cursor-pointer text-[15px] font-bold text-accent-text hover:text-ink">Rezervovat →</a>
+              <!-- Naplní skript v ScheduleWeek.astro (nejbližší 3 termíny s deep-linkem);
+                   bez JS / při výpadku feedu zůstává skryté a platí obecný odkaz níž. -->
+              <p class="mt-5 text-[14.5px] leading-[1.55]" data-next-for={l.id} hidden></p>
+              <a href={RESERVE_URL} class="mt-3 inline-block cursor-pointer text-[15px] font-bold text-accent-text hover:text-ink">Rezervovat →</a>
             </div>
           </article>
         ))}

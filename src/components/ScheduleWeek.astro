@@ -1,0 +1,247 @@
+---
+// Rozvrh skupinových lekcí na příštích 7 dní — živě z rezervačního kalendáře
+// (viz src/data/schedule.ts, proč to nejde staticky). Server vyrenderuje jen
+// hlavičku + neutrální větu s odkazem na kalendář (platí i bez JS); skript
+// níž doplní seznam termínů s volnými místy a deep-linkem na konkrétní
+// událost. Když feed spadne (Wedos…), zůstane odkaz na kalendář — nic
+// nerozbitého. Nic se tu neodesílá, rezervace je pořád jen ve WordPressu.
+//
+// Skript zároveň naplní všechny prvky `[data-next-for="<classId>"]` na
+// stránce (řádek „Nejbližší termíny" u karty lekce).
+import { classes as classesCS, RESERVE_URL } from '../data/home';
+import { classes as classesEN } from '../data/home.en';
+import { SCHEDULE_API, SCHEDULE_DAYS, baActivityToClass } from '../data/schedule';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang?: Lang;
+  id?: string;
+}
+const { lang = 'cs', id = 'rozvrh' } = Astro.props;
+
+const classes = lang === 'en' ? classesEN : classesCS;
+const titleById = Object.fromEntries(classes.map((c) => [c.id, c.t]));
+// activity_id → { id (kotva), t (název lekce v daném jazyce) }
+const map = Object.fromEntries(
+  Object.entries(baActivityToClass)
+    .filter(([, classId]) => titleById[classId])
+    .map(([actId, classId]) => [actId, { id: classId, t: titleById[classId] }]),
+);
+
+const copy = lang === 'en'
+  ? {
+      eyebrow: 'Schedule',
+      h2: 'Next 7 days',
+      lead: 'Times and free spots come straight from the booking calendar. Pick a class and book that exact slot.',
+      fallback: 'Current times and free spots are in the booking calendar.',
+      calendar: 'Open the booking calendar →',
+    }
+  : {
+      eyebrow: 'Rozvrh',
+      h2: 'Příštích 7 dní',
+      lead: 'Termíny i volná místa bereme přímo z rezervačního kalendáře. Vyber si lekci a rezervuj rovnou ten konkrétní termín.',
+      fallback: 'Aktuální termíny a volná místa najdeš v rezervačním kalendáři.',
+      calendar: 'Otevřít rezervační kalendář →',
+    };
+---
+<section id={id} class="mx-auto max-w-[1220px] scroll-mt-24 px-5 pb-14 md:px-8" aria-labelledby={`${id}-h2`}>
+  <div class="rounded-2xl border border-border bg-surface p-7 md:p-9">
+    <p class="mb-3 text-[13px] font-extrabold uppercase tracking-[0.08em] text-accent-text">{copy.eyebrow}</p>
+    <div class="flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
+      <h2 id={`${id}-h2`} class="text-[clamp(24px,3vw,34px)] font-extrabold tracking-[-0.02em]">{copy.h2}</h2>
+      <a href={RESERVE_URL} class="cursor-pointer text-base font-bold text-accent-text hover:text-ink">{copy.calendar}</a>
+    </div>
+    <p class="mt-3 max-w-[64ch] text-[15.5px] leading-[1.55] text-ink-soft">{copy.lead}</p>
+
+    <div
+      class="mt-6"
+      data-schedule
+      data-api={SCHEDULE_API}
+      data-days={String(SCHEDULE_DAYS)}
+      data-lang={lang}
+      data-calendar={RESERVE_URL}
+      data-map={JSON.stringify(map)}
+    >
+      <p class="text-[15.5px] text-ink-muted" data-schedule-status>{copy.fallback}</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  type Ev = {
+    id: number; activity_id: number; title: string; start: string; end: string;
+    capacity: number; available: number; bookable: boolean; url: string;
+  };
+  type Entry = { id: string; t: string };
+
+  const DICT = {
+    cs: {
+      days: ['Ne', 'Po', 'Út', 'St', 'Čt', 'Pá', 'So'],
+      today: 'dnes', tomorrow: 'zítra',
+      book: 'Rezervovat →',
+      full: 'obsazeno',
+      closed: 'rezervace uzavřena',
+      spots: (n: number) => (n === 1 ? '1 volné místo' : n < 5 ? `${n} volná místa` : `${n} volných míst`),
+      empty: 'V příštích 7 dnech není v kalendáři žádná skupinová lekce. Aktuální termíny najdeš v rezervačním kalendáři.',
+      error: 'Rozvrh se teď nepodařilo načíst. Aktuální termíny a volná místa najdeš v rezervačním kalendáři.',
+      next: 'Nejbližší termíny:',
+      none: 'V příštích 7 dnech není v rozvrhu — termíny sleduj v rezervačním kalendáři.',
+      date: (d: Date) => `${d.getDate()}. ${d.getMonth() + 1}.`,
+    },
+    en: {
+      days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      today: 'today', tomorrow: 'tomorrow',
+      book: 'Book →',
+      full: 'full',
+      closed: 'booking closed',
+      spots: (n: number) => (n === 1 ? '1 spot left' : `${n} spots left`),
+      empty: 'No group classes in the calendar for the next 7 days. Check the booking calendar for current times.',
+      error: 'The schedule could not be loaded right now. Current times and free spots are in the booking calendar.',
+      next: 'Next sessions:',
+      none: 'Not scheduled in the next 7 days — check the booking calendar.',
+      date: (d: Date) => `${d.getDate()} ${['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][d.getMonth()]}`,
+    },
+  };
+
+  // "2026-09-16 07:00:00" → Date z komponent (bez převodu zóny — čas studia
+  // se má zobrazit tak, jak je, ať návštěvník sedí kdekoliv).
+  const parse = (s: string) => {
+    const [d, t = '00:00:00'] = s.split(' ');
+    const [y, m, day] = d.split('-').map(Number);
+    const [h, min] = t.split(':').map(Number);
+    return new Date(y, m - 1, day, h, min);
+  };
+  const hm = (d: Date) => `${d.getHours()}:${String(d.getMinutes()).padStart(2, '0')}`;
+  const dayKey = (d: Date) => `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+
+  const el = (tag: string, cls: string, text?: string) => {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text !== undefined) n.textContent = text;
+    return n;
+  };
+  const link = (href: string, cls: string, text: string) => {
+    const a = el('a', cls, text) as HTMLAnchorElement;
+    a.href = href;
+    return a;
+  };
+
+  const BOOK_CLS = 'inline-flex cursor-pointer items-center rounded-full bg-accent-text px-4 py-2 text-[14px] font-bold text-cream transition-colors hover:bg-accent-deep';
+  const CLASS_LINK_CLS = 'cursor-pointer font-extrabold text-ink hover:text-accent-text';
+
+  function renderList(container: HTMLElement, events: Ev[], lang: 'cs' | 'en', calendarUrl: string) {
+    const L = DICT[lang];
+    container.innerHTML = '';
+    if (!events.length) {
+      container.append(el('p', 'text-[15.5px] text-ink-muted', L.empty));
+      return;
+    }
+
+    const now = new Date();
+    const todayKey = dayKey(now);
+    const tomorrowKey = dayKey(new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1));
+
+    const byDay = new Map<string, { date: Date; items: Ev[] }>();
+    for (const ev of events) {
+      const d = parse(ev.start);
+      const k = dayKey(d);
+      if (!byDay.has(k)) byDay.set(k, { date: d, items: [] });
+      byDay.get(k)!.items.push(ev);
+    }
+
+    const wrap = el('div', 'divide-y divide-border');
+    for (const [k, { date, items }] of byDay) {
+      const day = el('div', 'py-4 first:pt-0 last:pb-0');
+      const h3 = el('h3', 'flex flex-wrap items-baseline gap-x-2.5 text-[17px] font-extrabold tracking-[-0.01em] text-ink');
+      h3.append(`${L.days[date.getDay()]} ${L.date(date)}`);
+      const rel = k === todayKey ? L.today : k === tomorrowKey ? L.tomorrow : '';
+      if (rel) h3.append(el('span', 'text-[13px] font-bold uppercase tracking-[0.06em] text-accent-text', rel));
+      day.append(h3);
+
+      const ul = el('ul', 'mt-2');
+      for (const ev of items) {
+        const entry = (ev as Ev & { _entry: Entry })._entry;
+        const li = el('li', 'grid grid-cols-[auto_1fr] items-center gap-x-4 gap-y-1 py-2.5 sm:grid-cols-[96px_1fr_auto_auto] sm:gap-x-6');
+        const time = el('time', 'text-[15px] font-bold tabular-nums text-brand', `${hm(parse(ev.start))}${ev.end ? `–${hm(parse(ev.end))}` : ''}`) as HTMLTimeElement;
+        time.dateTime = ev.start.replace(' ', 'T');
+        li.append(time);
+        li.append(link(`#${entry.id}`, CLASS_LINK_CLS + ' text-[16px]', entry.t));
+
+        const status = ev.available <= 0 ? L.full : !ev.bookable ? L.closed : L.spots(ev.available);
+        const statusCls = ev.available > 0 && ev.available <= 3 && ev.bookable ? 'text-accent-text' : 'text-ink-muted';
+        li.append(el('span', `col-start-2 text-[14px] font-semibold sm:col-start-auto ${statusCls}`, status));
+
+        if (ev.bookable) {
+          const a = link(ev.url, BOOK_CLS + ' col-start-2 justify-self-start sm:col-start-auto', L.book);
+          a.setAttribute('aria-label', `${L.book.replace(' →', '')} — ${entry.t}, ${L.days[date.getDay()]} ${L.date(date)} ${hm(parse(ev.start))}`);
+          li.append(a);
+        } else {
+          li.append(el('span', 'hidden sm:block'));
+        }
+        ul.append(li);
+      }
+      day.append(ul);
+      wrap.append(day);
+    }
+    container.append(wrap);
+    container.append(link(calendarUrl, 'mt-5 inline-block cursor-pointer text-[15px] font-bold text-accent-text hover:text-ink', lang === 'en' ? 'Whole calendar →' : 'Celý kalendář →'));
+  }
+
+  function renderNextFor(events: Ev[], lang: 'cs' | 'en') {
+    const L = DICT[lang];
+    document.querySelectorAll<HTMLElement>('[data-next-for]').forEach((slot) => {
+      const classId = slot.dataset.nextFor;
+      const mine = events.filter((ev) => (ev as Ev & { _entry: Entry })._entry.id === classId).slice(0, 3);
+      slot.innerHTML = '';
+      slot.hidden = false;
+      if (!mine.length) {
+        slot.append(el('span', 'text-ink-muted', L.none));
+        return;
+      }
+      slot.append(el('span', 'font-bold text-ink', `${L.next} `));
+      mine.forEach((ev, i) => {
+        const d = parse(ev.start);
+        const label = `${L.days[d.getDay()]} ${L.date(d)} ${hm(d)}`;
+        const status = ev.available <= 0 ? ` (${L.full})` : !ev.bookable ? ` (${L.closed})` : '';
+        if (ev.bookable) {
+          slot.append(link(ev.url, 'cursor-pointer font-bold text-accent-text hover:text-ink', `${label} →`));
+        } else {
+          slot.append(el('span', 'text-ink-muted', `${label}${status}`));
+        }
+        if (i < mine.length - 1) slot.append(el('span', 'text-ink-muted', ' · '));
+      });
+    });
+  }
+
+  async function load(container: HTMLElement) {
+    const lang = (container.dataset.lang === 'en' ? 'en' : 'cs') as 'cs' | 'en';
+    const L = DICT[lang];
+    const map = JSON.parse(container.dataset.map || '{}') as Record<string, Entry>;
+    const calendarUrl = container.dataset.calendar || 'https://studio.bohemi.fit/';
+    const status = container.querySelector<HTMLElement>('[data-schedule-status]');
+
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 8000);
+    try {
+      container.setAttribute('aria-busy', 'true');
+      const res = await fetch(`${container.dataset.api}?days=${container.dataset.days || 8}`, { signal: ctrl.signal });
+      if (!res.ok) throw new Error(String(res.status));
+      const data = (await res.json()) as { events?: Ev[] };
+      const events = (data.events || [])
+        .filter((ev) => map[String(ev.activity_id)])
+        .map((ev) => Object.assign(ev, { _entry: map[String(ev.activity_id)] }));
+      renderList(container, events, lang, calendarUrl);
+      renderNextFor(events, lang);
+    } catch {
+      if (status) status.textContent = L.error;
+      if (!container.querySelector('a')) {
+        container.append(link(calendarUrl, 'mt-2 inline-block cursor-pointer text-[15px] font-bold text-accent-text hover:text-ink', lang === 'en' ? 'Open the booking calendar →' : 'Otevřít rezervační kalendář →'));
+      }
+    } finally {
+      clearTimeout(timer);
+      container.removeAttribute('aria-busy');
+    }
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-schedule]').forEach((c) => { void load(c); });
+</script>
