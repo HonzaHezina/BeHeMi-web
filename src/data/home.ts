@@ -136,9 +136,9 @@ export const trainers: { id: string; name: string; role: string; media: string; 
 // od 15. 9. 2026 tlačítko vede do kalendáře, ne na /kontakt/ (audit: „Vybrat
 // u jednorázového vstupu vedlo na kontakt").
 // Cena jednorázového vstupu se liší podle typu lekce (ověřeno Klárkou 1. 8. 2026):
-// 199 Kč posilovací lekce, 250 Kč Enduro/Objevovárna, 150 Kč Open gym.
+// 199 Kč posilovací lekce, 250 Kč Enduro/Objevovárna, 300 Kč Contemporary dance, 150 Kč Open gym.
 export const pricing = [
-  { t: 'Jednorázový vstup', d: 'Když přijdeš jen občas', price: '199 Kč', per: '/ lekce', featured: false, badge: '', note: 'Cena se liší podle typu lekce.', feat: ['Kruhové, silové, HIIT, Supermamky – 199 Kč', 'Enduro, Objevovárna – 250 Kč · Open gym – 150 Kč', 'Platíš za každou lekci zvlášť, žádná sleva'], href: 'https://studio.bohemi.fit/' },
+  { t: 'Jednorázový vstup', d: 'Když přijdeš jen občas', price: '199 Kč', per: '/ lekce', featured: false, badge: '', note: 'Cena se liší podle typu lekce.', feat: ['Kruhové, silové, HIIT, Supermamky – 199 Kč', 'Enduro, Objevovárna – 250 Kč · Contemporary dance – 300 Kč · Open gym – 150 Kč', 'Platíš za každou lekci zvlášť, žádná sleva'], href: 'https://studio.bohemi.fit/' },
   { t: 'Měsíční členství', d: 'Pohyb jako součást rutiny', price: '1 499 Kč', per: '/ měsíc', featured: true, badge: 'Nejoblíbenější', note: '8 lekcí vychází na ~187 Kč za lekci.', feat: ['8 skupinových lekcí, 30 dní platnosti', '1× Open gym + 10 min fotobiomodulace', '10% sleva na ostatní lekce'], href: 'https://studio.bohemi.fit/ucet-clenstvi/platba-clenstvi/?level=4' },
   { t: 'Roční členství', d: 'Pohyb jako dlouhodobý závazek', price: '1 199 Kč', per: '/ měsíc', featured: false, badge: 'Nejlepší cena', note: '96 lekcí vychází na ~150 Kč za lekci.', feat: ['96 skupinových lekcí, 14 měsíců platnosti', '12× Open gym + 10 min fotobio / měsíc', '10% sleva na ostatní lekce'], href: 'https://studio.bohemi.fit/ucet-clenstvi/platba-clenstvi/?level=3' },
 ];

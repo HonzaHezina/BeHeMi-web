@@ -118,7 +118,7 @@ export const trainers: { id: string; name: string; role: string; media: string; 
 // Single entry price varies by class type (confirmed by Klárka 1 Aug 2026):
 // 199 CZK strength classes, 250 CZK Enduro/Discovery Room, 150 CZK Open gym.
 export const pricing = [
-  { t: 'Single entry', d: 'When you come just occasionally', price: '199 CZK', per: '/ class', featured: false, badge: '', note: 'Price varies by class type.', feat: ['Circuit, strength, HIIT, Supermums – 199 CZK', 'Enduro, Discovery Room – 250 CZK · Open gym – 150 CZK', 'Pay per class separately, no discount'], href: 'https://studio.bohemi.fit/' },
+  { t: 'Single entry', d: 'When you come just occasionally', price: '199 CZK', per: '/ class', featured: false, badge: '', note: 'Price varies by class type.', feat: ['Circuit, strength, HIIT, Supermums – 199 CZK', 'Enduro, Discovery Room – 250 CZK · Contemporary dance – 300 CZK · Open gym – 150 CZK', 'Pay per class separately, no discount'], href: 'https://studio.bohemi.fit/' },
   { t: 'Monthly membership', d: 'Movement as part of your routine', price: '1,499 CZK', per: '/ month', featured: true, badge: 'Most popular', note: '8 classes works out to ~187 CZK per class.', feat: ['8 group classes, 30-day validity', '1× Open gym + 10 min photobiomodulation', '10% off other classes'], href: 'https://studio.bohemi.fit/ucet-clenstvi/platba-clenstvi/?level=4' },
   { t: 'Annual membership', d: 'Movement as a long-term commitment', price: '1,199 CZK', per: '/ month', featured: false, badge: 'Best value', note: '96 classes works out to ~150 CZK per class.', feat: ['96 group classes, 14-month validity', '12× Open gym + 10 min photobio / month', '10% off other classes'], href: 'https://studio.bohemi.fit/ucet-clenstvi/platba-clenstvi/?level=3' },
 ];
