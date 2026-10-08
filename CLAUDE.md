@@ -292,7 +292,7 @@ Pravidlo pro celý web: **každý klik vede na NEJKONKRÉTNĚJŠÍ existující 
 stejné slugy, jen cestu `/en/group-classes/#…`):**
 
 - `/skupinove-lekce/`: `#kruhac #silovy-trenink #hiit #supermamky #vlastni-vaha
-  #power-zone #brisni-pekac #solid-booty #enduro` + blok `#prvni-lekce`
+  #power-zone #brisni-pekac #solid-booty #enduro #contemporary-dance` + blok `#prvni-lekce`
   („Tvoje první lekce" — konverzní jádro stránky, přidáno 7. 7. 2026; vedou na
   něj odkazy „Jdeš poprvé? →" z HP a z dětské stránky). **Move Smart NEJEDE**
   (rozhodnuto Honzou 7. 7. 2026) — lekce visí už jen na starém WP, na nový web
@@ -303,7 +303,7 @@ stejné slugy, jen cestu `/en/group-classes/#…`):**
   vede) — nejde plést dohromady, jde jen o zrušení dospělácké varianty.
 - `/krouzky-pro-deti/`: `#cirkusova-skolicka #zaklady-gymnastiky
   #akrobacie-zonglovani #objevovarna #detska-zumba`
-- `/treneri/`: `#klara-mechurova #jitka-stepankova #eliska-velazquez #jan-hezina`
+- `/treneri/`: `#klara-mechurova #jitka-stepankova #eliska-velazquez #nikola-komendova #jan-hezina`
   (`trainers[].id` v `home.ts`/`home.en.ts`, přidáno 10. 7. 2026). HP karty
   trenérů (`Trainers.astro`) jsou celé klikací a vedou na `/treneri/#id` —
   stejná logika jako typ lekce → `/skupinove-lekce/#kotva` (trenér nemá
