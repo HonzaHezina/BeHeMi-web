@@ -160,7 +160,7 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   ap.) se NIKDY nemění**; cíl kotvy má `scroll-mt-24`.
   Provozní údaje (rozvrh, kapacita) jen na detailu, ne v dlaždicích. **Rozvrh
   na `/skupinove-lekce/` (+ EN) se od 15. 9. 2026 čte ŽIVĚ** z read-only
-  endpointu na studio (`ScheduleWeek.astro`, `src/data/schedule.ts`, mapa BA
+  endpointu na studio (`ScheduleTerms.astro` — termíny v kartách lekcí, `src/data/schedule.ts`, mapa BA
   `activity_id` → `classes[].id`; endpoint v child theme) s deep-linkem na
   konkrétní událost — jen čtení, rezervace dál jen ve WP, nic víc dynamického
   nepřidávat (viz `/CLAUDE.md` „Audit prodejní cesty 15. 9. 2026"). Stejný

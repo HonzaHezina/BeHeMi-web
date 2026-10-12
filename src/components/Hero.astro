@@ -39,10 +39,10 @@ const { lang = 'cs' } = Astro.props;
       </p>
 
       <div class="mt-8 flex flex-wrap gap-3.5">
-        {/* „Zkus první lekci“ vede na rozvrh (termíny + volná místa + deep-link
-            na konkrétní událost), ne na rozcestník — audit 15. 9. 2026: kdo je
-            rozhodnutý, má dostat termín, ne další přehled. */}
-        <Button href={lang === 'en' ? '/en/group-classes/#schedule' : '/skupinove-lekce/#rozvrh'} variant="primary">{t(lang, 'hero_cta_primary')}</Button>
+        {/* „Zkus první lekci“ vede na blok „Tvoje první lekce“ (CZ), ne na rozcestník —
+            audit 15. 9. 2026: kdo je rozhodnutý, nemá dostat další přehled. Termíny jsou
+            u karet lekcí hned pod ním. */}
+        <Button href={lang === 'en' ? '/en/group-classes/' : '/skupinove-lekce/#prvni-lekce'} variant="primary">{t(lang, 'hero_cta_primary')}</Button>
         <Button href="#nabidka" variant="outline-light">{t(lang, 'hero_cta_secondary')}</Button>
       </div>
 

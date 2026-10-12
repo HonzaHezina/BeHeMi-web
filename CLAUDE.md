@@ -28,7 +28,7 @@ luxusní wellness. Tělo jako cesta k síle, zdraví a klidu.
    lekce, platbu nebo storno → **to není stránka, to je WordPress.**
    **Jediná výjimka (15. 9. 2026): rozvrh a volná místa se na
    `/skupinove-lekce/` jen ČTOU** z read-only endpointu na studio
-   (`ScheduleWeek.astro`, `src/data/schedule.ts`) — nic se neodesílá, žádný
+   (`ScheduleTerms.astro`, `src/data/schedule.ts`) — nic se neodesílá, žádný
    stav uživatele, rezervace dál jen ve WP. Detail v „Audit prodejní cesty
    (15. 9. 2026)" v sekci Stav implementace níž. Další dynamiku nezavádět.
 2. **Booking = odkaz ven.** Každé tlačítko „Rezervovat" je `<a>` na
@@ -1146,19 +1146,23 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
 - **Audit prodejní cesty (15. 9. 2026, externí konzultant, Honza řekl
   „uprav to na webu") — co se udělalo a co čeká:**
   - **Rozvrh na `/skupinove-lekce/` (a `/en/group-classes/`) — živě z
-    rezervačního kalendáře.** Komponenta `ScheduleWeek.astro`
-    (sekce `#rozvrh` CZ / `#schedule` EN hned pod hero, PŘED `#prvni-lekce`),
+    rezervačního kalendáře, termíny přímo v kartách lekcí.** Komponenta
+    `ScheduleTerms.astro` (od 12. 10. 2026 bez vlastního viditelného bloku —
+    samostatná sekce „Příštích 7 dní" byla zrušena jako duplicitní s kartami,
+    kompletní kalendář zůstává na studiu),
     data + mapa BA `activity_id` → `classes[].id` v `src/data/schedule.ts`,
     endpoint `GET studio.bohemi.fit/wp-json/bohemi/v1/schedule?days=8` v
     child theme (`wordpress/README.md`, sekce „Read-only rozvrh"). Server
-    vyrenderuje jen hlavičku + neutrální větu s odkazem na kalendář; inline
-    skript doplní dny → řádky `čas · lekce (kotva) · volná místa ·
-    Rezervovat →`, kde **„Rezervovat" vede na KONKRÉTNÍ událost**
-    (`?selected_events[0][id]=…`, BA ji předvybere — ověřeno živě). Stejný
-    skript plní `<p data-next-for={l.id}>` u každé karty lekce („Nejbližší
-    termíny: Út 16. 9. 7:00 → · …", nebo „V příštích 7 dnech není v
-    rozvrhu"). Když feed spadne (Wedos, CORS), zůstane věta + odkaz na
-    kalendář — nic se nerozbije. **Tohle je vědomá výjimka z pravidla 1
+    nevyrenderuje nic; inline skript naplní `<div data-next-for={id} hidden>`
+    u každé karty lekce (CZ `/skupinove-lekce/`, EN `/en/group-classes/`)
+    termíny na 7 dní jako chipy `Út 13. 10. 17:00 · 14 míst`, kde **každý
+    chip vede na KONKRÉTNÍ událost** (`?selected_events[0][id]=…`, BA ji
+    předvybere — ověřeno živě); lekce bez termínu ukáže „V příštích 7 dnech
+    není lekce v rozvrhu" + odkaz do kalendáře. Když feed spadne (Wedos,
+    CORS), sloty zůstanou skryté a platí obecný odkaz „Rezervovat →" v kartě —
+    nic se nerozbije. Nový typ lekce na stránce = nový `data-next-for={id}`
+    slot v kartě + řádek v `baActivityToClass`. Supermamky (dlaždice je
+    celá `<a>`) slot na CZ nemají, na EN ano. **Tohle je vědomá výjimka z pravidla 1
     (statika only): jen ČTENÍ, nic se neodesílá, žádný stav uživatele,
     rezervace je pořád jen ve WP.** Proč ne statická tabulka: sloty St/Čt
     7:00, 8:00, 17:00, 18:00 rotují týden od týdne mezi Břišním pekáčem,
@@ -1168,10 +1172,10 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
     test skriptu (CZ/EN + fail path) proti reálným datům BA.
     **Feed funguje až po nahrání ZIPu motivu 2.9** — do té doby web ukazuje
     fallback větu, což je stejný stav jako dřív.
-  - **Hero CTA „Zkus první lekci →"** vede na `/skupinove-lekce/#rozvrh`
-    (EN `/en/group-classes/#schedule`), ne na rozcestník `/lekce-a-sluzby/`
-    — kdo je rozhodnutý, dostane termín, ne další přehled. Odkazy „Jdeš
-    poprvé? →" dál míří na `#prvni-lekce` (ten blok je hned pod rozvrhem).
+  - **Hero CTA „Zkus první lekci →"** vede na `/skupinove-lekce/#prvni-lekce`
+    (EN `/en/group-classes/`), ne na rozcestník `/lekce-a-sluzby/` — kdo je
+    rozhodnutý, nedostane další přehled (do 12. 10. 2026 mířilo na zrušený
+    blok `#rozvrh`). Termíny jsou u karet lekcí hned pod blokem první lekce.
   - **Program 8 týdnů — CTA „Rezervovat místo" už nevede do kalendáře
     lekcí** (žádný program tam není, audit to správně vytkl). Teď
     `mailto:info@bohemi.fit?subject=Program 8 týdnů…` s popiskem
@@ -1216,7 +1220,7 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
        vrátit, nebo zvážit, jestli mají mít na `/skupinove-lekce/` plnou
        kartu.
     6. `/open-gym/` rozvrh zatím nemá (Open gym = activity 8, ~20 slotů
-       denně) — `ScheduleWeek` by šel rozšířit o filtr, až bude chtít.
+       denně) — `ScheduleTerms` by šel rozšířit (slot u Open gymu), až bude chtít.
     7. Auditor chce GSC dotazy a BA poměr registrovaní/hosté + návratnost
        po první lekci, než potvrdí body 3–4 — data má jen Honza.
 

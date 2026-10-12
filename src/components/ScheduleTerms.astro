@@ -1,0 +1,141 @@
+---
+// Nejbližší termíny lekcí z rezervačního kalendáře (viz src/data/schedule.ts,
+// proč to nejde staticky). Komponenta nic nevykresluje — jen načte feed a
+// naplní prvky `[data-next-for="<classId>"]` na stránce: u každé karty lekce
+// se objeví termíny na příštích 7 dní, každý jako odkaz přímo na tu událost
+// v kalendáři. Celý kalendář je pořád na studiu (12. 10. 2026: samostatný
+// blok „Příštích 7 dní" zrušen, byl duplicitní s kartami).
+// Když feed spadne, sloty zůstanou skryté a platí obecný odkaz „Rezervovat →"
+// v kartě. Nic se neodesílá, rezervace je jen ve WordPressu.
+import { classes as classesCS, RESERVE_URL } from '../data/home';
+import { classes as classesEN } from '../data/home.en';
+import { SCHEDULE_API, SCHEDULE_DAYS, baActivityToClass } from '../data/schedule';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'cs' } = Astro.props;
+
+const classes = lang === 'en' ? classesEN : classesCS;
+const titleById = Object.fromEntries(classes.map((c) => [c.id, c.t]));
+const map = Object.fromEntries(
+  Object.entries(baActivityToClass)
+    .filter(([, classId]) => titleById[classId])
+    .map(([actId, classId]) => [actId, { id: classId, t: titleById[classId] }]),
+);
+---
+<div
+  hidden
+  data-schedule
+  data-api={SCHEDULE_API}
+  data-days={String(SCHEDULE_DAYS)}
+  data-lang={lang}
+  data-calendar={RESERVE_URL}
+  data-map={JSON.stringify(map)}
+></div>
+
+<script>
+  type Ev = {
+    id: number; activity_id: number; start: string; end: string;
+    available: number; bookable: boolean; url: string;
+  };
+
+  const DICT = {
+    cs: {
+      days: ['Ne', 'Po', 'Út', 'St', 'Čt', 'Pá', 'So'],
+      full: 'obsazeno',
+      closed: 'rezervace uzavřena',
+      spots: (n: number) => (n === 1 ? '1 místo' : n < 5 ? `${n} místa` : `${n} míst`),
+      next: 'Nejbližší termíny (7 dní)',
+      none: 'V příštích 7 dnech není lekce v rozvrhu. Další termíny najdeš v kalendáři.',
+      date: (d: Date) => `${d.getDate()}. ${d.getMonth() + 1}.`,
+    },
+    en: {
+      days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      full: 'full',
+      closed: 'booking closed',
+      spots: (n: number) => (n === 1 ? '1 spot' : `${n} spots`),
+      next: 'Next sessions (7 days)',
+      none: 'Not scheduled in the next 7 days. Check the calendar for later dates.',
+      date: (d: Date) => `${d.getDate()} ${['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][d.getMonth()]}`,
+    },
+  };
+
+  // "2026-09-16 07:00:00" → Date z komponent (bez převodu zóny — čas studia
+  // se zobrazí tak, jak je, ať návštěvník sedí kdekoliv).
+  const parse = (s: string) => {
+    const [d, t = '00:00:00'] = s.split(' ');
+    const [y, m, day] = d.split('-').map(Number);
+    const [h, min] = t.split(':').map(Number);
+    return new Date(y, m - 1, day, h, min);
+  };
+  const hm = (d: Date) => `${d.getHours()}:${String(d.getMinutes()).padStart(2, '0')}`;
+
+  const el = (tag: string, cls: string, text?: string) => {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text !== undefined) n.textContent = text;
+    return n;
+  };
+
+  const CHIP = 'inline-flex items-baseline gap-1.5 rounded-full border-[1.5px] px-3.5 py-1.5 text-[14px] transition-colors';
+
+  async function load(container: HTMLElement) {
+    const lang = (container.dataset.lang === 'en' ? 'en' : 'cs') as 'cs' | 'en';
+    const L = DICT[lang];
+    const map = JSON.parse(container.dataset.map || '{}') as Record<string, { id: string; t: string }>;
+    const calendarUrl = container.dataset.calendar || 'https://studio.bohemi.fit/';
+
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 8000);
+    try {
+      const res = await fetch(`${container.dataset.api}?days=${container.dataset.days || 8}`, { signal: ctrl.signal });
+      if (!res.ok) throw new Error(String(res.status));
+      const data = (await res.json()) as { events?: Ev[] };
+      const events = data.events || [];
+
+      document.querySelectorAll<HTMLElement>('[data-next-for]').forEach((slot) => {
+        const classId = slot.dataset.nextFor;
+        const mine = events.filter((ev) => map[String(ev.activity_id)]?.id === classId);
+        slot.innerHTML = '';
+        slot.hidden = false;
+        slot.append(el('p', 'mb-2 text-[13px] font-extrabold uppercase tracking-[0.06em] text-ink-faint', L.next));
+
+        if (!mine.length) {
+          const p = el('p', 'text-[14.5px] text-ink-muted', `${L.none} `);
+          const a = el('a', 'cursor-pointer font-bold text-accent-text hover:text-ink', lang === 'en' ? 'Calendar →' : 'Kalendář →') as HTMLAnchorElement;
+          a.href = calendarUrl;
+          p.append(a);
+          slot.append(p);
+          return;
+        }
+
+        const list = el('ul', 'flex flex-wrap gap-2');
+        for (const ev of mine) {
+          const d = parse(ev.start);
+          const label = `${L.days[d.getDay()]} ${L.date(d)} ${hm(d)}`;
+          const li = document.createElement('li');
+          if (ev.bookable) {
+            const a = el('a', `${CHIP} cursor-pointer border-border-button text-ink hover:border-brand hover:text-brand`) as HTMLAnchorElement;
+            a.href = ev.url;
+            a.append(el('span', 'font-bold tabular-nums', label), el('span', 'text-[12.5px] text-ink-muted', L.spots(ev.available)));
+            li.append(a);
+          } else {
+            const s = el('span', `${CHIP} border-border text-ink-muted`);
+            s.append(el('span', 'font-bold tabular-nums', label), el('span', 'text-[12.5px]', ev.available <= 0 ? L.full : L.closed));
+            li.append(s);
+          }
+          list.append(li);
+        }
+        slot.append(list);
+      });
+    } catch {
+      // Feed nedostupný — sloty zůstávají skryté, karta má obecný odkaz „Rezervovat →".
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-schedule]').forEach((c) => { void load(c); });
+</script>

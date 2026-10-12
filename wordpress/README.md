@@ -1362,9 +1362,8 @@ událost. Motiv → **2.9**, ZIP přegenerovaný. Jen PHP (`functions.php`),
 **Ověření po nahrání:** otevři
 `https://studio.bohemi.fit/wp-json/bohemi/v1/schedule?days=8` — má vrátit
 JSON s `events` (ne 404 = starý motiv / rewrite cache, ne 503 = BA
-neaktivní). Pak `bohemi.fit/skupinove-lekce/#rozvrh` musí místo věty
-„Aktuální termíny a volná místa najdeš v rezervačním kalendáři." ukázat
-seznam dnů. Pokud zůstane věta, otevři konzoli prohlížeče — CORS chyba
+neaktivní). Pak karty lekcí na `bohemi.fit/skupinove-lekce/` (např. HIIT) musí
+ukázat chipy s termíny a volnými místy. Pokud chipy chybí (jen odkaz „Rezervovat →"), otevři konzoli prohlížeče — CORS chyba
 znamená, že filtr origin nesedí (www vs. bez www).
 
 ### 2. `noindex` na celém studio kromě právních stránek
