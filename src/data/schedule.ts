@@ -37,6 +37,9 @@ export const baActivityToClass: Record<number, string> = {
   34: 'power-zone',
   36: 'solid-booty',
   37: 'enduro',
+  42: 'contemporary-dance',
+  43: 'vlastni-vaha', // „Vlastní váha a protahování“ — varianta stejné lekce (potvrdit)
+  44: 'dance-workout',
 };
 
 export type ScheduleEvent = {

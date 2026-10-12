@@ -563,8 +563,8 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   začátku/konci, uzavřená skupina do 12, 70% vratka po 1. týdnu). Nevracet
   zpět na 3 900 bez nového rozhodnutí Honzy. Interní podklady (osnovy 20min bloků, měřicí protokol,
   plná storno tabulka) = `docs/program-8-tydnu-podklady.md` — **NEPUBLIKOVAT**;
-  předstartovní storno pásma patří do budoucích VOP. Termín na webu je záměrně
-  „září 2026" (kandidát 14. 9.–8. 11. 2026 čeká na Honzovo potvrzení). EN
+  předstartovní storno pásma patří do budoucích VOP. Termín na webu (Honza, 12. 10. 2026): „Zářijový běh už běží, přihlášky bereme na
+  prosinec" — konkrétní prosincové datum zatím není, nevymýšlet. EN
   stránka není — EN odkazuje českým slugem.
 - **Early-bird sleva pro prvních 5 přihlášených (31. 8. 2026):** 6 900 Kč
   místo 7 900 Kč — cena a přeškrtnutá původní cena jsou (jako jediné místo
@@ -1180,7 +1180,7 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   - **Studio: noindex mimo právní stránky** + poslední dva EN řetězce BA —
     v child theme 2.9 (`wp_robots`, `gettext`), viz `wordpress/README.md`.
   - **ČEKÁ NA HONZU (rozhodnutí o obsahu, nedělat potichu):**
-    1. `/program-8-tydnu/` CTA pořád říká „První běh připravujeme na září
+    1. (VYŘEŠENO 12. 10. 2026: „Zářijový běh už běží, přihlášky na prosinec"; Google recenze jsou na HP v `Reviews.astro`, bod 3 zbývá jen průměr/počet.) `/program-8-tydnu/` CTA pořád říkalo „První běh připravujeme na září
        2026 — přesný termín zveřejníme" — dnes je 15. 9. 2026, audit: „buď
        běží, nebo je datum pryč; obojí zabíjí důvěru". Kandidát 14. 9.–
        8. 11. 2026 nikdy nebyl potvrzen. Potřeba: reálný termín, nebo
