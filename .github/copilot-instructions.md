@@ -222,7 +222,7 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   Velký taneční 600 Kč, Malý taneční 500 Kč, Funkční sál 700 Kč (největší,
   TRX), Multifunkční sál (nyní tatami) 350 Kč (max 3 osoby, i zkušebna) —
   `halls` v `pronajem-salu.astro`, sync v `cenik.astro`/`en/pricing.astro`.
-  Ke kroužkům Akademie CLP, Dětské Zumbě a pronájmu patří viditelný odkaz na
+  Ke kroužkům BoHeMi Akademie, Dětské Zumbě a pronájmu patří viditelný odkaz na
   obchodní podmínky (přímé `https://studio.bohemi.fit/obchodni-podminky-*` URL,
   stejný vzor jako `Footer.astro`). Detaily: `/CLAUDE.md`.
 - **Data** sdílená v `src/data/home.ts`, stránky skládají `src/components/`.

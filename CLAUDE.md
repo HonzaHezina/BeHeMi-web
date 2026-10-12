@@ -91,7 +91,7 @@ luxusní wellness. Tělo jako cesta k síle, zdraví a klidu.
 | Proč BoHeMi | `/proc-bohemi/` | `proc-bohemi.astro` |
 | Lekce a služby (hub) | `/lekce-a-sluzby/` | `lekce-a-sluzby.astro` |
 | Skupinové lekce | `/skupinove-lekce/` | `skupinove-lekce.astro` |
-| Kroužky pro děti | `/krouzky-pro-deti/` | `krouzky-pro-deti.astro` |
+| Kroužky pro děti (BoHeMi Akademie) | `/krouzky-pro-deti/` | `krouzky-pro-deti.astro` |
 | Supermamky | `/supermamky/` | `supermamky.astro` |
 | Open gym | `/open-gym/` | `open-gym.astro` |
 | Fotobiomodulace | `/fotobiomodulacni-terapie/` | `fotobiomodulacni-terapie.astro` |
@@ -726,7 +726,9 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
     (konzistentní s anti-cílem „žádná externí kniha/autorita" výš). Copy na
     `/kurzy/` zůstává obecné — od 31. 8. 2026 (pozdě odpoledne, viz „Externí
     zpětná vazba" níž) přesněji „Kurzy vedou trenéři BoHeMi a lektoři
-    spolupracující s naším cirkusovým programem podle konkrétní disciplíny",
+    spolupracující s naším cirkusovým programem podle konkrétní disciplíny"
+    (**od 12. 10. 2026 zjednodušeno na „Kurzy vedou trenéři BoHeMi a
+    hostující lektoři"** — viz rozhodnutí o BoHeMi Akademii výš),
     ne „zkušení cirkusoví lektoři" (nebyla by pravdivá, pokud kalisteniku
     povede trenér BoHeMi bez cirkusové vazby).
   - **Pedagogický princip (CIRQUEON-style):** hraní → učení → předvádění,
@@ -884,7 +886,7 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   počet osob. Bývalé „Střední sál" a „Fitness sál" jako samostatné položky
   zanikly. Drženo v synku: `pronajem-salu.astro` (`halls`, plné popisy) +
   `cenik.astro` + `en/pricing.astro` (jen krátké dlaždice jméno+cena, beze
-  změny). Ke všem sálům + kroužkům Akademie CLP a Dětské Zumbě patří viditelný odkaz na
+  změny). Ke všem sálům + kroužkům BoHeMi Akademie a Dětské Zumbě patří viditelný odkaz na
   obchodní podmínky (`https://studio.bohemi.fit/obchodni-podminky-*`, přímý
   externí odkaz jako u `Footer.astro`, ne lokální redirect route).
 - **Přístupnost:** všechny stránky projdou **axe-core (WCAG 2.1 A+AA) = 0 chyb**.
