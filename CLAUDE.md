@@ -1206,6 +1206,15 @@ FTP přístup / DKIM podpis e-mailu. Motivace i souvislost s
 `ERR_HTTP2_PROTOCOL_ERROR` bugem na `studio.bohemi.fit` je v
 `wordpress/README.md`.
 
+**DNS se mění jen v Cloudflare, ne ve Wedosu** (Wedos je jen registrátor +
+hosting `studio.bohemi.fit`; nameservery jsou `vera`/`ridge.ns.cloudflare.com`).
+**`www.bohemi.fit` → 301 na `https://bohemi.fit/…` (Cloudflare Redirect Rule,
+12. 10. 2026)** — dřív `www` vracelo 503/404, protože Coolify `www` doménu
+nemá. Záznam `www` musí zůstat Proxied (jinak redirect nezabere), do Coolify
+`www` nepřidávat (vznikly by duplicitní URL). `http://` → `https://` je
+taky 301 (Always Use HTTPS). Detail v `docs/cloudflare-dns-migration.md`.
+Po změně Cloudflare pravidel ověř `curl -I` na `www` i apex (smyčka).
+
 ## Nasazení (Coolify na Hetzneru)
 
 Web běží jako **statika** (Astro `output: static` → složka `dist/`). V Coolify:

@@ -60,6 +60,21 @@ proti týhle tabulce.
   kroku před přepnutím
 - **AI Crawl Control** (Search/Agent povoleno, Training ponecháno
   blokované) — kosmetická volba, nesouvisí s funkčností
+- **`www` → apex redirect (12. 10. 2026):** `www.bohemi.fit` dřív vracelo
+  503 (HTTPS) / 404 (HTTP), protože `www` záznam míří na Hetzner, ale
+  Coolify na něm doménu `www` nemá. Kolega na Safari se dostal na chybu
+  po kliknutí z Googlu (odkaz mohl vést na `www`), ručně zadané URL bez
+  `www` fungovalo. Řešení je jen v Cloudflare, ne v Coolify ani v repu:
+  Rules → Redirect Rules → `www.bohemi.fit`, filtr
+  `(http.host eq "www.bohemi.fit")`, dynamic
+  `concat("https://bohemi.fit", http.request.uri.path)`, **301**,
+  Preserve query string zapnuto. Záznam `www` (A, Proxied) musí zůstat
+  oranžový, jinak redirect nezabere. Ověřeno `curl`em: https/http, s cestou
+  i s `?x=1` → 301 na apex. Pokud to Safari dál dělá, přesný text chyby
+  nikdo nezjistil — `www` byl nejpravděpodobnější podezřelý, ne potvrzená
+  příčina.
+- **HTTP → HTTPS (12. 10. 2026):** Always Use HTTPS zapnuto, `http://bohemi.fit/`
+  dává 301 (dřív 302).
 
 ## Rollback
 
