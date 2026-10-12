@@ -122,3 +122,15 @@ nulové duplicity se stránkami supermamky/hula-hoop.
   vlastní váha, Power Zone, břišní pekáč, Solid Booty, Supermamky — zůstávají
   na 199 Kč). Zdroj pravdy: `src/data/home.ts`/`home.en.ts` (`pricing[0].feat`)
   + `cenik.astro`/`en/pricing.astro`, zdůvodnění v `/CLAUDE.md`.
+
+## Aktualizace (12. 10. 2026)
+- **Přibyly dvě taneční lekce, obě vede Nikola Komendová:** Contemporary dance
+  (`#contemporary-dance`) a Dance workout (`#dance-workout`). Texty vychází
+  z podkladů od Kláry Měchurové; délka 60 min, intenzita a „Pro koho" jsou
+  odhad čekající na potvrzení.
+- **Contemporary dance: jednorázový vstup 300 Kč, Multisport se na ni nebere,
+  členství se na ni nevztahuje** (Honza). Cena Dance workoutu zatím není
+  potvrzená. Zdroj pravdy: `pricing[0].feat` v `src/data/home.ts`/`home.en.ts`
+  a `priceNotes` v `cenik.astro`/`en/pricing.astro`.
+- Obě lekce zatím bez fotky. V živém rozvrhu se ukážou po doplnění jejich
+  `activity_id` do `baActivityToClass` v `src/data/schedule.ts`.

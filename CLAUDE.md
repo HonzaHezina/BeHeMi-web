@@ -847,7 +847,7 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   na 6 karet (→ „Všechny lekce →" na `/skupinove-lekce/`). Stejný odstavec
   nesmí být na rozcestníku i detailu. **HP nabídka (`Offer.astro`) i EN rozcestník
   ukazují stejných 6 karet lekcí** (`classes.slice(0, 6)`, rozhodnuto 5. 7. 2026) —
-  všech 10 má jen detail `/skupinove-lekce/`.
+  všech 11 má jen detail `/skupinove-lekce/`.
 - **Obsah z WordPressu ověřovat — je místy zastaralý.** Př.: lektorka Supermamek
   na WP (Klára Šauerová) už v týmu není; termíny semestru kroužků („letní
   16. 9. 2026 – 27. 1. 2027") vypadají jako zimní — čeká na Honzovo potvrzení.
@@ -872,6 +872,15 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   Enduro/Objevovárna, 150 Kč Open gym. `pricing[0]` v `home.ts`/
   `home.en.ts` nese breakdown ve `feat`, `cenik.astro`/`en/pricing.astro`
   bar chart i doprovodná věta pod ním jsou dolazené na stejná čísla.
+  **Contemporary dance (Honza, 12. 10. 2026): jednorázový vstup 300 Kč,
+  Multisport a další benefity se na ni NEBEROU, členství se na ni
+  nevztahuje.** Cena je ve `feat` u `pricing[0]` (CZ i EN), v textu pod
+  grafem v `cenik.astro`/`en/pricing.astro` a v komentáři nad `pricing`.
+  Výjimka z Multisportu je v `priceNotes` jmenovitě („mimo vybrané lekce,
+  např. Contemporary dance"); seznam lekcí, na které platí členství, ji
+  neobsahuje (nic se tam nepřidává). Cena **Dance workoutu** (taky vede
+  Nikola) a jeho Multisport/členství stav v datech zatím není — doplnit,
+  až ji Honza/Klára potvrdí, ne hádat.
 - **Pronájem sálů = 4 sály s novými jmény/cenami/popisy (ověřeno Klárkou
   1.–2. 8. 2026, nahrazuje starší 4sálový seznam s jinými cenami/jmény —
   pozor, mezitím krátce existovala chybná 3sálová verze, opravena zpět na 4
@@ -984,6 +993,20 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
     bio (stejný vzor jako `extra` u lekcí). Nový trenér s fotkami → hlavní do
     `trainerPhotos`, zbytek do `trainerGallery`, fotky zpracovat do
     `src/assets/treneri/`.
+  **Nikola Komendová (přidána 7.–12. 10. 2026, podnět Klára Měchurová):**
+  lektorka Contemporary dance a Dance workoutu (`id: 'nikola-komendova'`,
+  bio i `bioShort` CZ+EN). **Zatím bez fotky** — ani lekce, ani trenérka
+  nemají záběr, zobrazí se barevný rámeček (`media-rose`). Fotku dodat do
+  `_raw/treneri/nikola-komendova/` a `_raw/lekce/<id>/`, zpracovat a zapsat
+  do `trainerPhotos` / `photosCS`+`photosEN`. HP mřížka trenérů
+  (`Trainers.astro`) má s pěti kartami `lg:grid-cols-3 xl:grid-cols-5`
+  (dřív 4 sloupce, pátá karta by zůstala sama na řádku). Bio vychází z
+  Klárčina textu přepsaného do kratších vět; zakázané „vědomý přístup"
+  (rod slova „vědomí") se nepoužilo. Délka lekcí 60 min, intenzita a
+  „Pro koho" u obou tanečních lekcí jsou odhad čekající na potvrzení.
+  Rozvrh: lekce se v něm ukáže až po přidání jejich `activity_id` do
+  `baActivityToClass` v `src/data/schedule.ts` (Klára hodiny v Booking
+  Activities už zadala).
   **`/treneri/` je bohatý detail, HP (`Trainers.astro`) jen ochutnávka**
   (potvrzeno 17. 7. 2026) — stejné rozdělení jako `/skupinove-lekce/` vs. HP
   `Offer.astro`. **Od 2. 8. 2026 platí totéž i pro bio, ne jen pro fotky:**
@@ -1026,10 +1049,12 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   _raw/lekce/kruhac/          _raw/lekce/silovy-trenink/    _raw/lekce/hiit/
   _raw/lekce/vlastni-vaha/    _raw/lekce/power-zone/
   _raw/lekce/brisni-pekac/    _raw/lekce/solid-booty/       _raw/lekce/enduro/
+  _raw/lekce/contemporary-dance/    _raw/lekce/dance-workout/
   _raw/deti/cirkusova-skolicka/    _raw/deti/zaklady-gymnastiky/
   _raw/deti/akrobacie-zonglovani/  _raw/deti/objevovarna/  _raw/deti/detska-zumba/
   _raw/treneri/klara-mechurova/  _raw/treneri/jitka-stepankova/
-  _raw/treneri/eliska-velazquez/ _raw/treneri/jan-hezina/
+  _raw/treneri/eliska-velazquez/ _raw/treneri/nikola-komendova/
+  _raw/treneri/jan-hezina/
   _raw/supermamky/
   _raw/studio/    (pronájem sálů + obecná atmosféra studia, viz výš — na
                    webu se dnes rozděluje mezi /pronajem-salu/ a /fotky/)

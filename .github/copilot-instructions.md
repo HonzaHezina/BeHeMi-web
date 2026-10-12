@@ -165,7 +165,7 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   konkrétní událost — jen čtení, rezervace dál jen ve WP, nic víc dynamického
   nepřidávat (viz `/CLAUDE.md` „Audit prodejní cesty 15. 9. 2026"). Stejný
   odstavec nesmí být na rozcestníku i detailu. **HP nabídka i rozcestníky (CZ/EN)
-  ukazují 6 karet lekcí** (`classes.slice(0, 6)`), všech 10 jen na
+  ukazují 6 karet lekcí** (`classes.slice(0, 6)`), všech 11 jen na
   `/skupinove-lekce/`. Detaily v `/CLAUDE.md`.
 - **Děti = po homepage nejsilnější publikum:** hero má dětské tlačítko, homepage
   pruh `KidsBand.astro`, dětská karta i menu dropdown vedou na
@@ -218,6 +218,9 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
 - **Jednorázový vstup NENÍ jednotná cena (opraveno Klárkou 1. 8. 2026):** 199 Kč
   posilovací lekce, 250 Kč Enduro/Objevovárna, 150 Kč Open gym — breakdown
   v `pricing[0].feat` (`home.ts`/`home.en.ts`), sync v `cenik.astro`/`en/pricing.astro`.
+  **Contemporary dance = 300 Kč za vstup, bez Multisportu, členství se na ni
+  nevztahuje** (Honza, 12. 10. 2026) — výjimka je jmenovitě v `priceNotes`
+  obou ceníků. Cena Dance workoutu zatím není v datech (nehádat).
   **Pronájem sálů = 4 sály s novými jmény/cenami** (opraveno 1. 8. 2026):
   Velký taneční 600 Kč, Malý taneční 500 Kč, Funkční sál 700 Kč (největší,
   TRX), Multifunkční sál (nyní tatami) 350 Kč (max 3 osoby, i zkušebna) —
@@ -256,6 +259,10 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   `osobni-treninky.astro` má vlastní jednu větu natvrdo, ne `bio`/`bioShort`
   (audit 7. 9. 2026 — obě pole by tam duplikovala jinou stránku, detail
   v `/CLAUDE.md`).
+  **Nikola Komendová** (Contemporary dance + Dance workout, 10/2026) je zatím
+  bez fotky (barevný rámeček); HP mřížka trenérů má pro pět karet
+  `lg:grid-cols-3 xl:grid-cols-5`. Nová lekce ve WP = nový řádek i v
+  `baActivityToClass` (`src/data/schedule.ts`), jinak není v rozvrhu.
 - **Tailwind v4:** reset patří do `@layer base`; zlomky spacing (4.5/5.5/6.5/7.5)
   nejdou — piš `[18px]/[22px]/[26px]/[30px]`; po nové stránce restartuj dev server.
 - **Deploy:** Coolify statika — `dist/`, „Is it a static site?" ON, SPA OFF.
