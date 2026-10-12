@@ -292,7 +292,7 @@ Pravidlo pro celý web: **každý klik vede na NEJKONKRÉTNĚJŠÍ existující 
 stejné slugy, jen cestu `/en/group-classes/#…`):**
 
 - `/skupinove-lekce/`: `#kruhac #silovy-trenink #hiit #supermamky #vlastni-vaha
-  #power-zone #brisni-pekac #solid-booty #enduro #contemporary-dance` + blok `#prvni-lekce`
+  #power-zone #brisni-pekac #solid-booty #enduro #contemporary-dance #dance-workout` + blok `#prvni-lekce`
   („Tvoje první lekce" — konverzní jádro stránky, přidáno 7. 7. 2026; vedou na
   něj odkazy „Jdeš poprvé? →" z HP a z dětské stránky). **Move Smart NEJEDE**
   (rozhodnuto Honzou 7. 7. 2026) — lekce visí už jen na starém WP, na nový web
