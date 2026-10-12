@@ -1,4 +1,4 @@
-// Krátké specializační kurzy vedle Akademie Cirk La Putyka (viz
+// Krátké specializační kurzy vedle BoHeMi Akademie (dřív Akademie Cirk La Putyka; viz
 // krouzky-pro-deti.astro) — uzavřené bloky (typicky 4 lekce) zaměřené na
 // jednu dovednost, ne dlouhodobý semestrální kroužek. Neplést dohromady:
 // Akademie = celý cirkus po dobu semestru, tyhle kurzy = jedna dovednost
@@ -141,8 +141,8 @@ export const specializationCourses: SpecializationCourse[] = [
 // balanc — viz interní zadání) se na web zatím nedávají vůbec.
 //
 // Kalistenika (rozhodnuto Honzou 31. 8. 2026): jednotlivé navazující kurzy
-// jdou první, případný velký průběžný program (obdoba Akademie Cirk La
-// Putyka / cirkusové školy — jedna ucelená disciplína) se zatím nezveřejňuje
+// jdou první, případný velký průběžný program (obdoba BoHeMi Akademie
+// / cirkusové školy — jedna ucelená disciplína) se zatím nezveřejňuje
 // ani nenaznačuje na webu — nejdřív se ověří zájem přes tyhle kratší kurzy.
 // Platí jen pro kalisteniku (má na to potenciál jako vlastní obor), ne pro
 // žonglování/stojky — ty zůstávají jen sekvence I→II bez vyhlídky na velký

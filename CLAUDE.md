@@ -241,7 +241,7 @@ mají `$external` na `false` místo `true` (`bohemi-wp-ui` → 1.1.9, motiv →
 2.2) — **po nahrání vyžaduje re-insert obou Šablonových částí** (Záhlaví
 i Patička jsou zamrzlé HTML snapshoty, PHP update je sám nezmění, viz
 `wordpress/README.md`). Skutečně externí odkazy (Facebook, Instagram,
-Google Maps, obchodní podmínky, Cirk La Putyka) `target="_blank"` dál mají
+Google Maps, obchodní podmínky) `target="_blank"` dál mají
 — pravidlo platí jen pro navigaci mezi bohemi.fit a studio.bohemi.fit.
 
 **Patička na WP dostala 6. 9. 2026 poděkovací řádek** pod copyright/legal
@@ -588,7 +588,7 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   je OK, hlavní lišta se bez nového rozhodnutí Honzy neroztahuje.
 - **`/kurzy/` — krátké specializační kurzy (31. 8. 2026, druhá výjimka mimo
   GSC po `/program-8-tydnu/`, schváleno Honzou):** nová vrstva vedle Akademie
-  Cirk La Putyka — uzavřené bloky (typicky `4 × 60 min`) zaměřené na JEDNU
+  BoHeMi Akademie (dřív Akademie Cirk La Putyka) — uzavřené bloky (typicky `4 × 60 min`) zaměřené na JEDNU
   dovednost, otevřené dětem i dospělým, s i bez členství v Akademii. Akademie
   zůstává beze změny (název, obsah, ceny) — `/kurzy/` je čistě přídavná
   vrstva, cross-linkovaná obousměrně (mint banner na `/skupinove-lekce/`
@@ -708,9 +708,18 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
     na MultiSport ekonomice.
   - **Pozicování kalisteniky:** NENÍ druhý sport nalepený vedle cirkusu —
     je to pohybová průprava (síla/stabilita/mobilita/kontrola těla), kterou
-    lze využít ve stojkách a akrobacii. Akademie Cirk La Putyka zůstává
+    lze využít ve stojkách a akrobacii. BoHeMi Akademie zůstává
     hlavní dlouhodobý program, kurzy jsou přídavná vrstva — žádná vlastní
     vizuální identita/branding pro kalisteniku.
+  - **Spolupráce s Cirk La Putyka skončila (Honza, 12. 10. 2026) — na webu
+    se nejmenuje.** Akademie je přejmenovaná na **„BoHeMi Akademie – hravá
+    škola pohybu"** (gymnastika, akrobacie, cirkus, brzy divadlo; cirkus už
+    není hlavní). Kroužky vedou trenéři BoHeMi a hostující lektoři; partneři
+    do budoucna CIRQUEON a další performeři, na webu zatím bez jmen. Kotvy,
+    redirect `/akademie-cirk-la-putyka/` a odkaz na obchodní podmínky
+    (`…-akademie-clp`, slug na WP) zůstávají. Divadelní kroužek = jen
+    textový blok „připravujeme" na `/krouzky-pro-deti/`, bez ceny/termínu.
+    Níže zachovaná historie (partneři, nekonkurence):
   - **La Putyka a CIRQUEON = partneři** (dodávají BoHeMi lektory), ne
     konkurence — web proto nestaví komunikaci „BoHeMi vs. La Putyka" a
     nejmenuje je jako srovnání ani jako autoritu, ze které by web „vedl"

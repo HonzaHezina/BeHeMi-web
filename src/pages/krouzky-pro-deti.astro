@@ -35,7 +35,7 @@ const circusCourses = [
     age: '3–5 let',
     when: 'každou středu od 14:15',
     price: '4 000 Kč / semestr',
-    d: 'Zkušení trenéři a akrobaté naučí děti základní pohybové dovednosti a zdolávání jednoduchých překážek — formou hry a s pomocí cirkusových vzdělávacích technik. Rodiče jsou na hodině vítáni.',
+    d: 'Zkušení lektoři naučí děti základní pohybové dovednosti a zdolávání jednoduchých překážek — formou hry a s pomocí cirkusových vzdělávacích technik. Rodiče jsou na hodině vítáni.',
     media: 'media-sand',
     img: 'cirkusová školička',
     full: true,
@@ -73,7 +73,7 @@ const objevovarnaFacts = [
 ---
 <Layout
   title="Kroužky pro děti — BoHeMi fitness Vinohrady"
-  description="Cirkusové kroužky Akademie Cirk La Putyka pro děti 3–12 let, Objevovárna pro nejmenší do 5 let a Dětská Zumba. Malé skupiny na pražských Vinohradech pod vedením zkušených lektorů a akrobatů."
+  description="Kroužky pro děti 3–12 let: gymnastika, akrobacie a cirkus v BoHeMi Akademii, Objevovárna do 5 let a Dětská Zumba. Malé skupiny na pražských Vinohradech."
   current="/krouzky-pro-deti/"
 >
   <Header current="/krouzky-pro-deti/" />
@@ -93,7 +93,7 @@ const objevovarnaFacts = [
           Kroužky pro <span class="font-medium text-accent-text">děti</span>
         </h1>
         <p class="mt-6 max-w-[56ch] text-[clamp(18px,2.1vw,22px)] leading-[1.45] text-ink-warm">
-          Cirkusové kroužky Akademie Cirk La Putyka, Objevovárna pro nejmenší a Dětská Zumba.
+          BoHeMi Akademie (gymnastika, akrobacie, cirkus), Objevovárna pro nejmenší a Dětská Zumba.
           Na Vinohradech, v malých skupinách, kde se dětem někdo věnuje.
         </p>
         <div class="mt-7 flex flex-wrap items-center gap-4">
@@ -110,12 +110,15 @@ const objevovarnaFacts = [
       </div>
     </section>
 
-    <!-- AKADEMIE CIRK LA PUTYKA -->
+    <!-- BOHEMI AKADEMIE -->
     <section class="mx-auto max-w-[1220px] px-5 pt-6 md:px-8">
-      <h2 class="mb-3 text-[clamp(26px,3.2vw,38px)] font-extrabold leading-[1.06] tracking-[-0.03em]">Akademie Cirk La Putyka</h2>
-      <p class="mb-8 max-w-[60ch] text-[17px] leading-[1.55] text-ink-soft">
-        Cirkusové kroužky vedené zkušenými trenéry a akrobaty Cirk La Putyka. Děti se učí
-        pohybové dovednosti, spolupráci a vytrvalost — každá věková skupina má svůj kurz.
+      <h2 class="mb-3 text-[clamp(26px,3.2vw,38px)] font-extrabold leading-[1.06] tracking-[-0.03em]">BoHeMi Akademie – hravá škola pohybu</h2>
+      <p class="mb-3 max-w-[60ch] text-[17px] leading-[1.55] text-ink-soft">
+        Gymnastika, akrobacie, cirkus a brzy i divadlo. Děti se učí pohybové dovednosti,
+        spolupráci a vytrvalost — každá věková skupina má svůj kurz.
+      </p>
+      <p class="mb-8 max-w-[60ch] text-[15px] leading-[1.55] text-ink-muted">
+        Kroužky vedou trenéři BoHeMi a hostující lektoři z cirkusu a divadla.
       </p>
       <div class="space-y-6">
         {circusCourses.map((c) => (
@@ -166,13 +169,19 @@ const objevovarnaFacts = [
           </article>
         ))}
       </div>
+      <div class="mt-6 rounded-2xl border border-border bg-surface px-7 py-6">
+        <h3 class="text-[19px] font-extrabold tracking-[-0.02em]">Divadelní kroužek — připravujeme</h3>
+        <p class="mt-2 max-w-[62ch] text-[15.5px] leading-[1.55] text-ink-soft">
+          Hra, improvizace a vystupování před ostatními. Termín, věk ani cena zatím nejsou.
+          Napiš na <a href="mailto:info@bohemi.fit" class="font-bold text-accent-text hover:text-ink">info@bohemi.fit</a>, ozveme se, až budeme otevírat.
+        </p>
+      </div>
       <div class="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-mint-border bg-mint px-7 py-6">
         <p class="max-w-[62ch] text-[16px] leading-[1.55] text-ink">
           <strong class="font-bold">Semestr běží 16. 9. 2026 – 27. 1. 2027.</strong> Plná kapacita? Zařadíme dítě jako náhradníka nebo rovnou na další semestr — napiš na <a href="mailto:info@bohemi.fit" class="font-bold text-accent-text hover:text-ink">info@bohemi.fit</a>.
         </p>
         <div class="flex flex-wrap gap-x-5 gap-y-1">
-          <a href="https://www.laputyka.cz/cs/studio" rel="noopener noreferrer" target="_blank" class="text-[14px] font-bold text-accent-text hover:text-ink">Více o Cirk La Putyka ↗</a>
-          <a href="https://studio.bohemi.fit/obchodni-podminky-akademie-clp/" rel="noopener noreferrer" target="_blank" class="text-[14px] font-bold text-accent-text hover:text-ink">Obchodní podmínky ↗</a>
+          <a href="https://studio.bohemi.fit/obchodni-podminky-akademie-clp/" rel="noopener noreferrer" target="_blank" class="text-[14px] font-bold text-accent-text hover:text-ink">Obchodní podmínky Akademie ↗</a>
           <a href="/fotky/" class="text-[14px] font-bold text-accent-text hover:text-ink">Fotky z lekcí →</a>
         </div>
       </div>
@@ -249,7 +258,7 @@ const objevovarnaFacts = [
         </div>
         <div class="mt-4 flex flex-wrap items-center justify-between gap-4 border-t border-mint-border pt-4">
           <p class="max-w-[62ch] text-[16px] leading-[1.55] text-ink">
-            <strong class="font-bold">Chce dítě jít v jedné dovednosti víc do hloubky, nebo nechcete rovnou celý semestr?</strong> Kalistenika, žonglování a stojky — krátké kurzy vedle Akademie, otevřené i dospělým.
+            <strong class="font-bold">Chce dítě jít v jedné dovednosti víc do hloubky, nebo nechcete rovnou celý semestr?</strong> Kalistenika, žonglování a stojky — krátké kurzy vedle BoHeMi Akademie, otevřené i dospělým.
           </p>
           <a href="/kurzy/" class="shrink-0 cursor-pointer text-[15px] font-bold text-accent-text hover:text-ink">Krátké kurzy →</a>
         </div>

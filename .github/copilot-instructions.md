@@ -95,7 +95,7 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   samostatné 9. téma) — souhrn na webu, plný rozpis pro lektora v
   `docs/program-8-tydnu-podklady.md`. `forYou` má 4. položku o učení AI.
 - **`/kurzy/` — krátké specializační kurzy (31. 8. 2026):** vrstva vedle
-  Akademie Cirk La Putyka (`/krouzky-pro-deti/`), NE náhrada — uzavřené bloky
+  BoHeMi Akademie (`/krouzky-pro-deti/`), NE náhrada — uzavřené bloky
   (`4 × 60 min`) na jednu dovednost, otevřené dětem i dospělým. Data v
   `src/data/specialization-courses.ts` (`SpecializationCourse[]`). **3 aktivní
   MVP kurzy** (kalistenika, žonglování, stojky) — **cena 1 290 Kč / 4 lekce,
@@ -121,7 +121,7 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   `audience: ['deti']`/`['dospeli']` (model to podporuje) dává smysl až u
   pokročilých skills (muscle-up, front lever…), ne na level 1. Kalistenika
   je pozicovaná jako průprava pro stojky/akrobacii, ne konkurenční sport
-  vedle Akademie Cirk La Putyka — žádný vlastní branding, žádné „level
+  vedle BoHeMi Akademie — žádný vlastní branding, žádné „level
   1–8"/„certifikace" na webu. Plné zdůvodnění: `/CLAUDE.md`.
 - **„Jak vznikl web" sekce** (5. 8. 2026): jen na `/proc-bohemi/` +
   `/en/why-bohemi/` (founder story stránky), odkaz ven na `hezina.cz`. Patička
