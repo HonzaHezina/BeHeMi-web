@@ -197,7 +197,13 @@ AI fialové gradienty, žádné vedení webu externí knihou/autoritou, žádná
   `gold` = amber (Mind, TENTATIVE). Triáda = červená / neutrál / amber.
 - **Červená nikdy jako body text** — jen akcent/CTA/výplň. Výjimka: akcentové slovo
   v display nadpisu smí být červené (echo loga; na tmavém AA-large). Kontrast ≥ 4.5:1.
-- **Kontakt:** přímé akce `mailto:`/`tel:`, žádný `<form>`.
+- **Kontakt:** přímé akce `mailto:`/`tel:`, žádný `<form>`. Mapový box na
+  `/kontakt/` + EN vede na profil `https://maps.app.goo.gl/rXmtXjN1tzUXKpcT9`
+  a má fotku sálu (`studio-01.jpg`).
+- **Google recenze (12. 10. 2026):** HP `Reviews.astro` (jen CZ, pod Programem
+  8 týdnů) — doslovné recenze + „4,8 ★ z 17"; `RATING`/`COUNT` se opisují ručně,
+  aktualizuj při nových recenzích. Nic nevymýšlej. Termín Programu 8 týdnů na
+  webu: „Zářijový běh už běží, přihlášky bereme na prosinec" (bez data).
 - **Přímé odkazy na platbu členství (1. 8. 2026):** kde WP „level" produkt
   jde koupit online, veď tam přímo (`.../ucet-clenstvi/platba-clenstvi/?level=<ID>`)
   místo obecného `RESERVE_URL`/`/kontakt/` — level 3/4 (roční/měsíční členství,

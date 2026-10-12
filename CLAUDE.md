@@ -425,6 +425,18 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   („nic neber jako dogma, ověř si to") zůstává, **název knihy a odkazy pryč**.
   Platí i pro `/program-8-tydnu/`: obsah čerpá myšlenky přes `docs/fraze-pool.md`,
   kniha se na webu nejmenuje ani neodkazuje.
+- **Google recenze + hodnocení (12. 10. 2026):** HP sekce `Reviews.astro`
+  (pod `LifePracticeFeature`, jen CZ) — 4 doslovné recenze z Google profilu +
+  odkaz „4,8 ★ z 17 recenzí na Googlu ↗" (`RATING`/`COUNT` v komponentě se
+  opisují RUČNĚ; při nových recenzích aktualizovat, jinak číslo zastará).
+  Texty beze změn (kromě vynechaného smajlíku a překlepu), Honzova vlastní
+  recenze ani strojový překlad se nepoužily. Bez schema.org rating dat,
+  nic se nevymýšlí. Profil: `https://maps.app.goo.gl/z9NNTR9osXd9cxKW9`.
+  **`/kontakt/` + `/en/contact/`:** mapový box vede na přesný profil
+  `https://maps.app.goo.gl/rXmtXjN1tzUXKpcT9` (ne vyhledávání adresy) a má
+  místo placeholderu fotku sálu `studio-01.jpg`. Footer (Astro i WP) má pořád
+  starý odkaz na vyhledávání adresy — sjednotit jen na pokyn (WP vyžaduje ZIP +
+  re-insert patičky).
 - **Kontakt = statika:** export měl odesílací formulář → nahrazen přímými akcemi
   (`mailto:` / `tel:`) + odkaz ven na rezervaci. Žádný `<form>`/`<input>`.
 - **Přímé odkazy na platbu členství (WP „level" produkty) — realizováno 1. 8. 2026:**
@@ -543,7 +555,7 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
     (nic naň neodkazovalo, na rozdíl od `#pro-deti` na `/lekce-a-sluzby/`
     a `/en/classes-and-services/`, které jsou samostatná stránka a zůstávají
     beze změny). Dětská nabídka na HP žije jen v `KidsBand.astro`.
-  - HP teď jede: Hero → ApproachGrid → KidsBand → Offer → LifePracticeFeature
+  - HP teď jede (od 12. 10. 2026 s `Reviews` za Programem): Hero → ApproachGrid → KidsBand → Offer → LifePracticeFeature → Reviews
     → ProcTriad → Trainers → PricingTeaser (z původních 12 bloků na 8).
   - Nevracet Marquee, starou dvojici Proc/Triad, Audiences ani „Pro děti"
     sekci v Offer zpět bez nového rozhodnutí Honzy — pokud se HP bude zase
@@ -1180,7 +1192,9 @@ Realizovaná rozhodnutí — nová stránka ať je dělá taky, ať se web neroz
   - **Studio: noindex mimo právní stránky** + poslední dva EN řetězce BA —
     v child theme 2.9 (`wp_robots`, `gettext`), viz `wordpress/README.md`.
   - **ČEKÁ NA HONZU (rozhodnutí o obsahu, nedělat potichu):**
-    1. (VYŘEŠENO 12. 10. 2026: „Zářijový běh už běží, přihlášky na prosinec"; Google recenze jsou na HP v `Reviews.astro`, bod 3 zbývá jen průměr/počet.) `/program-8-tydnu/` CTA pořád říkalo „První běh připravujeme na září
+    1. (VYŘEŠENO 12. 10. 2026: „Zářijový běh už běží, přihlášky bereme na
+       prosinec", e-mail s předmětem „přihláška na prosinec"; bod 3 recenze
+       také vyřešen, viz „Google recenze + hodnocení" výš.) `/program-8-tydnu/` CTA pořád říkalo „První běh připravujeme na září
        2026 — přesný termín zveřejníme" — dnes je 15. 9. 2026, audit: „buď
        běží, nebo je datum pryč; obojí zabíjí důvěru". Kandidát 14. 9.–
        8. 11. 2026 nikdy nebyl potvrzen. Potřeba: reálný termín, nebo
