@@ -1,12 +1,14 @@
 ---
 // Google recenze — výběr čtyř skutečných hodnocení z veřejného profilu
 // BoHeMi fitness (výběr 12. 10. 2026, texty doslova, bez úprav kromě
-// vynechaného smajlíku u Petry). Jen CZ homepage. Průměrné hodnocení a
-// počet recenzí se na webu záměrně NEuvádí, dokud je Honza nepotvrdí z
-// profilu — nic se nevymýšlí. Nová recenze = jen nový řádek níž; odkaz
-// „Všechny recenze" míří na profil studia v Google Maps.
+// vynechaného smajlíku u Petry). Jen CZ homepage. Průměr a počet recenzí
+// (4,8 z 17, Honza, screenshot Google Maps 12. 10. 2026) se ručně opisují
+// do RATING/COUNT níž — při dalších recenzích je aktualizuj, ať číslo nezastará.
+// Nová recenze = nový řádek níž; odkaz míří na profil studia v Google Maps.
 import Eyebrow from './Eyebrow.astro';
 
+const RATING = '4,8';
+const COUNT = 17;
 const GOOGLE_PROFILE = 'https://maps.app.goo.gl/z9NNTR9osXd9cxKW9';
 
 const reviews = [
@@ -21,7 +23,7 @@ const reviews = [
     <Eyebrow>Recenze</Eyebrow>
     <div class="mb-9 flex flex-wrap items-baseline justify-between gap-4">
       <h2 class="text-[clamp(28px,3.6vw,42px)] font-extrabold tracking-[-0.03em]">Co o nás píšou lidé na Googlu</h2>
-      <a href={GOOGLE_PROFILE} target="_blank" rel="noopener noreferrer" class="cursor-pointer text-base font-bold text-accent-text hover:text-ink">Všechny recenze na Googlu ↗</a>
+      <a href={GOOGLE_PROFILE} target="_blank" rel="noopener noreferrer" class="cursor-pointer text-base font-bold text-accent-text hover:text-ink">{RATING} ★ z {COUNT} recenzí na Googlu ↗</a>
     </div>
     <div class="grid gap-5 sm:grid-cols-2">
       {reviews.map((r) => (
